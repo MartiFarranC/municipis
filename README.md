@@ -1,6 +1,6 @@
 # Descobreix Catalunya
 
-App per visitar els 947 municipis de Catalunya com si fos un videojoc. Tot el mapa comença a la boira. El teu municipi és el primer que s'il·lumina, i a partir d'aquí vas desbloquejant els municipis veïns amb punts o visitant-los en persona.
+App per visitar els 947 municipis de Catalunya com si fos un videojoc. Tot el mapa comença a la boira. El teu municipi és el primer que s'il·lumina, i a partir d'aquí vas desbloquejant els municipis veïns amb els punts que guanyes completant missions.
 
 ## Què hi ha ara mateix
 
