@@ -1,0 +1,12 @@
+node_modules/
+font/
+.DS_Store
+# Android Studio (quan s'hi afegeixi el projecte)
+.gradle/
+.idea/
+local.properties
+build/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
