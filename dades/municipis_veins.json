@@ -3,6 +3,7 @@
   "codi_ine": "25001",
   "nom": "Abella de la Conca",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25061",
    "25077",
@@ -14,6 +15,7 @@
   "codi_ine": "08001",
   "nom": "Abrera",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08054",
    "08076",
@@ -29,6 +31,7 @@
   "codi_ine": "25002",
   "nom": "Àger",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25037",
    "25062",
@@ -42,6 +45,7 @@
   "codi_ine": "25003",
   "nom": "Agramunt",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25034",
    "25070",
@@ -57,6 +61,7 @@
   "codi_ine": "08002",
   "nom": "Aguilar de Segarra",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08059",
    "08084",
@@ -71,6 +76,7 @@
   "codi_ine": "17001",
   "nom": "Agullana",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17014",
    "17042",
@@ -82,6 +88,7 @@
   "codi_ine": "08014",
   "nom": "Aiguafreda",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08026",
    "08067",
@@ -94,6 +101,7 @@
   "codi_ine": "43001",
   "nom": "Aiguamúrcia",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "08168",
    "43090",
@@ -107,6 +115,7 @@
   "codi_ine": "17002",
   "nom": "Aiguaviva",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17020",
    "17073",
@@ -119,6 +128,7 @@
   "codi_ine": "25038",
   "nom": "Aitona",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25125",
    "25200",
@@ -131,6 +141,7 @@
   "codi_ine": "25005",
   "nom": "Alàs i Cerc",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25032",
    "25071",
@@ -144,6 +155,7 @@
   "codi_ine": "17003",
   "nom": "Albanyà",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17021",
    "17031",
@@ -157,6 +169,7 @@
   "codi_ine": "25007",
   "nom": "Albatàrrec",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25014",
    "25120",
@@ -167,6 +180,7 @@
   "codi_ine": "25008",
   "nom": "Albesa",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25015",
    "25016",
@@ -181,6 +195,7 @@
   "codi_ine": "43002",
   "nom": "Albinyana",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43020",
    "43028",
@@ -194,6 +209,7 @@
   "codi_ine": "17004",
   "nom": "Albons",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17018",
    "17062",
@@ -205,6 +221,7 @@
   "codi_ine": "43004",
   "nom": "Alcanar",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43062",
    "43136",
@@ -215,6 +232,7 @@
   "codi_ine": "25010",
   "nom": "Alcanó",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25014",
    "25076",
@@ -227,6 +245,7 @@
   "codi_ine": "25011",
   "nom": "Alcarràs",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25120",
    "25210",
@@ -239,6 +258,7 @@
   "codi_ine": "25012",
   "nom": "Alcoletge",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25048",
    "25078",
@@ -250,6 +270,7 @@
   "codi_ine": "43005",
   "nom": "Alcover",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43003",
    "43080",
@@ -267,6 +288,7 @@
   "codi_ine": "43006",
   "nom": "Aldover",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43008",
    "43052",
@@ -278,6 +300,7 @@
   "codi_ine": "08003",
   "nom": "Alella",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08118",
    "08126",
@@ -291,6 +314,7 @@
   "codi_ine": "43008",
   "nom": "Alfara de Carles",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43006",
    "43018",
@@ -305,6 +329,7 @@
   "codi_ine": "25013",
   "nom": "Alfarràs",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25015",
    "25021",
@@ -315,6 +340,7 @@
   "codi_ine": "25014",
   "nom": "Alfés",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25007",
    "25010",
@@ -329,6 +355,7 @@
   "codi_ine": "43009",
   "nom": "Alforja",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43015",
@@ -345,6 +372,7 @@
   "codi_ine": "25015",
   "nom": "Algerri",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25008",
    "25013",
@@ -358,6 +386,7 @@
   "codi_ine": "25016",
   "nom": "Alguaire",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25008",
    "25019",
@@ -371,6 +400,7 @@
   "codi_ine": "25017",
   "nom": "Alins",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25087",
    "25089",
@@ -384,6 +414,7 @@
   "codi_ine": "43010",
   "nom": "Alió",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43034",
    "43108",
@@ -396,6 +427,7 @@
   "codi_ine": "25019",
   "nom": "Almacelles",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25016",
    "25021",
@@ -407,6 +439,7 @@
   "codi_ine": "25020",
   "nom": "Almatret",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25133",
    "25204",
@@ -417,6 +450,7 @@
   "codi_ine": "25021",
   "nom": "Almenar",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25008",
    "25013",
@@ -429,6 +463,7 @@
   "codi_ine": "43011",
   "nom": "Almoster",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43042",
@@ -440,6 +475,7 @@
   "codi_ine": "25022",
   "nom": "Alòs de Balaguer",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25034",
    "25062",
@@ -452,6 +488,7 @@
   "codi_ine": "17006",
   "nom": "Alp",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "08016",
    "08052",
@@ -465,6 +502,7 @@
   "codi_ine": "08004",
   "nom": "Alpens",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08024",
    "08109",
@@ -477,6 +515,7 @@
   "codi_ine": "25023",
   "nom": "Alpicat",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25120",
    "25228"
@@ -486,6 +525,7 @@
   "codi_ine": "25024",
   "nom": "Alt Àneu",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25025",
    "25082",
@@ -497,6 +537,7 @@
   "codi_ine": "43012",
   "nom": "Altafulla",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43097",
    "43111",
@@ -509,6 +550,7 @@
   "codi_ine": "17007",
   "nom": "Amer",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17133",
    "17172",
@@ -522,6 +564,7 @@
   "codi_ine": "43014",
   "nom": "Amposta",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43062",
    "43078",
@@ -536,6 +579,7 @@
   "codi_ine": "17008",
   "nom": "Anglès",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17020",
    "17028",
@@ -548,6 +592,7 @@
   "codi_ine": "25027",
   "nom": "Anglesola",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25041",
    "25050",
@@ -560,6 +605,7 @@
   "codi_ine": "25029",
   "nom": "Arbeca",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25046",
    "25058",
@@ -575,6 +621,7 @@
   "codi_ine": "43015",
   "nom": "Arbolí",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43009",
    "43049",
@@ -586,6 +633,7 @@
   "codi_ine": "17009",
   "nom": "Arbúcies",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08081",
    "08137",
@@ -601,6 +649,7 @@
   "codi_ine": "08006",
   "nom": "Arenys de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08007",
    "08032",
@@ -612,6 +661,7 @@
   "codi_ine": "08007",
   "nom": "Arenys de Munt",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08006",
    "08040",
@@ -625,6 +675,7 @@
   "codi_ine": "17010",
   "nom": "Argelaguer",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17109",
    "17154",
@@ -637,6 +688,7 @@
   "codi_ine": "08008",
   "nom": "Argençola",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08103",
    "08133",
@@ -651,6 +703,7 @@
   "codi_ine": "08009",
   "nom": "Argentona",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08029",
    "08030",
@@ -664,6 +717,7 @@
   "codi_ine": "43018",
   "nom": "Arnes",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43008",
    "43071"
@@ -673,6 +727,7 @@
   "codi_ine": "25031",
   "nom": "Arres",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25057",
    "25059",
@@ -683,6 +738,7 @@
   "codi_ine": "25032",
   "nom": "Arsèguel",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25030",
@@ -695,6 +751,7 @@
   "codi_ine": "08010",
   "nom": "Artés",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08012",
    "08034",
@@ -705,6 +762,7 @@
   "codi_ine": "25033",
   "nom": "Artesa de Lleida",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25036",
    "25067",
@@ -717,6 +775,7 @@
   "codi_ine": "25034",
   "nom": "Artesa de Segre",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25003",
    "25022",
@@ -734,6 +793,7 @@
   "codi_ine": "43019",
   "nom": "Ascó",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43056",
    "43060",
@@ -747,6 +807,7 @@
   "codi_ine": "25036",
   "nom": "Aspa",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25014",
    "25033",
@@ -759,6 +820,7 @@
   "codi_ine": "08011",
   "nom": "Avià",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08022",
    "08045",
@@ -772,6 +834,7 @@
   "codi_ine": "08012",
   "nom": "Avinyó",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08010",
    "08034",
@@ -787,6 +850,7 @@
   "codi_ine": "17012",
   "nom": "Avinyonet de Puigventós",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17026",
    "17093",
@@ -799,6 +863,7 @@
   "codi_ine": "08013",
   "nom": "Avinyonet del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08094",
    "08145",
@@ -813,6 +878,7 @@
   "codi_ine": "08015",
   "nom": "Badalona",
   "provincia": "Barcelona",
+  "comarca": "13",
   "veins": [
    "08125",
    "08126",
@@ -826,6 +892,7 @@
   "codi_ine": "08904",
   "nom": "Badia del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08187",
    "08252",
@@ -836,6 +903,7 @@
   "codi_ine": "08016",
   "nom": "Bagà",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08052",
    "08093",
@@ -852,6 +920,7 @@
   "codi_ine": "25039",
   "nom": "Baix Pallars",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25161",
    "25171",
@@ -866,6 +935,7 @@
   "codi_ine": "25040",
   "nom": "Balaguer",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25035",
    "25047",
@@ -882,6 +952,7 @@
   "codi_ine": "08017",
   "nom": "Balenyà",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08026",
    "08055",
@@ -895,6 +966,7 @@
   "codi_ine": "08018",
   "nom": "Balsareny",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08062",
    "08090",
@@ -906,6 +978,7 @@
   "codi_ine": "43020",
   "nom": "Banyeres del Penedès",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43016",
@@ -920,6 +993,7 @@
   "codi_ine": "17015",
   "nom": "Banyoles",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17056",
    "17071",
@@ -930,6 +1004,7 @@
   "codi_ine": "25041",
   "nom": "Barbens",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25027",
    "25050",
@@ -943,6 +1018,7 @@
   "codi_ine": "43021",
   "nom": "Barberà de la Conca",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43036",
    "43059",
@@ -956,6 +1032,7 @@
   "codi_ine": "08252",
   "nom": "Barberà del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08125",
    "08180",
@@ -969,6 +1046,7 @@
   "codi_ine": "08019",
   "nom": "Barcelona",
   "provincia": "Barcelona",
+  "comarca": "13",
   "veins": [
    "08077",
    "08101",
@@ -987,6 +1065,7 @@
   "codi_ine": "17016",
   "nom": "Bàscara",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17075",
    "17136",
@@ -1000,6 +1079,7 @@
   "codi_ine": "25044",
   "nom": "Bassella",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25042",
    "25064",
@@ -1015,6 +1095,7 @@
   "codi_ine": "43022",
   "nom": "Batea",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43032",
    "43041",
@@ -1027,6 +1108,7 @@
   "codi_ine": "25045",
   "nom": "Bausen",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25063",
    "25121"
@@ -1036,6 +1118,7 @@
   "codi_ine": "08020",
   "nom": "Begues",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08089",
    "08146",
@@ -1050,6 +1133,7 @@
   "codi_ine": "17013",
   "nom": "Begur",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17117",
    "17124",
@@ -1060,6 +1144,7 @@
   "codi_ine": "25046",
   "nom": "Belianes",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25029",
    "25050",
@@ -1072,6 +1157,7 @@
   "codi_ine": "25048",
   "nom": "Bell-lloc d'Urgell",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25004",
    "25012",
@@ -1087,6 +1173,7 @@
   "codi_ine": "25170",
   "nom": "Bellaguarda",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25101",
    "25118",
@@ -1099,6 +1186,7 @@
   "codi_ine": "17018",
   "nom": "Bellcaire d'Empordà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17004",
    "17062",
@@ -1111,6 +1199,7 @@
   "codi_ine": "25047",
   "nom": "Bellcaire d'Urgell",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25035",
    "25040",
@@ -1127,6 +1216,7 @@
   "codi_ine": "25049",
   "nom": "Bellmunt d'Urgell",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25047",
    "25138",
@@ -1137,6 +1227,7 @@
   "codi_ine": "43023",
   "nom": "Bellmunt del Priorat",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43055",
    "43069",
@@ -1148,6 +1239,7 @@
   "codi_ine": "08021",
   "nom": "Bellprat",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08226",
    "08257",
@@ -1160,6 +1252,7 @@
   "codi_ine": "25050",
   "nom": "Bellpuig",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25027",
    "25041",
@@ -1175,6 +1268,7 @@
   "codi_ine": "43024",
   "nom": "Bellvei",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08058",
    "43020",
@@ -1187,6 +1281,7 @@
   "codi_ine": "25051",
   "nom": "Bellver de Cerdanya",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "08016",
    "08093",
@@ -1204,6 +1299,7 @@
   "codi_ine": "25052",
   "nom": "Bellvís",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25047",
    "25048",
@@ -1219,6 +1315,7 @@
   "codi_ine": "25053",
   "nom": "Benavent de Segrià",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25078",
    "25189",
@@ -1231,6 +1328,7 @@
   "codi_ine": "43025",
   "nom": "Benifallet",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43052",
    "43084",
@@ -1245,6 +1343,7 @@
   "codi_ine": "43026",
   "nom": "Benissanet",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43048",
    "43064",
@@ -1259,6 +1358,7 @@
   "codi_ine": "08022",
   "nom": "Berga",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08045",
@@ -1271,6 +1371,7 @@
   "codi_ine": "17019",
   "nom": "Besalú",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17021",
    "17162"
@@ -1280,6 +1381,7 @@
   "codi_ine": "17020",
   "nom": "Bescanó",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17002",
    "17008",
@@ -1295,6 +1397,7 @@
   "codi_ine": "17021",
   "nom": "Beuda",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17003",
    "17019",
@@ -1308,6 +1411,7 @@
   "codi_ine": "08023",
   "nom": "Bigues i Riells del Fai",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08033",
@@ -1321,6 +1425,7 @@
   "codi_ine": "25055",
   "nom": "Biosca",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25129",
    "25132",
@@ -1333,6 +1438,7 @@
   "codi_ine": "17234",
   "nom": "Biure",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17029",
    "17042",
@@ -1345,6 +1451,7 @@
   "codi_ine": "43029",
   "nom": "Blancafort",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25238",
    "43054",
@@ -1357,6 +1464,7 @@
   "codi_ine": "17023",
   "nom": "Blanes",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08110",
    "08155",
@@ -1368,6 +1476,7 @@
   "codi_ine": "17029",
   "nom": "Boadella i les Escaules",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17060",
    "17093",
@@ -1380,6 +1489,7 @@
   "codi_ine": "17024",
   "nom": "Bolvir",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17069",
    "17078",
@@ -1391,6 +1501,7 @@
   "codi_ine": "43030",
   "nom": "Bonastre",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43050",
@@ -1406,6 +1517,7 @@
   "codi_ine": "17025",
   "nom": "Bordils",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17049",
    "17050",
@@ -1419,6 +1531,7 @@
   "codi_ine": "17026",
   "nom": "Borrassà",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17012",
    "17075",
@@ -1433,6 +1546,7 @@
   "codi_ine": "08024",
   "nom": "Borredà",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08004",
    "08057",
@@ -1446,6 +1560,7 @@
   "codi_ine": "25059",
   "nom": "Bossòst",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25031",
    "25121",
@@ -1456,6 +1571,7 @@
   "codi_ine": "43032",
   "nom": "Bot",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43022",
    "43041",
@@ -1468,6 +1584,7 @@
   "codi_ine": "43033",
   "nom": "Botarell",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43031",
    "43088",
@@ -1480,6 +1597,7 @@
   "codi_ine": "25056",
   "nom": "Bovera",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25101",
    "43060"
@@ -1489,6 +1607,7 @@
   "codi_ine": "43034",
   "nom": "Bràfim",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43010",
    "43089",
@@ -1501,6 +1620,7 @@
   "codi_ine": "17027",
   "nom": "Breda",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17146",
    "17159"
@@ -1510,6 +1630,7 @@
   "codi_ine": "17028",
   "nom": "Brunyola i Sant Martí Sapresa",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17008",
    "17020",
@@ -1522,6 +1643,7 @@
   "codi_ine": "43035",
   "nom": "Cabacés",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43027",
    "43058",
@@ -1538,6 +1660,7 @@
   "codi_ine": "25060",
   "nom": "Cabanabona",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25150",
    "25249",
@@ -1548,6 +1671,7 @@
   "codi_ine": "17031",
   "nom": "Cabanelles",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17003",
    "17021",
@@ -1566,6 +1690,7 @@
   "codi_ine": "17030",
   "nom": "Cabanes",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17066",
    "17093",
@@ -1579,6 +1704,7 @@
   "codi_ine": "25061",
   "nom": "Cabó",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25001",
    "25077",
@@ -1593,6 +1719,7 @@
   "codi_ine": "43036",
   "nom": "Cabra del Camp",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43021",
    "43059",
@@ -1605,6 +1732,7 @@
   "codi_ine": "08028",
   "nom": "Cabrera d'Anoia",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08044",
    "08122",
@@ -1619,6 +1747,7 @@
   "codi_ine": "08029",
   "nom": "Cabrera de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08009",
    "08030",
@@ -1630,6 +1759,7 @@
   "codi_ine": "08030",
   "nom": "Cabrils",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08009",
    "08029",
@@ -1642,6 +1772,7 @@
   "codi_ine": "17032",
   "nom": "Cadaqués",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17140",
    "17152"
@@ -1651,6 +1782,7 @@
   "codi_ine": "08031",
   "nom": "Calaf",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08036",
    "08170",
@@ -1663,6 +1795,7 @@
   "codi_ine": "43037",
   "nom": "Calafell",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08058",
    "43024",
@@ -1674,6 +1807,7 @@
   "codi_ine": "08034",
   "nom": "Calders",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08010",
    "08012",
@@ -1687,6 +1821,7 @@
   "codi_ine": "08032",
   "nom": "Caldes d'Estrac",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08006",
    "08264"
@@ -1696,6 +1831,7 @@
   "codi_ine": "17033",
   "nom": "Caldes de Malavella",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17044",
    "17089",
@@ -1710,6 +1846,7 @@
   "codi_ine": "08033",
   "nom": "Caldes de Montbui",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08023",
    "08087",
@@ -1725,6 +1862,7 @@
   "codi_ine": "08035",
   "nom": "Calella",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08163",
    "08203",
@@ -1735,6 +1873,7 @@
   "codi_ine": "08037",
   "nom": "Calldetenes",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08083",
    "08220",
@@ -1746,6 +1885,7 @@
   "codi_ine": "08038",
   "nom": "Callús",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08062",
    "08192",
@@ -1758,6 +1898,7 @@
   "codi_ine": "08036",
   "nom": "Calonge de Segarra",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08031",
    "08060",
@@ -1771,6 +1912,7 @@
   "codi_ine": "17034",
   "nom": "Calonge i Sant Antoni",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17048",
    "17118",
@@ -1783,6 +1925,7 @@
   "codi_ine": "25062",
   "nom": "Camarasa",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25002",
    "25022",
@@ -1799,6 +1942,7 @@
   "codi_ine": "43903",
   "nom": "Camarles",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43155",
    "43901",
@@ -1810,6 +1954,7 @@
   "codi_ine": "43038",
   "nom": "Cambrils",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43088",
    "43092",
@@ -1823,6 +1968,7 @@
   "codi_ine": "17035",
   "nom": "Camós",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17040",
    "17056",
@@ -1834,6 +1980,7 @@
   "codi_ine": "17036",
   "nom": "Campdevànol",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17037",
    "17080",
@@ -1847,6 +1994,7 @@
   "codi_ine": "17037",
   "nom": "Campelles",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17036",
    "17080",
@@ -1858,6 +2006,7 @@
   "codi_ine": "08039",
   "nom": "Campins",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08081",
    "08097",
@@ -1868,6 +2017,7 @@
   "codi_ine": "17038",
   "nom": "Campllong",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17044",
    "17073",
@@ -1880,6 +2030,7 @@
   "codi_ine": "17039",
   "nom": "Camprodon",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17091",
    "17107",
@@ -1895,6 +2046,7 @@
   "codi_ine": "25063",
   "nom": "Canejan",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25025",
    "25045",
@@ -1906,6 +2058,7 @@
   "codi_ine": "17040",
   "nom": "Canet d'Adri",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17035",
    "17123",
@@ -1919,6 +2072,7 @@
   "codi_ine": "08040",
   "nom": "Canet de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08006",
    "08007",
@@ -1931,6 +2085,7 @@
   "codi_ine": "08041",
   "nom": "Canovelles",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08086",
@@ -1943,6 +2098,7 @@
   "codi_ine": "08042",
   "nom": "Cànoves i Samalús",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08046",
    "08086",
@@ -1956,6 +2112,7 @@
   "codi_ine": "17041",
   "nom": "Cantallops",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17042",
    "17086",
@@ -1966,6 +2123,7 @@
   "codi_ine": "08043",
   "nom": "Canyelles",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08058",
    "08145",
@@ -1978,6 +2136,7 @@
   "codi_ine": "43039",
   "nom": "Capafonts",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43057",
    "43091",
@@ -1989,6 +2148,7 @@
   "codi_ine": "43040",
   "nom": "Capçanes",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43045",
    "43070",
@@ -2000,6 +2160,7 @@
   "codi_ine": "08044",
   "nom": "Capellades",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08028",
    "08286",
@@ -2010,6 +2171,7 @@
   "codi_ine": "17042",
   "nom": "Capmany",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17001",
    "17041",
@@ -2024,6 +2186,7 @@
   "codi_ine": "08045",
   "nom": "Capolat",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08022",
@@ -2038,6 +2201,7 @@
   "codi_ine": "08046",
   "nom": "Cardedeu",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08042",
    "08086",
@@ -2050,6 +2214,7 @@
   "codi_ine": "08047",
   "nom": "Cardona",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08132",
    "08141",
@@ -2065,6 +2230,7 @@
   "codi_ine": "08048",
   "nom": "Carme",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08104",
    "08122",
@@ -2078,6 +2244,7 @@
   "codi_ine": "43041",
   "nom": "Caseres",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43022",
    "43032",
@@ -2088,6 +2255,7 @@
   "codi_ine": "17044",
   "nom": "Cassà de la Selva",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17033",
    "17038",
@@ -2102,6 +2270,7 @@
   "codi_ine": "08049",
   "nom": "Casserres",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08078",
@@ -2116,6 +2285,7 @@
   "codi_ine": "17048",
   "nom": "Castell d’Aro, Platja d’Aro i s’Agaró",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17034",
    "17160",
@@ -2126,6 +2296,7 @@
   "codi_ine": "08057",
   "nom": "Castell de l'Areny",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08024",
    "08142",
@@ -2139,6 +2310,7 @@
   "codi_ine": "25904",
   "nom": "Castell de Mur",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25002",
    "25098",
@@ -2152,6 +2324,7 @@
   "codi_ine": "25064",
   "nom": "Castellar de la Ribera",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25044",
    "25124",
@@ -2164,6 +2337,7 @@
   "codi_ine": "08052",
   "nom": "Castellar de n'Hug",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08016",
    "08099",
@@ -2177,6 +2351,7 @@
   "codi_ine": "08050",
   "nom": "Castellar del Riu",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08022",
    "08045",
@@ -2190,6 +2365,7 @@
   "codi_ine": "08051",
   "nom": "Castellar del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08120",
    "08187",
@@ -2202,6 +2378,7 @@
   "codi_ine": "08053",
   "nom": "Castellbell i el Vilar",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08127",
    "08179",
@@ -2214,6 +2391,7 @@
   "codi_ine": "08054",
   "nom": "Castellbisbal",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08001",
    "08072",
@@ -2230,6 +2408,7 @@
   "codi_ine": "08055",
   "nom": "Castellcir",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08017",
    "08064",
@@ -2245,6 +2424,7 @@
   "codi_ine": "25067",
   "nom": "Castelldans",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25006",
    "25033",
@@ -2260,6 +2440,7 @@
   "codi_ine": "08056",
   "nom": "Castelldefels",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08089",
    "08270"
@@ -2269,6 +2450,7 @@
   "codi_ine": "08058",
   "nom": "Castellet i la Gornal",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08043",
    "08065",
@@ -2287,6 +2469,7 @@
   "codi_ine": "17046",
   "nom": "Castellfollit de la Roca",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17109",
    "17185"
@@ -2296,6 +2479,7 @@
   "codi_ine": "08060",
   "nom": "Castellfollit de Riubregós",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08036",
    "08176",
@@ -2309,6 +2493,7 @@
   "codi_ine": "08059",
   "nom": "Castellfollit del Boix",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08002",
    "08025",
@@ -2323,6 +2508,7 @@
   "codi_ine": "08061",
   "nom": "Castellgalí",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08098",
    "08113",
@@ -2334,6 +2520,7 @@
   "codi_ine": "08062",
   "nom": "Castellnou de Bages",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08018",
    "08038",
@@ -2347,6 +2534,7 @@
   "codi_ine": "25068",
   "nom": "Castellnou de Seana",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25050",
    "25099",
@@ -2359,6 +2547,7 @@
   "codi_ine": "17047",
   "nom": "Castelló d'Empúries",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17074",
    "17120",
@@ -2374,6 +2563,7 @@
   "codi_ine": "25069",
   "nom": "Castelló de Farfanya",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25008",
    "25015",
@@ -2386,6 +2576,7 @@
   "codi_ine": "08063",
   "nom": "Castellolí",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08025",
    "08059",
@@ -2398,6 +2589,7 @@
   "codi_ine": "25070",
   "nom": "Castellserà",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25003",
    "25096",
@@ -2410,6 +2602,7 @@
   "codi_ine": "08064",
   "nom": "Castellterçol",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08055",
    "08087",
@@ -2423,6 +2616,7 @@
   "codi_ine": "43042",
   "nom": "Castellvell del Camp",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43011",
@@ -2433,6 +2627,7 @@
   "codi_ine": "08065",
   "nom": "Castellví de la Marca",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08058",
    "08227",
@@ -2446,6 +2641,7 @@
   "codi_ine": "08066",
   "nom": "Castellví de Rosanes",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08072",
    "08091",
@@ -2458,6 +2654,7 @@
   "codi_ine": "25071",
   "nom": "Cava",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25030",
@@ -2471,6 +2668,7 @@
   "codi_ine": "17049",
   "nom": "Celrà",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17079",
@@ -2482,6 +2680,7 @@
   "codi_ine": "08067",
   "nom": "Centelles",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08014",
    "08017",
@@ -2494,6 +2693,7 @@
   "codi_ine": "08268",
   "nom": "Cercs",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08022",
    "08050",
@@ -2510,6 +2710,7 @@
   "codi_ine": "08266",
   "nom": "Cerdanyola del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08019",
    "08125",
@@ -2525,6 +2726,7 @@
   "codi_ine": "08068",
   "nom": "Cervelló",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08072",
    "08091",
@@ -2539,6 +2741,7 @@
   "codi_ine": "25072",
   "nom": "Cervera",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25085",
    "25103",
@@ -2556,6 +2759,7 @@
   "codi_ine": "25073",
   "nom": "Cervià de les Garrigues",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25006",
    "25009",
@@ -2570,6 +2774,7 @@
   "codi_ine": "17050",
   "nom": "Cervià de Ter",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17166",
@@ -2583,6 +2788,7 @@
   "codi_ine": "17051",
   "nom": "Cistella",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17031",
    "17088",
@@ -2595,6 +2801,7 @@
   "codi_ine": "25074",
   "nom": "Ciutadilla",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25109",
    "25145",
@@ -2607,6 +2814,7 @@
   "codi_ine": "25075",
   "nom": "Clariana de Cardener",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08047",
    "25146",
@@ -2618,6 +2826,7 @@
   "codi_ine": "17054",
   "nom": "Colera",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17092",
    "17138",
@@ -2628,6 +2837,7 @@
   "codi_ine": "25077",
   "nom": "Coll de Nargó",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25001",
    "25042",
@@ -2643,6 +2853,7 @@
   "codi_ine": "08069",
   "nom": "Collbató",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08025",
    "08076",
@@ -2654,6 +2865,7 @@
   "codi_ine": "43045",
   "nom": "Colldejou",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43017",
    "43040",
@@ -2669,6 +2881,7 @@
   "codi_ine": "08070",
   "nom": "Collsuspina",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08017",
    "08055",
@@ -2681,6 +2894,7 @@
   "codi_ine": "17055",
   "nom": "Colomers",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17068",
    "17085",
@@ -2692,6 +2906,7 @@
   "codi_ine": "25161",
   "nom": "Conca de Dalt",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25001",
    "25039",
@@ -2708,6 +2923,7 @@
   "codi_ine": "43046",
   "nom": "Conesa",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43061",
    "43101",
@@ -2723,6 +2939,7 @@
   "codi_ine": "43047",
   "nom": "Constantí",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43100",
    "43103",
@@ -2736,6 +2953,7 @@
   "codi_ine": "08071",
   "nom": "Copons",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08103",
    "08185",
@@ -2747,6 +2965,7 @@
   "codi_ine": "43048",
   "nom": "Corbera d'Ebre",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43026",
    "43056",
@@ -2759,6 +2978,7 @@
   "codi_ine": "08072",
   "nom": "Corbera de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08054",
    "08066",
@@ -2773,6 +2993,7 @@
   "codi_ine": "25078",
   "nom": "Corbins",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25012",
    "25053",
@@ -2788,6 +3009,7 @@
   "codi_ine": "17057",
   "nom": "Corçà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17022",
    "17097",
@@ -2802,6 +3024,7 @@
   "codi_ine": "08073",
   "nom": "Cornellà de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08077",
    "08101",
@@ -2814,6 +3037,7 @@
   "codi_ine": "17056",
   "nom": "Cornellà del Terri",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17015",
    "17035",
@@ -2828,6 +3052,7 @@
   "codi_ine": "43049",
   "nom": "Cornudella de Montsant",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43015",
    "43057",
@@ -2842,6 +3067,7 @@
   "codi_ine": "43050",
   "nom": "Creixell",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43030",
    "43111",
@@ -2853,6 +3079,7 @@
   "codi_ine": "17058",
   "nom": "Crespià",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17031",
    "17065",
@@ -2864,6 +3091,7 @@
   "codi_ine": "17901",
   "nom": "Cruïlles, Monells i Sant Sadurní de l'Heura",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17022",
    "17034",
@@ -2880,6 +3108,7 @@
   "codi_ine": "08074",
   "nom": "Cubelles",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08058",
    "08307",
@@ -2890,6 +3119,7 @@
   "codi_ine": "25079",
   "nom": "Cubells",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25022",
    "25040",
@@ -2903,6 +3133,7 @@
   "codi_ine": "43051",
   "nom": "Cunit",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08058",
    "08074",
@@ -2913,6 +3144,7 @@
   "codi_ine": "17060",
   "nom": "Darnius",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17001",
    "17014",
@@ -2928,6 +3160,7 @@
   "codi_ine": "17061",
   "nom": "Das",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17006",
    "17069",
@@ -2941,6 +3174,7 @@
   "codi_ine": "43901",
   "nom": "Deltebre",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43014",
    "43902",
@@ -2953,6 +3187,7 @@
   "codi_ine": "08075",
   "nom": "Dosrius",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08007",
    "08009",
@@ -2969,6 +3204,7 @@
   "codi_ine": "43053",
   "nom": "Duesaigües",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43009",
    "43017",
@@ -2981,6 +3217,7 @@
   "codi_ine": "08025",
   "nom": "El Bruc",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08059",
    "08063",
@@ -2996,6 +3233,7 @@
   "codi_ine": "08026",
   "nom": "El Brull",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08014",
    "08017",
@@ -3009,6 +3247,7 @@
   "codi_ine": "43043",
   "nom": "El Catllar",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43097",
    "43100",
@@ -3023,6 +3262,7 @@
   "codi_ine": "25076",
   "nom": "El Cogul",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25006",
    "25010",
@@ -3037,6 +3277,7 @@
   "codi_ine": "17005",
   "nom": "El Far d'Empordà",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17066",
    "17074",
@@ -3049,6 +3290,7 @@
   "codi_ine": "43072",
   "nom": "El Lloar",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43058",
    "43069",
@@ -3060,6 +3302,7 @@
   "codi_ine": "08118",
   "nom": "El Masnou",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08003",
    "08126",
@@ -3071,6 +3314,7 @@
   "codi_ine": "43082",
   "nom": "El Masroig",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43023",
    "43055",
@@ -3084,6 +3328,7 @@
   "codi_ine": "43083",
   "nom": "El Milà",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43005",
    "43080",
@@ -3094,6 +3339,7 @@
   "codi_ine": "43085",
   "nom": "El Molar",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43023",
    "43058",
@@ -3108,6 +3354,7 @@
   "codi_ine": "43090",
   "nom": "El Montmell",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08065",
    "08227",
@@ -3123,6 +3370,7 @@
   "codi_ine": "43095",
   "nom": "El Morell",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43066",
    "43103",
@@ -3137,6 +3385,7 @@
   "codi_ine": "25158",
   "nom": "El Palau d'Anglesola",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25048",
    "25052",
@@ -3151,6 +3400,7 @@
   "codi_ine": "08158",
   "nom": "El Papiol",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08054",
    "08123",
@@ -3162,6 +3412,7 @@
   "codi_ine": "43104",
   "nom": "El Perelló",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43013",
    "43121",
@@ -3175,6 +3426,7 @@
   "codi_ine": "43106",
   "nom": "El Pinell de Brai",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43025",
    "43026",
@@ -3187,6 +3439,7 @@
   "codi_ine": "43108",
   "nom": "El Pla de Santa Maria",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43001",
    "43010",
@@ -3201,6 +3454,7 @@
   "codi_ine": "08164",
   "nom": "El Pla del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08085",
    "08174",
@@ -3213,6 +3467,7 @@
   "codi_ine": "25168",
   "nom": "El Poal",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25052",
    "25122",
@@ -3224,6 +3479,7 @@
   "codi_ine": "43113",
   "nom": "El Pont d'Armentera",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43001",
    "43036",
@@ -3237,6 +3493,7 @@
   "codi_ine": "25030",
   "nom": "El Pont de Bar",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25032",
    "25071",
@@ -3250,6 +3507,7 @@
   "codi_ine": "25173",
   "nom": "El Pont de Suert",
   "provincia": "Lleida",
+  "comarca": "05",
   "veins": [
    "25043",
    "25161",
@@ -3263,6 +3521,7 @@
   "codi_ine": "08182",
   "nom": "El Pont de Vilomara i Rocafort",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08113",
    "08139",
@@ -3275,6 +3534,7 @@
   "codi_ine": "17140",
   "nom": "El Port de la Selva",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17032",
    "17092",
@@ -3289,6 +3549,7 @@
   "codi_ine": "08169",
   "nom": "El Prat de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08019",
    "08073",
@@ -3301,6 +3562,7 @@
   "codi_ine": "43134",
   "nom": "El Rourell",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43005",
    "43080",
@@ -3314,6 +3576,7 @@
   "codi_ine": "25206",
   "nom": "El Soleràs",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25006",
    "25076",
@@ -3326,6 +3589,7 @@
   "codi_ine": "43163",
   "nom": "El Vendrell",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43024",
@@ -3338,6 +3602,7 @@
   "codi_ine": "25253",
   "nom": "El Vilosell",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25009",
    "25169",
@@ -3350,6 +3615,7 @@
   "codi_ine": "25004",
   "nom": "Els Alamús",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25048",
    "25120",
@@ -3360,6 +3626,7 @@
   "codi_ine": "43066",
   "nom": "Els Garidells",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43095",
    "43103",
@@ -3371,6 +3638,7 @@
   "codi_ine": "43070",
   "nom": "Els Guiamets",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43040",
    "43065",
@@ -3383,6 +3651,7 @@
   "codi_ine": "08162",
   "nom": "Els Hostalets de Pierola",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08001",
    "08025",
@@ -3397,6 +3666,7 @@
   "codi_ine": "25153",
   "nom": "Els Omellons",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25029",
    "25081",
@@ -3409,6 +3679,7 @@
   "codi_ine": "25154",
   "nom": "Els Omells de na Gaia",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25081",
    "25130",
@@ -3420,6 +3691,7 @@
   "codi_ine": "43100",
   "nom": "Els Pallaresos",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43043",
    "43047",
@@ -3432,6 +3704,7 @@
   "codi_ine": "25911",
   "nom": "Els Plans de Sió",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25103",
@@ -3445,6 +3718,7 @@
   "codi_ine": "08170",
   "nom": "Els Prats de Rei",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08002",
    "08031",
@@ -3459,6 +3733,7 @@
   "codi_ine": "25224",
   "nom": "Els Torms",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25101",
    "25118",
@@ -3470,6 +3745,7 @@
   "codi_ine": "25057",
   "nom": "Es Bòrdes",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25031",
    "25243",
@@ -3480,6 +3756,7 @@
   "codi_ine": "08076",
   "nom": "Esparreguera",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08001",
    "08069",
@@ -3493,6 +3770,7 @@
   "codi_ine": "17063",
   "nom": "Espinelves",
   "provincia": "Girona",
+  "comarca": "24",
   "veins": [
    "08241",
    "08303",
@@ -3505,6 +3783,7 @@
   "codi_ine": "08077",
   "nom": "Esplugues de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08019",
    "08073",
@@ -3517,6 +3796,7 @@
   "codi_ine": "17064",
   "nom": "Espolla",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17086",
    "17106",
@@ -3528,6 +3808,7 @@
   "codi_ine": "17065",
   "nom": "Esponellà",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17031",
    "17058",
@@ -3541,6 +3822,7 @@
   "codi_ine": "25082",
   "nom": "Espot",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25024",
    "25025",
@@ -3556,6 +3838,7 @@
   "codi_ine": "25088",
   "nom": "Estamariu",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25030",
@@ -3568,6 +3851,7 @@
   "codi_ine": "25085",
   "nom": "Estaràs",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "08060",
    "08176",
@@ -3583,6 +3867,7 @@
   "codi_ine": "25086",
   "nom": "Esterri d'Àneu",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25024",
    "25082",
@@ -3593,6 +3878,7 @@
   "codi_ine": "25087",
   "nom": "Esterri de Cardós",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25017",
    "25123",
@@ -3603,6 +3889,7 @@
   "codi_ine": "43055",
   "nom": "Falset",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43023",
    "43069",
@@ -3616,6 +3903,7 @@
   "codi_ine": "25089",
   "nom": "Farrera",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25017",
    "25126",
@@ -3628,6 +3916,7 @@
   "codi_ine": "08134",
   "nom": "Figaró-Montmany",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08023",
@@ -3642,6 +3931,7 @@
   "codi_ine": "08080",
   "nom": "Fígols",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08050",
    "08132",
@@ -3656,6 +3946,7 @@
   "codi_ine": "25908",
   "nom": "Fígols i Alinyà",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25061",
    "25077",
@@ -3671,6 +3962,7 @@
   "codi_ine": "17066",
   "nom": "Figueres",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17005",
    "17030",
@@ -3685,6 +3977,7 @@
   "codi_ine": "43059",
   "nom": "Figuerola del Camp",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43021",
    "43036",
@@ -3697,6 +3990,7 @@
   "codi_ine": "17067",
   "nom": "Flaçà",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17068",
    "17130",
@@ -3709,6 +4003,7 @@
   "codi_ine": "43060",
   "nom": "Flix",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "25056",
    "25101",
@@ -3727,6 +4022,7 @@
   "codi_ine": "08082",
   "nom": "Fogars de la Selva",
   "provincia": "Barcelona",
+  "comarca": "34",
   "veins": [
    "08202",
    "08284",
@@ -3740,6 +4036,7 @@
   "codi_ine": "08081",
   "nom": "Fogars de Montclús",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08039",
    "08097",
@@ -3756,6 +4053,7 @@
   "codi_ine": "17068",
   "nom": "Foixà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17055",
    "17067",
@@ -3772,6 +4070,7 @@
   "codi_ine": "08083",
   "nom": "Folgueroles",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08037",
    "08100",
@@ -3785,6 +4084,7 @@
   "codi_ine": "25093",
   "nom": "Fondarella",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25137",
    "25158",
@@ -3796,6 +4096,7 @@
   "codi_ine": "08084",
   "nom": "Fonollosa",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08002",
    "08113",
@@ -3808,6 +4109,7 @@
   "codi_ine": "08085",
   "nom": "Font-rubí",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08094",
    "08104",
@@ -3826,6 +4128,7 @@
   "codi_ine": "17069",
   "nom": "Fontanals de Cerdanya",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17006",
    "17024",
@@ -3838,6 +4141,7 @@
   "codi_ine": "17070",
   "nom": "Fontanilles",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17081",
    "17121",
@@ -3853,6 +4157,7 @@
   "codi_ine": "17071",
   "nom": "Fontcoberta",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17015",
    "17056",
@@ -3865,6 +4170,7 @@
   "codi_ine": "25094",
   "nom": "Foradada",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25003",
    "25022",
@@ -3878,6 +4184,7 @@
   "codi_ine": "17902",
   "nom": "Forallac",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17022",
    "17034",
@@ -3895,6 +4202,7 @@
   "codi_ine": "43061",
   "nom": "Forès",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43046",
    "43101",
@@ -3907,6 +4215,7 @@
   "codi_ine": "17073",
   "nom": "Fornells de la Selva",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17002",
    "17038",
@@ -3921,6 +4230,7 @@
   "codi_ine": "17074",
   "nom": "Fortià",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17005",
    "17047",
@@ -3935,6 +4245,7 @@
   "codi_ine": "43062",
   "nom": "Freginals",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43004",
    "43014",
@@ -3948,6 +4259,7 @@
   "codi_ine": "25097",
   "nom": "Fulleda",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25081",
    "25218",
@@ -3961,6 +4273,7 @@
   "codi_ine": "08090",
   "nom": "Gaià",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08012",
    "08018",
@@ -3974,6 +4287,7 @@
   "codi_ine": "08087",
   "nom": "Gallifa",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08033",
    "08064",
@@ -3986,6 +4300,7 @@
   "codi_ine": "43064",
   "nom": "Gandesa",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43022",
    "43026",
@@ -4000,6 +4315,7 @@
   "codi_ine": "43065",
   "nom": "Garcia",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43019",
    "43070",
@@ -4016,6 +4332,7 @@
   "codi_ine": "17075",
   "nom": "Garrigàs",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17016",
    "17026",
@@ -4031,6 +4348,7 @@
   "codi_ine": "17076",
   "nom": "Garrigoles",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17085",
    "17195",
@@ -4044,6 +4362,7 @@
   "codi_ine": "17077",
   "nom": "Garriguella",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17092",
    "17106",
@@ -4058,6 +4377,7 @@
   "codi_ine": "08089",
   "nom": "Gavà",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08020",
    "08056",
@@ -4070,6 +4390,7 @@
   "codi_ine": "25098",
   "nom": "Gavet de la Conca",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25034",
    "25115",
@@ -4083,6 +4404,7 @@
   "codi_ine": "08091",
   "nom": "Gelida",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08066",
    "08068",
@@ -4097,6 +4419,7 @@
   "codi_ine": "17078",
   "nom": "Ger",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17024",
    "17061",
@@ -4110,6 +4433,7 @@
   "codi_ine": "25912",
   "nom": "Gimenells i el Pla de la Font",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25011",
    "25120"
@@ -4119,6 +4443,7 @@
   "codi_ine": "43067",
   "nom": "Ginestar",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43026",
    "43084",
@@ -4130,6 +4455,7 @@
   "codi_ine": "17079",
   "nom": "Girona",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17049",
    "17073",
@@ -4146,6 +4472,7 @@
   "codi_ine": "08092",
   "nom": "Gironella",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08049",
    "08144"
@@ -4155,6 +4482,7 @@
   "codi_ine": "08093",
   "nom": "Gisclareny",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08016",
    "08099",
@@ -4168,6 +4496,7 @@
   "codi_ine": "43068",
   "nom": "Godall",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43062",
    "43063",
@@ -4179,6 +4508,7 @@
   "codi_ine": "25099",
   "nom": "Golmés",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25068",
    "25135",
@@ -4191,6 +4521,7 @@
   "codi_ine": "17080",
   "nom": "Gombrèn",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "08052",
    "08166",
@@ -4206,6 +4537,7 @@
   "codi_ine": "25100",
   "nom": "Gósol",
   "provincia": "Lleida",
+  "comarca": "14",
   "veins": [
    "08080",
    "08190",
@@ -4218,6 +4550,7 @@
   "codi_ine": "08095",
   "nom": "Granera",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08064",
    "08087",
@@ -4230,6 +4563,7 @@
   "codi_ine": "08096",
   "nom": "Granollers",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08041",
    "08086",
@@ -4246,6 +4580,7 @@
   "codi_ine": "25103",
   "nom": "Granyanella",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25104",
@@ -4257,6 +4592,7 @@
   "codi_ine": "25105",
   "nom": "Granyena de les Garrigues",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25010",
    "25076",
@@ -4269,6 +4605,7 @@
   "codi_ine": "25104",
   "nom": "Granyena de Segarra",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25103",
@@ -4282,6 +4619,7 @@
   "codi_ine": "43069",
   "nom": "Gratallops",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43023",
    "43055",
@@ -4297,6 +4635,7 @@
   "codi_ine": "08097",
   "nom": "Gualba",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08039",
    "08081",
@@ -4308,6 +4647,7 @@
   "codi_ine": "17081",
   "nom": "Gualta",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17070",
    "17199",
@@ -4318,6 +4658,7 @@
   "codi_ine": "08099",
   "nom": "Guardiola de Berguedà",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08016",
    "08052",
@@ -4336,6 +4677,7 @@
   "codi_ine": "17082",
   "nom": "Guils de Cerdanya",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17024",
    "17078",
@@ -4346,6 +4688,7 @@
   "codi_ine": "25109",
   "nom": "Guimerà",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25074",
    "25141",
@@ -4359,6 +4702,7 @@
   "codi_ine": "25110",
   "nom": "Guissona",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25132",
    "25197",
@@ -4370,6 +4714,7 @@
   "codi_ine": "25111",
   "nom": "Guixers",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08045",
    "08050",
@@ -4386,6 +4731,7 @@
   "codi_ine": "08100",
   "nom": "Gurb",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08083",
    "08112",
@@ -4402,6 +4748,7 @@
   "codi_ine": "43071",
   "nom": "Horta de Sant Joan",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43008",
    "43018",
@@ -4415,6 +4762,7 @@
   "codi_ine": "17083",
   "nom": "Hostalric",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08082",
    "17101",
@@ -4425,6 +4773,7 @@
   "codi_ine": "08102",
   "nom": "Igualada",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08103",
    "08143",
@@ -4436,6 +4785,7 @@
   "codi_ine": "25115",
   "nom": "Isona i Conca Dellà",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25001",
    "25034",
@@ -4454,6 +4804,7 @@
   "codi_ine": "17084",
   "nom": "Isòvol",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17061",
    "17078",
@@ -4465,6 +4816,7 @@
   "codi_ine": "25113",
   "nom": "Ivars d'Urgell",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25041",
    "25050",
@@ -4480,6 +4832,7 @@
   "codi_ine": "25112",
   "nom": "Ivars de Noguera",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25013",
    "25015",
@@ -4490,6 +4843,7 @@
   "codi_ine": "25114",
   "nom": "Ivorra",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "08060",
    "25085",
@@ -4502,6 +4856,7 @@
   "codi_ine": "17085",
   "nom": "Jafre",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17055",
    "17068",
@@ -4514,6 +4869,7 @@
   "codi_ine": "08103",
   "nom": "Jorba",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08008",
    "08071",
@@ -4529,6 +4885,7 @@
   "codi_ine": "25910",
   "nom": "Josa i Tuixén",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "08016",
    "08190",
@@ -4543,6 +4900,7 @@
   "codi_ine": "17087",
   "nom": "Juià",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17049",
@@ -4555,6 +4913,7 @@
   "codi_ine": "25118",
   "nom": "Juncosa",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25006",
    "25073",
@@ -4569,6 +4928,7 @@
   "codi_ine": "25119",
   "nom": "Juneda",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25058",
    "25067",
@@ -4583,6 +4943,7 @@
   "codi_ine": "25006",
   "nom": "L'Albagés",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25067",
    "25073",
@@ -4595,6 +4956,7 @@
   "codi_ine": "25009",
   "nom": "L'Albi",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25058",
    "25073",
@@ -4607,6 +4969,7 @@
   "codi_ine": "43003",
   "nom": "L'Albiol",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43005",
    "43007",
@@ -4619,6 +4982,7 @@
   "codi_ine": "43904",
   "nom": "L'Aldea",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43014",
    "43155",
@@ -4630,6 +4994,7 @@
   "codi_ine": "43007",
   "nom": "L'Aleixar",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43003",
    "43009",
@@ -4646,6 +5011,7 @@
   "codi_ine": "43013",
   "nom": "L'Ametlla de Mar",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43104",
    "43150",
@@ -4656,6 +5022,7 @@
   "codi_ine": "08005",
   "nom": "L'Ametlla del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08023",
    "08041",
@@ -4669,6 +5036,7 @@
   "codi_ine": "43906",
   "nom": "L'Ampolla",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43104",
    "43901",
@@ -4679,6 +5047,7 @@
   "codi_ine": "43016",
   "nom": "L'Arboç",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08058",
    "08065",
@@ -4691,6 +5060,7 @@
   "codi_ine": "43017",
   "nom": "L'Argentera",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43045",
    "43053",
@@ -4704,6 +5074,7 @@
   "codi_ine": "17011",
   "nom": "L'Armentera",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17062",
    "17178",
@@ -4714,6 +5085,7 @@
   "codi_ine": "17062",
   "nom": "L'Escala",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17004",
    "17011",
@@ -4728,6 +5100,7 @@
   "codi_ine": "25081",
   "nom": "L'Espluga Calba",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25097",
    "25130",
@@ -4741,6 +5114,7 @@
   "codi_ine": "43054",
   "nom": "L'Espluga de Francolí",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25097",
    "25238",
@@ -4754,6 +5128,7 @@
   "codi_ine": "08078",
   "nom": "L'Espunyola",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08045",
@@ -4767,6 +5142,7 @@
   "codi_ine": "08254",
   "nom": "L'Esquirol",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08112",
    "08116",
@@ -4781,6 +5157,7 @@
   "codi_ine": "08079",
   "nom": "L'Estany",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08129",
    "08138",
@@ -4791,6 +5168,7 @@
   "codi_ine": "08101",
   "nom": "L'Hospitalet de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "13",
   "veins": [
    "08019",
    "08073",
@@ -4802,6 +5180,7 @@
   "codi_ine": "25042",
   "nom": "La Baronia de Rialb",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25034",
    "25044",
@@ -4816,6 +5195,7 @@
   "codi_ine": "17022",
   "nom": "La Bisbal d'Empordà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17057",
    "17205",
@@ -4827,6 +5207,7 @@
   "codi_ine": "43027",
   "nom": "La Bisbal de Falset",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43035",
    "43060",
@@ -4838,6 +5219,7 @@
   "codi_ine": "43028",
   "nom": "La Bisbal del Penedès",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43020",
@@ -4853,6 +5235,7 @@
   "codi_ine": "43907",
   "nom": "La Canonja",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43123",
    "43148",
@@ -4863,6 +5246,7 @@
   "codi_ine": "17189",
   "nom": "La Cellera de Ter",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17007",
    "17008",
@@ -4875,6 +5259,7 @@
   "codi_ine": "25163",
   "nom": "La Coma i la Pedra",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25100",
    "25111",
@@ -4888,6 +5273,7 @@
   "codi_ine": "43056",
   "nom": "La Fatarella",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43019",
    "43048",
@@ -4900,6 +5286,7 @@
   "codi_ine": "43057",
   "nom": "La Febró",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43015",
    "43039",
@@ -4912,6 +5299,7 @@
   "codi_ine": "43058",
   "nom": "La Figuera",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43035",
    "43072",
@@ -4924,6 +5312,7 @@
   "codi_ine": "25092",
   "nom": "La Floresta",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25029",
    "25058",
@@ -4935,6 +5324,7 @@
   "codi_ine": "25096",
   "nom": "La Fuliola",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25003",
    "25070",
@@ -4947,6 +5337,7 @@
   "codi_ine": "43063",
   "nom": "La Galera",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43068",
    "43077",
@@ -4959,6 +5350,7 @@
   "codi_ine": "08088",
   "nom": "La Garriga",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08042",
@@ -4970,6 +5362,7 @@
   "codi_ine": "08094",
   "nom": "La Granada",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08027",
@@ -4985,6 +5378,7 @@
   "codi_ine": "25101",
   "nom": "La Granadella",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25056",
    "25105",
@@ -5000,6 +5394,7 @@
   "codi_ine": "25102",
   "nom": "La Granja d'Escarp",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25131",
    "25204"
@@ -5009,6 +5404,7 @@
   "codi_ine": "25903",
   "nom": "La Guingueta d'Àneu",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25024",
    "25082",
@@ -5023,6 +5419,7 @@
   "codi_ine": "17086",
   "nom": "La Jonquera",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17001",
    "17041",
@@ -5035,6 +5432,7 @@
   "codi_ine": "08104",
   "nom": "La Llacuna",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08048",
    "08085",
@@ -5050,6 +5448,7 @@
   "codi_ine": "08105",
   "nom": "La Llagosta",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08124",
    "08125",
@@ -5061,6 +5460,7 @@
   "codi_ine": "43080",
   "nom": "La Masó",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43005",
    "43083",
@@ -5073,6 +5473,7 @@
   "codi_ine": "25136",
   "nom": "La Molsosa",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08036",
    "08060",
@@ -5086,6 +5487,7 @@
   "codi_ine": "43096",
   "nom": "La Morera de Montsant",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43035",
    "43049",
@@ -5100,6 +5502,7 @@
   "codi_ine": "08142",
   "nom": "La Nou de Berguedà",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08057",
    "08099",
@@ -5112,6 +5515,7 @@
   "codi_ine": "43097",
   "nom": "La Nou de Gaià",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43012",
    "43043",
@@ -5124,6 +5528,7 @@
   "codi_ine": "43099",
   "nom": "La Palma d'Ebre",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43027",
    "43035",
@@ -5135,6 +5540,7 @@
   "codi_ine": "08905",
   "nom": "La Palma de Cervelló",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08068",
    "08072",
@@ -5146,6 +5552,7 @@
   "codi_ine": "17130",
   "nom": "La Pera",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17057",
    "17067",
@@ -5159,6 +5566,7 @@
   "codi_ine": "25169",
   "nom": "La Pobla de Cérvoles",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25009",
    "25073",
@@ -5172,6 +5580,7 @@
   "codi_ine": "08165",
   "nom": "La Pobla de Claramunt",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08048",
    "08063",
@@ -5186,6 +5595,7 @@
   "codi_ine": "08166",
   "nom": "La Pobla de Lillet",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08052",
    "08057",
@@ -5200,6 +5610,7 @@
   "codi_ine": "43109",
   "nom": "La Pobla de Mafumet",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43047",
    "43095",
@@ -5211,6 +5622,7 @@
   "codi_ine": "43110",
   "nom": "La Pobla de Massaluca",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43022",
    "43125",
@@ -5221,6 +5633,7 @@
   "codi_ine": "43111",
   "nom": "La Pobla de Montornès",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43012",
    "43030",
@@ -5234,6 +5647,7 @@
   "codi_ine": "25171",
   "nom": "La Pobla de Segur",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25039",
    "25161",
@@ -5245,6 +5659,7 @@
   "codi_ine": "25174",
   "nom": "La Portella",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25008",
    "25016",
@@ -5256,6 +5671,7 @@
   "codi_ine": "08177",
   "nom": "La Quar",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08024",
    "08109",
@@ -5269,6 +5685,7 @@
   "codi_ine": "43136",
   "nom": "La Ràpita",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43004",
    "43014",
@@ -5279,6 +5696,7 @@
   "codi_ine": "43124",
   "nom": "La Riba",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43005",
    "43086",
@@ -5291,6 +5709,7 @@
   "codi_ine": "43126",
   "nom": "La Riera de Gaià",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43012",
    "43043",
@@ -5303,6 +5722,7 @@
   "codi_ine": "08181",
   "nom": "La Roca del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08009",
    "08046",
@@ -5318,6 +5738,7 @@
   "codi_ine": "43144",
   "nom": "La Secuita",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43043",
    "43066",
@@ -5332,6 +5753,7 @@
   "codi_ine": "17188",
   "nom": "La Selva de Mar",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17120",
    "17140",
@@ -5342,6 +5764,7 @@
   "codi_ine": "43145",
   "nom": "La Selva del Camp",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43003",
    "43005",
@@ -5358,6 +5781,7 @@
   "codi_ine": "43044",
   "nom": "La Sénia",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43077",
    "43133",
@@ -5369,6 +5793,7 @@
   "codi_ine": "25035",
   "nom": "La Sentiu de Sió",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25040",
    "25047",
@@ -5380,6 +5805,7 @@
   "codi_ine": "25203",
   "nom": "La Seu d'Urgell",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25088",
@@ -5392,6 +5818,7 @@
   "codi_ine": "17195",
   "nom": "La Tallada d'Empordà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17004",
    "17018",
@@ -5407,6 +5834,7 @@
   "codi_ine": "25227",
   "nom": "La Torre de Cabdella",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25039",
    "25043",
@@ -5420,6 +5848,7 @@
   "codi_ine": "08286",
   "nom": "La Torre de Claramunt",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08028",
    "08044",
@@ -5433,6 +5862,7 @@
   "codi_ine": "43151",
   "nom": "La Torre de Fontaubella",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43017",
    "43045",
@@ -5443,6 +5873,7 @@
   "codi_ine": "43152",
   "nom": "La Torre de l'Espanyol",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43035",
    "43058",
@@ -5455,6 +5886,7 @@
   "codi_ine": "17014",
   "nom": "La Vajol",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17001",
    "17060",
@@ -5465,6 +5897,7 @@
   "codi_ine": "17207",
   "nom": "La Vall d'en Bas",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "08233",
    "08254",
@@ -5480,6 +5913,7 @@
   "codi_ine": "17208",
   "nom": "La Vall de Bianya",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17039",
    "17109",
@@ -5494,6 +5928,7 @@
   "codi_ine": "25043",
   "nom": "La Vall de Boí",
   "provincia": "Lleida",
+  "comarca": "05",
   "veins": [
    "25025",
    "25082",
@@ -5507,6 +5942,7 @@
   "codi_ine": "25909",
   "nom": "La Vansa i Fórnols",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25071",
@@ -5520,6 +5956,7 @@
   "codi_ine": "43173",
   "nom": "La Vilella Alta",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43035",
    "43069",
@@ -5532,6 +5969,7 @@
   "codi_ine": "43174",
   "nom": "La Vilella Baixa",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43035",
    "43058",
@@ -5544,6 +5982,7 @@
   "codi_ine": "25121",
   "nom": "Les",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25045",
    "25059",
@@ -5555,6 +5994,7 @@
   "codi_ine": "25037",
   "nom": "Les Avellanes i Santa Linya",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25002",
    "25062",
@@ -5565,6 +6005,7 @@
   "codi_ine": "25058",
   "nom": "Les Borges Blanques",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25009",
    "25029",
@@ -5580,6 +6021,7 @@
   "codi_ine": "43031",
   "nom": "Les Borges del Camp",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43009",
    "43033",
@@ -5591,6 +6033,7 @@
   "codi_ine": "08027",
   "nom": "Les Cabanyes",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08094",
    "08154",
@@ -5602,6 +6045,7 @@
   "codi_ine": "08086",
   "nom": "Les Franqueses del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08041",
@@ -5616,6 +6060,7 @@
   "codi_ine": "17096",
   "nom": "Les Llosses",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "08004",
    "08024",
@@ -5634,6 +6079,7 @@
   "codi_ine": "08116",
   "nom": "Les Masies de Roda",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08112",
@@ -5648,6 +6094,7 @@
   "codi_ine": "08117",
   "nom": "Les Masies de Voltregà",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08112",
@@ -5662,6 +6109,7 @@
   "codi_ine": "25152",
   "nom": "Les Oluges",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25085",
@@ -5672,6 +6120,7 @@
   "codi_ine": "43105",
   "nom": "Les Piles",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "08021",
    "43046",
@@ -5684,6 +6133,7 @@
   "codi_ine": "17133",
   "nom": "Les Planes d'Hostoles",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "08901",
    "17007",
@@ -5696,6 +6146,7 @@
   "codi_ine": "17139",
   "nom": "Les Preses",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17114",
    "17161",
@@ -5707,6 +6158,7 @@
   "codi_ine": "25906",
   "nom": "Les Valls d'Aguilar",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25039",
    "25061",
@@ -5720,6 +6172,7 @@
   "codi_ine": "25239",
   "nom": "Les Valls de Valira",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25017",
    "25030",
@@ -5735,6 +6188,7 @@
   "codi_ine": "25122",
   "nom": "Linyola",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25047",
    "25052",
@@ -5749,6 +6203,7 @@
   "codi_ine": "17088",
   "nom": "Lladó",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17031",
    "17051",
@@ -5759,6 +6214,7 @@
   "codi_ine": "25123",
   "nom": "Lladorre",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25017",
    "25087",
@@ -5770,6 +6226,7 @@
   "codi_ine": "25124",
   "nom": "Lladurs",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25064",
    "25146",
@@ -5782,6 +6239,7 @@
   "codi_ine": "17089",
   "nom": "Llagostera",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17033",
    "17044",
@@ -5793,6 +6251,7 @@
   "codi_ine": "17090",
   "nom": "Llambilles",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17038",
    "17044",
@@ -5805,6 +6264,7 @@
   "codi_ine": "17091",
   "nom": "Llanars",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17039",
    "17107",
@@ -5816,6 +6276,7 @@
   "codi_ine": "17092",
   "nom": "Llançà",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17054",
    "17077",
@@ -5829,6 +6290,7 @@
   "codi_ine": "25125",
   "nom": "Llardecans",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25038",
    "25101",
@@ -5843,6 +6305,7 @@
   "codi_ine": "25126",
   "nom": "Llavorsí",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25089",
    "25140",
@@ -5857,6 +6320,7 @@
   "codi_ine": "25120",
   "nom": "Lleida",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25004",
    "25007",
@@ -5881,6 +6345,7 @@
   "codi_ine": "17093",
   "nom": "Llers",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17012",
    "17029",
@@ -5896,6 +6361,7 @@
   "codi_ine": "25127",
   "nom": "Lles de Cerdanya",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "17099",
    "25030",
@@ -5909,6 +6375,7 @@
   "codi_ine": "08107",
   "nom": "Lliçà d'Amunt",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08033",
    "08041",
@@ -5923,6 +6390,7 @@
   "codi_ine": "08108",
   "nom": "Lliçà de Vall",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08096",
    "08107",
@@ -5935,6 +6403,7 @@
   "codi_ine": "25128",
   "nom": "Llimiana",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25062",
    "25098",
@@ -5947,6 +6416,7 @@
   "codi_ine": "08106",
   "nom": "Llinars del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08046",
    "08075",
@@ -5961,12 +6431,19 @@
   "codi_ine": "17094",
   "nom": "Llívia",
   "provincia": "Girona",
-  "veins": []
+  "comarca": "15",
+  "veins": [
+   "17141"
+  ],
+  "connexions_especials": [
+   "17141"
+  ]
  },
  {
   "codi_ine": "25129",
   "nom": "Llobera",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25055",
    "25151",
@@ -5980,6 +6457,7 @@
   "codi_ine": "43073",
   "nom": "Llorac",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25141",
    "25216",
@@ -5992,6 +6470,7 @@
   "codi_ine": "43074",
   "nom": "Llorenç del Penedès",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43020",
    "43028",
@@ -6002,6 +6481,7 @@
   "codi_ine": "17095",
   "nom": "Lloret de Mar",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08284",
    "17023",
@@ -6014,6 +6494,7 @@
   "codi_ine": "08109",
   "nom": "Lluçà",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08004",
    "08024",
@@ -6030,6 +6511,7 @@
   "codi_ine": "17102",
   "nom": "Maçanet de Cabrenys",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17003",
    "17014",
@@ -6041,6 +6523,7 @@
   "codi_ine": "17103",
   "nom": "Maçanet de la Selva",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08082",
    "08284",
@@ -6055,6 +6538,7 @@
   "codi_ine": "17097",
   "nom": "Madremanya",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17057",
    "17130",
@@ -6067,6 +6551,7 @@
   "codi_ine": "17098",
   "nom": "Maià de Montcal",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17021",
    "17031",
@@ -6080,6 +6565,7 @@
   "codi_ine": "25133",
   "nom": "Maials",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25020",
    "25125",
@@ -6092,6 +6578,7 @@
   "codi_ine": "25130",
   "nom": "Maldà",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25029",
    "25046",
@@ -6106,6 +6593,7 @@
   "codi_ine": "08110",
   "nom": "Malgrat de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08155",
    "08261",
@@ -6116,6 +6604,7 @@
   "codi_ine": "08111",
   "nom": "Malla",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08129",
    "08246",
@@ -6129,6 +6618,7 @@
   "codi_ine": "08112",
   "nom": "Manlleu",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08116",
@@ -6141,6 +6631,7 @@
   "codi_ine": "08113",
   "nom": "Manresa",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08061",
    "08084",
@@ -6156,6 +6647,7 @@
   "codi_ine": "43076",
   "nom": "Marçà",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43040",
    "43045",
@@ -6169,6 +6661,7 @@
   "codi_ine": "43075",
   "nom": "Margalef",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "25118",
    "25170",
@@ -6183,6 +6676,7 @@
   "codi_ine": "08242",
   "nom": "Marganell",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08025",
    "08053",
@@ -6196,6 +6690,7 @@
   "codi_ine": "08114",
   "nom": "Martorell",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08001",
    "08054",
@@ -6208,6 +6703,7 @@
   "codi_ine": "08115",
   "nom": "Martorelles",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08124",
    "08135",
@@ -6220,6 +6716,7 @@
   "codi_ine": "43077",
   "nom": "Mas de Barberans",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43044",
    "43063",
@@ -6232,6 +6729,7 @@
   "codi_ine": "17100",
   "nom": "Masarac",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17030",
    "17042",
@@ -6246,6 +6744,7 @@
   "codi_ine": "43078",
   "nom": "Masdenverge",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43014",
    "43062",
@@ -6259,6 +6758,7 @@
   "codi_ine": "43079",
   "nom": "Masllorenç",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43028",
@@ -6271,6 +6771,7 @@
   "codi_ine": "43081",
   "nom": "Maspujols",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43009",
@@ -6282,6 +6783,7 @@
   "codi_ine": "08119",
   "nom": "Masquefa",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08161",
    "08162",
@@ -6293,6 +6795,7 @@
   "codi_ine": "25131",
   "nom": "Massalcoreig",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25102",
    "25204"
@@ -6302,6 +6805,7 @@
   "codi_ine": "17101",
   "nom": "Massanes",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08082",
    "17083",
@@ -6314,6 +6818,7 @@
   "codi_ine": "25132",
   "nom": "Massoteres",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25055",
    "25110",
@@ -6327,6 +6832,7 @@
   "codi_ine": "08120",
   "nom": "Matadepera",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08051",
    "08139",
@@ -6338,6 +6844,7 @@
   "codi_ine": "08121",
   "nom": "Mataró",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08009",
    "08029",
@@ -6349,6 +6856,7 @@
   "codi_ine": "08122",
   "nom": "Mediona",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08028",
    "08048",
@@ -6363,6 +6871,7 @@
   "codi_ine": "25134",
   "nom": "Menàrguens",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25008",
    "25040",
@@ -6376,6 +6885,7 @@
   "codi_ine": "17099",
   "nom": "Meranges",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17078",
    "25051",
@@ -6386,6 +6896,7 @@
   "codi_ine": "17105",
   "nom": "Mieres",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17162",
    "17172",
@@ -6398,6 +6909,7 @@
   "codi_ine": "25135",
   "nom": "Miralcamp",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25029",
    "25099",
@@ -6412,6 +6924,7 @@
   "codi_ine": "43084",
   "nom": "Miravet",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43025",
    "43026",
@@ -6424,6 +6937,7 @@
   "codi_ine": "08138",
   "nom": "Moià",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08012",
    "08034",
@@ -6440,6 +6954,7 @@
   "codi_ine": "08123",
   "nom": "Molins de Rei",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08019",
    "08157",
@@ -6453,6 +6968,7 @@
   "codi_ine": "25137",
   "nom": "Mollerussa",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25093",
    "25099",
@@ -6466,6 +6982,7 @@
   "codi_ine": "17106",
   "nom": "Mollet de Peralada",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17064",
    "17077",
@@ -6479,6 +6996,7 @@
   "codi_ine": "08124",
   "nom": "Mollet del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08105",
    "08108",
@@ -6495,6 +7013,7 @@
   "codi_ine": "17107",
   "nom": "Molló",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17039",
    "17091",
@@ -6505,6 +7024,7 @@
   "codi_ine": "08128",
   "nom": "Monistrol de Calders",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08034",
    "08055",
@@ -6519,6 +7039,7 @@
   "codi_ine": "08127",
   "nom": "Monistrol de Montserrat",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08025",
    "08053",
@@ -6533,6 +7054,7 @@
   "codi_ine": "43091",
   "nom": "Mont-ral",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43003",
    "43005",
@@ -6547,6 +7069,7 @@
   "codi_ine": "17110",
   "nom": "Mont-ras",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17117",
    "17118",
@@ -6558,6 +7081,7 @@
   "codi_ine": "43092",
   "nom": "Mont-roig del Camp",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43038",
    "43088",
@@ -6571,6 +7095,7 @@
   "codi_ine": "17109",
   "nom": "Montagut i Oix",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17003",
    "17010",
@@ -6587,6 +7112,7 @@
   "codi_ine": "43086",
   "nom": "Montblanc",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43021",
    "43029",
@@ -6604,6 +7130,7 @@
   "codi_ine": "43088",
   "nom": "Montbrió del Camp",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43033",
    "43038",
@@ -6617,6 +7144,7 @@
   "codi_ine": "08125",
   "nom": "Montcada i Reixac",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08015",
    "08019",
@@ -6635,6 +7163,7 @@
   "codi_ine": "08130",
   "nom": "Montclar",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08049",
@@ -6647,6 +7176,7 @@
   "codi_ine": "25139",
   "nom": "Montellà i Martinet",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "08016",
    "08093",
@@ -6662,6 +7192,7 @@
   "codi_ine": "08131",
   "nom": "Montesquiu",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08237",
    "08253",
@@ -6673,6 +7204,7 @@
   "codi_ine": "25140",
   "nom": "Montferrer i Castellbò",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25089",
    "25126",
@@ -6687,6 +7219,7 @@
   "codi_ine": "43089",
   "nom": "Montferri",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43030",
    "43034",
@@ -6701,6 +7234,7 @@
   "codi_ine": "25138",
   "nom": "Montgai",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25047",
    "25049",
@@ -6715,6 +7249,7 @@
   "codi_ine": "08126",
   "nom": "Montgat",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08003",
    "08015",
@@ -6726,6 +7261,7 @@
   "codi_ine": "08132",
   "nom": "Montmajor",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08045",
    "08047",
@@ -6742,6 +7278,7 @@
   "codi_ine": "08133",
   "nom": "Montmaneu",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08008",
    "25192",
@@ -6753,6 +7290,7 @@
   "codi_ine": "08135",
   "nom": "Montmeló",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08096",
    "08115",
@@ -6765,6 +7303,7 @@
   "codi_ine": "25142",
   "nom": "Montoliu de Lleida",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25007",
    "25014",
@@ -6777,6 +7316,7 @@
   "codi_ine": "25141",
   "nom": "Montoliu de Segarra",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25109",
@@ -6791,6 +7331,7 @@
   "codi_ine": "25143",
   "nom": "Montornès de Segarra",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25104",
    "25109",
@@ -6803,6 +7344,7 @@
   "codi_ine": "08136",
   "nom": "Montornès del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08096",
    "08115",
@@ -6816,6 +7358,7 @@
   "codi_ine": "08137",
   "nom": "Montseny",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08026",
    "08081",
@@ -6829,6 +7372,7 @@
   "codi_ine": "43093",
   "nom": "Móra d'Ebre",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43019",
    "43026",
@@ -6843,6 +7387,7 @@
   "codi_ine": "43094",
   "nom": "Móra la Nova",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43065",
    "43093",
@@ -6853,6 +7398,7 @@
   "codi_ine": "08129",
   "nom": "Muntanyola",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08070",
    "08079",
@@ -6870,6 +7416,7 @@
   "codi_ine": "08139",
   "nom": "Mura",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08095",
    "08120",
@@ -6887,6 +7434,7 @@
   "codi_ine": "25145",
   "nom": "Nalec",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25074",
    "25238",
@@ -6898,6 +7446,7 @@
   "codi_ine": "25025",
   "nom": "Naut Aran",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25024",
    "25043",
@@ -6911,6 +7460,7 @@
   "codi_ine": "08140",
   "nom": "Navarcles",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08034",
    "08191",
@@ -6922,6 +7472,7 @@
   "codi_ine": "08141",
   "nom": "Navàs",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08018",
    "08047",
@@ -6938,6 +7489,7 @@
   "codi_ine": "17111",
   "nom": "Navata",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17031",
    "17051",
@@ -6953,6 +7505,7 @@
   "codi_ine": "25146",
   "nom": "Navès",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08045",
    "08047",
@@ -6970,6 +7523,7 @@
   "codi_ine": "43098",
   "nom": "Nulles",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43119",
    "43122",
@@ -6982,6 +7536,7 @@
   "codi_ine": "25148",
   "nom": "Odèn",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25044",
    "25064",
@@ -6997,6 +7552,7 @@
   "codi_ine": "08143",
   "nom": "Òdena",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08059",
    "08063",
@@ -7011,6 +7567,7 @@
   "codi_ine": "17112",
   "nom": "Ogassa",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17036",
    "17039",
@@ -7025,6 +7582,7 @@
   "codi_ine": "08145",
   "nom": "Olèrdola",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08043",
@@ -7039,6 +7597,7 @@
   "codi_ine": "08146",
   "nom": "Olesa de Bonesvalls",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08020",
@@ -7050,6 +7609,7 @@
   "codi_ine": "08147",
   "nom": "Olesa de Montserrat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08001",
    "08076",
@@ -7061,6 +7621,7 @@
   "codi_ine": "25149",
   "nom": "Oliana",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25044",
    "25077",
@@ -7073,6 +7634,7 @@
   "codi_ine": "25150",
   "nom": "Oliola",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25003",
    "25034",
@@ -7089,6 +7651,7 @@
   "codi_ine": "25151",
   "nom": "Olius",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25064",
    "25075",
@@ -7104,6 +7667,7 @@
   "codi_ine": "08148",
   "nom": "Olivella",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08013",
    "08020",
@@ -7117,6 +7681,7 @@
   "codi_ine": "08149",
   "nom": "Olost",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08151",
    "08160",
@@ -7131,6 +7696,7 @@
   "codi_ine": "17114",
   "nom": "Olot",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17139",
    "17149",
@@ -7144,6 +7710,7 @@
   "codi_ine": "08144",
   "nom": "Olvan",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08011",
    "08022",
@@ -7159,6 +7726,7 @@
   "codi_ine": "17115",
   "nom": "Ordis",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17012",
    "17026",
@@ -7171,6 +7739,7 @@
   "codi_ine": "25155",
   "nom": "Organyà",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25061",
    "25077",
@@ -7181,6 +7750,7 @@
   "codi_ine": "08150",
   "nom": "Orís",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08117",
    "08201",
@@ -7196,6 +7766,7 @@
   "codi_ine": "08151",
   "nom": "Oristà",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08129",
    "08149",
@@ -7210,6 +7781,7 @@
   "codi_ine": "08152",
   "nom": "Orpí",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08048",
    "08104",
@@ -7222,6 +7794,7 @@
   "codi_ine": "08153",
   "nom": "Òrrius",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08009",
    "08030",
@@ -7234,6 +7807,7 @@
   "codi_ine": "25156",
   "nom": "Os de Balaguer",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25002",
    "25015",
@@ -7248,6 +7822,7 @@
   "codi_ine": "17116",
   "nom": "Osor",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17008",
    "17028",
@@ -7261,6 +7836,7 @@
   "codi_ine": "25157",
   "nom": "Ossó de Sió",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25150",
    "25181",
@@ -7273,6 +7849,7 @@
   "codi_ine": "08154",
   "nom": "Pacs del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08027",
    "08227",
@@ -7285,6 +7862,7 @@
   "codi_ine": "08155",
   "nom": "Palafolls",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08110",
    "08261",
@@ -7296,6 +7874,7 @@
   "codi_ine": "17117",
   "nom": "Palafrugell",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17013",
    "17110",
@@ -7308,6 +7887,7 @@
   "codi_ine": "17118",
   "nom": "Palamós",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17034",
    "17110",
@@ -7319,6 +7899,7 @@
   "codi_ine": "17119",
   "nom": "Palau de Santa Eulàlia",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17052",
    "17075",
@@ -7331,6 +7912,7 @@
   "codi_ine": "17121",
   "nom": "Palau-sator",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17070",
    "17124",
@@ -7343,6 +7925,7 @@
   "codi_ine": "17120",
   "nom": "Palau-saverdera",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17047",
    "17128",
@@ -7355,6 +7938,7 @@
   "codi_ine": "08156",
   "nom": "Palau-solità i Plegamans",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08033",
    "08107",
@@ -7371,6 +7955,7 @@
   "codi_ine": "08157",
   "nom": "Pallejà",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08054",
    "08072",
@@ -7384,6 +7969,7 @@
   "codi_ine": "17123",
   "nom": "Palol de Revardit",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17035",
    "17040",
@@ -7396,6 +7982,7 @@
   "codi_ine": "17124",
   "nom": "Pals",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17013",
    "17070",
@@ -7409,6 +7996,7 @@
   "codi_ine": "17125",
   "nom": "Pardines",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17043",
    "17112",
@@ -7420,6 +8008,7 @@
   "codi_ine": "08159",
   "nom": "Parets del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08096",
    "08107",
@@ -7433,6 +8022,7 @@
   "codi_ine": "17126",
   "nom": "Parlavà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17057",
    "17068",
@@ -7446,6 +8036,7 @@
   "codi_ine": "43101",
   "nom": "Passanant i Belltall",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25074",
    "25109",
@@ -7460,6 +8051,7 @@
   "codi_ine": "17128",
   "nom": "Pau",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17047",
    "17120",
@@ -7473,6 +8065,7 @@
   "codi_ine": "43102",
   "nom": "Paüls",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43008",
    "43025",
@@ -7485,6 +8078,7 @@
   "codi_ine": "17129",
   "nom": "Pedret i Marzà",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17077",
    "17128",
@@ -7496,6 +8090,7 @@
   "codi_ine": "25164",
   "nom": "Penelles",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25047",
    "25049",
@@ -7510,6 +8105,7 @@
   "codi_ine": "08160",
   "nom": "Perafita",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08109",
    "08149",
@@ -7522,6 +8118,7 @@
   "codi_ine": "43103",
   "nom": "Perafort",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43005",
    "43047",
@@ -7539,6 +8136,7 @@
   "codi_ine": "17132",
   "nom": "Peralada",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17030",
    "17047",
@@ -7558,6 +8156,7 @@
   "codi_ine": "25165",
   "nom": "Peramola",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25042",
    "25044",
@@ -7569,6 +8168,7 @@
   "codi_ine": "08161",
   "nom": "Piera",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08025",
    "08028",
@@ -7586,6 +8186,7 @@
   "codi_ine": "08163",
   "nom": "Pineda de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08035",
    "08203",
@@ -7597,6 +8198,7 @@
   "codi_ine": "25166",
   "nom": "Pinell de Solsonès",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25044",
    "25055",
@@ -7612,6 +8214,7 @@
   "codi_ine": "25167",
   "nom": "Pinós",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08036",
    "08047",
@@ -7627,6 +8230,7 @@
   "codi_ine": "43107",
   "nom": "Pira",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43021",
    "43029",
@@ -7638,6 +8242,7 @@
   "codi_ine": "17134",
   "nom": "Planoles",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17037",
    "17043",
@@ -7650,6 +8255,7 @@
   "codi_ine": "43112",
   "nom": "Poboleda",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43096",
    "43114",
@@ -7660,6 +8266,7 @@
   "codi_ine": "08167",
   "nom": "Polinyà",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08156",
    "08187",
@@ -7671,6 +8278,7 @@
   "codi_ine": "17135",
   "nom": "Pont de Molins",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17029",
    "17030",
@@ -7683,6 +8291,7 @@
   "codi_ine": "43141",
   "nom": "Pontils",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "08021",
    "08257",
@@ -7696,6 +8305,7 @@
   "codi_ine": "08168",
   "nom": "Pontons",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08104",
    "08288",
@@ -7707,6 +8317,7 @@
   "codi_ine": "17136",
   "nom": "Pontós",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17016",
    "17026",
@@ -7720,6 +8331,7 @@
   "codi_ine": "25172",
   "nom": "Ponts",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25034",
    "25042",
@@ -7731,6 +8343,7 @@
   "codi_ine": "17137",
   "nom": "Porqueres",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17015",
    "17035",
@@ -7745,6 +8358,7 @@
   "codi_ine": "43114",
   "nom": "Porrera",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43009",
    "43049",
@@ -7759,6 +8373,7 @@
   "codi_ine": "17138",
   "nom": "Portbou",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17054"
   ]
@@ -7767,6 +8382,7 @@
   "codi_ine": "43115",
   "nom": "Pradell de la Teixeta",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43009",
    "43017",
@@ -7782,6 +8398,7 @@
   "codi_ine": "43116",
   "nom": "Prades",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43039",
    "43049",
@@ -7796,6 +8413,7 @@
   "codi_ine": "43117",
   "nom": "Prat de Comte",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43025",
    "43032",
@@ -7809,6 +8427,7 @@
   "codi_ine": "43118",
   "nom": "Pratdip",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43045",
    "43092",
@@ -7820,6 +8439,7 @@
   "codi_ine": "08171",
   "nom": "Prats de Lluçanès",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08109",
    "08149",
@@ -7833,6 +8453,7 @@
   "codi_ine": "25175",
   "nom": "Prats i Sansor",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "17061",
    "17084",
@@ -7845,6 +8466,7 @@
   "codi_ine": "25176",
   "nom": "Preixana",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25050",
    "25242",
@@ -7856,6 +8478,7 @@
   "codi_ine": "25177",
   "nom": "Preixens",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25003",
    "25034",
@@ -7868,6 +8491,7 @@
   "codi_ine": "08230",
   "nom": "Premià de Dalt",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08172",
    "08214",
@@ -7880,6 +8504,7 @@
   "codi_ine": "08172",
   "nom": "Premià de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08118",
    "08219",
@@ -7890,6 +8515,7 @@
   "codi_ine": "25179",
   "nom": "Prullans",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "25051",
    "25127",
@@ -7900,6 +8526,7 @@
   "codi_ine": "08175",
   "nom": "Puig-reig",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08049",
    "08090",
@@ -7914,17 +8541,23 @@
   "codi_ine": "17141",
   "nom": "Puigcerdà",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "17006",
    "17024",
    "17069",
-   "17082"
+   "17082",
+   "17094"
+  ],
+  "connexions_especials": [
+   "17094"
   ]
  },
  {
   "codi_ine": "08174",
   "nom": "Puigdàlber",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08085",
    "08164",
@@ -7935,6 +8568,7 @@
   "codi_ine": "25180",
   "nom": "Puiggròs",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25029",
    "25058",
@@ -7947,6 +8581,7 @@
   "codi_ine": "43119",
   "nom": "Puigpelat",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43010",
    "43034",
@@ -7960,6 +8595,7 @@
   "codi_ine": "25181",
   "nom": "Puigverd d'Agramunt",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25003",
    "25041",
@@ -7973,6 +8609,7 @@
   "codi_ine": "25182",
   "nom": "Puigverd de Lleida",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25033",
    "25067",
@@ -7984,6 +8621,7 @@
   "codi_ine": "08176",
   "nom": "Pujalt",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08031",
    "08036",
@@ -7999,6 +8637,7 @@
   "codi_ine": "17142",
   "nom": "Quart",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17073",
    "17079",
@@ -8013,6 +8652,7 @@
   "codi_ine": "17043",
   "nom": "Queralbs",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17125",
    "17134",
@@ -8025,6 +8665,7 @@
   "codi_ine": "43120",
   "nom": "Querol",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "08104",
    "08168",
@@ -8038,6 +8679,7 @@
   "codi_ine": "17143",
   "nom": "Rabós",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17054",
    "17064",
@@ -8052,6 +8694,7 @@
   "codi_ine": "08178",
   "nom": "Rajadell",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08002",
    "08059",
@@ -8064,6 +8707,7 @@
   "codi_ine": "43121",
   "nom": "Rasquera",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43025",
    "43067",
@@ -8077,6 +8721,7 @@
   "codi_ine": "17144",
   "nom": "Regencós",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17013",
    "17117",
@@ -8088,6 +8733,7 @@
   "codi_ine": "08179",
   "nom": "Rellinars",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08053",
    "08139",
@@ -8099,6 +8745,7 @@
   "codi_ine": "43122",
   "nom": "Renau",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43043",
    "43098",
@@ -8111,6 +8758,7 @@
   "codi_ine": "43123",
   "nom": "Reus",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43011",
@@ -8127,6 +8775,7 @@
   "codi_ine": "25183",
   "nom": "Rialp",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25082",
    "25126",
@@ -8139,6 +8788,7 @@
   "codi_ine": "43125",
   "nom": "Riba-roja d'Ebre",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "25020",
    "25133",
@@ -8153,6 +8803,7 @@
   "codi_ine": "25905",
   "nom": "Ribera d'Ondara",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "08133",
    "25072",
@@ -8168,6 +8819,7 @@
   "codi_ine": "25185",
   "nom": "Ribera d'Urgellet",
   "provincia": "Lleida",
+  "comarca": "04",
   "veins": [
    "25005",
    "25061",
@@ -8182,6 +8834,7 @@
   "codi_ine": "17145",
   "nom": "Ribes de Freser",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17036",
    "17037",
@@ -8195,6 +8848,7 @@
   "codi_ine": "17146",
   "nom": "Riells i Viabrea",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08081",
    "08097",
@@ -8208,6 +8862,7 @@
   "codi_ine": "25186",
   "nom": "Riner",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08047",
    "25075",
@@ -8220,6 +8875,7 @@
   "codi_ine": "17147",
   "nom": "Ripoll",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "08253",
    "17036",
@@ -8234,6 +8890,7 @@
   "codi_ine": "08180",
   "nom": "Ripollet",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08125",
    "08252",
@@ -8244,6 +8901,7 @@
   "codi_ine": "25913",
   "nom": "Riu de Cerdanya",
   "provincia": "Lleida",
+  "comarca": "15",
   "veins": [
    "08099",
    "17206",
@@ -8255,6 +8913,7 @@
   "codi_ine": "17148",
   "nom": "Riudarenes",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17101",
    "17103",
@@ -8267,6 +8926,7 @@
   "codi_ine": "17149",
   "nom": "Riudaura",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17114",
    "17167",
@@ -8280,6 +8940,7 @@
   "codi_ine": "43127",
   "nom": "Riudecanyes",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43017",
    "43033",
@@ -8294,6 +8955,7 @@
   "codi_ine": "43128",
   "nom": "Riudecols",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43009",
    "43033",
@@ -8305,6 +8967,7 @@
   "codi_ine": "17150",
   "nom": "Riudellots de la Selva",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17002",
    "17033",
@@ -8318,6 +8981,7 @@
   "codi_ine": "43129",
   "nom": "Riudoms",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43007",
    "43031",
@@ -8334,6 +8998,7 @@
   "codi_ine": "17151",
   "nom": "Riumors",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17047",
    "17052",
@@ -8346,6 +9011,7 @@
   "codi_ine": "43130",
   "nom": "Rocafort de Queralt",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43046",
    "43061",
@@ -8356,6 +9022,7 @@
   "codi_ine": "43131",
   "nom": "Roda de Berà",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43030",
    "43050",
@@ -8366,6 +9033,7 @@
   "codi_ine": "08183",
   "nom": "Roda de Ter",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08116"
@@ -8375,6 +9043,7 @@
   "codi_ine": "43132",
   "nom": "Rodonyà",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43028",
    "43079",
@@ -8387,6 +9056,7 @@
   "codi_ine": "43133",
   "nom": "Roquetes",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43008",
    "43044",
@@ -8399,6 +9069,7 @@
   "codi_ine": "17152",
   "nom": "Roses",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17032",
    "17047",
@@ -8411,6 +9082,7 @@
   "codi_ine": "25189",
   "nom": "Rosselló",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25053",
    "25228",
@@ -8421,6 +9093,7 @@
   "codi_ine": "08184",
   "nom": "Rubí",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08054",
    "08205",
@@ -8433,6 +9106,7 @@
   "codi_ine": "08185",
   "nom": "Rubió",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08002",
    "08059",
@@ -8447,6 +9121,7 @@
   "codi_ine": "17153",
   "nom": "Rupià",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17057",
    "17068",
@@ -8458,6 +9133,7 @@
   "codi_ine": "08901",
   "nom": "Rupit i Pruit",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08254",
    "08280",
@@ -8473,6 +9149,7 @@
   "codi_ine": "08187",
   "nom": "Sabadell",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08051",
    "08167",
@@ -8489,6 +9166,7 @@
   "codi_ine": "08188",
   "nom": "Sagàs",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08109",
    "08144",
@@ -8501,6 +9179,7 @@
   "codi_ine": "25190",
   "nom": "Salàs de Pallars",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25115",
    "25161",
@@ -8513,6 +9192,7 @@
   "codi_ine": "08190",
   "nom": "Saldes",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08016",
    "08080",
@@ -8526,6 +9206,7 @@
   "codi_ine": "17154",
   "nom": "Sales de Llierca",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17003",
    "17010",
@@ -8539,6 +9220,7 @@
   "codi_ine": "08191",
   "nom": "Sallent",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08010",
    "08012",
@@ -8554,6 +9236,7 @@
   "codi_ine": "43135",
   "nom": "Salomó",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43030",
    "43089",
@@ -8565,6 +9248,7 @@
   "codi_ine": "43905",
   "nom": "Salou",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43038",
    "43171"
@@ -8574,6 +9258,7 @@
   "codi_ine": "17155",
   "nom": "Salt",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17020",
    "17079",
@@ -8585,6 +9270,7 @@
   "codi_ine": "25191",
   "nom": "Sanaüja",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25055",
    "25132",
@@ -8597,6 +9283,7 @@
   "codi_ine": "08194",
   "nom": "Sant Adrià de Besòs",
   "provincia": "Barcelona",
+  "comarca": "13",
   "veins": [
    "08015",
    "08019",
@@ -8607,6 +9294,7 @@
   "codi_ine": "08195",
   "nom": "Sant Agustí de Lluçanès",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08004",
    "08109",
@@ -8619,6 +9307,7 @@
   "codi_ine": "08196",
   "nom": "Sant Andreu de la Barca",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08054",
    "08066",
@@ -8630,6 +9319,7 @@
   "codi_ine": "08197",
   "nom": "Sant Andreu de Llavaneres",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08075",
    "08121",
@@ -8640,6 +9330,7 @@
   "codi_ine": "17157",
   "nom": "Sant Andreu Salou",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17033",
    "17038",
@@ -8651,6 +9342,7 @@
   "codi_ine": "17183",
   "nom": "Sant Aniol de Finestres",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17007",
    "17105",
@@ -8664,6 +9356,7 @@
   "codi_ine": "08198",
   "nom": "Sant Antoni de Vilamajor",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08046",
    "08106",
@@ -8674,6 +9367,7 @@
   "codi_ine": "08199",
   "nom": "Sant Bartomeu del Grau",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08129",
@@ -8690,6 +9384,7 @@
   "codi_ine": "08200",
   "nom": "Sant Boi de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08073",
    "08169",
@@ -8703,6 +9398,7 @@
   "codi_ine": "08201",
   "nom": "Sant Boi de Lluçanès",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08149",
    "08150",
@@ -8716,6 +9412,7 @@
   "codi_ine": "08203",
   "nom": "Sant Cebrià de Vallalta",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08035",
    "08040",
@@ -8730,6 +9427,7 @@
   "codi_ine": "08202",
   "nom": "Sant Celoni",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08039",
    "08081",
@@ -8748,6 +9446,7 @@
   "codi_ine": "08204",
   "nom": "Sant Climent de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08020",
    "08089",
@@ -8761,6 +9460,7 @@
   "codi_ine": "17158",
   "nom": "Sant Climent Sescebes",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17041",
    "17042",
@@ -8774,6 +9474,7 @@
   "codi_ine": "08205",
   "nom": "Sant Cugat del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08019",
    "08054",
@@ -8789,6 +9490,7 @@
   "codi_ine": "08206",
   "nom": "Sant Cugat Sesgarrigues",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08094",
@@ -8800,6 +9502,7 @@
   "codi_ine": "25196",
   "nom": "Sant Esteve de la Sarga",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25002",
    "25234",
@@ -8810,6 +9513,7 @@
   "codi_ine": "08207",
   "nom": "Sant Esteve de Palautordera",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08081",
    "08234",
@@ -8820,6 +9524,7 @@
   "codi_ine": "08208",
   "nom": "Sant Esteve Sesrovires",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08001",
    "08066",
@@ -8834,6 +9539,7 @@
   "codi_ine": "17159",
   "nom": "Sant Feliu de Buixalleu",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08082",
    "08202",
@@ -8850,6 +9556,7 @@
   "codi_ine": "08210",
   "nom": "Sant Feliu de Codines",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08023",
    "08033",
@@ -8861,6 +9568,7 @@
   "codi_ine": "17160",
   "nom": "Sant Feliu de Guíxols",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17048",
    "17181"
@@ -8870,6 +9578,7 @@
   "codi_ine": "08211",
   "nom": "Sant Feliu de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08019",
    "08123",
@@ -8884,6 +9593,7 @@
   "codi_ine": "17161",
   "nom": "Sant Feliu de Pallerols",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "08901",
    "17133",
@@ -8897,6 +9607,7 @@
   "codi_ine": "08212",
   "nom": "Sant Feliu Sasserra",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08012",
    "08151",
@@ -8909,6 +9620,7 @@
   "codi_ine": "17162",
   "nom": "Sant Ferriol",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17010",
    "17019",
@@ -8926,6 +9638,7 @@
   "codi_ine": "08209",
   "nom": "Sant Fost de Campsentelles",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08015",
    "08105",
@@ -8940,6 +9653,7 @@
   "codi_ine": "08213",
   "nom": "Sant Fruitós de Bages",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08113",
    "08140",
@@ -8954,6 +9668,7 @@
   "codi_ine": "17163",
   "nom": "Sant Gregori",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17020",
    "17040",
@@ -8970,6 +9685,7 @@
   "codi_ine": "25192",
   "nom": "Sant Guim de Freixenet",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "08008",
    "08071",
@@ -8984,6 +9700,7 @@
   "codi_ine": "25197",
   "nom": "Sant Guim de la Plana",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25110",
    "25114",
@@ -8997,6 +9714,7 @@
   "codi_ine": "17164",
   "nom": "Sant Hilari Sacalm",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08303",
    "08901",
@@ -9011,6 +9729,7 @@
   "codi_ine": "08215",
   "nom": "Sant Hipòlit de Voltregà",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08117"
   ]
@@ -9019,6 +9738,7 @@
   "codi_ine": "08193",
   "nom": "Sant Iscle de Vallalta",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08007",
    "08040",
@@ -9031,6 +9751,7 @@
   "codi_ine": "43902",
   "nom": "Sant Jaume d'Enveja",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43014",
    "43901"
@@ -9040,6 +9761,7 @@
   "codi_ine": "08216",
   "nom": "Sant Jaume de Frontanyà",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08166",
    "17080",
@@ -9050,6 +9772,7 @@
   "codi_ine": "17165",
   "nom": "Sant Jaume de Llierca",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17010",
    "17109",
@@ -9062,6 +9785,7 @@
   "codi_ine": "43137",
   "nom": "Sant Jaume dels Domenys",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "08058",
    "08065",
@@ -9076,6 +9800,7 @@
   "codi_ine": "17167",
   "nom": "Sant Joan de les Abadesses",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17039",
    "17112",
@@ -9090,6 +9815,7 @@
   "codi_ine": "17168",
   "nom": "Sant Joan de Mollet",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17050",
@@ -9102,6 +9828,7 @@
   "codi_ine": "08218",
   "nom": "Sant Joan de Vilatorrada",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08038",
    "08084",
@@ -9115,6 +9842,7 @@
   "codi_ine": "08217",
   "nom": "Sant Joan Despí",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08073",
    "08077",
@@ -9128,6 +9856,7 @@
   "codi_ine": "17185",
   "nom": "Sant Joan les Fonts",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17046",
    "17109",
@@ -9141,6 +9870,7 @@
   "codi_ine": "17166",
   "nom": "Sant Jordi Desvalls",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17050",
    "17055",
@@ -9155,6 +9885,7 @@
   "codi_ine": "08903",
   "nom": "Sant Julià de Cerdanyola",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08057",
    "08099",
@@ -9166,6 +9897,7 @@
   "codi_ine": "17169",
   "nom": "Sant Julià de Ramis",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17049",
@@ -9182,6 +9914,7 @@
   "codi_ine": "08220",
   "nom": "Sant Julià de Vilatorta",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08037",
    "08083",
@@ -9195,6 +9928,7 @@
   "codi_ine": "17903",
   "nom": "Sant Julià del Llor i Bonmatí",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17007",
    "17008",
@@ -9208,6 +9942,7 @@
   "codi_ine": "08221",
   "nom": "Sant Just Desvern",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08019",
    "08077",
@@ -9219,6 +9954,7 @@
   "codi_ine": "08222",
   "nom": "Sant Llorenç d'Hortons",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08091",
    "08119",
@@ -9231,6 +9967,7 @@
   "codi_ine": "17171",
   "nom": "Sant Llorenç de la Muga",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17003",
    "17031",
@@ -9243,6 +9980,7 @@
   "codi_ine": "25193",
   "nom": "Sant Llorenç de Morunys",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25111",
    "25146",
@@ -9253,6 +9991,7 @@
   "codi_ine": "08223",
   "nom": "Sant Llorenç Savall",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08033",
    "08051",
@@ -9267,6 +10006,7 @@
   "codi_ine": "08225",
   "nom": "Sant Martí d'Albars",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08109",
    "08149",
@@ -9278,6 +10018,7 @@
   "codi_ine": "08224",
   "nom": "Sant Martí de Centelles",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08014",
    "08055",
@@ -9291,6 +10032,7 @@
   "codi_ine": "17172",
   "nom": "Sant Martí de Llémena",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17007",
    "17040",
@@ -9305,6 +10047,7 @@
   "codi_ine": "25902",
   "nom": "Sant Martí de Riucorb",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25046",
    "25130",
@@ -9318,6 +10061,7 @@
   "codi_ine": "08226",
   "nom": "Sant Martí de Tous",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08008",
    "08021",
@@ -9331,6 +10075,7 @@
   "codi_ine": "08227",
   "nom": "Sant Martí Sarroca",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08065",
    "08085",
@@ -9345,6 +10090,7 @@
   "codi_ine": "08228",
   "nom": "Sant Martí Sesgueioles",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08031",
    "08170",
@@ -9355,6 +10101,7 @@
   "codi_ine": "17173",
   "nom": "Sant Martí Vell",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17025",
    "17067",
@@ -9369,6 +10116,7 @@
   "codi_ine": "08229",
   "nom": "Sant Mateu de Bages",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08002",
    "08038",
@@ -9386,6 +10134,7 @@
   "codi_ine": "17174",
   "nom": "Sant Miquel de Campmajor",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17040",
    "17105",
@@ -9399,6 +10148,7 @@
   "codi_ine": "17175",
   "nom": "Sant Miquel de Fluvià",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17119",
    "17176",
@@ -9410,6 +10160,7 @@
   "codi_ine": "17176",
   "nom": "Sant Mori",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17075",
    "17119",
@@ -9424,6 +10175,7 @@
   "codi_ine": "17177",
   "nom": "Sant Pau de Segúries",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17039",
    "17167",
@@ -9434,6 +10186,7 @@
   "codi_ine": "08231",
   "nom": "Sant Pere de Ribes",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08043",
    "08148",
@@ -9445,6 +10198,7 @@
   "codi_ine": "08232",
   "nom": "Sant Pere de Riudebitlles",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08028",
    "08122",
@@ -9456,6 +10210,7 @@
   "codi_ine": "08233",
   "nom": "Sant Pere de Torelló",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08150",
    "08237",
@@ -9471,6 +10226,7 @@
   "codi_ine": "08234",
   "nom": "Sant Pere de Vilamajor",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08042",
    "08081",
@@ -9485,6 +10241,7 @@
   "codi_ine": "17178",
   "nom": "Sant Pere Pescador",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17011",
    "17047",
@@ -9497,6 +10254,7 @@
   "codi_ine": "08189",
   "nom": "Sant Pere Sallavinera",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08002",
    "08031",
@@ -9510,6 +10268,7 @@
   "codi_ine": "08235",
   "nom": "Sant Pol de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08035",
    "08040",
@@ -9520,6 +10279,7 @@
   "codi_ine": "08236",
   "nom": "Sant Quintí de Mediona",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08085",
    "08122",
@@ -9531,6 +10291,7 @@
   "codi_ine": "08237",
   "nom": "Sant Quirze de Besora",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08131",
    "08150",
@@ -9543,6 +10304,7 @@
   "codi_ine": "08238",
   "nom": "Sant Quirze del Vallès",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08184",
    "08187",
@@ -9555,6 +10317,7 @@
   "codi_ine": "08239",
   "nom": "Sant Quirze Safaja",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08023",
    "08055",
@@ -9568,6 +10331,7 @@
   "codi_ine": "25194",
   "nom": "Sant Ramon",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25085",
@@ -9581,6 +10345,7 @@
   "codi_ine": "08240",
   "nom": "Sant Sadurní d'Anoia",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08091",
    "08161",
@@ -9593,6 +10358,7 @@
   "codi_ine": "08241",
   "nom": "Sant Sadurní d'Osormort",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08083",
    "08220",
@@ -9606,6 +10372,7 @@
   "codi_ine": "08098",
   "nom": "Sant Salvador de Guardiola",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08025",
    "08059",
@@ -9619,6 +10386,7 @@
   "codi_ine": "08262",
   "nom": "Sant Vicenç de Castellet",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08053",
    "08061",
@@ -9634,6 +10402,7 @@
   "codi_ine": "08264",
   "nom": "Sant Vicenç de Montalt",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08006",
    "08007",
@@ -9646,6 +10415,7 @@
   "codi_ine": "08265",
   "nom": "Sant Vicenç de Torelló",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08150",
    "08233",
@@ -9656,6 +10426,7 @@
   "codi_ine": "08263",
   "nom": "Sant Vicenç dels Horts",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08068",
    "08123",
@@ -9670,6 +10441,7 @@
   "codi_ine": "43138",
   "nom": "Santa Bàrbara",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43063",
    "43077",
@@ -9682,6 +10454,7 @@
   "codi_ine": "08243",
   "nom": "Santa Cecília de Voltregà",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08100",
    "08117",
@@ -9693,6 +10466,7 @@
   "codi_ine": "08244",
   "nom": "Santa Coloma de Cervelló",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08200",
    "08204",
@@ -9706,6 +10480,7 @@
   "codi_ine": "17180",
   "nom": "Santa Coloma de Farners",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17009",
    "17028",
@@ -9721,6 +10496,7 @@
   "codi_ine": "08245",
   "nom": "Santa Coloma de Gramenet",
   "provincia": "Barcelona",
+  "comarca": "13",
   "veins": [
    "08015",
    "08019",
@@ -9732,6 +10508,7 @@
   "codi_ine": "43139",
   "nom": "Santa Coloma de Queralt",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "08008",
    "08021",
@@ -9747,6 +10524,7 @@
   "codi_ine": "17181",
   "nom": "Santa Cristina d'Aro",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17034",
    "17044",
@@ -9761,6 +10539,7 @@
   "codi_ine": "08246",
   "nom": "Santa Eugènia de Berga",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08037",
    "08111",
@@ -9773,6 +10552,7 @@
   "codi_ine": "08247",
   "nom": "Santa Eulàlia de Riuprimer",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08129",
    "08199",
@@ -9784,6 +10564,7 @@
   "codi_ine": "08248",
   "nom": "Santa Eulàlia de Ronçana",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08005",
    "08023",
@@ -9796,6 +10577,7 @@
   "codi_ine": "08249",
   "nom": "Santa Fe del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08085",
@@ -9808,6 +10590,7 @@
   "codi_ine": "17182",
   "nom": "Santa Llogaia d'Àlguema",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17005",
    "17026",
@@ -9819,6 +10602,7 @@
   "codi_ine": "08250",
   "nom": "Santa Margarida de Montbui",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08102",
    "08103",
@@ -9832,6 +10616,7 @@
   "codi_ine": "08251",
   "nom": "Santa Margarida i els Monjos",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08058",
    "08065",
@@ -9846,6 +10631,7 @@
   "codi_ine": "08258",
   "nom": "Santa Maria d'Oló",
   "provincia": "Barcelona",
+  "comarca": "42",
   "veins": [
    "08012",
    "08079",
@@ -9861,6 +10647,7 @@
   "codi_ine": "08253",
   "nom": "Santa Maria de Besora",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08131",
    "08233",
@@ -9874,6 +10661,7 @@
   "codi_ine": "08256",
   "nom": "Santa Maria de Martorelles",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08003",
    "08115",
@@ -9887,6 +10675,7 @@
   "codi_ine": "08255",
   "nom": "Santa Maria de Merlès",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08012",
    "08090",
@@ -9902,6 +10691,7 @@
   "codi_ine": "08257",
   "nom": "Santa Maria de Miralles",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08021",
    "08104",
@@ -9916,6 +10706,7 @@
   "codi_ine": "08259",
   "nom": "Santa Maria de Palautordera",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08081",
    "08106",
@@ -9929,6 +10720,7 @@
   "codi_ine": "43140",
   "nom": "Santa Oliva",
   "provincia": "Tarragona",
+  "comarca": "12",
   "veins": [
    "43002",
    "43020",
@@ -9941,6 +10733,7 @@
   "codi_ine": "17184",
   "nom": "Santa Pau",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17105",
    "17114",
@@ -9956,6 +10749,7 @@
   "codi_ine": "08260",
   "nom": "Santa Perpètua de Mogoda",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08105",
    "08124",
@@ -9970,6 +10764,7 @@
   "codi_ine": "08261",
   "nom": "Santa Susanna",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08110",
    "08155",
@@ -9981,6 +10776,7 @@
   "codi_ine": "08192",
   "nom": "Santpedor",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08038",
    "08062",
@@ -9993,6 +10789,7 @@
   "codi_ine": "43142",
   "nom": "Sarral",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43021",
    "43036",
@@ -10009,6 +10806,7 @@
   "codi_ine": "17186",
   "nom": "Sarrià de Ter",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17079",
    "17163",
@@ -10019,6 +10817,7 @@
   "codi_ine": "25201",
   "nom": "Sarroca de Bellera",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25043",
    "25173",
@@ -10030,6 +10829,7 @@
   "codi_ine": "25200",
   "nom": "Sarroca de Lleida",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25010",
    "25038",
@@ -10043,6 +10843,7 @@
   "codi_ine": "17187",
   "nom": "Saus, Camallera i Llampaies",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17016",
    "17176",
@@ -10055,6 +10856,7 @@
   "codi_ine": "43143",
   "nom": "Savallà del Comtat",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43046",
    "43073",
@@ -10066,6 +10868,7 @@
   "codi_ine": "43146",
   "nom": "Senan",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25081",
    "25097",
@@ -10078,6 +10881,7 @@
   "codi_ine": "25202",
   "nom": "Senterada",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25039",
    "25161",
@@ -10091,6 +10895,7 @@
   "codi_ine": "08267",
   "nom": "Sentmenat",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08033",
    "08051",
@@ -10104,6 +10909,7 @@
   "codi_ine": "17190",
   "nom": "Serinyà",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17065",
    "17098",
@@ -10116,6 +10922,7 @@
   "codi_ine": "25204",
   "nom": "Seròs",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25020",
    "25038",
@@ -10129,6 +10936,7 @@
   "codi_ine": "17191",
   "nom": "Serra de Daró",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17070",
    "17126",
@@ -10142,6 +10950,7 @@
   "codi_ine": "17192",
   "nom": "Setcases",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17043",
    "17091",
@@ -10153,6 +10962,7 @@
   "codi_ine": "08269",
   "nom": "Seva",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08014",
    "08017",
@@ -10168,6 +10978,7 @@
   "codi_ine": "25205",
   "nom": "Sidamon",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25048",
    "25093",
@@ -10179,6 +10990,7 @@
   "codi_ine": "17193",
   "nom": "Sils",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17033",
    "17103",
@@ -10192,6 +11004,7 @@
   "codi_ine": "08270",
   "nom": "Sitges",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08020",
    "08056",
@@ -10204,6 +11017,7 @@
   "codi_ine": "17052",
   "nom": "Siurana",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17074",
    "17075",
@@ -10217,6 +11031,7 @@
   "codi_ine": "08271",
   "nom": "Sobremunt",
   "provincia": "Barcelona",
+  "comarca": "43",
   "veins": [
    "08117",
    "08149",
@@ -10230,6 +11045,7 @@
   "codi_ine": "43147",
   "nom": "Solivella",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25238",
    "43021",
@@ -10244,6 +11060,7 @@
   "codi_ine": "25207",
   "nom": "Solsona",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "25124",
    "25151"
@@ -10253,6 +11070,7 @@
   "codi_ine": "08272",
   "nom": "Sora",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08004",
    "08131",
@@ -10267,6 +11085,7 @@
   "codi_ine": "25208",
   "nom": "Soriguera",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25039",
    "25126",
@@ -10280,6 +11099,7 @@
   "codi_ine": "25209",
   "nom": "Sort",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25039",
    "25082",
@@ -10292,6 +11112,7 @@
   "codi_ine": "25210",
   "nom": "Soses",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25011",
    "25038",
@@ -10302,6 +11123,7 @@
   "codi_ine": "08273",
   "nom": "Subirats",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08013",
    "08068",
@@ -10320,6 +11142,7 @@
   "codi_ine": "25211",
   "nom": "Sudanell",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25011",
    "25120",
@@ -10332,6 +11155,7 @@
   "codi_ine": "25212",
   "nom": "Sunyer",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25014",
    "25142",
@@ -10344,6 +11168,7 @@
   "codi_ine": "08274",
   "nom": "Súria",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08038",
    "08062",
@@ -10355,6 +11180,7 @@
   "codi_ine": "17194",
   "nom": "Susqueda",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "08901",
    "17007",
@@ -10368,6 +11194,7 @@
   "codi_ine": "08276",
   "nom": "Tagamanent",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08014",
    "08026",
@@ -10381,6 +11208,7 @@
   "codi_ine": "08277",
   "nom": "Talamanca",
   "provincia": "Barcelona",
+  "comarca": "07",
   "veins": [
    "08034",
    "08128",
@@ -10394,6 +11222,7 @@
   "codi_ine": "25215",
   "nom": "Talarn",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25115",
    "25190",
@@ -10405,6 +11234,7 @@
   "codi_ine": "25216",
   "nom": "Talavera",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "08008",
    "08133",
@@ -10418,6 +11248,7 @@
   "codi_ine": "08278",
   "nom": "Taradell",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08111",
    "08220",
@@ -10431,6 +11262,7 @@
   "codi_ine": "43148",
   "nom": "Tarragona",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43012",
    "43043",
@@ -10446,6 +11278,7 @@
   "codi_ine": "25217",
   "nom": "Tàrrega",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25027",
    "25041",
@@ -10463,6 +11296,7 @@
   "codi_ine": "25218",
   "nom": "Tarrés",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25097",
    "25255",
@@ -10473,6 +11307,7 @@
   "codi_ine": "25219",
   "nom": "Tarroja de Segarra",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25072",
    "25907"
@@ -10482,6 +11317,7 @@
   "codi_ine": "08275",
   "nom": "Tavèrnoles",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08083",
    "08100",
@@ -10494,6 +11330,7 @@
   "codi_ine": "08280",
   "nom": "Tavertet",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08116",
    "08254",
@@ -10505,6 +11342,7 @@
   "codi_ine": "08281",
   "nom": "Teià",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08003",
    "08118",
@@ -10516,6 +11354,7 @@
   "codi_ine": "25220",
   "nom": "Térmens",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25040",
    "25052",
@@ -10528,6 +11367,7 @@
   "codi_ine": "17196",
   "nom": "Terrades",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17029",
    "17031",
@@ -10542,6 +11382,7 @@
   "codi_ine": "08279",
   "nom": "Terrassa",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08051",
    "08120",
@@ -10558,6 +11399,7 @@
   "codi_ine": "08282",
   "nom": "Tiana",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08003",
    "08015",
@@ -10570,6 +11412,7 @@
   "codi_ine": "25221",
   "nom": "Tírvia",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25017",
    "25089",
@@ -10581,6 +11424,7 @@
   "codi_ine": "25222",
   "nom": "Tiurana",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25042",
    "25044",
@@ -10593,6 +11437,7 @@
   "codi_ine": "43149",
   "nom": "Tivenys",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43006",
    "43025",
@@ -10606,6 +11451,7 @@
   "codi_ine": "43150",
   "nom": "Tivissa",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43013",
    "43026",
@@ -10626,6 +11472,7 @@
   "codi_ine": "08283",
   "nom": "Tona",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08017",
    "08070",
@@ -10639,6 +11486,7 @@
   "codi_ine": "25223",
   "nom": "Torà",
   "provincia": "Lleida",
+  "comarca": "35",
   "veins": [
    "08060",
    "25055",
@@ -10654,6 +11502,7 @@
   "codi_ine": "08284",
   "nom": "Tordera",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08082",
    "08155",
@@ -10670,6 +11519,7 @@
   "codi_ine": "08285",
   "nom": "Torelló",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08112",
    "08117",
@@ -10683,6 +11533,7 @@
   "codi_ine": "25225",
   "nom": "Tornabous",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25003",
    "25027",
@@ -10697,6 +11548,7 @@
   "codi_ine": "25233",
   "nom": "Torre-serona",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25053",
    "25078",
@@ -10708,6 +11560,7 @@
   "codi_ine": "25226",
   "nom": "Torrebesses",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25010",
    "25101",
@@ -10720,6 +11573,7 @@
   "codi_ine": "43153",
   "nom": "Torredembarra",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43012",
    "43050",
@@ -10730,6 +11584,7 @@
   "codi_ine": "25228",
   "nom": "Torrefarrera",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25016",
    "25019",
@@ -10745,6 +11600,7 @@
   "codi_ine": "25907",
   "nom": "Torrefeta i Florejacs",
   "provincia": "Lleida",
+  "comarca": "32",
   "veins": [
    "25060",
    "25072",
@@ -10765,6 +11621,7 @@
   "codi_ine": "25230",
   "nom": "Torregrossa",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25004",
    "25033",
@@ -10783,6 +11640,7 @@
   "codi_ine": "25231",
   "nom": "Torrelameu",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25008",
    "25078",
@@ -10794,6 +11652,7 @@
   "codi_ine": "08287",
   "nom": "Torrelavit",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08028",
    "08085",
@@ -10809,6 +11668,7 @@
   "codi_ine": "08288",
   "nom": "Torrelles de Foix",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08085",
    "08104",
@@ -10821,6 +11681,7 @@
   "codi_ine": "08289",
   "nom": "Torrelles de Llobregat",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08020",
    "08068",
@@ -10834,6 +11695,7 @@
   "codi_ine": "17197",
   "nom": "Torrent",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17117",
    "17121",
@@ -10846,6 +11708,7 @@
   "codi_ine": "25232",
   "nom": "Torres de Segre",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25011",
    "25038",
@@ -10859,6 +11722,7 @@
   "codi_ine": "17198",
   "nom": "Torroella de Fluvià",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17052",
    "17119",
@@ -10873,6 +11737,7 @@
   "codi_ine": "17199",
   "nom": "Torroella de Montgrí",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17018",
    "17062",
@@ -10886,6 +11751,7 @@
   "codi_ine": "43154",
   "nom": "Torroja del Priorat",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "43069",
    "43096",
@@ -10898,6 +11764,7 @@
   "codi_ine": "17200",
   "nom": "Tortellà",
   "provincia": "Girona",
+  "comarca": "19",
   "veins": [
    "17010",
    "17109",
@@ -10908,6 +11775,7 @@
   "codi_ine": "43155",
   "nom": "Tortosa",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43006",
    "43008",
@@ -10926,6 +11794,7 @@
   "codi_ine": "17201",
   "nom": "Toses",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "08052",
    "17006",
@@ -10937,6 +11806,7 @@
   "codi_ine": "17202",
   "nom": "Tossa de Mar",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17089",
    "17095",
@@ -10948,6 +11818,7 @@
   "codi_ine": "25234",
   "nom": "Tremp",
   "provincia": "Lleida",
+  "comarca": "25",
   "veins": [
    "25098",
    "25115",
@@ -10963,6 +11834,7 @@
   "codi_ine": "17204",
   "nom": "Ullà",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17018",
    "17070",
@@ -10975,6 +11847,7 @@
   "codi_ine": "08290",
   "nom": "Ullastrell",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08001",
    "08054",
@@ -10987,6 +11860,7 @@
   "codi_ine": "17205",
   "nom": "Ullastret",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17022",
    "17057",
@@ -11001,6 +11875,7 @@
   "codi_ine": "43156",
   "nom": "Ulldecona",
   "provincia": "Tarragona",
+  "comarca": "22",
   "veins": [
    "43004",
    "43044",
@@ -11014,6 +11889,7 @@
   "codi_ine": "43157",
   "nom": "Ulldemolins",
   "provincia": "Tarragona",
+  "comarca": "29",
   "veins": [
    "25118",
    "25169",
@@ -11027,6 +11903,7 @@
   "codi_ine": "17203",
   "nom": "Ultramort",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17068",
    "17126",
@@ -11038,6 +11915,7 @@
   "codi_ine": "17206",
   "nom": "Urús",
   "provincia": "Girona",
+  "comarca": "15",
   "veins": [
    "08016",
    "08099",
@@ -11050,6 +11928,7 @@
   "codi_ine": "08291",
   "nom": "Vacarisses",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08053",
    "08076",
@@ -11065,6 +11944,7 @@
   "codi_ine": "25901",
   "nom": "Vall de Cardós",
   "provincia": "Lleida",
+  "comarca": "26",
   "veins": [
    "25017",
    "25087",
@@ -11078,6 +11958,7 @@
   "codi_ine": "17209",
   "nom": "Vall-llobrega",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17110",
    "17118",
@@ -11088,6 +11969,7 @@
   "codi_ine": "08292",
   "nom": "Vallbona d'Anoia",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08028",
    "08044",
@@ -11100,6 +11982,7 @@
   "codi_ine": "25238",
   "nom": "Vallbona de les Monges",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25074",
    "25130",
@@ -11117,6 +12000,7 @@
   "codi_ine": "08293",
   "nom": "Vallcebre",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08080",
    "08093",
@@ -11129,6 +12013,7 @@
   "codi_ine": "43158",
   "nom": "Vallclara",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25253",
    "25255",
@@ -11141,6 +12026,7 @@
   "codi_ine": "25240",
   "nom": "Vallfogona de Balaguer",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25035",
    "25040",
@@ -11154,6 +12040,7 @@
   "codi_ine": "17170",
   "nom": "Vallfogona de Ripollès",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17147",
    "17149",
@@ -11165,6 +12052,7 @@
   "codi_ine": "43159",
   "nom": "Vallfogona de Riucorb",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25109",
    "25141",
@@ -11178,6 +12066,7 @@
   "codi_ine": "08294",
   "nom": "Vallgorguina",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08007",
    "08075",
@@ -11191,6 +12080,7 @@
   "codi_ine": "08295",
   "nom": "Vallirana",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08020",
    "08068",
@@ -11203,6 +12093,7 @@
   "codi_ine": "43160",
   "nom": "Vallmoll",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43066",
    "43080",
@@ -11218,6 +12109,7 @@
   "codi_ine": "08296",
   "nom": "Vallromanes",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08003",
    "08136",
@@ -11232,6 +12124,7 @@
   "codi_ine": "43161",
   "nom": "Valls",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43005",
    "43010",
@@ -11249,6 +12142,7 @@
   "codi_ine": "43162",
   "nom": "Vandellòs i l'Hospitalet de l'Infant",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43013",
    "43092",
@@ -11260,6 +12154,7 @@
   "codi_ine": "08297",
   "nom": "Veciana",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08008",
    "08071",
@@ -11274,6 +12169,7 @@
   "codi_ine": "17210",
   "nom": "Ventalló",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17011",
    "17062",
@@ -11289,6 +12185,7 @@
   "codi_ine": "25242",
   "nom": "Verdú",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25074",
    "25104",
@@ -11305,6 +12202,7 @@
   "codi_ine": "17211",
   "nom": "Verges",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17068",
    "17076",
@@ -11318,6 +12216,7 @@
   "codi_ine": "43164",
   "nom": "Vespella de Gaià",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43030",
    "43043",
@@ -11333,6 +12232,7 @@
   "codi_ine": "08298",
   "nom": "Vic",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08037",
    "08083",
@@ -11348,6 +12248,7 @@
   "codi_ine": "17212",
   "nom": "Vidrà",
   "provincia": "Girona",
+  "comarca": "24",
   "veins": [
    "08233",
    "08253",
@@ -11361,6 +12262,7 @@
   "codi_ine": "17213",
   "nom": "Vidreres",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17033",
    "17095",
@@ -11373,6 +12275,7 @@
   "codi_ine": "25243",
   "nom": "Vielha e Mijaran",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25025",
    "25057",
@@ -11385,6 +12288,7 @@
   "codi_ine": "43170",
   "nom": "Vila-rodona",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43001",
    "43010",
@@ -11399,6 +12303,7 @@
   "codi_ine": "17230",
   "nom": "Vila-sacra",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17005",
    "17066",
@@ -11410,6 +12315,7 @@
   "codi_ine": "25252",
   "nom": "Vila-sana",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25068",
    "25099",
@@ -11424,6 +12330,7 @@
   "codi_ine": "43171",
   "nom": "Vila-seca",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43038",
    "43123",
@@ -11437,6 +12344,7 @@
   "codi_ine": "43165",
   "nom": "Vilabella",
   "provincia": "Tarragona",
+  "comarca": "01",
   "veins": [
    "43034",
    "43089",
@@ -11451,6 +12359,7 @@
   "codi_ine": "17214",
   "nom": "Vilabertran",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17030",
    "17066",
@@ -11461,6 +12370,7 @@
   "codi_ine": "17215",
   "nom": "Vilablareix",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17002",
    "17020",
@@ -11473,6 +12383,7 @@
   "codi_ine": "08299",
   "nom": "Vilada",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08024",
    "08057",
@@ -11485,6 +12396,7 @@
   "codi_ine": "17217",
   "nom": "Viladamat",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17004",
    "17062",
@@ -11497,6 +12409,7 @@
   "codi_ine": "17216",
   "nom": "Viladasens",
   "provincia": "Girona",
+  "comarca": "20",
   "veins": [
    "17016",
    "17050",
@@ -11510,6 +12423,7 @@
   "codi_ine": "08301",
   "nom": "Viladecans",
   "provincia": "Barcelona",
+  "comarca": "11",
   "veins": [
    "08089",
    "08169",
@@ -11521,6 +12435,7 @@
   "codi_ine": "08300",
   "nom": "Viladecavalls",
   "provincia": "Barcelona",
+  "comarca": "40",
   "veins": [
    "08001",
    "08147",
@@ -11533,6 +12448,7 @@
   "codi_ine": "17218",
   "nom": "Vilademuls",
   "provincia": "Girona",
+  "comarca": "28",
   "veins": [
    "17016",
    "17031",
@@ -11550,6 +12466,7 @@
   "codi_ine": "17220",
   "nom": "Viladrau",
   "provincia": "Girona",
+  "comarca": "24",
   "veins": [
    "08026",
    "08137",
@@ -11565,6 +12482,7 @@
   "codi_ine": "17221",
   "nom": "Vilafant",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17012",
    "17026",
@@ -11577,6 +12495,7 @@
   "codi_ine": "08305",
   "nom": "Vilafranca del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08027",
    "08094",
@@ -11590,6 +12509,7 @@
   "codi_ine": "25244",
   "nom": "Vilagrassa",
   "provincia": "Lleida",
+  "comarca": "38",
   "veins": [
    "25027",
    "25050",
@@ -11602,6 +12522,7 @@
   "codi_ine": "17223",
   "nom": "Vilajuïga",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17077",
    "17092",
@@ -11614,6 +12535,7 @@
   "codi_ine": "43175",
   "nom": "Vilalba dels Arcs",
   "provincia": "Tarragona",
+  "comarca": "37",
   "veins": [
    "43022",
    "43048",
@@ -11627,6 +12549,7 @@
   "codi_ine": "08306",
   "nom": "Vilalba Sasserra",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08075",
    "08106",
@@ -11637,6 +12560,7 @@
   "codi_ine": "25245",
   "nom": "Vilaller",
   "provincia": "Lleida",
+  "comarca": "05",
   "veins": [
    "25025",
    "25043",
@@ -11648,6 +12572,7 @@
   "codi_ine": "17224",
   "nom": "Vilallonga de Ter",
   "provincia": "Girona",
+  "comarca": "31",
   "veins": [
    "17039",
    "17043",
@@ -11661,6 +12586,7 @@
   "codi_ine": "43166",
   "nom": "Vilallonga del Camp",
   "provincia": "Tarragona",
+  "comarca": "36",
   "veins": [
    "43005",
    "43095",
@@ -11674,6 +12600,7 @@
   "codi_ine": "17225",
   "nom": "Vilamacolum",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17047",
    "17151",
@@ -11685,6 +12612,7 @@
   "codi_ine": "17226",
   "nom": "Vilamalla",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17005",
    "17026",
@@ -11698,6 +12626,7 @@
   "codi_ine": "17227",
   "nom": "Vilamaniscle",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17077",
    "17092",
@@ -11708,6 +12637,7 @@
   "codi_ine": "25247",
   "nom": "Vilamòs",
   "provincia": "Lleida",
+  "comarca": "39",
   "veins": [
    "25031",
    "25057",
@@ -11720,6 +12650,7 @@
   "codi_ine": "17228",
   "nom": "Vilanant",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17012",
    "17051",
@@ -11733,6 +12664,7 @@
   "codi_ine": "43167",
   "nom": "Vilanova d'Escornalbou",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43017",
    "43045",
@@ -11744,6 +12676,7 @@
   "codi_ine": "25248",
   "nom": "Vilanova de Bellpuig",
   "provincia": "Lleida",
+  "comarca": "27",
   "veins": [
    "25029",
    "25046",
@@ -11757,6 +12690,7 @@
   "codi_ine": "25249",
   "nom": "Vilanova de l'Aguda",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25044",
    "25060",
@@ -11771,6 +12705,7 @@
   "codi_ine": "25254",
   "nom": "Vilanova de la Barca",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25012",
    "25048",
@@ -11785,6 +12720,7 @@
   "codi_ine": "25250",
   "nom": "Vilanova de Meià",
   "provincia": "Lleida",
+  "comarca": "23",
   "veins": [
    "25002",
    "25022",
@@ -11799,6 +12735,7 @@
   "codi_ine": "43168",
   "nom": "Vilanova de Prades",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25169",
    "25253",
@@ -11812,6 +12749,7 @@
   "codi_ine": "08303",
   "nom": "Vilanova de Sau",
   "provincia": "Barcelona",
+  "comarca": "24",
   "veins": [
    "08116",
    "08241",
@@ -11826,6 +12764,7 @@
   "codi_ine": "25251",
   "nom": "Vilanova de Segrià",
   "provincia": "Lleida",
+  "comarca": "33",
   "veins": [
    "25016",
    "25053",
@@ -11839,6 +12778,7 @@
   "codi_ine": "08302",
   "nom": "Vilanova del Camí",
   "provincia": "Barcelona",
+  "comarca": "06",
   "veins": [
    "08048",
    "08102",
@@ -11852,6 +12792,7 @@
   "codi_ine": "08902",
   "nom": "Vilanova del Vallès",
   "provincia": "Barcelona",
+  "comarca": "41",
   "veins": [
    "08096",
    "08136",
@@ -11865,6 +12806,7 @@
   "codi_ine": "08307",
   "nom": "Vilanova i la Geltrú",
   "provincia": "Barcelona",
+  "comarca": "17",
   "veins": [
    "08043",
    "08058",
@@ -11876,6 +12818,7 @@
   "codi_ine": "43169",
   "nom": "Vilaplana",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43003",
    "43007",
@@ -11890,6 +12833,7 @@
   "codi_ine": "08214",
   "nom": "Vilassar de Dalt",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08030",
    "08153",
@@ -11903,6 +12847,7 @@
   "codi_ine": "08219",
   "nom": "Vilassar de Mar",
   "provincia": "Barcelona",
+  "comarca": "21",
   "veins": [
    "08029",
    "08030",
@@ -11915,6 +12860,7 @@
   "codi_ine": "17222",
   "nom": "Vilaür",
   "provincia": "Girona",
+  "comarca": "02",
   "veins": [
    "17016",
    "17075",
@@ -11926,6 +12872,7 @@
   "codi_ine": "43172",
   "nom": "Vilaverd",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "43086",
    "43124"
@@ -11935,6 +12882,7 @@
   "codi_ine": "17233",
   "nom": "Vilobí d'Onyar",
   "provincia": "Girona",
+  "comarca": "34",
   "veins": [
    "17002",
    "17020",
@@ -11949,6 +12897,7 @@
   "codi_ine": "08304",
   "nom": "Vilobí del Penedès",
   "provincia": "Barcelona",
+  "comarca": "03",
   "veins": [
    "08027",
    "08085",
@@ -11961,6 +12910,7 @@
   "codi_ine": "17232",
   "nom": "Vilopriu",
   "provincia": "Girona",
+  "comarca": "10",
   "veins": [
    "17055",
    "17076",
@@ -11976,6 +12926,7 @@
   "codi_ine": "43176",
   "nom": "Vimbodí i Poblet",
   "provincia": "Tarragona",
+  "comarca": "16",
   "veins": [
    "25097",
    "25218",
@@ -11990,6 +12941,7 @@
   "codi_ine": "25255",
   "nom": "Vinaixa",
   "provincia": "Lleida",
+  "comarca": "18",
   "veins": [
    "25009",
    "25058",
@@ -12007,6 +12959,7 @@
   "codi_ine": "43177",
   "nom": "Vinebre",
   "provincia": "Tarragona",
+  "comarca": "30",
   "veins": [
    "43019",
    "43035",
@@ -12020,6 +12973,7 @@
   "codi_ine": "43178",
   "nom": "Vinyols i els Arcs",
   "provincia": "Tarragona",
+  "comarca": "08",
   "veins": [
    "43038",
    "43088",
@@ -12030,6 +12984,7 @@
   "codi_ine": "08308",
   "nom": "Viver i Serrateix",
   "provincia": "Barcelona",
+  "comarca": "14",
   "veins": [
    "08047",
    "08049",
@@ -12043,6 +12998,7 @@
   "codi_ine": "43052",
   "nom": "Xerta",
   "provincia": "Tarragona",
+  "comarca": "09",
   "veins": [
    "43006",
    "43008",
