@@ -1,9 +1,11 @@
 {
   "name": "municipis-scripts",
   "private": true,
-  "description": "Genera les dades de municipis i el prototip del mapa",
+  "description": "Genera les dades de municipis, les missions i el prototip del mapa",
   "scripts": {
-    "dades": "node generar-dades.js"
+    "dades": "node generar-dades.js",
+    "missions": "node generar-missions.js",
+    "test": "node --test test/"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",
