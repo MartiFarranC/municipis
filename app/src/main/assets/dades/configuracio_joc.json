@@ -1,0 +1,48 @@
+{
+  "versio": 1,
+  "desbloqueig": {
+    "costBase": 60,
+    "costIncrementPerMunicipi": 5,
+    "costMaxim": 200
+  },
+  "punts": {
+    "minimGarantitPerMunicipi": 200,
+    "maximMissionsPerMunicipi": 400,
+    "bonusTotesLesMissions": 50,
+    "minimPerMissioLloc": 5,
+    "maximMissionsLlocPerMunicipi": 25
+  },
+  "missionsGeneriques": [
+    { "clau": "checkin", "titol": "Fes check-in al municipi", "prova": "GPS", "punts": 100 },
+    { "clau": "cartell", "titol": "Fes una foto del cartell d'entrada", "prova": "FOTO", "punts": 50 },
+    { "clau": "ajuntament", "titol": "Fes una foto de l'ajuntament", "prova": "FOTO", "punts": 50 }
+  ],
+  "categoriesLloc": {
+    "patrimoni": { "punts": 40, "prova": "GPS", "prioritat": 1 },
+    "castell": { "punts": 40, "prova": "GPS", "prioritat": 2 },
+    "monestir": { "punts": 40, "prova": "GPS", "prioritat": 2 },
+    "museu": { "punts": 35, "prova": "GPS", "prioritat": 3 },
+    "esglesia": { "punts": 30, "prova": "GPS", "prioritat": 4 },
+    "mirador": { "punts": 30, "prova": "FOTO", "prioritat": 5 },
+    "monument": { "punts": 25, "prova": "GPS", "prioritat": 6 },
+    "atraccio": { "punts": 25, "prova": "FOTO", "prioritat": 7 }
+  },
+  "gps": {
+    "radiMissioMetres": 75,
+    "precisioMaximaMetres": 50,
+    "margeFronteraMetres": 50
+  },
+  "fotos": {
+    "costatLlargMaxim": 2048,
+    "costatMiniatura": 320,
+    "qualitatJpeg": 85
+  },
+  "nivells": {
+    "puntsPrimerNivell": 150,
+    "increment": 150
+  },
+  "assoliments": {
+    "municipis": [10, 50, 100, 250, 500, 947],
+    "fotos": [1, 25, 100]
+  }
+}
