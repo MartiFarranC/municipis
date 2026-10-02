@@ -1,0 +1,142 @@
+package cat.descobreix
+
+import cat.descobreix.data.assets.Dades
+import cat.descobreix.data.assets.FontDadesJoc
+import cat.descobreix.data.assets.construeixDades
+import cat.descobreix.data.repositori.FotosRepositori
+import cat.descobreix.data.repositori.MissionsPropiesRepositori
+import cat.descobreix.data.repositori.ProgresRepositori
+import cat.descobreix.data.ubicacio.ServeiUbicacio
+import cat.descobreix.domain.Foto
+import cat.descobreix.domain.MissioCompletada
+import cat.descobreix.domain.MissioPropia
+import cat.descobreix.domain.Progres
+import cat.descobreix.joc.dades.FormatLimits
+import cat.descobreix.joc.dades.FormatMapa
+import cat.descobreix.joc.dades.GeometriaMapa
+import cat.descobreix.joc.geo.Localitzador
+import cat.descobreix.joc.model.CodiIne
+import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.regles.Ubicacio
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
+import java.io.File
+import java.io.RandomAccessFile
+
+/** Dades reals dels assets de l'app, llegides des del disc. */
+object DadesDeProva : FontDadesJoc {
+    private val carpeta = File("src/main/assets/dades")
+
+    val dades: Dades by lazy {
+        val limits = File(carpeta, "limits.bin")
+        construeixDades(
+            File(carpeta, "configuracio_joc.json").readText(),
+            File(carpeta, "municipis.json").readText(),
+            File(carpeta, "missions.json").readText(),
+        ) { geografia, config ->
+            val bytes = limits.readBytes()
+            val n = FormatLimits.llegeixTotal(bytes.copyOfRange(0, FormatLimits.MIDA_CAPCALERA_FIXA))
+            val index = FormatLimits.llegeixIndex(bytes.copyOfRange(0, FormatLimits.midaCapcalera(n)), bytes.size)
+            Localitzador(index, geografia.municipis.map { it.codi }, config.gps.margeFronteraMetres) { _, offset, mida ->
+                RandomAccessFile(limits, "r").use { f ->
+                    f.seek(offset.toLong())
+                    ByteArray(mida).also { f.readFully(it) }
+                }
+            }
+        }
+    }
+
+    private val geometria: GeometriaMapa by lazy { File(carpeta, "mapa.bin").inputStream().use { FormatMapa.llegeix(it) } }
+
+    override suspend fun obte(): Dades = dades
+
+    override suspend fun mapa(): GeometriaMapa = geometria
+
+    fun codi(nom: String): CodiIne = dades.geografia.municipis.single { it.nom == nom }.codi
+
+    /** Un punt (lat, lon) ben endins del municipi: el de l'etiqueta del mapa. */
+    fun puntDins(nom: String): Pair<Double, Double> {
+        val m = geometria.municipis[dades.geografia.index(codi(nom))]
+        return geometria.projeccio.lat(m.etiquetaY.toDouble()) to geometria.projeccio.lon(m.etiquetaX.toDouble())
+    }
+}
+
+class ProgresEnMemoria : ProgresRepositori {
+    private val estat = MutableStateFlow(Progres.BUIT)
+    override val progres: Flow<Progres> = estat
+
+    override suspend fun progresAra(): Progres = estat.value
+
+    override suspend fun iniciaPartida(codi: CodiIne) {
+        check(estat.value.inici == null)
+        estat.value = estat.value.copy(inici = codi, descoberts = listOf(codi))
+    }
+
+    override suspend fun desbloqueja(codi: CodiIne, cost: Int) {
+        val p = estat.value
+        check(codi !in p.descoberts && p.saldo >= cost)
+        estat.value = p.copy(descoberts = p.descoberts + codi, puntsGastats = p.puntsGastats + cost)
+    }
+
+    override suspend fun completaMissio(missioId: String, codi: CodiIne, punts: Int, bonus: Int, ubicacio: Ubicacio?, fotoId: String?) {
+        val p = estat.value
+        check(missioId !in p.completades)
+        estat.value = p.copy(
+            completades = p.completades + (missioId to MissioCompletada(missioId, codi, punts, bonus, 0)),
+            puntsGuanyats = p.puntsGuanyats + punts + bonus,
+        )
+    }
+}
+
+class MissionsPropiesEnMemoria : MissionsPropiesRepositori {
+    private val llista = MutableStateFlow<List<MissioPropia>>(emptyList())
+
+    override fun de(codi: CodiIne): Flow<List<MissioPropia>> = llista.map { l -> l.filter { it.codiIne == codi } }
+
+    override suspend fun afegeix(codi: CodiIne, titol: String, descripcio: String?) {
+        llista.value = llista.value + MissioPropia("p${llista.value.size}", codi, titol, descripcio, false, 0)
+    }
+
+    override suspend fun canviaCompletada(id: String, completada: Boolean) {
+        llista.value = llista.value.map { if (it.id == id) it.copy(completada = completada) else it }
+    }
+
+    override suspend fun esborra(id: String) {
+        llista.value = llista.value.filterNot { it.id == id }
+    }
+}
+
+class FotosEnMemoria : FotosRepositori {
+    private val llista = MutableStateFlow<List<Foto>>(emptyList())
+    override val totes: Flow<List<Foto>> = llista
+
+    override fun de(codi: CodiIne): Flow<List<Foto>> = llista.map { l -> l.filter { it.codiIne == codi } }
+
+    override fun foto(id: String): Flow<Foto?> = llista.map { l -> l.firstOrNull { it.id == id } }
+
+    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto {
+        val f = Foto("f${llista.value.size}", codi, "", "", ubicacio?.lat, ubicacio?.lon, Visibilitat.PRIVADA, llista.value.none { it.codiIne == codi }, missioId, 0)
+        llista.value = llista.value + f
+        return f
+    }
+
+    override suspend fun canviaVisibilitat(id: String, visibilitat: Visibilitat) {
+        llista.value = llista.value.map { if (it.id == id) it.copy(visibilitat = visibilitat) else it }
+    }
+
+    override suspend fun fesPortada(id: String) {
+        val codi = llista.value.first { it.id == id }.codiIne
+        llista.value = llista.value.map { if (it.codiIne == codi) it.copy(esPortada = it.id == id) else it }
+    }
+
+    override suspend fun esborra(id: String) {
+        llista.value = llista.value.filterNot { it.id == id }
+    }
+}
+
+class UbicacioFixa(var ubicacio: Ubicacio?) : ServeiUbicacio {
+    override fun tePermis(): Boolean = true
+
+    override suspend fun ubicacioActual(): Ubicacio? = ubicacio
+}
