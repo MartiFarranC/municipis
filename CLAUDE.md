@@ -21,11 +21,23 @@ App Android per visitar els 947 municipis de Catalunya com si fos un videojoc: u
 ## Estructura
 
 ```
-app/            projecte Android (pendent de crear)
-dades/          dades generades (GeoJSON i veïns)
+app/            projecte Android (Compose, Hilt, Room, DataStore, CameraX)
+joc/            regles del joc en Kotlin pur, amb tests (build composta, sense SDK d'Android)
+dades/          dades generades, configuració del joc i connexions especials
 docs/           requisits i disseny
 prototip/       prototip web del mapa
-scripts/        generació de dades (Node.js)
+scripts/        generació de dades i missions (Node.js)
+```
+
+- **Configuració del joc:** `dades/configuracio_joc.json` (l'script la copia als assets). La llegeix `joc/.../ConfiguracioJoc.kt`.
+- **Lògica:** les regles van al mòdul `joc`; l'app només les aplica i en desa el resultat (`app/.../domain/Joc.kt`).
+
+## Compilar i provar
+
+```bash
+./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+./gradlew -p joc test
+cd scripts && npm test
 ```
 
 ## Regenerar les dades
@@ -33,4 +45,5 @@ scripts/        generació de dades (Node.js)
 ```bash
 git clone --depth 1 https://github.com/ArnauInes/geometries_cat_bcn_2024.git font
 cd scripts && npm install && node generar-dades.js ../font/dts_municipis_cat_2025.json
+node generar-missions.js ../font/dts_municipis_cat_2025.json
 ```
