@@ -1,0 +1,12054 @@
+[
+ {
+  "codi_ine": "25001",
+  "nom": "Abella de la Conca",
+  "provincia": "Lleida",
+  "veins": [
+   "25061",
+   "25077",
+   "25115",
+   "25161"
+  ]
+ },
+ {
+  "codi_ine": "08001",
+  "nom": "Abrera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08076",
+   "08114",
+   "08147",
+   "08162",
+   "08208",
+   "08290",
+   "08300"
+  ]
+ },
+ {
+  "codi_ine": "25002",
+  "nom": "Àger",
+  "provincia": "Lleida",
+  "veins": [
+   "25037",
+   "25062",
+   "25156",
+   "25196",
+   "25250",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "25003",
+  "nom": "Agramunt",
+  "provincia": "Lleida",
+  "veins": [
+   "25034",
+   "25070",
+   "25094",
+   "25096",
+   "25150",
+   "25177",
+   "25181",
+   "25225"
+  ]
+ },
+ {
+  "codi_ine": "08002",
+  "nom": "Aguilar de Segarra",
+  "provincia": "Barcelona",
+  "veins": [
+   "08059",
+   "08084",
+   "08170",
+   "08178",
+   "08185",
+   "08189",
+   "08229"
+  ]
+ },
+ {
+  "codi_ine": "17001",
+  "nom": "Agullana",
+  "provincia": "Girona",
+  "veins": [
+   "17014",
+   "17042",
+   "17060",
+   "17086"
+  ]
+ },
+ {
+  "codi_ine": "08014",
+  "nom": "Aiguafreda",
+  "provincia": "Barcelona",
+  "veins": [
+   "08026",
+   "08067",
+   "08224",
+   "08269",
+   "08276"
+  ]
+ },
+ {
+  "codi_ine": "43001",
+  "nom": "Aiguamúrcia",
+  "provincia": "Tarragona",
+  "veins": [
+   "08168",
+   "43090",
+   "43108",
+   "43113",
+   "43120",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "17002",
+  "nom": "Aiguaviva",
+  "provincia": "Girona",
+  "veins": [
+   "17020",
+   "17073",
+   "17150",
+   "17215",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "25038",
+  "nom": "Aitona",
+  "provincia": "Lleida",
+  "veins": [
+   "25125",
+   "25200",
+   "25204",
+   "25210",
+   "25232"
+  ]
+ },
+ {
+  "codi_ine": "25005",
+  "nom": "Alàs i Cerc",
+  "provincia": "Lleida",
+  "veins": [
+   "25032",
+   "25071",
+   "25088",
+   "25185",
+   "25203",
+   "25909"
+  ]
+ },
+ {
+  "codi_ine": "17003",
+  "nom": "Albanyà",
+  "provincia": "Girona",
+  "veins": [
+   "17021",
+   "17031",
+   "17102",
+   "17109",
+   "17154",
+   "17171"
+  ]
+ },
+ {
+  "codi_ine": "25007",
+  "nom": "Albatàrrec",
+  "provincia": "Lleida",
+  "veins": [
+   "25014",
+   "25120",
+   "25142"
+  ]
+ },
+ {
+  "codi_ine": "25008",
+  "nom": "Albesa",
+  "provincia": "Lleida",
+  "veins": [
+   "25015",
+   "25016",
+   "25021",
+   "25069",
+   "25134",
+   "25174",
+   "25231"
+  ]
+ },
+ {
+  "codi_ine": "43002",
+  "nom": "Albinyana",
+  "provincia": "Tarragona",
+  "veins": [
+   "43020",
+   "43028",
+   "43030",
+   "43079",
+   "43140",
+   "43163"
+  ]
+ },
+ {
+  "codi_ine": "17004",
+  "nom": "Albons",
+  "provincia": "Girona",
+  "veins": [
+   "17018",
+   "17062",
+   "17195",
+   "17217"
+  ]
+ },
+ {
+  "codi_ine": "43004",
+  "nom": "Alcanar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43062",
+   "43136",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "25010",
+  "nom": "Alcanó",
+  "provincia": "Lleida",
+  "veins": [
+   "25014",
+   "25076",
+   "25105",
+   "25200",
+   "25226"
+  ]
+ },
+ {
+  "codi_ine": "25011",
+  "nom": "Alcarràs",
+  "provincia": "Lleida",
+  "veins": [
+   "25120",
+   "25210",
+   "25211",
+   "25232",
+   "25912"
+  ]
+ },
+ {
+  "codi_ine": "25012",
+  "nom": "Alcoletge",
+  "provincia": "Lleida",
+  "veins": [
+   "25048",
+   "25078",
+   "25120",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "43005",
+  "nom": "Alcover",
+  "provincia": "Tarragona",
+  "veins": [
+   "43003",
+   "43080",
+   "43083",
+   "43091",
+   "43103",
+   "43124",
+   "43134",
+   "43145",
+   "43161",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "43006",
+  "nom": "Aldover",
+  "provincia": "Tarragona",
+  "veins": [
+   "43008",
+   "43052",
+   "43149",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "08003",
+  "nom": "Alella",
+  "provincia": "Barcelona",
+  "veins": [
+   "08118",
+   "08126",
+   "08256",
+   "08281",
+   "08282",
+   "08296"
+  ]
+ },
+ {
+  "codi_ine": "43008",
+  "nom": "Alfara de Carles",
+  "provincia": "Tarragona",
+  "veins": [
+   "43006",
+   "43018",
+   "43052",
+   "43071",
+   "43102",
+   "43133",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "25013",
+  "nom": "Alfarràs",
+  "provincia": "Lleida",
+  "veins": [
+   "25015",
+   "25021",
+   "25112"
+  ]
+ },
+ {
+  "codi_ine": "25014",
+  "nom": "Alfés",
+  "provincia": "Lleida",
+  "veins": [
+   "25007",
+   "25010",
+   "25036",
+   "25076",
+   "25120",
+   "25142",
+   "25212"
+  ]
+ },
+ {
+  "codi_ine": "43009",
+  "nom": "Alforja",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43015",
+   "43031",
+   "43053",
+   "43081",
+   "43114",
+   "43115",
+   "43128",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "25015",
+  "nom": "Algerri",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25013",
+   "25021",
+   "25069",
+   "25112",
+   "25156"
+  ]
+ },
+ {
+  "codi_ine": "25016",
+  "nom": "Alguaire",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25019",
+   "25021",
+   "25174",
+   "25228",
+   "25251"
+  ]
+ },
+ {
+  "codi_ine": "25017",
+  "nom": "Alins",
+  "provincia": "Lleida",
+  "veins": [
+   "25087",
+   "25089",
+   "25123",
+   "25221",
+   "25239",
+   "25901"
+  ]
+ },
+ {
+  "codi_ine": "43010",
+  "nom": "Alió",
+  "provincia": "Tarragona",
+  "veins": [
+   "43034",
+   "43108",
+   "43119",
+   "43161",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "25019",
+  "nom": "Almacelles",
+  "provincia": "Lleida",
+  "veins": [
+   "25016",
+   "25021",
+   "25120",
+   "25228"
+  ]
+ },
+ {
+  "codi_ine": "25020",
+  "nom": "Almatret",
+  "provincia": "Lleida",
+  "veins": [
+   "25133",
+   "25204",
+   "43125"
+  ]
+ },
+ {
+  "codi_ine": "25021",
+  "nom": "Almenar",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25013",
+   "25015",
+   "25016",
+   "25019"
+  ]
+ },
+ {
+  "codi_ine": "43011",
+  "nom": "Almoster",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43042",
+   "43123",
+   "43145"
+  ]
+ },
+ {
+  "codi_ine": "25022",
+  "nom": "Alòs de Balaguer",
+  "provincia": "Lleida",
+  "veins": [
+   "25034",
+   "25062",
+   "25079",
+   "25094",
+   "25250"
+  ]
+ },
+ {
+  "codi_ine": "17006",
+  "nom": "Alp",
+  "provincia": "Girona",
+  "veins": [
+   "08016",
+   "08052",
+   "17061",
+   "17069",
+   "17141",
+   "17201"
+  ]
+ },
+ {
+  "codi_ine": "08004",
+  "nom": "Alpens",
+  "provincia": "Barcelona",
+  "veins": [
+   "08024",
+   "08109",
+   "08195",
+   "08272",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "25023",
+  "nom": "Alpicat",
+  "provincia": "Lleida",
+  "veins": [
+   "25120",
+   "25228"
+  ]
+ },
+ {
+  "codi_ine": "25024",
+  "nom": "Alt Àneu",
+  "provincia": "Lleida",
+  "veins": [
+   "25025",
+   "25082",
+   "25086",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "43012",
+  "nom": "Altafulla",
+  "provincia": "Tarragona",
+  "veins": [
+   "43097",
+   "43111",
+   "43126",
+   "43148",
+   "43153"
+  ]
+ },
+ {
+  "codi_ine": "17007",
+  "nom": "Amer",
+  "provincia": "Girona",
+  "veins": [
+   "17133",
+   "17172",
+   "17183",
+   "17189",
+   "17194",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "43014",
+  "nom": "Amposta",
+  "provincia": "Tarragona",
+  "veins": [
+   "43062",
+   "43078",
+   "43136",
+   "43155",
+   "43901",
+   "43902",
+   "43904"
+  ]
+ },
+ {
+  "codi_ine": "17008",
+  "nom": "Anglès",
+  "provincia": "Girona",
+  "veins": [
+   "17020",
+   "17028",
+   "17116",
+   "17189",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "25027",
+  "nom": "Anglesola",
+  "provincia": "Lleida",
+  "veins": [
+   "25041",
+   "25050",
+   "25217",
+   "25225",
+   "25244"
+  ]
+ },
+ {
+  "codi_ine": "25029",
+  "nom": "Arbeca",
+  "provincia": "Lleida",
+  "veins": [
+   "25046",
+   "25058",
+   "25092",
+   "25130",
+   "25135",
+   "25153",
+   "25180",
+   "25248"
+  ]
+ },
+ {
+  "codi_ine": "43015",
+  "nom": "Arbolí",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43049",
+   "43057",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "17009",
+  "nom": "Arbúcies",
+  "provincia": "Girona",
+  "veins": [
+   "08081",
+   "08137",
+   "17063",
+   "17146",
+   "17159",
+   "17164",
+   "17180",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "08006",
+  "nom": "Arenys de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08007",
+   "08032",
+   "08040",
+   "08264"
+  ]
+ },
+ {
+  "codi_ine": "08007",
+  "nom": "Arenys de Munt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08006",
+   "08040",
+   "08075",
+   "08193",
+   "08264",
+   "08294"
+  ]
+ },
+ {
+  "codi_ine": "17010",
+  "nom": "Argelaguer",
+  "provincia": "Girona",
+  "veins": [
+   "17109",
+   "17154",
+   "17162",
+   "17165",
+   "17200"
+  ]
+ },
+ {
+  "codi_ine": "08008",
+  "nom": "Argençola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08103",
+   "08133",
+   "08226",
+   "08297",
+   "25192",
+   "25216",
+   "43139"
+  ]
+ },
+ {
+  "codi_ine": "08009",
+  "nom": "Argentona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08029",
+   "08030",
+   "08075",
+   "08121",
+   "08153",
+   "08181"
+  ]
+ },
+ {
+  "codi_ine": "43018",
+  "nom": "Arnes",
+  "provincia": "Tarragona",
+  "veins": [
+   "43008",
+   "43071"
+  ]
+ },
+ {
+  "codi_ine": "25031",
+  "nom": "Arres",
+  "provincia": "Lleida",
+  "veins": [
+   "25057",
+   "25059",
+   "25247"
+  ]
+ },
+ {
+  "codi_ine": "25032",
+  "nom": "Arsèguel",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25030",
+   "25071",
+   "25088",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "08010",
+  "nom": "Artés",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08034",
+   "08191"
+  ]
+ },
+ {
+  "codi_ine": "25033",
+  "nom": "Artesa de Lleida",
+  "provincia": "Lleida",
+  "veins": [
+   "25036",
+   "25067",
+   "25120",
+   "25182",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "25034",
+  "nom": "Artesa de Segre",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25022",
+   "25042",
+   "25094",
+   "25098",
+   "25115",
+   "25150",
+   "25172",
+   "25177",
+   "25250"
+  ]
+ },
+ {
+  "codi_ine": "43019",
+  "nom": "Ascó",
+  "provincia": "Tarragona",
+  "veins": [
+   "43056",
+   "43060",
+   "43065",
+   "43093",
+   "43125",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "25036",
+  "nom": "Aspa",
+  "provincia": "Lleida",
+  "veins": [
+   "25014",
+   "25033",
+   "25067",
+   "25076",
+   "25120"
+  ]
+ },
+ {
+  "codi_ine": "08011",
+  "nom": "Avià",
+  "provincia": "Barcelona",
+  "veins": [
+   "08022",
+   "08045",
+   "08049",
+   "08078",
+   "08130",
+   "08144"
+  ]
+ },
+ {
+  "codi_ine": "08012",
+  "nom": "Avinyó",
+  "provincia": "Barcelona",
+  "veins": [
+   "08010",
+   "08034",
+   "08090",
+   "08138",
+   "08191",
+   "08212",
+   "08255",
+   "08258"
+  ]
+ },
+ {
+  "codi_ine": "17012",
+  "nom": "Avinyonet de Puigventós",
+  "provincia": "Girona",
+  "veins": [
+   "17026",
+   "17093",
+   "17115",
+   "17221",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "08013",
+  "nom": "Avinyonet del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08094",
+   "08145",
+   "08146",
+   "08148",
+   "08206",
+   "08249",
+   "08273"
+  ]
+ },
+ {
+  "codi_ine": "08015",
+  "nom": "Badalona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08125",
+   "08126",
+   "08194",
+   "08209",
+   "08245",
+   "08282"
+  ]
+ },
+ {
+  "codi_ine": "08904",
+  "nom": "Badia del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08187",
+   "08252",
+   "08266"
+  ]
+ },
+ {
+  "codi_ine": "08016",
+  "nom": "Bagà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08052",
+   "08093",
+   "08099",
+   "08190",
+   "17006",
+   "17206",
+   "25051",
+   "25139",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "25039",
+  "nom": "Baix Pallars",
+  "provincia": "Lleida",
+  "veins": [
+   "25161",
+   "25171",
+   "25202",
+   "25208",
+   "25209",
+   "25227",
+   "25906"
+  ]
+ },
+ {
+  "codi_ine": "25040",
+  "nom": "Balaguer",
+  "provincia": "Lleida",
+  "veins": [
+   "25035",
+   "25047",
+   "25062",
+   "25069",
+   "25079",
+   "25134",
+   "25156",
+   "25220",
+   "25240"
+  ]
+ },
+ {
+  "codi_ine": "08017",
+  "nom": "Balenyà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08026",
+   "08055",
+   "08067",
+   "08070",
+   "08269",
+   "08283"
+  ]
+ },
+ {
+  "codi_ine": "08018",
+  "nom": "Balsareny",
+  "provincia": "Barcelona",
+  "veins": [
+   "08062",
+   "08090",
+   "08141",
+   "08191"
+  ]
+ },
+ {
+  "codi_ine": "43020",
+  "nom": "Banyeres del Penedès",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43016",
+   "43024",
+   "43028",
+   "43074",
+   "43137",
+   "43140"
+  ]
+ },
+ {
+  "codi_ine": "17015",
+  "nom": "Banyoles",
+  "provincia": "Girona",
+  "veins": [
+   "17056",
+   "17071",
+   "17137"
+  ]
+ },
+ {
+  "codi_ine": "25041",
+  "nom": "Barbens",
+  "provincia": "Lleida",
+  "veins": [
+   "25027",
+   "25050",
+   "25113",
+   "25181",
+   "25217",
+   "25225"
+  ]
+ },
+ {
+  "codi_ine": "43021",
+  "nom": "Barberà de la Conca",
+  "provincia": "Tarragona",
+  "veins": [
+   "43036",
+   "43059",
+   "43086",
+   "43107",
+   "43142",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "08252",
+  "nom": "Barberà del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08125",
+   "08180",
+   "08187",
+   "08260",
+   "08266",
+   "08904"
+  ]
+ },
+ {
+  "codi_ine": "08019",
+  "nom": "Barcelona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08077",
+   "08101",
+   "08123",
+   "08125",
+   "08169",
+   "08194",
+   "08205",
+   "08211",
+   "08221",
+   "08245",
+   "08266"
+  ]
+ },
+ {
+  "codi_ine": "17016",
+  "nom": "Bàscara",
+  "provincia": "Girona",
+  "veins": [
+   "17075",
+   "17136",
+   "17187",
+   "17216",
+   "17218",
+   "17222"
+  ]
+ },
+ {
+  "codi_ine": "25044",
+  "nom": "Bassella",
+  "provincia": "Lleida",
+  "veins": [
+   "25042",
+   "25064",
+   "25148",
+   "25149",
+   "25165",
+   "25166",
+   "25222",
+   "25249"
+  ]
+ },
+ {
+  "codi_ine": "43022",
+  "nom": "Batea",
+  "provincia": "Tarragona",
+  "veins": [
+   "43032",
+   "43041",
+   "43064",
+   "43110",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "25045",
+  "nom": "Bausen",
+  "provincia": "Lleida",
+  "veins": [
+   "25063",
+   "25121"
+  ]
+ },
+ {
+  "codi_ine": "08020",
+  "nom": "Begues",
+  "provincia": "Barcelona",
+  "veins": [
+   "08089",
+   "08146",
+   "08148",
+   "08204",
+   "08270",
+   "08289",
+   "08295"
+  ]
+ },
+ {
+  "codi_ine": "17013",
+  "nom": "Begur",
+  "provincia": "Girona",
+  "veins": [
+   "17117",
+   "17124",
+   "17144"
+  ]
+ },
+ {
+  "codi_ine": "25046",
+  "nom": "Belianes",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25050",
+   "25130",
+   "25248",
+   "25902"
+  ]
+ },
+ {
+  "codi_ine": "25048",
+  "nom": "Bell-lloc d'Urgell",
+  "provincia": "Lleida",
+  "veins": [
+   "25004",
+   "25012",
+   "25052",
+   "25120",
+   "25158",
+   "25205",
+   "25230",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "25170",
+  "nom": "Bellaguarda",
+  "provincia": "Lleida",
+  "veins": [
+   "25101",
+   "25118",
+   "25224",
+   "43060",
+   "43075"
+  ]
+ },
+ {
+  "codi_ine": "17018",
+  "nom": "Bellcaire d'Empordà",
+  "provincia": "Girona",
+  "veins": [
+   "17004",
+   "17062",
+   "17195",
+   "17199",
+   "17204"
+  ]
+ },
+ {
+  "codi_ine": "25047",
+  "nom": "Bellcaire d'Urgell",
+  "provincia": "Lleida",
+  "veins": [
+   "25035",
+   "25040",
+   "25049",
+   "25052",
+   "25079",
+   "25122",
+   "25138",
+   "25164",
+   "25240"
+  ]
+ },
+ {
+  "codi_ine": "25049",
+  "nom": "Bellmunt d'Urgell",
+  "provincia": "Lleida",
+  "veins": [
+   "25047",
+   "25138",
+   "25164"
+  ]
+ },
+ {
+  "codi_ine": "43023",
+  "nom": "Bellmunt del Priorat",
+  "provincia": "Tarragona",
+  "veins": [
+   "43055",
+   "43069",
+   "43082",
+   "43085"
+  ]
+ },
+ {
+  "codi_ine": "08021",
+  "nom": "Bellprat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08226",
+   "08257",
+   "43105",
+   "43139",
+   "43141"
+  ]
+ },
+ {
+  "codi_ine": "25050",
+  "nom": "Bellpuig",
+  "provincia": "Lleida",
+  "veins": [
+   "25027",
+   "25041",
+   "25046",
+   "25068",
+   "25113",
+   "25176",
+   "25244",
+   "25248"
+  ]
+ },
+ {
+  "codi_ine": "43024",
+  "nom": "Bellvei",
+  "provincia": "Tarragona",
+  "veins": [
+   "08058",
+   "43020",
+   "43037",
+   "43140",
+   "43163"
+  ]
+ },
+ {
+  "codi_ine": "25051",
+  "nom": "Bellver de Cerdanya",
+  "provincia": "Lleida",
+  "veins": [
+   "08016",
+   "08093",
+   "08099",
+   "17084",
+   "17099",
+   "25127",
+   "25139",
+   "25175",
+   "25179",
+   "25913"
+  ]
+ },
+ {
+  "codi_ine": "25052",
+  "nom": "Bellvís",
+  "provincia": "Lleida",
+  "veins": [
+   "25047",
+   "25048",
+   "25122",
+   "25158",
+   "25168",
+   "25220",
+   "25240",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "25053",
+  "nom": "Benavent de Segrià",
+  "provincia": "Lleida",
+  "veins": [
+   "25078",
+   "25189",
+   "25228",
+   "25233",
+   "25251"
+  ]
+ },
+ {
+  "codi_ine": "43025",
+  "nom": "Benifallet",
+  "provincia": "Tarragona",
+  "veins": [
+   "43052",
+   "43084",
+   "43102",
+   "43106",
+   "43117",
+   "43121",
+   "43149"
+  ]
+ },
+ {
+  "codi_ine": "43026",
+  "nom": "Benissanet",
+  "provincia": "Tarragona",
+  "veins": [
+   "43048",
+   "43064",
+   "43067",
+   "43084",
+   "43093",
+   "43106",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "08022",
+  "nom": "Berga",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08045",
+   "08050",
+   "08144",
+   "08268"
+  ]
+ },
+ {
+  "codi_ine": "17019",
+  "nom": "Besalú",
+  "provincia": "Girona",
+  "veins": [
+   "17021",
+   "17162"
+  ]
+ },
+ {
+  "codi_ine": "17020",
+  "nom": "Bescanó",
+  "provincia": "Girona",
+  "veins": [
+   "17002",
+   "17008",
+   "17028",
+   "17155",
+   "17163",
+   "17215",
+   "17233",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "17021",
+  "nom": "Beuda",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17019",
+   "17031",
+   "17098",
+   "17154",
+   "17162"
+  ]
+ },
+ {
+  "codi_ine": "08023",
+  "nom": "Bigues i Riells del Fai",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08033",
+   "08134",
+   "08210",
+   "08239",
+   "08248"
+  ]
+ },
+ {
+  "codi_ine": "25055",
+  "nom": "Biosca",
+  "provincia": "Lleida",
+  "veins": [
+   "25129",
+   "25132",
+   "25166",
+   "25191",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "17234",
+  "nom": "Biure",
+  "provincia": "Girona",
+  "veins": [
+   "17029",
+   "17042",
+   "17060",
+   "17100",
+   "17135"
+  ]
+ },
+ {
+  "codi_ine": "43029",
+  "nom": "Blancafort",
+  "provincia": "Tarragona",
+  "veins": [
+   "25238",
+   "43054",
+   "43086",
+   "43107",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "17023",
+  "nom": "Blanes",
+  "provincia": "Girona",
+  "veins": [
+   "08110",
+   "08155",
+   "08284",
+   "17095"
+  ]
+ },
+ {
+  "codi_ine": "17029",
+  "nom": "Boadella i les Escaules",
+  "provincia": "Girona",
+  "veins": [
+   "17060",
+   "17093",
+   "17135",
+   "17196",
+   "17234"
+  ]
+ },
+ {
+  "codi_ine": "17024",
+  "nom": "Bolvir",
+  "provincia": "Girona",
+  "veins": [
+   "17069",
+   "17078",
+   "17082",
+   "17141"
+  ]
+ },
+ {
+  "codi_ine": "43030",
+  "nom": "Bonastre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43050",
+   "43079",
+   "43089",
+   "43111",
+   "43131",
+   "43135",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "17025",
+  "nom": "Bordils",
+  "provincia": "Girona",
+  "veins": [
+   "17049",
+   "17050",
+   "17087",
+   "17168",
+   "17169",
+   "17173"
+  ]
+ },
+ {
+  "codi_ine": "17026",
+  "nom": "Borrassà",
+  "provincia": "Girona",
+  "veins": [
+   "17012",
+   "17075",
+   "17115",
+   "17136",
+   "17182",
+   "17221",
+   "17226"
+  ]
+ },
+ {
+  "codi_ine": "08024",
+  "nom": "Borredà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08004",
+   "08057",
+   "08109",
+   "08177",
+   "08299",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "25059",
+  "nom": "Bossòst",
+  "provincia": "Lleida",
+  "veins": [
+   "25031",
+   "25121",
+   "25247"
+  ]
+ },
+ {
+  "codi_ine": "43032",
+  "nom": "Bot",
+  "provincia": "Tarragona",
+  "veins": [
+   "43022",
+   "43041",
+   "43064",
+   "43071",
+   "43117"
+  ]
+ },
+ {
+  "codi_ine": "43033",
+  "nom": "Botarell",
+  "provincia": "Tarragona",
+  "veins": [
+   "43031",
+   "43088",
+   "43127",
+   "43128",
+   "43129"
+  ]
+ },
+ {
+  "codi_ine": "25056",
+  "nom": "Bovera",
+  "provincia": "Lleida",
+  "veins": [
+   "25101",
+   "43060"
+  ]
+ },
+ {
+  "codi_ine": "43034",
+  "nom": "Bràfim",
+  "provincia": "Tarragona",
+  "veins": [
+   "43010",
+   "43089",
+   "43119",
+   "43165",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "17027",
+  "nom": "Breda",
+  "provincia": "Girona",
+  "veins": [
+   "17146",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "17028",
+  "nom": "Brunyola i Sant Martí Sapresa",
+  "provincia": "Girona",
+  "veins": [
+   "17008",
+   "17020",
+   "17116",
+   "17180",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "43035",
+  "nom": "Cabacés",
+  "provincia": "Tarragona",
+  "veins": [
+   "43027",
+   "43058",
+   "43075",
+   "43096",
+   "43099",
+   "43152",
+   "43173",
+   "43174",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "25060",
+  "nom": "Cabanabona",
+  "provincia": "Lleida",
+  "veins": [
+   "25150",
+   "25249",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "17031",
+  "nom": "Cabanelles",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17021",
+   "17051",
+   "17058",
+   "17065",
+   "17088",
+   "17098",
+   "17111",
+   "17171",
+   "17196",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "17030",
+  "nom": "Cabanes",
+  "provincia": "Girona",
+  "veins": [
+   "17066",
+   "17093",
+   "17100",
+   "17132",
+   "17135",
+   "17214"
+  ]
+ },
+ {
+  "codi_ine": "25061",
+  "nom": "Cabó",
+  "provincia": "Lleida",
+  "veins": [
+   "25001",
+   "25077",
+   "25155",
+   "25161",
+   "25185",
+   "25906",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "43036",
+  "nom": "Cabra del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43021",
+   "43059",
+   "43108",
+   "43113",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "08028",
+  "nom": "Cabrera d'Anoia",
+  "provincia": "Barcelona",
+  "veins": [
+   "08044",
+   "08122",
+   "08161",
+   "08232",
+   "08286",
+   "08287",
+   "08292"
+  ]
+ },
+ {
+  "codi_ine": "08029",
+  "nom": "Cabrera de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08009",
+   "08030",
+   "08121",
+   "08219"
+  ]
+ },
+ {
+  "codi_ine": "08030",
+  "nom": "Cabrils",
+  "provincia": "Barcelona",
+  "veins": [
+   "08009",
+   "08029",
+   "08153",
+   "08214",
+   "08219"
+  ]
+ },
+ {
+  "codi_ine": "17032",
+  "nom": "Cadaqués",
+  "provincia": "Girona",
+  "veins": [
+   "17140",
+   "17152"
+  ]
+ },
+ {
+  "codi_ine": "08031",
+  "nom": "Calaf",
+  "provincia": "Barcelona",
+  "veins": [
+   "08036",
+   "08170",
+   "08176",
+   "08189",
+   "08228"
+  ]
+ },
+ {
+  "codi_ine": "43037",
+  "nom": "Calafell",
+  "provincia": "Tarragona",
+  "veins": [
+   "08058",
+   "43024",
+   "43051",
+   "43163"
+  ]
+ },
+ {
+  "codi_ine": "08034",
+  "nom": "Calders",
+  "provincia": "Barcelona",
+  "veins": [
+   "08010",
+   "08012",
+   "08128",
+   "08138",
+   "08140",
+   "08277"
+  ]
+ },
+ {
+  "codi_ine": "08032",
+  "nom": "Caldes d'Estrac",
+  "provincia": "Barcelona",
+  "veins": [
+   "08006",
+   "08264"
+  ]
+ },
+ {
+  "codi_ine": "17033",
+  "nom": "Caldes de Malavella",
+  "provincia": "Girona",
+  "veins": [
+   "17044",
+   "17089",
+   "17150",
+   "17157",
+   "17193",
+   "17213",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "08033",
+  "nom": "Caldes de Montbui",
+  "provincia": "Barcelona",
+  "veins": [
+   "08023",
+   "08087",
+   "08107",
+   "08156",
+   "08210",
+   "08223",
+   "08248",
+   "08267"
+  ]
+ },
+ {
+  "codi_ine": "08035",
+  "nom": "Calella",
+  "provincia": "Barcelona",
+  "veins": [
+   "08163",
+   "08203",
+   "08235"
+  ]
+ },
+ {
+  "codi_ine": "08037",
+  "nom": "Calldetenes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08083",
+   "08220",
+   "08246",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08038",
+  "nom": "Callús",
+  "provincia": "Barcelona",
+  "veins": [
+   "08062",
+   "08192",
+   "08218",
+   "08229",
+   "08274"
+  ]
+ },
+ {
+  "codi_ine": "08036",
+  "nom": "Calonge de Segarra",
+  "provincia": "Barcelona",
+  "veins": [
+   "08031",
+   "08060",
+   "08176",
+   "08189",
+   "25136",
+   "25167"
+  ]
+ },
+ {
+  "codi_ine": "17034",
+  "nom": "Calonge i Sant Antoni",
+  "provincia": "Girona",
+  "veins": [
+   "17048",
+   "17118",
+   "17181",
+   "17901",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "25062",
+  "nom": "Camarasa",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25022",
+   "25035",
+   "25037",
+   "25040",
+   "25079",
+   "25128",
+   "25156",
+   "25250"
+  ]
+ },
+ {
+  "codi_ine": "43903",
+  "nom": "Camarles",
+  "provincia": "Tarragona",
+  "veins": [
+   "43155",
+   "43901",
+   "43904",
+   "43906"
+  ]
+ },
+ {
+  "codi_ine": "43038",
+  "nom": "Cambrils",
+  "provincia": "Tarragona",
+  "veins": [
+   "43088",
+   "43092",
+   "43129",
+   "43171",
+   "43178",
+   "43905"
+  ]
+ },
+ {
+  "codi_ine": "17035",
+  "nom": "Camós",
+  "provincia": "Girona",
+  "veins": [
+   "17040",
+   "17056",
+   "17123",
+   "17137"
+  ]
+ },
+ {
+  "codi_ine": "17036",
+  "nom": "Campdevànol",
+  "provincia": "Girona",
+  "veins": [
+   "17037",
+   "17080",
+   "17096",
+   "17112",
+   "17145",
+   "17147"
+  ]
+ },
+ {
+  "codi_ine": "17037",
+  "nom": "Campelles",
+  "provincia": "Girona",
+  "veins": [
+   "17036",
+   "17080",
+   "17134",
+   "17145"
+  ]
+ },
+ {
+  "codi_ine": "08039",
+  "nom": "Campins",
+  "provincia": "Barcelona",
+  "veins": [
+   "08081",
+   "08097",
+   "08202"
+  ]
+ },
+ {
+  "codi_ine": "17038",
+  "nom": "Campllong",
+  "provincia": "Girona",
+  "veins": [
+   "17044",
+   "17073",
+   "17090",
+   "17150",
+   "17157"
+  ]
+ },
+ {
+  "codi_ine": "17039",
+  "nom": "Camprodon",
+  "provincia": "Girona",
+  "veins": [
+   "17091",
+   "17107",
+   "17109",
+   "17112",
+   "17167",
+   "17177",
+   "17208",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "25063",
+  "nom": "Canejan",
+  "provincia": "Lleida",
+  "veins": [
+   "25025",
+   "25045",
+   "25121",
+   "25243"
+  ]
+ },
+ {
+  "codi_ine": "17040",
+  "nom": "Canet d'Adri",
+  "provincia": "Girona",
+  "veins": [
+   "17035",
+   "17123",
+   "17137",
+   "17163",
+   "17172",
+   "17174"
+  ]
+ },
+ {
+  "codi_ine": "08040",
+  "nom": "Canet de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08006",
+   "08007",
+   "08193",
+   "08203",
+   "08235"
+  ]
+ },
+ {
+  "codi_ine": "08041",
+  "nom": "Canovelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08086",
+   "08096",
+   "08107",
+   "08248"
+  ]
+ },
+ {
+  "codi_ine": "08042",
+  "nom": "Cànoves i Samalús",
+  "provincia": "Barcelona",
+  "veins": [
+   "08046",
+   "08086",
+   "08088",
+   "08134",
+   "08234",
+   "08276"
+  ]
+ },
+ {
+  "codi_ine": "17041",
+  "nom": "Cantallops",
+  "provincia": "Girona",
+  "veins": [
+   "17042",
+   "17086",
+   "17158"
+  ]
+ },
+ {
+  "codi_ine": "08043",
+  "nom": "Canyelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08058",
+   "08145",
+   "08148",
+   "08231",
+   "08307"
+  ]
+ },
+ {
+  "codi_ine": "43039",
+  "nom": "Capafonts",
+  "provincia": "Tarragona",
+  "veins": [
+   "43057",
+   "43091",
+   "43116",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "43040",
+  "nom": "Capçanes",
+  "provincia": "Tarragona",
+  "veins": [
+   "43045",
+   "43070",
+   "43076",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "08044",
+  "nom": "Capellades",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08286",
+   "08292"
+  ]
+ },
+ {
+  "codi_ine": "17042",
+  "nom": "Capmany",
+  "provincia": "Girona",
+  "veins": [
+   "17001",
+   "17041",
+   "17060",
+   "17086",
+   "17100",
+   "17158",
+   "17234"
+  ]
+ },
+ {
+  "codi_ine": "08045",
+  "nom": "Capolat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08022",
+   "08050",
+   "08078",
+   "08132",
+   "25111",
+   "25146"
+  ]
+ },
+ {
+  "codi_ine": "08046",
+  "nom": "Cardedeu",
+  "provincia": "Barcelona",
+  "veins": [
+   "08042",
+   "08086",
+   "08106",
+   "08181",
+   "08198"
+  ]
+ },
+ {
+  "codi_ine": "08047",
+  "nom": "Cardona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08132",
+   "08141",
+   "08229",
+   "08308",
+   "25075",
+   "25146",
+   "25167",
+   "25186"
+  ]
+ },
+ {
+  "codi_ine": "08048",
+  "nom": "Carme",
+  "provincia": "Barcelona",
+  "veins": [
+   "08104",
+   "08122",
+   "08152",
+   "08165",
+   "08286",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "43041",
+  "nom": "Caseres",
+  "provincia": "Tarragona",
+  "veins": [
+   "43022",
+   "43032",
+   "43071"
+  ]
+ },
+ {
+  "codi_ine": "17044",
+  "nom": "Cassà de la Selva",
+  "provincia": "Girona",
+  "veins": [
+   "17033",
+   "17038",
+   "17089",
+   "17090",
+   "17157",
+   "17181",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "08049",
+  "nom": "Casserres",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08078",
+   "08092",
+   "08130",
+   "08144",
+   "08175",
+   "08308"
+  ]
+ },
+ {
+  "codi_ine": "17048",
+  "nom": "Castell d’Aro, Platja d’Aro i s’Agaró",
+  "provincia": "Girona",
+  "veins": [
+   "17034",
+   "17160",
+   "17181"
+  ]
+ },
+ {
+  "codi_ine": "08057",
+  "nom": "Castell de l'Areny",
+  "provincia": "Barcelona",
+  "veins": [
+   "08024",
+   "08142",
+   "08166",
+   "08299",
+   "08903",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "25904",
+  "nom": "Castell de Mur",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25098",
+   "25128",
+   "25196",
+   "25215",
+   "25234"
+  ]
+ },
+ {
+  "codi_ine": "25064",
+  "nom": "Castellar de la Ribera",
+  "provincia": "Lleida",
+  "veins": [
+   "25044",
+   "25124",
+   "25148",
+   "25151",
+   "25166"
+  ]
+ },
+ {
+  "codi_ine": "08052",
+  "nom": "Castellar de n'Hug",
+  "provincia": "Barcelona",
+  "veins": [
+   "08016",
+   "08099",
+   "08166",
+   "17006",
+   "17080",
+   "17201"
+  ]
+ },
+ {
+  "codi_ine": "08050",
+  "nom": "Castellar del Riu",
+  "provincia": "Barcelona",
+  "veins": [
+   "08022",
+   "08045",
+   "08080",
+   "08132",
+   "08268",
+   "25111"
+  ]
+ },
+ {
+  "codi_ine": "08051",
+  "nom": "Castellar del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08120",
+   "08187",
+   "08223",
+   "08267",
+   "08279"
+  ]
+ },
+ {
+  "codi_ine": "08053",
+  "nom": "Castellbell i el Vilar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08127",
+   "08179",
+   "08242",
+   "08262",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "08054",
+  "nom": "Castellbisbal",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08072",
+   "08114",
+   "08157",
+   "08158",
+   "08184",
+   "08196",
+   "08205",
+   "08290"
+  ]
+ },
+ {
+  "codi_ine": "08055",
+  "nom": "Castellcir",
+  "provincia": "Barcelona",
+  "veins": [
+   "08017",
+   "08064",
+   "08067",
+   "08070",
+   "08128",
+   "08138",
+   "08224",
+   "08239"
+  ]
+ },
+ {
+  "codi_ine": "25067",
+  "nom": "Castelldans",
+  "provincia": "Lleida",
+  "veins": [
+   "25006",
+   "25033",
+   "25036",
+   "25058",
+   "25073",
+   "25076",
+   "25119",
+   "25182"
+  ]
+ },
+ {
+  "codi_ine": "08056",
+  "nom": "Castelldefels",
+  "provincia": "Barcelona",
+  "veins": [
+   "08089",
+   "08270"
+  ]
+ },
+ {
+  "codi_ine": "08058",
+  "nom": "Castellet i la Gornal",
+  "provincia": "Barcelona",
+  "veins": [
+   "08043",
+   "08065",
+   "08074",
+   "08145",
+   "08251",
+   "08307",
+   "43016",
+   "43024",
+   "43037",
+   "43051",
+   "43137"
+  ]
+ },
+ {
+  "codi_ine": "17046",
+  "nom": "Castellfollit de la Roca",
+  "provincia": "Girona",
+  "veins": [
+   "17109",
+   "17185"
+  ]
+ },
+ {
+  "codi_ine": "08060",
+  "nom": "Castellfollit de Riubregós",
+  "provincia": "Barcelona",
+  "veins": [
+   "08036",
+   "08176",
+   "25085",
+   "25114",
+   "25136",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "08059",
+  "nom": "Castellfollit del Boix",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08025",
+   "08063",
+   "08098",
+   "08143",
+   "08178",
+   "08185"
+  ]
+ },
+ {
+  "codi_ine": "08061",
+  "nom": "Castellgalí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08098",
+   "08113",
+   "08242",
+   "08262"
+  ]
+ },
+ {
+  "codi_ine": "08062",
+  "nom": "Castellnou de Bages",
+  "provincia": "Barcelona",
+  "veins": [
+   "08018",
+   "08038",
+   "08141",
+   "08191",
+   "08192",
+   "08274"
+  ]
+ },
+ {
+  "codi_ine": "25068",
+  "nom": "Castellnou de Seana",
+  "provincia": "Lleida",
+  "veins": [
+   "25050",
+   "25099",
+   "25113",
+   "25248",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "17047",
+  "nom": "Castelló d'Empúries",
+  "provincia": "Girona",
+  "veins": [
+   "17074",
+   "17120",
+   "17128",
+   "17132",
+   "17151",
+   "17152",
+   "17178",
+   "17225"
+  ]
+ },
+ {
+  "codi_ine": "25069",
+  "nom": "Castelló de Farfanya",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25015",
+   "25040",
+   "25134",
+   "25156"
+  ]
+ },
+ {
+  "codi_ine": "08063",
+  "nom": "Castellolí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08059",
+   "08143",
+   "08161",
+   "08165"
+  ]
+ },
+ {
+  "codi_ine": "25070",
+  "nom": "Castellserà",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25096",
+   "25138",
+   "25164",
+   "25177"
+  ]
+ },
+ {
+  "codi_ine": "08064",
+  "nom": "Castellterçol",
+  "provincia": "Barcelona",
+  "veins": [
+   "08055",
+   "08087",
+   "08095",
+   "08128",
+   "08138",
+   "08239"
+  ]
+ },
+ {
+  "codi_ine": "43042",
+  "nom": "Castellvell del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43011",
+   "43123"
+  ]
+ },
+ {
+  "codi_ine": "08065",
+  "nom": "Castellví de la Marca",
+  "provincia": "Barcelona",
+  "veins": [
+   "08058",
+   "08227",
+   "08251",
+   "43016",
+   "43090",
+   "43137"
+  ]
+ },
+ {
+  "codi_ine": "08066",
+  "nom": "Castellví de Rosanes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08072",
+   "08091",
+   "08114",
+   "08196",
+   "08208"
+  ]
+ },
+ {
+  "codi_ine": "25071",
+  "nom": "Cava",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25030",
+   "25032",
+   "25139",
+   "25909",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "17049",
+  "nom": "Celrà",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17079",
+   "17087",
+   "17169"
+  ]
+ },
+ {
+  "codi_ine": "08067",
+  "nom": "Centelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08014",
+   "08017",
+   "08055",
+   "08224",
+   "08269"
+  ]
+ },
+ {
+  "codi_ine": "08268",
+  "nom": "Cercs",
+  "provincia": "Barcelona",
+  "veins": [
+   "08022",
+   "08050",
+   "08080",
+   "08099",
+   "08142",
+   "08144",
+   "08177",
+   "08293",
+   "08299"
+  ]
+ },
+ {
+  "codi_ine": "08266",
+  "nom": "Cerdanyola del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08125",
+   "08180",
+   "08187",
+   "08205",
+   "08238",
+   "08252",
+   "08904"
+  ]
+ },
+ {
+  "codi_ine": "08068",
+  "nom": "Cervelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08072",
+   "08091",
+   "08263",
+   "08273",
+   "08289",
+   "08295",
+   "08905"
+  ]
+ },
+ {
+  "codi_ine": "25072",
+  "nom": "Cervera",
+  "provincia": "Lleida",
+  "veins": [
+   "25085",
+   "25103",
+   "25104",
+   "25141",
+   "25152",
+   "25194",
+   "25219",
+   "25905",
+   "25907",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "25073",
+  "nom": "Cervià de les Garrigues",
+  "provincia": "Lleida",
+  "veins": [
+   "25006",
+   "25009",
+   "25058",
+   "25067",
+   "25118",
+   "25119",
+   "25169"
+  ]
+ },
+ {
+  "codi_ine": "17050",
+  "nom": "Cervià de Ter",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17166",
+   "17168",
+   "17169",
+   "17216",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "17051",
+  "nom": "Cistella",
+  "provincia": "Girona",
+  "veins": [
+   "17031",
+   "17088",
+   "17111",
+   "17196",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "25074",
+  "nom": "Ciutadilla",
+  "provincia": "Lleida",
+  "veins": [
+   "25109",
+   "25145",
+   "25238",
+   "25242",
+   "43101"
+  ]
+ },
+ {
+  "codi_ine": "25075",
+  "nom": "Clariana de Cardener",
+  "provincia": "Lleida",
+  "veins": [
+   "08047",
+   "25146",
+   "25151",
+   "25186"
+  ]
+ },
+ {
+  "codi_ine": "17054",
+  "nom": "Colera",
+  "provincia": "Girona",
+  "veins": [
+   "17092",
+   "17138",
+   "17143"
+  ]
+ },
+ {
+  "codi_ine": "25077",
+  "nom": "Coll de Nargó",
+  "provincia": "Lleida",
+  "veins": [
+   "25001",
+   "25042",
+   "25061",
+   "25115",
+   "25149",
+   "25155",
+   "25165",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "08069",
+  "nom": "Collbató",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08076",
+   "08127",
+   "08162"
+  ]
+ },
+ {
+  "codi_ine": "43045",
+  "nom": "Colldejou",
+  "provincia": "Tarragona",
+  "veins": [
+   "43017",
+   "43040",
+   "43076",
+   "43115",
+   "43118",
+   "43150",
+   "43151",
+   "43167"
+  ]
+ },
+ {
+  "codi_ine": "08070",
+  "nom": "Collsuspina",
+  "provincia": "Barcelona",
+  "veins": [
+   "08017",
+   "08055",
+   "08129",
+   "08138",
+   "08283"
+  ]
+ },
+ {
+  "codi_ine": "17055",
+  "nom": "Colomers",
+  "provincia": "Girona",
+  "veins": [
+   "17068",
+   "17085",
+   "17166",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "25161",
+  "nom": "Conca de Dalt",
+  "provincia": "Lleida",
+  "veins": [
+   "25001",
+   "25039",
+   "25061",
+   "25115",
+   "25171",
+   "25173",
+   "25190",
+   "25202",
+   "25234"
+  ]
+ },
+ {
+  "codi_ine": "43046",
+  "nom": "Conesa",
+  "provincia": "Tarragona",
+  "veins": [
+   "43061",
+   "43101",
+   "43105",
+   "43130",
+   "43139",
+   "43142",
+   "43143",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "43047",
+  "nom": "Constantí",
+  "provincia": "Tarragona",
+  "veins": [
+   "43100",
+   "43103",
+   "43109",
+   "43123",
+   "43145",
+   "43148"
+  ]
+ },
+ {
+  "codi_ine": "08071",
+  "nom": "Copons",
+  "provincia": "Barcelona",
+  "veins": [
+   "08103",
+   "08185",
+   "08297",
+   "25192"
+  ]
+ },
+ {
+  "codi_ine": "43048",
+  "nom": "Corbera d'Ebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43026",
+   "43056",
+   "43064",
+   "43093",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "08072",
+  "nom": "Corbera de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08066",
+   "08068",
+   "08091",
+   "08157",
+   "08196",
+   "08905"
+  ]
+ },
+ {
+  "codi_ine": "25078",
+  "nom": "Corbins",
+  "provincia": "Lleida",
+  "veins": [
+   "25012",
+   "25053",
+   "25120",
+   "25174",
+   "25231",
+   "25233",
+   "25251",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "17057",
+  "nom": "Corçà",
+  "provincia": "Girona",
+  "veins": [
+   "17022",
+   "17097",
+   "17126",
+   "17130",
+   "17153",
+   "17205",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "08073",
+  "nom": "Cornellà de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08077",
+   "08101",
+   "08169",
+   "08200",
+   "08217"
+  ]
+ },
+ {
+  "codi_ine": "17056",
+  "nom": "Cornellà del Terri",
+  "provincia": "Girona",
+  "veins": [
+   "17015",
+   "17035",
+   "17071",
+   "17123",
+   "17137",
+   "17169",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "43049",
+  "nom": "Cornudella de Montsant",
+  "provincia": "Tarragona",
+  "veins": [
+   "43015",
+   "43057",
+   "43096",
+   "43114",
+   "43116",
+   "43157",
+   "43168"
+  ]
+ },
+ {
+  "codi_ine": "43050",
+  "nom": "Creixell",
+  "provincia": "Tarragona",
+  "veins": [
+   "43030",
+   "43111",
+   "43131",
+   "43153"
+  ]
+ },
+ {
+  "codi_ine": "17058",
+  "nom": "Crespià",
+  "provincia": "Girona",
+  "veins": [
+   "17031",
+   "17065",
+   "17098",
+   "17111"
+  ]
+ },
+ {
+  "codi_ine": "17901",
+  "nom": "Cruïlles, Monells i Sant Sadurní de l'Heura",
+  "provincia": "Girona",
+  "veins": [
+   "17022",
+   "17034",
+   "17044",
+   "17057",
+   "17090",
+   "17097",
+   "17142",
+   "17181",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "08074",
+  "nom": "Cubelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08058",
+   "08307",
+   "43051"
+  ]
+ },
+ {
+  "codi_ine": "25079",
+  "nom": "Cubells",
+  "provincia": "Lleida",
+  "veins": [
+   "25022",
+   "25040",
+   "25047",
+   "25062",
+   "25094",
+   "25138"
+  ]
+ },
+ {
+  "codi_ine": "43051",
+  "nom": "Cunit",
+  "provincia": "Tarragona",
+  "veins": [
+   "08058",
+   "08074",
+   "43037"
+  ]
+ },
+ {
+  "codi_ine": "17060",
+  "nom": "Darnius",
+  "provincia": "Girona",
+  "veins": [
+   "17001",
+   "17014",
+   "17029",
+   "17042",
+   "17102",
+   "17171",
+   "17196",
+   "17234"
+  ]
+ },
+ {
+  "codi_ine": "17061",
+  "nom": "Das",
+  "provincia": "Girona",
+  "veins": [
+   "17006",
+   "17069",
+   "17078",
+   "17084",
+   "17206",
+   "25175"
+  ]
+ },
+ {
+  "codi_ine": "43901",
+  "nom": "Deltebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43014",
+   "43902",
+   "43903",
+   "43904",
+   "43906"
+  ]
+ },
+ {
+  "codi_ine": "08075",
+  "nom": "Dosrius",
+  "provincia": "Barcelona",
+  "veins": [
+   "08007",
+   "08009",
+   "08106",
+   "08121",
+   "08181",
+   "08197",
+   "08264",
+   "08294",
+   "08306"
+  ]
+ },
+ {
+  "codi_ine": "43053",
+  "nom": "Duesaigües",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43017",
+   "43115",
+   "43127",
+   "43128"
+  ]
+ },
+ {
+  "codi_ine": "08025",
+  "nom": "El Bruc",
+  "provincia": "Barcelona",
+  "veins": [
+   "08059",
+   "08063",
+   "08069",
+   "08098",
+   "08127",
+   "08161",
+   "08162",
+   "08242"
+  ]
+ },
+ {
+  "codi_ine": "08026",
+  "nom": "El Brull",
+  "provincia": "Barcelona",
+  "veins": [
+   "08014",
+   "08017",
+   "08137",
+   "08269",
+   "08276",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "43043",
+  "nom": "El Catllar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43097",
+   "43100",
+   "43122",
+   "43126",
+   "43144",
+   "43148",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "25076",
+  "nom": "El Cogul",
+  "provincia": "Lleida",
+  "veins": [
+   "25006",
+   "25010",
+   "25014",
+   "25036",
+   "25067",
+   "25105",
+   "25206"
+  ]
+ },
+ {
+  "codi_ine": "17005",
+  "nom": "El Far d'Empordà",
+  "provincia": "Girona",
+  "veins": [
+   "17066",
+   "17074",
+   "17182",
+   "17226",
+   "17230"
+  ]
+ },
+ {
+  "codi_ine": "43072",
+  "nom": "El Lloar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43058",
+   "43069",
+   "43085",
+   "43174"
+  ]
+ },
+ {
+  "codi_ine": "08118",
+  "nom": "El Masnou",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08126",
+   "08172",
+   "08281"
+  ]
+ },
+ {
+  "codi_ine": "43082",
+  "nom": "El Masroig",
+  "provincia": "Tarragona",
+  "veins": [
+   "43023",
+   "43055",
+   "43065",
+   "43070",
+   "43076",
+   "43085"
+  ]
+ },
+ {
+  "codi_ine": "43083",
+  "nom": "El Milà",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43080",
+   "43161"
+  ]
+ },
+ {
+  "codi_ine": "43085",
+  "nom": "El Molar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43023",
+   "43058",
+   "43065",
+   "43069",
+   "43072",
+   "43082",
+   "43152"
+  ]
+ },
+ {
+  "codi_ine": "43090",
+  "nom": "El Montmell",
+  "provincia": "Tarragona",
+  "veins": [
+   "08065",
+   "08227",
+   "08288",
+   "43001",
+   "43028",
+   "43132",
+   "43137",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "43095",
+  "nom": "El Morell",
+  "provincia": "Tarragona",
+  "veins": [
+   "43066",
+   "43103",
+   "43109",
+   "43134",
+   "43145",
+   "43160",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "25158",
+  "nom": "El Palau d'Anglesola",
+  "provincia": "Lleida",
+  "veins": [
+   "25048",
+   "25052",
+   "25093",
+   "25137",
+   "25168",
+   "25205",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "08158",
+  "nom": "El Papiol",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08123",
+   "08157",
+   "08205"
+  ]
+ },
+ {
+  "codi_ine": "43104",
+  "nom": "El Perelló",
+  "provincia": "Tarragona",
+  "veins": [
+   "43013",
+   "43121",
+   "43149",
+   "43150",
+   "43155",
+   "43906"
+  ]
+ },
+ {
+  "codi_ine": "43106",
+  "nom": "El Pinell de Brai",
+  "provincia": "Tarragona",
+  "veins": [
+   "43025",
+   "43026",
+   "43064",
+   "43084",
+   "43117"
+  ]
+ },
+ {
+  "codi_ine": "43108",
+  "nom": "El Pla de Santa Maria",
+  "provincia": "Tarragona",
+  "veins": [
+   "43001",
+   "43010",
+   "43036",
+   "43059",
+   "43113",
+   "43161",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "08164",
+  "nom": "El Pla del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08085",
+   "08174",
+   "08249",
+   "08273",
+   "08287"
+  ]
+ },
+ {
+  "codi_ine": "25168",
+  "nom": "El Poal",
+  "provincia": "Lleida",
+  "veins": [
+   "25052",
+   "25122",
+   "25158",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "43113",
+  "nom": "El Pont d'Armentera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43001",
+   "43036",
+   "43108",
+   "43120",
+   "43141",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "25030",
+  "nom": "El Pont de Bar",
+  "provincia": "Lleida",
+  "veins": [
+   "25032",
+   "25071",
+   "25088",
+   "25127",
+   "25139",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "25173",
+  "nom": "El Pont de Suert",
+  "provincia": "Lleida",
+  "veins": [
+   "25043",
+   "25161",
+   "25201",
+   "25202",
+   "25234",
+   "25245"
+  ]
+ },
+ {
+  "codi_ine": "08182",
+  "nom": "El Pont de Vilomara i Rocafort",
+  "provincia": "Barcelona",
+  "veins": [
+   "08113",
+   "08139",
+   "08213",
+   "08262",
+   "08277"
+  ]
+ },
+ {
+  "codi_ine": "17140",
+  "nom": "El Port de la Selva",
+  "provincia": "Girona",
+  "veins": [
+   "17032",
+   "17092",
+   "17120",
+   "17128",
+   "17152",
+   "17188",
+   "17223"
+  ]
+ },
+ {
+  "codi_ine": "08169",
+  "nom": "El Prat de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08073",
+   "08101",
+   "08200",
+   "08301"
+  ]
+ },
+ {
+  "codi_ine": "43134",
+  "nom": "El Rourell",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43080",
+   "43095",
+   "43103",
+   "43160",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "25206",
+  "nom": "El Soleràs",
+  "provincia": "Lleida",
+  "veins": [
+   "25006",
+   "25076",
+   "25101",
+   "25105",
+   "25224"
+  ]
+ },
+ {
+  "codi_ine": "43163",
+  "nom": "El Vendrell",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43024",
+   "43037",
+   "43131",
+   "43140"
+  ]
+ },
+ {
+  "codi_ine": "25253",
+  "nom": "El Vilosell",
+  "provincia": "Lleida",
+  "veins": [
+   "25009",
+   "25169",
+   "25255",
+   "43158",
+   "43168"
+  ]
+ },
+ {
+  "codi_ine": "25004",
+  "nom": "Els Alamús",
+  "provincia": "Lleida",
+  "veins": [
+   "25048",
+   "25120",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "43066",
+  "nom": "Els Garidells",
+  "provincia": "Tarragona",
+  "veins": [
+   "43095",
+   "43103",
+   "43144",
+   "43160"
+  ]
+ },
+ {
+  "codi_ine": "43070",
+  "nom": "Els Guiamets",
+  "provincia": "Tarragona",
+  "veins": [
+   "43040",
+   "43065",
+   "43076",
+   "43082",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "08162",
+  "nom": "Els Hostalets de Pierola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08025",
+   "08069",
+   "08076",
+   "08119",
+   "08161",
+   "08208"
+  ]
+ },
+ {
+  "codi_ine": "25153",
+  "nom": "Els Omellons",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25081",
+   "25092",
+   "25130",
+   "25255"
+  ]
+ },
+ {
+  "codi_ine": "25154",
+  "nom": "Els Omells de na Gaia",
+  "provincia": "Lleida",
+  "veins": [
+   "25081",
+   "25130",
+   "25238",
+   "43146"
+  ]
+ },
+ {
+  "codi_ine": "43100",
+  "nom": "Els Pallaresos",
+  "provincia": "Tarragona",
+  "veins": [
+   "43043",
+   "43047",
+   "43103",
+   "43144",
+   "43148"
+  ]
+ },
+ {
+  "codi_ine": "25911",
+  "nom": "Els Plans de Sió",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25103",
+   "25110",
+   "25157",
+   "25217",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "08170",
+  "nom": "Els Prats de Rei",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08031",
+   "08176",
+   "08185",
+   "08189",
+   "08228",
+   "08297"
+  ]
+ },
+ {
+  "codi_ine": "25224",
+  "nom": "Els Torms",
+  "provincia": "Lleida",
+  "veins": [
+   "25101",
+   "25118",
+   "25170",
+   "25206"
+  ]
+ },
+ {
+  "codi_ine": "25057",
+  "nom": "Es Bòrdes",
+  "provincia": "Lleida",
+  "veins": [
+   "25031",
+   "25243",
+   "25247"
+  ]
+ },
+ {
+  "codi_ine": "08076",
+  "nom": "Esparreguera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08069",
+   "08127",
+   "08147",
+   "08162",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "17063",
+  "nom": "Espinelves",
+  "provincia": "Girona",
+  "veins": [
+   "08241",
+   "08303",
+   "17009",
+   "17164",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "08077",
+  "nom": "Esplugues de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08073",
+   "08101",
+   "08217",
+   "08221"
+  ]
+ },
+ {
+  "codi_ine": "17064",
+  "nom": "Espolla",
+  "provincia": "Girona",
+  "veins": [
+   "17086",
+   "17106",
+   "17143",
+   "17158"
+  ]
+ },
+ {
+  "codi_ine": "17065",
+  "nom": "Esponellà",
+  "provincia": "Girona",
+  "veins": [
+   "17031",
+   "17058",
+   "17071",
+   "17098",
+   "17190",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "25082",
+  "nom": "Espot",
+  "provincia": "Lleida",
+  "veins": [
+   "25024",
+   "25025",
+   "25043",
+   "25086",
+   "25183",
+   "25209",
+   "25227",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "25088",
+  "nom": "Estamariu",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25030",
+   "25032",
+   "25203",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "25085",
+  "nom": "Estaràs",
+  "provincia": "Lleida",
+  "veins": [
+   "08060",
+   "08176",
+   "25072",
+   "25114",
+   "25152",
+   "25192",
+   "25194",
+   "25905"
+  ]
+ },
+ {
+  "codi_ine": "25086",
+  "nom": "Esterri d'Àneu",
+  "provincia": "Lleida",
+  "veins": [
+   "25024",
+   "25082",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "25087",
+  "nom": "Esterri de Cardós",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25123",
+   "25901"
+  ]
+ },
+ {
+  "codi_ine": "43055",
+  "nom": "Falset",
+  "provincia": "Tarragona",
+  "veins": [
+   "43023",
+   "43069",
+   "43076",
+   "43082",
+   "43114",
+   "43115"
+  ]
+ },
+ {
+  "codi_ine": "25089",
+  "nom": "Farrera",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25126",
+   "25140",
+   "25221",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "08134",
+  "nom": "Figaró-Montmany",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08023",
+   "08042",
+   "08088",
+   "08224",
+   "08239",
+   "08276"
+  ]
+ },
+ {
+  "codi_ine": "08080",
+  "nom": "Fígols",
+  "provincia": "Barcelona",
+  "veins": [
+   "08050",
+   "08132",
+   "08190",
+   "08268",
+   "08293",
+   "25100",
+   "25111"
+  ]
+ },
+ {
+  "codi_ine": "25908",
+  "nom": "Fígols i Alinyà",
+  "provincia": "Lleida",
+  "veins": [
+   "25061",
+   "25077",
+   "25148",
+   "25149",
+   "25155",
+   "25185",
+   "25906",
+   "25909"
+  ]
+ },
+ {
+  "codi_ine": "17066",
+  "nom": "Figueres",
+  "provincia": "Girona",
+  "veins": [
+   "17005",
+   "17030",
+   "17093",
+   "17132",
+   "17214",
+   "17221",
+   "17230"
+  ]
+ },
+ {
+  "codi_ine": "43059",
+  "nom": "Figuerola del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43021",
+   "43036",
+   "43086",
+   "43108",
+   "43161"
+  ]
+ },
+ {
+  "codi_ine": "17067",
+  "nom": "Flaçà",
+  "provincia": "Girona",
+  "veins": [
+   "17068",
+   "17130",
+   "17166",
+   "17168",
+   "17173"
+  ]
+ },
+ {
+  "codi_ine": "43060",
+  "nom": "Flix",
+  "provincia": "Tarragona",
+  "veins": [
+   "25056",
+   "25101",
+   "25125",
+   "25133",
+   "25170",
+   "43019",
+   "43027",
+   "43075",
+   "43099",
+   "43125",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "08082",
+  "nom": "Fogars de la Selva",
+  "provincia": "Barcelona",
+  "veins": [
+   "08202",
+   "08284",
+   "17083",
+   "17101",
+   "17103",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "08081",
+  "nom": "Fogars de Montclús",
+  "provincia": "Barcelona",
+  "veins": [
+   "08039",
+   "08097",
+   "08137",
+   "08202",
+   "08207",
+   "08234",
+   "08259",
+   "17009",
+   "17146"
+  ]
+ },
+ {
+  "codi_ine": "17068",
+  "nom": "Foixà",
+  "provincia": "Girona",
+  "veins": [
+   "17055",
+   "17067",
+   "17085",
+   "17126",
+   "17130",
+   "17153",
+   "17166",
+   "17203",
+   "17211"
+  ]
+ },
+ {
+  "codi_ine": "08083",
+  "nom": "Folgueroles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08037",
+   "08100",
+   "08220",
+   "08241",
+   "08275",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "25093",
+  "nom": "Fondarella",
+  "provincia": "Lleida",
+  "veins": [
+   "25137",
+   "25158",
+   "25205",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "08084",
+  "nom": "Fonollosa",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08113",
+   "08178",
+   "08218",
+   "08229"
+  ]
+ },
+ {
+  "codi_ine": "08085",
+  "nom": "Font-rubí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08094",
+   "08104",
+   "08122",
+   "08164",
+   "08174",
+   "08227",
+   "08236",
+   "08249",
+   "08287",
+   "08288",
+   "08304"
+  ]
+ },
+ {
+  "codi_ine": "17069",
+  "nom": "Fontanals de Cerdanya",
+  "provincia": "Girona",
+  "veins": [
+   "17006",
+   "17024",
+   "17061",
+   "17078",
+   "17141"
+  ]
+ },
+ {
+  "codi_ine": "17070",
+  "nom": "Fontanilles",
+  "provincia": "Girona",
+  "veins": [
+   "17081",
+   "17121",
+   "17124",
+   "17191",
+   "17195",
+   "17199",
+   "17204",
+   "17205"
+  ]
+ },
+ {
+  "codi_ine": "17071",
+  "nom": "Fontcoberta",
+  "provincia": "Girona",
+  "veins": [
+   "17015",
+   "17056",
+   "17065",
+   "17137",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "25094",
+  "nom": "Foradada",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25022",
+   "25034",
+   "25079",
+   "25138",
+   "25177"
+  ]
+ },
+ {
+  "codi_ine": "17902",
+  "nom": "Forallac",
+  "provincia": "Girona",
+  "veins": [
+   "17022",
+   "17034",
+   "17110",
+   "17117",
+   "17118",
+   "17121",
+   "17197",
+   "17205",
+   "17209",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "43061",
+  "nom": "Forès",
+  "provincia": "Tarragona",
+  "veins": [
+   "43046",
+   "43101",
+   "43130",
+   "43142",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "17073",
+  "nom": "Fornells de la Selva",
+  "provincia": "Girona",
+  "veins": [
+   "17002",
+   "17038",
+   "17079",
+   "17090",
+   "17142",
+   "17150",
+   "17215"
+  ]
+ },
+ {
+  "codi_ine": "17074",
+  "nom": "Fortià",
+  "provincia": "Girona",
+  "veins": [
+   "17005",
+   "17047",
+   "17052",
+   "17132",
+   "17151",
+   "17226",
+   "17230"
+  ]
+ },
+ {
+  "codi_ine": "43062",
+  "nom": "Freginals",
+  "provincia": "Tarragona",
+  "veins": [
+   "43004",
+   "43014",
+   "43068",
+   "43078",
+   "43136",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "25097",
+  "nom": "Fulleda",
+  "provincia": "Lleida",
+  "veins": [
+   "25081",
+   "25218",
+   "25255",
+   "43054",
+   "43146",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "08090",
+  "nom": "Gaià",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08018",
+   "08141",
+   "08175",
+   "08191",
+   "08255"
+  ]
+ },
+ {
+  "codi_ine": "08087",
+  "nom": "Gallifa",
+  "provincia": "Barcelona",
+  "veins": [
+   "08033",
+   "08064",
+   "08095",
+   "08210",
+   "08223"
+  ]
+ },
+ {
+  "codi_ine": "43064",
+  "nom": "Gandesa",
+  "provincia": "Tarragona",
+  "veins": [
+   "43022",
+   "43026",
+   "43032",
+   "43048",
+   "43106",
+   "43117",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "43065",
+  "nom": "Garcia",
+  "provincia": "Tarragona",
+  "veins": [
+   "43019",
+   "43070",
+   "43082",
+   "43085",
+   "43093",
+   "43094",
+   "43150",
+   "43152",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "17075",
+  "nom": "Garrigàs",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17026",
+   "17052",
+   "17119",
+   "17136",
+   "17176",
+   "17222",
+   "17226"
+  ]
+ },
+ {
+  "codi_ine": "17076",
+  "nom": "Garrigoles",
+  "provincia": "Girona",
+  "veins": [
+   "17085",
+   "17195",
+   "17210",
+   "17211",
+   "17217",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "17077",
+  "nom": "Garriguella",
+  "provincia": "Girona",
+  "veins": [
+   "17092",
+   "17106",
+   "17129",
+   "17132",
+   "17143",
+   "17223",
+   "17227"
+  ]
+ },
+ {
+  "codi_ine": "08089",
+  "nom": "Gavà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08020",
+   "08056",
+   "08204",
+   "08270",
+   "08301"
+  ]
+ },
+ {
+  "codi_ine": "25098",
+  "nom": "Gavet de la Conca",
+  "provincia": "Lleida",
+  "veins": [
+   "25034",
+   "25115",
+   "25128",
+   "25234",
+   "25250",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "08091",
+  "nom": "Gelida",
+  "provincia": "Barcelona",
+  "veins": [
+   "08066",
+   "08068",
+   "08072",
+   "08208",
+   "08222",
+   "08240",
+   "08273"
+  ]
+ },
+ {
+  "codi_ine": "17078",
+  "nom": "Ger",
+  "provincia": "Girona",
+  "veins": [
+   "17024",
+   "17061",
+   "17069",
+   "17082",
+   "17084",
+   "17099"
+  ]
+ },
+ {
+  "codi_ine": "25912",
+  "nom": "Gimenells i el Pla de la Font",
+  "provincia": "Lleida",
+  "veins": [
+   "25011",
+   "25120"
+  ]
+ },
+ {
+  "codi_ine": "43067",
+  "nom": "Ginestar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43026",
+   "43084",
+   "43121",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "17079",
+  "nom": "Girona",
+  "provincia": "Girona",
+  "veins": [
+   "17049",
+   "17073",
+   "17087",
+   "17142",
+   "17155",
+   "17163",
+   "17169",
+   "17186",
+   "17215"
+  ]
+ },
+ {
+  "codi_ine": "08092",
+  "nom": "Gironella",
+  "provincia": "Barcelona",
+  "veins": [
+   "08049",
+   "08144"
+  ]
+ },
+ {
+  "codi_ine": "08093",
+  "nom": "Gisclareny",
+  "provincia": "Barcelona",
+  "veins": [
+   "08016",
+   "08099",
+   "08190",
+   "08293",
+   "25051",
+   "25139"
+  ]
+ },
+ {
+  "codi_ine": "43068",
+  "nom": "Godall",
+  "provincia": "Tarragona",
+  "veins": [
+   "43062",
+   "43063",
+   "43078",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "25099",
+  "nom": "Golmés",
+  "provincia": "Lleida",
+  "veins": [
+   "25068",
+   "25135",
+   "25137",
+   "25248",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "17080",
+  "nom": "Gombrèn",
+  "provincia": "Girona",
+  "veins": [
+   "08052",
+   "08166",
+   "08216",
+   "17036",
+   "17037",
+   "17096",
+   "17134",
+   "17201"
+  ]
+ },
+ {
+  "codi_ine": "25100",
+  "nom": "Gósol",
+  "provincia": "Lleida",
+  "veins": [
+   "08080",
+   "08190",
+   "25111",
+   "25163",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "08095",
+  "nom": "Granera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08064",
+   "08087",
+   "08128",
+   "08139",
+   "08223"
+  ]
+ },
+ {
+  "codi_ine": "08096",
+  "nom": "Granollers",
+  "provincia": "Barcelona",
+  "veins": [
+   "08041",
+   "08086",
+   "08107",
+   "08108",
+   "08135",
+   "08136",
+   "08159",
+   "08181",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "25103",
+  "nom": "Granyanella",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25104",
+   "25217",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "25105",
+  "nom": "Granyena de les Garrigues",
+  "provincia": "Lleida",
+  "veins": [
+   "25010",
+   "25076",
+   "25101",
+   "25206",
+   "25226"
+  ]
+ },
+ {
+  "codi_ine": "25104",
+  "nom": "Granyena de Segarra",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25103",
+   "25143",
+   "25217",
+   "25242",
+   "25905"
+  ]
+ },
+ {
+  "codi_ine": "43069",
+  "nom": "Gratallops",
+  "provincia": "Tarragona",
+  "veins": [
+   "43023",
+   "43055",
+   "43072",
+   "43085",
+   "43114",
+   "43154",
+   "43173",
+   "43174"
+  ]
+ },
+ {
+  "codi_ine": "08097",
+  "nom": "Gualba",
+  "provincia": "Barcelona",
+  "veins": [
+   "08039",
+   "08081",
+   "08202",
+   "17146"
+  ]
+ },
+ {
+  "codi_ine": "17081",
+  "nom": "Gualta",
+  "provincia": "Girona",
+  "veins": [
+   "17070",
+   "17199",
+   "17204"
+  ]
+ },
+ {
+  "codi_ine": "08099",
+  "nom": "Guardiola de Berguedà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08016",
+   "08052",
+   "08093",
+   "08142",
+   "08166",
+   "08268",
+   "08293",
+   "08903",
+   "17206",
+   "25051",
+   "25913"
+  ]
+ },
+ {
+  "codi_ine": "17082",
+  "nom": "Guils de Cerdanya",
+  "provincia": "Girona",
+  "veins": [
+   "17024",
+   "17078",
+   "17141"
+  ]
+ },
+ {
+  "codi_ine": "25109",
+  "nom": "Guimerà",
+  "provincia": "Lleida",
+  "veins": [
+   "25074",
+   "25141",
+   "25143",
+   "25242",
+   "43101",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "25110",
+  "nom": "Guissona",
+  "provincia": "Lleida",
+  "veins": [
+   "25132",
+   "25197",
+   "25907",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "25111",
+  "nom": "Guixers",
+  "provincia": "Lleida",
+  "veins": [
+   "08045",
+   "08050",
+   "08080",
+   "08132",
+   "25100",
+   "25146",
+   "25148",
+   "25163",
+   "25193"
+  ]
+ },
+ {
+  "codi_ine": "08100",
+  "nom": "Gurb",
+  "provincia": "Barcelona",
+  "veins": [
+   "08083",
+   "08112",
+   "08116",
+   "08117",
+   "08183",
+   "08199",
+   "08243",
+   "08275",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "43071",
+  "nom": "Horta de Sant Joan",
+  "provincia": "Tarragona",
+  "veins": [
+   "43008",
+   "43018",
+   "43032",
+   "43041",
+   "43102",
+   "43117"
+  ]
+ },
+ {
+  "codi_ine": "17083",
+  "nom": "Hostalric",
+  "provincia": "Girona",
+  "veins": [
+   "08082",
+   "17101",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "08102",
+  "nom": "Igualada",
+  "provincia": "Barcelona",
+  "veins": [
+   "08103",
+   "08143",
+   "08250",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "25115",
+  "nom": "Isona i Conca Dellà",
+  "provincia": "Lleida",
+  "veins": [
+   "25001",
+   "25034",
+   "25042",
+   "25077",
+   "25098",
+   "25128",
+   "25161",
+   "25190",
+   "25215",
+   "25234",
+   "25250"
+  ]
+ },
+ {
+  "codi_ine": "17084",
+  "nom": "Isòvol",
+  "provincia": "Girona",
+  "veins": [
+   "17061",
+   "17078",
+   "25051",
+   "25175"
+  ]
+ },
+ {
+  "codi_ine": "25113",
+  "nom": "Ivars d'Urgell",
+  "provincia": "Lleida",
+  "veins": [
+   "25041",
+   "25050",
+   "25068",
+   "25096",
+   "25122",
+   "25164",
+   "25225",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "25112",
+  "nom": "Ivars de Noguera",
+  "provincia": "Lleida",
+  "veins": [
+   "25013",
+   "25015",
+   "25156"
+  ]
+ },
+ {
+  "codi_ine": "25114",
+  "nom": "Ivorra",
+  "provincia": "Lleida",
+  "veins": [
+   "08060",
+   "25085",
+   "25194",
+   "25197",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "17085",
+  "nom": "Jafre",
+  "provincia": "Girona",
+  "veins": [
+   "17055",
+   "17068",
+   "17076",
+   "17211",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "08103",
+  "nom": "Jorba",
+  "provincia": "Barcelona",
+  "veins": [
+   "08008",
+   "08071",
+   "08102",
+   "08143",
+   "08185",
+   "08226",
+   "08250",
+   "08297"
+  ]
+ },
+ {
+  "codi_ine": "25910",
+  "nom": "Josa i Tuixén",
+  "provincia": "Lleida",
+  "veins": [
+   "08016",
+   "08190",
+   "25071",
+   "25100",
+   "25139",
+   "25163",
+   "25909"
+  ]
+ },
+ {
+  "codi_ine": "17087",
+  "nom": "Juià",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17049",
+   "17079",
+   "17142",
+   "17173"
+  ]
+ },
+ {
+  "codi_ine": "25118",
+  "nom": "Juncosa",
+  "provincia": "Lleida",
+  "veins": [
+   "25006",
+   "25073",
+   "25169",
+   "25170",
+   "25224",
+   "43075",
+   "43157"
+  ]
+ },
+ {
+  "codi_ine": "25119",
+  "nom": "Juneda",
+  "provincia": "Lleida",
+  "veins": [
+   "25058",
+   "25067",
+   "25073",
+   "25135",
+   "25180",
+   "25182",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "25006",
+  "nom": "L'Albagés",
+  "provincia": "Lleida",
+  "veins": [
+   "25067",
+   "25073",
+   "25076",
+   "25118",
+   "25206"
+  ]
+ },
+ {
+  "codi_ine": "25009",
+  "nom": "L'Albi",
+  "provincia": "Lleida",
+  "veins": [
+   "25058",
+   "25073",
+   "25169",
+   "25253",
+   "25255"
+  ]
+ },
+ {
+  "codi_ine": "43003",
+  "nom": "L'Albiol",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43007",
+   "43091",
+   "43145",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "43904",
+  "nom": "L'Aldea",
+  "provincia": "Tarragona",
+  "veins": [
+   "43014",
+   "43155",
+   "43901",
+   "43903"
+  ]
+ },
+ {
+  "codi_ine": "43007",
+  "nom": "L'Aleixar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43003",
+   "43009",
+   "43011",
+   "43042",
+   "43081",
+   "43123",
+   "43129",
+   "43145",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "43013",
+  "nom": "L'Ametlla de Mar",
+  "provincia": "Tarragona",
+  "veins": [
+   "43104",
+   "43150",
+   "43162"
+  ]
+ },
+ {
+  "codi_ine": "08005",
+  "nom": "L'Ametlla del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08023",
+   "08041",
+   "08086",
+   "08088",
+   "08134",
+   "08248"
+  ]
+ },
+ {
+  "codi_ine": "43906",
+  "nom": "L'Ampolla",
+  "provincia": "Tarragona",
+  "veins": [
+   "43104",
+   "43901",
+   "43903"
+  ]
+ },
+ {
+  "codi_ine": "43016",
+  "nom": "L'Arboç",
+  "provincia": "Tarragona",
+  "veins": [
+   "08058",
+   "08065",
+   "08251",
+   "43020",
+   "43137"
+  ]
+ },
+ {
+  "codi_ine": "43017",
+  "nom": "L'Argentera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43045",
+   "43053",
+   "43115",
+   "43127",
+   "43151",
+   "43167"
+  ]
+ },
+ {
+  "codi_ine": "17011",
+  "nom": "L'Armentera",
+  "provincia": "Girona",
+  "veins": [
+   "17062",
+   "17178",
+   "17210"
+  ]
+ },
+ {
+  "codi_ine": "17062",
+  "nom": "L'Escala",
+  "provincia": "Girona",
+  "veins": [
+   "17004",
+   "17011",
+   "17018",
+   "17178",
+   "17199",
+   "17210",
+   "17217"
+  ]
+ },
+ {
+  "codi_ine": "25081",
+  "nom": "L'Espluga Calba",
+  "provincia": "Lleida",
+  "veins": [
+   "25097",
+   "25130",
+   "25153",
+   "25154",
+   "25255",
+   "43146"
+  ]
+ },
+ {
+  "codi_ine": "43054",
+  "nom": "L'Espluga de Francolí",
+  "provincia": "Tarragona",
+  "veins": [
+   "25097",
+   "25238",
+   "43029",
+   "43086",
+   "43146",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "08078",
+  "nom": "L'Espunyola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08045",
+   "08049",
+   "08130",
+   "08132",
+   "25146"
+  ]
+ },
+ {
+  "codi_ine": "08254",
+  "nom": "L'Esquirol",
+  "provincia": "Barcelona",
+  "veins": [
+   "08112",
+   "08116",
+   "08233",
+   "08280",
+   "08285",
+   "08901",
+   "17207"
+  ]
+ },
+ {
+  "codi_ine": "08079",
+  "nom": "L'Estany",
+  "provincia": "Barcelona",
+  "veins": [
+   "08129",
+   "08138",
+   "08258"
+  ]
+ },
+ {
+  "codi_ine": "08101",
+  "nom": "L'Hospitalet de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08073",
+   "08077",
+   "08169"
+  ]
+ },
+ {
+  "codi_ine": "25042",
+  "nom": "La Baronia de Rialb",
+  "provincia": "Lleida",
+  "veins": [
+   "25034",
+   "25044",
+   "25077",
+   "25115",
+   "25165",
+   "25172",
+   "25222"
+  ]
+ },
+ {
+  "codi_ine": "17022",
+  "nom": "La Bisbal d'Empordà",
+  "provincia": "Girona",
+  "veins": [
+   "17057",
+   "17205",
+   "17901",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "43027",
+  "nom": "La Bisbal de Falset",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43060",
+   "43075",
+   "43099"
+  ]
+ },
+ {
+  "codi_ine": "43028",
+  "nom": "La Bisbal del Penedès",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43020",
+   "43074",
+   "43079",
+   "43090",
+   "43132",
+   "43137",
+   "43140"
+  ]
+ },
+ {
+  "codi_ine": "43907",
+  "nom": "La Canonja",
+  "provincia": "Tarragona",
+  "veins": [
+   "43123",
+   "43148",
+   "43171"
+  ]
+ },
+ {
+  "codi_ine": "17189",
+  "nom": "La Cellera de Ter",
+  "provincia": "Girona",
+  "veins": [
+   "17007",
+   "17008",
+   "17116",
+   "17194",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "25163",
+  "nom": "La Coma i la Pedra",
+  "provincia": "Lleida",
+  "veins": [
+   "25100",
+   "25111",
+   "25148",
+   "25193",
+   "25909",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "43056",
+  "nom": "La Fatarella",
+  "provincia": "Tarragona",
+  "veins": [
+   "43019",
+   "43048",
+   "43093",
+   "43125",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "43057",
+  "nom": "La Febró",
+  "provincia": "Tarragona",
+  "veins": [
+   "43015",
+   "43039",
+   "43049",
+   "43116",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "43058",
+  "nom": "La Figuera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43072",
+   "43085",
+   "43152",
+   "43174"
+  ]
+ },
+ {
+  "codi_ine": "25092",
+  "nom": "La Floresta",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25058",
+   "25153",
+   "25255"
+  ]
+ },
+ {
+  "codi_ine": "25096",
+  "nom": "La Fuliola",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25070",
+   "25113",
+   "25164",
+   "25225"
+  ]
+ },
+ {
+  "codi_ine": "43063",
+  "nom": "La Galera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43068",
+   "43077",
+   "43078",
+   "43138",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "08088",
+  "nom": "La Garriga",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08042",
+   "08086",
+   "08134"
+  ]
+ },
+ {
+  "codi_ine": "08094",
+  "nom": "La Granada",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08027",
+   "08085",
+   "08206",
+   "08249",
+   "08273",
+   "08304",
+   "08305"
+  ]
+ },
+ {
+  "codi_ine": "25101",
+  "nom": "La Granadella",
+  "provincia": "Lleida",
+  "veins": [
+   "25056",
+   "25105",
+   "25125",
+   "25170",
+   "25206",
+   "25224",
+   "25226",
+   "43060"
+  ]
+ },
+ {
+  "codi_ine": "25102",
+  "nom": "La Granja d'Escarp",
+  "provincia": "Lleida",
+  "veins": [
+   "25131",
+   "25204"
+  ]
+ },
+ {
+  "codi_ine": "25903",
+  "nom": "La Guingueta d'Àneu",
+  "provincia": "Lleida",
+  "veins": [
+   "25024",
+   "25082",
+   "25086",
+   "25123",
+   "25126",
+   "25183",
+   "25901"
+  ]
+ },
+ {
+  "codi_ine": "17086",
+  "nom": "La Jonquera",
+  "provincia": "Girona",
+  "veins": [
+   "17001",
+   "17041",
+   "17042",
+   "17064",
+   "17158"
+  ]
+ },
+ {
+  "codi_ine": "08104",
+  "nom": "La Llacuna",
+  "provincia": "Barcelona",
+  "veins": [
+   "08048",
+   "08085",
+   "08122",
+   "08152",
+   "08168",
+   "08257",
+   "08288",
+   "43120"
+  ]
+ },
+ {
+  "codi_ine": "08105",
+  "nom": "La Llagosta",
+  "provincia": "Barcelona",
+  "veins": [
+   "08124",
+   "08125",
+   "08209",
+   "08260"
+  ]
+ },
+ {
+  "codi_ine": "43080",
+  "nom": "La Masó",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43083",
+   "43134",
+   "43160",
+   "43161"
+  ]
+ },
+ {
+  "codi_ine": "25136",
+  "nom": "La Molsosa",
+  "provincia": "Lleida",
+  "veins": [
+   "08036",
+   "08060",
+   "08189",
+   "08229",
+   "25167",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "43096",
+  "nom": "La Morera de Montsant",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43049",
+   "43075",
+   "43112",
+   "43154",
+   "43157",
+   "43173"
+  ]
+ },
+ {
+  "codi_ine": "08142",
+  "nom": "La Nou de Berguedà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08057",
+   "08099",
+   "08268",
+   "08299",
+   "08903"
+  ]
+ },
+ {
+  "codi_ine": "43097",
+  "nom": "La Nou de Gaià",
+  "provincia": "Tarragona",
+  "veins": [
+   "43012",
+   "43043",
+   "43111",
+   "43126",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "43099",
+  "nom": "La Palma d'Ebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43027",
+   "43035",
+   "43060",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "08905",
+  "nom": "La Palma de Cervelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08068",
+   "08072",
+   "08157",
+   "08263"
+  ]
+ },
+ {
+  "codi_ine": "17130",
+  "nom": "La Pera",
+  "provincia": "Girona",
+  "veins": [
+   "17057",
+   "17067",
+   "17068",
+   "17097",
+   "17153",
+   "17173"
+  ]
+ },
+ {
+  "codi_ine": "25169",
+  "nom": "La Pobla de Cérvoles",
+  "provincia": "Lleida",
+  "veins": [
+   "25009",
+   "25073",
+   "25118",
+   "25253",
+   "43157",
+   "43168"
+  ]
+ },
+ {
+  "codi_ine": "08165",
+  "nom": "La Pobla de Claramunt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08048",
+   "08063",
+   "08143",
+   "08161",
+   "08286",
+   "08292",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "08166",
+  "nom": "La Pobla de Lillet",
+  "provincia": "Barcelona",
+  "veins": [
+   "08052",
+   "08057",
+   "08099",
+   "08216",
+   "08903",
+   "17080",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "43109",
+  "nom": "La Pobla de Mafumet",
+  "provincia": "Tarragona",
+  "veins": [
+   "43047",
+   "43095",
+   "43103",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "43110",
+  "nom": "La Pobla de Massaluca",
+  "provincia": "Tarragona",
+  "veins": [
+   "43022",
+   "43125",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "43111",
+  "nom": "La Pobla de Montornès",
+  "provincia": "Tarragona",
+  "veins": [
+   "43012",
+   "43030",
+   "43050",
+   "43097",
+   "43153",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "25171",
+  "nom": "La Pobla de Segur",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25161",
+   "25190",
+   "25202"
+  ]
+ },
+ {
+  "codi_ine": "25174",
+  "nom": "La Portella",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25016",
+   "25078",
+   "25251"
+  ]
+ },
+ {
+  "codi_ine": "08177",
+  "nom": "La Quar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08024",
+   "08109",
+   "08144",
+   "08188",
+   "08268",
+   "08299"
+  ]
+ },
+ {
+  "codi_ine": "43136",
+  "nom": "La Ràpita",
+  "provincia": "Tarragona",
+  "veins": [
+   "43004",
+   "43014",
+   "43062"
+  ]
+ },
+ {
+  "codi_ine": "43124",
+  "nom": "La Riba",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43086",
+   "43091",
+   "43161",
+   "43172"
+  ]
+ },
+ {
+  "codi_ine": "43126",
+  "nom": "La Riera de Gaià",
+  "provincia": "Tarragona",
+  "veins": [
+   "43012",
+   "43043",
+   "43097",
+   "43148",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "08181",
+  "nom": "La Roca del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08009",
+   "08046",
+   "08075",
+   "08086",
+   "08096",
+   "08106",
+   "08153",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "43144",
+  "nom": "La Secuita",
+  "provincia": "Tarragona",
+  "veins": [
+   "43043",
+   "43066",
+   "43098",
+   "43100",
+   "43103",
+   "43122",
+   "43160"
+  ]
+ },
+ {
+  "codi_ine": "17188",
+  "nom": "La Selva de Mar",
+  "provincia": "Girona",
+  "veins": [
+   "17120",
+   "17140",
+   "17152"
+  ]
+ },
+ {
+  "codi_ine": "43145",
+  "nom": "La Selva del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43003",
+   "43005",
+   "43007",
+   "43011",
+   "43047",
+   "43095",
+   "43103",
+   "43123",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "43044",
+  "nom": "La Sénia",
+  "provincia": "Tarragona",
+  "veins": [
+   "43077",
+   "43133",
+   "43155",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "25035",
+  "nom": "La Sentiu de Sió",
+  "provincia": "Lleida",
+  "veins": [
+   "25040",
+   "25047",
+   "25062",
+   "25240"
+  ]
+ },
+ {
+  "codi_ine": "25203",
+  "nom": "La Seu d'Urgell",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25088",
+   "25140",
+   "25185",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "17195",
+  "nom": "La Tallada d'Empordà",
+  "provincia": "Girona",
+  "veins": [
+   "17004",
+   "17018",
+   "17070",
+   "17076",
+   "17191",
+   "17204",
+   "17211",
+   "17217"
+  ]
+ },
+ {
+  "codi_ine": "25227",
+  "nom": "La Torre de Cabdella",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25043",
+   "25082",
+   "25201",
+   "25202",
+   "25209"
+  ]
+ },
+ {
+  "codi_ine": "08286",
+  "nom": "La Torre de Claramunt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08044",
+   "08048",
+   "08122",
+   "08165",
+   "08292"
+  ]
+ },
+ {
+  "codi_ine": "43151",
+  "nom": "La Torre de Fontaubella",
+  "provincia": "Tarragona",
+  "veins": [
+   "43017",
+   "43045",
+   "43115"
+  ]
+ },
+ {
+  "codi_ine": "43152",
+  "nom": "La Torre de l'Espanyol",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43058",
+   "43065",
+   "43085",
+   "43177"
+  ]
+ },
+ {
+  "codi_ine": "17014",
+  "nom": "La Vajol",
+  "provincia": "Girona",
+  "veins": [
+   "17001",
+   "17060",
+   "17102"
+  ]
+ },
+ {
+  "codi_ine": "17207",
+  "nom": "La Vall d'en Bas",
+  "provincia": "Girona",
+  "veins": [
+   "08233",
+   "08254",
+   "08901",
+   "17114",
+   "17139",
+   "17149",
+   "17161",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "17208",
+  "nom": "La Vall de Bianya",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17109",
+   "17114",
+   "17149",
+   "17167",
+   "17177",
+   "17185"
+  ]
+ },
+ {
+  "codi_ine": "25043",
+  "nom": "La Vall de Boí",
+  "provincia": "Lleida",
+  "veins": [
+   "25025",
+   "25082",
+   "25173",
+   "25201",
+   "25227",
+   "25245"
+  ]
+ },
+ {
+  "codi_ine": "25909",
+  "nom": "La Vansa i Fórnols",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25071",
+   "25163",
+   "25185",
+   "25908",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "43173",
+  "nom": "La Vilella Alta",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43069",
+   "43096",
+   "43154",
+   "43174"
+  ]
+ },
+ {
+  "codi_ine": "43174",
+  "nom": "La Vilella Baixa",
+  "provincia": "Tarragona",
+  "veins": [
+   "43035",
+   "43058",
+   "43069",
+   "43072",
+   "43173"
+  ]
+ },
+ {
+  "codi_ine": "25121",
+  "nom": "Les",
+  "provincia": "Lleida",
+  "veins": [
+   "25045",
+   "25059",
+   "25063",
+   "25247"
+  ]
+ },
+ {
+  "codi_ine": "25037",
+  "nom": "Les Avellanes i Santa Linya",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25062",
+   "25156"
+  ]
+ },
+ {
+  "codi_ine": "25058",
+  "nom": "Les Borges Blanques",
+  "provincia": "Lleida",
+  "veins": [
+   "25009",
+   "25029",
+   "25067",
+   "25073",
+   "25092",
+   "25119",
+   "25180",
+   "25255"
+  ]
+ },
+ {
+  "codi_ine": "43031",
+  "nom": "Les Borges del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43033",
+   "43081",
+   "43129"
+  ]
+ },
+ {
+  "codi_ine": "08027",
+  "nom": "Les Cabanyes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08094",
+   "08154",
+   "08304",
+   "08305"
+  ]
+ },
+ {
+  "codi_ine": "08086",
+  "nom": "Les Franqueses del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08041",
+   "08042",
+   "08046",
+   "08088",
+   "08096",
+   "08181"
+  ]
+ },
+ {
+  "codi_ine": "17096",
+  "nom": "Les Llosses",
+  "provincia": "Girona",
+  "veins": [
+   "08004",
+   "08024",
+   "08057",
+   "08131",
+   "08166",
+   "08216",
+   "08253",
+   "08272",
+   "17036",
+   "17080",
+   "17147"
+  ]
+ },
+ {
+  "codi_ine": "08116",
+  "nom": "Les Masies de Roda",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08112",
+   "08183",
+   "08254",
+   "08275",
+   "08280",
+   "08303"
+  ]
+ },
+ {
+  "codi_ine": "08117",
+  "nom": "Les Masies de Voltregà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08112",
+   "08150",
+   "08215",
+   "08243",
+   "08271",
+   "08285"
+  ]
+ },
+ {
+  "codi_ine": "25152",
+  "nom": "Les Oluges",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25085",
+   "25194"
+  ]
+ },
+ {
+  "codi_ine": "43105",
+  "nom": "Les Piles",
+  "provincia": "Tarragona",
+  "veins": [
+   "08021",
+   "43046",
+   "43139",
+   "43141",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "17133",
+  "nom": "Les Planes d'Hostoles",
+  "provincia": "Girona",
+  "veins": [
+   "08901",
+   "17007",
+   "17161",
+   "17183",
+   "17194"
+  ]
+ },
+ {
+  "codi_ine": "17139",
+  "nom": "Les Preses",
+  "provincia": "Girona",
+  "veins": [
+   "17114",
+   "17161",
+   "17184",
+   "17207"
+  ]
+ },
+ {
+  "codi_ine": "25906",
+  "nom": "Les Valls d'Aguilar",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25061",
+   "25140",
+   "25185",
+   "25208",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "25239",
+  "nom": "Les Valls de Valira",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25030",
+   "25032",
+   "25088",
+   "25089",
+   "25127",
+   "25140",
+   "25203"
+  ]
+ },
+ {
+  "codi_ine": "25122",
+  "nom": "Linyola",
+  "provincia": "Lleida",
+  "veins": [
+   "25047",
+   "25052",
+   "25113",
+   "25164",
+   "25168",
+   "25240",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "17088",
+  "nom": "Lladó",
+  "provincia": "Girona",
+  "veins": [
+   "17031",
+   "17051",
+   "17111"
+  ]
+ },
+ {
+  "codi_ine": "25123",
+  "nom": "Lladorre",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25087",
+   "25901",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "25124",
+  "nom": "Lladurs",
+  "provincia": "Lleida",
+  "veins": [
+   "25064",
+   "25146",
+   "25148",
+   "25151",
+   "25207"
+  ]
+ },
+ {
+  "codi_ine": "17089",
+  "nom": "Llagostera",
+  "provincia": "Girona",
+  "veins": [
+   "17033",
+   "17044",
+   "17181",
+   "17202"
+  ]
+ },
+ {
+  "codi_ine": "17090",
+  "nom": "Llambilles",
+  "provincia": "Girona",
+  "veins": [
+   "17038",
+   "17044",
+   "17073",
+   "17142",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "17091",
+  "nom": "Llanars",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17107",
+   "17192",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "17092",
+  "nom": "Llançà",
+  "provincia": "Girona",
+  "veins": [
+   "17054",
+   "17077",
+   "17140",
+   "17143",
+   "17223",
+   "17227"
+  ]
+ },
+ {
+  "codi_ine": "25125",
+  "nom": "Llardecans",
+  "provincia": "Lleida",
+  "veins": [
+   "25038",
+   "25101",
+   "25133",
+   "25200",
+   "25204",
+   "25226",
+   "43060"
+  ]
+ },
+ {
+  "codi_ine": "25126",
+  "nom": "Llavorsí",
+  "provincia": "Lleida",
+  "veins": [
+   "25089",
+   "25140",
+   "25183",
+   "25208",
+   "25221",
+   "25901",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "25120",
+  "nom": "Lleida",
+  "provincia": "Lleida",
+  "veins": [
+   "25004",
+   "25007",
+   "25011",
+   "25012",
+   "25014",
+   "25019",
+   "25023",
+   "25033",
+   "25036",
+   "25048",
+   "25078",
+   "25142",
+   "25211",
+   "25228",
+   "25230",
+   "25233",
+   "25912"
+  ]
+ },
+ {
+  "codi_ine": "17093",
+  "nom": "Llers",
+  "provincia": "Girona",
+  "veins": [
+   "17012",
+   "17029",
+   "17030",
+   "17066",
+   "17135",
+   "17196",
+   "17221",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "25127",
+  "nom": "Lles de Cerdanya",
+  "provincia": "Lleida",
+  "veins": [
+   "17099",
+   "25030",
+   "25051",
+   "25139",
+   "25179",
+   "25239"
+  ]
+ },
+ {
+  "codi_ine": "08107",
+  "nom": "Lliçà d'Amunt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08033",
+   "08041",
+   "08096",
+   "08108",
+   "08156",
+   "08159",
+   "08248"
+  ]
+ },
+ {
+  "codi_ine": "08108",
+  "nom": "Lliçà de Vall",
+  "provincia": "Barcelona",
+  "veins": [
+   "08096",
+   "08107",
+   "08124",
+   "08156",
+   "08159"
+  ]
+ },
+ {
+  "codi_ine": "25128",
+  "nom": "Llimiana",
+  "provincia": "Lleida",
+  "veins": [
+   "25062",
+   "25098",
+   "25115",
+   "25250",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "08106",
+  "nom": "Llinars del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08046",
+   "08075",
+   "08181",
+   "08198",
+   "08234",
+   "08259",
+   "08306"
+  ]
+ },
+ {
+  "codi_ine": "17094",
+  "nom": "Llívia",
+  "provincia": "Girona",
+  "veins": []
+ },
+ {
+  "codi_ine": "25129",
+  "nom": "Llobera",
+  "provincia": "Lleida",
+  "veins": [
+   "25055",
+   "25151",
+   "25166",
+   "25167",
+   "25186",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "43073",
+  "nom": "Llorac",
+  "provincia": "Tarragona",
+  "veins": [
+   "25141",
+   "25216",
+   "43139",
+   "43143",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "43074",
+  "nom": "Llorenç del Penedès",
+  "provincia": "Tarragona",
+  "veins": [
+   "43020",
+   "43028",
+   "43137"
+  ]
+ },
+ {
+  "codi_ine": "17095",
+  "nom": "Lloret de Mar",
+  "provincia": "Girona",
+  "veins": [
+   "08284",
+   "17023",
+   "17103",
+   "17202",
+   "17213"
+  ]
+ },
+ {
+  "codi_ine": "08109",
+  "nom": "Lluçà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08004",
+   "08024",
+   "08160",
+   "08171",
+   "08177",
+   "08188",
+   "08195",
+   "08225",
+   "08255"
+  ]
+ },
+ {
+  "codi_ine": "17102",
+  "nom": "Maçanet de Cabrenys",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17014",
+   "17060",
+   "17171"
+  ]
+ },
+ {
+  "codi_ine": "17103",
+  "nom": "Maçanet de la Selva",
+  "provincia": "Girona",
+  "veins": [
+   "08082",
+   "08284",
+   "17095",
+   "17101",
+   "17148",
+   "17193",
+   "17213"
+  ]
+ },
+ {
+  "codi_ine": "17097",
+  "nom": "Madremanya",
+  "provincia": "Girona",
+  "veins": [
+   "17057",
+   "17130",
+   "17142",
+   "17173",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "17098",
+  "nom": "Maià de Montcal",
+  "provincia": "Girona",
+  "veins": [
+   "17021",
+   "17031",
+   "17058",
+   "17065",
+   "17162",
+   "17190"
+  ]
+ },
+ {
+  "codi_ine": "25133",
+  "nom": "Maials",
+  "provincia": "Lleida",
+  "veins": [
+   "25020",
+   "25125",
+   "25204",
+   "43060",
+   "43125"
+  ]
+ },
+ {
+  "codi_ine": "25130",
+  "nom": "Maldà",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25046",
+   "25081",
+   "25153",
+   "25154",
+   "25238",
+   "25902"
+  ]
+ },
+ {
+  "codi_ine": "08110",
+  "nom": "Malgrat de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08155",
+   "08261",
+   "17023"
+  ]
+ },
+ {
+  "codi_ine": "08111",
+  "nom": "Malla",
+  "provincia": "Barcelona",
+  "veins": [
+   "08129",
+   "08246",
+   "08269",
+   "08278",
+   "08283",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08112",
+  "nom": "Manlleu",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08116",
+   "08117",
+   "08254",
+   "08285"
+  ]
+ },
+ {
+  "codi_ine": "08113",
+  "nom": "Manresa",
+  "provincia": "Barcelona",
+  "veins": [
+   "08061",
+   "08084",
+   "08098",
+   "08178",
+   "08182",
+   "08213",
+   "08218",
+   "08262"
+  ]
+ },
+ {
+  "codi_ine": "43076",
+  "nom": "Marçà",
+  "provincia": "Tarragona",
+  "veins": [
+   "43040",
+   "43045",
+   "43055",
+   "43070",
+   "43082",
+   "43115"
+  ]
+ },
+ {
+  "codi_ine": "43075",
+  "nom": "Margalef",
+  "provincia": "Tarragona",
+  "veins": [
+   "25118",
+   "25170",
+   "43027",
+   "43035",
+   "43060",
+   "43096",
+   "43157"
+  ]
+ },
+ {
+  "codi_ine": "08242",
+  "nom": "Marganell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08053",
+   "08061",
+   "08098",
+   "08127",
+   "08262"
+  ]
+ },
+ {
+  "codi_ine": "08114",
+  "nom": "Martorell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08054",
+   "08066",
+   "08196",
+   "08208"
+  ]
+ },
+ {
+  "codi_ine": "08115",
+  "nom": "Martorelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08124",
+   "08135",
+   "08136",
+   "08209",
+   "08256"
+  ]
+ },
+ {
+  "codi_ine": "43077",
+  "nom": "Mas de Barberans",
+  "provincia": "Tarragona",
+  "veins": [
+   "43044",
+   "43063",
+   "43133",
+   "43138",
+   "43156"
+  ]
+ },
+ {
+  "codi_ine": "17100",
+  "nom": "Masarac",
+  "provincia": "Girona",
+  "veins": [
+   "17030",
+   "17042",
+   "17106",
+   "17132",
+   "17135",
+   "17158",
+   "17234"
+  ]
+ },
+ {
+  "codi_ine": "43078",
+  "nom": "Masdenverge",
+  "provincia": "Tarragona",
+  "veins": [
+   "43014",
+   "43062",
+   "43063",
+   "43068",
+   "43138",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "43079",
+  "nom": "Masllorenç",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43028",
+   "43030",
+   "43089",
+   "43132"
+  ]
+ },
+ {
+  "codi_ine": "43081",
+  "nom": "Maspujols",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43009",
+   "43031",
+   "43129"
+  ]
+ },
+ {
+  "codi_ine": "08119",
+  "nom": "Masquefa",
+  "provincia": "Barcelona",
+  "veins": [
+   "08161",
+   "08162",
+   "08208",
+   "08222"
+  ]
+ },
+ {
+  "codi_ine": "25131",
+  "nom": "Massalcoreig",
+  "provincia": "Lleida",
+  "veins": [
+   "25102",
+   "25204"
+  ]
+ },
+ {
+  "codi_ine": "17101",
+  "nom": "Massanes",
+  "provincia": "Girona",
+  "veins": [
+   "08082",
+   "17083",
+   "17103",
+   "17148",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "25132",
+  "nom": "Massoteres",
+  "provincia": "Lleida",
+  "veins": [
+   "25055",
+   "25110",
+   "25191",
+   "25197",
+   "25223",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "08120",
+  "nom": "Matadepera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08051",
+   "08139",
+   "08223",
+   "08279"
+  ]
+ },
+ {
+  "codi_ine": "08121",
+  "nom": "Mataró",
+  "provincia": "Barcelona",
+  "veins": [
+   "08009",
+   "08029",
+   "08075",
+   "08197"
+  ]
+ },
+ {
+  "codi_ine": "08122",
+  "nom": "Mediona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08048",
+   "08085",
+   "08104",
+   "08232",
+   "08236",
+   "08286"
+  ]
+ },
+ {
+  "codi_ine": "25134",
+  "nom": "Menàrguens",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25040",
+   "25069",
+   "25220",
+   "25231",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "17099",
+  "nom": "Meranges",
+  "provincia": "Girona",
+  "veins": [
+   "17078",
+   "25051",
+   "25127"
+  ]
+ },
+ {
+  "codi_ine": "17105",
+  "nom": "Mieres",
+  "provincia": "Girona",
+  "veins": [
+   "17162",
+   "17172",
+   "17174",
+   "17183",
+   "17184"
+  ]
+ },
+ {
+  "codi_ine": "25135",
+  "nom": "Miralcamp",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25099",
+   "25119",
+   "25137",
+   "25180",
+   "25230",
+   "25248"
+  ]
+ },
+ {
+  "codi_ine": "43084",
+  "nom": "Miravet",
+  "provincia": "Tarragona",
+  "veins": [
+   "43025",
+   "43026",
+   "43067",
+   "43106",
+   "43121"
+  ]
+ },
+ {
+  "codi_ine": "08138",
+  "nom": "Moià",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08034",
+   "08055",
+   "08064",
+   "08070",
+   "08079",
+   "08128",
+   "08129",
+   "08258"
+  ]
+ },
+ {
+  "codi_ine": "08123",
+  "nom": "Molins de Rei",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08157",
+   "08158",
+   "08205",
+   "08211",
+   "08263"
+  ]
+ },
+ {
+  "codi_ine": "25137",
+  "nom": "Mollerussa",
+  "provincia": "Lleida",
+  "veins": [
+   "25093",
+   "25099",
+   "25135",
+   "25158",
+   "25230",
+   "25252"
+  ]
+ },
+ {
+  "codi_ine": "17106",
+  "nom": "Mollet de Peralada",
+  "provincia": "Girona",
+  "veins": [
+   "17064",
+   "17077",
+   "17100",
+   "17132",
+   "17143",
+   "17158"
+  ]
+ },
+ {
+  "codi_ine": "08124",
+  "nom": "Mollet del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08105",
+   "08108",
+   "08115",
+   "08125",
+   "08135",
+   "08156",
+   "08159",
+   "08209",
+   "08260"
+  ]
+ },
+ {
+  "codi_ine": "17107",
+  "nom": "Molló",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17091",
+   "17192"
+  ]
+ },
+ {
+  "codi_ine": "08128",
+  "nom": "Monistrol de Calders",
+  "provincia": "Barcelona",
+  "veins": [
+   "08034",
+   "08055",
+   "08064",
+   "08095",
+   "08138",
+   "08139",
+   "08277"
+  ]
+ },
+ {
+  "codi_ine": "08127",
+  "nom": "Monistrol de Montserrat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08053",
+   "08069",
+   "08076",
+   "08242",
+   "08262",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "43091",
+  "nom": "Mont-ral",
+  "provincia": "Tarragona",
+  "veins": [
+   "43003",
+   "43005",
+   "43039",
+   "43086",
+   "43116",
+   "43124",
+   "43169"
+  ]
+ },
+ {
+  "codi_ine": "17110",
+  "nom": "Mont-ras",
+  "provincia": "Girona",
+  "veins": [
+   "17117",
+   "17118",
+   "17209",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "43092",
+  "nom": "Mont-roig del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43038",
+   "43088",
+   "43118",
+   "43127",
+   "43162",
+   "43167"
+  ]
+ },
+ {
+  "codi_ine": "17109",
+  "nom": "Montagut i Oix",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17010",
+   "17039",
+   "17046",
+   "17154",
+   "17165",
+   "17185",
+   "17200",
+   "17208"
+  ]
+ },
+ {
+  "codi_ine": "43086",
+  "nom": "Montblanc",
+  "provincia": "Tarragona",
+  "veins": [
+   "43021",
+   "43029",
+   "43054",
+   "43059",
+   "43091",
+   "43107",
+   "43124",
+   "43161",
+   "43172",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "43088",
+  "nom": "Montbrió del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43033",
+   "43038",
+   "43092",
+   "43127",
+   "43129",
+   "43178"
+  ]
+ },
+ {
+  "codi_ine": "08125",
+  "nom": "Montcada i Reixac",
+  "provincia": "Barcelona",
+  "veins": [
+   "08015",
+   "08019",
+   "08105",
+   "08124",
+   "08156",
+   "08180",
+   "08209",
+   "08245",
+   "08252",
+   "08260",
+   "08266"
+  ]
+ },
+ {
+  "codi_ine": "08130",
+  "nom": "Montclar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08049",
+   "08078",
+   "08132",
+   "08308"
+  ]
+ },
+ {
+  "codi_ine": "25139",
+  "nom": "Montellà i Martinet",
+  "provincia": "Lleida",
+  "veins": [
+   "08016",
+   "08093",
+   "25030",
+   "25051",
+   "25071",
+   "25127",
+   "25179",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "08131",
+  "nom": "Montesquiu",
+  "provincia": "Barcelona",
+  "veins": [
+   "08237",
+   "08253",
+   "08272",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "25140",
+  "nom": "Montferrer i Castellbò",
+  "provincia": "Lleida",
+  "veins": [
+   "25089",
+   "25126",
+   "25185",
+   "25203",
+   "25208",
+   "25239",
+   "25906"
+  ]
+ },
+ {
+  "codi_ine": "43089",
+  "nom": "Montferri",
+  "provincia": "Tarragona",
+  "veins": [
+   "43030",
+   "43034",
+   "43079",
+   "43132",
+   "43135",
+   "43165",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "25138",
+  "nom": "Montgai",
+  "provincia": "Lleida",
+  "veins": [
+   "25047",
+   "25049",
+   "25070",
+   "25079",
+   "25094",
+   "25164",
+   "25177"
+  ]
+ },
+ {
+  "codi_ine": "08126",
+  "nom": "Montgat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08015",
+   "08118",
+   "08282"
+  ]
+ },
+ {
+  "codi_ine": "08132",
+  "nom": "Montmajor",
+  "provincia": "Barcelona",
+  "veins": [
+   "08045",
+   "08047",
+   "08050",
+   "08078",
+   "08080",
+   "08130",
+   "08308",
+   "25111",
+   "25146"
+  ]
+ },
+ {
+  "codi_ine": "08133",
+  "nom": "Montmaneu",
+  "provincia": "Barcelona",
+  "veins": [
+   "08008",
+   "25192",
+   "25216",
+   "25905"
+  ]
+ },
+ {
+  "codi_ine": "08135",
+  "nom": "Montmeló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08096",
+   "08115",
+   "08124",
+   "08136",
+   "08159"
+  ]
+ },
+ {
+  "codi_ine": "25142",
+  "nom": "Montoliu de Lleida",
+  "provincia": "Lleida",
+  "veins": [
+   "25007",
+   "25014",
+   "25120",
+   "25211",
+   "25212"
+  ]
+ },
+ {
+  "codi_ine": "25141",
+  "nom": "Montoliu de Segarra",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25109",
+   "25143",
+   "25216",
+   "25905",
+   "43073",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "25143",
+  "nom": "Montornès de Segarra",
+  "provincia": "Lleida",
+  "veins": [
+   "25104",
+   "25109",
+   "25141",
+   "25242",
+   "25905"
+  ]
+ },
+ {
+  "codi_ine": "08136",
+  "nom": "Montornès del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08096",
+   "08115",
+   "08135",
+   "08256",
+   "08296",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "08137",
+  "nom": "Montseny",
+  "provincia": "Barcelona",
+  "veins": [
+   "08026",
+   "08081",
+   "08234",
+   "08276",
+   "17009",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "43093",
+  "nom": "Móra d'Ebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43019",
+   "43026",
+   "43048",
+   "43056",
+   "43065",
+   "43094",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "43094",
+  "nom": "Móra la Nova",
+  "provincia": "Tarragona",
+  "veins": [
+   "43065",
+   "43093",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "08129",
+  "nom": "Muntanyola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08070",
+   "08079",
+   "08111",
+   "08138",
+   "08151",
+   "08199",
+   "08247",
+   "08258",
+   "08283",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08139",
+  "nom": "Mura",
+  "provincia": "Barcelona",
+  "veins": [
+   "08095",
+   "08120",
+   "08128",
+   "08179",
+   "08182",
+   "08223",
+   "08262",
+   "08277",
+   "08279",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "25145",
+  "nom": "Nalec",
+  "provincia": "Lleida",
+  "veins": [
+   "25074",
+   "25238",
+   "25242",
+   "25902"
+  ]
+ },
+ {
+  "codi_ine": "25025",
+  "nom": "Naut Aran",
+  "provincia": "Lleida",
+  "veins": [
+   "25024",
+   "25043",
+   "25063",
+   "25082",
+   "25243",
+   "25245"
+  ]
+ },
+ {
+  "codi_ine": "08140",
+  "nom": "Navarcles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08034",
+   "08191",
+   "08213",
+   "08277"
+  ]
+ },
+ {
+  "codi_ine": "08141",
+  "nom": "Navàs",
+  "provincia": "Barcelona",
+  "veins": [
+   "08018",
+   "08047",
+   "08062",
+   "08090",
+   "08175",
+   "08229",
+   "08274",
+   "08308",
+   "25167"
+  ]
+ },
+ {
+  "codi_ine": "17111",
+  "nom": "Navata",
+  "provincia": "Girona",
+  "veins": [
+   "17031",
+   "17051",
+   "17058",
+   "17088",
+   "17115",
+   "17136",
+   "17218",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "25146",
+  "nom": "Navès",
+  "provincia": "Lleida",
+  "veins": [
+   "08045",
+   "08047",
+   "08078",
+   "08132",
+   "25075",
+   "25111",
+   "25124",
+   "25148",
+   "25151",
+   "25193"
+  ]
+ },
+ {
+  "codi_ine": "43098",
+  "nom": "Nulles",
+  "provincia": "Tarragona",
+  "veins": [
+   "43119",
+   "43122",
+   "43144",
+   "43160",
+   "43165"
+  ]
+ },
+ {
+  "codi_ine": "25148",
+  "nom": "Odèn",
+  "provincia": "Lleida",
+  "veins": [
+   "25044",
+   "25064",
+   "25111",
+   "25124",
+   "25146",
+   "25149",
+   "25163",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "08143",
+  "nom": "Òdena",
+  "provincia": "Barcelona",
+  "veins": [
+   "08059",
+   "08063",
+   "08102",
+   "08103",
+   "08165",
+   "08185",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "17112",
+  "nom": "Ogassa",
+  "provincia": "Girona",
+  "veins": [
+   "17036",
+   "17039",
+   "17125",
+   "17145",
+   "17147",
+   "17167",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "08145",
+  "nom": "Olèrdola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08043",
+   "08058",
+   "08148",
+   "08206",
+   "08251",
+   "08305"
+  ]
+ },
+ {
+  "codi_ine": "08146",
+  "nom": "Olesa de Bonesvalls",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08020",
+   "08273",
+   "08295"
+  ]
+ },
+ {
+  "codi_ine": "08147",
+  "nom": "Olesa de Montserrat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08076",
+   "08291",
+   "08300"
+  ]
+ },
+ {
+  "codi_ine": "25149",
+  "nom": "Oliana",
+  "provincia": "Lleida",
+  "veins": [
+   "25044",
+   "25077",
+   "25148",
+   "25165",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "25150",
+  "nom": "Oliola",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25034",
+   "25060",
+   "25157",
+   "25172",
+   "25181",
+   "25222",
+   "25249",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "25151",
+  "nom": "Olius",
+  "provincia": "Lleida",
+  "veins": [
+   "25064",
+   "25075",
+   "25124",
+   "25129",
+   "25146",
+   "25166",
+   "25186",
+   "25207"
+  ]
+ },
+ {
+  "codi_ine": "08148",
+  "nom": "Olivella",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08020",
+   "08043",
+   "08145",
+   "08231",
+   "08270"
+  ]
+ },
+ {
+  "codi_ine": "08149",
+  "nom": "Olost",
+  "provincia": "Barcelona",
+  "veins": [
+   "08151",
+   "08160",
+   "08171",
+   "08199",
+   "08201",
+   "08225",
+   "08271"
+  ]
+ },
+ {
+  "codi_ine": "17114",
+  "nom": "Olot",
+  "provincia": "Girona",
+  "veins": [
+   "17139",
+   "17149",
+   "17184",
+   "17185",
+   "17207",
+   "17208"
+  ]
+ },
+ {
+  "codi_ine": "08144",
+  "nom": "Olvan",
+  "provincia": "Barcelona",
+  "veins": [
+   "08011",
+   "08022",
+   "08049",
+   "08092",
+   "08175",
+   "08177",
+   "08188",
+   "08268"
+  ]
+ },
+ {
+  "codi_ine": "17115",
+  "nom": "Ordis",
+  "provincia": "Girona",
+  "veins": [
+   "17012",
+   "17026",
+   "17111",
+   "17136",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "25155",
+  "nom": "Organyà",
+  "provincia": "Lleida",
+  "veins": [
+   "25061",
+   "25077",
+   "25908"
+  ]
+ },
+ {
+  "codi_ine": "08150",
+  "nom": "Orís",
+  "provincia": "Barcelona",
+  "veins": [
+   "08117",
+   "08201",
+   "08233",
+   "08237",
+   "08265",
+   "08271",
+   "08272",
+   "08285"
+  ]
+ },
+ {
+  "codi_ine": "08151",
+  "nom": "Oristà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08129",
+   "08149",
+   "08171",
+   "08199",
+   "08212",
+   "08255",
+   "08258"
+  ]
+ },
+ {
+  "codi_ine": "08152",
+  "nom": "Orpí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08048",
+   "08104",
+   "08250",
+   "08257",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "08153",
+  "nom": "Òrrius",
+  "provincia": "Barcelona",
+  "veins": [
+   "08009",
+   "08030",
+   "08181",
+   "08214",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "25156",
+  "nom": "Os de Balaguer",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25015",
+   "25037",
+   "25040",
+   "25062",
+   "25069",
+   "25112"
+  ]
+ },
+ {
+  "codi_ine": "17116",
+  "nom": "Osor",
+  "provincia": "Girona",
+  "veins": [
+   "17008",
+   "17028",
+   "17164",
+   "17180",
+   "17189",
+   "17194"
+  ]
+ },
+ {
+  "codi_ine": "25157",
+  "nom": "Ossó de Sió",
+  "provincia": "Lleida",
+  "veins": [
+   "25150",
+   "25181",
+   "25217",
+   "25907",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "08154",
+  "nom": "Pacs del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08027",
+   "08227",
+   "08251",
+   "08304",
+   "08305"
+  ]
+ },
+ {
+  "codi_ine": "08155",
+  "nom": "Palafolls",
+  "provincia": "Barcelona",
+  "veins": [
+   "08110",
+   "08261",
+   "08284",
+   "17023"
+  ]
+ },
+ {
+  "codi_ine": "17117",
+  "nom": "Palafrugell",
+  "provincia": "Girona",
+  "veins": [
+   "17013",
+   "17110",
+   "17144",
+   "17197",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "17118",
+  "nom": "Palamós",
+  "provincia": "Girona",
+  "veins": [
+   "17034",
+   "17110",
+   "17209",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "17119",
+  "nom": "Palau de Santa Eulàlia",
+  "provincia": "Girona",
+  "veins": [
+   "17052",
+   "17075",
+   "17175",
+   "17176",
+   "17198"
+  ]
+ },
+ {
+  "codi_ine": "17121",
+  "nom": "Palau-sator",
+  "provincia": "Girona",
+  "veins": [
+   "17070",
+   "17124",
+   "17197",
+   "17205",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "17120",
+  "nom": "Palau-saverdera",
+  "provincia": "Girona",
+  "veins": [
+   "17047",
+   "17128",
+   "17140",
+   "17152",
+   "17188"
+  ]
+ },
+ {
+  "codi_ine": "08156",
+  "nom": "Palau-solità i Plegamans",
+  "provincia": "Barcelona",
+  "veins": [
+   "08033",
+   "08107",
+   "08108",
+   "08124",
+   "08125",
+   "08159",
+   "08167",
+   "08260",
+   "08267"
+  ]
+ },
+ {
+  "codi_ine": "08157",
+  "nom": "Pallejà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08072",
+   "08123",
+   "08158",
+   "08263",
+   "08905"
+  ]
+ },
+ {
+  "codi_ine": "17123",
+  "nom": "Palol de Revardit",
+  "provincia": "Girona",
+  "veins": [
+   "17035",
+   "17040",
+   "17056",
+   "17163",
+   "17169"
+  ]
+ },
+ {
+  "codi_ine": "17124",
+  "nom": "Pals",
+  "provincia": "Girona",
+  "veins": [
+   "17013",
+   "17070",
+   "17121",
+   "17144",
+   "17197",
+   "17199"
+  ]
+ },
+ {
+  "codi_ine": "17125",
+  "nom": "Pardines",
+  "provincia": "Girona",
+  "veins": [
+   "17043",
+   "17112",
+   "17145",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "08159",
+  "nom": "Parets del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08096",
+   "08107",
+   "08108",
+   "08124",
+   "08135",
+   "08156"
+  ]
+ },
+ {
+  "codi_ine": "17126",
+  "nom": "Parlavà",
+  "provincia": "Girona",
+  "veins": [
+   "17057",
+   "17068",
+   "17153",
+   "17191",
+   "17203",
+   "17205"
+  ]
+ },
+ {
+  "codi_ine": "43101",
+  "nom": "Passanant i Belltall",
+  "provincia": "Tarragona",
+  "veins": [
+   "25074",
+   "25109",
+   "25238",
+   "43046",
+   "43061",
+   "43147",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "17128",
+  "nom": "Pau",
+  "provincia": "Girona",
+  "veins": [
+   "17047",
+   "17120",
+   "17129",
+   "17132",
+   "17140",
+   "17223"
+  ]
+ },
+ {
+  "codi_ine": "43102",
+  "nom": "Paüls",
+  "provincia": "Tarragona",
+  "veins": [
+   "43008",
+   "43025",
+   "43052",
+   "43071",
+   "43117"
+  ]
+ },
+ {
+  "codi_ine": "17129",
+  "nom": "Pedret i Marzà",
+  "provincia": "Girona",
+  "veins": [
+   "17077",
+   "17128",
+   "17132",
+   "17223"
+  ]
+ },
+ {
+  "codi_ine": "25164",
+  "nom": "Penelles",
+  "provincia": "Lleida",
+  "veins": [
+   "25047",
+   "25049",
+   "25070",
+   "25096",
+   "25113",
+   "25122",
+   "25138"
+  ]
+ },
+ {
+  "codi_ine": "08160",
+  "nom": "Perafita",
+  "provincia": "Barcelona",
+  "veins": [
+   "08109",
+   "08149",
+   "08195",
+   "08201",
+   "08225"
+  ]
+ },
+ {
+  "codi_ine": "43103",
+  "nom": "Perafort",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43047",
+   "43066",
+   "43095",
+   "43100",
+   "43109",
+   "43134",
+   "43144",
+   "43145",
+   "43166"
+  ]
+ },
+ {
+  "codi_ine": "17132",
+  "nom": "Peralada",
+  "provincia": "Girona",
+  "veins": [
+   "17030",
+   "17047",
+   "17066",
+   "17074",
+   "17077",
+   "17100",
+   "17106",
+   "17128",
+   "17129",
+   "17143",
+   "17214",
+   "17230"
+  ]
+ },
+ {
+  "codi_ine": "25165",
+  "nom": "Peramola",
+  "provincia": "Lleida",
+  "veins": [
+   "25042",
+   "25044",
+   "25077",
+   "25149"
+  ]
+ },
+ {
+  "codi_ine": "08161",
+  "nom": "Piera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08028",
+   "08063",
+   "08119",
+   "08162",
+   "08165",
+   "08222",
+   "08240",
+   "08287",
+   "08292"
+  ]
+ },
+ {
+  "codi_ine": "08163",
+  "nom": "Pineda de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08035",
+   "08203",
+   "08261",
+   "08284"
+  ]
+ },
+ {
+  "codi_ine": "25166",
+  "nom": "Pinell de Solsonès",
+  "provincia": "Lleida",
+  "veins": [
+   "25044",
+   "25055",
+   "25064",
+   "25129",
+   "25151",
+   "25191",
+   "25249",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "25167",
+  "nom": "Pinós",
+  "provincia": "Lleida",
+  "veins": [
+   "08036",
+   "08047",
+   "08141",
+   "08229",
+   "25129",
+   "25136",
+   "25186",
+   "25223"
+  ]
+ },
+ {
+  "codi_ine": "43107",
+  "nom": "Pira",
+  "provincia": "Tarragona",
+  "veins": [
+   "43021",
+   "43029",
+   "43086",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "17134",
+  "nom": "Planoles",
+  "provincia": "Girona",
+  "veins": [
+   "17037",
+   "17043",
+   "17080",
+   "17145",
+   "17201"
+  ]
+ },
+ {
+  "codi_ine": "43112",
+  "nom": "Poboleda",
+  "provincia": "Tarragona",
+  "veins": [
+   "43096",
+   "43114",
+   "43154"
+  ]
+ },
+ {
+  "codi_ine": "08167",
+  "nom": "Polinyà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08156",
+   "08187",
+   "08260",
+   "08267"
+  ]
+ },
+ {
+  "codi_ine": "17135",
+  "nom": "Pont de Molins",
+  "provincia": "Girona",
+  "veins": [
+   "17029",
+   "17030",
+   "17093",
+   "17100",
+   "17234"
+  ]
+ },
+ {
+  "codi_ine": "43141",
+  "nom": "Pontils",
+  "provincia": "Tarragona",
+  "veins": [
+   "08021",
+   "08257",
+   "43105",
+   "43113",
+   "43120",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "08168",
+  "nom": "Pontons",
+  "provincia": "Barcelona",
+  "veins": [
+   "08104",
+   "08288",
+   "43001",
+   "43120"
+  ]
+ },
+ {
+  "codi_ine": "17136",
+  "nom": "Pontós",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17026",
+   "17075",
+   "17111",
+   "17115",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "25172",
+  "nom": "Ponts",
+  "provincia": "Lleida",
+  "veins": [
+   "25034",
+   "25042",
+   "25150",
+   "25222"
+  ]
+ },
+ {
+  "codi_ine": "17137",
+  "nom": "Porqueres",
+  "provincia": "Girona",
+  "veins": [
+   "17015",
+   "17035",
+   "17040",
+   "17056",
+   "17071",
+   "17174",
+   "17190"
+  ]
+ },
+ {
+  "codi_ine": "43114",
+  "nom": "Porrera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43049",
+   "43055",
+   "43069",
+   "43112",
+   "43115",
+   "43154"
+  ]
+ },
+ {
+  "codi_ine": "17138",
+  "nom": "Portbou",
+  "provincia": "Girona",
+  "veins": [
+   "17054"
+  ]
+ },
+ {
+  "codi_ine": "43115",
+  "nom": "Pradell de la Teixeta",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43017",
+   "43045",
+   "43053",
+   "43055",
+   "43076",
+   "43114",
+   "43151"
+  ]
+ },
+ {
+  "codi_ine": "43116",
+  "nom": "Prades",
+  "provincia": "Tarragona",
+  "veins": [
+   "43039",
+   "43049",
+   "43057",
+   "43091",
+   "43158",
+   "43168",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "43117",
+  "nom": "Prat de Comte",
+  "provincia": "Tarragona",
+  "veins": [
+   "43025",
+   "43032",
+   "43064",
+   "43071",
+   "43102",
+   "43106"
+  ]
+ },
+ {
+  "codi_ine": "43118",
+  "nom": "Pratdip",
+  "provincia": "Tarragona",
+  "veins": [
+   "43045",
+   "43092",
+   "43150",
+   "43162"
+  ]
+ },
+ {
+  "codi_ine": "08171",
+  "nom": "Prats de Lluçanès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08109",
+   "08149",
+   "08151",
+   "08212",
+   "08225",
+   "08255"
+  ]
+ },
+ {
+  "codi_ine": "25175",
+  "nom": "Prats i Sansor",
+  "provincia": "Lleida",
+  "veins": [
+   "17061",
+   "17084",
+   "17206",
+   "25051",
+   "25913"
+  ]
+ },
+ {
+  "codi_ine": "25176",
+  "nom": "Preixana",
+  "provincia": "Lleida",
+  "veins": [
+   "25050",
+   "25242",
+   "25244",
+   "25902"
+  ]
+ },
+ {
+  "codi_ine": "25177",
+  "nom": "Preixens",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25034",
+   "25070",
+   "25094",
+   "25138"
+  ]
+ },
+ {
+  "codi_ine": "08230",
+  "nom": "Premià de Dalt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08172",
+   "08214",
+   "08219",
+   "08281",
+   "08296"
+  ]
+ },
+ {
+  "codi_ine": "08172",
+  "nom": "Premià de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08118",
+   "08219",
+   "08230"
+  ]
+ },
+ {
+  "codi_ine": "25179",
+  "nom": "Prullans",
+  "provincia": "Lleida",
+  "veins": [
+   "25051",
+   "25127",
+   "25139"
+  ]
+ },
+ {
+  "codi_ine": "08175",
+  "nom": "Puig-reig",
+  "provincia": "Barcelona",
+  "veins": [
+   "08049",
+   "08090",
+   "08141",
+   "08144",
+   "08188",
+   "08255",
+   "08308"
+  ]
+ },
+ {
+  "codi_ine": "17141",
+  "nom": "Puigcerdà",
+  "provincia": "Girona",
+  "veins": [
+   "17006",
+   "17024",
+   "17069",
+   "17082"
+  ]
+ },
+ {
+  "codi_ine": "08174",
+  "nom": "Puigdàlber",
+  "provincia": "Barcelona",
+  "veins": [
+   "08085",
+   "08164",
+   "08273"
+  ]
+ },
+ {
+  "codi_ine": "25180",
+  "nom": "Puiggròs",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25058",
+   "25119",
+   "25135",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "43119",
+  "nom": "Puigpelat",
+  "provincia": "Tarragona",
+  "veins": [
+   "43010",
+   "43034",
+   "43098",
+   "43160",
+   "43161",
+   "43165"
+  ]
+ },
+ {
+  "codi_ine": "25181",
+  "nom": "Puigverd d'Agramunt",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25041",
+   "25150",
+   "25157",
+   "25217",
+   "25225"
+  ]
+ },
+ {
+  "codi_ine": "25182",
+  "nom": "Puigverd de Lleida",
+  "provincia": "Lleida",
+  "veins": [
+   "25033",
+   "25067",
+   "25119",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "08176",
+  "nom": "Pujalt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08031",
+   "08036",
+   "08060",
+   "08170",
+   "08228",
+   "08297",
+   "25085",
+   "25192"
+  ]
+ },
+ {
+  "codi_ine": "17142",
+  "nom": "Quart",
+  "provincia": "Girona",
+  "veins": [
+   "17073",
+   "17079",
+   "17087",
+   "17090",
+   "17097",
+   "17173",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "17043",
+  "nom": "Queralbs",
+  "provincia": "Girona",
+  "veins": [
+   "17125",
+   "17134",
+   "17145",
+   "17192",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "43120",
+  "nom": "Querol",
+  "provincia": "Tarragona",
+  "veins": [
+   "08104",
+   "08168",
+   "08257",
+   "43001",
+   "43113",
+   "43141"
+  ]
+ },
+ {
+  "codi_ine": "17143",
+  "nom": "Rabós",
+  "provincia": "Girona",
+  "veins": [
+   "17054",
+   "17064",
+   "17077",
+   "17092",
+   "17106",
+   "17132",
+   "17227"
+  ]
+ },
+ {
+  "codi_ine": "08178",
+  "nom": "Rajadell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08059",
+   "08084",
+   "08098",
+   "08113"
+  ]
+ },
+ {
+  "codi_ine": "43121",
+  "nom": "Rasquera",
+  "provincia": "Tarragona",
+  "veins": [
+   "43025",
+   "43067",
+   "43084",
+   "43104",
+   "43149",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "17144",
+  "nom": "Regencós",
+  "provincia": "Girona",
+  "veins": [
+   "17013",
+   "17117",
+   "17124",
+   "17197"
+  ]
+ },
+ {
+  "codi_ine": "08179",
+  "nom": "Rellinars",
+  "provincia": "Barcelona",
+  "veins": [
+   "08053",
+   "08139",
+   "08262",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "43122",
+  "nom": "Renau",
+  "provincia": "Tarragona",
+  "veins": [
+   "43043",
+   "43098",
+   "43144",
+   "43164",
+   "43165"
+  ]
+ },
+ {
+  "codi_ine": "43123",
+  "nom": "Reus",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43011",
+   "43042",
+   "43047",
+   "43129",
+   "43145",
+   "43148",
+   "43171",
+   "43907"
+  ]
+ },
+ {
+  "codi_ine": "25183",
+  "nom": "Rialp",
+  "provincia": "Lleida",
+  "veins": [
+   "25082",
+   "25126",
+   "25208",
+   "25209",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "43125",
+  "nom": "Riba-roja d'Ebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "25020",
+   "25133",
+   "43019",
+   "43056",
+   "43060",
+   "43110",
+   "43175"
+  ]
+ },
+ {
+  "codi_ine": "25905",
+  "nom": "Ribera d'Ondara",
+  "provincia": "Lleida",
+  "veins": [
+   "08133",
+   "25072",
+   "25085",
+   "25104",
+   "25141",
+   "25143",
+   "25192",
+   "25216"
+  ]
+ },
+ {
+  "codi_ine": "25185",
+  "nom": "Ribera d'Urgellet",
+  "provincia": "Lleida",
+  "veins": [
+   "25005",
+   "25061",
+   "25140",
+   "25203",
+   "25906",
+   "25908",
+   "25909"
+  ]
+ },
+ {
+  "codi_ine": "17145",
+  "nom": "Ribes de Freser",
+  "provincia": "Girona",
+  "veins": [
+   "17036",
+   "17037",
+   "17043",
+   "17112",
+   "17125",
+   "17134"
+  ]
+ },
+ {
+  "codi_ine": "17146",
+  "nom": "Riells i Viabrea",
+  "provincia": "Girona",
+  "veins": [
+   "08081",
+   "08097",
+   "08202",
+   "17009",
+   "17027",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "25186",
+  "nom": "Riner",
+  "provincia": "Lleida",
+  "veins": [
+   "08047",
+   "25075",
+   "25129",
+   "25151",
+   "25167"
+  ]
+ },
+ {
+  "codi_ine": "17147",
+  "nom": "Ripoll",
+  "provincia": "Girona",
+  "veins": [
+   "08253",
+   "17036",
+   "17096",
+   "17112",
+   "17167",
+   "17170",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "08180",
+  "nom": "Ripollet",
+  "provincia": "Barcelona",
+  "veins": [
+   "08125",
+   "08252",
+   "08266"
+  ]
+ },
+ {
+  "codi_ine": "25913",
+  "nom": "Riu de Cerdanya",
+  "provincia": "Lleida",
+  "veins": [
+   "08099",
+   "17206",
+   "25051",
+   "25175"
+  ]
+ },
+ {
+  "codi_ine": "17148",
+  "nom": "Riudarenes",
+  "provincia": "Girona",
+  "veins": [
+   "17101",
+   "17103",
+   "17159",
+   "17180",
+   "17193"
+  ]
+ },
+ {
+  "codi_ine": "17149",
+  "nom": "Riudaura",
+  "provincia": "Girona",
+  "veins": [
+   "17114",
+   "17167",
+   "17170",
+   "17207",
+   "17208",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "43127",
+  "nom": "Riudecanyes",
+  "provincia": "Tarragona",
+  "veins": [
+   "43017",
+   "43033",
+   "43053",
+   "43088",
+   "43092",
+   "43128",
+   "43167"
+  ]
+ },
+ {
+  "codi_ine": "43128",
+  "nom": "Riudecols",
+  "provincia": "Tarragona",
+  "veins": [
+   "43009",
+   "43033",
+   "43053",
+   "43127"
+  ]
+ },
+ {
+  "codi_ine": "17150",
+  "nom": "Riudellots de la Selva",
+  "provincia": "Girona",
+  "veins": [
+   "17002",
+   "17033",
+   "17038",
+   "17073",
+   "17157",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "43129",
+  "nom": "Riudoms",
+  "provincia": "Tarragona",
+  "veins": [
+   "43007",
+   "43031",
+   "43033",
+   "43038",
+   "43081",
+   "43088",
+   "43123",
+   "43171",
+   "43178"
+  ]
+ },
+ {
+  "codi_ine": "17151",
+  "nom": "Riumors",
+  "provincia": "Girona",
+  "veins": [
+   "17047",
+   "17052",
+   "17074",
+   "17198",
+   "17225"
+  ]
+ },
+ {
+  "codi_ine": "43130",
+  "nom": "Rocafort de Queralt",
+  "provincia": "Tarragona",
+  "veins": [
+   "43046",
+   "43061",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "43131",
+  "nom": "Roda de Berà",
+  "provincia": "Tarragona",
+  "veins": [
+   "43030",
+   "43050",
+   "43163"
+  ]
+ },
+ {
+  "codi_ine": "08183",
+  "nom": "Roda de Ter",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08116"
+  ]
+ },
+ {
+  "codi_ine": "43132",
+  "nom": "Rodonyà",
+  "provincia": "Tarragona",
+  "veins": [
+   "43028",
+   "43079",
+   "43089",
+   "43090",
+   "43170"
+  ]
+ },
+ {
+  "codi_ine": "43133",
+  "nom": "Roquetes",
+  "provincia": "Tarragona",
+  "veins": [
+   "43008",
+   "43044",
+   "43077",
+   "43138",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "17152",
+  "nom": "Roses",
+  "provincia": "Girona",
+  "veins": [
+   "17032",
+   "17047",
+   "17120",
+   "17140",
+   "17188"
+  ]
+ },
+ {
+  "codi_ine": "25189",
+  "nom": "Rosselló",
+  "provincia": "Lleida",
+  "veins": [
+   "25053",
+   "25228",
+   "25251"
+  ]
+ },
+ {
+  "codi_ine": "08184",
+  "nom": "Rubí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08205",
+   "08238",
+   "08279",
+   "08290"
+  ]
+ },
+ {
+  "codi_ine": "08185",
+  "nom": "Rubió",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08059",
+   "08071",
+   "08103",
+   "08143",
+   "08170",
+   "08297"
+  ]
+ },
+ {
+  "codi_ine": "17153",
+  "nom": "Rupià",
+  "provincia": "Girona",
+  "veins": [
+   "17057",
+   "17068",
+   "17126",
+   "17130"
+  ]
+ },
+ {
+  "codi_ine": "08901",
+  "nom": "Rupit i Pruit",
+  "provincia": "Barcelona",
+  "veins": [
+   "08254",
+   "08280",
+   "08303",
+   "17133",
+   "17161",
+   "17164",
+   "17194",
+   "17207"
+  ]
+ },
+ {
+  "codi_ine": "08187",
+  "nom": "Sabadell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08051",
+   "08167",
+   "08238",
+   "08252",
+   "08260",
+   "08266",
+   "08267",
+   "08279",
+   "08904"
+  ]
+ },
+ {
+  "codi_ine": "08188",
+  "nom": "Sagàs",
+  "provincia": "Barcelona",
+  "veins": [
+   "08109",
+   "08144",
+   "08175",
+   "08177",
+   "08255"
+  ]
+ },
+ {
+  "codi_ine": "25190",
+  "nom": "Salàs de Pallars",
+  "provincia": "Lleida",
+  "veins": [
+   "25115",
+   "25161",
+   "25171",
+   "25215",
+   "25234"
+  ]
+ },
+ {
+  "codi_ine": "08190",
+  "nom": "Saldes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08016",
+   "08080",
+   "08093",
+   "08293",
+   "25100",
+   "25910"
+  ]
+ },
+ {
+  "codi_ine": "17154",
+  "nom": "Sales de Llierca",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17010",
+   "17021",
+   "17109",
+   "17162",
+   "17200"
+  ]
+ },
+ {
+  "codi_ine": "08191",
+  "nom": "Sallent",
+  "provincia": "Barcelona",
+  "veins": [
+   "08010",
+   "08012",
+   "08018",
+   "08062",
+   "08090",
+   "08140",
+   "08192",
+   "08213"
+  ]
+ },
+ {
+  "codi_ine": "43135",
+  "nom": "Salomó",
+  "provincia": "Tarragona",
+  "veins": [
+   "43030",
+   "43089",
+   "43164",
+   "43165"
+  ]
+ },
+ {
+  "codi_ine": "43905",
+  "nom": "Salou",
+  "provincia": "Tarragona",
+  "veins": [
+   "43038",
+   "43171"
+  ]
+ },
+ {
+  "codi_ine": "17155",
+  "nom": "Salt",
+  "provincia": "Girona",
+  "veins": [
+   "17020",
+   "17079",
+   "17163",
+   "17215"
+  ]
+ },
+ {
+  "codi_ine": "25191",
+  "nom": "Sanaüja",
+  "provincia": "Lleida",
+  "veins": [
+   "25055",
+   "25132",
+   "25166",
+   "25249",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "08194",
+  "nom": "Sant Adrià de Besòs",
+  "provincia": "Barcelona",
+  "veins": [
+   "08015",
+   "08019",
+   "08245"
+  ]
+ },
+ {
+  "codi_ine": "08195",
+  "nom": "Sant Agustí de Lluçanès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08004",
+   "08109",
+   "08160",
+   "08201",
+   "08272"
+  ]
+ },
+ {
+  "codi_ine": "08196",
+  "nom": "Sant Andreu de la Barca",
+  "provincia": "Barcelona",
+  "veins": [
+   "08054",
+   "08066",
+   "08072",
+   "08114"
+  ]
+ },
+ {
+  "codi_ine": "08197",
+  "nom": "Sant Andreu de Llavaneres",
+  "provincia": "Barcelona",
+  "veins": [
+   "08075",
+   "08121",
+   "08264"
+  ]
+ },
+ {
+  "codi_ine": "17157",
+  "nom": "Sant Andreu Salou",
+  "provincia": "Girona",
+  "veins": [
+   "17033",
+   "17038",
+   "17044",
+   "17150"
+  ]
+ },
+ {
+  "codi_ine": "17183",
+  "nom": "Sant Aniol de Finestres",
+  "provincia": "Girona",
+  "veins": [
+   "17007",
+   "17105",
+   "17133",
+   "17161",
+   "17172",
+   "17184"
+  ]
+ },
+ {
+  "codi_ine": "08198",
+  "nom": "Sant Antoni de Vilamajor",
+  "provincia": "Barcelona",
+  "veins": [
+   "08046",
+   "08106",
+   "08234"
+  ]
+ },
+ {
+  "codi_ine": "08199",
+  "nom": "Sant Bartomeu del Grau",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08129",
+   "08149",
+   "08151",
+   "08243",
+   "08247",
+   "08258",
+   "08271",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08200",
+  "nom": "Sant Boi de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08073",
+   "08169",
+   "08204",
+   "08217",
+   "08244",
+   "08301"
+  ]
+ },
+ {
+  "codi_ine": "08201",
+  "nom": "Sant Boi de Lluçanès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08149",
+   "08150",
+   "08160",
+   "08195",
+   "08271",
+   "08272"
+  ]
+ },
+ {
+  "codi_ine": "08203",
+  "nom": "Sant Cebrià de Vallalta",
+  "provincia": "Barcelona",
+  "veins": [
+   "08035",
+   "08040",
+   "08163",
+   "08193",
+   "08202",
+   "08235",
+   "08284"
+  ]
+ },
+ {
+  "codi_ine": "08202",
+  "nom": "Sant Celoni",
+  "provincia": "Barcelona",
+  "veins": [
+   "08039",
+   "08081",
+   "08082",
+   "08097",
+   "08193",
+   "08203",
+   "08259",
+   "08284",
+   "08294",
+   "17146",
+   "17159"
+  ]
+ },
+ {
+  "codi_ine": "08204",
+  "nom": "Sant Climent de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08020",
+   "08089",
+   "08200",
+   "08244",
+   "08289",
+   "08301"
+  ]
+ },
+ {
+  "codi_ine": "17158",
+  "nom": "Sant Climent Sescebes",
+  "provincia": "Girona",
+  "veins": [
+   "17041",
+   "17042",
+   "17064",
+   "17086",
+   "17100",
+   "17106"
+  ]
+ },
+ {
+  "codi_ine": "08205",
+  "nom": "Sant Cugat del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08054",
+   "08123",
+   "08158",
+   "08184",
+   "08211",
+   "08238",
+   "08266"
+  ]
+ },
+ {
+  "codi_ine": "08206",
+  "nom": "Sant Cugat Sesgarrigues",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08094",
+   "08145",
+   "08305"
+  ]
+ },
+ {
+  "codi_ine": "25196",
+  "nom": "Sant Esteve de la Sarga",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25234",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "08207",
+  "nom": "Sant Esteve de Palautordera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08081",
+   "08234",
+   "08259"
+  ]
+ },
+ {
+  "codi_ine": "08208",
+  "nom": "Sant Esteve Sesrovires",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08066",
+   "08091",
+   "08114",
+   "08119",
+   "08162",
+   "08222"
+  ]
+ },
+ {
+  "codi_ine": "17159",
+  "nom": "Sant Feliu de Buixalleu",
+  "provincia": "Girona",
+  "veins": [
+   "08082",
+   "08202",
+   "17009",
+   "17027",
+   "17083",
+   "17101",
+   "17146",
+   "17148",
+   "17180"
+  ]
+ },
+ {
+  "codi_ine": "08210",
+  "nom": "Sant Feliu de Codines",
+  "provincia": "Barcelona",
+  "veins": [
+   "08023",
+   "08033",
+   "08087",
+   "08239"
+  ]
+ },
+ {
+  "codi_ine": "17160",
+  "nom": "Sant Feliu de Guíxols",
+  "provincia": "Girona",
+  "veins": [
+   "17048",
+   "17181"
+  ]
+ },
+ {
+  "codi_ine": "08211",
+  "nom": "Sant Feliu de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08123",
+   "08205",
+   "08217",
+   "08221",
+   "08244",
+   "08263"
+  ]
+ },
+ {
+  "codi_ine": "17161",
+  "nom": "Sant Feliu de Pallerols",
+  "provincia": "Girona",
+  "veins": [
+   "08901",
+   "17133",
+   "17139",
+   "17183",
+   "17184",
+   "17207"
+  ]
+ },
+ {
+  "codi_ine": "08212",
+  "nom": "Sant Feliu Sasserra",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08151",
+   "08171",
+   "08255",
+   "08258"
+  ]
+ },
+ {
+  "codi_ine": "17162",
+  "nom": "Sant Ferriol",
+  "provincia": "Girona",
+  "veins": [
+   "17010",
+   "17019",
+   "17021",
+   "17098",
+   "17105",
+   "17154",
+   "17165",
+   "17174",
+   "17184",
+   "17190"
+  ]
+ },
+ {
+  "codi_ine": "08209",
+  "nom": "Sant Fost de Campsentelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08015",
+   "08105",
+   "08115",
+   "08124",
+   "08125",
+   "08256",
+   "08282"
+  ]
+ },
+ {
+  "codi_ine": "08213",
+  "nom": "Sant Fruitós de Bages",
+  "provincia": "Barcelona",
+  "veins": [
+   "08113",
+   "08140",
+   "08182",
+   "08191",
+   "08192",
+   "08218",
+   "08277"
+  ]
+ },
+ {
+  "codi_ine": "17163",
+  "nom": "Sant Gregori",
+  "provincia": "Girona",
+  "veins": [
+   "17020",
+   "17040",
+   "17079",
+   "17123",
+   "17155",
+   "17169",
+   "17172",
+   "17186",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "25192",
+  "nom": "Sant Guim de Freixenet",
+  "provincia": "Lleida",
+  "veins": [
+   "08008",
+   "08071",
+   "08133",
+   "08176",
+   "08297",
+   "25085",
+   "25905"
+  ]
+ },
+ {
+  "codi_ine": "25197",
+  "nom": "Sant Guim de la Plana",
+  "provincia": "Lleida",
+  "veins": [
+   "25110",
+   "25114",
+   "25132",
+   "25194",
+   "25223",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "17164",
+  "nom": "Sant Hilari Sacalm",
+  "provincia": "Girona",
+  "veins": [
+   "08303",
+   "08901",
+   "17009",
+   "17063",
+   "17116",
+   "17180",
+   "17194"
+  ]
+ },
+ {
+  "codi_ine": "08215",
+  "nom": "Sant Hipòlit de Voltregà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08117"
+  ]
+ },
+ {
+  "codi_ine": "08193",
+  "nom": "Sant Iscle de Vallalta",
+  "provincia": "Barcelona",
+  "veins": [
+   "08007",
+   "08040",
+   "08202",
+   "08203",
+   "08294"
+  ]
+ },
+ {
+  "codi_ine": "43902",
+  "nom": "Sant Jaume d'Enveja",
+  "provincia": "Tarragona",
+  "veins": [
+   "43014",
+   "43901"
+  ]
+ },
+ {
+  "codi_ine": "08216",
+  "nom": "Sant Jaume de Frontanyà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08166",
+   "17080",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "17165",
+  "nom": "Sant Jaume de Llierca",
+  "provincia": "Girona",
+  "veins": [
+   "17010",
+   "17109",
+   "17162",
+   "17184",
+   "17185"
+  ]
+ },
+ {
+  "codi_ine": "43137",
+  "nom": "Sant Jaume dels Domenys",
+  "provincia": "Tarragona",
+  "veins": [
+   "08058",
+   "08065",
+   "43016",
+   "43020",
+   "43028",
+   "43074",
+   "43090"
+  ]
+ },
+ {
+  "codi_ine": "17167",
+  "nom": "Sant Joan de les Abadesses",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17112",
+   "17147",
+   "17149",
+   "17170",
+   "17177",
+   "17208"
+  ]
+ },
+ {
+  "codi_ine": "17168",
+  "nom": "Sant Joan de Mollet",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17050",
+   "17067",
+   "17166",
+   "17173"
+  ]
+ },
+ {
+  "codi_ine": "08218",
+  "nom": "Sant Joan de Vilatorrada",
+  "provincia": "Barcelona",
+  "veins": [
+   "08038",
+   "08084",
+   "08113",
+   "08192",
+   "08213",
+   "08229"
+  ]
+ },
+ {
+  "codi_ine": "08217",
+  "nom": "Sant Joan Despí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08073",
+   "08077",
+   "08200",
+   "08211",
+   "08221",
+   "08244"
+  ]
+ },
+ {
+  "codi_ine": "17185",
+  "nom": "Sant Joan les Fonts",
+  "provincia": "Girona",
+  "veins": [
+   "17046",
+   "17109",
+   "17114",
+   "17165",
+   "17184",
+   "17208"
+  ]
+ },
+ {
+  "codi_ine": "17166",
+  "nom": "Sant Jordi Desvalls",
+  "provincia": "Girona",
+  "veins": [
+   "17050",
+   "17055",
+   "17067",
+   "17068",
+   "17168",
+   "17216",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "08903",
+  "nom": "Sant Julià de Cerdanyola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08057",
+   "08099",
+   "08142",
+   "08166"
+  ]
+ },
+ {
+  "codi_ine": "17169",
+  "nom": "Sant Julià de Ramis",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17049",
+   "17050",
+   "17056",
+   "17079",
+   "17123",
+   "17163",
+   "17186",
+   "17218"
+  ]
+ },
+ {
+  "codi_ine": "08220",
+  "nom": "Sant Julià de Vilatorta",
+  "provincia": "Barcelona",
+  "veins": [
+   "08037",
+   "08083",
+   "08241",
+   "08246",
+   "08278",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "17903",
+  "nom": "Sant Julià del Llor i Bonmatí",
+  "provincia": "Girona",
+  "veins": [
+   "17007",
+   "17008",
+   "17020",
+   "17163",
+   "17172",
+   "17189"
+  ]
+ },
+ {
+  "codi_ine": "08221",
+  "nom": "Sant Just Desvern",
+  "provincia": "Barcelona",
+  "veins": [
+   "08019",
+   "08077",
+   "08211",
+   "08217"
+  ]
+ },
+ {
+  "codi_ine": "08222",
+  "nom": "Sant Llorenç d'Hortons",
+  "provincia": "Barcelona",
+  "veins": [
+   "08091",
+   "08119",
+   "08161",
+   "08208",
+   "08240"
+  ]
+ },
+ {
+  "codi_ine": "17171",
+  "nom": "Sant Llorenç de la Muga",
+  "provincia": "Girona",
+  "veins": [
+   "17003",
+   "17031",
+   "17060",
+   "17102",
+   "17196"
+  ]
+ },
+ {
+  "codi_ine": "25193",
+  "nom": "Sant Llorenç de Morunys",
+  "provincia": "Lleida",
+  "veins": [
+   "25111",
+   "25146",
+   "25163"
+  ]
+ },
+ {
+  "codi_ine": "08223",
+  "nom": "Sant Llorenç Savall",
+  "provincia": "Barcelona",
+  "veins": [
+   "08033",
+   "08051",
+   "08087",
+   "08095",
+   "08120",
+   "08139",
+   "08267"
+  ]
+ },
+ {
+  "codi_ine": "08225",
+  "nom": "Sant Martí d'Albars",
+  "provincia": "Barcelona",
+  "veins": [
+   "08109",
+   "08149",
+   "08160",
+   "08171"
+  ]
+ },
+ {
+  "codi_ine": "08224",
+  "nom": "Sant Martí de Centelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08014",
+   "08055",
+   "08067",
+   "08134",
+   "08239",
+   "08276"
+  ]
+ },
+ {
+  "codi_ine": "17172",
+  "nom": "Sant Martí de Llémena",
+  "provincia": "Girona",
+  "veins": [
+   "17007",
+   "17040",
+   "17105",
+   "17163",
+   "17174",
+   "17183",
+   "17903"
+  ]
+ },
+ {
+  "codi_ine": "25902",
+  "nom": "Sant Martí de Riucorb",
+  "provincia": "Lleida",
+  "veins": [
+   "25046",
+   "25130",
+   "25145",
+   "25176",
+   "25238",
+   "25242"
+  ]
+ },
+ {
+  "codi_ine": "08226",
+  "nom": "Sant Martí de Tous",
+  "provincia": "Barcelona",
+  "veins": [
+   "08008",
+   "08021",
+   "08103",
+   "08250",
+   "08257",
+   "43139"
+  ]
+ },
+ {
+  "codi_ine": "08227",
+  "nom": "Sant Martí Sarroca",
+  "provincia": "Barcelona",
+  "veins": [
+   "08065",
+   "08085",
+   "08154",
+   "08251",
+   "08288",
+   "08304",
+   "43090"
+  ]
+ },
+ {
+  "codi_ine": "08228",
+  "nom": "Sant Martí Sesgueioles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08031",
+   "08170",
+   "08176"
+  ]
+ },
+ {
+  "codi_ine": "17173",
+  "nom": "Sant Martí Vell",
+  "provincia": "Girona",
+  "veins": [
+   "17025",
+   "17067",
+   "17087",
+   "17097",
+   "17130",
+   "17142",
+   "17168"
+  ]
+ },
+ {
+  "codi_ine": "08229",
+  "nom": "Sant Mateu de Bages",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08038",
+   "08047",
+   "08084",
+   "08141",
+   "08189",
+   "08218",
+   "08274",
+   "25136",
+   "25167"
+  ]
+ },
+ {
+  "codi_ine": "17174",
+  "nom": "Sant Miquel de Campmajor",
+  "provincia": "Girona",
+  "veins": [
+   "17040",
+   "17105",
+   "17137",
+   "17162",
+   "17172",
+   "17190"
+  ]
+ },
+ {
+  "codi_ine": "17175",
+  "nom": "Sant Miquel de Fluvià",
+  "provincia": "Girona",
+  "veins": [
+   "17119",
+   "17176",
+   "17198",
+   "17210"
+  ]
+ },
+ {
+  "codi_ine": "17176",
+  "nom": "Sant Mori",
+  "provincia": "Girona",
+  "veins": [
+   "17075",
+   "17119",
+   "17175",
+   "17187",
+   "17210",
+   "17222",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "17177",
+  "nom": "Sant Pau de Segúries",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17167",
+   "17208"
+  ]
+ },
+ {
+  "codi_ine": "08231",
+  "nom": "Sant Pere de Ribes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08043",
+   "08148",
+   "08270",
+   "08307"
+  ]
+ },
+ {
+  "codi_ine": "08232",
+  "nom": "Sant Pere de Riudebitlles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08122",
+   "08236",
+   "08287"
+  ]
+ },
+ {
+  "codi_ine": "08233",
+  "nom": "Sant Pere de Torelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08150",
+   "08237",
+   "08253",
+   "08254",
+   "08265",
+   "08285",
+   "17207",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "08234",
+  "nom": "Sant Pere de Vilamajor",
+  "provincia": "Barcelona",
+  "veins": [
+   "08042",
+   "08081",
+   "08106",
+   "08137",
+   "08198",
+   "08207",
+   "08259"
+  ]
+ },
+ {
+  "codi_ine": "17178",
+  "nom": "Sant Pere Pescador",
+  "provincia": "Girona",
+  "veins": [
+   "17011",
+   "17047",
+   "17062",
+   "17198",
+   "17225"
+  ]
+ },
+ {
+  "codi_ine": "08189",
+  "nom": "Sant Pere Sallavinera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08002",
+   "08031",
+   "08036",
+   "08170",
+   "08229",
+   "25136"
+  ]
+ },
+ {
+  "codi_ine": "08235",
+  "nom": "Sant Pol de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08035",
+   "08040",
+   "08203"
+  ]
+ },
+ {
+  "codi_ine": "08236",
+  "nom": "Sant Quintí de Mediona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08085",
+   "08122",
+   "08232",
+   "08287"
+  ]
+ },
+ {
+  "codi_ine": "08237",
+  "nom": "Sant Quirze de Besora",
+  "provincia": "Barcelona",
+  "veins": [
+   "08131",
+   "08150",
+   "08233",
+   "08253",
+   "08272"
+  ]
+ },
+ {
+  "codi_ine": "08238",
+  "nom": "Sant Quirze del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08184",
+   "08187",
+   "08205",
+   "08266",
+   "08279"
+  ]
+ },
+ {
+  "codi_ine": "08239",
+  "nom": "Sant Quirze Safaja",
+  "provincia": "Barcelona",
+  "veins": [
+   "08023",
+   "08055",
+   "08064",
+   "08134",
+   "08210",
+   "08224"
+  ]
+ },
+ {
+  "codi_ine": "25194",
+  "nom": "Sant Ramon",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25085",
+   "25114",
+   "25152",
+   "25197",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "08240",
+  "nom": "Sant Sadurní d'Anoia",
+  "provincia": "Barcelona",
+  "veins": [
+   "08091",
+   "08161",
+   "08222",
+   "08273",
+   "08287"
+  ]
+ },
+ {
+  "codi_ine": "08241",
+  "nom": "Sant Sadurní d'Osormort",
+  "provincia": "Barcelona",
+  "veins": [
+   "08083",
+   "08220",
+   "08275",
+   "08303",
+   "17063",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "08098",
+  "nom": "Sant Salvador de Guardiola",
+  "provincia": "Barcelona",
+  "veins": [
+   "08025",
+   "08059",
+   "08061",
+   "08113",
+   "08178",
+   "08242"
+  ]
+ },
+ {
+  "codi_ine": "08262",
+  "nom": "Sant Vicenç de Castellet",
+  "provincia": "Barcelona",
+  "veins": [
+   "08053",
+   "08061",
+   "08113",
+   "08127",
+   "08139",
+   "08179",
+   "08182",
+   "08242"
+  ]
+ },
+ {
+  "codi_ine": "08264",
+  "nom": "Sant Vicenç de Montalt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08006",
+   "08007",
+   "08032",
+   "08075",
+   "08197"
+  ]
+ },
+ {
+  "codi_ine": "08265",
+  "nom": "Sant Vicenç de Torelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08150",
+   "08233",
+   "08285"
+  ]
+ },
+ {
+  "codi_ine": "08263",
+  "nom": "Sant Vicenç dels Horts",
+  "provincia": "Barcelona",
+  "veins": [
+   "08068",
+   "08123",
+   "08157",
+   "08211",
+   "08244",
+   "08289",
+   "08905"
+  ]
+ },
+ {
+  "codi_ine": "43138",
+  "nom": "Santa Bàrbara",
+  "provincia": "Tarragona",
+  "veins": [
+   "43063",
+   "43077",
+   "43078",
+   "43133",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "08243",
+  "nom": "Santa Cecília de Voltregà",
+  "provincia": "Barcelona",
+  "veins": [
+   "08100",
+   "08117",
+   "08199",
+   "08271"
+  ]
+ },
+ {
+  "codi_ine": "08244",
+  "nom": "Santa Coloma de Cervelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08200",
+   "08204",
+   "08211",
+   "08217",
+   "08263",
+   "08289"
+  ]
+ },
+ {
+  "codi_ine": "17180",
+  "nom": "Santa Coloma de Farners",
+  "provincia": "Girona",
+  "veins": [
+   "17009",
+   "17028",
+   "17116",
+   "17148",
+   "17159",
+   "17164",
+   "17193",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "08245",
+  "nom": "Santa Coloma de Gramenet",
+  "provincia": "Barcelona",
+  "veins": [
+   "08015",
+   "08019",
+   "08125",
+   "08194"
+  ]
+ },
+ {
+  "codi_ine": "43139",
+  "nom": "Santa Coloma de Queralt",
+  "provincia": "Tarragona",
+  "veins": [
+   "08008",
+   "08021",
+   "08226",
+   "25216",
+   "43046",
+   "43073",
+   "43105",
+   "43143"
+  ]
+ },
+ {
+  "codi_ine": "17181",
+  "nom": "Santa Cristina d'Aro",
+  "provincia": "Girona",
+  "veins": [
+   "17034",
+   "17044",
+   "17048",
+   "17089",
+   "17160",
+   "17202",
+   "17901"
+  ]
+ },
+ {
+  "codi_ine": "08246",
+  "nom": "Santa Eugènia de Berga",
+  "provincia": "Barcelona",
+  "veins": [
+   "08037",
+   "08111",
+   "08220",
+   "08278",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08247",
+  "nom": "Santa Eulàlia de Riuprimer",
+  "provincia": "Barcelona",
+  "veins": [
+   "08129",
+   "08199",
+   "08258",
+   "08298"
+  ]
+ },
+ {
+  "codi_ine": "08248",
+  "nom": "Santa Eulàlia de Ronçana",
+  "provincia": "Barcelona",
+  "veins": [
+   "08005",
+   "08023",
+   "08033",
+   "08041",
+   "08107"
+  ]
+ },
+ {
+  "codi_ine": "08249",
+  "nom": "Santa Fe del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08085",
+   "08094",
+   "08164",
+   "08273"
+  ]
+ },
+ {
+  "codi_ine": "17182",
+  "nom": "Santa Llogaia d'Àlguema",
+  "provincia": "Girona",
+  "veins": [
+   "17005",
+   "17026",
+   "17221",
+   "17226"
+  ]
+ },
+ {
+  "codi_ine": "08250",
+  "nom": "Santa Margarida de Montbui",
+  "provincia": "Barcelona",
+  "veins": [
+   "08102",
+   "08103",
+   "08152",
+   "08226",
+   "08257",
+   "08302"
+  ]
+ },
+ {
+  "codi_ine": "08251",
+  "nom": "Santa Margarida i els Monjos",
+  "provincia": "Barcelona",
+  "veins": [
+   "08058",
+   "08065",
+   "08145",
+   "08154",
+   "08227",
+   "08305",
+   "43016"
+  ]
+ },
+ {
+  "codi_ine": "08258",
+  "nom": "Santa Maria d'Oló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08079",
+   "08129",
+   "08138",
+   "08151",
+   "08199",
+   "08212",
+   "08247"
+  ]
+ },
+ {
+  "codi_ine": "08253",
+  "nom": "Santa Maria de Besora",
+  "provincia": "Barcelona",
+  "veins": [
+   "08131",
+   "08233",
+   "08237",
+   "17096",
+   "17147",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "08256",
+  "nom": "Santa Maria de Martorelles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08115",
+   "08136",
+   "08209",
+   "08282",
+   "08296"
+  ]
+ },
+ {
+  "codi_ine": "08255",
+  "nom": "Santa Maria de Merlès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08012",
+   "08090",
+   "08109",
+   "08151",
+   "08171",
+   "08175",
+   "08188",
+   "08212"
+  ]
+ },
+ {
+  "codi_ine": "08257",
+  "nom": "Santa Maria de Miralles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08021",
+   "08104",
+   "08152",
+   "08226",
+   "08250",
+   "43120",
+   "43141"
+  ]
+ },
+ {
+  "codi_ine": "08259",
+  "nom": "Santa Maria de Palautordera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08081",
+   "08106",
+   "08202",
+   "08207",
+   "08234",
+   "08294"
+  ]
+ },
+ {
+  "codi_ine": "43140",
+  "nom": "Santa Oliva",
+  "provincia": "Tarragona",
+  "veins": [
+   "43002",
+   "43020",
+   "43024",
+   "43028",
+   "43163"
+  ]
+ },
+ {
+  "codi_ine": "17184",
+  "nom": "Santa Pau",
+  "provincia": "Girona",
+  "veins": [
+   "17105",
+   "17114",
+   "17139",
+   "17161",
+   "17162",
+   "17165",
+   "17183",
+   "17185"
+  ]
+ },
+ {
+  "codi_ine": "08260",
+  "nom": "Santa Perpètua de Mogoda",
+  "provincia": "Barcelona",
+  "veins": [
+   "08105",
+   "08124",
+   "08125",
+   "08156",
+   "08167",
+   "08187",
+   "08252"
+  ]
+ },
+ {
+  "codi_ine": "08261",
+  "nom": "Santa Susanna",
+  "provincia": "Barcelona",
+  "veins": [
+   "08110",
+   "08155",
+   "08163",
+   "08284"
+  ]
+ },
+ {
+  "codi_ine": "08192",
+  "nom": "Santpedor",
+  "provincia": "Barcelona",
+  "veins": [
+   "08038",
+   "08062",
+   "08191",
+   "08213",
+   "08218"
+  ]
+ },
+ {
+  "codi_ine": "43142",
+  "nom": "Sarral",
+  "provincia": "Tarragona",
+  "veins": [
+   "43021",
+   "43036",
+   "43046",
+   "43061",
+   "43105",
+   "43113",
+   "43130",
+   "43141",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "17186",
+  "nom": "Sarrià de Ter",
+  "provincia": "Girona",
+  "veins": [
+   "17079",
+   "17163",
+   "17169"
+  ]
+ },
+ {
+  "codi_ine": "25201",
+  "nom": "Sarroca de Bellera",
+  "provincia": "Lleida",
+  "veins": [
+   "25043",
+   "25173",
+   "25202",
+   "25227"
+  ]
+ },
+ {
+  "codi_ine": "25200",
+  "nom": "Sarroca de Lleida",
+  "provincia": "Lleida",
+  "veins": [
+   "25010",
+   "25038",
+   "25125",
+   "25212",
+   "25226",
+   "25232"
+  ]
+ },
+ {
+  "codi_ine": "17187",
+  "nom": "Saus, Camallera i Llampaies",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17176",
+   "17216",
+   "17222",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "43143",
+  "nom": "Savallà del Comtat",
+  "provincia": "Tarragona",
+  "veins": [
+   "43046",
+   "43073",
+   "43139",
+   "43159"
+  ]
+ },
+ {
+  "codi_ine": "43146",
+  "nom": "Senan",
+  "provincia": "Tarragona",
+  "veins": [
+   "25081",
+   "25097",
+   "25154",
+   "25238",
+   "43054"
+  ]
+ },
+ {
+  "codi_ine": "25202",
+  "nom": "Senterada",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25161",
+   "25171",
+   "25173",
+   "25201",
+   "25227"
+  ]
+ },
+ {
+  "codi_ine": "08267",
+  "nom": "Sentmenat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08033",
+   "08051",
+   "08156",
+   "08167",
+   "08187",
+   "08223"
+  ]
+ },
+ {
+  "codi_ine": "17190",
+  "nom": "Serinyà",
+  "provincia": "Girona",
+  "veins": [
+   "17065",
+   "17098",
+   "17137",
+   "17162",
+   "17174"
+  ]
+ },
+ {
+  "codi_ine": "25204",
+  "nom": "Seròs",
+  "provincia": "Lleida",
+  "veins": [
+   "25020",
+   "25038",
+   "25102",
+   "25125",
+   "25131",
+   "25133"
+  ]
+ },
+ {
+  "codi_ine": "17191",
+  "nom": "Serra de Daró",
+  "provincia": "Girona",
+  "veins": [
+   "17070",
+   "17126",
+   "17195",
+   "17203",
+   "17205",
+   "17211"
+  ]
+ },
+ {
+  "codi_ine": "17192",
+  "nom": "Setcases",
+  "provincia": "Girona",
+  "veins": [
+   "17043",
+   "17091",
+   "17107",
+   "17224"
+  ]
+ },
+ {
+  "codi_ine": "08269",
+  "nom": "Seva",
+  "provincia": "Barcelona",
+  "veins": [
+   "08014",
+   "08017",
+   "08026",
+   "08067",
+   "08111",
+   "08278",
+   "08283",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "25205",
+  "nom": "Sidamon",
+  "provincia": "Lleida",
+  "veins": [
+   "25048",
+   "25093",
+   "25158",
+   "25230"
+  ]
+ },
+ {
+  "codi_ine": "17193",
+  "nom": "Sils",
+  "provincia": "Girona",
+  "veins": [
+   "17033",
+   "17103",
+   "17148",
+   "17180",
+   "17213",
+   "17233"
+  ]
+ },
+ {
+  "codi_ine": "08270",
+  "nom": "Sitges",
+  "provincia": "Barcelona",
+  "veins": [
+   "08020",
+   "08056",
+   "08089",
+   "08148",
+   "08231"
+  ]
+ },
+ {
+  "codi_ine": "17052",
+  "nom": "Siurana",
+  "provincia": "Girona",
+  "veins": [
+   "17074",
+   "17075",
+   "17119",
+   "17151",
+   "17198",
+   "17226"
+  ]
+ },
+ {
+  "codi_ine": "08271",
+  "nom": "Sobremunt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08117",
+   "08149",
+   "08150",
+   "08199",
+   "08201",
+   "08243"
+  ]
+ },
+ {
+  "codi_ine": "43147",
+  "nom": "Solivella",
+  "provincia": "Tarragona",
+  "veins": [
+   "25238",
+   "43021",
+   "43029",
+   "43061",
+   "43101",
+   "43107",
+   "43142"
+  ]
+ },
+ {
+  "codi_ine": "25207",
+  "nom": "Solsona",
+  "provincia": "Lleida",
+  "veins": [
+   "25124",
+   "25151"
+  ]
+ },
+ {
+  "codi_ine": "08272",
+  "nom": "Sora",
+  "provincia": "Barcelona",
+  "veins": [
+   "08004",
+   "08131",
+   "08150",
+   "08195",
+   "08201",
+   "08237",
+   "17096"
+  ]
+ },
+ {
+  "codi_ine": "25208",
+  "nom": "Soriguera",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25126",
+   "25140",
+   "25183",
+   "25209",
+   "25906"
+  ]
+ },
+ {
+  "codi_ine": "25209",
+  "nom": "Sort",
+  "provincia": "Lleida",
+  "veins": [
+   "25039",
+   "25082",
+   "25183",
+   "25208",
+   "25227"
+  ]
+ },
+ {
+  "codi_ine": "25210",
+  "nom": "Soses",
+  "provincia": "Lleida",
+  "veins": [
+   "25011",
+   "25038",
+   "25232"
+  ]
+ },
+ {
+  "codi_ine": "08273",
+  "nom": "Subirats",
+  "provincia": "Barcelona",
+  "veins": [
+   "08013",
+   "08068",
+   "08091",
+   "08094",
+   "08146",
+   "08164",
+   "08174",
+   "08240",
+   "08249",
+   "08287",
+   "08295"
+  ]
+ },
+ {
+  "codi_ine": "25211",
+  "nom": "Sudanell",
+  "provincia": "Lleida",
+  "veins": [
+   "25011",
+   "25120",
+   "25142",
+   "25212",
+   "25232"
+  ]
+ },
+ {
+  "codi_ine": "25212",
+  "nom": "Sunyer",
+  "provincia": "Lleida",
+  "veins": [
+   "25014",
+   "25142",
+   "25200",
+   "25211",
+   "25232"
+  ]
+ },
+ {
+  "codi_ine": "08274",
+  "nom": "Súria",
+  "provincia": "Barcelona",
+  "veins": [
+   "08038",
+   "08062",
+   "08141",
+   "08229"
+  ]
+ },
+ {
+  "codi_ine": "17194",
+  "nom": "Susqueda",
+  "provincia": "Girona",
+  "veins": [
+   "08901",
+   "17007",
+   "17116",
+   "17133",
+   "17164",
+   "17189"
+  ]
+ },
+ {
+  "codi_ine": "08276",
+  "nom": "Tagamanent",
+  "provincia": "Barcelona",
+  "veins": [
+   "08014",
+   "08026",
+   "08042",
+   "08134",
+   "08137",
+   "08224"
+  ]
+ },
+ {
+  "codi_ine": "08277",
+  "nom": "Talamanca",
+  "provincia": "Barcelona",
+  "veins": [
+   "08034",
+   "08128",
+   "08139",
+   "08140",
+   "08182",
+   "08213"
+  ]
+ },
+ {
+  "codi_ine": "25215",
+  "nom": "Talarn",
+  "provincia": "Lleida",
+  "veins": [
+   "25115",
+   "25190",
+   "25234",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "25216",
+  "nom": "Talavera",
+  "provincia": "Lleida",
+  "veins": [
+   "08008",
+   "08133",
+   "25141",
+   "25905",
+   "43073",
+   "43139"
+  ]
+ },
+ {
+  "codi_ine": "08278",
+  "nom": "Taradell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08111",
+   "08220",
+   "08246",
+   "08269",
+   "08283",
+   "17220"
+  ]
+ },
+ {
+  "codi_ine": "43148",
+  "nom": "Tarragona",
+  "provincia": "Tarragona",
+  "veins": [
+   "43012",
+   "43043",
+   "43047",
+   "43100",
+   "43123",
+   "43126",
+   "43171",
+   "43907"
+  ]
+ },
+ {
+  "codi_ine": "25217",
+  "nom": "Tàrrega",
+  "provincia": "Lleida",
+  "veins": [
+   "25027",
+   "25041",
+   "25103",
+   "25104",
+   "25157",
+   "25181",
+   "25225",
+   "25242",
+   "25244",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "25218",
+  "nom": "Tarrés",
+  "provincia": "Lleida",
+  "veins": [
+   "25097",
+   "25255",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "25219",
+  "nom": "Tarroja de Segarra",
+  "provincia": "Lleida",
+  "veins": [
+   "25072",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "08275",
+  "nom": "Tavèrnoles",
+  "provincia": "Barcelona",
+  "veins": [
+   "08083",
+   "08100",
+   "08116",
+   "08241",
+   "08303"
+  ]
+ },
+ {
+  "codi_ine": "08280",
+  "nom": "Tavertet",
+  "provincia": "Barcelona",
+  "veins": [
+   "08116",
+   "08254",
+   "08303",
+   "08901"
+  ]
+ },
+ {
+  "codi_ine": "08281",
+  "nom": "Teià",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08118",
+   "08230",
+   "08296"
+  ]
+ },
+ {
+  "codi_ine": "25220",
+  "nom": "Térmens",
+  "provincia": "Lleida",
+  "veins": [
+   "25040",
+   "25052",
+   "25134",
+   "25240",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "17196",
+  "nom": "Terrades",
+  "provincia": "Girona",
+  "veins": [
+   "17029",
+   "17031",
+   "17051",
+   "17060",
+   "17093",
+   "17171",
+   "17228"
+  ]
+ },
+ {
+  "codi_ine": "08279",
+  "nom": "Terrassa",
+  "provincia": "Barcelona",
+  "veins": [
+   "08051",
+   "08120",
+   "08139",
+   "08184",
+   "08187",
+   "08238",
+   "08290",
+   "08291",
+   "08300"
+  ]
+ },
+ {
+  "codi_ine": "08282",
+  "nom": "Tiana",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08015",
+   "08126",
+   "08209",
+   "08256"
+  ]
+ },
+ {
+  "codi_ine": "25221",
+  "nom": "Tírvia",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25089",
+   "25126",
+   "25901"
+  ]
+ },
+ {
+  "codi_ine": "25222",
+  "nom": "Tiurana",
+  "provincia": "Lleida",
+  "veins": [
+   "25042",
+   "25044",
+   "25150",
+   "25172",
+   "25249"
+  ]
+ },
+ {
+  "codi_ine": "43149",
+  "nom": "Tivenys",
+  "provincia": "Tarragona",
+  "veins": [
+   "43006",
+   "43025",
+   "43052",
+   "43104",
+   "43121",
+   "43155"
+  ]
+ },
+ {
+  "codi_ine": "43150",
+  "nom": "Tivissa",
+  "provincia": "Tarragona",
+  "veins": [
+   "43013",
+   "43026",
+   "43040",
+   "43045",
+   "43065",
+   "43067",
+   "43070",
+   "43093",
+   "43094",
+   "43104",
+   "43118",
+   "43121",
+   "43162"
+  ]
+ },
+ {
+  "codi_ine": "08283",
+  "nom": "Tona",
+  "provincia": "Barcelona",
+  "veins": [
+   "08017",
+   "08070",
+   "08111",
+   "08129",
+   "08269",
+   "08278"
+  ]
+ },
+ {
+  "codi_ine": "25223",
+  "nom": "Torà",
+  "provincia": "Lleida",
+  "veins": [
+   "08060",
+   "25055",
+   "25114",
+   "25129",
+   "25132",
+   "25136",
+   "25167",
+   "25197"
+  ]
+ },
+ {
+  "codi_ine": "08284",
+  "nom": "Tordera",
+  "provincia": "Barcelona",
+  "veins": [
+   "08082",
+   "08155",
+   "08163",
+   "08202",
+   "08203",
+   "08261",
+   "17023",
+   "17095",
+   "17103"
+  ]
+ },
+ {
+  "codi_ine": "08285",
+  "nom": "Torelló",
+  "provincia": "Barcelona",
+  "veins": [
+   "08112",
+   "08117",
+   "08150",
+   "08233",
+   "08254",
+   "08265"
+  ]
+ },
+ {
+  "codi_ine": "25225",
+  "nom": "Tornabous",
+  "provincia": "Lleida",
+  "veins": [
+   "25003",
+   "25027",
+   "25041",
+   "25096",
+   "25113",
+   "25181",
+   "25217"
+  ]
+ },
+ {
+  "codi_ine": "25233",
+  "nom": "Torre-serona",
+  "provincia": "Lleida",
+  "veins": [
+   "25053",
+   "25078",
+   "25120",
+   "25228"
+  ]
+ },
+ {
+  "codi_ine": "25226",
+  "nom": "Torrebesses",
+  "provincia": "Lleida",
+  "veins": [
+   "25010",
+   "25101",
+   "25105",
+   "25125",
+   "25200"
+  ]
+ },
+ {
+  "codi_ine": "43153",
+  "nom": "Torredembarra",
+  "provincia": "Tarragona",
+  "veins": [
+   "43012",
+   "43050",
+   "43111"
+  ]
+ },
+ {
+  "codi_ine": "25228",
+  "nom": "Torrefarrera",
+  "provincia": "Lleida",
+  "veins": [
+   "25016",
+   "25019",
+   "25023",
+   "25053",
+   "25120",
+   "25189",
+   "25233",
+   "25251"
+  ]
+ },
+ {
+  "codi_ine": "25907",
+  "nom": "Torrefeta i Florejacs",
+  "provincia": "Lleida",
+  "veins": [
+   "25060",
+   "25072",
+   "25110",
+   "25132",
+   "25150",
+   "25157",
+   "25166",
+   "25191",
+   "25194",
+   "25197",
+   "25219",
+   "25249",
+   "25911"
+  ]
+ },
+ {
+  "codi_ine": "25230",
+  "nom": "Torregrossa",
+  "provincia": "Lleida",
+  "veins": [
+   "25004",
+   "25033",
+   "25048",
+   "25093",
+   "25119",
+   "25120",
+   "25135",
+   "25137",
+   "25180",
+   "25182",
+   "25205"
+  ]
+ },
+ {
+  "codi_ine": "25231",
+  "nom": "Torrelameu",
+  "provincia": "Lleida",
+  "veins": [
+   "25008",
+   "25078",
+   "25134",
+   "25254"
+  ]
+ },
+ {
+  "codi_ine": "08287",
+  "nom": "Torrelavit",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08085",
+   "08161",
+   "08164",
+   "08232",
+   "08236",
+   "08240",
+   "08273"
+  ]
+ },
+ {
+  "codi_ine": "08288",
+  "nom": "Torrelles de Foix",
+  "provincia": "Barcelona",
+  "veins": [
+   "08085",
+   "08104",
+   "08168",
+   "08227",
+   "43090"
+  ]
+ },
+ {
+  "codi_ine": "08289",
+  "nom": "Torrelles de Llobregat",
+  "provincia": "Barcelona",
+  "veins": [
+   "08020",
+   "08068",
+   "08204",
+   "08244",
+   "08263",
+   "08295"
+  ]
+ },
+ {
+  "codi_ine": "17197",
+  "nom": "Torrent",
+  "provincia": "Girona",
+  "veins": [
+   "17117",
+   "17121",
+   "17124",
+   "17144",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "25232",
+  "nom": "Torres de Segre",
+  "provincia": "Lleida",
+  "veins": [
+   "25011",
+   "25038",
+   "25200",
+   "25210",
+   "25211",
+   "25212"
+  ]
+ },
+ {
+  "codi_ine": "17198",
+  "nom": "Torroella de Fluvià",
+  "provincia": "Girona",
+  "veins": [
+   "17052",
+   "17119",
+   "17151",
+   "17175",
+   "17178",
+   "17210",
+   "17225"
+  ]
+ },
+ {
+  "codi_ine": "17199",
+  "nom": "Torroella de Montgrí",
+  "provincia": "Girona",
+  "veins": [
+   "17018",
+   "17062",
+   "17070",
+   "17081",
+   "17124",
+   "17204"
+  ]
+ },
+ {
+  "codi_ine": "43154",
+  "nom": "Torroja del Priorat",
+  "provincia": "Tarragona",
+  "veins": [
+   "43069",
+   "43096",
+   "43112",
+   "43114",
+   "43173"
+  ]
+ },
+ {
+  "codi_ine": "17200",
+  "nom": "Tortellà",
+  "provincia": "Girona",
+  "veins": [
+   "17010",
+   "17109",
+   "17154"
+  ]
+ },
+ {
+  "codi_ine": "43155",
+  "nom": "Tortosa",
+  "provincia": "Tarragona",
+  "veins": [
+   "43006",
+   "43008",
+   "43014",
+   "43044",
+   "43078",
+   "43104",
+   "43133",
+   "43138",
+   "43149",
+   "43903",
+   "43904"
+  ]
+ },
+ {
+  "codi_ine": "17201",
+  "nom": "Toses",
+  "provincia": "Girona",
+  "veins": [
+   "08052",
+   "17006",
+   "17080",
+   "17134"
+  ]
+ },
+ {
+  "codi_ine": "17202",
+  "nom": "Tossa de Mar",
+  "provincia": "Girona",
+  "veins": [
+   "17089",
+   "17095",
+   "17181",
+   "17213"
+  ]
+ },
+ {
+  "codi_ine": "25234",
+  "nom": "Tremp",
+  "provincia": "Lleida",
+  "veins": [
+   "25098",
+   "25115",
+   "25161",
+   "25173",
+   "25190",
+   "25196",
+   "25215",
+   "25904"
+  ]
+ },
+ {
+  "codi_ine": "17204",
+  "nom": "Ullà",
+  "provincia": "Girona",
+  "veins": [
+   "17018",
+   "17070",
+   "17081",
+   "17195",
+   "17199"
+  ]
+ },
+ {
+  "codi_ine": "08290",
+  "nom": "Ullastrell",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08054",
+   "08184",
+   "08279",
+   "08300"
+  ]
+ },
+ {
+  "codi_ine": "17205",
+  "nom": "Ullastret",
+  "provincia": "Girona",
+  "veins": [
+   "17022",
+   "17057",
+   "17070",
+   "17121",
+   "17126",
+   "17191",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "43156",
+  "nom": "Ulldecona",
+  "provincia": "Tarragona",
+  "veins": [
+   "43004",
+   "43044",
+   "43062",
+   "43063",
+   "43068",
+   "43077"
+  ]
+ },
+ {
+  "codi_ine": "43157",
+  "nom": "Ulldemolins",
+  "provincia": "Tarragona",
+  "veins": [
+   "25118",
+   "25169",
+   "43049",
+   "43075",
+   "43096",
+   "43168"
+  ]
+ },
+ {
+  "codi_ine": "17203",
+  "nom": "Ultramort",
+  "provincia": "Girona",
+  "veins": [
+   "17068",
+   "17126",
+   "17191",
+   "17211"
+  ]
+ },
+ {
+  "codi_ine": "17206",
+  "nom": "Urús",
+  "provincia": "Girona",
+  "veins": [
+   "08016",
+   "08099",
+   "17061",
+   "25175",
+   "25913"
+  ]
+ },
+ {
+  "codi_ine": "08291",
+  "nom": "Vacarisses",
+  "provincia": "Barcelona",
+  "veins": [
+   "08053",
+   "08076",
+   "08127",
+   "08139",
+   "08147",
+   "08179",
+   "08279",
+   "08300"
+  ]
+ },
+ {
+  "codi_ine": "25901",
+  "nom": "Vall de Cardós",
+  "provincia": "Lleida",
+  "veins": [
+   "25017",
+   "25087",
+   "25123",
+   "25126",
+   "25221",
+   "25903"
+  ]
+ },
+ {
+  "codi_ine": "17209",
+  "nom": "Vall-llobrega",
+  "provincia": "Girona",
+  "veins": [
+   "17110",
+   "17118",
+   "17902"
+  ]
+ },
+ {
+  "codi_ine": "08292",
+  "nom": "Vallbona d'Anoia",
+  "provincia": "Barcelona",
+  "veins": [
+   "08028",
+   "08044",
+   "08161",
+   "08165",
+   "08286"
+  ]
+ },
+ {
+  "codi_ine": "25238",
+  "nom": "Vallbona de les Monges",
+  "provincia": "Lleida",
+  "veins": [
+   "25074",
+   "25130",
+   "25145",
+   "25154",
+   "25902",
+   "43029",
+   "43054",
+   "43101",
+   "43146",
+   "43147"
+  ]
+ },
+ {
+  "codi_ine": "08293",
+  "nom": "Vallcebre",
+  "provincia": "Barcelona",
+  "veins": [
+   "08080",
+   "08093",
+   "08099",
+   "08190",
+   "08268"
+  ]
+ },
+ {
+  "codi_ine": "43158",
+  "nom": "Vallclara",
+  "provincia": "Tarragona",
+  "veins": [
+   "25253",
+   "25255",
+   "43116",
+   "43168",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "25240",
+  "nom": "Vallfogona de Balaguer",
+  "provincia": "Lleida",
+  "veins": [
+   "25035",
+   "25040",
+   "25047",
+   "25052",
+   "25122",
+   "25220"
+  ]
+ },
+ {
+  "codi_ine": "17170",
+  "nom": "Vallfogona de Ripollès",
+  "provincia": "Girona",
+  "veins": [
+   "17147",
+   "17149",
+   "17167",
+   "17212"
+  ]
+ },
+ {
+  "codi_ine": "43159",
+  "nom": "Vallfogona de Riucorb",
+  "provincia": "Tarragona",
+  "veins": [
+   "25109",
+   "25141",
+   "43046",
+   "43073",
+   "43101",
+   "43143"
+  ]
+ },
+ {
+  "codi_ine": "08294",
+  "nom": "Vallgorguina",
+  "provincia": "Barcelona",
+  "veins": [
+   "08007",
+   "08075",
+   "08193",
+   "08202",
+   "08259",
+   "08306"
+  ]
+ },
+ {
+  "codi_ine": "08295",
+  "nom": "Vallirana",
+  "provincia": "Barcelona",
+  "veins": [
+   "08020",
+   "08068",
+   "08146",
+   "08273",
+   "08289"
+  ]
+ },
+ {
+  "codi_ine": "43160",
+  "nom": "Vallmoll",
+  "provincia": "Tarragona",
+  "veins": [
+   "43066",
+   "43080",
+   "43095",
+   "43098",
+   "43119",
+   "43134",
+   "43144",
+   "43161"
+  ]
+ },
+ {
+  "codi_ine": "08296",
+  "nom": "Vallromanes",
+  "provincia": "Barcelona",
+  "veins": [
+   "08003",
+   "08136",
+   "08214",
+   "08230",
+   "08256",
+   "08281",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "43161",
+  "nom": "Valls",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43010",
+   "43059",
+   "43080",
+   "43083",
+   "43086",
+   "43108",
+   "43119",
+   "43124",
+   "43160"
+  ]
+ },
+ {
+  "codi_ine": "43162",
+  "nom": "Vandellòs i l'Hospitalet de l'Infant",
+  "provincia": "Tarragona",
+  "veins": [
+   "43013",
+   "43092",
+   "43118",
+   "43150"
+  ]
+ },
+ {
+  "codi_ine": "08297",
+  "nom": "Veciana",
+  "provincia": "Barcelona",
+  "veins": [
+   "08008",
+   "08071",
+   "08103",
+   "08170",
+   "08176",
+   "08185",
+   "25192"
+  ]
+ },
+ {
+  "codi_ine": "17210",
+  "nom": "Ventalló",
+  "provincia": "Girona",
+  "veins": [
+   "17011",
+   "17062",
+   "17076",
+   "17175",
+   "17176",
+   "17198",
+   "17217",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "25242",
+  "nom": "Verdú",
+  "provincia": "Lleida",
+  "veins": [
+   "25074",
+   "25104",
+   "25109",
+   "25143",
+   "25145",
+   "25176",
+   "25217",
+   "25244",
+   "25902"
+  ]
+ },
+ {
+  "codi_ine": "17211",
+  "nom": "Verges",
+  "provincia": "Girona",
+  "veins": [
+   "17068",
+   "17076",
+   "17085",
+   "17191",
+   "17195",
+   "17203"
+  ]
+ },
+ {
+  "codi_ine": "43164",
+  "nom": "Vespella de Gaià",
+  "provincia": "Tarragona",
+  "veins": [
+   "43030",
+   "43043",
+   "43097",
+   "43111",
+   "43122",
+   "43126",
+   "43135",
+   "43165"
+  ]
+ },
+ {
+  "codi_ine": "08298",
+  "nom": "Vic",
+  "provincia": "Barcelona",
+  "veins": [
+   "08037",
+   "08083",
+   "08100",
+   "08111",
+   "08129",
+   "08199",
+   "08246",
+   "08247"
+  ]
+ },
+ {
+  "codi_ine": "17212",
+  "nom": "Vidrà",
+  "provincia": "Girona",
+  "veins": [
+   "08233",
+   "08253",
+   "17147",
+   "17149",
+   "17170",
+   "17207"
+  ]
+ },
+ {
+  "codi_ine": "17213",
+  "nom": "Vidreres",
+  "provincia": "Girona",
+  "veins": [
+   "17033",
+   "17095",
+   "17103",
+   "17193",
+   "17202"
+  ]
+ },
+ {
+  "codi_ine": "25243",
+  "nom": "Vielha e Mijaran",
+  "provincia": "Lleida",
+  "veins": [
+   "25025",
+   "25057",
+   "25063",
+   "25245",
+   "25247"
+  ]
+ },
+ {
+  "codi_ine": "43170",
+  "nom": "Vila-rodona",
+  "provincia": "Tarragona",
+  "veins": [
+   "43001",
+   "43010",
+   "43034",
+   "43089",
+   "43090",
+   "43108",
+   "43132"
+  ]
+ },
+ {
+  "codi_ine": "17230",
+  "nom": "Vila-sacra",
+  "provincia": "Girona",
+  "veins": [
+   "17005",
+   "17066",
+   "17074",
+   "17132"
+  ]
+ },
+ {
+  "codi_ine": "25252",
+  "nom": "Vila-sana",
+  "provincia": "Lleida",
+  "veins": [
+   "25068",
+   "25099",
+   "25113",
+   "25122",
+   "25137",
+   "25158",
+   "25168"
+  ]
+ },
+ {
+  "codi_ine": "43171",
+  "nom": "Vila-seca",
+  "provincia": "Tarragona",
+  "veins": [
+   "43038",
+   "43123",
+   "43129",
+   "43148",
+   "43905",
+   "43907"
+  ]
+ },
+ {
+  "codi_ine": "43165",
+  "nom": "Vilabella",
+  "provincia": "Tarragona",
+  "veins": [
+   "43034",
+   "43089",
+   "43098",
+   "43119",
+   "43122",
+   "43135",
+   "43164"
+  ]
+ },
+ {
+  "codi_ine": "17214",
+  "nom": "Vilabertran",
+  "provincia": "Girona",
+  "veins": [
+   "17030",
+   "17066",
+   "17132"
+  ]
+ },
+ {
+  "codi_ine": "17215",
+  "nom": "Vilablareix",
+  "provincia": "Girona",
+  "veins": [
+   "17002",
+   "17020",
+   "17073",
+   "17079",
+   "17155"
+  ]
+ },
+ {
+  "codi_ine": "08299",
+  "nom": "Vilada",
+  "provincia": "Barcelona",
+  "veins": [
+   "08024",
+   "08057",
+   "08142",
+   "08177",
+   "08268"
+  ]
+ },
+ {
+  "codi_ine": "17217",
+  "nom": "Viladamat",
+  "provincia": "Girona",
+  "veins": [
+   "17004",
+   "17062",
+   "17076",
+   "17195",
+   "17210"
+  ]
+ },
+ {
+  "codi_ine": "17216",
+  "nom": "Viladasens",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17050",
+   "17166",
+   "17187",
+   "17218",
+   "17232"
+  ]
+ },
+ {
+  "codi_ine": "08301",
+  "nom": "Viladecans",
+  "provincia": "Barcelona",
+  "veins": [
+   "08089",
+   "08169",
+   "08200",
+   "08204"
+  ]
+ },
+ {
+  "codi_ine": "08300",
+  "nom": "Viladecavalls",
+  "provincia": "Barcelona",
+  "veins": [
+   "08001",
+   "08147",
+   "08279",
+   "08290",
+   "08291"
+  ]
+ },
+ {
+  "codi_ine": "17218",
+  "nom": "Vilademuls",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17031",
+   "17050",
+   "17056",
+   "17065",
+   "17071",
+   "17111",
+   "17136",
+   "17169",
+   "17216"
+  ]
+ },
+ {
+  "codi_ine": "17220",
+  "nom": "Viladrau",
+  "provincia": "Girona",
+  "veins": [
+   "08026",
+   "08137",
+   "08220",
+   "08241",
+   "08269",
+   "08278",
+   "17009",
+   "17063"
+  ]
+ },
+ {
+  "codi_ine": "17221",
+  "nom": "Vilafant",
+  "provincia": "Girona",
+  "veins": [
+   "17012",
+   "17026",
+   "17066",
+   "17093",
+   "17182"
+  ]
+ },
+ {
+  "codi_ine": "08305",
+  "nom": "Vilafranca del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08027",
+   "08094",
+   "08145",
+   "08154",
+   "08206",
+   "08251"
+  ]
+ },
+ {
+  "codi_ine": "25244",
+  "nom": "Vilagrassa",
+  "provincia": "Lleida",
+  "veins": [
+   "25027",
+   "25050",
+   "25176",
+   "25217",
+   "25242"
+  ]
+ },
+ {
+  "codi_ine": "17223",
+  "nom": "Vilajuïga",
+  "provincia": "Girona",
+  "veins": [
+   "17077",
+   "17092",
+   "17128",
+   "17129",
+   "17140"
+  ]
+ },
+ {
+  "codi_ine": "43175",
+  "nom": "Vilalba dels Arcs",
+  "provincia": "Tarragona",
+  "veins": [
+   "43022",
+   "43048",
+   "43056",
+   "43064",
+   "43110",
+   "43125"
+  ]
+ },
+ {
+  "codi_ine": "08306",
+  "nom": "Vilalba Sasserra",
+  "provincia": "Barcelona",
+  "veins": [
+   "08075",
+   "08106",
+   "08294"
+  ]
+ },
+ {
+  "codi_ine": "25245",
+  "nom": "Vilaller",
+  "provincia": "Lleida",
+  "veins": [
+   "25025",
+   "25043",
+   "25173",
+   "25243"
+  ]
+ },
+ {
+  "codi_ine": "17224",
+  "nom": "Vilallonga de Ter",
+  "provincia": "Girona",
+  "veins": [
+   "17039",
+   "17043",
+   "17091",
+   "17112",
+   "17125",
+   "17192"
+  ]
+ },
+ {
+  "codi_ine": "43166",
+  "nom": "Vilallonga del Camp",
+  "provincia": "Tarragona",
+  "veins": [
+   "43005",
+   "43095",
+   "43103",
+   "43109",
+   "43134",
+   "43145"
+  ]
+ },
+ {
+  "codi_ine": "17225",
+  "nom": "Vilamacolum",
+  "provincia": "Girona",
+  "veins": [
+   "17047",
+   "17151",
+   "17178",
+   "17198"
+  ]
+ },
+ {
+  "codi_ine": "17226",
+  "nom": "Vilamalla",
+  "provincia": "Girona",
+  "veins": [
+   "17005",
+   "17026",
+   "17052",
+   "17074",
+   "17075",
+   "17182"
+  ]
+ },
+ {
+  "codi_ine": "17227",
+  "nom": "Vilamaniscle",
+  "provincia": "Girona",
+  "veins": [
+   "17077",
+   "17092",
+   "17143"
+  ]
+ },
+ {
+  "codi_ine": "25247",
+  "nom": "Vilamòs",
+  "provincia": "Lleida",
+  "veins": [
+   "25031",
+   "25057",
+   "25059",
+   "25121",
+   "25243"
+  ]
+ },
+ {
+  "codi_ine": "17228",
+  "nom": "Vilanant",
+  "provincia": "Girona",
+  "veins": [
+   "17012",
+   "17051",
+   "17093",
+   "17111",
+   "17115",
+   "17196"
+  ]
+ },
+ {
+  "codi_ine": "43167",
+  "nom": "Vilanova d'Escornalbou",
+  "provincia": "Tarragona",
+  "veins": [
+   "43017",
+   "43045",
+   "43092",
+   "43127"
+  ]
+ },
+ {
+  "codi_ine": "25248",
+  "nom": "Vilanova de Bellpuig",
+  "provincia": "Lleida",
+  "veins": [
+   "25029",
+   "25046",
+   "25050",
+   "25068",
+   "25099",
+   "25135"
+  ]
+ },
+ {
+  "codi_ine": "25249",
+  "nom": "Vilanova de l'Aguda",
+  "provincia": "Lleida",
+  "veins": [
+   "25044",
+   "25060",
+   "25150",
+   "25166",
+   "25191",
+   "25222",
+   "25907"
+  ]
+ },
+ {
+  "codi_ine": "25254",
+  "nom": "Vilanova de la Barca",
+  "provincia": "Lleida",
+  "veins": [
+   "25012",
+   "25048",
+   "25052",
+   "25078",
+   "25134",
+   "25220",
+   "25231"
+  ]
+ },
+ {
+  "codi_ine": "25250",
+  "nom": "Vilanova de Meià",
+  "provincia": "Lleida",
+  "veins": [
+   "25002",
+   "25022",
+   "25034",
+   "25062",
+   "25098",
+   "25115",
+   "25128"
+  ]
+ },
+ {
+  "codi_ine": "43168",
+  "nom": "Vilanova de Prades",
+  "provincia": "Tarragona",
+  "veins": [
+   "25169",
+   "25253",
+   "43049",
+   "43116",
+   "43157",
+   "43158"
+  ]
+ },
+ {
+  "codi_ine": "08303",
+  "nom": "Vilanova de Sau",
+  "provincia": "Barcelona",
+  "veins": [
+   "08116",
+   "08241",
+   "08275",
+   "08280",
+   "08901",
+   "17063",
+   "17164"
+  ]
+ },
+ {
+  "codi_ine": "25251",
+  "nom": "Vilanova de Segrià",
+  "provincia": "Lleida",
+  "veins": [
+   "25016",
+   "25053",
+   "25078",
+   "25174",
+   "25189",
+   "25228"
+  ]
+ },
+ {
+  "codi_ine": "08302",
+  "nom": "Vilanova del Camí",
+  "provincia": "Barcelona",
+  "veins": [
+   "08048",
+   "08102",
+   "08143",
+   "08152",
+   "08165",
+   "08250"
+  ]
+ },
+ {
+  "codi_ine": "08902",
+  "nom": "Vilanova del Vallès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08096",
+   "08136",
+   "08153",
+   "08181",
+   "08214",
+   "08296"
+  ]
+ },
+ {
+  "codi_ine": "08307",
+  "nom": "Vilanova i la Geltrú",
+  "provincia": "Barcelona",
+  "veins": [
+   "08043",
+   "08058",
+   "08074",
+   "08231"
+  ]
+ },
+ {
+  "codi_ine": "43169",
+  "nom": "Vilaplana",
+  "provincia": "Tarragona",
+  "veins": [
+   "43003",
+   "43007",
+   "43009",
+   "43015",
+   "43039",
+   "43057",
+   "43091"
+  ]
+ },
+ {
+  "codi_ine": "08214",
+  "nom": "Vilassar de Dalt",
+  "provincia": "Barcelona",
+  "veins": [
+   "08030",
+   "08153",
+   "08219",
+   "08230",
+   "08296",
+   "08902"
+  ]
+ },
+ {
+  "codi_ine": "08219",
+  "nom": "Vilassar de Mar",
+  "provincia": "Barcelona",
+  "veins": [
+   "08029",
+   "08030",
+   "08172",
+   "08214",
+   "08230"
+  ]
+ },
+ {
+  "codi_ine": "17222",
+  "nom": "Vilaür",
+  "provincia": "Girona",
+  "veins": [
+   "17016",
+   "17075",
+   "17176",
+   "17187"
+  ]
+ },
+ {
+  "codi_ine": "43172",
+  "nom": "Vilaverd",
+  "provincia": "Tarragona",
+  "veins": [
+   "43086",
+   "43124"
+  ]
+ },
+ {
+  "codi_ine": "17233",
+  "nom": "Vilobí d'Onyar",
+  "provincia": "Girona",
+  "veins": [
+   "17002",
+   "17020",
+   "17028",
+   "17033",
+   "17150",
+   "17180",
+   "17193"
+  ]
+ },
+ {
+  "codi_ine": "08304",
+  "nom": "Vilobí del Penedès",
+  "provincia": "Barcelona",
+  "veins": [
+   "08027",
+   "08085",
+   "08094",
+   "08154",
+   "08227"
+  ]
+ },
+ {
+  "codi_ine": "17232",
+  "nom": "Vilopriu",
+  "provincia": "Girona",
+  "veins": [
+   "17055",
+   "17076",
+   "17085",
+   "17166",
+   "17176",
+   "17187",
+   "17210",
+   "17216"
+  ]
+ },
+ {
+  "codi_ine": "43176",
+  "nom": "Vimbodí i Poblet",
+  "provincia": "Tarragona",
+  "veins": [
+   "25097",
+   "25218",
+   "25255",
+   "43054",
+   "43086",
+   "43116",
+   "43158"
+  ]
+ },
+ {
+  "codi_ine": "25255",
+  "nom": "Vinaixa",
+  "provincia": "Lleida",
+  "veins": [
+   "25009",
+   "25058",
+   "25081",
+   "25092",
+   "25097",
+   "25153",
+   "25218",
+   "25253",
+   "43158",
+   "43176"
+  ]
+ },
+ {
+  "codi_ine": "43177",
+  "nom": "Vinebre",
+  "provincia": "Tarragona",
+  "veins": [
+   "43019",
+   "43035",
+   "43060",
+   "43065",
+   "43099",
+   "43152"
+  ]
+ },
+ {
+  "codi_ine": "43178",
+  "nom": "Vinyols i els Arcs",
+  "provincia": "Tarragona",
+  "veins": [
+   "43038",
+   "43088",
+   "43129"
+  ]
+ },
+ {
+  "codi_ine": "08308",
+  "nom": "Viver i Serrateix",
+  "provincia": "Barcelona",
+  "veins": [
+   "08047",
+   "08049",
+   "08130",
+   "08132",
+   "08141",
+   "08175"
+  ]
+ },
+ {
+  "codi_ine": "43052",
+  "nom": "Xerta",
+  "provincia": "Tarragona",
+  "veins": [
+   "43006",
+   "43008",
+   "43025",
+   "43102",
+   "43149"
+  ]
+ }
+]
