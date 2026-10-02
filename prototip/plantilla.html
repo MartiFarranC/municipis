@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Descobreix Catalunya — mapa interactiu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#0B0E13; --surface:#151A22; --surface2:#1C2330; --line:#273041;
+  --text:#EEF1F5; --muted:#9AA4B2; --amber:#F2B544; --amber-dim:#B8862F; --amber-ink:#1A1305;
+  --blue:#5AB8E8; --fog:#161B23; --frontier:#2E2918;
+  --display:'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --body:'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0B0E13; --text:#EEF1F5; } }
+:root[data-theme="dark"]{ --bg:#0B0E13; --text:#EEF1F5; }
+html{ height:100%; scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--body); overflow:hidden; -webkit-tap-highlight-color:transparent; }
+button,input{ font:inherit; color:inherit; }
+button{ cursor:pointer; }
+:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+
+#app{ position:relative; height:100%; overflow:hidden; }
+#map{ position:absolute; inset:0; width:100%; height:100%; touch-action:none; display:block; cursor:grab; }
+#map.dragging{ cursor:grabbing; }
+#map path{ vector-effect:non-scaling-stroke; stroke:var(--bg); stroke-width:.9; stroke-linejoin:round; }
+#map .fog{ fill:var(--fog); }
+#map .fog:hover{ fill:#1E2530; }
+#map .frontier{ fill:url(#hatch); }
+#map .frontier:hover{ fill:#3A3320; }
+#map .unlocked{ fill:var(--amber-dim); stroke-width:1.3; }
+#map .home{ fill:var(--amber); }
+#litLayer{ filter:drop-shadow(0 0 6px rgba(242,181,68,.55)); }
+#map .sel{ fill:none; stroke:var(--blue); stroke-width:2.6; pointer-events:none; }
+#labels text{ font-family:var(--display); font-weight:700; fill:var(--text); paint-order:stroke; stroke:var(--bg); stroke-linejoin:round; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+#labels text.lt-unlocked{ fill:var(--amber); }
+#labels text.lt-frontier{ fill:#D9C9A0; }
+#labels text.lt-fog{ fill:#7D8796; font-weight:600; }
+
+.hud{ position:absolute; top:0; left:0; right:0; padding:12px; display:flex; gap:8px; align-items:flex-start; pointer-events:none; }
+.hud > *{ pointer-events:auto; }
+.pill{ display:flex; align-items:center; gap:8px; min-height:44px; padding:0 14px; border-radius:999px; background:rgba(21,26,34,.94); border:1px solid var(--line); }
+.pill strong{ font-family:var(--display); font-size:17px; }
+.count{ flex-direction:column; align-items:flex-start; justify-content:center; gap:0; border-radius:14px; padding:4px 14px; }
+.count b{ font-family:var(--display); font-size:18px; color:var(--amber); line-height:1.1; }
+.count span{ font-size:12px; color:var(--muted); }
+.search{ position:relative; flex:1; min-width:0; }
+.search input{ width:100%; min-height:44px; padding:0 14px 0 40px; border-radius:14px; background:rgba(21,26,34,.94); border:1px solid var(--line); outline:none; font-size:16px; }
+.search input:focus{ border-color:var(--blue); }
+.search svg{ position:absolute; left:12px; top:12px; }
+.results{ position:absolute; top:50px; left:0; right:0; background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; max-height:50vh; overflow-y:auto; }
+.results button{ display:flex; justify-content:space-between; align-items:center; width:100%; min-height:46px; padding:0 14px; background:none; border:0; border-bottom:1px solid var(--line); text-align:left; }
+.results button:last-child{ border-bottom:0; }
+.results button:hover,.results button:focus-visible{ background:var(--surface2); }
+.tag{ font-size:12px; color:var(--muted); }
+.tag.u{ color:var(--amber); } .tag.f{ color:#D9C9A0; }
+
+.fab{ position:absolute; right:12px; display:flex; flex-direction:column; gap:8px; top:68px; }
+.iconbtn{ width:44px; height:44px; border-radius:12px; background:rgba(21,26,34,.94); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+
+.sheet{ position:absolute; left:0; right:0; bottom:0; margin:0 auto; max-width:520px; background:var(--surface); border:1px solid var(--line); border-bottom:0; border-radius:20px 20px 0 0; padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px)); transform:translateY(105%); transition:transform .22s ease; max-height:62%; overflow-y:auto; }
+.sheet.open{ transform:none; }
+.sheet .grab{ width:40px; height:4px; border-radius:2px; background:var(--line); margin:0 auto 12px; }
+.sheet h2{ margin:0; font-family:var(--display); font-size:28px; line-height:1.1; }
+.state{ font-size:14px; color:var(--muted); margin:4px 0 14px; }
+.state.u{ color:var(--amber); } .state.f{ color:#D9C9A0; }
+.actions{ display:flex; flex-direction:column; gap:8px; }
+.btn{ min-height:50px; border-radius:14px; border:1px solid var(--line); background:var(--surface2); font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0 16px; text-align:left; }
+.btn.primary{ background:var(--amber); color:var(--amber-ink); border-color:var(--amber); font-family:var(--display); font-size:17px; justify-content:center; }
+.btn.primary:disabled{ background:var(--surface2); color:var(--muted); border-color:var(--line); cursor:not-allowed; }
+.btn.ghost{ background:transparent; color:var(--blue); justify-content:center; }
+.btn.done{ color:var(--muted); }
+.btn .pts{ font-family:var(--display); color:var(--amber); }
+.note{ font-size:13px; color:var(--muted); line-height:1.45; margin:10px 0 0; }
+.neigh{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.neigh button{ min-height:36px; padding:0 12px; border-radius:999px; border:1px solid var(--line); background:transparent; font-size:13px; }
+.neigh button.u{ border-color:var(--amber-dim); color:var(--amber); }
+.sub{ font-family:var(--display); font-size:15px; margin:18px 0 0; color:var(--muted); font-weight:600; }
+.photo{ width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:14px; display:block; margin-bottom:12px; border:1px solid var(--line); }
+.closebtn{ position:absolute; right:12px; top:12px; }
+
+.toast{ position:absolute; left:50%; top:70px; transform:translate(-50%,-20px); opacity:0; background:var(--amber); color:var(--amber-ink); font-family:var(--display); font-weight:700; padding:10px 16px; border-radius:12px; transition:.25s; pointer-events:none; white-space:nowrap; }
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+
+.onboard{ position:absolute; inset:0; background:rgba(11,14,19,.86); display:flex; align-items:center; justify-content:center; padding:20px; }
+.onboard .card{ width:100%; max-width:420px; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:24px 20px; }
+.onboard h1{ font-family:var(--display); font-size:34px; margin:0 0 8px; line-height:1.05; }
+.onboard p{ color:var(--muted); margin:0 0 16px; line-height:1.5; }
+.onboard .search .results{ position:static; margin-top:8px; }
+.hidden{ display:none !important; }
+@media (prefers-reduced-motion: reduce){ .sheet,.toast{ transition:none; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <svg id="map" aria-label="Mapa dels 947 municipis de Catalunya" role="img">
+    <defs>
+      <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+        <rect width="6" height="6" fill="#2A2618"></rect>
+        <rect width="2" height="6" fill="#4A3E1E"></rect>
+      </pattern>
+    </defs>
+    <g id="world">
+      <g id="fogLayer"></g>
+      <g id="litLayer"></g>
+      <path id="selPath" class="sel" d=""></path>
+      <g id="labels"></g>
+    </g>
+  </svg>
+
+  <div class="hud">
+    <div class="pill" title="Punts">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2B544" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M9 9.5h4.5a1.75 1.75 0 0 1 0 3.5h-3a1.75 1.75 0 0 0 0 3.5H15"></path></svg>
+      <strong id="pts">0</strong>
+    </div>
+    <div class="search" id="topSearch">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9AA4B2" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <label for="q" class="hidden">Busca un municipi</label>
+      <input id="q" aria-label="Busca un municipi" placeholder="Busca un municipi" autocomplete="off">
+      <div class="results hidden" id="qres"></div>
+    </div>
+    <div class="pill count"><b id="cnt">0</b><span>de 947</span></div>
+  </div>
+
+  <div class="fab">
+    <button class="iconbtn" id="homeBtn" aria-label="Anar al meu municipi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EEF1F5" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg></button>
+    <button class="iconbtn" id="allBtn" aria-label="Veure tota Catalunya"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EEF1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg></button>
+    <button class="iconbtn" id="resetBtn" aria-label="Tornar a començar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EEF1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></svg></button>
+  </div>
+
+  <div class="sheet" id="sheet" aria-live="polite">
+    <div class="grab"></div>
+    <button class="iconbtn closebtn" id="closeSheet" aria-label="Tancar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EEF1F5" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <div id="sheetBody"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <input type="file" accept="image/*" id="fileIn" class="hidden">
+
+  <div class="onboard" id="onboard">
+    <div class="card">
+      <h1>D'on ets?</h1>
+      <p>El teu municipi serà el primer que s'il·lumini. Els altres 946 són a la boira.</p>
+      <div class="search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9AA4B2" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+        <label for="oq" class="hidden">Busca el teu municipi</label>
+        <input id="oq" aria-label="Busca el teu municipi" placeholder="Busca el teu municipi" autocomplete="off">
+        <div class="results" id="oqres"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = __DATA__;
+const M = DATA.m, N = M.length;
+const NS = 'http://www.w3.org/2000/svg';
+const $ = (id) => document.getElementById(id);
+const svg = $('map'), world = $('world'), fogLayer = $('fogLayer'), litLayer = $('litLayer'), labelsG = $('labels'), selPath = $('selPath');
+const byCode = {}; M.forEach((m, i) => { byCode[m.c] = i; });
+const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/^(l'|el |la |els |les )/, '');
+M.forEach((m) => { m.k = norm(m.n); });
+
+/* ---------- state ---------- */
+const KEY = 'descobreix-catalunya-v1';
+let S = { home: null, unlocked: [], visited: [], photos: {}, points: 0 };
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); return true; }
+  catch (e) { return false; }
+}
+const unlocked = () => new Set(S.unlocked.map((c) => byCode[c]));
+const isUnlocked = (i) => S.unlocked.includes(M[i].c);
+const cost = () => 50 + 10 * Math.max(0, S.unlocked.length - 1);
+function frontierSet(U) { const F = new Set(); U.forEach((u) => M[u].v.forEach((n) => { if (!U.has(n)) F.add(n); })); return F; }
+function distance(i, U) {
+  if (U.has(i)) return 0;
+  const seen = new Set(U); let q = [...U], d = 0;
+  while (q.length) { d++; const nq = []; for (const u of q) for (const n of M[u].v) { if (n === i) return d; if (!seen.has(n)) { seen.add(n); nq.push(n); } } q = nq; }
+  return Infinity;
+}
+
+/* ---------- build map ---------- */
+const paths = M.map((m, i) => {
+  const p = document.createElementNS(NS, 'path');
+  p.setAttribute('d', m.d); p.dataset.i = i;
+  const t = document.createElementNS(NS, 'title'); t.textContent = m.n; p.appendChild(t);
+  return p;
+});
+const labelEls = M.map((m) => { const t = document.createElementNS(NS, 'text'); t.setAttribute('x', m.x); t.setAttribute('y', m.y); t.textContent = m.n; return t; });
+
+let selected = null;
+function render() {
+  const U = unlocked(), F = frontierSet(U), homeI = S.home ? byCode[S.home] : -1;
+  fogLayer.textContent = ''; litLayer.textContent = ''; labelsG.textContent = '';
+  const fogFrag = document.createDocumentFragment(), litFrag = document.createDocumentFragment();
+  paths.forEach((p, i) => {
+    if (U.has(i)) { p.setAttribute('class', 'unlocked' + (i === homeI ? ' home' : '')); litFrag.appendChild(p); }
+    else { p.setAttribute('class', F.has(i) ? 'frontier' : 'fog'); fogFrag.appendChild(p); }
+  });
+  fogLayer.appendChild(fogFrag); litLayer.appendChild(litFrag);
+  updateLabels(U, F);
+  $('pts').textContent = S.points.toLocaleString('ca');
+  $('cnt').textContent = S.unlocked.length;
+  selPath.setAttribute('d', selected != null ? M[selected].d : '');
+}
+
+/* ---------- view (pan / zoom) ---------- */
+const V = { k: 1, x: 0, y: 0 };
+let kMin = 1, kMax = 60;
+function size() { const r = svg.getBoundingClientRect(); return { w: r.width, h: r.height, l: r.left, t: r.top }; }
+function fitAll() {
+  const s = size(); kMin = Math.min(s.w / DATA.w, s.h / DATA.h) * 0.92; kMax = kMin * 70;
+  return { k: kMin, x: (s.w - DATA.w * kMin) / 2, y: (s.h - DATA.h * kMin) / 2 };
+}
+let lastLabelMode = '';
+function apply() {
+  world.setAttribute('transform', `translate(${V.x},${V.y}) scale(${V.k})`);
+  labelsG.setAttribute('font-size', (13 / V.k).toFixed(3));
+  labelsG.setAttribute('stroke-width', (3.5 / V.k).toFixed(3));
+  const z = V.k / kMin, mode = z > 18 ? 'all' : z > 7 ? 'near' : z > 3 ? 'lit' : 'none';
+  if (mode !== lastLabelMode) { lastLabelMode = mode; updateLabels(); }
+}
+function updateLabels(U, F) {
+  U = U || unlocked(); F = F || frontierSet(U);
+  labelsG.textContent = '';
+  const mode = lastLabelMode, frag = document.createDocumentFragment();
+  if (mode === 'none') return;
+  M.forEach((m, i) => {
+    const cls = U.has(i) ? 'lt-unlocked' : F.has(i) ? 'lt-frontier' : 'lt-fog';
+    if (cls === 'lt-unlocked' || (cls === 'lt-frontier' && mode !== 'lit') || mode === 'all') {
+      labelEls[i].setAttribute('class', cls); frag.appendChild(labelEls[i]);
+    }
+  });
+  labelsG.appendChild(frag);
+}
+function zoomAt(px, py, f) {
+  const k2 = Math.max(kMin, Math.min(kMax, V.k * f)); f = k2 / V.k;
+  V.x = px - (px - V.x) * f; V.y = py - (py - V.y) * f; V.k = k2; apply();
+}
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateTo(T) {
+  if (reduce) { Object.assign(V, T); apply(); return; }
+  const A = { ...V }, t0 = performance.now(), dur = 550;
+  (function step(t) {
+    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    const lk = Math.exp(Math.log(A.k) + (Math.log(T.k) - Math.log(A.k)) * e);
+    V.k = lk; V.x = A.x + (T.x - A.x) * e; V.y = A.y + (T.y - A.y) * e; apply();
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+function flyTo(i, zoom) {
+  const s = size(), k = Math.max(kMin * (zoom || 14), Math.min(V.k, kMax));
+  const sheetH = $('sheet').classList.contains('open') ? Math.min(s.h * 0.45, 320) : 0;
+  animateTo({ k, x: s.w / 2 - M[i].x * k, y: (s.h - sheetH) / 2 - M[i].y * k });
+}
+
+const ptrs = new Map(); let moved = 0, pinch = null, downAt = null;
+svg.addEventListener('pointerdown', (e) => {
+  svg.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  moved = 0; downAt = { x: e.clientX, y: e.clientY, target: e.target };
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y) }; }
+  svg.classList.add('dragging');
+});
+svg.addEventListener('pointermove', (e) => {
+  if (!ptrs.has(e.pointerId)) return;
+  const prev = ptrs.get(e.pointerId), cur = { x: e.clientX, y: e.clientY };
+  ptrs.set(e.pointerId, cur);
+  const s = size();
+  if (ptrs.size === 1) { V.x += cur.x - prev.x; V.y += cur.y - prev.y; moved += Math.abs(cur.x - prev.x) + Math.abs(cur.y - prev.y); apply(); }
+  else if (ptrs.size === 2 && pinch) {
+    const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
+    zoomAt((a.x + b.x) / 2 - s.l, (a.y + b.y) / 2 - s.t, d / pinch.d); pinch.d = d; moved += 99;
+  }
+});
+function endPtr(e) {
+  ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null;
+  if (ptrs.size === 0) {
+    svg.classList.remove('dragging');
+    if (moved < 6 && downAt && downAt.target && downAt.target.dataset && downAt.target.dataset.i != null) select(+downAt.target.dataset.i);
+    downAt = null;
+  }
+}
+svg.addEventListener('pointerup', endPtr); svg.addEventListener('pointercancel', endPtr);
+svg.addEventListener('wheel', (e) => { e.preventDefault(); const s = size(); zoomAt(e.clientX - s.l, e.clientY - s.t, Math.exp(-e.deltaY * 0.0018)); }, { passive: false });
+svg.addEventListener('dblclick', (e) => { const s = size(); zoomAt(e.clientX - s.l, e.clientY - s.t, 2); });
+window.addEventListener('resize', () => { const k0 = kMin; const f = fitAll(); if (k0 === 1) Object.assign(V, f); apply(); });
+
+/* ---------- selection sheet ---------- */
+const sheet = $('sheet'), body = $('sheetBody');
+function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function select(i) {
+  selected = i; selPath.setAttribute('d', M[i].d);
+  fillSheet(); sheet.classList.add('open');
+}
+function closeSheet() { sheet.classList.remove('open'); selected = null; selPath.setAttribute('d', ''); }
+$('closeSheet').onclick = closeSheet;
+
+function fillSheet() {
+  const i = selected; if (i == null) return;
+  const m = M[i], U = unlocked(), F = frontierSet(U), c = m.c;
+  let h = '';
+  if (S.photos[c]) h += `<img class="photo" src="${S.photos[c]}" alt="La teva foto de ${esc(m.n)}">`;
+  h += `<h2>${esc(m.n)}</h2>`;
+  if (U.has(i)) {
+    const vis = S.visited.includes(c), ph = !!S.photos[c];
+    h += `<div class="state u">${S.home === c ? 'El teu municipi' : 'Descobert'}</div><div class="actions">`;
+    h += `<button class="btn ${vis ? 'done' : ''}" data-act="visit" ${vis ? 'disabled' : ''}><span>${vis ? 'Visitat' : 'Fer check-in (hi soc)'}</span><span class="pts">${vis ? '✓' : '+50'}</span></button>`;
+    h += `<button class="btn ${ph ? 'done' : ''}" data-act="photo"><span>${ph ? 'Canviar la foto' : 'Afegir una foto'}</span><span class="pts">${ph ? '' : '+30'}</span></button>`;
+    h += `</div><p class="note">Les missions de cada municipi (monuments, llocs i productes) es generaran a partir de dades reals de Wikidata i OpenStreetMap a l'app final.</p>`;
+  } else if (F.has(i)) {
+    const k = cost(), ok = S.points >= k;
+    h += `<div class="state f">Disponible: fa frontera amb un municipi descobert</div><div class="actions">`;
+    h += `<button class="btn primary" data-act="unlock" ${ok ? '' : 'disabled'}>Desbloquejar per ${k} punts</button>`;
+    h += `<button class="btn ghost" data-act="checkin">Hi soc ara: desbloqueja'l amb el GPS</button></div>`;
+    if (!ok) h += `<p class="note">Et falten ${k - S.points} punts. Fes check-in o afegeix fotos als municipis que ja tens.</p>`;
+  } else {
+    const d = distance(i, U);
+    h += `<div class="state">A la boira · a ${d} ${d === 1 ? 'municipi' : 'municipis'} del teu territori</div><div class="actions">`;
+    h += `<button class="btn ghost" data-act="checkin">Hi soc ara: desbloqueja'l amb el GPS</button></div>`;
+    h += `<p class="note">Desbloqueja els municipis del camí per arribar-hi amb punts, o visita'l en persona.</p>`;
+  }
+  h += `<div class="sub">Fa frontera amb</div><div class="neigh">`;
+  m.v.map((n) => [n, M[n].n]).sort((a, b) => a[1].localeCompare(b[1], 'ca')).forEach(([n, name]) => {
+    h += `<button class="${U.has(n) ? 'u' : ''}" data-go="${n}">${esc(name)}</button>`;
+  });
+  h += `</div>`;
+  body.innerHTML = h;
+}
+body.addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.go) { const n = +b.dataset.go; select(n); flyTo(n); return; }
+  const act = b.dataset.act, i = selected, c = M[i].c;
+  if (act === 'visit') verifyPresence(i, () => { if (!S.visited.includes(c)) { S.visited.push(c); gain(50, 'Check-in fet'); } });
+  if (act === 'photo') $('fileIn').click();
+  if (act === 'unlock') { const k = cost(); if (S.points >= k) { S.points -= k; S.unlocked.push(c); afterUnlock(i, `${M[i].n} desbloquejat`); } }
+  if (act === 'checkin') verifyPresence(i, () => { if (!S.unlocked.includes(c)) S.unlocked.push(c); if (!S.visited.includes(c)) { S.visited.push(c); S.points += 50; } afterUnlock(i, `${M[i].n} desbloquejat · +50`); });
+});
+function gain(p, msg) { S.points += p; save(); render(); fillSheet(); toast(`${msg} · +${p}`); }
+function afterUnlock(i, msg) { save(); render(); fillSheet(); toast(msg); }
+
+/* presence check: real GPS against the real boundary; demo fallback */
+function lonLatToXY(lon, lat) {
+  const r = Math.PI / 180;
+  return [DATA.ps * lon * r + DATA.pt[0], -DATA.ps * Math.log(Math.tan(Math.PI / 4 + lat * r / 2)) + DATA.pt[1]];
+}
+function verifyPresence(i, onOk) {
+  const fallback = (why) => {
+    body.insertAdjacentHTML('beforeend', `<p class="note" id="gpsMsg">${why}</p><div class="actions" style="margin-top:8px"><button class="btn" id="simBtn"><span>Simular que hi soc (prova)</span></button></div>`);
+    $('simBtn').onclick = () => onOk();
+  };
+  const old = $('gpsMsg'); if (old) { old.nextElementSibling && old.nextElementSibling.remove(); old.remove(); }
+  if (!navigator.geolocation) { fallback('Aquest navegador no dona la ubicació.'); return; }
+  toast('Comprovant la ubicació…');
+  navigator.geolocation.getCurrentPosition((pos) => {
+    const [x, y] = lonLatToXY(pos.coords.longitude, pos.coords.latitude);
+    let inside = false;
+    try { const pt = svg.createSVGPoint(); pt.x = x; pt.y = y; inside = paths[i].isPointInFill(pt); } catch (e) {}
+    if (inside) onOk();
+    else {
+      let where = null; for (let j = 0; j < N && where == null; j++) { try { const pt = svg.createSVGPoint(); pt.x = x; pt.y = y; if (paths[j].isPointInFill(pt)) where = j; } catch (e) {} }
+      fallback(where != null ? `Ara mateix ets a ${esc(M[where].n)}, no a ${esc(M[i].n)}.` : `No ets dins de ${esc(M[i].n)} ni de cap municipi de Catalunya.`);
+    }
+  }, () => fallback('No s\'ha pogut obtenir la ubicació (permís denegat o sense senyal).'), { enableHighAccuracy: true, timeout: 10000 });
+}
+
+$('fileIn').addEventListener('change', (e) => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f || selected == null) return;
+  const c = M[selected].c, first = !S.photos[c];
+  const img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const s = Math.min(1, 640 / Math.max(img.width, img.height)), cv = document.createElement('canvas');
+    cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s);
+    cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
+    S.photos[c] = cv.toDataURL('image/jpeg', 0.72);
+    if (first) S.points += 30;
+    const ok = save(); render(); fillSheet();
+    toast(ok ? (first ? 'Foto afegida · +30' : 'Foto canviada') : 'La foto es veu, però no s\'ha pogut guardar en aquest navegador');
+  };
+  img.src = url;
+});
+
+let tt; function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('show'), 2200); }
+
+/* ---------- search ---------- */
+function search(q) {
+  q = norm(q.trim()); if (!q) return [];
+  const a = [], b = [];
+  M.forEach((m, i) => { const p = m.k.indexOf(q); if (p === 0) a.push(i); else if (p > 0) b.push(i); });
+  return a.concat(b).slice(0, 8);
+}
+function wireSearch(input, box, onPick, showState) {
+  input.addEventListener('input', () => {
+    const r = search(input.value), U = unlocked(), F = frontierSet(U);
+    box.innerHTML = r.map((i) => {
+      const st = !showState ? '' : U.has(i) ? '<span class="tag u">descobert</span>' : F.has(i) ? '<span class="tag f">disponible</span>' : '<span class="tag">a la boira</span>';
+      return `<button data-i="${i}"><span>${esc(M[i].n)}</span>${st}</button>`;
+    }).join('');
+    box.classList.toggle('hidden', !r.length && showState);
+  });
+  box.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { onPick(+b.dataset.i); input.value = ''; box.innerHTML = ''; if (showState) box.classList.add('hidden'); } });
+}
+wireSearch($('q'), $('qres'), (i) => { $('q').blur(); select(i); flyTo(i); }, true);
+wireSearch($('oq'), $('oqres'), (i) => {
+  S = { home: M[i].c, unlocked: [M[i].c], visited: [], photos: {}, points: 0 };
+  save(); $('onboard').classList.add('hidden'); render(); select(i); flyTo(i, 16);
+  toast(`${M[i].n} s'il·lumina`);
+}, false);
+
+$('homeBtn').onclick = () => { if (S.home) { const i = byCode[S.home]; flyTo(i, 16); } };
+$('allBtn').onclick = () => { closeSheet(); animateTo(fitAll()); };
+let resetArmed = false;
+$('resetBtn').onclick = () => {
+  if (!resetArmed) { resetArmed = true; toast('Torna a prémer per esborrar el progrés'); setTimeout(() => { resetArmed = false; }, 3000); return; }
+  resetArmed = false;
+  S = { home: null, unlocked: [], visited: [], photos: {}, points: 0 }; save(); closeSheet(); render();
+  animateTo(fitAll()); $('onboard').classList.remove('hidden'); $('oq').focus();
+};
+
+/* ---------- start ---------- */
+Object.assign(V, fitAll()); apply(); render();
+if (S.home && byCode[S.home] != null) { $('onboard').classList.add('hidden'); flyTo(byCode[S.home], 16); }
+else { setTimeout(() => $('oq').focus(), 50); }
+</script>
+</body>
+</html>
