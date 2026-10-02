@@ -1,0 +1,11 @@
+{
+  "descripcio": "Connexions entre municipis que no fan frontera però que s'han de considerar veïns. L'script generar-dades.js les afegeix al graf de veïns.",
+  "connexions": [
+    {
+      "a": "17094",
+      "b": "17141",
+      "noms": ["Llívia", "Puigcerdà"],
+      "motiu": "Llívia és un enclavament dins de França. La carretera que l'uneix amb Puigcerdà la connecta amb la resta de Catalunya."
+    }
+  ]
+}
