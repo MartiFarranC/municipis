@@ -1,0 +1,13 @@
+{
+  "name": "municipis-scripts",
+  "private": true,
+  "description": "Genera les dades de municipis i el prototip del mapa",
+  "scripts": {
+    "dades": "node generar-dades.js"
+  },
+  "dependencies": {
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "topojson-simplify": "^3.0.3"
+  }
+}
