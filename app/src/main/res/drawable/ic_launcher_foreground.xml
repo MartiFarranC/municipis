@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icona provisional: un fanal (punt de llum ambre) sobre el mapa de nit. El nom i la icona definitius són pendents. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FF2A2618"
+        android:pathData="M36,40 L54,32 L72,40 L76,58 L66,74 L46,76 L34,62 Z" />
+    <path
+        android:fillColor="#FFF2B544"
+        android:pathData="M54,42 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFF2B544"
+        android:strokeWidth="2.5"
+        android:strokeLineJoin="round"
+        android:pathData="M36,40 L54,32 L72,40 L76,58 L66,74 L46,76 L34,62 Z" />
+</vector>

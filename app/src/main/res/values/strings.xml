@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- El nom definitiu de l'app és pendent (docs/requisits.md, secció 11). -->
+    <string name="app_name">Descobreix Catalunya</string>
+
+    <!-- Navegació -->
+    <string name="pestanya_mapa">Mapa</string>
+    <string name="pestanya_missions">Missions</string>
+    <string name="pestanya_perfil">Perfil</string>
+    <string name="enrere">Enrere</string>
+    <string name="tanca">Tanca</string>
+    <string name="cancela">Cancel·la</string>
+    <string name="desa">Desa</string>
+    <string name="entesos">Entesos</string>
+    <string name="esborra">Esborra</string>
+
+    <!-- Tria el teu municipi -->
+    <string name="onboarding_titol">D\'on ets?</string>
+    <string name="onboarding_text">El teu municipi serà el primer que s\'il·lumina al mapa. Els altres són a la boira, esperant-te.</string>
+    <string name="onboarding_cerca">Busca el teu municipi</string>
+    <string name="onboarding_triat">Començaràs a %1$s.</string>
+    <string name="onboarding_ubicacio">Fes servir la meva ubicació</string>
+    <string name="onboarding_comencar">Comença l\'aventura</string>
+    <string name="buscant_ubicacio">Buscant la teva ubicació…</string>
+    <string name="titol_on_ets">On ets?</string>
+    <string name="text_on_ets">Ets a prop d\'una frontera entre municipis. Tria on ets ara mateix.</string>
+
+    <!-- Mapa -->
+    <string name="mapa_descripcio">Mapa de Catalunya. Has descobert %1$d de %2$d municipis. Toca un municipi per seleccionar-lo, o fes servir el cercador.</string>
+    <string name="minimapa_descripcio">Minimapa de Catalunya amb la zona visible marcada. Toca\'l per moure-t\'hi.</string>
+    <string name="comptador_curt">%1$d / %2$d</string>
+    <string name="comptador_llarg">de %1$d municipis descoberts</string>
+    <string name="nivell">Nivell %1$d</string>
+    <string name="punts">Punts</string>
+    <string name="punts_curt">%1$d pts</string>
+    <string name="cerca_municipi">Cerca un municipi</string>
+    <string name="centra_territori">Centra el mapa al teu municipi</string>
+    <string name="on_soc">On sóc?</string>
+    <string name="estat_descobert">Descobert</string>
+    <string name="estat_disponible">Disponible</string>
+    <string name="estat_boira">A la boira</string>
+    <string name="vei_de">Veí de %1$s</string>
+    <string name="vei_de_comarca">Veí de %1$s · %2$s</string>
+    <string name="missions_fetes">%1$d de %2$d missions fetes</string>
+    <string name="obre_fitxa">Obre la fitxa</string>
+    <string name="veure_al_mapa">Mostra\'l al mapa</string>
+
+    <plurals name="missions_ocultes">
+        <item quantity="one">%1$d missió oculta</item>
+        <item quantity="other">%1$d missions ocultes</item>
+    </plurals>
+    <plurals name="distancia_territori">
+        <item quantity="one">a %1$d municipi del teu territori</item>
+        <item quantity="other">a %1$d municipis del teu territori</item>
+    </plurals>
+
+    <!-- Fitxa del municipi -->
+    <string name="comarca_inici">%1$s · El teu municipi d\'inici</string>
+    <string name="de_punts">de %1$d pts</string>
+    <string name="progres_missions">%1$d de %2$d missions · Completa-les totes i guanya +%3$d de bonus</string>
+    <string name="prova_gps">GPS</string>
+    <string name="prova_foto">Foto</string>
+    <string name="prova_toca">Prova: %1$s · Toca per fer-la</string>
+    <string name="prova_feta">Prova: %1$s · Feta</string>
+    <string name="completada">Completada</string>
+    <string name="completat">Completat</string>
+    <string name="pendent">Pendent</string>
+    <string name="missio_checkin">Fes check-in al municipi</string>
+    <string name="missio_cartell">Fes una foto del cartell d\'entrada</string>
+    <string name="missio_ajuntament">Fes una foto de l\'ajuntament</string>
+    <string name="les_teves_missions">Les teves missions</string>
+    <string name="les_teves_missions_text">Les missions que proposes només les veus tu i no donen punts.</string>
+    <string name="afegeix_missio">Proposa una missió</string>
+    <string name="nova_missio">Nova missió</string>
+    <string name="nova_missio_text">Què vols fer en aquest municipi? Només la veuràs tu.</string>
+    <string name="titol">Títol</string>
+    <string name="descripcio_opcional">Descripció (opcional)</string>
+    <string name="esborra_missio">Esborra la missió %1$s</string>
+    <string name="fotos">Fotos</string>
+    <string name="fes_foto">Fes una foto</string>
+    <string name="afegeix_foto_de">Afegeix la teva foto de %1$s</string>
+    <string name="foto_de">Foto de %1$s</string>
+    <string name="foto_portada_de">Foto de portada de %1$s. Toca-la per obrir-la.</string>
+    <string name="veins">Municipis veïns</string>
+
+    <!-- Fitxa d'un municipi bloquejat -->
+    <string name="bloquejat_text">Encara és a la boira. Desbloqueja\'l amb punts per veure\'n les missions.</string>
+    <plurals name="boira_text">
+        <item quantity="one">És a %1$d municipi del teu territori. Primer has de desbloquejar un veí.</item>
+        <item quantity="other">És a %1$d municipis del teu territori. Primer has de desbloquejar els que hi ha entremig.</item>
+    </plurals>
+    <string name="missions_ocultes_titol">Missions ocultes</string>
+    <string name="punts_en_joc">Punts en joc</string>
+    <string name="fins_a">fins a %1$d</string>
+    <string name="tens_punts">Tens %1$d pts</string>
+    <string name="despres_punts">Després: %1$d pts</string>
+    <string name="desbloqueja_cost">Desbloqueja · %1$d pts</string>
+    <string name="et_falten">Et falten %1$d punts. Fes missions als municipis que ja tens per guanyar-ne.</string>
+
+    <!-- Càmera -->
+    <string name="camera_text">Fes una foto. Ha de ser feta dins del municipi.</string>
+    <string name="camera_missio">Missió: %1$s</string>
+    <string name="torna_a_demanar_permis">Dona permís per fer servir la càmera</string>
+
+    <!-- Foto -->
+    <string name="visibilitat">Qui la pot veure</string>
+    <string name="visibilitat_text">Ara mateix totes les fotos es queden al teu mòbil. Quan l\'app permeti compartir-les, es respectarà el que triïs aquí.</string>
+    <string name="visibilitat_privada">Només jo</string>
+    <string name="visibilitat_amics">Els meus amics</string>
+    <string name="visibilitat_publica">Tothom</string>
+    <string name="fes_portada">Fes-la la portada del municipi</string>
+    <string name="es_portada">És la portada del municipi.</string>
+    <string name="esborra_foto">Esborra la foto</string>
+    <string name="esborra_foto_text">La foto s\'esborrarà del mòbil. Els punts que hagis guanyat amb ella no es perden.</string>
+
+    <!-- Missions -->
+    <string name="missions_resum">%1$d missions completades · %2$d punts per gastar</string>
+    <string name="missions_municipi">%1$s · %2$d de %3$d missions · %4$d de %5$d pts</string>
+
+    <!-- Perfil -->
+    <string name="punts_per_al_nivell">%1$d pts per al nivell %2$d</string>
+    <string name="stat_municipis">municipis</string>
+    <string name="stat_missions">missions</string>
+    <string name="stat_fotos">fotos</string>
+    <string name="stat_comarques">comarques</string>
+    <string name="punts_resum">Tens %1$d punts per gastar. N\'has guanyat %2$d en total.</string>
+    <string name="album">El meu àlbum</string>
+    <string name="album_buit">Encara no has fet cap foto. Les pots fer des de la fitxa de cada municipi.</string>
+    <string name="assoliments">Assoliments</string>
+    <string name="aconseguit">Aconseguit</string>
+    <string name="progres_de">%1$d de %2$d</string>
+    <string name="assoliment_primer_municipi">Primera llum</string>
+    <string name="assoliment_primera_missio">Primera missió</string>
+    <string name="assoliment_municipi_complet">Municipi complet</string>
+    <string name="assoliment_comarca_completa">Tota una comarca</string>
+    <string name="assoliment_capitals">Totes les capitals de comarca</string>
+    <plurals name="assoliment_municipis">
+        <item quantity="one">%1$d municipi</item>
+        <item quantity="other">%1$d municipis</item>
+    </plurals>
+    <plurals name="assoliment_fotos">
+        <item quantity="one">Primera foto</item>
+        <item quantity="other">%1$d fotos</item>
+    </plurals>
+    <string name="comarques">Comarques</string>
+    <string name="les_teves_dades">Les teves dades</string>
+    <string name="les_teves_dades_text">Tot el teu progrés es guarda només en aquest mòbil. Pots exportar-lo o esborrar-lo.</string>
+    <string name="exporta">Exporta el meu progrés</string>
+    <string name="nom_fitxer_exportacio">descobreix-catalunya.zip</string>
+    <string name="exportacio_feta">S\'ha exportat el teu progrés, amb les fotos.</string>
+    <string name="exportacio_error">No s\'ha pogut exportar el progrés.</string>
+    <string name="esborra_tot">Esborra tot el progrés</string>
+    <string name="esborra_tot_text">S\'esborraran els municipis descoberts, els punts, les missions, les fotos i les preferències. No es pot desfer.</string>
+
+    <!-- Sobre l'app -->
+    <string name="sobre_app">Sobre l\'app</string>
+    <string name="sobre_text">Visita els 947 municipis de Catalunya com si fos un joc. L\'app funciona sense connexió i no envia cap dada fora del mòbil.</string>
+    <string name="atribucio_limits_titol">Límits municipals</string>
+    <string name="atribucio_limits">© Instituto Geográfico Nacional (IGN), límits municipals de desembre de 2024, amb llicència CC BY 4.0. Comarques segons la mateixa font (43 comarques).</string>
+    <string name="atribucio_wikidata_titol">Wikidata</string>
+    <string name="atribucio_wikidata">Dades de llocs d\'interès de Wikidata, amb llicència CC0.</string>
+    <string name="atribucio_osm_titol">OpenStreetMap</string>
+    <string name="atribucio_osm">Dades de llocs d\'interès © col·laboradors d\'OpenStreetMap, amb llicència ODbL.</string>
+    <string name="atribucio_fonts_titol">Tipografies</string>
+    <string name="atribucio_fonts">Chakra Petch (© The Chakra Petch Project Authors) i Atkinson Hyperlegible (© Braille Institute of America), amb llicència SIL Open Font License 1.1.</string>
+    <string name="privacitat_titol">Privacitat</string>
+    <string name="privacitat">La ubicació només es fa servir mentre utilitzes l\'app, quan fas una prova. Les fotos i el progrés es guarden només al mòbil.</string>
+
+    <!-- Missatges -->
+    <string name="titol_no_ha_funcionat">No ha funcionat</string>
+    <string name="titol_municipi_bloquejat">Municipi bloquejat</string>
+    <string name="missatge_punts">Missió completada! +%1$d punts</string>
+    <string name="missatge_punts_amb_bonus">Missió completada! +%1$d punts i +%2$d de bonus per completar-les totes</string>
+    <string name="missatge_foto_desada">Foto desada</string>
+    <string name="missatge_foto_punts">Foto desada. Missió completada! +%1$d punts</string>
+    <string name="missatge_foto_punts_amb_bonus">Foto desada. Missió completada! +%1$d punts i +%2$d de bonus</string>
+    <string name="missatge_desbloquejat">Has desbloquejat %1$s!</string>
+    <string name="missatge_precisio">El GPS no és prou precís (%1$d m). Cal una precisió de %2$d m o millor. Prova-ho a l\'aire lliure.</string>
+    <string name="missatge_massa_lluny">Ets a %1$d m del lloc. Has d\'estar a menys de %2$d m.</string>
+    <string name="missatge_altre_municipi">Ara ets a %1$s. Aquesta prova s\'ha de fer dins del municipi de la missió.</string>
+    <string name="missatge_bloquejat_falten">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falten %2$d punts per desbloquejar-lo.</string>
+    <string name="missatge_bloquejat_pots">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Ja tens prou punts: desbloqueja\'l des del mapa.</string>
+    <plurals name="missatge_bloquejat_boira">
+        <item quantity="one">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipi del teu territori.</item>
+        <item quantity="other">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipis del teu territori.</item>
+    </plurals>
+    <string name="missatge_fora">Sembla que no ets a Catalunya.</string>
+    <string name="missatge_sense_ubicacio">No s\'ha pogut obtenir la teva ubicació. Comprova que el GPS estigui activat.</string>
+    <string name="missatge_sense_permis_ubicacio">Sense permís d\'ubicació no es pot comprovar on ets. El pots donar a la configuració del sistema.</string>
+    <string name="missatge_sense_permis_camera">Sense permís de càmera no pots fer fotos. El pots donar a la configuració del sistema.</string>
+    <string name="missatge_error">Hi ha hagut un error. Torna-ho a provar.</string>
+</resources>
