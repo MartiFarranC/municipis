@@ -48,4 +48,7 @@ npx supabase start && npx supabase test db   # Supabase local amb Docker; mai co
 git clone --depth 1 https://github.com/ArnauInes/geometries_cat_bcn_2024.git font
 cd scripts && npm install && node generar-dades.js ../font/dts_municipis_cat_2025.json
 node generar-missions.js ../font/dts_municipis_cat_2025.json
+node generar-sql-missions.js   # migració amb les missions oficials per al rànquing
 ```
+
+Després de regenerar les missions, cal aplicar la migració nova al projecte de Supabase (`npx supabase db push`).

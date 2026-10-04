@@ -14,7 +14,7 @@ El mapa és de nit. Els municipis descoberts brillen en ambre, com pobles amb el
 | Descobert (altres) | `#B8862F` |
 | Disponible (veí) | ratllat ambre fosc `#2A2618` / `#4A3E1E` |
 | A la boira | `#161B23` |
-| Selecció i accions secundàries | `#5AB8E8` |
+| Selecció i accions secundàries | `#5AB8E8` per defecte; l'usuari el pot canviar al perfil |
 
 Tipografia: **Chakra Petch** per als títols i els números, i **Atkinson Hyperlegible** per al text.
 
@@ -24,8 +24,8 @@ Tipografia: **Chakra Petch** per als títols i els números, i **Atkinson Hyperl
 2. **Mapa.** És la pantalla principal. Mostra els límits reals amb tres estats (descobert, disponible, a la boira), un minimapa de Catalunya, els punts i el comptador sobre 947.
 3. **Fitxa del municipi.** Té la foto, les missions amb punts i el bonus per completar-les totes.
 4. **Municipi bloquejat.** Mostra el cost i quantes missions s'hi amaguen. Només es desbloqueja amb punts.
-5. **Rànquing.** Global i amics, amb la teva posició sempre visible. Més endavant, per comarca i per setmana.
-6. **Perfil i àlbum.** Estadístiques, fotos per municipi i assoliments.
+5. **Rànquing.** Pestanya del perfil. Per punts o per municipis, global i amics, amb la teva posició sempre visible. Més endavant, per comarca i per setmana.
+6. **Perfil i àlbum.** Foto de perfil, estadístiques, fotos per municipi, assoliments i color de l'app.
 
 Disseny visual de les pantalles: https://claude.ai/artifact/KoLHogxx6EceJqBkFAyXih
 
