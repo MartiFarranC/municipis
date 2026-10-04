@@ -24,7 +24,7 @@ Tipografia: **Chakra Petch** per als títols i els números, i **Atkinson Hyperl
 2. **Mapa.** És la pantalla principal. Mostra els límits reals amb tres estats (descobert, disponible, a la boira), un minimapa de Catalunya, els punts i el comptador sobre 947.
 3. **Fitxa del municipi.** Té la foto, les missions amb punts i el bonus per completar-les totes.
 4. **Municipi bloquejat.** Mostra el cost i quantes missions s'hi amaguen. Només es desbloqueja amb punts.
-5. **Rànquing (versió 2).** Global, amics, comarca i setmana, amb la teva posició sempre visible. A la versió 1 no hi és.
+5. **Rànquing.** Global i amics, amb la teva posició sempre visible. Més endavant, per comarca i per setmana.
 6. **Perfil i àlbum.** Estadístiques, fotos per municipi i assoliments.
 
 Disseny visual de les pantalles: https://claude.ai/artifact/KoLHogxx6EceJqBkFAyXih
@@ -39,4 +39,4 @@ Les regles definitives són a [`requisits.md`](requisits.md). El prototip web (`
 - El mapa dibuixat amb Canvas a partir del GeoJSON, perquè sembli un joc i no Google Maps.
 - Room per guardar les dades al mòbil, amb mode sense connexió.
 - CameraX per a les fotos.
-- Per al rànquing de la versió 2, Firebase (Auth, Firestore, Storage) o Supabase. La versió 1 no porta cap SDK de servidor.
+- Servidor: Supabase (Auth, Postgres, Storage). Vegeu la secció 9 de `requisits.md`.

@@ -1,6 +1,6 @@
-# Requisits — Descobreix Catalunya (versió 1)
+# Requisits — Descobreix Catalunya
 
-Aquest document defineix què ha de fer la primera versió de l'app i com s'ha de construir. Si alguna cosa d'aquí contradiu `disseny.md` o el prototip web, mana aquest document.
+Aquest document defineix què ha de fer l'app i com s'ha de construir. Si alguna cosa d'aquí contradiu `disseny.md` o el prototip web, mana aquest document.
 
 ## 1. Què és
 
@@ -12,19 +12,19 @@ Una app Android per visitar els 947 municipis de Catalunya com si fos un videojo
 - Les missions donen punts, i amb els punts es desbloquegen municipis veïns.
 - L'usuari pot afegir fotos a cada municipi.
 
-## 2. Abast de la versió 1
+## 2. Abast
 
 **Inclou:**
-- Funcionament **100% local i sense connexió**: sense comptes, sense servidor.
+- **Compte d'usuari obligatori** (Google, correu i contrasenya, o enllaç màgic), amb servidor **Supabase** (vegeu la secció 9).
+- Funcionament **sense connexió** un cop iniciada la sessió: el joc es juga en local i se sincronitza quan hi ha connexió.
+- Còpia i sincronització del progrés, les missions pròpies i les fotos entre dispositius.
+- Rànquing de punts.
+- Amics, i fotos visibles per als amics o per a tothom.
 - L'app **només en català**.
 
-**No inclou (versió 2, online):**
-- Comptes d'usuari i rànquing.
-- Amics.
-- Compartir fotos o missions entre usuaris.
+**No inclou (versió posterior):**
+- Compartir missions proposades entre usuaris.
 - Moderació de missions proposades.
-
-Tot i això, el codi s'ha de preparar perquè la versió 2 es pugui afegir sense refer res (vegeu la secció 9).
 
 ## 3. Regles del joc
 
@@ -68,7 +68,7 @@ La relació de veïnatge surt de `dades/municipis_veins.json`, i s'ha de regener
 **Origen**
 
 1. **Automàtiques.** Es generen fora de l'app amb un script, a partir de Wikidata (patrimoni, monuments, esglésies, museus) i d'OpenStreetMap (`historic=*`, `tourism=attraction|museum|viewpoint`, etc.). Es guarden en un JSON que va dins de l'app.
-2. **Proposades per l'usuari.** A la versió 1 només les veu qui les crea. **No donen punts**, perquè ningú es pugui inventar missions per sumar-ne. A la versió 2 es podran compartir després d'una moderació.
+2. **Proposades per l'usuari.** Només les veu qui les crea (se sincronitzen entre els seus dispositius). **No donen punts**, perquè ningú es pugui inventar missions per sumar-ne. En una versió posterior es podran compartir després d'una moderació.
 
 **Prova.** Cada missió té un tipus de prova, que surt de les dades:
 
@@ -89,8 +89,8 @@ Totes dues proves només funcionen si el municipi ja està **desbloquejat**.
 ### 3.6 Fotos
 
 - Hi pot haver diverses fotos per municipi, i una d'elles és la portada de la fitxa.
-- Cada foto té una **visibilitat** que tria l'usuari: `PRIVADA` (per defecte), `AMICS` o `PUBLICA`. A la versió 1 totes són locals, però el camp s'ha de guardar ja i l'usuari l'ha de poder canviar, perquè la versió 2 el respecti.
-- Les fotos es guarden a l'emmagatzematge intern de l'app, comprimides (màxim 2048 px pel costat llarg). També es guarda una miniatura per a l'àlbum.
+- Cada foto té una **visibilitat** que tria l'usuari: `PRIVADA` (per defecte), `AMICS` o `PUBLICA`. El servidor l'ha de fer complir (secció 9.4): una foto privada només la pot llegir el seu propietari.
+- Les fotos es guarden a l'emmagatzematge intern de l'app, comprimides (màxim 2048 px pel costat llarg). També es guarda una miniatura per a l'àlbum. Totes dues es pugen a Supabase Storage quan hi ha connexió.
 
 ### 3.7 Progressió
 
@@ -114,9 +114,10 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
 4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
-5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques.
-
-A la versió 1 **no hi ha** pantalla de rànquing.
+5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar el compte.
+6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
+7. **Rànquing.** Classificació general i classificació entre amics.
+8. **Amics.** Buscar per nom d'usuari, enviar, acceptar i rebutjar sol·licituds, eliminar amics, i veure el mapa i les fotos visibles d'un amic.
 
 ## 5. Estètica
 
@@ -141,6 +142,7 @@ Requisits d'accessibilitat:
 | Persistència | Room (estat del joc, missions, fotos) i DataStore (preferències) |
 | Càmera | CameraX |
 | Ubicació | Fused Location Provider |
+| Servidor | Supabase (Auth, Postgres amb RLS, Storage) amb el client `supabase-kt`. Inici de sessió amb Google via Credential Manager. Sincronització en segon pla amb WorkManager |
 | Mòduls | Al principi un sol mòdul `:app`, organitzat per paquets de funcionalitat (`map`, `municipality`, `missions`, `photos`, `profile`, `onboarding`) i una capa `data` / `domain` |
 | SDK | `minSdk 26`; `targetSdk` i `compileSdk` a l'última versió estable |
 | Tests | Unitaris per a les regles del joc (secció 3), la geometria (punt dins de polígon, distància a frontera) i els ViewModels. Tests de UI de Compose per als fluxos principals. |
@@ -191,13 +193,51 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 
 - **Ubicació:** només mentre s'utilitza l'app, mai en segon pla. Es demana en el moment en què cal, no en obrir l'app.
 - **Càmera:** es demana en el moment de fer la primera foto.
-- **Dades:** a la versió 1 no surt res del dispositiu. L'usuari pot exportar i esborrar tot el seu progrés.
+- **Dades:** el progrés, les missions pròpies i les fotos es desen a Supabase, en un projecte de la **regió UE**. La ubicació només es puja com a part d'una missió completada o d'una foto, mai de manera contínua. L'usuari pot exportar les seves dades i **esborrar el compte des de l'app**, cosa que esborra totes les seves dades del servidor (Google Play ho exigeix). També cal una URL web per demanar l'esborrat.
+- **Política de privacitat** publicada i enllaçada des de l'app i des de Google Play.
+- **Sense analítica:** no s'hi afegeix cap SDK d'analítica ni de publicitat.
 
-## 9. Preparació per a la versió 2 (online)
+## 9. Comptes, sincronització i funcions socials
 
-- Totes les entitats de l'usuari (progrés, missions pròpies, fotos) tenen un identificador UUID i dates de creació i modificació.
-- L'accés a dades es fa a través de repositoris amb interfícies, perquè es pugui afegir una font remota sense tocar la UI.
-- El servidor (Firebase o Supabase) es decidirà a la versió 2. No s'ha d'afegir cap SDK de servidor a la versió 1.
+### 9.1 Comptes
+
+- El compte és **obligatori**. El primer cop cal connexió per iniciar la sessió. Després la sessió es guarda i l'app funciona sense connexió.
+- Mètodes: Google, correu i contrasenya (amb verificació del correu i recuperació de contrasenya), i enllaç màgic per correu (obre l'app amb un deep link).
+- Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i als amics) i data d'alta. No es mostra mai el correu a altres usuaris.
+- **Dades d'abans dels comptes:** si en iniciar sessió hi ha progrés local sense compte, s'assigna a aquest compte.
+
+### 9.2 Sincronització
+
+- **Room continua sent la font principal.** La UI llegeix sempre de Room; el servidor és una còpia que se sincronitza.
+- Cada canvi local queda marcat com a pendent i un treball de WorkManager el puja quan hi ha connexió. En iniciar sessió en un dispositiu nou, es baixa tot.
+- Resolució de conflictes:
+  - **Municipis descoberts, missions completades i moviments de punts** només s'afegeixen, mai es modifiquen: es fusionen per UUID. Si dos dispositius completen la mateixa missió, val la primera (`missioId` és únic per usuari).
+  - **Missions pròpies i fotos:** guanya la modificació més recent (`modificatEl`).
+  - Els esborrats són **lògics** (`esborratEl`) perquè es puguin sincronitzar.
+- Les regles del joc s'han de continuar complint després de fusionar (per exemple, el saldo no pot ser negatiu). Si una fusió dona un estat invàlid, cal un test que ho cobreixi i una regla clara per resoldre-ho.
+
+### 9.3 Rànquing
+
+- Es calcula **al servidor** a partir de les missions completades i dels punts que val cada missió segons la taula oficial de missions del servidor. **No es fia mai dels punts que envia el client.**
+- La taula oficial de missions es carrega al servidor amb un script a partir del mateix JSON que va dins de l'app.
+- Les missions pròpies no compten mai.
+- Classificació general i entre amics.
+- Limitació coneguda: el GPS es pot falsejar. Es valida com a mínim que la missió existeix, que el municipi està desbloquejat i que la ubicació enviada compleix el radi (secció 3.4).
+
+### 9.4 Amics i fotos
+
+- Sol·licitud d'amistat per nom d'usuari: enviar, acceptar, rebutjar i eliminar.
+- Visibilitat de les fotos, aplicada amb **RLS** a Postgres i a Storage:
+  - `PRIVADA`: només el propietari;
+  - `AMICS`: el propietari i els seus amics;
+  - `PUBLICA`: qualsevol usuari amb sessió iniciada.
+- Un amic pot veure el mapa (municipis descoberts) i els punts de l'altre.
+
+### 9.5 Seguretat
+
+- **Totes les taules tenen RLS activat.** Un usuari només pot escriure les seves pròpies files.
+- A l'app només hi va la URL del projecte i la clau pública (`anon`), llegides de `local.properties` a través de `BuildConfig`. **La clau `service_role` no pot sortir mai del servidor ni entrar al repositori.**
+- L'esquema de la base de dades, les polítiques RLS i les funcions es versionen com a migracions a `supabase/migrations/` i tenen tests.
 
 ## 10. Ordre de feina proposat
 
@@ -209,6 +249,12 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 6. **Fotos i àlbum.** Amb la visibilitat de cada foto.
 7. **Perfil.** Nivells, assoliments i comarques.
 8. **Poliment.** Accessibilitat, rendiment, exportar i esborrar dades, atribucions.
+9. **Servidor.** Projecte Supabase, esquema, RLS i migracions amb tests.
+10. **Comptes.** Pantalla d'inici de sessió amb els tres mètodes, perfil, tancar sessió i esborrar el compte.
+11. **Sincronització.** Esborrats lògics, cua de pendents, pujada i baixada amb WorkManager i fusió amb tests.
+12. **Fotos al núvol.** Pujar-les a Storage amb la visibilitat aplicada.
+13. **Rànquing.** Taula oficial de missions al servidor, càlcul al servidor i pantalla.
+14. **Amics.** Sol·licituds, llista d'amics i veure el mapa i les fotos d'un amic.
 
 ## 11. Decisions pendents
 
@@ -216,3 +262,6 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 - Ajustar els valors de l'economia (secció 3.3) després de provar-la.
 - Quines categories de Wikidata i d'OSM es converteixen en missions, i quants punts val cada categoria.
 - Nom definitiu de l'app i icona.
+- Normes del nom d'usuari (llargada, caràcters permesos, paraules prohibides).
+- Si el rànquing és només de punts o també de municipis descoberts.
+- URL de la política de privacitat i de la pàgina per esborrar el compte.
