@@ -30,6 +30,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import cat.descobreix.R
+import cat.descobreix.compte.CompteScreen
+import cat.descobreix.compte.NomUsuariScreen
+import cat.descobreix.compte.NovaContrasenyaScreen
+import cat.descobreix.compte.SenseConnexioScreen
+import cat.descobreix.data.compte.EstatCompte
 import cat.descobreix.map.MapaScreen
 import cat.descobreix.missions.MissionsScreen
 import cat.descobreix.municipality.MunicipiScreen
@@ -68,6 +73,19 @@ private val pestanyes = listOf(
 
 @Composable
 fun AppNavegacio(viewModel: AppViewModel = hiltViewModel()) {
+    val compte by viewModel.compte.collectAsStateWithLifecycle()
+    when (compte) {
+        EstatCompte.Carregant -> Carregant(Modifier.fillMaxSize())
+        EstatCompte.SenseSessio -> CompteScreen()
+        EstatCompte.CalPerfil -> NomUsuariScreen()
+        EstatCompte.SenseConnexio -> SenseConnexioScreen()
+        EstatCompte.CalNovaContrasenya -> NovaContrasenyaScreen()
+        is EstatCompte.Llest -> PantallesJoc(viewModel)
+    }
+}
+
+@Composable
+private fun PantallesJoc(viewModel: AppViewModel) {
     val iniciada by viewModel.partidaIniciada.collectAsStateWithLifecycle()
     val inicial = iniciada
     if (inicial == null) {
