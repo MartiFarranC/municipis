@@ -214,6 +214,7 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 
 - El compte és **obligatori**. El primer cop cal connexió per iniciar la sessió. Després la sessió es guarda i l'app funciona sense connexió.
 - Mètodes: Google, correu i contrasenya (amb verificació del correu i recuperació de contrasenya), i enllaç màgic per correu (obre l'app amb un deep link).
+- **De moment l'app no envia cap correu.** Per crear el compte n'hi ha prou amb el correu i la contrasenya, que s'escriu dues vegades. No hi ha verificació del correu (*Confirm email* desactivat al projecte), ni enllaç màgic, ni recuperació de contrasenya. Es tornaran a activar quan el projecte tingui un SMTP propi i `cat.descobreix://login/**` sigui a les URL de redirecció.
 - Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i als amics) i data d'alta. No es mostra mai el correu a altres usuaris.
 - **Dades d'abans dels comptes:** si en iniciar sessió hi ha progrés local sense compte, s'assigna a aquest compte.
 

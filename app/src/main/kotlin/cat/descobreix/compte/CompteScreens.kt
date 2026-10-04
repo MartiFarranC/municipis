@@ -79,9 +79,21 @@ fun CompteScreen(viewModel: CompteViewModel = hiltViewModel()) {
                 onCanvi = viewModel::canviaContrasenya,
                 etiqueta = stringResource(R.string.compte_contrasenya),
                 tipus = KeyboardType.Password,
-                accio = ImeAction.Done,
+                accio = if (mode == ModeCompte.REGISTRA) ImeAction.Next else ImeAction.Done,
                 onAccio = viewModel::envia,
                 ajuda = if (mode == ModeCompte.REGISTRA) stringResource(R.string.compte_contrasenya_ajuda, CONTRASENYA_MINIM) else null,
+            )
+        }
+        if (mode == ModeCompte.REGISTRA) {
+            Camp(
+                valor = estat.repeticio,
+                onCanvi = viewModel::canviaRepeticio,
+                etiqueta = stringResource(R.string.compte_repeteix_contrasenya),
+                tipus = KeyboardType.Password,
+                accio = ImeAction.Done,
+                onAccio = viewModel::envia,
+                ajuda = if (estat.contrasenyesDiferents) stringResource(R.string.compte_contrasenyes_diferents) else null,
+                esError = estat.contrasenyesDiferents,
             )
         }
         BotoPrincipal(
@@ -99,8 +111,8 @@ fun CompteScreen(viewModel: CompteViewModel = hiltViewModel()) {
         when (mode) {
             ModeCompte.ENTRA -> {
                 Enllac(stringResource(R.string.compte_vull_registrar)) { viewModel.canviaMode(ModeCompte.REGISTRA) }
-                Enllac(stringResource(R.string.compte_vull_enllac)) { viewModel.canviaMode(ModeCompte.ENLLAC) }
-                Enllac(stringResource(R.string.compte_he_oblidat)) { viewModel.canviaMode(ModeCompte.RECUPERA) }
+                // De moment l'app no envia correus: l'enllaç màgic i la recuperació de la contrasenya
+                // no es mostren fins que el projecte de Supabase tingui un SMTP propi.
             }
             ModeCompte.REGISTRA -> Enllac(stringResource(R.string.compte_ja_tinc_compte)) { viewModel.canviaMode(ModeCompte.ENTRA) }
             ModeCompte.ENLLAC, ModeCompte.RECUPERA ->
@@ -235,6 +247,7 @@ private fun Camp(
     accio: ImeAction,
     onAccio: () -> Unit,
     ajuda: String? = null,
+    esError: Boolean = false,
 ) {
     val esContrasenya = tipus == KeyboardType.Password
     OutlinedTextField(
@@ -243,6 +256,7 @@ private fun Camp(
         modifier = Modifier.fillMaxWidth(),
         label = { Text(etiqueta) },
         supportingText = ajuda?.let { { Text(it) } },
+        isError = esError,
         singleLine = true,
         visualTransformation = if (esContrasenya) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = KeyboardOptions(
