@@ -63,7 +63,7 @@ class ServeiCompteSupabase @Inject constructor(
     }
 
     override suspend fun registra(correu: String, contrasenya: String): ResultatRegistre = ambErrors {
-        supabase.auth.signUpWith(Email) {
+        supabase.auth.signUpWith(Email, redirectUrl = ENLLAC_APP) {
             email = correu.trim()
             password = contrasenya
         }
@@ -71,7 +71,7 @@ class ServeiCompteSupabase @Inject constructor(
     }
 
     override suspend fun enviaEnllac(correu: String) = ambErrors {
-        supabase.auth.signInWith(OTP) {
+        supabase.auth.signInWith(OTP, redirectUrl = ENLLAC_APP) {
             email = correu.trim()
             createUser = true
         }
@@ -196,7 +196,10 @@ class ServeiCompteSupabase @Inject constructor(
         const val ESQUEMA = "cat.descobreix"
         const val AMFITRIO = "login"
         private const val CAMI_RECUPERACIO = "/recuperacio"
-        private const val ENLLAC_RECUPERACIO = "$ESQUEMA://$AMFITRIO$CAMI_RECUPERACIO"
+        // Supabase només hi redirigeix si són a Authentication → URL Configuration → Redirect URLs.
+        // Si no, obre la Site URL del projecte compartit (localhost:3000).
+        private const val ENLLAC_APP = "$ESQUEMA://$AMFITRIO"
+        private const val ENLLAC_RECUPERACIO = "$ENLLAC_APP$CAMI_RECUPERACIO"
 
         private val CLAU_USUARI = stringPreferencesKey("compte_usuari_id")
         private val CLAU_NOM = stringPreferencesKey("compte_nom_usuari")
