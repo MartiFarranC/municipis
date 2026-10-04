@@ -201,12 +201,13 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 
 ### 9.0 Projecte de Supabase compartit
 
-El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió per confirmar) és **compartit amb altres apps**. Per això:
+El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-west-3`, París) és **compartit amb altres apps**. Per això:
 
 - Totes les taules, vistes i funcions d'aquesta app van a l'esquema **`descobreix`**, mai a `public`. L'esquema s'ha d'afegir a *Settings → API → Exposed schemas*.
 - Els buckets de Storage porten el prefix `descobreix-` (per exemple `descobreix-fotos`).
 - Els comptes (`auth.users`) i la configuració d'autenticació (proveïdors, plantilles de correu, URL de redirecció) són compartits. Un usuari "és de l'app" quan té una fila a `descobreix.perfils`.
 - Les migracions no poden tocar res de fora de l'esquema `descobreix` i els buckets `descobreix-*`, ni dependre de l'historial de migracions de les altres apps.
+- Les migracions s'apliquen amb `supabase db push`. Quan es va adoptar, cap altra app del projecte feia servir migracions de la CLI (`supabase_migrations` no existia). Si una altra app en comença a fer servir, cal coordinar-ho.
 - L'app **no pot esborrar mai** files d'`auth.users`.
 
 ### 9.1 Comptes
@@ -276,4 +277,3 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió per 
 - Si el rànquing és només de punts o també de municipis descoberts.
 - URL de la política de privacitat i de la pàgina per esborrar les dades.
 - Si esborrar només les dades de l'app (i no el compte compartit) compleix la política d'esborrat de comptes de Google Play. Si no, caldrà un projecte de Supabase dedicat.
-- Regió del projecte de Supabase (ha de ser a la UE).
