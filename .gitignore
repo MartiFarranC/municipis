@@ -1,5 +1,5 @@
 node_modules/
-font/
+/font/
 .DS_Store
 # Android Studio (quan s'hi afegeixi el projecte)
 .gradle/
