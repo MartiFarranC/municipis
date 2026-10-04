@@ -19,11 +19,11 @@ class JocTest {
         assertEquals(vic, repositori.progresAra().inici)
         assertEquals(ResultatDesbloqueig.PuntsInsuficients(60, 60), joc.desbloqueja(gurb))
 
+        // Les missions genèriques sempre donen els punts garantits.
         val generiques = DadesDeProva.dades.missions.de(vic).filter { it.tipus == TipusMissio.GENERICA }
         val punts = generiques.map { joc.completaMissio(it, null, null) }
         assertEquals(listOf(100, 50, 50), punts.map { it.missio })
-        assertEquals(50, punts.last().bonus)
-        assertEquals(250, repositori.progresAra().saldo)
+        assertEquals(200, repositori.progresAra().saldo)
 
         // Tornar a completar una missió no dona punts.
         assertEquals(0, joc.completaMissio(generiques.first(), null, null).total)
@@ -31,8 +31,18 @@ class JocTest {
         assertEquals(ResultatDesbloqueig.Permes(60), joc.desbloqueja(gurb))
         val p = repositori.progresAra()
         assertEquals(listOf(vic, gurb), p.descoberts)
-        assertEquals(190, p.saldo)
-        assertEquals(250, p.puntsGuanyats)
+        assertEquals(140, p.saldo)
+        assertEquals(200, p.puntsGuanyats)
+    }
+
+    @Test
+    fun `el bonus arriba amb l'última missió del municipi`() = runTest {
+        joc.iniciaPartida(vic)
+        val missions = DadesDeProva.dades.missions.de(vic)
+        val punts = missions.map { joc.completaMissio(it, null, null) }
+        assertEquals(0, punts.dropLast(1).sumOf { it.bonus })
+        assertEquals(DadesDeProva.dades.config.punts.bonusTotesLesMissions, punts.last().bonus)
+        assertEquals(DadesDeProva.dades.regles.puntsPossibles(vic), repositori.progresAra().saldo)
     }
 
     @Test(expected = IllegalStateException::class)
