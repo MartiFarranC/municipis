@@ -12,6 +12,8 @@ import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.compte.ServeiCompteSupabase
 import cat.descobreix.data.db.BaseDades
+import cat.descobreix.data.ranquing.ServeiRanquing
+import cat.descobreix.data.ranquing.ServeiRanquingSupabase
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.FotosRepositoriRoom
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
@@ -34,6 +36,7 @@ import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.FlowType
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.storage.Storage
 import javax.inject.Singleton
 
 @Module
@@ -62,6 +65,7 @@ object ModulDades {
         }
         // Totes les dades de l'app són a l'esquema descobreix (docs/requisits.md, secció 9.0).
         install(Postgrest) { defaultSchema = "descobreix" }
+        install(Storage)
     }
 }
 
@@ -99,4 +103,8 @@ abstract class ModulCompte {
     @Binds
     @Singleton
     abstract fun compte(s: ServeiCompteSupabase): ServeiCompte
+
+    @Binds
+    @Singleton
+    abstract fun ranquing(s: ServeiRanquingSupabase): ServeiRanquing
 }

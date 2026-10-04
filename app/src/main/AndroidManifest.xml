@@ -36,6 +36,17 @@
                 <data android:scheme="cat.descobreix" android:host="login" />
             </intent-filter>
         </activity>
+
+        <!-- Per fer la foto de perfil amb l'app de càmera del sistema. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fitxers"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fitxers_compartits" />
+        </provider>
     </application>
 
 </manifest>

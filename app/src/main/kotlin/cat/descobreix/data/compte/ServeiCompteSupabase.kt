@@ -17,6 +17,8 @@ import io.github.jan.supabase.auth.providers.builtin.OTP
 import io.github.jan.supabase.auth.status.SessionStatus
 import io.github.jan.supabase.postgrest.exception.PostgrestRestException
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.storage.storage
+import io.ktor.http.ContentType
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.io.IOException
+import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,6 +42,7 @@ class ServeiCompteSupabase @Inject constructor(
     private val supabase: SupabaseClient,
     private val dataStore: DataStore<Preferences>,
     private val gestio: GestioDades,
+    private val fotosPerfil: FotosPerfilRemotes,
 ) : ServeiCompte {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val mutex = Mutex()
@@ -95,6 +99,53 @@ class ServeiCompteSupabase @Inject constructor(
         reintenta()
     }
 
+    override suspend fun canviaFoto(jpeg: ByteArray) {
+        val perfil = perfilLlest()
+        val ruta = "${perfil.usuariId}/${UUID.randomUUID()}.jpg"
+        ambErrors {
+            avatars.upload(ruta, jpeg) { contentType = ContentType.Image.JPEG }
+            supabase.postgrest.from(PERFILS).update({ set("foto", ruta) }) { filter { eq("id", perfil.usuariId) } }
+        }
+        fotosPerfil.guarda(ruta, jpeg)
+        esborraFitxerAvatar(perfil.foto)
+        desaPerfil(perfil.copy(foto = ruta))
+    }
+
+    override suspend fun treuFoto() {
+        val perfil = perfilLlest()
+        ambErrors {
+            supabase.postgrest.from(PERFILS).update({ set<String?>("foto", null) }) { filter { eq("id", perfil.usuariId) } }
+        }
+        esborraFitxerAvatar(perfil.foto)
+        desaPerfil(perfil.copy(foto = null))
+    }
+
+    private fun perfilLlest(): Perfil =
+        (_estat.value as? EstatCompte.Llest)?.perfil ?: throw ExcepcioCompte(ErrorCompte.DESCONEGUT)
+
+    /** Si no es pot esborrar la foto antiga, només queda un fitxer orfe: no cal avisar l'usuari. */
+    private suspend fun esborraFitxerAvatar(ruta: String?) {
+        if (ruta == null) return
+        try {
+            avatars.delete(ruta)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.w(TAG, "No s'ha pogut esborrar la foto de perfil antiga", e)
+        }
+    }
+
+    private suspend fun desaPerfil(perfil: Perfil) = mutex.withLock {
+        dataStore.edit {
+            it[CLAU_USUARI] = perfil.usuariId
+            it[CLAU_NOM] = perfil.nomUsuari
+            if (perfil.foto != null) it[CLAU_FOTO] = perfil.foto else it.remove(CLAU_FOTO)
+        }
+        if (_estat.value is EstatCompte.Llest) _estat.value = EstatCompte.Llest(perfil)
+    }
+
+    private val avatars get() = supabase.storage.from(BUCKET_AVATARS)
+
     override suspend fun reintenta() = avalua(supabase.auth.sessionStatus.value)
 
     override suspend fun surt() {
@@ -110,7 +161,13 @@ class ServeiCompteSupabase @Inject constructor(
     }
 
     override suspend fun esborraDades() {
-        ambErrors { supabase.postgrest.rpc("esborra_dades") }
+        val id = supabase.auth.currentUserOrNull()?.id ?: throw ExcepcioCompte(ErrorCompte.DESCONEGUT)
+        ambErrors {
+            // Els fitxers de Storage s'han d'esborrar abans, amb l'API de Storage.
+            val fitxers = avatars.list(id).map { "$id/${it.name}" }
+            if (fitxers.isNotEmpty()) avatars.delete(fitxers)
+            supabase.postgrest.rpc("esborra_dades")
+        }
         gestio.esborraTot()
         reintenta()
     }
@@ -152,10 +209,11 @@ class ServeiCompteSupabase @Inject constructor(
         }
         adoptaDades(id)
         if (remot == null) return EstatCompte.CalPerfil
-        val perfil = Perfil(id, remot.nomUsuari)
+        val perfil = Perfil(id, remot.nomUsuari, remot.foto)
         dataStore.edit {
             it[CLAU_USUARI] = perfil.usuariId
             it[CLAU_NOM] = perfil.nomUsuari
+            if (perfil.foto != null) it[CLAU_FOTO] = perfil.foto else it.remove(CLAU_FOTO)
         }
         return EstatCompte.Llest(perfil)
     }
@@ -174,7 +232,7 @@ class ServeiCompteSupabase @Inject constructor(
         val p = dataStore.data.first()
         val id = p[CLAU_USUARI] ?: return null
         val nom = p[CLAU_NOM] ?: return null
-        return Perfil(id, nom)
+        return Perfil(id, nom, p[CLAU_FOTO])
     }
 
     private inline fun <T> ambErrors(bloc: () -> T): T = try {
@@ -186,11 +244,16 @@ class ServeiCompteSupabase @Inject constructor(
     }
 
     @Serializable
-    private data class PerfilRemot(val id: String, @SerialName("nom_usuari") val nomUsuari: String)
+    private data class PerfilRemot(
+        val id: String,
+        @SerialName("nom_usuari") val nomUsuari: String,
+        val foto: String? = null,
+    )
 
     companion object {
         private const val TAG = "Compte"
         private const val PERFILS = "perfils"
+        private const val BUCKET_AVATARS = "descobreix-avatars"
 
         // Ha de coincidir amb l'intent-filter de MainActivity i amb les URL de redirecció de Supabase.
         const val ESQUEMA = "cat.descobreix"
@@ -203,6 +266,7 @@ class ServeiCompteSupabase @Inject constructor(
 
         private val CLAU_USUARI = stringPreferencesKey("compte_usuari_id")
         private val CLAU_NOM = stringPreferencesKey("compte_nom_usuari")
+        private val CLAU_FOTO = stringPreferencesKey("compte_foto")
         private val CLAU_PROPIETARI = stringPreferencesKey("dades_propietari")
 
         internal fun errorDe(e: Exception): ErrorCompte = when (e) {

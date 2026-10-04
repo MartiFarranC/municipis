@@ -1,6 +1,9 @@
 package cat.descobreix.profile
 
+import android.content.Context
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,6 +18,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -26,18 +30,25 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -46,11 +57,13 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
 import cat.descobreix.joc.progressio.Assoliment
 import cat.descobreix.joc.progressio.TipusAssoliment
+import cat.descobreix.ui.components.Avatar
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
@@ -58,12 +71,44 @@ import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.components.Xifra
 import cat.descobreix.ui.plural
+import cat.descobreix.ui.rememberPermisCamera
 import cat.descobreix.ui.theme.ColorSecundari
 import cat.descobreix.ui.theme.Colors
+import java.io.File
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PerfilScreen(
+    onObreFoto: (String) -> Unit,
+    onObreSobre: () -> Unit,
+) {
+    var pestanya by rememberSaveable { mutableIntStateOf(0) }
+    Column(
+        Modifier
+            .fillMaxSize()
+            .statusBarsPadding(),
+    ) {
+        PrimaryTabRow(selectedTabIndex = pestanya, containerColor = Colors.Fons, contentColor = Colors.Text) {
+            listOf(R.string.pestanya_perfil, R.string.pestanya_ranquing).forEachIndexed { i, text ->
+                Tab(
+                    selected = pestanya == i,
+                    onClick = { pestanya = i },
+                    text = { Text(stringResource(text), style = MaterialTheme.typography.titleSmall) },
+                    selectedContentColor = Colors.Ambre,
+                    unselectedContentColor = Colors.TextSecundari,
+                )
+            }
+        }
+        when (pestanya) {
+            0 -> PestanyaPerfil(onObreFoto, onObreSobre)
+            else -> RanquingPestanya()
+        }
+    }
+}
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun PerfilScreen(
+private fun PestanyaPerfil(
     onObreFoto: (String) -> Unit,
     onObreSobre: () -> Unit,
     viewModel: PerfilViewModel = hiltViewModel(),
@@ -75,19 +120,28 @@ fun PerfilScreen(
     }
     var confirmantEsborrar by rememberSaveable { mutableStateOf(false) }
     var confirmantSortir by rememberSaveable { mutableStateOf(false) }
+    var triantFoto by rememberSaveable { mutableStateOf(false) }
+    var senseCamera by rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
+    val galeria = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) viewModel.canviaFoto(uri)
+    }
+    val fotoCamera = remember(context) { fitxerFotoCamera(context) }
+    val camera = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
+        if (ok) viewModel.canviaFoto(fotoCamera)
+    }
+    val demanaCamera = rememberPermisCamera(onConcedit = { camera.launch(fotoCamera) }, onDenegat = { senseCamera = true })
     val exportador = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
         if (uri != null) viewModel.exporta(uri)
     }
     val nomExportacio = stringResource(R.string.nom_fitxer_exportacio)
 
     LazyColumn(
-        Modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
+        Modifier.fillMaxSize(),
         contentPadding = PaddingValues(20.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        item { Capcalera(estat) }
+        item { Capcalera(estat, onFoto = { triantFoto = true }) }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Xifra("${estat.descoberts}", stringResource(R.string.stat_municipis), Modifier.weight(1f), Colors.Ambre)
@@ -168,6 +222,48 @@ fun PerfilScreen(
         }
     }
 
+    if (triantFoto) {
+        AlertDialog(
+            onDismissRequest = { triantFoto = false },
+            containerColor = Colors.Superficie,
+            title = { Text(stringResource(R.string.foto_perfil)) },
+            text = {
+                Column {
+                    OpcioFoto(stringResource(R.string.foto_perfil_galeria)) {
+                        triantFoto = false
+                        galeria.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    }
+                    OpcioFoto(stringResource(R.string.foto_perfil_camera)) {
+                        triantFoto = false
+                        demanaCamera()
+                    }
+                    if (estat.foto != null) {
+                        OpcioFoto(stringResource(R.string.foto_perfil_treu)) {
+                            triantFoto = false
+                            viewModel.treuFoto()
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { triantFoto = false }) { Text(stringResource(R.string.cancela)) } },
+        )
+    }
+    if (senseCamera) {
+        AlertDialog(
+            onDismissRequest = { senseCamera = false },
+            containerColor = Colors.Superficie,
+            text = { Text(stringResource(R.string.missatge_sense_permis_camera)) },
+            confirmButton = { TextButton(onClick = { senseCamera = false }) { Text(stringResource(R.string.entesos)) } },
+        )
+    }
+    if (estat.errorFoto) {
+        AlertDialog(
+            onDismissRequest = viewModel::tancaErrorFoto,
+            containerColor = Colors.Superficie,
+            text = { Text(stringResource(R.string.foto_perfil_error)) },
+            confirmButton = { TextButton(onClick = viewModel::tancaErrorFoto) { Text(stringResource(R.string.entesos)) } },
+        )
+    }
     if (confirmantEsborrar) {
         AlertDialog(
             onDismissRequest = { confirmantEsborrar = false },
@@ -264,25 +360,55 @@ private fun Titol(text: String) {
 }
 
 @Composable
-private fun Capcalera(estat: PerfilEstat) {
+private fun Capcalera(estat: PerfilEstat, onFoto: () -> Unit) {
     val nivell = estat.nivell ?: return
+    val nom = estat.nomUsuari.orEmpty()
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
         Box(
             Modifier
-                .size(64.dp)
-                .clip(RoundedCornerShape(20.dp))
-                .background(Colors.Disponible1)
-                .border(2.dp, Colors.Ambre, RoundedCornerShape(20.dp)),
+                .size(72.dp)
+                .clip(CircleShape)
+                .clickable(enabled = !estat.canviantFoto, onClickLabel = stringResource(R.string.foto_perfil_canvia), role = Role.Button, onClick = onFoto),
             contentAlignment = Alignment.Center,
         ) {
-            Text("${nivell.numero}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
+            Avatar(estat.foto, nom, 72.dp, vora = true)
+            if (estat.canviantFoto) {
+                CircularProgressIndicator(Modifier.size(32.dp), color = Colors.Ambre)
+            } else {
+                Box(
+                    Modifier
+                        .align(Alignment.BottomEnd)
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(Colors.Ambre),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(Icones.Camera, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(14.dp))
+                }
+            }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
+            if (nom.isNotEmpty()) {
+                Text(nom, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
+            }
+            Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.titleMedium.copy(color = Colors.Ambre))
             Text(stringResource(R.string.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
             BarraProgres(nivell.progres, alcada = 6)
         }
     }
+}
+
+@Composable
+private fun OpcioFoto(text: String, onClick: () -> Unit) {
+    TextButton(onClick = onClick, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
+        Text(text, Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodyLarge)
+    }
+}
+
+/** On l'app de càmera desa la foto de perfil (res/xml/fitxers_compartits.xml). */
+private fun fitxerFotoCamera(context: Context): Uri {
+    val fitxer = File(File(context.cacheDir, "foto_perfil").apply { mkdirs() }, "camera.jpg")
+    return FileProvider.getUriForFile(context, "${context.packageName}.fitxers", fitxer)
 }
 
 @Composable
