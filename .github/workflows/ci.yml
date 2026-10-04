@@ -70,6 +70,26 @@ jobs:
           for f in app/build/test-results/testDebugUnitTest/*.xml; do grep -A5 "<failure" "$f" | head -40; done 2>/dev/null || true
           find app/build/reports/lint-results* -name "*.txt" -exec head -150 {} \; 2>/dev/null || true
 
+  # Esquema de Supabase (RLS i funcions) en un Supabase local, mai contra el projecte compartit.
+  supabase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.119.0
+
+      - name: Engega Supabase
+        run: supabase start -x studio,imgproxy,realtime,edge-runtime,logflare,vector,supavisor,postgres-meta,mailpit
+
+      - name: Tests de la base de dades
+        run: supabase test db
+
+      - name: Lint de la base de dades
+        run: supabase db lint --schema descobreix --level warning --fail-on warning
+
   # Tests de UI amb l'app real en un emulador.
   ui:
     runs-on: ubuntu-latest

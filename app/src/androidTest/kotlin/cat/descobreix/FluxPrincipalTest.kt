@@ -17,24 +17,43 @@ import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.db.BaseDades
+import cat.descobreix.di.ModulCompte
+import dagger.hilt.android.testing.BindValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** El flux principal amb l'app real: triar el municipi, veure el mapa, les missions, la fitxa i el perfil. */
+/**
+ * El flux principal amb l'app real: triar el municipi, veure el mapa, les missions, la fitxa i el perfil.
+ * El compte és fals (ja hi ha sessió), perquè el test no depengui del servidor.
+ */
 @OptIn(ExperimentalTestApi::class)
+@HiltAndroidTest
+@UninstallModules(ModulCompte::class)
 @RunWith(AndroidJUnit4::class)
 class FluxPrincipalTest {
-    @get:Rule
+    @get:Rule(order = 0)
+    val hilt = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
     val regla = createEmptyComposeRule()
+
+    @BindValue
+    @JvmField
+    val compte: ServeiCompte = CompteFals()
 
     private var escenari: ActivityScenario<MainActivity>? = null
 
     @Before
     fun abans() {
+        hilt.inject()
         // Comença sempre sense partida.
         InstrumentationRegistry.getInstrumentation().targetContext.deleteDatabase(BaseDades.NOM)
         escenari = ActivityScenario.launch(MainActivity::class.java)
