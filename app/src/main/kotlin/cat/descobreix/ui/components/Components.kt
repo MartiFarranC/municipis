@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Secundari
 
 @Composable
 fun BotoPrincipal(
@@ -80,7 +81,7 @@ fun BotoSecundari(
         modifier = modifier.fillMaxWidth().heightIn(min = 48.dp),
         shape = RoundedCornerShape(14.dp),
         border = BorderStroke(1.dp, Colors.Linia),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Colors.Blau, disabledContentColor = Colors.TextSecundari),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Colors.Secundari, disabledContentColor = Colors.TextSecundari),
     ) {
         if (icona != null) {
             Icon(icona, contentDescription = null, modifier = Modifier.size(18.dp))

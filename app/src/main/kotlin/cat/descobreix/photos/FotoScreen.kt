@@ -44,6 +44,7 @@ import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Secundari
 import java.text.DateFormat
 import java.util.Date
 
@@ -98,7 +99,7 @@ fun FotoScreen(onEnrere: () -> Unit, viewModel: FotoViewModel = hiltViewModel())
                     RadioButton(
                         selected = foto.visibilitat == v,
                         onClick = null,
-                        colors = RadioButtonDefaults.colors(selectedColor = Colors.Blau),
+                        colors = RadioButtonDefaults.colors(selectedColor = Colors.Secundari),
                     )
                     Text(
                         stringResource(

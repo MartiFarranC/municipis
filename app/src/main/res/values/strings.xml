@@ -189,6 +189,15 @@
     <string name="missatge_sense_permis_ubicacio">Sense permís d\'ubicació no es pot comprovar on ets. El pots donar a la configuració del sistema.</string>
     <string name="missatge_sense_permis_camera">Sense permís de càmera no pots fer fotos. El pots donar a la configuració del sistema.</string>
     <string name="missatge_error">Hi ha hagut un error. Torna-ho a provar.</string>
+    <!-- Color secundari de l'app -->
+    <string name="color_app">Color de l\'app</string>
+    <string name="color_app_text">El color de la selecció al mapa, dels botons secundaris i dels enllaços.</string>
+    <string name="color_blau">Blau</string>
+    <string name="color_turquesa">Turquesa</string>
+    <string name="color_verd">Verd</string>
+    <string name="color_lila">Lila</string>
+    <string name="color_rosa">Rosa</string>
+
     <!-- Compte (docs/requisits.md, secció 9.1) -->
     <string name="compte_titol_entra">Entra</string>
     <string name="compte_titol_registra">Crea el teu compte</string>

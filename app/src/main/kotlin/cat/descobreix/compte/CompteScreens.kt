@@ -41,6 +41,7 @@ import cat.descobreix.data.compte.NomUsuari
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Secundari
 
 /** Inici de sessió i registre (secció 4, pantalla 6). */
 @Composable
@@ -281,7 +282,7 @@ private fun Camp(
 @Composable
 private fun Enllac(text: String, onClick: () -> Unit) {
     TextButton(onClick = onClick, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-        Text(text, style = MaterialTheme.typography.labelLarge.copy(color = Colors.Blau))
+        Text(text, style = MaterialTheme.typography.labelLarge.copy(color = Colors.Secundari))
     }
 }
 

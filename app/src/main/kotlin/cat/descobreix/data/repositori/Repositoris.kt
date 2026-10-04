@@ -6,6 +6,7 @@ import cat.descobreix.domain.Progres
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
 import cat.descobreix.joc.regles.Ubicacio
+import cat.descobreix.ui.theme.ColorSecundari
 import kotlinx.coroutines.flow.Flow
 
 // L'app accedeix a les dades només a través d'aquestes interfícies, perquè a la versió 2
@@ -65,6 +66,11 @@ interface PreferenciesRepositori {
     val cameraMapa: Flow<CameraMapa?>
 
     suspend fun desaCameraMapa(camera: CameraMapa)
+
+    /** Color secundari que ha triat l'usuari al perfil. */
+    val colorSecundari: Flow<ColorSecundari>
+
+    suspend fun desaColorSecundari(color: ColorSecundari)
 }
 
 data class CameraMapa(val x: Float, val y: Float, val escala: Float)
