@@ -6,8 +6,11 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
+import cat.descobreix.BuildConfig
 import cat.descobreix.data.assets.DadesJoc
 import cat.descobreix.data.assets.FontDadesJoc
+import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.ServeiCompteSupabase
 import cat.descobreix.data.db.BaseDades
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.FotosRepositoriRoom
@@ -26,6 +29,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.FlowType
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.postgrest.Postgrest
 import javax.inject.Singleton
 
 @Module
@@ -43,6 +51,18 @@ object ModulDades {
 
     @Provides
     fun rellotge(): Rellotge = Rellotge { System.currentTimeMillis() }
+
+    @Provides
+    @Singleton
+    fun supabase(): SupabaseClient = createSupabaseClient(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY) {
+        install(Auth) {
+            flowType = FlowType.PKCE
+            scheme = ServeiCompteSupabase.ESQUEMA
+            host = ServeiCompteSupabase.AMFITRIO
+        }
+        // Totes les dades de l'app són a l'esquema descobreix (docs/requisits.md, secció 9.0).
+        install(Postgrest) { defaultSchema = "descobreix" }
+    }
 }
 
 @Module
@@ -70,4 +90,13 @@ abstract class ModulRepositoris {
     @Binds
     @Singleton
     abstract fun ubicacio(s: ServeiUbicacioFused): ServeiUbicacio
+}
+
+/** A part, perquè els tests de UI el puguin substituir per un compte fals. */
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class ModulCompte {
+    @Binds
+    @Singleton
+    abstract fun compte(s: ServeiCompteSupabase): ServeiCompte
 }

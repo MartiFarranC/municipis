@@ -69,6 +69,7 @@ fun PerfilScreen(
         return
     }
     var confirmantEsborrar by rememberSaveable { mutableStateOf(false) }
+    var confirmantSortir by rememberSaveable { mutableStateOf(false) }
     val exportador = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
         if (uri != null) viewModel.exporta(uri)
     }
@@ -148,6 +149,15 @@ fun PerfilScreen(
                 BotoSecundari(stringResource(R.string.sobre_app), onObreSobre, icona = Icones.Info)
             }
         }
+
+        estat.nomUsuari?.let { nom ->
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(stringResource(R.string.perfil_sessio, nom), style = MaterialTheme.typography.bodySmall)
+                    BotoSecundari(stringResource(R.string.compte_surt), { confirmantSortir = true }, icona = Icones.Perfil, enabled = !estat.treballant)
+                }
+            }
+        }
     }
 
     if (confirmantEsborrar) {
@@ -163,6 +173,29 @@ fun PerfilScreen(
                 }) { Text(stringResource(R.string.esborra)) }
             },
             dismissButton = { TextButton(onClick = { confirmantEsborrar = false }) { Text(stringResource(R.string.cancela)) } },
+        )
+    }
+    if (confirmantSortir) {
+        AlertDialog(
+            onDismissRequest = { confirmantSortir = false },
+            containerColor = Colors.Superficie,
+            title = { Text(stringResource(R.string.compte_surt)) },
+            text = { Text(stringResource(R.string.perfil_surt_text)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmantSortir = false
+                    viewModel.surt()
+                }) { Text(stringResource(R.string.compte_surt)) }
+            },
+            dismissButton = { TextButton(onClick = { confirmantSortir = false }) { Text(stringResource(R.string.cancela)) } },
+        )
+    }
+    if (estat.errorEsborrant) {
+        AlertDialog(
+            onDismissRequest = viewModel::tancaErrorEsborrant,
+            containerColor = Colors.Superficie,
+            text = { Text(stringResource(R.string.compte_error_sense_connexio)) },
+            confirmButton = { TextButton(onClick = viewModel::tancaErrorEsborrant) { Text(stringResource(R.string.entesos)) } },
         )
     }
     estat.exportat?.let { ok ->

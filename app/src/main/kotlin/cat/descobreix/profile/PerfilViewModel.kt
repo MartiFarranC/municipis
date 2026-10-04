@@ -3,6 +3,9 @@ package cat.descobreix.profile
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cat.descobreix.data.compte.EstatCompte
+import cat.descobreix.data.compte.ExcepcioCompte
+import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.exportacio.GestioDades
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.domain.Foto
@@ -38,6 +41,9 @@ data class PerfilEstat(
     val treballant: Boolean = false,
     /** Resultat de l'última exportació: true si ha anat bé. */
     val exportat: Boolean? = null,
+    val nomUsuari: String? = null,
+    /** No s'han pogut esborrar les dades (per exemple, sense connexió). */
+    val errorEsborrant: Boolean = false,
 )
 
 @HiltViewModel
@@ -45,11 +51,17 @@ class PerfilViewModel @Inject constructor(
     private val joc: Joc,
     fotos: FotosRepositori,
     private val gestio: GestioDades,
+    private val compte: ServeiCompte,
 ) : ViewModel() {
     private val _estat = MutableStateFlow(PerfilEstat())
     val estat: StateFlow<PerfilEstat> = _estat.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            compte.estat.collect { e ->
+                _estat.update { it.copy(nomUsuari = (e as? EstatCompte.Llest)?.perfil?.nomUsuari) }
+            }
+        }
         viewModelScope.launch {
             val d = joc.dades()
             combine(joc.progres, fotos.totes) { p, f -> p to f }.collect { (p, f) ->
@@ -85,10 +97,26 @@ class PerfilViewModel @Inject constructor(
 
     fun tancaExportacio() = _estat.update { it.copy(exportat = null) }
 
+    /** Esborra les dades del joc al servidor i al mòbil (cal connexió). */
     fun esborraTot() {
         _estat.update { it.copy(treballant = true) }
         viewModelScope.launch {
-            gestio.esborraTot()
+            val ok = try {
+                compte.esborraDades()
+                true
+            } catch (e: ExcepcioCompte) {
+                false
+            }
+            _estat.update { it.copy(treballant = false, errorEsborrant = !ok) }
+        }
+    }
+
+    fun tancaErrorEsborrant() = _estat.update { it.copy(errorEsborrant = false) }
+
+    fun surt() {
+        _estat.update { it.copy(treballant = true) }
+        viewModelScope.launch {
+            compte.surt()
             _estat.update { it.copy(treballant = false) }
         }
     }
