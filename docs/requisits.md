@@ -114,9 +114,9 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
 4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
-5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
+5. **Perfil i àlbum.** Té dues pestanyes: **Perfil** i **Rànquing** (pantalla 7). La de perfil té la foto de perfil, les estadístiques, les fotos per municipi, els assoliments, el progrés per comarques i el color secundari de l'app. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
 6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
-7. **Rànquing.** Classificació general i classificació entre amics.
+7. **Rànquing.** Pestanya del perfil. Classificació per punts o per municipis descoberts, general o entre amics, amb la posició de l'usuari sempre visible.
 8. **Amics.** Buscar per nom d'usuari, enviar, acceptar i rebutjar sol·licituds, eliminar amics, i veure el mapa i les fotos visibles d'un amic.
 
 ## 5. Estètica
@@ -124,6 +124,7 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
 Es segueix el que diu `docs/disseny.md`:
 - **Tema:** fosc, "nit i fanals".
 - **Colors:** ambre `#F2B544` per al que està descobert i blau `#5AB8E8` per a la selecció.
+- **Color secundari:** l'usuari el pot canviar al perfil (el de la selecció i de les accions secundàries). Es tria d'una paleta tancada (`ColorSecundari`) en què tots els colors tenen un contrast de 4,5:1 sobre els fons i es distingeixen de l'ambre i del color d'error. L'ambre no es pot canviar, perquè marca el territori descobert.
 - **Tipografia:** Chakra Petch per als títols i Atkinson Hyperlegible per al text.
 
 Requisits d'accessibilitat:
@@ -215,7 +216,8 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - El compte és **obligatori**. El primer cop cal connexió per iniciar la sessió. Després la sessió es guarda i l'app funciona sense connexió.
 - Mètodes: Google, correu i contrasenya (amb verificació del correu i recuperació de contrasenya), i enllaç màgic per correu (obre l'app amb un deep link).
 - **De moment l'app no envia cap correu.** Per crear el compte n'hi ha prou amb el correu i la contrasenya, que s'escriu dues vegades. No hi ha verificació del correu (*Confirm email* desactivat al projecte), ni enllaç màgic, ni recuperació de contrasenya. Es tornaran a activar quan el projecte tingui un SMTP propi i `cat.descobreix://login/**` sigui a les URL de redirecció.
-- Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i als amics) i data d'alta. No es mostra mai el correu a altres usuaris.
+- Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i als amics), data d'alta i, si vol, una **foto de perfil**. No es mostra mai el correu a altres usuaris.
+- **Foto de perfil:** es tria de la galeria o es fa amb la càmera. Es retalla quadrada i es redueix a la mida de les miniatures. Es puja al bucket `descobreix-avatars` i la veu qualsevol usuari amb sessió (al rànquing i als amics).
 - **Dades d'abans dels comptes:** si en iniciar sessió hi ha progrés local sense compte, s'assigna a aquest compte.
 
 ### 9.2 Sincronització
@@ -233,7 +235,9 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - Es calcula **al servidor** a partir de les missions completades i dels punts que val cada missió segons la taula oficial de missions del servidor. **No es fia mai dels punts que envia el client.**
 - La taula oficial de missions es carrega al servidor amb un script a partir del mateix JSON que va dins de l'app.
 - Les missions pròpies no compten mai.
-- Classificació general i entre amics.
+- Dues classificacions: per **punts** i per **municipis descoberts**. Cadascuna, general o entre amics.
+- Els municipis només compten si són dels 947 de l'app. Limitació coneguda: el servidor no comprova l'economia de punts del desbloqueig.
+- Mentre no hi hagi la sincronització completa (pas 11), l'app ja puja els municipis descoberts i les missions completades quan hi ha connexió (cada vegada que canvien i en obrir el rànquing), perquè el rànquing estigui al dia.
 - Limitació coneguda: el GPS es pot falsejar. Es valida com a mínim que la missió existeix, que el municipi està desbloquejat i que la ubicació enviada compleix el radi (secció 3.4).
 
 ### 9.4 Amics i fotos
@@ -275,6 +279,5 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - Quines categories de Wikidata i d'OSM es converteixen en missions, i quants punts val cada categoria.
 - Nom definitiu de l'app i icona.
 - Normes del nom d'usuari (llargada, caràcters permesos, paraules prohibides).
-- Si el rànquing és només de punts o també de municipis descoberts.
 - URL de la política de privacitat i de la pàgina per esborrar les dades.
 - Si esborrar només les dades de l'app (i no el compte compartit) compleix la política d'esborrat de comptes de Google Play. Si no, caldrà un projecte de Supabase dedicat.
