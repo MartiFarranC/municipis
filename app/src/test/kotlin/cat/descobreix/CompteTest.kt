@@ -105,7 +105,9 @@ class CompteTest {
         assertFalse(CompteEstat(correu = "anna@example.com").potEnviar, "cal la contrasenya per entrar")
         assertTrue(CompteEstat(correu = "anna@example.com", contrasenya = "x").potEnviar)
         assertFalse(CompteEstat(ModeCompte.REGISTRA, "anna@example.com", "12345").potEnviar, "contrasenya massa curta")
-        assertTrue(CompteEstat(ModeCompte.REGISTRA, "anna@example.com", "123456").potEnviar)
+        assertFalse(CompteEstat(ModeCompte.REGISTRA, "anna@example.com", "123456").potEnviar, "cal repetir la contrasenya")
+        assertFalse(CompteEstat(ModeCompte.REGISTRA, "anna@example.com", "123456", "123457").potEnviar, "no coincideixen")
+        assertTrue(CompteEstat(ModeCompte.REGISTRA, "anna@example.com", "123456", "123456").potEnviar)
         assertTrue(CompteEstat(ModeCompte.ENLLAC, "anna@example.com").potEnviar, "l'enllaç no necessita contrasenya")
     }
 
@@ -142,8 +144,27 @@ class CompteTest {
         vm.canviaMode(ModeCompte.REGISTRA)
         vm.canviaCorreu("anna@example.com")
         vm.canviaContrasenya("secreta")
+        vm.canviaRepeticio("secreta")
         vm.envia()
         assertEquals(AvisCompte.CONFIRMA_CORREU, vm.estat.value.avis)
+    }
+
+    @Test
+    fun `registrar-se sense confirmació entra directament`() = runTest {
+        val vm = CompteViewModel(compte)
+        vm.canviaMode(ModeCompte.REGISTRA)
+        vm.canviaCorreu("anna@example.com")
+        vm.canviaContrasenya("secreta")
+        vm.canviaRepeticio("secret")
+        assertTrue(vm.estat.value.contrasenyesDiferents)
+        vm.envia()
+        assertTrue(compte.crides.isEmpty(), "no s'envia si les contrasenyes no coincideixen")
+
+        vm.canviaRepeticio("secreta")
+        assertFalse(vm.estat.value.contrasenyesDiferents)
+        vm.envia()
+        assertEquals(listOf("registra anna@example.com"), compte.crides)
+        assertNull(vm.estat.value.avis)
     }
 
     @Test
@@ -167,7 +188,10 @@ class CompteTest {
         vm.canviaCorreu("anna@example.com")
         vm.canviaContrasenya("secreta")
         vm.canviaMode(ModeCompte.REGISTRA)
+        vm.canviaRepeticio("secreta")
+        vm.canviaMode(ModeCompte.ENTRA)
         assertEquals("", vm.estat.value.contrasenya)
+        assertEquals("", vm.estat.value.repeticio)
         assertEquals("anna@example.com", vm.estat.value.correu)
     }
 
