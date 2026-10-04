@@ -47,6 +47,12 @@ node generar-missions.js ../font/dts_municipis_cat_2025.json
 
 `generar-missions.js` consulta Wikidata i OpenStreetMap i escriu `missions.json` i `dades/informe_missions.txt`. Sense connexió, amb `--nomes-generiques` genera només les missions genèriques.
 
+## Integració contínua
+
+A cada push, GitHub Actions (`.github/workflows/ci.yml`) passa els tests dels scripts i del joc, compila l'app, passa els tests unitaris i el lint, i executa els tests de UI en un emulador. L'APK de prova queda com a artefacte de l'execució.
+
+El workflow `Genera les missions` (`missions.yml`, s'executa a mà des de la pestanya Actions) consulta Wikidata i OpenStreetMap i desa les missions a la branca.
+
 ## Fonts de dades
 
 - **Límits municipals.** Instituto Geográfico Nacional (IGN), versió de desembre de 2024 publicada a [ArnauInes/geometries_cat_bcn_2024](https://github.com/ArnauInes/geometries_cat_bcn_2024), amb llicència CC BY 4.0.
@@ -56,7 +62,6 @@ node generar-missions.js ../font/dts_municipis_cat_2025.json
 
 ## Pendent
 
-- **Missions de lloc.** Els `missions.json` actuals només tenen les missions genèriques, perquè es van generar sense accés a Wikidata ni a OpenStreetMap. Cal tornar a executar `generar-missions.js` amb connexió.
 - **Base municipal de l'ICGC.** La referència oficial per als límits. Els codis INE coincideixen, així que el canvi és directe.
 - **Comarques de l'Idescat.** Ara surten de la capa de comarques de l'IGN, que ja té les 43 comarques. Si cal la llista oficial de l'Idescat, s'ha de baixar i comparar.
 - **Ajustar l'economia**, el nom definitiu de l'app i la icona (secció 11 dels requisits).
