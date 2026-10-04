@@ -1,8 +1,8 @@
 Informe de missions (2026-10-04)
 
 Mode: Wikidata + OpenStreetMap + genèriques
-Missions totals: 15861
-Missions de lloc: 13020
-Llocs descartats perquè queden fora de Catalunya: 830
+Missions totals: 10763
+Missions de lloc: 7922
+Llocs descartats perquè queden fora de Catalunya: 758
 Municipis només amb missions genèriques: 0 de 947
 
