@@ -172,7 +172,6 @@ function categoriaOsm(t) {
 }
 
 const prioritat = (categoria) => config.categoriesLloc[categoria].prioritat;
-const normalitza = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 function distanciaMetres(a, b) {
   const R = 6371000; const rad = Math.PI / 180;
   const dLat = (b.lat - a.lat) * rad; const dLon = (b.lon - a.lon) * rad;
@@ -180,17 +179,19 @@ function distanciaMetres(a, b) {
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
-// Uneix els llocs repetits: mateix element de Wikidata, o mateix nom a menys de 150 m.
+// Uneix els llocs repetits: mateix element de Wikidata, o a menys del radi de la prova GPS
+// (una sola visita els completaria tots dos; sovint són el mateix lloc amb noms diferents).
+// Es queda el de més prioritat.
 function desduplica(llocs) {
+  const radi = config.gps.radiMissioMetres;
   const ordenats = llocs.slice().sort((a, b) => prioritat(a.categoria) - prioritat(b.categoria) || a.id.localeCompare(b.id));
   const resultat = [];
-  const perWikidata = new Map();
+  const perWikidata = new Set();
   for (const l of ordenats) {
     if (l.wikidata && perWikidata.has(l.wikidata)) continue;
-    const nom = normalitza(l.nom);
-    if (resultat.some((r) => normalitza(r.nom) === nom && distanciaMetres(r, l) < 150)) continue;
+    if (resultat.some((r) => distanciaMetres(r, l) < radi)) continue;
     resultat.push(l);
-    if (l.wikidata) perWikidata.set(l.wikidata, l);
+    if (l.wikidata) perWikidata.add(l.wikidata);
   }
   return resultat;
 }
