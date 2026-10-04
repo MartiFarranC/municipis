@@ -104,4 +104,4 @@ jobs:
         if: failure()
         run: |
           grep -E "^e: |FAILED|What went wrong|Exception|AssertionError|tests completed" ui.log | head -100 || true
-          find app/build/outputs/androidTest-results -name "*.xml" -exec grep -A8 "<failure" {} \; 2>/dev/null | head -80 || true
+          find app/build/outputs/androidTest-results -name "*.xml" -exec grep -A150 "<failure" {} \; 2>/dev/null | head -250 || true
