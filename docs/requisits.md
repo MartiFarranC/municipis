@@ -114,7 +114,7 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
 4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
-5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar el compte.
+5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
 6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
 7. **Rànquing.** Classificació general i classificació entre amics.
 8. **Amics.** Buscar per nom d'usuari, enviar, acceptar i rebutjar sol·licituds, eliminar amics, i veure el mapa i les fotos visibles d'un amic.
@@ -193,11 +193,21 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 
 - **Ubicació:** només mentre s'utilitza l'app, mai en segon pla. Es demana en el moment en què cal, no en obrir l'app.
 - **Càmera:** es demana en el moment de fer la primera foto.
-- **Dades:** el progrés, les missions pròpies i les fotos es desen a Supabase, en un projecte de la **regió UE**. La ubicació només es puja com a part d'una missió completada o d'una foto, mai de manera contínua. L'usuari pot exportar les seves dades i **esborrar el compte des de l'app**, cosa que esborra totes les seves dades del servidor (Google Play ho exigeix). També cal una URL web per demanar l'esborrat.
+- **Dades:** el progrés, les missions pròpies i les fotos es desen a Supabase, en un projecte de la **regió UE**. La ubicació només es puja com a part d'una missió completada o d'una foto, mai de manera contínua. L'usuari pot exportar les seves dades i **esborrar-les des de l'app**: s'esborren totes les dades d'aquesta app del servidor (taules i fotos), però no el compte d'usuari, perquè és compartit amb altres apps (secció 9.0). També cal una URL web per demanar l'esborrat. Cal comprovar si això compleix la política d'esborrat de comptes de Google Play (secció 11).
 - **Política de privacitat** publicada i enllaçada des de l'app i des de Google Play.
 - **Sense analítica:** no s'hi afegeix cap SDK d'analítica ni de publicitat.
 
 ## 9. Comptes, sincronització i funcions socials
+
+### 9.0 Projecte de Supabase compartit
+
+El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió per confirmar) és **compartit amb altres apps**. Per això:
+
+- Totes les taules, vistes i funcions d'aquesta app van a l'esquema **`descobreix`**, mai a `public`. L'esquema s'ha d'afegir a *Settings → API → Exposed schemas*.
+- Els buckets de Storage porten el prefix `descobreix-` (per exemple `descobreix-fotos`).
+- Els comptes (`auth.users`) i la configuració d'autenticació (proveïdors, plantilles de correu, URL de redirecció) són compartits. Un usuari "és de l'app" quan té una fila a `descobreix.perfils`.
+- Les migracions no poden tocar res de fora de l'esquema `descobreix` i els buckets `descobreix-*`, ni dependre de l'historial de migracions de les altres apps.
+- L'app **no pot esborrar mai** files d'`auth.users`.
 
 ### 9.1 Comptes
 
@@ -250,7 +260,7 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 7. **Perfil.** Nivells, assoliments i comarques.
 8. **Poliment.** Accessibilitat, rendiment, exportar i esborrar dades, atribucions.
 9. **Servidor.** Projecte Supabase, esquema, RLS i migracions amb tests.
-10. **Comptes.** Pantalla d'inici de sessió amb els tres mètodes, perfil, tancar sessió i esborrar el compte.
+10. **Comptes.** Pantalla d'inici de sessió amb els tres mètodes, perfil, tancar sessió i esborrar les dades del joc.
 11. **Sincronització.** Esborrats lògics, cua de pendents, pujada i baixada amb WorkManager i fusió amb tests.
 12. **Fotos al núvol.** Pujar-les a Storage amb la visibilitat aplicada.
 13. **Rànquing.** Taula oficial de missions al servidor, càlcul al servidor i pantalla.
@@ -264,4 +274,6 @@ També ha de fer un informe de quants municipis queden només amb missions genè
 - Nom definitiu de l'app i icona.
 - Normes del nom d'usuari (llargada, caràcters permesos, paraules prohibides).
 - Si el rànquing és només de punts o també de municipis descoberts.
-- URL de la política de privacitat i de la pàgina per esborrar el compte.
+- URL de la política de privacitat i de la pàgina per esborrar les dades.
+- Si esborrar només les dades de l'app (i no el compte compartit) compleix la política d'esborrat de comptes de Google Play. Si no, caldrà un projecte de Supabase dedicat.
+- Regió del projecte de Supabase (ha de ser a la UE).
