@@ -1,0 +1,40 @@
+name: Genera les missions
+
+# Consulta Wikidata i OpenStreetMap i desa les missions a la mateixa branca.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  missions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Baixa la font dels límits municipals
+        run: git clone --depth 1 https://github.com/ArnauInes/geometries_cat_bcn_2024.git font
+
+      - name: Genera les missions
+        working-directory: scripts
+        run: |
+          npm ci
+          node generar-missions.js ../font/dts_municipis_cat_2025.json
+
+      - name: Desa els canvis
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/assets/dades/missions.json dades/informe_missions.txt
+          if git diff --cached --quiet; then
+            echo "Cap canvi a les missions."
+          else
+            git commit -m "Actualitza les missions amb Wikidata i OpenStreetMap"
+            git push
+          fi
