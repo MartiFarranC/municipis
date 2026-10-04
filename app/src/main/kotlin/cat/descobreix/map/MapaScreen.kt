@@ -37,10 +37,10 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -61,6 +61,7 @@ import cat.descobreix.ui.textDe
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
+import cat.descobreix.ui.theme.Secundari
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.drop
@@ -174,7 +175,7 @@ fun MapaScreen(
                         Icones.Ubicacio,
                         stringResource(if (estat.buscantUbicacio) R.string.buscant_ubicacio else R.string.on_soc),
                         demanaUbicacio,
-                        tint = if (estat.buscantUbicacio) Colors.Blau else Colors.Text,
+                        tint = if (estat.buscantUbicacio) Colors.Secundari else Colors.Text,
                     )
                 }
             }
@@ -297,7 +298,7 @@ private fun TargetaSeleccio(
                     ?: stringResource(R.string.estat_disponible).uppercase()
                 EstatMunicipi.BOIRA -> stringResource(R.string.estat_boira).uppercase()
             }
-            Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.Blau))
+            Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.Secundari))
             Text(s.nom, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
             val detall = when (s.estat) {
                 EstatMunicipi.DESCOBERT -> stringResource(R.string.missions_fetes, s.missionsFetes, s.missions)

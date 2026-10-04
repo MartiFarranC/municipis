@@ -1,9 +1,9 @@
 package cat.descobreix.map
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -33,6 +33,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Secundari
 import kotlinx.coroutines.launch
 
 /** A partir d'aquest zoom es dibuixa la geometria detallada. */
@@ -57,6 +58,7 @@ fun MapaCanvas(
 ) {
     val ambit = rememberCoroutineScope()
     val mesurador = rememberTextMeasurer(cacheSize = 256)
+    val secundari = Colors.Secundari
     val estilEtiqueta = TextStyle(fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 0.04.em)
 
     Canvas(
@@ -111,12 +113,12 @@ fun MapaCanvas(
                 drawPath(camiActual[i], color, style = vora)
             }
             if (seleccionat != null && seleccionat in camiActual.indices) {
-                drawPath(camiActual[seleccionat], Colors.Blau.copy(alpha = 0.25f))
-                drawPath(camiActual[seleccionat], Colors.Blau, style = Stroke(width = 2.5f * gruix))
+                drawPath(camiActual[seleccionat], secundari.copy(alpha = 0.25f))
+                drawPath(camiActual[seleccionat], secundari, style = Stroke(width = 2.5f * gruix))
             }
         }
 
-        dibuixaEtiquetes(geometria, estats, noms, seleccionat, visibles, camera, mesurador, estilEtiqueta)
+        dibuixaEtiquetes(geometria, estats, noms, seleccionat, visibles, camera, mesurador, estilEtiqueta, secundari)
     }
 }
 
@@ -130,6 +132,7 @@ private fun DrawScope.dibuixaEtiquetes(
     camera: CameraMapa,
     mesurador: TextMeasurer,
     estil: TextStyle,
+    secundari: Color,
 ) {
     val minim = 56.dp.toPx()
     val marge = 6.dp.toPx()
@@ -153,7 +156,7 @@ private fun DrawScope.dibuixaEtiquetes(
         if (i != seleccionat && amplada < llindar) continue
         val nom = noms.getOrNull(i) ?: continue
         val color = when {
-            i == seleccionat -> Colors.Blau
+            i == seleccionat -> secundari
             estat == EstatMunicipi.DESCOBERT -> Colors.Ambre
             estat == EstatMunicipi.DISPONIBLE -> Colors.Text
             else -> Colors.TextSecundari

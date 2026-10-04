@@ -1,14 +1,15 @@
 package cat.descobreix.ui.theme
 
 import android.provider.Settings
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
@@ -17,7 +18,7 @@ private val esquemaFosc = darkColorScheme(
     onPrimary = Colors.TintaAmbre,
     primaryContainer = Colors.Disponible1,
     onPrimaryContainer = Colors.Ambre,
-    secondary = Colors.Blau,
+    secondary = ColorSecundari.PER_DEFECTE.color,
     onSecondary = Colors.Fons,
     background = Colors.Fons,
     onBackground = Colors.Text,
@@ -48,12 +49,16 @@ private val formes = Shapes(
 val LocalReduirAnimacions = staticCompositionLocalOf { false }
 
 @Composable
-fun DescobreixTheme(content: @Composable () -> Unit) {
+fun DescobreixTheme(
+    colorSecundari: Color = ColorSecundari.PER_DEFECTE.color,
+    content: @Composable () -> Unit,
+) {
     val context = LocalContext.current
     val reduir = remember(context) {
         Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
     }
-    CompositionLocalProvider(LocalReduirAnimacions provides reduir) {
-        MaterialTheme(colorScheme = esquemaFosc, typography = Tipografia, shapes = formes, content = content)
+    val esquema = remember(colorSecundari) { esquemaFosc.copy(secondary = colorSecundari) }
+    CompositionLocalProvider(LocalReduirAnimacions provides reduir, LocalColorSecundari provides colorSecundari) {
+        MaterialTheme(colorScheme = esquema, typography = Tipografia, shapes = formes, content = content)
     }
 }

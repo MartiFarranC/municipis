@@ -21,6 +21,9 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -37,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -54,6 +58,7 @@ import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.components.Xifra
 import cat.descobreix.ui.plural
+import cat.descobreix.ui.theme.ColorSecundari
 import cat.descobreix.ui.theme.Colors
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -140,6 +145,9 @@ fun PerfilScreen(
             }
         }
 
+        item { Titol(stringResource(R.string.color_app)) }
+        item { SelectorColor(estat.colorSecundari, viewModel::canviaColor) }
+
         item { Titol(stringResource(R.string.les_teves_dades)) }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -205,6 +213,48 @@ fun PerfilScreen(
             text = { Text(stringResource(if (ok) R.string.exportacio_feta else R.string.exportacio_error)) },
             confirmButton = { TextButton(onClick = viewModel::tancaExportacio) { Text(stringResource(R.string.entesos)) } },
         )
+    }
+}
+
+/** Cercles de la paleta de [ColorSecundari]. El triat porta una vora i una marca. */
+@Composable
+private fun SelectorColor(triat: ColorSecundari, onTria: (ColorSecundari) -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(stringResource(R.string.color_app_text), style = MaterialTheme.typography.bodySmall)
+        Row(Modifier.selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            for (c in ColorSecundari.entries) {
+                val seleccionat = c == triat
+                val nom = stringResource(
+                    when (c) {
+                        ColorSecundari.BLAU -> R.string.color_blau
+                        ColorSecundari.TURQUESA -> R.string.color_turquesa
+                        ColorSecundari.VERD -> R.string.color_verd
+                        ColorSecundari.LILA -> R.string.color_lila
+                        ColorSecundari.ROSA -> R.string.color_rosa
+                    },
+                )
+                Box(
+                    Modifier
+                        .size(48.dp)
+                        .clip(CircleShape)
+                        .selectable(selected = seleccionat, role = Role.RadioButton) { onTria(c) }
+                        .semantics { contentDescription = nom },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Box(
+                        Modifier
+                            .size(36.dp)
+                            .border(if (seleccionat) 3.dp else 0.dp, Colors.Text, CircleShape)
+                            .padding(if (seleccionat) 5.dp else 0.dp)
+                            .clip(CircleShape)
+                            .background(c.color),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        if (seleccionat) Icon(Icones.Fet, contentDescription = null, tint = Colors.Fons, modifier = Modifier.size(16.dp))
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -8,12 +8,14 @@ import cat.descobreix.data.compte.ExcepcioCompte
 import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.exportacio.GestioDades
 import cat.descobreix.data.repositori.FotosRepositori
+import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.Joc
 import cat.descobreix.joc.progressio.Assoliment
 import cat.descobreix.joc.progressio.DadesAssoliments
 import cat.descobreix.joc.progressio.Nivell
 import cat.descobreix.joc.progressio.ProgresComarca
+import cat.descobreix.ui.theme.ColorSecundari
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,6 +46,7 @@ data class PerfilEstat(
     val nomUsuari: String? = null,
     /** No s'han pogut esborrar les dades (per exemple, sense connexió). */
     val errorEsborrant: Boolean = false,
+    val colorSecundari: ColorSecundari = ColorSecundari.PER_DEFECTE,
 )
 
 @HiltViewModel
@@ -52,6 +55,7 @@ class PerfilViewModel @Inject constructor(
     fotos: FotosRepositori,
     private val gestio: GestioDades,
     private val compte: ServeiCompte,
+    private val preferencies: PreferenciesRepositori,
 ) : ViewModel() {
     private val _estat = MutableStateFlow(PerfilEstat())
     val estat: StateFlow<PerfilEstat> = _estat.asStateFlow()
@@ -61,6 +65,9 @@ class PerfilViewModel @Inject constructor(
             compte.estat.collect { e ->
                 _estat.update { it.copy(nomUsuari = (e as? EstatCompte.Llest)?.perfil?.nomUsuari) }
             }
+        }
+        viewModelScope.launch {
+            preferencies.colorSecundari.collect { c -> _estat.update { it.copy(colorSecundari = c) } }
         }
         viewModelScope.launch {
             val d = joc.dades()
@@ -85,6 +92,10 @@ class PerfilViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun canviaColor(color: ColorSecundari) {
+        viewModelScope.launch { preferencies.desaColorSecundari(color) }
     }
 
     fun exporta(desti: Uri) {

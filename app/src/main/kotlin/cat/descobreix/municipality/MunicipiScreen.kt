@@ -42,10 +42,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -77,6 +77,7 @@ import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Secundari
 
 @Composable
 fun MunicipiScreen(
@@ -385,8 +386,8 @@ private fun FilaPropia(p: MissioPropia, onCanvia: (String, Boolean) -> Unit, onE
                 Modifier
                     .size(22.dp)
                     .clip(RoundedCornerShape(6.dp))
-                    .background(if (p.completada) Colors.Blau else Color.Transparent)
-                    .border(2.dp, Colors.Blau, RoundedCornerShape(6.dp)),
+                    .background(if (p.completada) Colors.Secundari else Color.Transparent)
+                    .border(2.dp, Colors.Secundari, RoundedCornerShape(6.dp)),
                 contentAlignment = Alignment.Center,
             ) {
                 if (p.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.Fons, modifier = Modifier.size(14.dp))
@@ -519,7 +520,7 @@ private fun FitxaBloquejada(
         item {
             Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
                 val etiqueta = estat.veiDescobert?.let { stringResource(R.string.vei_de_comarca, it, estat.comarca) } ?: estat.comarca
-                Text(etiqueta.uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Blau))
+                Text(etiqueta.uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Secundari))
                 Text(estat.nom, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.semantics { heading() })
                 Text(
                     if (estat.estat == EstatMunicipi.DISPONIBLE) {

@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import cat.descobreix.ui.theme.ColorSecundari
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -26,9 +28,16 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         }
     }
 
+    override val colorSecundari: Flow<ColorSecundari> = dataStore.data.map { ColorSecundari.perNom(it[COLOR_SECUNDARI]) }
+
+    override suspend fun desaColorSecundari(color: ColorSecundari) {
+        dataStore.edit { it[COLOR_SECUNDARI] = color.name }
+    }
+
     private companion object {
         val X = floatPreferencesKey("mapa_x")
         val Y = floatPreferencesKey("mapa_y")
         val ESCALA = floatPreferencesKey("mapa_escala")
+        val COLOR_SECUNDARI = stringPreferencesKey("color_secundari")
     }
 }
