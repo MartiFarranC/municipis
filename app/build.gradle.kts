@@ -48,6 +48,8 @@ android {
     lint {
         abortOnError = true
         checkReleaseBuilds = true
+        textReport = true
+        textOutput = file("build/reports/lint-results.txt")
         // Les versions de les dependències s'actualitzen a mà.
         disable += setOf("GradleDependency", "NewerVersionAvailable", "AndroidGradlePluginVersion")
     }

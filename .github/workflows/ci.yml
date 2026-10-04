@@ -12,6 +12,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -32,16 +35,16 @@ jobs:
         run: npm ci && npm test
 
       - name: Tests de les regles del joc
-        run: ./gradlew -p joc test --stacktrace
+        run: ./gradlew -p joc test --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: Compila l'app
-        run: ./gradlew :app:assembleDebug --stacktrace
+        run: ./gradlew :app:assembleDebug --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: Tests unitaris de l'app
-        run: ./gradlew :app:testDebugUnitTest --stacktrace
+        run: ./gradlew :app:testDebugUnitTest --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: Lint
-        run: ./gradlew :app:lintDebug --stacktrace
+        run: ./gradlew :app:lintDebug --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: APK de prova
         if: success()
@@ -58,3 +61,11 @@ jobs:
           path: |
             app/build/reports/
             joc/build/reports/
+
+      # L'últim pas: un resum dels errors, perquè sigui el final del registre.
+      - name: Resum d'errors
+        if: failure()
+        run: |
+          grep -E "^e: |^w: .*(error|Error)|What went wrong|FAILED|Error:|error:|tests completed|> .*Exception|lint found" build.log | grep -v "^\s*at " | head -200 || true
+          for f in app/build/test-results/testDebugUnitTest/*.xml; do grep -A5 "<failure" "$f" | head -40; done 2>/dev/null || true
+          find app/build/reports/lint-results* -name "*.txt" -exec head -150 {} \; 2>/dev/null || true
