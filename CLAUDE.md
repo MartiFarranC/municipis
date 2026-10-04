@@ -39,6 +39,7 @@ scripts/        generació de dades i missions (Node.js)
 ./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
 ./gradlew -p joc test
 cd scripts && npm test
+npx supabase start && npx supabase test db   # Supabase local amb Docker; mai contra el projecte compartit
 ```
 
 ## Regenerar les dades
