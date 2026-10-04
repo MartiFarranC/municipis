@@ -1,6 +1,9 @@
 package cat.descobreix
 
+import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.isRoot
+import androidx.compose.ui.test.printToString
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
@@ -43,7 +46,13 @@ class FluxPrincipalTest {
     }
 
     private fun espera(text: String, temps: Long = 20_000) {
-        regla.waitUntilAtLeastOneExists(hasText(text, substring = true), temps)
+        try {
+            regla.waitUntilAtLeastOneExists(hasText(text, substring = true), temps)
+        } catch (e: ComposeTimeoutException) {
+            // Mostra què hi ha a la pantalla, per entendre per què no hi és.
+            val arbre = regla.onAllNodes(isRoot(), useUnmergedTree = true).printToString(maxDepth = 30)
+            throw AssertionError("No apareix \"$text\". Pantalla:\n$arbre", e)
+        }
     }
 
     @Test
