@@ -10,7 +10,7 @@
     "maximMissionsPerMunicipi": 400,
     "bonusTotesLesMissions": 50,
     "minimPerMissioLloc": 5,
-    "maximMissionsLlocPerMunicipi": 25
+    "maximMissionsLlocPerMunicipi": 12
   },
   "missionsGeneriques": [
     { "clau": "checkin", "titol": "Fes check-in al municipi", "prova": "GPS", "punts": 100 },
