@@ -32,7 +32,12 @@ const config = JSON.parse(fs.readFileSync(path.join(root, 'dades/configuracio_jo
 const municipisApp = JSON.parse(fs.readFileSync(path.join(root, 'app/src/main/assets/dades/municipis.json'), 'utf8')).municipis;
 
 const WIKIDATA = 'https://query.wikidata.org/sparql';
-const OVERPASS = 'https://overpass-api.de/api/interpreter';
+// Overpass té diversos servidors públics; si un està saturat es prova el següent.
+const OVERPASS = [
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.private.coffee/api/interpreter',
+  'https://overpass.kumi.systems/api/interpreter'
+];
 const AGENT = 'DescobreixCatalunya/1.0 (generador de missions; https://github.com/martifarranc/municipis)';
 
 // Classes de Wikidata (P31) que es converteixen en missions.
@@ -72,19 +77,33 @@ function municipiDe(lon, lat) {
 // ---------------------------------------------------------------------------
 // Consultes
 // ---------------------------------------------------------------------------
-async function consulta(nom, url, opcions) {
+async function consulta(nom, urls, opcions) {
   fs.mkdirSync(cache, { recursive: true });
   const fitxer = path.join(cache, `${nom}.json`);
   if (fs.existsSync(fitxer)) {
     console.log(`${nom}: faig servir la còpia de scripts/cache/`);
     return JSON.parse(fs.readFileSync(fitxer, 'utf8'));
   }
-  console.log(`${nom}: consultant ${new URL(url).host}...`);
-  const r = await fetch(url, { ...opcions, headers: { 'User-Agent': AGENT, Accept: 'application/json', ...(opcions.headers || {}) } });
-  if (!r.ok) throw new Error(`${nom}: el servidor ha respost ${r.status}`);
-  const json = await r.json();
-  fs.writeFileSync(fitxer, JSON.stringify(json));
-  return json;
+  const llista = Array.isArray(urls) ? urls : [urls];
+  let darrerError;
+  // Tres intents per servidor, amb espera creixent: els servidors públics a vegades responen 429 o 504.
+  for (let intent = 0; intent < 3; intent++) {
+    for (const url of llista) {
+      try {
+        console.log(`${nom}: consultant ${new URL(url).host}...`);
+        const r = await fetch(url, { ...opcions, headers: { 'User-Agent': AGENT, Accept: 'application/json', ...(opcions.headers || {}) } });
+        if (!r.ok) throw new Error(`el servidor ha respost ${r.status}`);
+        const json = await r.json();
+        fs.writeFileSync(fitxer, JSON.stringify(json));
+        return json;
+      } catch (e) {
+        darrerError = e;
+        console.log(`${nom}: ${new URL(url).host} ha fallat (${e.message})`);
+      }
+    }
+    await new Promise((resolt) => setTimeout(resolt, 30000 * (intent + 1)));
+  }
+  throw new Error(`${nom}: ${darrerError.message}`);
 }
 
 async function llocsWikidata() {
