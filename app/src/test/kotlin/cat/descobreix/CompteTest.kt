@@ -60,6 +60,16 @@ class CompteEnMemoria : ServeiCompte {
         estat.value = EstatCompte.Llest(Perfil("id", nomUsuari))
     }
 
+    override suspend fun canviaFoto(jpeg: ByteArray) {
+        crida("foto ${jpeg.size}")
+        (estat.value as? EstatCompte.Llest)?.let { estat.value = EstatCompte.Llest(it.perfil.copy(foto = "id/nova.jpg")) }
+    }
+
+    override suspend fun treuFoto() {
+        crida("treu foto")
+        (estat.value as? EstatCompte.Llest)?.let { estat.value = EstatCompte.Llest(it.perfil.copy(foto = null)) }
+    }
+
     override suspend fun reintenta() = crida("reintenta")
 
     override suspend fun surt() {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.compte.EstatCompte
 import cat.descobreix.data.compte.ExcepcioCompte
+import cat.descobreix.data.compte.PreparaFotoPerfil
 import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.exportacio.GestioDades
 import cat.descobreix.data.repositori.FotosRepositori
@@ -17,6 +18,7 @@ import cat.descobreix.joc.progressio.Nivell
 import cat.descobreix.joc.progressio.ProgresComarca
 import cat.descobreix.ui.theme.ColorSecundari
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,6 +46,11 @@ data class PerfilEstat(
     /** Resultat de l'última exportació: true si ha anat bé. */
     val exportat: Boolean? = null,
     val nomUsuari: String? = null,
+    /** Ruta de la foto de perfil al servidor. */
+    val foto: String? = null,
+    val canviantFoto: Boolean = false,
+    /** No s'ha pogut canviar la foto (per exemple, sense connexió). */
+    val errorFoto: Boolean = false,
     /** No s'han pogut esborrar les dades (per exemple, sense connexió). */
     val errorEsborrant: Boolean = false,
     val colorSecundari: ColorSecundari = ColorSecundari.PER_DEFECTE,
@@ -56,6 +63,7 @@ class PerfilViewModel @Inject constructor(
     private val gestio: GestioDades,
     private val compte: ServeiCompte,
     private val preferencies: PreferenciesRepositori,
+    private val preparaFoto: PreparaFotoPerfil,
 ) : ViewModel() {
     private val _estat = MutableStateFlow(PerfilEstat())
     val estat: StateFlow<PerfilEstat> = _estat.asStateFlow()
@@ -63,7 +71,8 @@ class PerfilViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             compte.estat.collect { e ->
-                _estat.update { it.copy(nomUsuari = (e as? EstatCompte.Llest)?.perfil?.nomUsuari) }
+                val perfil = (e as? EstatCompte.Llest)?.perfil
+                _estat.update { it.copy(nomUsuari = perfil?.nomUsuari, foto = perfil?.foto) }
             }
         }
         viewModelScope.launch {
@@ -91,6 +100,29 @@ class PerfilViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    /** Retalla la imatge triada (de la galeria o de la càmera) i la puja com a foto de perfil. */
+    fun canviaFoto(imatge: Uri) = canviFoto { compte.canviaFoto(preparaFoto.jpeg(imatge)) }
+
+    fun treuFoto() = canviFoto { compte.treuFoto() }
+
+    fun tancaErrorFoto() = _estat.update { it.copy(errorFoto = false) }
+
+    private fun canviFoto(accio: suspend () -> Unit) {
+        if (_estat.value.canviantFoto) return
+        _estat.update { it.copy(canviantFoto = true, errorFoto = false) }
+        viewModelScope.launch {
+            val ok = try {
+                accio()
+                true
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                false
+            }
+            _estat.update { it.copy(canviantFoto = false, errorFoto = !ok) }
         }
     }
 

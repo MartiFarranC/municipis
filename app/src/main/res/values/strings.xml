@@ -189,6 +189,32 @@
     <string name="missatge_sense_permis_ubicacio">Sense permís d\'ubicació no es pot comprovar on ets. El pots donar a la configuració del sistema.</string>
     <string name="missatge_sense_permis_camera">Sense permís de càmera no pots fer fotos. El pots donar a la configuració del sistema.</string>
     <string name="missatge_error">Hi ha hagut un error. Torna-ho a provar.</string>
+
+    <!-- Pestanyes del perfil -->
+    <string name="pestanya_ranquing">Rànquing</string>
+
+    <!-- Foto de perfil -->
+    <string name="foto_perfil">Foto de perfil</string>
+    <string name="foto_perfil_canvia">canviar la foto de perfil</string>
+    <string name="foto_perfil_galeria">Tria-la de la galeria</string>
+    <string name="foto_perfil_camera">Fes una foto</string>
+    <string name="foto_perfil_treu">Treu la foto</string>
+    <string name="foto_perfil_error">No s\'ha pogut canviar la foto. Comprova la connexió i torna-ho a provar.</string>
+
+    <!-- Rànquing (docs/requisits.md, secció 9.3) -->
+    <string name="ranquing_punts">Punts</string>
+    <string name="ranquing_municipis">Municipis</string>
+    <string name="ranquing_general">General</string>
+    <string name="ranquing_amics">Amics</string>
+    <string name="ranquing_tu">%1$s (tu)</string>
+    <plurals name="ranquing_n_municipis">
+        <item quantity="one">%1$d municipi</item>
+        <item quantity="other">%1$d municipis</item>
+    </plurals>
+    <string name="ranquing_error">No s\'ha pogut carregar el rànquing. Cal connexió a internet.</string>
+    <string name="ranquing_sense_amics">Encara no tens amics. Quan en tinguis, aquí veuràs com aneu.</string>
+    <string name="ranquing_nota">Els punts els calcula el servidor i només compten les missions oficials. El teu progrés es puja quan tens connexió.</string>
+
     <!-- Color secundari de l'app -->
     <string name="color_app">Color de l\'app</string>
     <string name="color_app_text">El color de la selecció al mapa, dels botons secundaris i dels enllaços.</string>

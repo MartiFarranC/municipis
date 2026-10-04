@@ -20,6 +20,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import cat.descobreix.data.compte.EstatCompte
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.ranquing.ServeiRanquing
 import cat.descobreix.data.db.BaseDades
 import cat.descobreix.di.ModulCompte
 import dagger.hilt.android.testing.BindValue
@@ -47,6 +48,10 @@ class CompteUiTest {
     @BindValue
     @JvmField
     val compte: ServeiCompte = CompteFals(EstatCompte.SenseSessio)
+
+    @BindValue
+    @JvmField
+    val ranquing: ServeiRanquing = RanquingFals()
 
     private var escenari: ActivityScenario<MainActivity>? = null
 

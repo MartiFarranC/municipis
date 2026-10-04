@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- La foto de perfil que fa l'app de càmera, abans de retallar-la i pujar-la. -->
+    <cache-path name="foto_perfil" path="foto_perfil/" />
+</paths>

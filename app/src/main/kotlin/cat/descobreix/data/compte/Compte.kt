@@ -6,7 +6,12 @@ import kotlinx.coroutines.flow.StateFlow
 // Comptes d'usuari (docs/requisits.md, secció 9.1). El compte és obligatori: l'app només
 // deixa jugar quan l'estat és [EstatCompte.Llest].
 
-data class Perfil(val usuariId: String, val nomUsuari: String)
+data class Perfil(
+    val usuariId: String,
+    val nomUsuari: String,
+    /** Ruta de la foto de perfil al bucket descobreix-avatars, o null si no en té. */
+    val foto: String? = null,
+)
 
 sealed interface EstatCompte {
     /** Encara es llegeix la sessió desada. */
@@ -68,6 +73,12 @@ interface ServeiCompte {
     suspend fun canviaContrasenya(nova: String)
 
     suspend fun creaPerfil(nomUsuari: String)
+
+    /** Puja la foto de perfil (un JPEG ja retallat i reduït) i substitueix l'anterior. Cal connexió. */
+    suspend fun canviaFoto(jpeg: ByteArray)
+
+    /** Treu la foto de perfil. Cal connexió. */
+    suspend fun treuFoto()
 
     /** Torna a provar de llegir el perfil (per exemple, quan torna la connexió). */
     suspend fun reintenta()
