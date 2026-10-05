@@ -56,4 +56,4 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - **General de Catalunya**: només comptes públics.
 - **Per comarca**: qui ha descobert més municipis d'una comarca. També només comptes públics.
 - Es classifica per **municipis descoberts**.
-- Els rànquings **no es reinicien mai**: són històrics.
+- Cada rànquing té dues versions: **de sempre** (històric) i **del mes** en curs, que es reinicia l'1 de cada mes. Al del mes compten els municipis descoberts aquell mes.
