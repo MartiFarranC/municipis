@@ -25,6 +25,9 @@ import cat.descobreix.ui.theme.LocalReduirAnimacions
 
 private val VidreApagat = Color(0xFF3A4558)
 
+/** El fanal només s'encén la primera vegada que es mostra mentre l'app és oberta. */
+private var jaEnces = false
+
 /**
  * El logo: el fanal de paret fent llum sobre Catalunya.
  * Si [encen] és cert, el fanal s'encén fent pampallugues, com un fanal de poble quan es fa fosc.
@@ -32,7 +35,7 @@ private val VidreApagat = Color(0xFF3A4558)
 @Composable
 fun Logo(descripcio: String?, modifier: Modifier = Modifier, encen: Boolean = false) {
     val reduir = LocalReduirAnimacions.current
-    val llum = remember { Animatable(if (encen && !reduir) 0f else 1f) }
+    val llum = remember { Animatable(if (encen && !reduir && !jaEnces) 0f else 1f) }
     LaunchedEffect(Unit) {
         if (llum.value < 1f) {
             llum.animateTo(
@@ -47,6 +50,7 @@ fun Logo(descripcio: String?, modifier: Modifier = Modifier, encen: Boolean = fa
                     1f at 980
                 },
             )
+            jaEnces = true
         }
     }
     val semantica = if (descripcio != null) Modifier.semantics { contentDescription = descripcio } else Modifier
