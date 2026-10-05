@@ -57,3 +57,14 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - **Per comarca**: qui ha descobert més municipis d'una comarca. També només comptes públics.
 - Es classifica per **municipis descoberts**.
 - Cada rànquing té dues versions: **de sempre** (històric) i **del mes** en curs, que es reinicia l'1 de cada mes. Al del mes compten els municipis descoberts aquell mes.
+
+## Coses per fer
+
+- **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
+  - emojis per a les reaccions;
+  - colors secundaris;
+  - animacions de càrrega;
+  - etc.
+
+  Pendent de decidir com es guanyen (punts, missions, nivells…) i si algunes coses són més rares que d'altres.
+- **Emojis propis:** proposta a l'artifact «Emojis propis». Totes les persones porten barretina. El brindis és un porró i una ampolla amb estrella, sense cap marca comercial.
