@@ -75,7 +75,7 @@ private val pestanyes = listOf(
 fun AppNavegacio(viewModel: AppViewModel = hiltViewModel()) {
     val compte by viewModel.compte.collectAsStateWithLifecycle()
     when (compte) {
-        EstatCompte.Carregant -> Carregant(Modifier.fillMaxSize())
+        EstatCompte.Carregant -> Obertura(Modifier.fillMaxSize())
         EstatCompte.SenseSessio -> CompteScreen()
         EstatCompte.CalPerfil -> NomUsuariScreen()
         EstatCompte.SenseConnexio -> SenseConnexioScreen()
