@@ -55,4 +55,5 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - **Entre la gent que segueixo**, amb mi inclòs.
 - **General de Catalunya**: només comptes públics.
 - **Per comarca**: qui ha descobert més municipis d'una comarca. També només comptes públics.
-- Pendent: decidir si es classifica per municipis descoberts o per punts.
+- Es classifica per **municipis descoberts**.
+- Els rànquings **no es reinicien mai**: són històrics.
