@@ -63,8 +63,8 @@ class ComponentsUiTest {
                 Celebracio(Missatge.PuntsGuanyats(100, 0)) { tancada = true }
             }
         }
-        regla.onNodeWithText("Missió completada!").assertIsDisplayed()
-        // Després de la confirmació arriba el premi, amb els punts i el botó per continuar.
+        // Amb animacions, primer surt la confirmació; amb les animacions reduïdes, es va directament al premi.
+        // En tots dos casos, al final hi ha els punts i el botó per continuar.
         regla.mainClock.advanceTimeBy(3000)
         regla.onNodeWithText("+100").assertIsDisplayed()
         regla.onNodeWithText("Continua").performClick()
