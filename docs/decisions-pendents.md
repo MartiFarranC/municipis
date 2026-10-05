@@ -68,3 +68,172 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 
   Pendent de decidir com es guanyen (punts, missions, nivells…) i si algunes coses són més rares que d'altres.
 - **Emojis propis:** proposta a l'artifact «Emojis propis». Totes les persones porten barretina. El brindis és un porró i una ampolla amb estrella, sense cap marca comercial.
+
+## Valoració dels emojis
+
+El Martí ha valorat els 155 emojis proposats (artifact «Tria d'emojis»).
+
+### M'agraden (71)
+
+- Recarregant piles (Ànims · Bateria)
+- Ets un far (Ànims · Fanal)
+- En ratxa (Ànims · Foc)
+- Gairebé hi ets! (Ànims · Barra de progrés)
+- Al·lucino (Cares · Al·lucinant)
+- Atxim! (Cares · Esternudant)
+- A ballar! (Cares · Ballant)
+- Em bull la sang (Cares · Bullint)
+- Que bé! (Cares · Content)
+- Que arribo tard! (Cares · Corrent)
+- Quina decepció (Cares · Decebut)
+- Estic rebentat (Cares · Dormint)
+- Quina ràbia (Cares · Enfadat)
+- Festa major! (Cares · De festa)
+- Quina idea! (Cares · Amb una idea)
+- Mec! (Cares · Fent llengotes)
+- Estic marejat (Cares · Marejat)
+- Ploro a mars (Cares · Plorant a mars)
+- Mentida! (Cares · Mentider)
+- Quin temazo (Cares · Escoltant música)
+- Sense paraules (Cares · Sense paraules)
+- Tot del revés (Cares · Del revés)
+- M'escanyo de riure (Cares · Rodolant)
+- Salut! (Cares · Bevent amb porró)
+- Sóc un sant (Cares · Sant)
+- Foto! (Cares · Fent-se una foto)
+- Molt senyor (Cares · Molt senyor)
+- Mmm, sospitós (Cares · Sospitós)
+- Uf, quina pujada (Cares · Suant)
+- Quina pena (Cares · Plorant)
+- Vinga, va! (Cares · Impacient)
+- Visca! (Cares · Cridant)
+- Que bé m'ho passo (Cares · Xalant)
+- Amb tot el cor (Celebrar · Cor)
+- Que bonic! (Celebrar · Globus)
+- Medalla d'or (Celebrar · Medalla)
+- Per molts anys! (Celebrar · Pastís)
+- Ballem! (Celebrar · Sardana)
+- Campió! (Celebrar · Trofeu)
+- Compte! (Comentar · Alerta)
+- Quina troballa! (Comentar · Rovelló)
+- Aquí no hi ha cobertura (Comentar · Sense cobertura)
+- Quin lloc! (Comentar · Lloc)
+- A veure, a veure… (Comentar · Lupa)
+- On ets? (Comentar · Mapa)
+- Quina calor! (Del dia · Termòmetre)
+- Bona nit (Del dia · Lluna)
+- Plou i fa sol (Del dia · Pluja)
+- Bon dia (Del dia · Sol)
+- Quin cap més gros! (Festes · Capgròs)
+- Amunt l'estel! (Festes · Estel)
+- Anem a la fira! (Festes · Fira)
+- Bona revetlla (Festes · Revetlla)
+- Feliç Sant Jordi (Festes · Rosa i llibre)
+- Anem pedalant (Ruta · Bicicleta)
+- Cap al nord! (Ruta · Brúixola)
+- Quina foto! (Ruta · Càmera)
+- Pel bon camí (Ruta · Marca de GR)
+- Ja tinc la motxilla feta (Ruta · Motxilla)
+- Acampada! (Ruta · Tenda)
+- A poc a poc (Taula · Caragol)
+- Al bosc! (Terra · Bosc)
+- A la platja! (Terra · Cala)
+- Toquen a festa! (Terra · Campana)
+- Beee! (Terra · Ovella)
+- Tossut com un ruc (Terra · Ruc català)
+- Ruta en furgo (Vehicles · Furgoneta)
+- Fins al cel! (Vehicles · Globus aerostàtic)
+- Zum, zum (Vehicles · Patinet)
+- Quines vistes! (Vehicles · Telefèric)
+- Vent a favor (Vehicles · Veler)
+
+### Cal millorar (60)
+
+- Bona caminada (Ànims · Bota): No sembla que camini
+- Força! (Ànims · Castell)
+- Al cim! (Ànims · Muntanya)
+- Tu pots! (Ànims · Puny): No sembla un puny
+- Ai, mare! (Cares · Mà a la cara): La ma
+- A tope! (Cares · A tope): La ma
+- Bravo! (Cares · Aplaudint): Les mans sembla que tinguin urpes
+- Calla, calla! (Cares · Rient tapant-se la boca): La ma
+- Ei! (Cares · Saludant): Les mans sembla que tingui urpes
+- M'emociono (Cares · Emocionat): No sembla que s'emocioni
+- M'encanta (Cares · Enamorat): Els cors haurien de ser més grans
+- Quin fàstic (Cares · Fastiguejat): La llengua no quadra
+- Flipo (Cares · Flipant): Les estrelles han de ser més grans
+- Em fonc (Cares · Fonent-se): No sembla que es fongui
+- Quin fred! (Cares · Glaçat)
+- Tinc gana (Cares · Afamat): La gota està tallada
+- Estic fotut (Cares · Malalt): Sembla que estigui fumant
+- Ni idea (Cares · Arronsant les espatlles): Les mans
+- Ni de conya (Cares · Negant): No sembla que digui que no
+- Mmm… (Cares · Pensant): No sembla que estigui pensat
+- Em peta el cap (Cares · Petant el cap): Els ulls han de ser més grans
+- Petonets (Cares · Fent un petó): La posició dels ulls i boca no m'agraden
+- Quina por! (Cares · Esglaiat): Les mans
+- Em pixo de riure (Cares · Rient): Sembla que estigui suant
+- Xxxt! (Cares · Fent silenci): No sembla un dit
+- Sí, sí! (Cares · Assentint): No sembla que digui que si
+- Quina son (Cares · Badallant): La ma
+- Ostres! (Cares · Sorprès): Els ulls han de ser més gran
+- Quina trapelleria (Cares · Trapella): No es veuen les banyes
+- Crack (Cares · Amb ulleres): Les ulleres han de ser més grans
+- Ja m'entens (Cares · Picant l'ullet): La llengua no quadra
+- Quina paciència (Cares · Ulls al cel): Els ulls
+- Ai, que vergonya (Cares · Avergonyit): No sembla avergonyit
+- Brindem! (Celebrar · Brindis): Haurien de ser dos cerveses, la cervesa sembla una ampolla de vi
+- Ets un gegant! (Celebrar · Gegant): no sembla un gegant
+- Visca, visca! (Celebrar · Canó de confeti): Més confeti
+- Quina festa! (Celebrar · Traca)
+- Ups! (Comentar · Caganer): No sembla el caganer
+- M'ho apunto (Comentar · Llibreta): El llapis
+- Molt nostre (Del dia · Barretina): No sembla
+- Primer, un cafè (Del dia · Cafè)
+- Calçotada! (Del dia · Calçot)
+- Neva! (Del dia · Ninot de neu)
+- Bon profit (Del dia · Pa amb tomàquet)
+- Fem el vermut? (Del dia · Vermut)
+- Toc, toc, toc! (Festes · Ball de bastons)
+- Que salti el tap! (Festes · Cava)
+- Correfoc! (Festes · Correfoc): No sembla
+- Quin drac! (Festes · Drac)
+- Caga tió! (Festes · Tió)
+- Ja hi som! (Ruta · Cartell d'entrada): No entenc l'animació
+- Carretera i manta (Ruta · Cotxe)
+- El tren torna a anar tard (Ruta · Tren)
+- Quin salt d'aigua! (Terra · Salt d'aigua)
+- A ballar sardanes (Terra · Espardenya): No ho entenc
+- Bona pesca (Terra · Llaüt)
+- Me'n vaig de viatge (Vehicles · Avió)
+- Agafem el bus (Vehicles · Autobús)
+- Brrrum! (Vehicles · Moto)
+- Pagès de cor (Vehicles · Tractor)
+
+### No m'agraden (24)
+
+- Endavant! (Ànims · Senyal)
+- Pas a pas (Ànims · Petjades)
+- Je, je (Cares · Burleta)
+- Quina ressaca (Cares · Amb ressaca)
+- T'estic seguint (Comentar · Prismàtics)
+- Ja era hora! (Comentar · Rellotge)
+- Visca el carnaval! (Festes · Carnestoltes)
+- Toca la gralla! (Festes · Gralla)
+- Bona Pasqua (Festes · Mona)
+- Quin ou més ballador! (Festes · L'ou com balla)
+- Bon Nadal (Festes · Pessebre)
+- A esquiar! (Ruta · Esquís)
+- Allioli! (Taula · Allioli)
+- Botifarra! (Taula · Botifarra)
+- Bona castanyada (Taula · Castanyes)
+- Boníssim! (Taula · Crema catalana)
+- Escudella i carn d'olla (Taula · Escudella)
+- Un fuet i cap a la muntanya (Taula · Fuet)
+- Bons panellets! (Taula · Panellets)
+- Qui té la fava? (Taula · Tortell de Reis)
+- Xocolata amb melindros (Taula · Xocolata desfeta)
+- Oli d'aquí (Terra · Olivera)
+- Verema! (Terra · Raïm)
+- Amunt per la cremallera (Vehicles · Cremallera)
+
