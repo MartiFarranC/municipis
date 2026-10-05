@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +45,9 @@ import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.Logo
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.theme.Colors
+
+/** Posició del camp de cerca a la llista: després del logo i del títol. */
+private const val CAMP_DE_CERCA = 2
 
 @Composable
 fun OnboardingScreen(
@@ -65,10 +70,16 @@ fun OnboardingScreen(
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+        // Amb el teclat obert en una pantalla petita, els resultats queden a sota: s'hi baixa perquè es vegin.
+        val llista = rememberLazyListState()
+        LaunchedEffect(estat.resultats) {
+            if (estat.resultats.isNotEmpty()) llista.animateScrollToItem(CAMP_DE_CERCA)
+        }
         LazyColumn(
             Modifier
                 .weight(1f)
                 .fillMaxWidth(),
+            state = llista,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
