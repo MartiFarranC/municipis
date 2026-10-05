@@ -6,12 +6,14 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.theme.DescobreixTheme
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,5 +53,21 @@ class ComponentsUiTest {
             DescobreixTheme { BotoPrincipal("Desbloqueja · 60 pts", onClick = {}, enabled = false) }
         }
         regla.onNodeWithText("Desbloqueja · 60 pts").assertIsNotEnabled()
+    }
+
+    @Test
+    fun celebracioDeMissioCompletada() {
+        var tancada = false
+        regla.setContent {
+            DescobreixTheme {
+                Celebracio(Missatge.PuntsGuanyats(100, 0)) { tancada = true }
+            }
+        }
+        regla.onNodeWithText("Missió completada!").assertIsDisplayed()
+        // Després de la confirmació arriba el premi, amb els punts i el botó per continuar.
+        regla.mainClock.advanceTimeBy(3000)
+        regla.onNodeWithText("+100").assertIsDisplayed()
+        regla.onNodeWithText("Continua").performClick()
+        assertTrue(tancada)
     }
 }

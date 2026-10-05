@@ -42,10 +42,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -63,6 +63,7 @@ import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.model.Missio
 import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
+import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BarraProgres
@@ -72,6 +73,7 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
+import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
@@ -93,7 +95,7 @@ fun MunicipiScreen(
         return
     }
     val avisos = remember { SnackbarHostState() }
-    val textAvis = estat.avis?.let { textDe(it) }
+    val textAvis = estat.avis?.takeUnless { it.esCelebracio }?.let { textDe(it) }
     LaunchedEffect(textAvis) {
         if (textAvis != null) {
             avisos.showSnackbar(textAvis)
@@ -146,6 +148,7 @@ fun MunicipiScreen(
         )
     }
 
+    estat.avis?.takeIf { it.esCelebracio }?.let { Celebracio(it, viewModel::tancaAvis) }
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
 }
