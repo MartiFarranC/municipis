@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo, capa 3: el vidre del fanal, que l'app pinta i fa encendre. Generat a partir del logo triat (fanal de paret sobre Catalunya). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <group android:scaleX="0.85" android:scaleY="0.85" android:translateX="14.55" android:translateY="19.50">
+        <path
+            android:pathData="M47,39h26l-5,18h-16Z"
+            android:fillColor="#FFFFFFFF" />
+    </group>
+</vector>
