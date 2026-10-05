@@ -31,3 +31,7 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - Cada usuari, sigui Explorador o Espectador, tria si el seu compte és **públic** o **privat**.
 - **Públic:** qualsevol el pot seguir directament.
 - **Privat:** seguir-lo és una sol·licitud, que l'usuari **accepta o rebutja**. Fins que no l'accepta, no es veu res del seu compte: ni el mapa, ni els avisos, ni les fotos.
+- **Què mostra el perfil d'un Espectador**, que no té mapa ni fotos:
+  - a tothom, el nom i a quanta gent segueix;
+  - la llista de persones que segueix, només a qui ell ha acceptat (si el compte és privat) o a tothom (si és públic);
+  - les reaccions que envia, només a la persona que les rep.
