@@ -43,8 +43,8 @@ import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
-import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.components.Obertura
 import cat.descobreix.ui.theme.Colors
 
 object Rutes {
@@ -89,7 +89,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
     val iniciada by viewModel.partidaIniciada.collectAsStateWithLifecycle()
     val inicial = iniciada
     if (inicial == null) {
-        Carregant(Modifier.fillMaxSize())
+        Obertura(Modifier.fillMaxSize())
         return
     }
     // El destí inicial només es decideix una vegada.

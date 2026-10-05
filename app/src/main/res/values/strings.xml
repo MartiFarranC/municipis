@@ -241,4 +241,12 @@
     <string name="compte_error_desconegut">No ha funcionat. Torna-ho a provar d\'aquí a una estona.</string>
     <string name="perfil_sessio">Has entrat com a %1$s</string>
     <string name="perfil_surt_text">Les dades d\'aquest mòbil es mantenen. Si hi entra un altre compte, s\'esborraran.</string>
+
+    <!-- Logo i animacions -->
+    <string name="logo_descripcio">Logo de Descobreix Catalunya: un fanal de paret fent llum sobre Catalunya</string>
+    <string name="carregant">Carregant…</string>
+    <string name="celebracio_missio">Missió completada!</string>
+    <string name="celebracio_desbloquejat">Municipi desbloquejat!</string>
+    <string name="celebracio_punts">+%1$d</string>
+    <string name="continua">Continua</string>
 </resources>
