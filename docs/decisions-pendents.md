@@ -35,3 +35,24 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
   - a tothom, el nom i a quanta gent segueix;
   - la llista de persones que segueix, només a qui ell ha acceptat (si el compte és privat) o a tothom (si és públic);
   - les reaccions que envia, només a la persona que les rep.
+- **En crear el compte**, l'usuari tria si és públic o privat. No hi ha cap opció marcada per defecte.
+
+## Avisos
+
+- Els avisos arriben com a **notificacions del mòbil**, encara que l'app estigui tancada.
+- Cal Firebase Cloud Messaging. És un SDK de Google, i quan s'afegeixi cal actualitzar la norma de `CLAUDE.md` que ho prohibeix a la versió 1.
+- A Ajustos, l'usuari ha de poder apagar-les.
+
+## Reaccions per animar
+
+- **Emojis propis de l'app**, dibuixats amb l'estètica del logo: fanals, sardana, castellers, etc.
+- **Frases fetes** en català.
+- **Missatges lliures** curts.
+- Com que hi ha text lliure, cal poder **bloquejar** i **denunciar** algú que molesta.
+
+## Rànquings
+
+- **Entre la gent que segueixo**, amb mi inclòs.
+- **General de Catalunya**: només comptes públics.
+- **Per comarca**: qui ha descobert més municipis d'una comarca. També només comptes públics.
+- Pendent: decidir si es classifica per municipis descoberts o per punts.
