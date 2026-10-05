@@ -47,12 +47,14 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
 import cat.descobreix.municipality.titolMissio
+import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.rememberPermisCamera
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
@@ -80,7 +82,7 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
     LaunchedEffect(Unit) { demanaCamera() }
 
     val desada = estat.desada
-    if (desada != null) {
+    if (desada != null && !desada.esCelebracio) {
         val text = textDe(desada)
         val context = LocalContext.current
         LaunchedEffect(desada) {
@@ -156,6 +158,8 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
     missatgePermis?.let { DialegMissatge(it) { missatgePermis = null } }
+    // Si la foto ha completat una missió, es celebra abans de tancar la càmera.
+    desada?.takeIf { it.esCelebracio }?.let { Celebracio(it, onTanca) }
 }
 
 @Composable

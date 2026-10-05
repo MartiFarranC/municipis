@@ -37,10 +37,10 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -49,12 +49,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
+import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
@@ -112,7 +114,7 @@ fun MapaScreen(
                 }
             }
     }
-    val textAvis = estat.avis?.let { textDe(it) }
+    val textAvis = estat.avis?.takeUnless { it.esCelebracio }?.let { textDe(it) }
     LaunchedEffect(textAvis) {
         if (textAvis != null) {
             avisos.showSnackbar(textAvis)
@@ -215,6 +217,7 @@ fun MapaScreen(
 
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
+    estat.avis?.takeIf { it.esCelebracio }?.let { Celebracio(it, viewModel::tancaAvis) }
 }
 
 @Composable
