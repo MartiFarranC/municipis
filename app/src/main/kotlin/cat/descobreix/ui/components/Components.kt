@@ -30,11 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import cat.descobreix.R
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
 
@@ -181,7 +184,22 @@ fun FilaTitol(modifier: Modifier = Modifier, content: @Composable RowScope.() ->
 
 @Composable
 fun Carregant(modifier: Modifier = Modifier) {
-    Box(modifier, contentAlignment = Alignment.Center) {
-        CircularProgressIndicator(color = Colors.Ambre)
+    val text = stringResource(R.string.carregant)
+    Box(modifier.semantics { contentDescription = text }, contentAlignment = Alignment.Center) {
+        SardanaCarregant(Modifier.size(160.dp))
+    }
+}
+
+/** La pantalla d'obertura: el fanal s'encén i la rotllana balla mentre l'app es prepara. */
+@Composable
+fun Obertura(modifier: Modifier = Modifier) {
+    Column(
+        modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Logo(stringResource(R.string.logo_descripcio), Modifier.size(150.dp), encen = true)
+        Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge)
+        SardanaCarregant(Modifier.size(120.dp))
     }
 }
