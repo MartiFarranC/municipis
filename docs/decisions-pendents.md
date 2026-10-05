@@ -13,21 +13,21 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
   - un pas a la CI que publiqui la release;
   - les passes per configurar Obtainium al mòbil.
 
-## Perfils: Explorador i Copilot
+## Perfils: Explorador i Espectador
 
 - En entrar, l'usuari tria entre dos perfils:
   - **Explorador:** recorre els municipis i juga;
-  - **Copilot:** no explora, segueix altres persones.
-- Un Copilot pot seguir **diverses persones**, i tot el que veu és només de la gent que segueix:
+  - **Espectador:** no explora, segueix virtualment altres persones per veure com van.
+- Un Espectador pot seguir **diverses persones**, i tot el que veu és només de la gent que segueix:
   - **Mapa:** veu el mapa de cada persona, amb els municipis que ha descobert.
   - **Avisos:** rep una notificació quan l'altre desbloqueja un municipi o completa una missió.
   - **Animar:** pot enviar una reacció o un missatge curt quan l'altre aconsegueix alguna cosa.
   - **Fotos:** veu les fotos de les missions de l'altre.
-- Un **Explorador també pot seguir** altres exploradors, i hi veu el mateix que un Copilot.
+- Un **Explorador també pot seguir** altres exploradors, i hi veu el mateix que un Espectador.
 - Necessita els comptes (Supabase) per compartir les dades entre mòbils.
 
 ## Comptes públics i privats
 
-- Cada explorador tria si el seu compte és **públic** o **privat**.
+- Cada usuari, sigui Explorador o Espectador, tria si el seu compte és **públic** o **privat**.
 - **Públic:** qualsevol el pot seguir directament.
-- **Privat:** seguir-lo és una sol·licitud, que l'explorador **accepta o rebutja**. Fins que no l'accepta, no es veu res del seu compte: ni el mapa, ni els avisos, ni les fotos.
+- **Privat:** seguir-lo és una sol·licitud, que l'usuari **accepta o rebutja**. Fins que no l'accepta, no es veu res del seu compte: ni el mapa, ni els avisos, ni les fotos.
