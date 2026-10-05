@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo, capa 1: Catalunya. Generat a partir del logo triat (fanal de paret sobre Catalunya). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <group android:scaleX="0.84" android:scaleY="0.84" android:translateX="8" android:translateY="9">
+        <path
+            android:pathData="M14.3,49.0L24.0,27.9L22.5,8.5L39.7,13.7L42.2,23.8L49.5,21.4L57.2,27.0L63.5,23.8L70.7,27.5L84.3,22.5L91.8,28.0L87.7,30.0L89.4,41.2L84.4,47.3L60.5,64.3L29.8,73.4L22.3,81.8L26.7,85.5L17.4,91.5L8.0,83.5Z"
+            android:fillColor="#FF1C2330" />
+    </group>
+</vector>
