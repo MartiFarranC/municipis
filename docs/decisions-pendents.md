@@ -23,4 +23,11 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
   - **Avisos:** rep una notificació quan l'altre desbloqueja un municipi o completa una missió.
   - **Animar:** pot enviar una reacció o un missatge curt quan l'altre aconsegueix alguna cosa.
   - **Fotos:** veu les fotos de les missions de l'altre.
+- Un **Explorador també pot seguir** altres exploradors, i hi veu el mateix que un Copilot.
 - Necessita els comptes (Supabase) per compartir les dades entre mòbils.
+
+## Comptes públics i privats
+
+- Cada explorador tria si el seu compte és **públic** o **privat**.
+- **Públic:** qualsevol el pot seguir directament.
+- **Privat:** seguir-lo és una sol·licitud, que l'explorador **accepta o rebutja**. Fins que no l'accepta, no es veu res del seu compte: ni el mapa, ni els avisos, ni les fotos.
