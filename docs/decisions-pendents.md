@@ -281,3 +281,8 @@ La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina de
 
 - **M'agraden (2):** M'encanta; Em pixo de riure
 - **Cal millorar (3):** Quin fred! (continua fent por); Quina trapelleria (les banyes no segueixen l'angle del cap); Bon profit (no sembla un pa)
+
+### Setena ronda d'emojis
+
+- **M'agraden (2):** Quin fred!; Quina trapelleria
+- **Cal millorar (1):** Bon profit (no sembla una llesca de pa amb tomàquet)
