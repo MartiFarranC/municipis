@@ -276,3 +276,8 @@ La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina de
 - **M'agraden (5):** Bona caminada; Brindem!; Quina festa!; Neva!; Quin drac!
 - **Cal millorar (2):** Quina trapelleria (les banyes semblen orelles d'ase); Bon profit (la gota d'oli, la sal i el tomàquet del costat sobren, i ha de ser pa de pagès)
 - **Sense valorar (3):** M'encanta; Quin fred!; Em pixo de riure
+
+### Sisena ronda d'emojis
+
+- **M'agraden (2):** M'encanta; Em pixo de riure
+- **Cal millorar (3):** Quin fred! (continua fent por); Quina trapelleria (les banyes no segueixen l'angle del cap); Bon profit (no sembla un pa)
