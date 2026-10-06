@@ -1,0 +1,59 @@
+<title>Emojis de l'app</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Graella d'emojis agrupats per l'ús, amb una targeta d'avís a dalt que mostra com es fan servir. Aspecte fosc de l'app. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;
+ --titol:'Chakra Petch','Segoe UI',system-ui,sans-serif;--cos:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;color-scheme:dark}
+body{background:var(--fons);color:var(--text);font:16px/1.5 var(--cos)}
+main{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:grid;gap:28px}
+header{display:grid;gap:8px;max-width:64ch}
+.eti{font:600 12px/1 var(--titol);letter-spacing:.14em;text-transform:uppercase;color:var(--ambre)}
+h1{font:700 clamp(28px,6vw,40px)/1.05 var(--titol);margin:0;text-wrap:balance}
+header p{margin:0;color:var(--suau)}
+.avis{background:var(--sup);border:1px solid var(--linia);border-radius:18px;padding:14px 16px;display:grid;gap:10px;max-width:420px}
+.avis p{margin:0}.avis small{color:var(--suau)}
+.reacs{display:flex;flex-wrap:wrap;gap:6px}
+.reac{background:var(--sup2);border:1px solid var(--linia);border-radius:99px;padding:5px 9px;cursor:pointer;display:grid;place-items:center}
+.reac:hover,.reac:focus-visible{border-color:var(--ambre);outline:none}
+.reac.triat{background:#2A2110;border-color:var(--ambre)}
+.grup{display:grid;gap:12px}
+.grup h2{margin:0;font:600 13px/1 var(--titol);letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.graella{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr))}
+.emo{background:var(--sup);border:1px solid var(--linia);border-radius:16px;padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;gap:6px 12px;align-items:center}
+.gran svg{width:76px;height:76px;display:block}
+.txt{display:grid;gap:2px;min-width:0}
+.txt b{font:700 17px/1.2 var(--titol)}
+.txt span{color:var(--suau);font-size:13px}
+.petits{grid-column:1/-1;display:flex;gap:10px;align-items:center;border-top:1px solid var(--linia);padding-top:8px}
+.petits::before{content:'Mida petita';font:600 10px/1 var(--titol);letter-spacing:.08em;text-transform:uppercase;color:var(--suau);margin-right:auto}
+svg.em{overflow:visible}
+svg.m32{width:32px;height:32px}svg.m20{width:20px;height:20px}svg.m28{width:28px;height:28px}
+.peu{max-width:64ch;color:var(--suau);display:grid;gap:8px}.peu strong{color:var(--text)}
+@media (prefers-reduced-motion: reduce){.anim *{animation:none!important}}
+%%CSS%%
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<radialGradient id="halo"><stop offset="0" stop-color="#F2B544" stop-opacity=".55"/><stop offset="1" stop-color="#F2B544" stop-opacity="0"/></radialGradient>
+</defs></svg>
+<main>
+<header>
+  <span class="eti">Descobreix Catalunya · reaccions</span>
+  <h1>Emojis propis</h1>
+  <p>Primer, les cares, que es mouen senceres: les emocions de sempre, com el que riu fins a plorar, el sorprès o l'enamorat, però amb barretina. Després, les coses nostres. En total són %%N%% emojis, cadascun amb la frase que diu quan l'envies i una animació.</p>
+</header>
+<div class="avis">
+  <p><b>La Marta</b> ha desbloquejat <b>Gurb</b></p>
+  <small>Exemple d'avís. Toca una reacció per enviar-la.</small>
+  <div class="reacs" id="reacs">%%BARRA%%</div>
+  <small id="enviat" aria-live="polite">&nbsp;</small>
+</div>
+%%GRUPS%%
+<div class="peu">
+  <p>Totes les cares i les persones porten barretina. El brindis és un porró i una ampolla amb una estrella vermella que choquen. No hi ha cap marca: posar-hi el logo d'una empresa sense el seu permís ens podria portar problemes legals.</p><p>Digues-me quins t'agraden, quins treuries i què hi trobes a faltar. També puc canviar-ne la frase.</p>
+</div>
+</main>
+<script>
+document.getElementById('reacs').addEventListener('click',e=>{const b=e.target.closest('.reac');if(!b)return;
+document.querySelectorAll('.reac').forEach(x=>x.classList.toggle('triat',x===b));
+document.getElementById('enviat').textContent='Has enviat «'+b.getAttribute('aria-label')+'» a la Marta.'});
+</script>

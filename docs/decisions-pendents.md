@@ -286,3 +286,9 @@ La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina de
 
 - **M'agraden (2):** Quin fred!; Quina trapelleria
 - **Cal millorar (1):** Bon profit (no sembla una llesca de pa amb tomàquet)
+
+### Vuitena ronda d'emojis
+
+- **M'agraden (1):** Bon profit
+
+Amb aquesta ronda tots els emojis queden aprovats (119). El generador és a `disseny/emojis/`. Falta passar-los a l'app.
