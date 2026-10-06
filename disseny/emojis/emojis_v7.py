@@ -129,3 +129,17 @@ CSS+=r'''
 .anim .e-ulleres{animation:eull2 2.4s ease-in-out infinite}@keyframes eull2{0%,55%,100%{transform:none}62%,82%{transform:translateY(8px) rotate(-4deg)}}
 .anim .e-sol-gira{animation:esolg 6s linear infinite}@keyframes esolg{to{transform:rotate(360deg)}}
 '''
+
+# --- Tercera passada de la revisió
+# Flipo: els ulls d'estrella es dibuixen per sobre de la barretina, perquè no hi quedin mai amagats a sota.
+s7('flipo',cf(cara('<ellipse cx="50" cy="79" rx="6" ry="5" fill="'+TINTA+'"/>',extra=G('e-estels2',estrella(37,58,12.5)+estrella(63,58,12.5)))))
+# Petonets: la boca són uns llavis vermells que fan el petó (sense la ratlla en forma de 3).
+s7('peto',cf(cara(L('M32,57q7,-5 14,0M54,57q7,-5 14,0',TINTA,3)
+  +'<ellipse cx="30" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/><ellipse cx="72" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/>'
+  +G('e-morret',o('M43,73c2,-4 5,-4 7,-1.5c2,-2.5 5,-2.5 7,1.5c-2,4.5 -12,4.5 -14,0Z','#D7303A',1.6)+L('M44.5,73.2h11','#8E1A22',1.2),ORIG(50,73))))
+  +''.join(G('e-petons',cor(64,66,.7),f'style="--i:{i}"') for i in range(3)))
+# Em pixo de riure: tornen les gotes petites de la punta dels ulls, que ja t'agradaven.
+s7('riure',cf(G('e-riu',cara(L('M31,55l8,-5l8,5M53,55l8,-5l8,5',TINTA,3.2)+P('M31,64h38c0,11 -8,18 -19,18s-19,-7 -19,-18Z',TINTA)+P('M41,77c3,-3 15,-3 18,0c-3,3 -15,3 -18,0Z',R)
+  +G('e-llagrima2',gota(27,55,.8)+gota(73,55,.8))))))
+# A la platja!: no agrada, fora.
+E[:]=[e for e in E if e[1]!='cala']

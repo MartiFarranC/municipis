@@ -307,3 +307,9 @@ A partir d'ara, a les pàgines de valoració, escriure una nota marca l'emoji co
 - **Cal millorar (6):** Flipo (els ulls queden sota la boca i s'han de fer més grans); Petonets (no hi ha animació i la boca és estranya); Em pixo de riure (les llàgrimes són massa); Crack (ha de millorar l'animació de les ulleres); A la platja! (no sembla una platja); Toquen a festa! (massa detall i hi ha d'haver més animació)
 
 Les pàgines de valoració no tenien el CSS de les animacions noves; des de la tercera passada s'hi afegeix sempre el CSS actual.
+
+### Revisió final, tercera passada
+
+- **M'agraden (2):** Crack; Toquen a festa!
+- **Cal millorar (3):** Flipo (es continuen ficant els ulls sota la barretina, haurien de quedar a dalt); Petonets (no m'agrada gens la boca); Em pixo de riure (no m'agraden gens les llàgrimes, m'agradava més quan eren gotes)
+- **No m'agraden (1):** A la platja!
