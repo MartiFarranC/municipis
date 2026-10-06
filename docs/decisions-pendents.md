@@ -300,3 +300,10 @@ Amb aquesta ronda tots els emojis queden aprovats (119). El generador és a `dis
 - **No m'agraden (1):** Uf, quina pujada
 
 A partir d'ara, a les pàgines de valoració, escriure una nota marca l'emoji com a «Cal millorar», i «Cal millorar» sense nota vol dir refer-lo de zero.
+
+### Revisió final, segona passada
+
+- **M'agraden (3):** Al cim!; Quina idea!; Agafem el bus
+- **Cal millorar (6):** Flipo (els ulls queden sota la boca i s'han de fer més grans); Petonets (no hi ha animació i la boca és estranya); Em pixo de riure (les llàgrimes són massa); Crack (ha de millorar l'animació de les ulleres); A la platja! (no sembla una platja); Toquen a festa! (massa detall i hi ha d'haver més animació)
+
+Les pàgines de valoració no tenien el CSS de les animacions noves; des de la tercera passada s'hi afegeix sempre el CSS actual.
