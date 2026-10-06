@@ -798,6 +798,7 @@ exec(open(f'{S}/emojis_v3.py').read())
 exec(open(f'{S}/emojis_v4.py').read())
 exec(open(f'{S}/emojis_v5.py').read())
 exec(open(f'{S}/emojis_v6.py').read())
+exec(open(f'{S}/emojis_v7.py').read())
 grups=[]
 E[:]=[e for e in E if e[0]!='Fora']
 for g in ['Cares','Ànims','Celebrar','Comentar','Del dia','Festes','Taula','Terra','Ruta','Vehicles']:
