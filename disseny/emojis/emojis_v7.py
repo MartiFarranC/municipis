@@ -84,3 +84,48 @@ CSS+=r'''
 .anim .e-fars{animation:efars 1.6s steps(1) infinite}@keyframes efars{0%,60%{opacity:1}70%{opacity:.35}80%,100%{opacity:1}}
 .anim .e-retol{animation:eretol 2s steps(1) infinite}@keyframes eretol{0%,50%{opacity:1}55%,100%{opacity:.6}}
 '''
+
+# --- Segona passada de la revisió
+# Flipo: els ulls d'estrella més grossos i ben separats de la boca, que és petita i rodona.
+s7('flipo',cf(cara(G('e-estels2',estrella(37,59,12.5)+estrella(63,59,12.5))+'<ellipse cx="50" cy="79" rx="6" ry="5" fill="'+TINTA+'"/>')))
+# Petonets: la boca és el morret clàssic (com un 3) i en surten cors volant.
+s7('peto',cf(cara(L('M32,57q7,-5 14,0M54,57q7,-5 14,0',TINTA,3)
+  +'<ellipse cx="30" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/><ellipse cx="72" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/>'
+  +G('e-morret',L('M47,68q6,1.5 1,4.5q5,1.5 -1,5',TINTA,3.2),ORIG(49,73))))
+  +''.join(G('e-petons',cor(64,66,.7),f'style="--i:{i}"') for i in range(3)))
+# Em pixo de riure: les llàgrimes més petites i fines.
+def raig(s):
+    return G('e-raig-ll',L(f'M{50+s*21},54Q{50+s*28},48 {50+s*33},52',BLAU,2.4)+gota(50+s*33,51.5,.55),ORIG(50+s*21,54))
+s7('riure',cf(G('e-riu',cara(L('M31,55l8,-5l8,5M53,55l8,-5l8,5',TINTA,3.2)+P('M31,64h38c0,11 -8,18 -19,18s-19,-7 -19,-18Z',TINTA)+P('M41,77c3,-3 15,-3 18,0c-3,3 -15,3 -18,0Z',R)
+  +raig(-1)+raig(1)))))
+# Crack: les ulleres baixen pel nas i deixen veure els ulls que fan l'ullet, i tornen a pujar amb una lluentor.
+s7('ulleres',cf(cara(G('e-ulls-darrere',C(37,55,3.2,TINTA)+L('M58,55h7',TINTA,3))+L('M40,76q12,6 22,-2',TINTA,3.4)
+  +G('e-ulleres',P(LENTS,'#14171C')+L('M48,51h4',"#14171C",3.4)+G('e-llum-lent',L('M22,62l10,-12M56,62l10,-12',BL,3,'opacity=".8"')))
+  +G('e-brill2',estrella(80,46,6)))))
+# A la platja!: platja de debò: molta sorra, para-sol de ratlles, tovallola, el mar amb onades que arriben a la sorra i el sol.
+s7('cala','<rect x="0" y="0" width="100" height="100" rx="18" fill="#8FD3F4"/>'
+  +G('e-sol-gira',C(78,18,9,'#FFD45A')+L('M78,4v-3M92,18h3M88,8l2,-2M68,8l-2,-2',"#FFD45A",2.2),ORIG(78,18))
+  +P('M0,40H100V62H0Z','#1FA3B8')+P('M0,40H100V44H0Z','#167F99')
+  +G('e-onada',L('M-20,52q5,-3 10,0t10,0t10,0t10,0t10,0t10,0t10,0t10,0t10,0t10,0t10,0t10,0',BL,1.8,'opacity=".7"'))
+  +'<path d="M0,62C30,56 70,58 100,62V82C100,92 92,100 82,100H18C8,100 0,92 0,82Z" fill="#F2D59A"/>'
+  +G('e-espuma',L('M0,62C30,56 70,58 100,62',BL,3))
+  +f'<g transform="rotate(-8 30 80)" {ESTIL0}>'+o('M14,74h32v14h-32Z','#5AB8E8',1.6)+L('M14,79h32M14,84h32',BL,2)+'</g>'
+  +L('M70,92L64,52',K,2.6)
+  +o('M44,56C48,40 80,36 90,50Z',R,2)+P('M55,45C58,48 61,51 64,53L70,46C67,45 61,44 55,45Z',BL)+P('M75,44C79,46 83,48 86,51L90,50C86,46 81,44 75,44Z',BL)
+  +o('M80,92c0,-5 4,-8 8,-8s8,3 8,8Z',"#F07A4A",1.4),'cala')
+# Toquen a festa!: campana senzilla (sense jou ni detalls), que es gronxa molt, fa ding-dong i treu ones de so.
+s7('campana',L('M50,6V14',K,3)+C(50,6,3,'none',f'stroke="{K}" stroke-width="2.4"')
+  +G('e-campana3',G('e-batall',L('M50,64V78',K,2.6)+oc(50,80,5,'#7A5A1C',1.6),ORIG(50,62))
+     +o('M36,22C36,14 64,14 64,22L66,44C68,58 74,64 82,68H18C26,64 32,58 34,44Z','#E0A93A',2.4)
+     +P('M42,24C42,20 45,19 47,19L45,44C44,54 40,60 34,64H28C34,58 38,52 39,44Z','#F6D27A','opacity=".8"')
+     +o('M16,68H84V73C84,75 83,76 81,76H19C17,76 16,75 16,73Z','#C48A24',2.2),ORIG(50,14))
+  +''.join(G('e-ona-so',L(f'M{x},34q{d*7},12 0,24',AC,2.8),f'style="--i:{i};transform-box:view-box;transform-origin:{50+d*8}px 46px"') for i,(x,d) in enumerate([(12,-1),(88,1),(4,-1),(96,1)])),'campana')
+
+CSS+=r'''
+.anim .e-campana3{animation:ecamp3 .9s ease-in-out infinite alternate}@keyframes ecamp3{from{transform:rotate(-32deg)}to{transform:rotate(32deg)}}
+.anim .e-campana3 .e-batall{animation:ebat .9s ease-in-out infinite alternate}
+.anim .e-ulls-darrere{animation:eullsd 2.4s ease-in-out infinite}@keyframes eullsd{0%,55%,100%{opacity:0}62%,82%{opacity:1}}
+.e-ulls-darrere{opacity:0}
+.anim .e-ulleres{animation:eull2 2.4s ease-in-out infinite}@keyframes eull2{0%,55%,100%{transform:none}62%,82%{transform:translateY(8px) rotate(-4deg)}}
+.anim .e-sol-gira{animation:esolg 6s linear infinite}@keyframes esolg{to{transform:rotate(360deg)}}
+'''
