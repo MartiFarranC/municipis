@@ -313,3 +313,8 @@ Les pàgines de valoració no tenien el CSS de les animacions noves; des de la t
 - **M'agraden (2):** Crack; Toquen a festa!
 - **Cal millorar (3):** Flipo (es continuen ficant els ulls sota la barretina, haurien de quedar a dalt); Petonets (no m'agrada gens la boca); Em pixo de riure (no m'agraden gens les llàgrimes, m'agradava més quan eren gotes)
 - **No m'agraden (1):** A la platja!
+
+### Revisió final, quarta passada
+
+- **M'agraden (2):** Flipo; Em pixo de riure
+- **Cal millorar (1):** Petonets (no m'agrada gens la boca). Es proposen tres boques per triar.
