@@ -143,3 +143,9 @@ s7('riure',cf(G('e-riu',cara(L('M31,55l8,-5l8,5M53,55l8,-5l8,5',TINTA,3.2)+P('M3
   +G('e-llagrima2',gota(27,55,.8)+gota(73,55,.8))))))
 # A la platja!: no agrada, fora.
 E[:]=[e for e in E if e[1]!='cala']
+
+# --- Quarta passada: Petonets amb la boqueta petita i plena (opció B triada).
+s7('peto',cf(cara(L('M32,57q7,-5 14,0M54,57q7,-5 14,0',TINTA,3)
+  +'<ellipse cx="30" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/><ellipse cx="72" cy="68" rx="6" ry="3.6" fill="#F05A6A" opacity=".55"/>'
+  +G('e-morret','<ellipse cx="52" cy="73" rx="3.6" ry="4.2" fill="'+TINTA+'"/>',ORIG(52,73))))
+  +''.join(G('e-petons',cor(64,66,.7),f'style="--i:{i}"') for i in range(3)))
