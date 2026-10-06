@@ -60,6 +60,12 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 
 ## Coses per fer
 
+- **Medalles per comarca:**
+  - Cada comarca completada (tots els seus municipis descoberts) dona una **medalla digital**, que es veu al perfil.
+  - Si l'explorador **completa el repte**, rebrà una **medalla física**, sempre que el projecte vagi bé.
+  - Pendent de decidir:
+    - què és exactament «el repte» (totes les comarques? els 947 municipis?);
+    - com es fa arribar la medalla física (adreça, verificació que el repte s'ha fet de debò).
 - **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
   - emojis per a les reaccions;
   - colors secundaris;
