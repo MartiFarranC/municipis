@@ -262,3 +262,11 @@ El Martí ha valorat els 155 emojis proposats (artifact «Tria d'emojis»).
 - **Cal millorar (18):** Bona caminada; Quin fred!; Ni de conya (sembla una campana no una persona dient que no); Petonets (la cara està deforma); Em pixo de riure; Quina trapelleria; Brindem! (no semblen estrelles dam, si vols una foto de referencia avisa); Quina festa! (No semblen focs artificials); Ups! (està molt deforme); Molt nostre (Continua sense semblar una barretina com tota la resta); Primer, un cafè; Neva!; Bon profit; Toc, toc, toc! (els pals estan mal colocat); Correfoc! (les banyes estan volant i la banya dreta no sembla una banya); Quin drac!; Agafem el bus (no sembla un bus); Brrrum! (no sembla una moto)
 - **No m'agraden (8):** Calla, calla!; M'emociono; Xxxt!; Ets un gegant!; Fem el vermut?; El tren torna a anar tard; Bona pesca; Me'n vaig de viatge
 - **Sense valorar (amb nota) (2):** A tope! (sembla que estigui cabrejat); Sí, sí! (no sembla que digui que si, sembla que estigui saltant)
+
+### Quarta ronda d'emojis
+
+La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina del tió»), a la mida del cap.
+
+- **M'agraden (15):** A tope!; Bravo!; Ni de conya; Mmm…; Petonets; Sí, sí!; Ostres!; Força!; Ups!; Molt nostre; Toc, toc, toc!; Correfoc!; Caga tió!; Agafem el bus; Brrrum!
+- **Cal millorar (10):** Bona caminada (hi ha una línia al mig); M'encanta (la barretina tapa els cors); Quin fred! (fa por); Em pixo de riure (les llàgrimes són massa grosses); Quina trapelleria (les banyes no quadren i la de la dreta no ho sembla); Brindem! (les etiquetes no estan al seu lloc i són massa grogues); Quina festa! (no semblen focs artificials); Neva! (està deforme); Bon profit (no sembla pa amb tomàquet); Quin drac! (no sembla un drac)
+- **No m'agraden (1):** Primer, un cafè
