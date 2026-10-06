@@ -318,3 +318,9 @@ Les pàgines de valoració no tenien el CSS de les animacions noves; des de la t
 
 - **M'agraden (2):** Flipo; Em pixo de riure
 - **Cal millorar (1):** Petonets (no m'agrada gens la boca). Es proposen tres boques per triar.
+
+### Revisió final, cinquena passada
+
+- Petonets: de les tres boques, la B (boqueta petita i plena).
+
+Amb això tots els emojis queden aprovats: **117**. Falta passar-los a l'app.

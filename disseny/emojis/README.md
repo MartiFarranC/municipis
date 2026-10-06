@@ -1,6 +1,6 @@
 # Emojis propis
 
-Generador dels emojis de l'app (SVG de 100 × 100 amb animacions CSS). Tots els personatges porten la barretina
+Generador dels 117 emojis de l'app (SVG de 100 × 100 amb animacions CSS). Tots els personatges porten la barretina
 calcada del dibuix de referència (`barretina_nova.py`).
 
 ```bash
