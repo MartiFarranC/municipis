@@ -292,3 +292,11 @@ La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina de
 - **M'agraden (1):** Bon profit
 
 Amb aquesta ronda tots els emojis queden aprovats (119). El generador és a `disseny/emojis/`. Falta passar-los a l'app.
+
+### Revisió final de tots els emojis aprovats
+
+- **M'agraden (109)**
+- **Cal millorar (9):** Al cim! (el pic de la dreta està mal col·locat); Flipo (els ulls queden sota la barretina); Quina idea! (no se li veuen les celles); Petonets (hi ha d'haver animació del petó); Em pixo de riure (no m'agrada l'orientació de les llàgrimes); Crack (les ulleres haurien de ser més animades); A la platja! (refer de zero); Toquen a festa! (més animada i més campana); Agafem el bus (no em recorda a un bus)
+- **No m'agraden (1):** Uf, quina pujada
+
+A partir d'ara, a les pàgines de valoració, escriure una nota marca l'emoji com a «Cal millorar», i «Cal millorar» sense nota vol dir refer-lo de zero.
