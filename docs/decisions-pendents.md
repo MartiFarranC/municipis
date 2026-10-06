@@ -255,3 +255,10 @@ El Martí ha valorat els 155 emojis proposats (artifact «Tria d'emojis»).
 - Verema! (Terra · Raïm)
 - Amunt per la cremallera (Vehicles · Cremallera)
 
+
+### Tercera ronda d'emojis
+
+- **M'agraden (18):** Força!; Al cim!; Ai, mare!; Bravo!; Ei!; M'encanta; Ni idea; Mmm…; Ostres!; Crack; Ai, que vergonya; Calçotada!; Que salti el tap!; Caga tió!; Ja hi som!; Carretera i manta; Quin salt d'aigua!; Pagès de cor
+- **Cal millorar (18):** Bona caminada; Quin fred!; Ni de conya (sembla una campana no una persona dient que no); Petonets (la cara està deforma); Em pixo de riure; Quina trapelleria; Brindem! (no semblen estrelles dam, si vols una foto de referencia avisa); Quina festa! (No semblen focs artificials); Ups! (està molt deforme); Molt nostre (Continua sense semblar una barretina com tota la resta); Primer, un cafè; Neva!; Bon profit; Toc, toc, toc! (els pals estan mal colocat); Correfoc! (les banyes estan volant i la banya dreta no sembla una banya); Quin drac!; Agafem el bus (no sembla un bus); Brrrum! (no sembla una moto)
+- **No m'agraden (8):** Calla, calla!; M'emociono; Xxxt!; Ets un gegant!; Fem el vermut?; El tren torna a anar tard; Bona pesca; Me'n vaig de viatge
+- **Sense valorar (amb nota) (2):** A tope! (sembla que estigui cabrejat); Sí, sí! (no sembla que digui que si, sembla que estigui saltant)
