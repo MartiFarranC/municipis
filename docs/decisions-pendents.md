@@ -60,6 +60,15 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 
 ## Coses per fer
 
+- **Catàleg de municipis:**
+  - Una pantalla amb els 947 municipis, que es pot ordenar **per comarques** o **per ordre alfabètic**.
+  - Cada municipi té la seva casella. Quan es completa, la foto del seu **cartell d'entrada** s'hi col·loca, com un àlbum de cromos.
+- **Càmera del cartell:**
+  - A cada municipi hi ha l'opció «Fes la foto del cartell».
+  - S'obre la càmera de l'app amb un **requadre rectangular** imposat a sobre: cal enquadrar-hi el cartell i fer la foto.
+  - Només es guarda la part de dins del requadre (la foto queda retallada a la mida del cartell).
+  - Es comprova amb el GPS que la foto s'ha fet al municipi, com les altres missions de foto.
+  - Si és vàlida, completa la missió del cartell i la foto passa al catàleg. És també la prova per a la medalla física.
 - **Medalles per comarca:**
   - Cada comarca completada (tots els seus municipis descoberts) dona una **medalla digital**, que es veu al perfil.
   - **El repte** és completar els **947 municipis**.
