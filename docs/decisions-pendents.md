@@ -270,3 +270,9 @@ La barretina ja és la del dibuix de referència (l'adhesiu de «La barretina de
 - **M'agraden (15):** A tope!; Bravo!; Ni de conya; Mmm…; Petonets; Sí, sí!; Ostres!; Força!; Ups!; Molt nostre; Toc, toc, toc!; Correfoc!; Caga tió!; Agafem el bus; Brrrum!
 - **Cal millorar (10):** Bona caminada (hi ha una línia al mig); M'encanta (la barretina tapa els cors); Quin fred! (fa por); Em pixo de riure (les llàgrimes són massa grosses); Quina trapelleria (les banyes no quadren i la de la dreta no ho sembla); Brindem! (les etiquetes no estan al seu lloc i són massa grogues); Quina festa! (no semblen focs artificials); Neva! (està deforme); Bon profit (no sembla pa amb tomàquet); Quin drac! (no sembla un drac)
 - **No m'agraden (1):** Primer, un cafè
+
+### Cinquena ronda d'emojis
+
+- **M'agraden (5):** Bona caminada; Brindem!; Quina festa!; Neva!; Quin drac!
+- **Cal millorar (2):** Quina trapelleria (les banyes semblen orelles d'ase); Bon profit (la gota d'oli, la sal i el tomàquet del costat sobren, i ha de ser pa de pagès)
+- **Sense valorar (3):** M'encanta; Quin fred!; Em pixo de riure
