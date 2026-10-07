@@ -14,10 +14,14 @@ p{margin:0;color:var(--suau);max-width:64ch}
 .pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia);font-variant-numeric:tabular-nums}
 .pill b{font-family:var(--display);color:var(--ambre)}.pill.ok b{color:var(--ok)}.pill.massa b{color:var(--massa)}
 h2{font:700 15px var(--display);letter-spacing:.1em;text-transform:uppercase;margin:16px 0 2px}
-.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.prop{background:var(--sup);border:2px solid var(--linia);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;cursor:pointer;color:var(--text);font:inherit;text-align:center}
+.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.prop{background:var(--sup);border:2px solid var(--linia);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;color:var(--text);text-align:center;min-width:0}
+.prop[data-v="si"]{border-color:var(--ok)}.prop[data-v="no"]{border-color:var(--massa);opacity:.6}.prop[data-v="arreglar"]{border-color:var(--ambre)}
+.botons{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:100%}.v{font:600 12px var(--cos);padding:6px 0;border-radius:8px;border:1px solid var(--linia);background:var(--sup2);color:var(--text);cursor:pointer}
+.v:focus-visible{outline:2px solid var(--text)}.v.si[aria-pressed="true"]{background:var(--ok);color:#0B1A10;border-color:var(--ok)}.v.no[aria-pressed="true"]{background:var(--massa);color:#2A0E0A;border-color:var(--massa)}.v.arreglar[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre);border-color:var(--ambre)}
+.prop textarea{min-height:44px;font-size:13px}
 .prop:focus-visible{outline:2px solid var(--text);outline-offset:2px}
-.prop[aria-pressed="true"]{border-color:var(--ambre);background:color-mix(in srgb,var(--ambre) 10%,var(--sup))}
+
 .prop svg{width:100%;height:auto;display:block}
 .portada svg{max-width:110px}.anim svg{max-width:110px;background:var(--fons);border-radius:12px}
 .prop b{font-weight:600;font-size:14px}
@@ -31,7 +35,7 @@ label{font:600 13px var(--cos);color:var(--suau)}
 <div class="app">
   <span class="eti">Descobreix Catalunya · sacs</span>
   <h1>Portades, animacions i colors</h1>
-  <p>Toca les que vulguis que surtin als sacs: 10 portades del passaport, 10 animacions de càrrega i 9 colors per a l'app. Els colors substitueixen l'ambre (botons, municipis descoberts, xifres). Es desa sol. Si vols canviar alguna cosa d'una proposta, escriu-ho a la nota de la secció.</p>
+  <p>Per a cada proposta, tria <b>Sí</b>, <b>No</b> o <b>Arreglar</b>. Si escrius què s'ha d'arreglar, queda marcada com a «Arreglar». Calen 10 portades, 10 animacions i 9 colors; els colors substitueixen l'ambre (botons, municipis descoberts, xifres). Es desa sol.</p>
   <div class="resum" id="resum" aria-live="polite"></div>
   <p class="estat" id="estat">Carregant…</p>
   <div id="seccions"></div>
@@ -39,52 +43,60 @@ label{font:600 13px var(--cos);color:var(--suau)}
 <script>
 const D=%%DADES%%;
 const SECCIONS=[['portades','Portades del passaport',10,'portada'],['animacions','Animacions de càrrega',10,'anim'],['colors','Colors de l\'app',9,'color']];
+const VALORS=[['si','Sí'],['no','No'],['arreglar','Arreglar']];
 const $=id=>document.getElementById(id);
-let tries={}, notes={}, db=null, temps={};
-try{const m=JSON.parse(localStorage.getItem('extres')||'{}');tries=m.tries||{};notes=m.notes||{}}catch(e){}
+let vals={}, db=null, temps={};
+try{const m=JSON.parse(localStorage.getItem('extres2')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
 const estat=t=>{$('estat').textContent=t};
 const clau=(t,id)=>t+'--'+id;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function resum(){
-  $('resum').innerHTML=SECCIONS.map(([t,nom,n])=>{const k=D[t].filter(p=>tries[clau(t,p.id)]).length;return `<span class="pill ${k===n?'ok':k>n?'massa':''}"><b>${k}</b> de ${n} ${nom.split(' ')[0].toLowerCase()}</span>`}).join('');
+  $('resum').innerHTML=SECCIONS.map(([t,nom,n])=>{const ps=D[t].map(p=>vals[clau(t,p.id)]?.valor);const si=ps.filter(v=>v==='si').length,ar=ps.filter(v=>v==='arreglar').length,pend=ps.filter(v=>!v).length;
+    return `<span class="pill ${si===n?'ok':si>n?'massa':''}"><b>${si}</b>/${n} ${nom.split(' ')[0].toLowerCase()} · ${ar} arreglar · ${pend} per mirar</span>`}).join('');
+}
+function targeta(t,p,cls){
+  const k=clau(t,p.id), v=vals[k]||{};
+  return `<div class="prop ${cls}" data-k="${k}" data-v="${v.valor||''}">${p.svg}<b>${p.nom}</b>
+    <div class="botons" role="group" aria-label="${esc(p.nom)}">${VALORS.map(([x,txt])=>`<button class="v ${x}" data-x="${x}" aria-pressed="${v.valor===x}">${txt}</button>`).join('')}</div>
+    <textarea aria-label="Què s'ha d'arreglar de ${esc(p.nom)}" placeholder="Què s'ha d'arreglar?" ${v.valor==='arreglar'||v.nota?'':'hidden'}>${esc(v.nota||'')}</textarea></div>`;
 }
 function pinta(){
-  $('seccions').innerHTML=SECCIONS.map(([t,nom,n,cls])=>`<h2>${nom} · tria'n ${n}</h2><div class="graella">${D[t].map(p=>`
-    <button class="prop ${cls}" data-k="${clau(t,p.id)}" aria-pressed="${!!tries[clau(t,p.id)]}">${p.svg}<b>${p.nom}</b><span class="marca">${tries[clau(t,p.id)]?'TRIADA':'TOCA PER TRIAR'}</span></button>`).join('')}</div>
-    <label for="nota-${t}">Nota sobre les ${nom.toLowerCase()} (opcional)</label><textarea id="nota-${t}" data-t="${t}">${notes[t]||''}</textarea>`).join('');
+  $('seccions').innerHTML=SECCIONS.map(([t,nom,n,cls])=>`<h2>${nom} · en calen ${n}</h2><div class="graella">${D[t].map(p=>targeta(t,p,cls)).join('')}</div>`).join('');
   resum();
 }
-function desaLocal(){try{localStorage.setItem('extres',JSON.stringify({tries,notes}))}catch(e){}}
+function desaLocal(){try{localStorage.setItem('extres2',JSON.stringify(vals))}catch(e){}}
 document.addEventListener('click',ev=>{
-  const b=ev.target.closest('.prop'); if(!b) return;
-  const k=b.dataset.k; if(tries[k]) delete tries[k]; else tries[k]=true;
-  b.setAttribute('aria-pressed',!!tries[k]); b.querySelector('.marca').textContent=tries[k]?'TRIADA':'TOCA PER TRIAR';
+  const b=ev.target.closest('.v'); if(!b) return;
+  const card=b.closest('.prop'), k=card.dataset.k, x=b.dataset.x;
+  const v=vals[k]||{}; v.valor=v.valor===x?undefined:x; vals[k]=v;
+  card.dataset.v=v.valor||''; card.querySelectorAll('.v').forEach(y=>y.setAttribute('aria-pressed',y.dataset.x===v.valor));
+  const ta=card.querySelector('textarea'); ta.hidden=!(v.valor==='arreglar'||v.nota); if(v.valor==='arreglar') ta.focus();
   resum(); desaLocal(); desa(k);
 });
 document.addEventListener('input',ev=>{
-  const t=ev.target.dataset?.t; if(!t) return; notes[t]=ev.target.value; desaLocal();
-  clearTimeout(temps[t]); temps[t]=setTimeout(()=>desaNota(t),700);
+  const ta=ev.target; if(ta.tagName!=='TEXTAREA') return;
+  const card=ta.closest('.prop'), k=card.dataset.k, v=vals[k]||{};
+  v.nota=ta.value; if(ta.value.trim()) v.valor='arreglar'; vals[k]=v;
+  card.dataset.v=v.valor||''; card.querySelectorAll('.v').forEach(y=>y.setAttribute('aria-pressed',y.dataset.x===v.valor));
+  resum(); desaLocal(); clearTimeout(temps[k]); temps[k]=setTimeout(()=>desa(k),700);
 });
 async function desa(k){
   if(!db){estat('Desat en aquest navegador.');return}
-  const [t,id]=k.split('--');
+  const [t,id]=k.split('--'), v=vals[k]||{};
   try{
-    if(!tries[k]) await db.collection('extres').doc(k).delete();
-    else await db.collection('extres').doc(k).set({tipus:t,id,nom:D[t].find(p=>p.id===id).nom,tria:true,ts:Date.now()});
+    if(!v.valor&&!v.nota) await db.collection('extres2').doc(k).delete();
+    else await db.collection('extres2').doc(k).set({tipus:t,id,nom:D[t].find(p=>p.id===id).nom,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
     estat('Desat. Claude podrà llegir les teves tries.');
   }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
-}
-async function desaNota(t){
-  if(!db) return;
-  try{ if(notes[t]) await db.collection('extres').doc('nota--'+t).set({tipus:t,nota:notes[t],ts:Date.now()}); else await db.collection('extres').doc('nota--'+t).delete(); estat('Nota desada.') }catch(e){}
 }
 pinta();
 (async()=>{
   try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
   if(!db){estat('Les tries es desen en aquest navegador.');return}
   try{
-    const q=await db.collection('extres').get(); let n=0;
-    for(const d of q.docs){const x=d.data(); if(!x) continue; if(x.nota!==undefined){notes[x.tipus]=x.nota}else if(x.tria){tries[clau(x.tipus,x.id)]=true;n++}}
-    pinta(); estat(n?`Hi havia ${n} tries desades.`:'Les tries es desen soles i Claude les podrà llegir.');
-  }catch(e){estat('No s\'han pogut carregar les tries del núvol.')}
+    const q=await db.collection('extres2').get(); let n=0;
+    for(const d of q.docs){const x=d.data(); if(x&&x.tipus&&x.id){vals[clau(x.tipus,x.id)]={valor:x.valor||undefined,nota:x.nota||''};n++}}
+    pinta(); estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
 })();
 </script>

@@ -44,6 +44,20 @@ def neu(): return ''.join(f'<path d="M{x},{y-2.5}v5M{x-2.2},{y-1.2}l4.4,2.4M{x-2
 def castellers(c): return ''.join(f'<g opacity=".18" fill="{c}"><circle cx="{x}" cy="{y}" r="2.2"/><rect x="{x-2.6}" y="{y+2.6}" width="5.2" height="6" rx="1.5"/></g>' for x in range(10,100,12) for y in range(12,140,14))
 def barretines(): return ''.join(f'<path d="M{x-5},{y+3}c0,-6 2,-9 6,-9c3,0 4,2 3,4c-1,2 -3,1 -3,3h4v2h-10z" fill="#D7262B" opacity=".3"/>' for x in range(10,100,16) for y in range(14,140,18))
 
+
+def montserrat(c): return f'<path d="M0,140V108c4,-10 6,-18 10,-18s4,10 8,10s4,-16 8,-16s4,14 8,14s4,-20 9,-20s4,18 8,18s5,-14 9,-14s4,12 8,12s5,-18 9,-18s4,16 8,16s5,-8 7,-8V140Z" fill="{c}" opacity=".6"/>'
+def delta(): return ''.join(f'<path d="M0,{y}h100" stroke="#9CC27A" stroke-width=".8" opacity=".35"/>' for y in range(40,140,5))+''.join(f'<path d="M{x},{y}q3,-3 6,0q3,-3 6,0" fill="none" stroke="#F4EEDD" stroke-width=".8" opacity=".6"/>' for x,y in [(14,40),(70,48),(40,32),(80,30)])
+def costa(): return '<path d="M0,96C20,90 30,104 50,98S80,86 100,92V140H0Z" fill="#E8D2A0" opacity=".5"/><path d="M0,100C20,94 30,108 50,102S80,90 100,96" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".6"/>'
+def terrats(c): return f'<path d="M0,140V112h10v-8h8v12h10v-18h6v-6h4v24h12v-10h10v-14h8v20h10v-8h8v-6h6V140Z" fill="{c}" opacity=".6"/>'
+def roses(): return ''.join(f'<g opacity=".35"><circle cx="{x}" cy="{y}" r="3.2" fill="#D7262B"/><path d="M{x},{y+3}v7" stroke="#3E8A44" stroke-width="1"/><path d="M{x},{y+6}q4,-2 5,1" fill="#3E8A44"/></g>' for x in range(12,100,18) for y in range(14,140,20))
+def sardana_p(c): return ''.join(f'<g fill="{c}" opacity=".3"><circle cx="{50+38*math.cos(math.radians(a)):.1f}" cy="{70+44*math.sin(math.radians(a)):.1f}" r="2.4"/></g>' for a in range(0,360,20))
+def gotic(c): return ''.join(f'<path d="M{x},140V60q8,-16 16,0V140" fill="none" stroke="{c}" stroke-width="1" opacity=".3"/>' for x in range(2,100,18))
+def oliveres(): return ''.join(f'<ellipse cx="{x}" cy="{y}" rx="3.4" ry="1.3" fill="#B8C48A" opacity=".45" transform="rotate({(x*7+y)%60-30} {x} {y})"/>' for x in range(6,100,9) for y in range(8,140,10))
+def pedra(): return ''.join(f'<rect x="{x+(6 if (y//10)%2 else 0)}" y="{y}" width="{rnd.uniform(9,13):.1f}" height="8" rx="3" fill="#C9B89A" opacity=".35"/>' for x in range(-6,100,13) for y in range(0,140,10))
+def riu(): return '<path d="M30,0C60,30 10,60 50,90S70,130 60,140" fill="none" stroke="#5AB8E8" stroke-width="7" opacity=".5"/>'
+def bolets(): return ''.join(f'<g opacity=".35"><path d="M{x-5},{y}a5,4 0 0 1 10,0z" fill="#D9573B"/><rect x="{x-1.5}" y="{y}" width="3" height="5" fill="#F4EEDD"/></g>' for x in range(10,100,16) for y in range(16,140,20))
+def fanal_p(): return '<defs><radialGradient id="llf" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#F2B544" stop-opacity=".55"/><stop offset="1" stop-color="#0B0E13" stop-opacity="0"/></radialGradient></defs><rect width="100" height="140" fill="url(#llf)"/>'
+
 PORTADES=[
  ('verd-bosc','Verd bosc',tapa('#1F4A33','#E8C36A')),
  ('negre-plata','Negre i plata',tapa('#121418','#C3CCD6')),
@@ -61,12 +75,29 @@ PORTADES=[
  ('barretina','Barretina',tapa('#1E1E22','#D7262B',barretines(),text='#E8C36A')),
  ('neu','Neu',tapa('#5C86A8','#F2F5F8',neu())),
  ('albada','Albada',tapa('#2B2457','#FFE3A3',albada())),
+ ('montserrat','Montserrat',tapa('#3A3E5C','#E8C36A',montserrat('#1F2238'))),
+ ('delta','Delta de l\'Ebre',tapa('#2E5E3A','#F4EEDD',delta())),
+ ('costa-brava','Costa Brava',tapa('#1F7A8C','#F4EEDD',costa())),
+ ('terrats','Terrats de ciutat',tapa('#2A2F3A','#E8C36A',terrats('#151820'))),
+ ('roses','Roses de Sant Jordi',tapa('#F3E6D6','#9E1C20',roses(),text='#9E1C20')),
+ ('rotllana','Rotllana de sardana',tapa('#14324A','#E8C36A',sardana_p('#E8C36A'))),
+ ('fanal','Llum de fanal',tapa('#0B0E13','#F2B544',fanal_p())),
+ ('gotic','Gòtic',tapa('#4A4038','#E8D7B0',gotic('#E8D7B0'))),
+ ('blau-intens','Blau intens',tapa('#1A2FA0','#E8ECF0')),
+ ('oliveres','Oliveres',tapa('#5C6B3A','#F4EEDD',oliveres())),
+ ('pedra-seca','Pedra seca',tapa('#6E5E48','#F4EEDD',pedra())),
+ ('riu','Riu',tapa('#2E4A3A','#E8C36A',riu())),
+ ('bolets','Tardor de bolets',tapa('#5A3A22','#F2C230',bolets())),
+ ('vermell','Vermell i or',tapa('#B01E28','#F2C230')),
 ]
 
 # Colors secundaris: substitueixen l'ambre (botons, municipis descoberts, xifres). Fons i textos no canvien.
 COLORS=[('vermell','Vermell','#E5484D'),('blau-mar','Blau mar','#4FA3E0'),('verd-bosc','Verd bosc','#4CB782'),('lila','Lila','#A27BEA'),
  ('rosa','Rosa','#F07AAA'),('turquesa','Turquesa','#2EC4B6'),('taronja','Taronja','#F28C38'),('llimona','Llimona','#E8D44D'),
- ('coure','Coure','#D08A5C'),('plata','Plata','#C3CCD6'),('menta','Menta','#7FD1A0'),('corall','Corall','#FF7F6B'),('cirera','Cirera','#C2445A'),('cel','Blau cel','#8FD3F4')]
+ ('coure','Coure','#D08A5C'),('plata','Plata','#C3CCD6'),('menta','Menta','#7FD1A0'),('corall','Corall','#FF7F6B'),('cirera','Cirera','#C2445A'),('cel','Blau cel','#8FD3F4'),
+ ('or-vell','Or vell','#D4A63A'),('salvia','Sàlvia','#9CB89A'),('lavanda','Lavanda','#B9A5E8'),('magenta','Magenta','#E05AB8'),('indi','Indi','#7C83F2'),
+ ('oliva','Oliva','#A8B04A'),('maduixa','Maduixa','#F25C7A'),('ocre','Ocre','#D9963A'),('aigua','Aigua','#5ED6E0'),('pressec','Préssec','#FFB38A'),
+ ('llima','Verd llima','#A6E05A'),('acer','Blau acer','#7AA2C8'),('sorra','Sorra','#E2C48F'),('gerd','Gerd','#E0457B')]
 def mostra_color(c):
     # Un tros de mapa amb municipis descoberts, un botó i una xifra, com es veurien a l'app.
     hexes=''.join(f'<path d="M{x},{y}l9,-5l9,5v10l-9,5l-9,-5z" fill="{f}" stroke="#0B0E13" stroke-width="1"/>'
@@ -79,7 +110,11 @@ def mostra_color(c):
 A='#F2B544'; AF='#B8862F'
 def L(d,w=2.4,c=A,x=''): return f'<path d="{d}" fill="none" stroke="{c}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round" {x}/>'
 def C(x,y,r,c=A,x2=''): return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{c}" {x2}/>'
-def G(cls,inner,orig=None,x=''): return f'<g class="{cls}" style="transform-box:view-box;transform-origin:{orig or "50px 50px"}" {x}>{inner}</g>'
+def G(cls,inner,orig=None,x=''):
+    # Un sol atribut style: el que es passi a x (variables com --i) s'hi afegeix.
+    extra=x[len('style="'):-1].replace('transform-box:view-box','').strip(';') if x.startswith('style="') else ''
+    estil=f'transform-box:view-box;transform-origin:{orig or "50px 50px"}'+(';'+extra if extra else '')
+    return f'<g class="{cls}" style="{estil}">{inner}</g>'
 persona=lambda x,y,s=1,c=A: C(x,y-7*s,2.4*s,c)+f'<path d="M{x-3*s},{y-3.5*s}h{6*s}l{1*s},{9*s}h{-8*s}z" fill="{c}"/>'
 ANIMACIONS=[
  ('castell','Castell que es fa',''.join(G('c-pis',''.join(persona(50+dx,86-14*i,1) for dx in ([-12,0,12] if i==0 else [-6,6] if i==1 else [0])),x=f'style="--i:{i};transform-box:view-box"') for i in range(3))+L('M20,90h60',1.4,AF)),
@@ -99,6 +134,21 @@ ANIMACIONS=[
  ('estel','L\'estel vola',G('c-estel',f'<path d="M50,14l14,20l-14,24l-14,-24z" fill="{A}"/>'+L('M50,58q-8,10 0,18t0,16',1.6,AF),'50px 58px')),
  ('caragol','A poc a poc',G('c-caragol',f'<path d="M24,76h46c4,0 6,-3 6,-6l4,-8" fill="none" stroke="{A}" stroke-width="2.4" stroke-linecap="round"/>'+C(48,60,14,'none',f'stroke="{A}" stroke-width="2.4"')+L('M48,60m-6,0a6,6 0 1 1 6,6',2,AF)+L('M80,62l2,-8M76,62l-2,-8',1.4),'50px 70px')+L('M14,80h72',1,AF,'opacity=".4"')),
  ('campana','La campana toca',L('M50,12v6',2)+G('c-campana',f'<path d="M36,30c0,-8 28,-8 28,0l2,20c2,10 6,14 12,16H22c6,-2 10,-6 12,-16z" fill="{A}"/>'+C(50,72,4,AF),'50px 18px')+''.join(G('c-so',L(f'M{x},40q{d*5},10 0,20',2,AF),x=f'style="--i:{i};transform-box:view-box"') for i,(x,d) in enumerate([(14,-1),(86,1)]))),
+
+ ('rotllana','Rotllana de sardana',G('c-rotllana',''.join(persona(50+28*math.cos(math.radians(a)),58+10*math.sin(math.radians(a)),.9,A if math.sin(math.radians(a))>0 else AF) for a in range(0,360,45)),'50px 54px')+L('M18,74q32,12 64,0',1,AF,'opacity=".4"')),
+ ('castanyes','Castanyes torrant',L('M24,66h52l-6,14H30z',2.2,AF)+''.join(G('c-bot',f'<path d="M{x-5},62c0,-7 4,-10 5,-10s5,3 5,10z" fill="{A}"/>',x=f'style="--i:{i};transform-box:view-box"') for i,x in enumerate((36,50,64)))+''.join(G('c-fum',L(f'M{x},44q-3,-6 0,-12t0,-12',1.6,AF),x=f'style="--i:{i};transform-box:view-box"') for i,x in enumerate((40,56)))),
+ ('cremallera','Tren cremallera',L('M10,84L90,30',1.6,AF)+L('M14,90L94,36',1,AF,'stroke-dasharray="2 3"')+G('c-tren',f'<g transform="rotate(-34 50 57)"><rect x="34" y="46" width="32" height="16" rx="4" fill="{A}"/><rect x="38" y="49" width="7" height="6" fill="#0B0E13"/><rect x="48" y="49" width="7" height="6" fill="#0B0E13"/><rect x="58" y="49" width="5" height="6" fill="#0B0E13"/></g>')),
+ ('globus','Globus que puja',G('c-globus',C(50,40,18)+L('M38,52l8,16M62,52l-8,16',1.4,AF)+f'<rect x="44" y="68" width="12" height="9" rx="2" fill="{AF}"/>')),
+ ('ocell','Ocell volant',G('c-ocell',G('c-ala',L('M30,50q10,-12 20,0q10,-12 20,0',2.6),'50px 50px'))),
+ ('flor','Flor que s\'obre',L('M50,88V52',2.2,AF)+L('M50,74q-10,-6 -14,-14',1.8,AF)+G('c-flor',''.join(f'<ellipse cx="50" cy="38" rx="5" ry="11" fill="{A}" transform="rotate({a} 50 50)"/>' for a in range(0,360,60))+C(50,50,5,AF),'50px 50px')),
+ ('cor','Cor que batega',G('c-cor',f'<path d="M50,78C24,60 22,42 32,34c8,-6 16,-2 18,6c2,-8 10,-12 18,-6c10,8 8,26 -18,44z" fill="{A}"/>')),
+ ('punts','Tres punts',''.join(G('c-punt',C(30+20*i,52,6),x=f'style="--i:{i};transform-box:view-box"') for i in range(3))),
+ ('barretina','La barretina salta',G('c-salt',f'<path d="M26,66c0,-20 10,-34 26,-36c10,-1 16,4 14,12c-2,6 -10,6 -12,12c-1,4 2,8 6,12z" fill="{A}"/>'+f'<rect x="22" y="64" width="44" height="7" rx="2" fill="{AF}"/>','50px 72px')),
+ ('gota','Gota que cau',G('c-gota',f'<path d="M50,20c-7,11 -11,18 -11,24a11,11 0 0 0 22,0c0,-6 -4,-13 -11,-24z" fill="{A}"/>')+G('c-esquitx',L('M36,82q14,-8 28,0',2,AF))),
+ ('rellotge','Rellotge',C(50,52,30,'none',f'stroke="{A}" stroke-width="2.4"')+G('c-minuts',L('M50,52V30',2.4),'50px 52px')+G('c-hores',L('M50,52h12',3,AF),'50px 52px')),
+ ('foguera','Foguera',L('M30,82l40,-8M30,74l40,8',3,AF)+G('c-flama',f'<path d="M50,74c-12,-4 -14,-18 -4,-30c0,8 6,10 8,4c8,8 10,22 -4,26z" fill="{A}"/>','50px 76px')),
+ ('cotxe','Carretera i manta',''.join(G('c-ratlla',L(f'M{x},82h10',2,AF),x=f'style="--i:{i};transform-box:view-box"') for i,x in enumerate((10,40,70)))+G('c-cotxe',f'<path d="M22,64h56v-8l-10,-4l-8,-10H40l-8,10l-10,4z" fill="{A}"/>'+C(34,66,6,AF)+C(66,66,6,AF))),
+ ('espiga','Espiga al vent',''.join(G('c-espiga',L(f'M{x},88V44',1.8,AF)+''.join(f'<ellipse cx="{x+(3 if k%2 else -3)}" cy="{44+k*5}" rx="2.4" ry="4" fill="{A}" transform="rotate({20 if k%2 else -20} {x+(3 if k%2 else -3)} {44+k*5})"/>' for k in range(5)),f'{x}px 88px',f'style="--i:{i};transform-box:view-box;transform-origin:{x}px 88px"') for i,x in enumerate((36,50,64)))),
 ]
 CSS_ANIM='''
 .c-pis{animation:cpis 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*.3s)}@keyframes cpis{0%,10%{opacity:0;transform:translateY(-8px)}25%,75%{opacity:1;transform:none}90%,100%{opacity:0}}
@@ -124,6 +174,25 @@ CSS_ANIM='''
 .c-caragol{animation:ccar 4s linear infinite}@keyframes ccar{from{transform:translateX(-22px)}to{transform:translateX(18px)}}
 .c-campana{animation:ccamp .8s ease-in-out infinite alternate}@keyframes ccamp{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
 .c-so{animation:cso .8s ease-out infinite;animation-delay:calc(var(--i)*.4s)}@keyframes cso{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+
+.c-rotllana{animation:crot 6s linear infinite}@keyframes crot{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+.c-bot{animation:cbot .6s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.15s)}@keyframes cbot{from{transform:none}to{transform:translateY(-4px)}}
+.c-fum{animation:cfum 1.6s ease-out infinite;animation-delay:calc(var(--i)*.5s)}@keyframes cfum{0%{opacity:0;transform:translateY(6px)}40%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+.c-tren{animation:ctren 2.4s ease-in-out infinite}@keyframes ctren{0%{transform:translate(-20px,13px)}100%{transform:translate(20px,-13px)}}
+.c-globus{animation:cglob 2.4s ease-in-out infinite alternate}@keyframes cglob{from{transform:translateY(10px)}to{transform:translateY(-8px)}}
+.c-ocell{animation:cocell 3s ease-in-out infinite}@keyframes cocell{0%,100%{transform:translate(-8px,6px)}50%{transform:translate(8px,-6px)}}
+.c-ala{animation:cala .4s ease-in-out infinite alternate}@keyframes cala{from{transform:scaleY(1)}to{transform:scaleY(-.6)}}
+.c-flor{animation:cflor 2s ease-in-out infinite}@keyframes cflor{0%,100%{transform:scale(.6) rotate(0)}50%{transform:scale(1) rotate(30deg)}}
+.c-cor{animation:ccor 1s ease-in-out infinite}@keyframes ccor{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+.c-punt{animation:cpunt .9s ease-in-out infinite;animation-delay:calc(var(--i)*.15s)}@keyframes cpunt{0%,60%,100%{transform:none}30%{transform:translateY(-10px)}}
+.c-salt{animation:csalt 1s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes csalt{0%,100%{transform:none}40%{transform:translateY(-14px) rotate(-6deg)}}
+.c-gota{animation:cgota 1.4s ease-in infinite}@keyframes cgota{0%{opacity:0;transform:translateY(-10px)}20%{opacity:1}80%{opacity:1;transform:translateY(30px)}100%{opacity:0;transform:translateY(30px)}}
+.c-esquitx{animation:cesq 1.4s ease-out infinite}@keyframes cesq{0%,78%{opacity:0}85%{opacity:1}100%{opacity:0}}
+.c-minuts{animation:cmin 2s linear infinite}@keyframes cmin{to{transform:rotate(360deg)}}.c-hores{animation:cmin 24s linear infinite}
+.c-flama{animation:cflam .4s ease-in-out infinite alternate}@keyframes cflam{from{transform:scale(1,1)}to{transform:scale(.9,1.12)}}
+.c-ratlla{animation:crat .8s linear infinite;animation-delay:calc(var(--i)*-.27s)}@keyframes crat{from{transform:translateX(20px)}to{transform:translateX(-20px)}}
+.c-cotxe{animation:ccotxe .3s ease-in-out infinite alternate}@keyframes ccotxe{from{transform:none}to{transform:translateY(-1.5px)}}
+.c-espiga{animation:cespi 2s ease-in-out infinite;animation-delay:calc(var(--i)*.2s)}@keyframes cespi{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
 @media (prefers-reduced-motion:reduce){[class^="c-"],[class*=" c-"]{animation:none!important}}
 '''
 dades={
