@@ -45,6 +45,8 @@ import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
+import cat.descobreix.sacs.AvisSacs
+import cat.descobreix.sacs.SacsScreen
 import cat.descobreix.ui.CelebracioMedalles
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.Obertura
@@ -61,12 +63,14 @@ object Rutes {
     const val SOBRE = "sobre"
     const val PASSAPORT = "passaport"
     const val SEGELLA = "segella/{codi}"
+    const val SACS = "sacs?obre={obre}"
 
     fun mapa(centre: String? = null) = if (centre == null) "mapa" else "mapa?centre=$centre"
     fun municipi(codi: String) = "municipi/$codi"
     fun camera(codi: String, missio: String? = null) = if (missio == null) "camera/$codi" else "camera/$codi?missio=$missio"
     fun foto(id: String) = "foto/$id"
     fun segella(codi: String) = "segella/$codi"
+    fun sacs(obre: Boolean = false) = "sacs?obre=$obre"
 }
 
 private data class Pestanya(val ruta: String, val desti: String, val etiqueta: Int, val icona: ImageVector)
@@ -141,6 +145,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
                     onObreFoto = { nav.navigate(Rutes.foto(it)) },
                     onObreSobre = { nav.navigate(Rutes.SOBRE) },
                     onObrePassaport = { nav.navigate(Rutes.PASSAPORT) },
+                    onObreSacs = { nav.navigate(Rutes.sacs()) },
                 )
             }
             composable(Rutes.MUNICIPI, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
@@ -174,9 +179,24 @@ private fun PantallesJoc(viewModel: AppViewModel) {
             composable(Rutes.SEGELLA, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
                 SegellarScreen(onFet = { nav.popBackStack() })
             }
+            composable(Rutes.SACS, arguments = listOf(navArgument("obre") { type = NavType.BoolType; defaultValue = false })) { e ->
+                SacsScreen(onEnrere = { nav.popBackStack() }, obreAra = e.arguments?.getBoolean("obre") == true)
+            }
         }
     }
     celebracio?.let { c -> CelebracioMedalles(c.noves, c.nomsComarques, c.siluetes, viewModel::tancaCelebracio) }
+    // Els sacs nous s'anuncien quan ja no hi ha cap celebració de medalles, i no mentre s'obren.
+    val sacsNous by viewModel.sacsNous.collectAsStateWithLifecycle()
+    if (celebracio == null && sacsNous > 0 && rutaActual != Rutes.SACS) {
+        AvisSacs(
+            sacsNous,
+            onObre = {
+                viewModel.tancaAvisSacs()
+                nav.navigate(Rutes.sacs(obre = true))
+            },
+            onDespres = viewModel::tancaAvisSacs,
+        )
+    }
     }
 }
 

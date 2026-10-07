@@ -13,8 +13,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         MissioPropiaEntity::class,
         FotoEntity::class,
         SegellEntity::class,
+        SacEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class BaseDades : RoomDatabase() {
@@ -25,6 +26,8 @@ abstract class BaseDades : RoomDatabase() {
     abstract fun fotos(): FotosDao
 
     abstract fun segells(): SegellsDao
+
+    abstract fun sacs(): SacsDao
 
     companion object {
         const val NOM = "descobreix.db"
@@ -39,6 +42,17 @@ abstract class BaseDades : RoomDatabase() {
                 )
                 db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_segells_codiIne` ON `segells` (`codiIne`)")
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_segells_comarca` ON `segells` (`comarca`)")
+            }
+        }
+
+        /** Versió 3: la taula dels sacs. */
+        val MIGRACIO_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `sacs` (`id` TEXT NOT NULL, `origen` TEXT NOT NULL, `objecteTipus` TEXT, `objecteId` TEXT, " +
+                        "`punts` INTEGER, `obertEl` INTEGER, `creatEl` INTEGER NOT NULL, `modificatEl` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+                )
+                db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_sacs_origen` ON `sacs` (`origen`)")
             }
         }
     }

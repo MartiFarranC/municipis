@@ -275,4 +275,47 @@
     <string name="celebracio_desbloquejat">Municipi desbloquejat!</string>
     <string name="celebracio_punts">+%1$d</string>
     <string name="continua">Continua</string>
+    <!-- Sacs i col·lecció -->
+    <string name="sacs_titol">Sacs i col·lecció</string>
+    <string name="sacs_col_leccio">Tens %1$d de les %2$d coses que surten dels sacs.</string>
+    <string name="sacs_cap">No tens cap sac per obrir</string>
+    <string name="sacs_com_es_guanyen">Es guanyen la primera vegada que desbloqueges un municipi, fas una missió i fas una foto, i amb cada nivell de les medalles de comarca.</string>
+    <plurals name="sacs_per_obrir">
+        <item quantity="one">Tens un sac per obrir</item>
+        <item quantity="other">Tens %1$d sacs per obrir</item>
+    </plurals>
+    <string name="sacs_obre">Obre\'l</string>
+    <string name="sacs_nou">Un sac nou!</string>
+    <string name="sacs_toca">Toca el sac per obrir-lo</string>
+    <string name="sacs_fes_servir">Fes-lo servir</string>
+    <plurals name="sacs_obre_un_altre">
+        <item quantity="one">Obre l\'altre sac</item>
+        <item quantity="other">Obre\'n un altre (en queden %1$d)</item>
+    </plurals>
+    <string name="sacs_ja_ho_tens_tot">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d punts.</string>
+    <string name="sacs_sortit_emoji">Un emoji nou per reaccionar.</string>
+    <string name="sacs_sortit_portada">Una tapa nova per al passaport.</string>
+    <string name="sacs_sortit_animacio">Una animació nova per quan l\'app carrega.</string>
+    <string name="sacs_sortit_color">Un color nou per a l\'app.</string>
+    <string name="sacs_amagada">Encara no la tens (%1$s)</string>
+    <string name="sacs_ajuda_colors">El color dels botons, dels municipis descoberts i de les xifres.</string>
+    <string name="sacs_ajuda_animacions">El que es mou mentre l\'app carrega.</string>
+    <string name="sacs_ajuda_portades">La tapa del teu passaport.</string>
+    <string name="sacs_ajuda_emojis">Per reaccionar a les fotos dels altres (aviat).</string>
+    <string name="sacs_avis_titol">Has guanyat un sac!</string>
+    <plurals name="sacs_avis">
+        <item quantity="one">Tens un sac nou per obrir.</item>
+        <item quantity="other">Tens %1$d sacs nous per obrir.</item>
+    </plurals>
+    <string name="sacs_despres">Després</string>
+    <string name="color_ambre">Ambre</string>
+    <string name="animacio_sardana">Sardana</string>
+    <string name="raresa_inicial">De sempre</string>
+    <string name="raresa_comuna">Comuna</string>
+    <string name="raresa_rara">Rara</string>
+    <string name="raresa_llegendaria">Llegendària</string>
+    <string name="tipus_emojis">Emojis</string>
+    <string name="tipus_portades">Tapes del passaport</string>
+    <string name="tipus_animacions">Animacions de càrrega</string>
+    <string name="tipus_colors">Colors</string>
 </resources>

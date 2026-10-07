@@ -9,12 +9,15 @@ import cat.descobreix.data.repositori.CameraMapa
 import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.SegellsRepositori
-import cat.descobreix.data.repositori.TapaPassaport
+import cat.descobreix.data.repositori.SacsRepositori
+import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.data.ubicacio.ServeiUbicacio
+import cat.descobreix.domain.ClauObjecte
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioCompletada
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
+import cat.descobreix.domain.Sac
 import cat.descobreix.domain.Segell
 import cat.descobreix.joc.dades.FormatLimits
 import cat.descobreix.joc.dades.FormatMapa
@@ -22,6 +25,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.geo.Localitzador
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.Ubicacio
@@ -97,6 +101,10 @@ class ProgresEnMemoria : ProgresRepositori {
 
     private val medalles = mutableSetOf<String>()
 
+    fun sumaPunts(punts: Int) {
+        estat.value = estat.value.copy(puntsGuanyats = estat.value.puntsGuanyats + punts)
+    }
+
     override suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada> {
         val noves = guanyades.filter { medalles.add(it.id) }
         estat.value = estat.value.copy(puntsGuanyats = estat.value.puntsGuanyats + noves.sumOf { it.punts })
@@ -170,15 +178,50 @@ class SegellsEnMemoria : SegellsRepositori {
 
 class PreferenciesEnMemoria : PreferenciesRepositori {
     private val camera = MutableStateFlow<CameraMapa?>(null)
-    private val tapa = MutableStateFlow(TapaPassaport.GRANAT)
+    private val tapa = MutableStateFlow(TapesPassaport.GRANAT)
+    private val color = MutableStateFlow<String?>(null)
+    private val animacio = MutableStateFlow<String?>(null)
     override val cameraMapa: Flow<CameraMapa?> = camera
     override suspend fun desaCameraMapa(camera: CameraMapa) {
         this.camera.value = camera
     }
 
-    override val tapaPassaport: Flow<TapaPassaport> = tapa
-    override suspend fun desaTapaPassaport(tapa: TapaPassaport) {
+    override val tapaPassaport: Flow<String> = tapa
+    override suspend fun desaTapaPassaport(tapa: String) {
         this.tapa.value = tapa
+    }
+
+    override val colorApp: Flow<String?> = color
+    override suspend fun desaColorApp(color: String?) {
+        this.color.value = color
+    }
+
+    override val animacioCarrega: Flow<String?> = animacio
+    override suspend fun desaAnimacioCarrega(animacio: String?) {
+        this.animacio.value = animacio
+    }
+}
+
+class SacsEnMemoria(private val progres: ProgresEnMemoria) : SacsRepositori {
+    private val llista = MutableStateFlow<List<Sac>>(emptyList())
+    override val sacs: Flow<List<Sac>> = llista
+
+    override suspend fun sacsAra(): List<Sac> = llista.value
+
+    override suspend fun afegeix(origens: List<String>): List<String> {
+        val nous = origens.distinct().filter { o -> llista.value.none { it.origen == o } }
+        llista.value = llista.value + nous.map { Sac(it, 0, false, null, null) }
+        return nous
+    }
+
+    override suspend fun obre(origen: String, contingut: ContingutSac) {
+        val sac = checkNotNull(llista.value.firstOrNull { it.origen == origen })
+        check(!sac.obert)
+        val obert = when (contingut) {
+            is ContingutSac.Nou -> sac.copy(obert = true, objecte = ClauObjecte(contingut.objecte.tipus, contingut.objecte.id))
+            is ContingutSac.Punts -> sac.copy(obert = true, punts = contingut.punts).also { progres.sumaPunts(contingut.punts) }
+        }
+        llista.value = llista.value.map { if (it.origen == origen) obert else it }
     }
 }
 

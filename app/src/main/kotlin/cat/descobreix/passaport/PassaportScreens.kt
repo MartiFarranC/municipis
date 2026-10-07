@@ -6,10 +6,12 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,9 +24,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,6 +46,8 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -52,8 +58,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
-import cat.descobreix.data.repositori.TapaPassaport
 import cat.descobreix.joc.model.CodiIne
+import cat.descobreix.sacs.nomPortada
+import cat.descobreix.sacs.portada
 import cat.descobreix.ui.components.AMPLADA_SEGELL
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
@@ -115,8 +122,8 @@ fun PassaportScreen(
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(stringResource(R.string.passaport_color_tapa), style = MaterialTheme.typography.titleMedium)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    for (t in TapaPassaport.entries) OpcioTapa(t, t == estat.tapa) { viewModel.triaTapa(t) }
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    for (t in estat.tapes) OpcioTapa(t, t == estat.tapa) { viewModel.triaTapa(t) }
                 }
             }
         }
@@ -155,15 +162,9 @@ fun PassaportScreen(
 }
 
 @Composable
-private fun OpcioTapa(t: TapaPassaport, triada: Boolean, onTria: () -> Unit) {
-    val (fons, daurat) = ColorsPassaport.tapa(t)
-    val nom = stringResource(
-        when (t) {
-            TapaPassaport.GRANAT -> R.string.tapa_granat
-            TapaPassaport.BLAU -> R.string.tapa_blau
-            TapaPassaport.APP -> R.string.tapa_app
-        },
-    )
+private fun OpcioTapa(t: String, triada: Boolean, onTria: () -> Unit) {
+    val p = portada(t)
+    val nom = nomPortada(t)
     Column(
         Modifier
             .clip(RoundedCornerShape(12.dp))
@@ -176,10 +177,18 @@ private fun OpcioTapa(t: TapaPassaport, triada: Boolean, onTria: () -> Unit) {
             Modifier
                 .size(44.dp, 60.dp)
                 .clip(RoundedCornerShape(6.dp))
-                .background(fons)
-                .border(if (triada) 3.dp else 1.dp, if (triada) Colors.Ambre else daurat.copy(alpha = .5f), RoundedCornerShape(6.dp)),
+                .background(p.fons)
+                .border(if (triada) 3.dp else 1.dp, if (triada) Colors.Ambre else p.daurat.copy(alpha = .5f), RoundedCornerShape(6.dp)),
+        ) {
+            p.dibuix?.let { Image(painterResource(it), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop) }
+        }
+        Text(
+            nom,
+            style = MaterialTheme.typography.labelMedium.copy(color = if (triada) Colors.Ambre else Colors.Text),
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            modifier = Modifier.width(72.dp),
         )
-        Text(nom, style = MaterialTheme.typography.labelMedium.copy(color = if (triada) Colors.Ambre else Colors.Text))
     }
 }
 

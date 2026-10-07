@@ -27,12 +27,23 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         }
     }
 
-    override val tapaPassaport: Flow<TapaPassaport> = dataStore.data.map { p ->
-        TapaPassaport.entries.firstOrNull { it.name == p[TAPA] } ?: TapaPassaport.GRANAT
+    // Abans dels sacs es desava el nom de l'enum (GRANAT, BLAU, APP): en minúscules és l'id d'ara.
+    override val tapaPassaport: Flow<String> = dataStore.data.map { p -> p[TAPA]?.lowercase() ?: TapesPassaport.GRANAT }
+
+    override suspend fun desaTapaPassaport(tapa: String) {
+        dataStore.edit { it[TAPA] = tapa }
     }
 
-    override suspend fun desaTapaPassaport(tapa: TapaPassaport) {
-        dataStore.edit { it[TAPA] = tapa.name }
+    override val colorApp: Flow<String?> = dataStore.data.map { it[COLOR] }
+
+    override suspend fun desaColorApp(color: String?) {
+        dataStore.edit { if (color == null) it.remove(COLOR) else it[COLOR] = color }
+    }
+
+    override val animacioCarrega: Flow<String?> = dataStore.data.map { it[ANIMACIO] }
+
+    override suspend fun desaAnimacioCarrega(animacio: String?) {
+        dataStore.edit { if (animacio == null) it.remove(ANIMACIO) else it[ANIMACIO] = animacio }
     }
 
     private companion object {
@@ -40,5 +51,7 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         val Y = floatPreferencesKey("mapa_y")
         val ESCALA = floatPreferencesKey("mapa_escala")
         val TAPA = stringPreferencesKey("tapa_passaport")
+        val COLOR = stringPreferencesKey("color_app")
+        val ANIMACIO = stringPreferencesKey("animacio_carrega")
     }
 }

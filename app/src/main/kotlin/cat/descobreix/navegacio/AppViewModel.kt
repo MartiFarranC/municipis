@@ -46,7 +46,23 @@ class AppViewModel @Inject constructor(private val joc: Joc, compte: ServeiCompt
 
     private var siluetes: Map<String, Silueta>? = null
 
+    private val _sacsNous = MutableStateFlow(0)
+
+    /** Quants sacs s'han guanyat des de l'últim avís (0 si no n'hi ha cap per anunciar). */
+    val sacsNous: StateFlow<Int> = _sacsNous.asStateFlow()
+
     init {
+        viewModelScope.launch {
+            joc.sacsNous.collect { nous ->
+                launch {
+                    // Després de la celebració de la missió (la de les medalles, si n'hi ha, ja espera la seva).
+                    delay(ESPERA_MS)
+                    _sacsNous.update { it + nous.size }
+                }
+            }
+        }
+        // Els sacs que tocaven abans que n'hi hagués (o que no es van poder desar) es donen en obrir l'app.
+        viewModelScope.launch { joc.revisaSacs() }
         viewModelScope.launch {
             joc.medallesNoves.collect { noves ->
                 launch {
@@ -61,6 +77,10 @@ class AppViewModel @Inject constructor(private val joc: Joc, compte: ServeiCompt
     }
 
     fun tancaCelebracio() = cua.update { it.drop(1) }
+
+    fun tancaAvisSacs() {
+        _sacsNous.value = 0
+    }
 
     private companion object {
         const val ESPERA_MS = 3500L
