@@ -82,8 +82,9 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
 
 - **Tapa:** l'usuari tria el color entre tres opcions: **granat**, **blau fosc** o **els colors de l'app** (fosc amb ambre). Totes amb la silueta de Catalunya en daurat.
 - **Segell:** **rectangular**, amb la silueta del municipi, el nom i la data del descobriment. Cada segell surt amb un color de tinta i una mica girat, com en un passaport de veritat.
-- Pendent: si els municipis que encara no tens es veuen amb la silueta i el nom en pàl·lid o són sorpresa («?»).
 - **Pàgina lliure:** en lloc d'una graella, la pàgina és com la d'un passaport de veritat i **l'usuari tria on posa cada segell**. En completar un municipi: premis, el passaport s'obre amb una animació, l'usuari toca un lloc de la pàgina i el segell hi cau **sense tampó**: baixa des de dalt, pica sobre el paper, fa una onada i esquitxa unes gotes de tinta. Si li agrada on ha quedat, l'accepta; si no, el repeteix (el segell s'esborra i torna a triar el lloc). Prototip: `disseny/passaport/prototip-segellar.html`.
+- **Pàgines per comarca:** com a màxim **20 segells per pàgina**. Quan una pàgina en té 20, en comença una altra de la mateixa comarca (l'Alt Empordà, amb 68 municipis, en tindria 4). Els segells mantenen la mida d'ara. El valor (20) ha d'anar a la configuració del joc.
+- **Municipis que encara no tens:** de moment no es mostren; la pàgina només té els segells posats i el recompte (per exemple, «6 de 21»).
 - Generador de propostes: `disseny/passaport/`.
 
 ## Coses per fer
