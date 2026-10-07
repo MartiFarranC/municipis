@@ -17,6 +17,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.geo.Localitzador
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -86,6 +87,14 @@ class ProgresEnMemoria : ProgresRepositori {
             completades = p.completades + (missioId to MissioCompletada(missioId, codi, punts, bonus, 0)),
             puntsGuanyats = p.puntsGuanyats + punts + bonus,
         )
+    }
+
+    private val medalles = mutableSetOf<String>()
+
+    override suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada> {
+        val noves = guanyades.filter { medalles.add(it.id) }
+        estat.value = estat.value.copy(puntsGuanyats = estat.value.puntsGuanyats + noves.sumOf { it.punts })
+        return noves
     }
 }
 

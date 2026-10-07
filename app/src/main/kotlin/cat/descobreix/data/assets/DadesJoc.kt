@@ -10,7 +10,7 @@ import cat.descobreix.joc.dades.Geografia
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.dades.Missions
 import cat.descobreix.joc.geo.Localitzador
-import cat.descobreix.joc.progressio.Assoliments
+import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.progressio.Nivells
 import cat.descobreix.joc.regles.GrafVeins
 import cat.descobreix.joc.regles.ReglesJoc
@@ -37,7 +37,7 @@ class Dades(
     val validador: ValidadorProves,
     val cercador: Cercador,
     val nivells: Nivells,
-    val assoliments: Assoliments,
+    val medalles: Medalles,
     val localitzador: Localitzador,
 )
 
@@ -63,7 +63,7 @@ fun construeixDades(config: String, municipis: String, missions: String, localit
         validador = ValidadorProves(c),
         cercador = Cercador(geografia.municipis),
         nivells = Nivells(c.nivells),
-        assoliments = Assoliments(c.assoliments, geografia),
+        medalles = Medalles(c.medalles, geografia, m),
         localitzador = localitzador(geografia, c),
     )
 }

@@ -1,17 +1,20 @@
 package cat.descobreix.joc
 
-import cat.descobreix.joc.progressio.Assoliments
-import cat.descobreix.joc.progressio.DadesAssoliments
+import cat.descobreix.joc.progressio.DadesMedalles
+import cat.descobreix.joc.progressio.Medalles
+import cat.descobreix.joc.progressio.NivellMedalla
 import cat.descobreix.joc.progressio.Nivells
-import cat.descobreix.joc.progressio.TipusAssoliment
+import cat.descobreix.joc.progressio.TipusMedalla
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class ProgressioTest {
     private val nivells = Nivells(Repositori.config.nivells)
-    private val assoliments = Assoliments(Repositori.config.assoliments, Repositori.geografia)
+    private val medalles = Medalles(Repositori.config.medalles, Repositori.geografia, Repositori.missions)
+    private val moianes = Repositori.geografia.comarques.single { it.nom == "Moianès" }
+    private val municipisMoianes = Repositori.geografia.municipisDeComarca(moianes.codi).map { it.codi }.toSet()
 
     @Test
     fun `nivells`() {
@@ -37,24 +40,64 @@ class ProgressioTest {
     }
 
     @Test
-    fun `assoliments`() {
-        val vic = Repositori.codi("Vic")
-        val inicial = assoliments.calcula(DadesAssoliments(setOf(vic), 0, 0, 0))
-        assertTrue(inicial.none { it.aconseguit })
+    fun `la vitrina té totes les medalles`() {
+        val m = medalles.calcula(DadesMedalles(emptySet(), emptySet(), emptySet()))
+        assertEquals(43, m.count { it.tipus == TipusMedalla.COMARCA })
+        assertEquals(6, m.count { it.tipus == TipusMedalla.MUNICIPIS })
+        assertEquals(1, m.count { it.tipus == TipusMedalla.CAPITALS })
+        assertEquals(5, m.count { it.tipus == TipusMedalla.CARTELLS })
+        assertTrue(m.none { it.aconseguida })
+        assertTrue(medalles.guanyades(m).isEmpty())
+    }
 
-        val moianes = Repositori.geografia.comarques.single { it.nom == "Moianès" }
-        val tots = Repositori.geografia.municipisDeComarca(moianes.codi).map { it.codi }.toSet()
-        val despres = assoliments.calcula(DadesAssoliments(tots, 3, 1, 1)).filter { it.aconseguit }.map { it.tipus }
-        assertTrue(TipusAssoliment.PRIMER_MUNICIPI in despres)
-        assertTrue(TipusAssoliment.COMARCA_COMPLETA in despres)
-        assertTrue(TipusAssoliment.PRIMERA_MISSIO in despres)
-        assertTrue(TipusAssoliment.FOTOS in despres)
-        assertFalse(TipusAssoliment.CAPITALS in despres)
+    @Test
+    fun `els tres nivells d'una comarca`() {
+        fun nivell(d: DadesMedalles) = medalles.calcula(d).single { it.comarca == moianes.codi }
+        val tots = municipisMoianes
+        val unMenys = tots - tots.first()
+
+        val res = nivell(DadesMedalles(unMenys, emptySet(), emptySet()))
+        assertNull(res.nivell)
+        assertEquals(tots.size - 1, res.actual)
+        assertEquals(tots.size, res.necessari)
+
+        assertEquals(NivellMedalla.BRONZE, nivell(DadesMedalles(tots, unMenys, tots)).nivell)
+        assertEquals(NivellMedalla.PLATA, nivell(DadesMedalles(tots, tots, unMenys)).nivell)
+        assertEquals(NivellMedalla.OR, nivell(DadesMedalles(tots, tots, tots)).nivell)
+        // L'or demana la plata: amb tots els cartells però sense totes les missions es queda en bronze.
+        assertEquals(NivellMedalla.BRONZE, nivell(DadesMedalles(tots, unMenys, tots)).nivell)
+    }
+
+    @Test
+    fun `punts de les medalles guanyades`() {
+        val p = Repositori.config.medalles.punts
+        val or = medalles.calcula(DadesMedalles(municipisMoianes, municipisMoianes, municipisMoianes))
+        val guanyades = medalles.guanyades(or)
+        val deComarca = guanyades.filter { it.id.startsWith("comarca_${moianes.codi}_") }
+        assertEquals(listOf("bronze", "plata", "or"), deComarca.map { it.id.substringAfterLast('_') })
+        assertEquals(p.comarcaBronze + p.comarcaPlata + p.comarcaOr, deComarca.sumOf { it.punts })
+        // El Moianès té 10 municipis: fita de 10 municipis i fites d'1 cartell.
+        assertTrue(guanyades.any { it.id == "municipis_10" && it.punts == p.fitaMunicipis })
+        assertTrue(guanyades.any { it.id == "cartells_1" && it.punts == p.fitaCartells })
+        assertTrue(guanyades.none { it.id == "capitals" })
+        assertEquals(guanyades.size, guanyades.map { it.id }.distinct().size)
+    }
+
+    @Test
+    fun `dades a partir de les missions completades`() {
+        val codi = municipisMoianes.first()
+        val missions = Repositori.missions.de(codi)
+        val cartell = missions.single { it.clau == Medalles.CLAU_CARTELL }
+        val nomesCartell = medalles.dades(setOf(codi), setOf(cartell.id))
+        assertEquals(setOf(codi), nomesCartell.cartells)
+        assertTrue(nomesCartell.complets.isEmpty())
+        val totes = medalles.dades(setOf(codi), missions.map { it.id }.toSet())
+        assertEquals(setOf(codi), totes.complets)
     }
 
     @Test
     fun `progrés per comarques`() {
-        val p = assoliments.progresComarques(emptySet())
+        val p = medalles.progresComarques(emptySet())
         assertEquals(43, p.size)
         assertEquals(947, p.sumOf { it.total })
     }

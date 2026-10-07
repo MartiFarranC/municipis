@@ -1,8 +1,14 @@
 package cat.descobreix
 
 import cat.descobreix.domain.Joc
+import cat.descobreix.domain.MedallesNoves
 import cat.descobreix.joc.model.TipusMissio
+import cat.descobreix.joc.progressio.Medalles
+import cat.descobreix.joc.progressio.TipusMedalla
 import cat.descobreix.joc.regles.ResultatDesbloqueig
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -23,7 +29,9 @@ class JocTest {
         val generiques = DadesDeProva.dades.missions.de(vic).filter { it.tipus == TipusMissio.GENERICA }
         val punts = generiques.map { joc.completaMissio(it, null, null) }
         assertEquals(listOf(100, 50, 50), punts.map { it.missio })
-        assertEquals(200, repositori.progresAra().saldo)
+        // La foto del cartell també dona la medalla del primer cartell.
+        val medalla = DadesDeProva.dades.config.medalles.punts.fitaCartells
+        assertEquals(200 + medalla, repositori.progresAra().saldo)
 
         // Tornar a completar una missió no dona punts.
         assertEquals(0, joc.completaMissio(generiques.first(), null, null).total)
@@ -31,8 +39,8 @@ class JocTest {
         assertEquals(ResultatDesbloqueig.Permes(60), joc.desbloqueja(gurb))
         val p = repositori.progresAra()
         assertEquals(listOf(vic, gurb), p.descoberts)
-        assertEquals(140, p.saldo)
-        assertEquals(200, p.puntsGuanyats)
+        assertEquals(140 + medalla, p.saldo)
+        assertEquals(200 + medalla, p.puntsGuanyats)
     }
 
     @Test
@@ -42,7 +50,29 @@ class JocTest {
         val punts = missions.map { joc.completaMissio(it, null, null) }
         assertEquals(0, punts.dropLast(1).sumOf { it.bonus })
         assertEquals(DadesDeProva.dades.config.punts.bonusTotesLesMissions, punts.last().bonus)
-        assertEquals(DadesDeProva.dades.regles.puntsPossibles(vic), repositori.progresAra().saldo)
+        val medalla = DadesDeProva.dades.config.medalles.punts.fitaCartells
+        assertEquals(DadesDeProva.dades.regles.puntsPossibles(vic) + medalla, repositori.progresAra().saldo)
+    }
+
+    @Test
+    fun `una medalla només dona punts una vegada i s'anuncia`() = runTest {
+        joc.iniciaPartida(vic)
+        val anunciades = mutableListOf<MedallesNoves>()
+        val escolta = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { joc.medallesNoves.toList(anunciades) }
+        val cartell = DadesDeProva.dades.missions.de(vic).single { it.clau == Medalles.CLAU_CARTELL }
+        joc.completaMissio(cartell, null, null)
+        val p = DadesDeProva.dades.config.medalles.punts
+        assertEquals(cartell.punts + p.fitaCartells, repositori.progresAra().saldo)
+        assertEquals(1, anunciades.size)
+        assertEquals(TipusMedalla.CARTELLS, anunciades.single().medalles.single().tipus)
+        assertEquals(p.fitaCartells, anunciades.single().punts)
+
+        // Una altra missió no torna a donar la medalla.
+        val checkin = DadesDeProva.dades.missions.de(vic).first { it.clau != Medalles.CLAU_CARTELL }
+        joc.completaMissio(checkin, null, null)
+        assertEquals(cartell.punts + checkin.punts + p.fitaCartells, repositori.progresAra().saldo)
+        assertEquals(1, anunciades.size)
+        escolta.cancel()
     }
 
     @Test(expected = IllegalStateException::class)

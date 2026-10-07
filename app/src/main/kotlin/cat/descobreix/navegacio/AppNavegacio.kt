@@ -43,6 +43,7 @@ import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
+import cat.descobreix.ui.CelebracioMedalles
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.Obertura
 import cat.descobreix.ui.theme.Colors
@@ -105,6 +106,8 @@ private fun PantallesJoc(viewModel: AppViewModel) {
 
     val entrada by nav.currentBackStackEntryAsState()
     val rutaActual = entrada?.destination?.route
+    val celebracio by viewModel.celebracio.collectAsStateWithLifecycle()
+    Box(Modifier.fillMaxSize()) {
     Scaffold(
         containerColor = Colors.Fons,
         // Cada pantalla gestiona les barres del sistema (el mapa ocupa tota la pantalla).
@@ -159,6 +162,8 @@ private fun PantallesJoc(viewModel: AppViewModel) {
                 SobreScreen(onEnrere = { nav.popBackStack() })
             }
         }
+    }
+    celebracio?.let { c -> CelebracioMedalles(c.noves, c.nomsComarques, c.siluetes, viewModel::tancaCelebracio) }
     }
 }
 

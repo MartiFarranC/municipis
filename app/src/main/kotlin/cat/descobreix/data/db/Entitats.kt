@@ -43,9 +43,9 @@ data class MovimentPuntsEntity(
     /** GUANY o DESPESA. */
     val tipus: String,
     val quantitat: Int,
-    /** MISSIO, BONUS o DESBLOQUEIG. */
+    /** MISSIO, BONUS, DESBLOQUEIG o MEDALLA. */
     val motiu: String,
-    /** Identificador de la missió o codi INE del municipi. */
+    /** Identificador de la missió, codi INE del municipi o identificador de la medalla. */
     val referencia: String,
     val creatEl: Long,
     val modificatEl: Long,
@@ -56,6 +56,7 @@ data class MovimentPuntsEntity(
         const val MOTIU_MISSIO = "MISSIO"
         const val MOTIU_BONUS = "BONUS"
         const val MOTIU_DESBLOQUEIG = "DESBLOQUEIG"
+        const val MOTIU_MEDALLA = "MEDALLA"
     }
 }
 

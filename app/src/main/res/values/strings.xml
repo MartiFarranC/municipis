@@ -126,21 +126,29 @@
     <string name="punts_resum">Tens %1$d punts per gastar. N\'has guanyat %2$d en total.</string>
     <string name="album">El meu àlbum</string>
     <string name="album_buit">Encara no has fet cap foto. Les pots fer des de la fitxa de cada municipi.</string>
-    <string name="assoliments">Assoliments</string>
+    <string name="medalles">Medalles</string>
     <string name="aconseguit">Aconseguit</string>
     <string name="progres_de">%1$d de %2$d</string>
-    <string name="assoliment_primer_municipi">Primera llum</string>
-    <string name="assoliment_primera_missio">Primera missió</string>
-    <string name="assoliment_municipi_complet">Municipi complet</string>
-    <string name="assoliment_comarca_completa">Tota una comarca</string>
-    <string name="assoliment_capitals">Totes les capitals de comarca</string>
-    <plurals name="assoliment_municipis">
+    <string name="medalla_bronze">Bronze</string>
+    <string name="medalla_plata">Plata</string>
+    <string name="medalla_or">Or</string>
+    <string name="medalla_capitals">Totes les capitals</string>
+    <string name="medalla_capitals_etiqueta">CAPITALS</string>
+    <plurals name="medalla_municipis">
         <item quantity="one">%1$d municipi</item>
         <item quantity="other">%1$d municipis</item>
     </plurals>
-    <plurals name="assoliment_fotos">
-        <item quantity="one">Primera foto</item>
-        <item quantity="other">%1$d fotos</item>
+    <plurals name="medalla_cartells">
+        <item quantity="one">%1$d cartell</item>
+        <item quantity="other">%1$d cartells</item>
+    </plurals>
+    <string name="medalla_cap_a_bronze">%1$d de %2$d municipis</string>
+    <string name="medalla_cap_a_plata">Plata: %1$d de %2$d complets</string>
+    <string name="medalla_cap_a_or">Or: %1$d de %2$d cartells</string>
+    <string name="medalla_nivell_de">%1$s · %2$s</string>
+    <plurals name="celebracio_medalles">
+        <item quantity="one">Nova medalla!</item>
+        <item quantity="other">%1$d medalles noves!</item>
     </plurals>
     <string name="comarques">Comarques</string>
     <string name="les_teves_dades">Les teves dades</string>

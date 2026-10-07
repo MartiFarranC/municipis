@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -39,21 +38,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
-import cat.descobreix.joc.progressio.Assoliment
-import cat.descobreix.joc.progressio.TipusAssoliment
+import cat.descobreix.ui.TargetaMedalla
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.components.Xifra
-import cat.descobreix.ui.plural
 import cat.descobreix.ui.theme.Colors
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -122,10 +117,12 @@ fun PerfilScreen(
             }
         }
 
-        item { Titol(stringResource(R.string.assoliments)) }
+        item { Titol(stringResource(R.string.medalles)) }
         item {
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                for (a in estat.assoliments) TargetaAssoliment(a)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                for (m in estat.medalles) {
+                    TargetaMedalla(m, m.comarca?.let { estat.nomsComarques[it] }, m.comarca?.let { estat.siluetes[it] })
+                }
             }
         }
 
@@ -232,34 +229,5 @@ private fun Capcalera(estat: PerfilEstat) {
             Text(stringResource(R.string.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
             BarraProgres(nivell.progres, alcada = 6)
         }
-    }
-}
-
-@Composable
-private fun TargetaAssoliment(a: Assoliment) {
-    val (titol, icona) = when (a.tipus) {
-        TipusAssoliment.PRIMER_MUNICIPI -> stringResource(R.string.assoliment_primer_municipi) to Icones.Llum
-        TipusAssoliment.PRIMERA_MISSIO -> stringResource(R.string.assoliment_primera_missio) to Icones.Fet
-        TipusAssoliment.MUNICIPI_COMPLET -> stringResource(R.string.assoliment_municipi_complet) to Icones.Estrella
-        TipusAssoliment.COMARCA_COMPLETA -> stringResource(R.string.assoliment_comarca_completa) to Icones.Mapa
-        TipusAssoliment.MUNICIPIS -> plural(R.plurals.assoliment_municipis, a.objectiu, a.objectiu) to Icones.Trofeu
-        TipusAssoliment.CAPITALS -> stringResource(R.string.assoliment_capitals) to Icones.Casa
-        TipusAssoliment.FOTOS -> plural(R.plurals.assoliment_fotos, a.objectiu, a.objectiu) to Icones.Camera
-    }
-    val estatText = if (a.aconseguit) stringResource(R.string.aconseguit) else stringResource(R.string.progres_de, a.actual, a.objectiu)
-    Column(
-        Modifier
-            .width(104.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(if (a.aconseguit) Colors.Disponible1 else Colors.Superficie)
-            .border(1.dp, if (a.aconseguit) Colors.Disponible2 else Colors.Linia, RoundedCornerShape(12.dp))
-            .semantics(mergeDescendants = true) { stateDescription = estatText }
-            .padding(horizontal = 8.dp, vertical = 12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
-    ) {
-        Icon(icona, contentDescription = null, tint = if (a.aconseguit) Colors.Ambre else Colors.TextSecundari, modifier = Modifier.size(26.dp))
-        Text(titol, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
-        Text(estatText, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
     }
 }
