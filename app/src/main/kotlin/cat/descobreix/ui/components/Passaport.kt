@@ -1,11 +1,13 @@
 package cat.descobreix.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +31,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
@@ -37,9 +41,9 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cat.descobreix.data.repositori.TapaPassaport
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.progressio.SegellPosat
+import cat.descobreix.sacs.portada
 import cat.descobreix.ui.theme.ChakraPetch
 
 // El passaport (docs/decisions-pendents.md): pàgines de paper, una (o més) per comarca, on l'usuari
@@ -55,13 +59,6 @@ object ColorsPassaport {
     val Tintes = listOf(Color(0xFF2F5FA8), Color(0xFFB0303A), Color(0xFF2E7D4F), Color(0xFF6A3FA0), Color(0xFF1F7A8C))
 
     fun tinta(index: Int): Color = Tintes[index.mod(Tintes.size)]
-
-    /** Fons i daurat de cada tapa. */
-    fun tapa(t: TapaPassaport): Pair<Color, Color> = when (t) {
-        TapaPassaport.GRANAT -> Color(0xFF6E1B22) to Color(0xFFE8C36A)
-        TapaPassaport.BLAU -> Color(0xFF16243F) to Color(0xFFE8C36A)
-        TapaPassaport.APP -> Color(0xFF1C2330) to Color(0xFFF2B544)
-    }
 }
 
 /** Amplada del segell respecte de la pàgina, i la seva proporció (alçada / amplada). */
@@ -210,18 +207,20 @@ fun SegellALaPagina(s: SegellDibuix, amplada: Dp, alcada: Dp, modifier: Modifier
     )
 }
 
-/** La tapa del passaport: el color triat i la silueta de Catalunya en daurat. */
+/** La tapa del passaport: la triada (el color o el dibuix) i la silueta de Catalunya en daurat. */
 @Composable
-fun TapaDelPassaport(tapa: TapaPassaport, siluetaCatalunya: List<Silueta>, titol: String, subtitol: String, modifier: Modifier = Modifier) {
-    val (fons, daurat) = ColorsPassaport.tapa(tapa)
+fun TapaDelPassaport(tapa: String, siluetaCatalunya: List<Silueta>, titol: String, subtitol: String, modifier: Modifier = Modifier) {
+    val p = portada(tapa)
+    val daurat = p.daurat
     val forma = RoundedCornerShape(topStart = 6.dp, bottomStart = 6.dp, topEnd = 14.dp, bottomEnd = 14.dp)
     Box(
         modifier
             .aspectRatio(PROPORCIO_PAGINA)
             .clip(forma)
-            .background(fons),
+            .background(p.fons),
         contentAlignment = Alignment.Center,
     ) {
+        p.dibuix?.let { Image(painterResource(it), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop) }
         Box(
             Modifier
                 .fillMaxSize()
@@ -229,8 +228,8 @@ fun TapaDelPassaport(tapa: TapaPassaport, siluetaCatalunya: List<Silueta>, titol
                 .border(1.dp, daurat.copy(alpha = .6f), RoundedCornerShape(6.dp)),
         )
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(titol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 22.sp, letterSpacing = 4.sp, color = daurat)
-            if (siluetaCatalunya.isNotEmpty()) {
+            Text(titol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 22.sp, letterSpacing = 4.sp, color = p.text)
+            if (p.silueta && siluetaCatalunya.isNotEmpty()) {
                 Canvas(
                     Modifier
                         .fillMaxWidth(.62f)
@@ -249,7 +248,8 @@ fun TapaDelPassaport(tapa: TapaPassaport, siluetaCatalunya: List<Silueta>, titol
                     }
                 }
             }
-            Text(subtitol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 1.6.sp, color = daurat)
+            if (!p.silueta) Spacer(Modifier.fillMaxWidth(.62f).aspectRatio(1f))
+            Text(subtitol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 1.6.sp, color = p.text)
         }
     }
 }

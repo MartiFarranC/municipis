@@ -57,6 +57,7 @@ fun PerfilScreen(
     onObreFoto: (String) -> Unit,
     onObreSobre: () -> Unit,
     onObrePassaport: () -> Unit,
+    onObreSacs: () -> Unit,
     viewModel: PerfilViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -119,6 +120,7 @@ fun PerfilScreen(
         }
 
         item { BotoSecundari(stringResource(R.string.passaport), onObrePassaport, icona = Icones.Mapa) }
+        item { BotoSecundari(stringResource(R.string.sacs_titol), onObreSacs, icona = Icones.Sac) }
 
         item { Titol(stringResource(R.string.medalles)) }
         item {

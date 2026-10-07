@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.repositori.SegellsRepositori
-import cat.descobreix.data.repositori.TapaPassaport
+import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.domain.Joc
 import cat.descobreix.domain.Segell
+import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.progressio.Passaport
 import cat.descobreix.joc.progressio.SegellPosat
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,7 +47,9 @@ data class Pendent(val codi: CodiIne, val nom: String)
 
 data class PassaportEstat(
     val carregant: Boolean = true,
-    val tapa: TapaPassaport = TapaPassaport.GRANAT,
+    val tapa: String = TapesPassaport.GRANAT,
+    /** Les tapes que es poden triar: les de sempre i les portades dels sacs que es tenen. */
+    val tapes: List<String> = TapesPassaport.classiques,
     val pagines: List<PaginaComarca> = emptyList(),
     val pendents: List<Pendent> = emptyList(),
     val siluetesComarques: Map<String, Silueta> = emptyMap(),
@@ -74,7 +78,8 @@ class PassaportViewModel @Inject constructor(
             val siluetes = mutableMapOf<CodiIne, Silueta>()
             val noms = d.geografia.comarques.associate { it.codi to it.nom }
             val totals = d.geografia.municipis.groupingBy { it.comarca }.eachCount()
-            combine(segells.segells, joc.progres, preferencies.tapaPassaport) { s, p, t -> Triple(s, p, t) }.collect { (s, p, t) ->
+            val portades = joc.colleccio.map { l -> l.filter { it.tipus == TipusObjecte.PORTADA }.map { it.id } }
+            combine(segells.segells, joc.progres, preferencies.tapaPassaport, portades) { s, p, t, pt -> Quatre(s, p, t, pt) }.collect { (s, p, t, pt) ->
                 val ambSegell = s.map { it.posat.codi }.toSet()
                 val falten = ambSegell - siluetes.keys
                 if (falten.isNotEmpty()) {
@@ -94,6 +99,7 @@ class PassaportViewModel @Inject constructor(
                     it.copy(
                         carregant = false,
                         tapa = t,
+                        tapes = TapesPassaport.classiques + pt,
                         pagines = pagines,
                         pendents = checkins.map { c -> Pendent(c, d.geografia.municipi(c).nom) },
                         siluetesComarques = perComarca,
@@ -106,7 +112,9 @@ class PassaportViewModel @Inject constructor(
         }
     }
 
-    fun triaTapa(t: TapaPassaport) {
+    private data class Quatre<A, B, C, D>(val a: A, val b: B, val c: C, val d: D)
+
+    fun triaTapa(t: String) {
         viewModelScope.launch { preferencies.desaTapaPassaport(t) }
     }
 
@@ -138,7 +146,7 @@ data class SegellarEstat(
     val nom: String = "",
     val comarca: String = "",
     val nomComarca: String = "",
-    val tapa: TapaPassaport = TapaPassaport.GRANAT,
+    val tapa: String = TapesPassaport.GRANAT,
     val pagina: Int = 0,
     val total: Int = 0,
     /** Segells que ja són a la pàgina on va el nou. */

@@ -6,6 +6,8 @@ import cat.descobreix.domain.Progres
 import cat.descobreix.domain.Segell
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.domain.Sac
+import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.Ubicacio
@@ -75,14 +77,45 @@ interface PreferenciesRepositori {
 
     suspend fun desaCameraMapa(camera: CameraMapa)
 
-    /** El color de la tapa del passaport que ha triat l'usuari. */
-    val tapaPassaport: Flow<TapaPassaport>
+    /** La tapa del passaport que ha triat l'usuari: una de les tres de sempre o una portada dels sacs (pel seu id). */
+    val tapaPassaport: Flow<String>
 
-    suspend fun desaTapaPassaport(tapa: TapaPassaport)
+    suspend fun desaTapaPassaport(tapa: String)
+
+    /** El color secundari de l'app (l'id d'un color dels sacs), o null per a l'ambre de sempre. */
+    val colorApp: Flow<String?>
+
+    suspend fun desaColorApp(color: String?)
+
+    /** L'animació de càrrega (l'id d'una dels sacs), o null per a la sardana de sempre. */
+    val animacioCarrega: Flow<String?>
+
+    suspend fun desaAnimacioCarrega(animacio: String?)
 }
 
-/** Els tres colors que es poden triar per a la tapa del passaport. */
-enum class TapaPassaport { GRANAT, BLAU, APP }
+/** Les tres tapes del passaport que hi ha sempre. */
+object TapesPassaport {
+    const val GRANAT = "granat"
+    const val BLAU = "blau"
+    const val APP = "app"
+    val classiques = listOf(GRANAT, BLAU, APP)
+}
+
+/** Els sacs guanyats i el que n'ha sortit. */
+interface SacsRepositori {
+    val sacs: Flow<List<Sac>>
+
+    suspend fun sacsAra(): List<Sac>
+
+    /** Desa els sacs guanyats que encara no hi eren. Retorna els orígens dels nous. */
+    suspend fun afegeix(origens: List<String>): List<String>
+
+    /**
+     * Desa el que ha sortit d'un sac; si són punts, els suma.
+     * @throws IllegalStateException si el sac no existeix o ja estava obert.
+     */
+    suspend fun obre(origen: String, contingut: ContingutSac)
+}
 
 /** Els segells del passaport, al mòbil. */
 interface SegellsRepositori {

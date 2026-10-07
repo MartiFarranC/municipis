@@ -39,6 +39,7 @@ object Icones {
     val Cercar = icona("cercar", cercle(11f, 11f, 7f), "M20 20l-4-4")
     val Fet = icona("fet", "M5 12l5 5L20 7", gruix = 3f)
     val Mes = icona("mes", "M12 5v14M5 12h14")
+    val Sac = icona("sac", "M8 9h8c3 3 4 7 3 10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2c-1-3 0-7 3-10z", "M9 4l3 2 3-2-1 5h-4z")
     val Punts = icona("punts", cercle(12f, 12f, 9f), "M12 7v10M9 9.5h4.5a1.75 1.75 0 0 1 0 3.5h-3a1.75 1.75 0 0 0 0 3.5H15")
     val Trofeu = icona("trofeu", "M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z", "M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3")
     val Llum = icona(

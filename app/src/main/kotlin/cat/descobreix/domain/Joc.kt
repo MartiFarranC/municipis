@@ -2,11 +2,17 @@ package cat.descobreix.domain
 
 import cat.descobreix.data.assets.Dades
 import cat.descobreix.data.assets.FontDadesJoc
+import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.ProgresRepositori
+import cat.descobreix.data.repositori.SacsRepositori
+import cat.descobreix.joc.config.ConfiguracioJoc.Objecte
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Missio
+import cat.descobreix.joc.progressio.ContingutSac
+import cat.descobreix.joc.progressio.DadesSacs
 import cat.descobreix.joc.progressio.Medalla
+import cat.descobreix.joc.progressio.Sacs
 import cat.descobreix.joc.regles.PuntsMissio
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import cat.descobreix.joc.regles.Ubicacio
@@ -14,10 +20,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.random.Random
 
 /** Medalles que s'acaben d'aconseguir (o de pujar de nivell), amb els punts que han donat. */
 data class MedallesNoves(val medalles: List<Medalla>, val punts: Int)
@@ -27,6 +36,8 @@ data class MedallesNoves(val medalles: List<Medalla>, val punts: Int)
 class Joc @Inject constructor(
     private val dadesJoc: FontDadesJoc,
     private val repositori: ProgresRepositori,
+    private val sacsRepositori: SacsRepositori,
+    private val fotos: FotosRepositori,
 ) {
     private val mutex = Mutex()
 
@@ -36,6 +47,13 @@ class Joc @Inject constructor(
 
     /** Cada vegada que una acció fa guanyar medalles. Es mostren amb una celebració. */
     val medallesNoves: SharedFlow<MedallesNoves> = _medallesNoves.asSharedFlow()
+
+    private val _sacsNous = MutableSharedFlow<List<String>>(extraBufferCapacity = 4)
+
+    /** Cada vegada que es guanyen sacs (els seus orígens). Es mostren tancats perquè l'usuari els obri. */
+    val sacsNous: SharedFlow<List<String>> = _sacsNous.asSharedFlow()
+
+    val sacs: Flow<List<Sac>> = sacsRepositori.sacs
 
     suspend fun dades(): Dades = dadesJoc.obte()
 
@@ -74,14 +92,55 @@ class Joc @Inject constructor(
         punts
     }
 
+    /** Després de desar una foto que no és d'una missió: la primera dona un sac. */
+    suspend fun fotoDesada() = mutex.withLock { actualitzaSacs() }
+
+    /** Dona els sacs que toquen i encara no s'han donat (per exemple, els de quan encara no hi havia sacs). */
+    suspend fun revisaSacs() = mutex.withLock { actualitzaSacs() }
+
+    /** Les coses de la col·lecció que es tenen: les de tothom i les que han sortit dels sacs. */
+    val colleccio: Flow<List<Objecte>> = sacsRepositori.sacs.map { objectesDe(dades().sacs, it) }
+
+    suspend fun colleccioAra(): List<Objecte> = objectesDe(dades().sacs, sacsRepositori.sacsAra())
+
+    private fun objectesDe(s: Sacs, sacs: List<Sac>): List<Objecte> {
+        val sortits = sacs.mapNotNull { it.objecte }.toSet()
+        return s.inicials + s.delsSacs.filter { ClauObjecte(it.tipus, it.id) in sortits }
+    }
+
+    /**
+     * Obre un sac: en surt a l'atzar una cosa que encara no es té o, si ja es té tot, punts.
+     * @throws IllegalStateException si el sac no existeix o ja està obert.
+     */
+    suspend fun obreSac(origen: String): ContingutSac = mutex.withLock {
+        val sac = checkNotNull(sacsRepositori.sacsAra().firstOrNull { it.origen == origen }) { "No hi ha cap sac $origen" }
+        check(!sac.obert) { "El sac $origen ja està obert" }
+        val contingut = dades().sacs.obre(colleccioAra(), Random.Default)
+        sacsRepositori.obre(origen, contingut)
+        contingut
+    }
+
     /** Suma els punts de les medalles noves i les anuncia. Es crida amb el mutex agafat. */
     private suspend fun actualitzaMedalles() {
         val m = dades().medalles
         val p = repositori.progresAra()
         val medalles = m.calcula(m.dades(p.conjuntDescoberts, p.completades.keys))
         val noves = repositori.atorgaMedalles(m.guanyades(medalles))
-        if (noves.isEmpty()) return
-        val ids = noves.map { it.id }.toSet()
-        _medallesNoves.tryEmit(MedallesNoves(medalles.filter { md -> m.guanyades(md).any { it.id in ids } }, noves.sumOf { it.punts }))
+        if (noves.isNotEmpty()) {
+            val ids = noves.map { it.id }.toSet()
+            _medallesNoves.tryEmit(MedallesNoves(medalles.filter { md -> m.guanyades(md).any { it.id in ids } }, noves.sumOf { it.punts }))
+        }
+        actualitzaSacs()
+    }
+
+    /** Desa els sacs nous i els anuncia. Es crida amb el mutex agafat. */
+    private suspend fun actualitzaSacs() {
+        val d = dades()
+        val p = repositori.progresAra()
+        val m = d.medalles
+        val medalles = m.guanyades(m.calcula(m.dades(p.conjuntDescoberts, p.completades.keys)))
+        val dadesSacs = DadesSacs(p.descoberts.size, p.completades.size, fotos.totes.first().size, medalles)
+        val nous = sacsRepositori.afegeix(d.sacs.guanyats(dadesSacs))
+        if (nous.isNotEmpty()) _sacsNous.tryEmit(nous)
     }
 }

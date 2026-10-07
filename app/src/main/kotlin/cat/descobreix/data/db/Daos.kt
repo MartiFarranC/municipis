@@ -100,3 +100,18 @@ interface SegellsDao {
     suspend fun insereix(s: SegellEntity)
 }
 
+
+@Dao
+interface SacsDao {
+    @Query("SELECT * FROM sacs ORDER BY creatEl")
+    fun tots(): Flow<List<SacEntity>>
+
+    @Query("SELECT * FROM sacs ORDER BY creatEl")
+    suspend fun totsAra(): List<SacEntity>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insereix(s: SacEntity): Long
+
+    @Update
+    suspend fun actualitza(s: SacEntity)
+}

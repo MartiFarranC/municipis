@@ -38,8 +38,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cat.descobreix.R
+import cat.descobreix.sacs.ANIMACIONS_CARREGA
+import cat.descobreix.sacs.AnimacioCarrega
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.LocalAnimacioCarrega
 
 @Composable
 fun BotoPrincipal(
@@ -186,8 +189,15 @@ fun FilaTitol(modifier: Modifier = Modifier, content: @Composable RowScope.() ->
 fun Carregant(modifier: Modifier = Modifier) {
     val text = stringResource(R.string.carregant)
     Box(modifier.semantics { contentDescription = text }, contentAlignment = Alignment.Center) {
-        SardanaCarregant(Modifier.size(160.dp))
+        AnimacioDeCarrega(Modifier.size(160.dp))
     }
+}
+
+/** L'animació de càrrega triada (dels sacs) o, si no se n'ha triat cap, la sardana. */
+@Composable
+fun AnimacioDeCarrega(modifier: Modifier = Modifier) {
+    val triada = LocalAnimacioCarrega.current
+    if (triada != null && triada in ANIMACIONS_CARREGA) AnimacioCarrega(triada, modifier) else SardanaCarregant(modifier)
 }
 
 /** La pantalla d'obertura: el fanal s'encén i la rotllana balla mentre l'app es prepara. */
@@ -200,6 +210,6 @@ fun Obertura(modifier: Modifier = Modifier) {
     ) {
         Logo(stringResource(R.string.logo_descripcio), Modifier.size(150.dp), encen = true)
         Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge)
-        SardanaCarregant(Modifier.size(120.dp))
+        AnimacioDeCarrega(Modifier.size(120.dp))
     }
 }

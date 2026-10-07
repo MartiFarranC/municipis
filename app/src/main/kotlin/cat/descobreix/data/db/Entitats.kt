@@ -43,9 +43,9 @@ data class MovimentPuntsEntity(
     /** GUANY o DESPESA. */
     val tipus: String,
     val quantitat: Int,
-    /** MISSIO, BONUS, DESBLOQUEIG o MEDALLA. */
+    /** MISSIO, BONUS, DESBLOQUEIG, MEDALLA o SAC. */
     val motiu: String,
-    /** Identificador de la missió, codi INE del municipi o identificador de la medalla. */
+    /** Identificador de la missió, codi INE del municipi, identificador de la medalla o origen del sac. */
     val referencia: String,
     val creatEl: Long,
     val modificatEl: Long,
@@ -57,6 +57,7 @@ data class MovimentPuntsEntity(
         const val MOTIU_BONUS = "BONUS"
         const val MOTIU_DESBLOQUEIG = "DESBLOQUEIG"
         const val MOTIU_MEDALLA = "MEDALLA"
+        const val MOTIU_SAC = "SAC"
     }
 }
 
@@ -107,3 +108,19 @@ data class SegellEntity(
     val modificatEl: Long,
 )
 
+
+/**
+ * Un sac guanyat. [origen] diu per què es va guanyar (`primera_foto`, `medalla_comarca_24_bronze`…) i no es repeteix.
+ * Quan s'obre, es desa què en va sortir: una cosa ([objecteTipus] i [objecteId]) o, si ja es tenia tot, [punts].
+ */
+@Entity(tableName = "sacs", indices = [Index(value = ["origen"], unique = true)])
+data class SacEntity(
+    @PrimaryKey val id: String,
+    val origen: String,
+    val objecteTipus: String?,
+    val objecteId: String?,
+    val punts: Int?,
+    val obertEl: Long?,
+    val creatEl: Long,
+    val modificatEl: Long,
+)

@@ -3,7 +3,9 @@ package cat.descobreix
 import cat.descobreix.domain.Joc
 import cat.descobreix.domain.MedallesNoves
 import cat.descobreix.joc.model.TipusMissio
+import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.Medalles
+import cat.descobreix.joc.progressio.Sacs
 import cat.descobreix.joc.progressio.TipusMedalla
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import kotlinx.coroutines.flow.toList
@@ -12,10 +14,14 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertIs
 
 class JocTest {
     private val repositori = ProgresEnMemoria()
-    private val joc = Joc(DadesDeProva, repositori)
+    private val fotos = FotosEnMemoria()
+    private val sacs = SacsEnMemoria(repositori)
+    private val joc = Joc(DadesDeProva, repositori, sacs, fotos)
     private val vic = DadesDeProva.codi("Vic")
     private val gurb = DadesDeProva.codi("Gurb")
 
@@ -72,6 +78,28 @@ class JocTest {
         joc.completaMissio(checkin, null, null)
         assertEquals(cartell.punts + checkin.punts + p.fitaCartells, repositori.progresAra().saldo)
         assertEquals(1, anunciades.size)
+        escolta.cancel()
+    }
+
+    @Test
+    fun `la primera missió dona un sac, que s'obre una sola vegada`() = runTest {
+        joc.iniciaPartida(vic)
+        val anunciats = mutableListOf<List<String>>()
+        val escolta = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { joc.sacsNous.toList(anunciats) }
+        val inicials = joc.colleccioAra()
+        assertEquals(DadesDeProva.dades.sacs.inicials, inicials)
+
+        joc.completaMissio(DadesDeProva.dades.missions.de(vic).first { it.clau != Medalles.CLAU_CARTELL }, null, null)
+        assertEquals(listOf(listOf(Sacs.PRIMERA_MISSIO)), anunciats)
+
+        val contingut = joc.obreSac(Sacs.PRIMERA_MISSIO)
+        assertIs<ContingutSac.Nou>(contingut)
+        assertEquals(inicials + contingut.objecte, joc.colleccioAra())
+        assertFailsWith<IllegalStateException> { joc.obreSac(Sacs.PRIMERA_MISSIO) }
+
+        // Tornar a revisar els sacs no en dona cap de repetit.
+        joc.revisaSacs()
+        assertEquals(1, anunciats.size)
         escolta.cancel()
     }
 

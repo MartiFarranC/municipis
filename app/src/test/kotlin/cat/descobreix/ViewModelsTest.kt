@@ -30,7 +30,9 @@ class ViewModelsTest {
     private val segells = SegellsEnMemoria()
 
     private val repositori = ProgresEnMemoria()
-    private val joc = Joc(DadesDeProva, repositori)
+    private val fotos = FotosEnMemoria()
+    private val sacs = SacsEnMemoria(repositori)
+    private val joc = Joc(DadesDeProva, repositori, sacs, fotos)
     private val vic = DadesDeProva.codi("Vic")
 
     @Before
@@ -125,7 +127,7 @@ class ViewModelsTest {
     private fun municipi(codi: String, ubicacio: UbicacioFixa) = MunicipiViewModel(
         joc,
         MissionsPropiesEnMemoria(),
-        FotosEnMemoria(),
+        fotos,
         ubicacio,
         segells,
         SavedStateHandle(mapOf("codi" to codi)),

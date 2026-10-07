@@ -2,6 +2,7 @@ package cat.descobreix.domain
 
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
 import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.EstatJoc
 
@@ -60,3 +61,9 @@ data class Foto(
 /** Un segell del passaport amb la data en què es va posar. */
 data class Segell(val posat: SegellPosat, val creatEl: Long)
 
+
+/** Una cosa de la col·lecció (emoji, portada, animació o color), pel seu tipus i el seu id. */
+data class ClauObjecte(val tipus: TipusObjecte, val id: String)
+
+/** Un sac guanyat. Si està obert, en va sortir [objecte] o, si ja es tenia tot, [punts]. */
+data class Sac(val origen: String, val creatEl: Long, val obert: Boolean, val objecte: ClauObjecte?, val punts: Int?)

@@ -50,6 +50,9 @@ class GestioDades @Inject constructor(
             segells = db.segells().totsAra().map {
                 Exportacio.SegellExportat(it.id, it.codiIne, it.comarca, it.pagina, it.x, it.y, it.gir, it.tinta, it.creatEl, it.modificatEl)
             },
+            sacs = db.sacs().totsAra().map {
+                Exportacio.SacExportat(it.id, it.origen, it.objecteTipus, it.objecteId, it.punts, it.obertEl, it.creatEl, it.modificatEl)
+            },
         )
         val sortida = context.contentResolver.openOutputStream(desti) ?: error("No es pot escriure al fitxer triat")
         ZipOutputStream(sortida.buffered()).use { zip ->
@@ -84,7 +87,21 @@ class GestioDades @Inject constructor(
         val fotos: List<FotoExportada>,
         /** Els segells del passaport, amb el lloc de la pàgina on l'usuari els va posar. */
         val segells: List<SegellExportat> = emptyList(),
+        /** Els sacs guanyats i el que n'ha sortit. */
+        val sacs: List<SacExportat> = emptyList(),
     ) {
+        @Serializable
+        data class SacExportat(
+            val id: String,
+            val origen: String,
+            val objecteTipus: String?,
+            val objecteId: String?,
+            val punts: Int?,
+            val obertEl: Long?,
+            val creatEl: Long,
+            val modificatEl: Long,
+        )
+
         @Serializable
         data class SegellExportat(
             val id: String,

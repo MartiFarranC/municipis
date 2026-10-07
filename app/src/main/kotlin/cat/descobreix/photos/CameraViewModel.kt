@@ -103,6 +103,7 @@ class CameraViewModel @Inject constructor(
                     val missio = _estat.value.missio
                     val foto = fotos.desa(codi, p.jpeg, p.rotacio, p.ubicacio, missio?.id)
                     val punts = missio?.let { joc.completaMissio(it, p.ubicacio, foto.id) }
+                    if (missio == null) joc.fotoDesada()
                     _estat.update { it.copy(processant = false, desada = Missatge.FotoDesada(punts?.missio ?: 0, punts?.bonus ?: 0)) }
                 } catch (e: Exception) {
                     if (e is kotlinx.coroutines.CancellationException) throw e
