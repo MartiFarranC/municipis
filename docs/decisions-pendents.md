@@ -117,7 +117,7 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
   - **Raresa:** tres raritats, comuna (70 %), rara (25 %) i llegendària (5 %). Les probabilitats van a la configuració del joc, amb tests.
   - **Repetides:** mai. El sac només dona coses que encara no tens; quan ja ho tens tot, dona punts.
   - **Obrir-lo:** el sac surt tancat, l'usuari el toca i s'obre amb una animació; la cosa surt amb el color de la seva raresa.
-  - **Emojis:** triats un per un (`disseny/emojis/sacs.json`): 6 des del principi i, als sacs, 49 comuns, 46 rars i 16 llegendaris. Se'n treuen 11 perquè als sacs en quedin **100**.
+  - **Emojis:** triats un per un (`disseny/emojis/sacs.json`): 6 des del principi i, als sacs, 49 comuns, 46 rars i 16 llegendaris. Se'n van treure 11 (Que arribo tard!, Quina decepció, Quina ràbia, Quina idea!, Tot del revés, Mmm, sospitós, Ai, que vergonya, Vinga, va!, Visca!, A veure, a veure… i Zum, zum) i als sacs en queden **100**: 44 comuns, 40 rars i 16 llegendaris.
   - **Què hi ha als sacs, en total:** 100 emojis, 10 tapes (portades) del passaport, 10 animacions de càrrega i 9 colors nous de l'app: **129 coses**, tantes com sacs de les medalles de comarca. Els 3 sacs de les primeres vegades fan que la col·lecció es completi una mica abans; quan ja ho tens tot, el sac dona punts.
 - **Emojis propis:** proposta a l'artifact «Emojis propis». Totes les persones porten barretina. El brindis és un porró i una ampolla amb estrella, sense cap marca comercial.
 
