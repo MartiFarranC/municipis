@@ -106,7 +106,7 @@
     <string name="visibilitat">Qui la pot veure</string>
     <string name="visibilitat_text">Ara mateix totes les fotos es queden al teu mòbil. Quan l\'app permeti compartir-les, es respectarà el que triïs aquí.</string>
     <string name="visibilitat_privada">Només jo</string>
-    <string name="visibilitat_amics">Els meus amics</string>
+    <string name="visibilitat_seguidors">Qui em segueix</string>
     <string name="visibilitat_publica">Tothom</string>
     <string name="fes_portada">Fes-la la portada del municipi</string>
     <string name="es_portada">És la portada del municipi.</string>
@@ -243,7 +243,7 @@
     <string name="compte_avis_enllac">T\'hem enviat un enllaç a %1$s. Obre\'l en aquest mòbil per entrar.</string>
     <string name="compte_avis_recupera">Si hi ha un compte amb el correu %1$s, hi rebràs un enllaç per triar una contrasenya nova.</string>
     <string name="compte_titol_nom">Tria el teu nom</string>
-    <string name="compte_text_nom">És el nom que veuran els altres al rànquing i als amics. El teu correu no el veurà ningú.</string>
+    <string name="compte_text_nom">És el nom que veuran els altres al rànquing i la gent que et segueix. El teu correu no el veurà ningú.</string>
     <string name="compte_nom_usuari">Nom d\'usuari</string>
     <string name="compte_nom_ajuda">De %1$d a %2$d caràcters: lletres minúscules sense accents, números i _.</string>
     <string name="compte_desa_nom">Continua</string>
@@ -333,4 +333,57 @@
     <string name="cataleg_sense_foto">%1$s: encara no tens la foto del cartell</string>
     <string name="cataleg_tapat">Municipi per descobrir</string>
     <string name="cataleg_ves_al_municipi">Vés al municipi</string>
+    <!-- Perfils i comptes públics o privats -->
+    <string name="compte_com_jugaras">Com hi jugaràs?</string>
+    <string name="perfil_explorador">Explorador</string>
+    <string name="perfil_explorador_text">Recorres els municipis i jugues: el mapa, les missions i els premis.</string>
+    <string name="perfil_espectador">Espectador</string>
+    <string name="perfil_espectador_text">No jugues: segueixes altra gent per veure com van i animar-los.</string>
+    <string name="compte_per_sempre">No es podrà canviar: per fer-ho caldria un compte nou.</string>
+    <string name="compte_qui_et_pot_seguir">Qui et pot seguir?</string>
+    <string name="compte_public">Compte públic</string>
+    <string name="compte_public_text">Qualsevol et pot seguir directament.</string>
+    <string name="compte_privat">Compte privat</string>
+    <string name="compte_privat_text">Tu acceptes o rebutges qui et vol seguir. Fins llavors, no es veu res del teu compte.</string>
+    <string name="compte_titol_visibilitat">Hola, %1$s</string>
+    <string name="compte_text_visibilitat">Ara pots seguir altra gent i ells et poden seguir a tu. Tria si el teu compte és públic o privat. Ho podràs canviar al perfil.</string>
+    <!-- Gent -->
+    <string name="gent">Gent</string>
+    <string name="gent_cerca">Busca gent pel nom d\'usuari</string>
+    <string name="gent_cap_resultat">No hi ha ningú amb aquest nom.</string>
+    <string name="gent_sense_connexio">Sense connexió no es pot veure la gent. Torna-ho a provar quan en tinguis.</string>
+    <string name="gent_sollicituds">Et volen seguir</string>
+    <string name="gent_accepta">Accepta</string>
+    <string name="gent_rebutja">Rebutja</string>
+    <string name="gent_mur">El que fa la gent que segueixes</string>
+    <string name="gent_mur_buit">Encara no hi ha res. Busca gent i segueix-la per veure com va.</string>
+    <string name="gent_mes">Més</string>
+    <string name="mur_municipi">%1$s ha desbloquejat %2$s</string>
+    <string name="mur_foto">%1$s ha fet una foto a %2$s</string>
+    <string name="mur_foto_de">Foto de %1$s</string>
+    <plurals name="gent_seguidors">
+        <item quantity="one">%1$d seguidor</item>
+        <item quantity="other">%1$d seguidors</item>
+    </plurals>
+    <plurals name="gent_segueix">
+        <item quantity="one">segueix %1$d persona</item>
+        <item quantity="other">segueix %1$d persones</item>
+    </plurals>
+    <string name="gent_et_segueix">et segueix</string>
+    <string name="gent_segueix">Segueix</string>
+    <string name="gent_sollicitud_enviada">Sol·licitud enviada: falta que t\'accepti.</string>
+    <string name="gent_retira_sollicitud">Retira la sol·licitud</string>
+    <string name="gent_deixa_de_seguir">Deixa de seguir</string>
+    <string name="gent_compte_privat">És un compte privat. Quan t\'accepti, veuràs el seu mapa i les seves fotos.</string>
+    <string name="gent_mapa">Mapa · %1$d de %2$d municipis</string>
+    <string name="gent_mapa_descripcio">Mapa de Catalunya amb %1$d municipis descoberts</string>
+    <string name="gent_a_qui_segueix">A qui segueix</string>
+    <string name="gent_que_segueixo">Gent que segueixo</string>
+    <string name="gent_no_segueixes_ningu">Encara no segueixes ningú.</string>
+    <string name="perfil_compte">El teu compte</string>
+    <string name="pestanya_gent">Gent</string>
+    <plurals name="gent_segueixes">
+        <item quantity="one">Segueixes %1$d persona</item>
+        <item quantity="other">Segueixes %1$d persones</item>
+    </plurals>
 </resources>

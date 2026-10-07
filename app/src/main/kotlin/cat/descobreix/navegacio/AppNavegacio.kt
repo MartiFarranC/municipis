@@ -30,11 +30,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import cat.descobreix.R
+import cat.descobreix.cataleg.CatalegScreen
 import cat.descobreix.compte.CompteScreen
 import cat.descobreix.compte.NomUsuariScreen
 import cat.descobreix.compte.NovaContrasenyaScreen
 import cat.descobreix.compte.SenseConnexioScreen
+import cat.descobreix.compte.VisibilitatScreen
 import cat.descobreix.data.compte.EstatCompte
+import cat.descobreix.data.compte.TipusPerfil
+import cat.descobreix.gent.GentScreen
+import cat.descobreix.gent.PersonaScreen
+import cat.descobreix.gent.SeguitsScreen
 import cat.descobreix.map.MapaScreen
 import cat.descobreix.missions.MissionsScreen
 import cat.descobreix.municipality.MunicipiScreen
@@ -43,9 +49,9 @@ import cat.descobreix.passaport.PassaportScreen
 import cat.descobreix.passaport.SegellarScreen
 import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
+import cat.descobreix.profile.PerfilEspectadorScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
-import cat.descobreix.cataleg.CatalegScreen
 import cat.descobreix.sacs.AvisSacs
 import cat.descobreix.sacs.SacsScreen
 import cat.descobreix.ui.CelebracioMedalles
@@ -66,6 +72,9 @@ object Rutes {
     const val SEGELLA = "segella/{codi}"
     const val SACS = "sacs?obre={obre}"
     const val CATALEG = "cataleg"
+    const val GENT = "gent"
+    const val PERSONA = "persona/{id}"
+    const val SEGUITS = "seguits"
 
     fun mapa(centre: String? = null) = if (centre == null) "mapa" else "mapa?centre=$centre"
     fun municipi(codi: String) = "municipi/$codi"
@@ -73,13 +82,21 @@ object Rutes {
     fun foto(id: String) = "foto/$id"
     fun segella(codi: String) = "segella/$codi"
     fun sacs(obre: Boolean = false) = "sacs?obre=$obre"
+    fun persona(id: String) = "persona/$id"
 }
 
 private data class Pestanya(val ruta: String, val desti: String, val etiqueta: Int, val icona: ImageVector)
 
-private val pestanyes = listOf(
+private val pestanyesExplorador = listOf(
     Pestanya(Rutes.MAPA, Rutes.mapa(), R.string.pestanya_mapa, Icones.Mapa),
     Pestanya(Rutes.MISSIONS, Rutes.MISSIONS, R.string.pestanya_missions, Icones.Missions),
+    Pestanya(Rutes.GENT, Rutes.GENT, R.string.pestanya_gent, Icones.Gent),
+    Pestanya(Rutes.PERFIL, Rutes.PERFIL, R.string.pestanya_perfil, Icones.Perfil),
+)
+
+// L'Espectador no juga: només té la gent que segueix i el perfil.
+private val pestanyesEspectador = listOf(
+    Pestanya(Rutes.GENT, Rutes.GENT, R.string.pestanya_gent, Icones.Gent),
     Pestanya(Rutes.PERFIL, Rutes.PERFIL, R.string.pestanya_perfil, Icones.Perfil),
 )
 
@@ -92,25 +109,33 @@ fun AppNavegacio(viewModel: AppViewModel = hiltViewModel()) {
         EstatCompte.CalPerfil -> NomUsuariScreen()
         EstatCompte.SenseConnexio -> SenseConnexioScreen()
         EstatCompte.CalNovaContrasenya -> NovaContrasenyaScreen()
-        is EstatCompte.Llest -> PantallesJoc(viewModel)
+        is EstatCompte.CalVisibilitat -> VisibilitatScreen((compte as EstatCompte.CalVisibilitat).nomUsuari)
+        is EstatCompte.Llest -> PantallesJoc(viewModel, (compte as EstatCompte.Llest).perfil.tipus == TipusPerfil.ESPECTADOR)
     }
 }
 
 @Composable
-private fun PantallesJoc(viewModel: AppViewModel) {
+private fun PantallesJoc(viewModel: AppViewModel, esEspectador: Boolean) {
     val iniciada by viewModel.partidaIniciada.collectAsStateWithLifecycle()
     val inicial = iniciada
-    if (inicial == null) {
+    if (inicial == null && !esEspectador) {
         Obertura(Modifier.fillMaxSize())
         return
     }
-    // El destí inicial només es decideix una vegada.
-    val inici = remember { if (inicial) Rutes.MAPA else Rutes.ONBOARDING }
+    val pestanyes = if (esEspectador) pestanyesEspectador else pestanyesExplorador
+    // El destí inicial només es decideix una vegada. L'Espectador no juga: comença pel mur.
+    val inici = remember {
+        when {
+            esEspectador -> Rutes.GENT
+            inicial == true -> Rutes.MAPA
+            else -> Rutes.ONBOARDING
+        }
+    }
     val nav = rememberNavController()
 
     // Si l'usuari esborra totes les dades, torna a començar.
     LaunchedEffect(inicial) {
-        if (!inicial && nav.currentDestination?.route != Rutes.ONBOARDING) {
+        if (!esEspectador && inicial == false && nav.currentDestination?.route != Rutes.ONBOARDING) {
             nav.navigate(Rutes.ONBOARDING) { popUpTo(nav.graph.id) { inclusive = true } }
         }
     }
@@ -124,7 +149,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
         // Cada pantalla gestiona les barres del sistema (el mapa ocupa tota la pantalla).
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            if (pestanyes.any { it.ruta == rutaActual }) BarraInferior(nav, rutaActual)
+            if (pestanyes.any { it.ruta == rutaActual }) BarraInferior(nav, rutaActual, pestanyes)
         },
     ) { padding ->
         NavHost(nav, startDestination = inici, modifier = Modifier.padding(padding)) {
@@ -142,13 +167,27 @@ private fun PantallesJoc(viewModel: AppViewModel) {
             composable(Rutes.MISSIONS) {
                 MissionsScreen(onObreMunicipi = { nav.navigate(Rutes.municipi(it)) })
             }
+            composable(Rutes.GENT) {
+                GentScreen(onObrePersona = { nav.navigate(Rutes.persona(it)) })
+            }
+            composable(Rutes.PERSONA, arguments = listOf(navArgument("id") { type = NavType.StringType })) {
+                PersonaScreen(onEnrere = { nav.popBackStack() }, onObrePersona = { nav.navigate(Rutes.persona(it)) })
+            }
+            composable(Rutes.SEGUITS) {
+                SeguitsScreen(onEnrere = { nav.popBackStack() }, onObrePersona = { nav.navigate(Rutes.persona(it)) })
+            }
             composable(Rutes.PERFIL) {
+                if (esEspectador) {
+                    PerfilEspectadorScreen(onObreSeguits = { nav.navigate(Rutes.SEGUITS) }, onObreSobre = { nav.navigate(Rutes.SOBRE) })
+                    return@composable
+                }
                 PerfilScreen(
                     onObreFoto = { nav.navigate(Rutes.foto(it)) },
                     onObreSobre = { nav.navigate(Rutes.SOBRE) },
                     onObrePassaport = { nav.navigate(Rutes.PASSAPORT) },
                     onObreSacs = { nav.navigate(Rutes.sacs()) },
                     onObreCataleg = { nav.navigate(Rutes.CATALEG) },
+                    onObreSeguits = { nav.navigate(Rutes.SEGUITS) },
                 )
             }
             composable(Rutes.MUNICIPI, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
@@ -214,7 +253,7 @@ private fun irAlMapa(nav: NavHostController, codi: String) {
 }
 
 @Composable
-private fun BarraInferior(nav: NavHostController, rutaActual: String?) {
+private fun BarraInferior(nav: NavHostController, rutaActual: String?, pestanyes: List<Pestanya>) {
     NavigationBar(containerColor = Colors.Fons, tonalElevation = 0.dp) {
         for (p in pestanyes) {
             val seleccionada = p.ruta == rutaActual

@@ -27,6 +27,8 @@ import cat.descobreix.data.repositori.SegellsRepositori
 import cat.descobreix.data.repositori.SegellsRepositoriRoom
 import cat.descobreix.data.sincronitzacio.ServidorSincronitzacio
 import cat.descobreix.data.sincronitzacio.ServidorSupabase
+import cat.descobreix.data.social.ServeiSocial
+import cat.descobreix.data.social.ServeiSocialSupabase
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.data.ubicacio.ServeiUbicacioFused
 import cat.descobreix.photos.LectorCartell
@@ -53,7 +55,7 @@ object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5)
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5, BaseDades.MIGRACIO_5_6)
             .addCallback(TriggersSincronitzacio.callback).build()
 
     // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
@@ -115,6 +117,10 @@ abstract class ModulRepositoris {
     @Binds
     @Singleton
     abstract fun servidorSincronitzacio(s: ServidorSupabase): ServidorSincronitzacio
+
+    @Binds
+    @Singleton
+    abstract fun social(s: ServeiSocialSupabase): ServeiSocial
 
     @Binds
     @Singleton

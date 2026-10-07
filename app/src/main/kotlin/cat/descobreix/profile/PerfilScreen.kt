@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
+import cat.descobreix.gent.CompteSocial
 import cat.descobreix.ui.TargetaMedalla
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoSecundari
@@ -59,6 +60,7 @@ fun PerfilScreen(
     onObrePassaport: () -> Unit,
     onObreSacs: () -> Unit,
     onObreCataleg: () -> Unit,
+    onObreSeguits: () -> Unit,
     viewModel: PerfilViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -123,6 +125,7 @@ fun PerfilScreen(
         item { BotoSecundari(stringResource(R.string.passaport), onObrePassaport, icona = Icones.Mapa) }
         item { BotoSecundari(stringResource(R.string.cataleg), onObreCataleg, icona = Icones.Camera) }
         item { BotoSecundari(stringResource(R.string.sacs_titol), onObreSacs, icona = Icones.Sac) }
+        item { CompteSocial(onObreSeguits) }
 
         item { Titol(stringResource(R.string.medalles)) }
         item {

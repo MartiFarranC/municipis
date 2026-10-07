@@ -17,7 +17,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         CanviPendentEntity::class,
         ControlSincronitzacioEntity::class,
     ],
-    version = 5,
+    version = 6,
     exportSchema = true,
 )
 abstract class BaseDades : RoomDatabase() {
@@ -61,6 +61,13 @@ abstract class BaseDades : RoomDatabase() {
                 db.execSQL("CREATE TABLE IF NOT EXISTS `control_sincronitzacio` (`id` INTEGER NOT NULL, `aplicant` INTEGER NOT NULL, PRIMARY KEY(`id`))")
                 TriggersSincronitzacio.crea(db)
                 for (t in TriggersSincronitzacio.TAULES) db.execSQL("INSERT OR IGNORE INTO canvis_pendents (taula, id) SELECT '$t', id FROM `$t`")
+            }
+        }
+
+        /** Versió 6: la visibilitat AMICS de les fotos passa a ser SEGUIDORS (ja no hi ha amics, es segueix). */
+        val MIGRACIO_5_6 = object : Migration(5, 6) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("UPDATE fotos SET visibilitat = 'SEGUIDORS' WHERE visibilitat = 'AMICS'")
             }
         }
 

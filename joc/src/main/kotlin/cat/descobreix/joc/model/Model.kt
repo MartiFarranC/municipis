@@ -32,7 +32,7 @@ enum class TipusMissio { LLOC, GENERICA }
 enum class TipusProva { GPS, FOTO }
 
 /** Visibilitat d'una foto. A la versió 1 totes les fotos són locals, però el camp es guarda. */
-enum class Visibilitat { PRIVADA, AMICS, PUBLICA }
+enum class Visibilitat { PRIVADA, SEGUIDORS, PUBLICA }
 
 data class Missio(
     val id: String,

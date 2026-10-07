@@ -12,6 +12,7 @@ import cat.descobreix.data.compte.NomUsuari
 import cat.descobreix.data.compte.Perfil
 import cat.descobreix.data.compte.ResultatRegistre
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.TipusPerfil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -55,10 +56,12 @@ class CompteEnMemoria : ServeiCompte {
 
     override suspend fun canviaContrasenya(nova: String) = crida("contrasenya")
 
-    override suspend fun creaPerfil(nomUsuari: String) {
-        crida("perfil $nomUsuari")
-        estat.value = EstatCompte.Llest(Perfil("id", nomUsuari))
+    override suspend fun creaPerfil(nomUsuari: String, tipus: TipusPerfil, public: Boolean) {
+        crida("perfil $nomUsuari $tipus $public")
+        estat.value = EstatCompte.Llest(Perfil("id", nomUsuari, tipus, public))
     }
+
+    override suspend fun triaVisibilitat(public: Boolean) = crida("visibilitat $public")
 
     override suspend fun reintenta() = crida("reintenta")
 
@@ -208,9 +211,24 @@ class CompteTest {
     fun `crear el perfil deixa l'usuari llest per jugar`() = runTest {
         val vm = CompteViewModel(compte)
         vm.canviaNomUsuari(" Anna_1 ")
+        vm.triaTipus(TipusPerfil.ESPECTADOR)
+        vm.triaPublic(false)
         vm.creaPerfil()
-        assertEquals(listOf("perfil  Anna_1 "), compte.crides)
-        assertEquals(EstatCompte.Llest(Perfil("id", " Anna_1 ")), compte.estat.value)
+        assertEquals(listOf("perfil  Anna_1  ESPECTADOR false"), compte.crides)
+        assertEquals(EstatCompte.Llest(Perfil("id", " Anna_1 ", TipusPerfil.ESPECTADOR, false)), compte.estat.value)
+    }
+
+    @Test
+    fun `cal triar explorador o espectador i públic o privat: no hi ha res per defecte`() = runTest {
+        val vm = CompteViewModel(compte)
+        vm.canviaNomUsuari("anna")
+        assertFalse(vm.estat.value.potCrearPerfil)
+        vm.triaTipus(TipusPerfil.EXPLORADOR)
+        assertFalse(vm.estat.value.potCrearPerfil)
+        vm.creaPerfil()
+        assertTrue(compte.crides.isEmpty())
+        vm.triaPublic(true)
+        assertTrue(vm.estat.value.potCrearPerfil)
     }
 
     @Test
@@ -218,6 +236,8 @@ class CompteTest {
         compte.error = ErrorCompte.NOM_USUARI_AGAFAT
         val vm = CompteViewModel(compte)
         vm.canviaNomUsuari("anna")
+        vm.triaTipus(TipusPerfil.EXPLORADOR)
+        vm.triaPublic(true)
         vm.creaPerfil()
         assertEquals(ErrorCompte.NOM_USUARI_AGAFAT, vm.estat.value.error)
     }

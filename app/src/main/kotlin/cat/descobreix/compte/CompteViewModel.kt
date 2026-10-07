@@ -8,6 +8,7 @@ import cat.descobreix.data.compte.ExcepcioCompte
 import cat.descobreix.data.compte.NomUsuari
 import cat.descobreix.data.compte.ResultatRegistre
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.TipusPerfil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,6 +41,9 @@ data class CompteEstat(
     /** En crear el compte, la contrasenya s'ha d'escriure dues vegades. */
     val repeticio: String = "",
     val nomUsuari: String = "",
+    /** Explorador o Espectador, i compte públic o privat. No hi ha cap opció triada per defecte. */
+    val tipus: TipusPerfil? = null,
+    val public: Boolean? = null,
     val treballant: Boolean = false,
     val error: ErrorCompte? = null,
     val avis: AvisCompte? = null,
@@ -57,6 +61,8 @@ data class CompteEstat(
     val contrasenyesDiferents: Boolean get() = repeticio.isNotEmpty() && repeticio != contrasenya
 
     val nomUsuariValid: Boolean get() = NomUsuari.esValid(NomUsuari.normalitza(nomUsuari))
+
+    val potCrearPerfil: Boolean get() = nomUsuariValid && tipus != null && public != null
 
     val contrasenyaNovaValida: Boolean get() = contrasenya.length >= CONTRASENYA_MINIM
 
@@ -81,6 +87,20 @@ class CompteViewModel @Inject constructor(private val compte: ServeiCompte) : Vi
     fun canviaRepeticio(text: String) = _estat.update { it.copy(repeticio = text, error = null) }
 
     fun canviaNomUsuari(text: String) = _estat.update { it.copy(nomUsuari = text, error = null) }
+
+    fun triaTipus(t: TipusPerfil) = _estat.update { it.copy(tipus = t, error = null) }
+
+    fun triaPublic(public: Boolean) = _estat.update { it.copy(public = public, error = null) }
+
+    /** Per als perfils d'abans: només cal triar si el compte és públic o privat. */
+    fun desaVisibilitat() {
+        val public = _estat.value.public ?: return
+        if (_estat.value.treballant) return
+        executa {
+            compte.triaVisibilitat(public)
+            null
+        }
+    }
 
     fun tancaError() = _estat.update { it.copy(error = null) }
 
@@ -119,8 +139,10 @@ class CompteViewModel @Inject constructor(private val compte: ServeiCompte) : Vi
             _estat.update { it.copy(error = ErrorCompte.NOM_USUARI_INVALID) }
             return
         }
+        val tipus = e.tipus ?: return
+        val public = e.public ?: return
         executa {
-            compte.creaPerfil(e.nomUsuari)
+            compte.creaPerfil(e.nomUsuari, tipus, public)
             null
         }
     }

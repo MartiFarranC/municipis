@@ -243,14 +243,17 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - Classificació general i entre amics.
 - Limitació coneguda: el GPS es pot falsejar. Es valida com a mínim que la missió existeix, que el municipi està desbloquejat i que la ubicació enviada compleix el radi (secció 3.4).
 
-### 9.4 Amics i fotos
+### 9.4 Seguir i fotos
 
-- Sol·licitud d'amistat per nom d'usuari: enviar, acceptar, rebutjar i eliminar.
+- Ja no hi ha amics: **es segueix** (docs/decisions-pendents.md). Cada perfil és d'**Explorador** (juga) o d'**Espectador** (només segueix), es tria en crear el compte i no es pot canviar.
+- Cada compte és **públic** (qualsevol el segueix directament) o **privat** (el seguit accepta o rebutja la sol·licitud). Fins que no s'accepta, no es veu res del compte. Els perfils d'abans ho trien en entrar.
 - Visibilitat de les fotos, aplicada amb **RLS** a Postgres i a Storage:
   - `PRIVADA`: només el propietari;
-  - `AMICS`: el propietari i els seus amics;
-  - `PUBLICA`: qualsevol usuari amb sessió iniciada.
-- Un amic pot veure el mapa (municipis descoberts) i els punts de l'altre.
+  - `SEGUIDORS`: el propietari i qui el segueix (acceptat);
+  - `PUBLICA`: qualsevol usuari amb sessió, si el compte és públic; si és privat, només els seguidors.
+- Un seguidor veu el mapa (municipis descoberts) de l'altre.
+- **Pestanya «Gent»** (l'Espectador hi entra directament): el mur amb el que fa la gent que segueixes (municipis desbloquejats i fotos), buscar gent pel nom d'usuari i les sol·licituds per seguir-te. El perfil d'una persona mostra a quanta gent segueix i quants la segueixen, el botó de seguir i, si et deixa, el mapa, les fotos i a qui segueix.
+- Al perfil: el compte públic o privat i la gent que segueixes.
 
 ### 9.5 Seguretat
 
@@ -273,7 +276,7 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 11. **Sincronització.** Esborrats lògics, cua de pendents, pujada i baixada amb WorkManager i fusió amb tests.
 12. **Fotos al núvol.** Pujar-les a Storage amb la visibilitat aplicada.
 13. **Rànquing.** Taula oficial de missions al servidor, càlcul al servidor i pantalla.
-14. **Amics.** Sol·licituds, llista d'amics i veure el mapa i les fotos d'un amic.
+14. **Seguir.** Explorador o Espectador, comptes públics i privats, la pestanya «Gent», el mur i el perfil dels altres.
 
 ## 11. Decisions pendents
 
