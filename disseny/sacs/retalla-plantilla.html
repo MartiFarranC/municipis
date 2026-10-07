@@ -21,6 +21,10 @@ h2{font:700 15px var(--display);letter-spacing:.1em;text-transform:uppercase;mar
 .v:focus-visible{outline:2px solid var(--text)}.v.sac[aria-pressed="true"]{background:var(--ok);color:#0B1A10;border-color:var(--ok)}.v.principi[aria-pressed="true"]{background:#5AB8E8;color:#07182A;border-color:#5AB8E8}.v.fora[aria-pressed="true"]{background:var(--massa);color:#2A0E0A;border-color:var(--massa)}.v.arreglar[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre);border-color:var(--ambre)}
 .raresa{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:4px;width:100%}.r{font:600 11px var(--cos);padding:5px 0;border-radius:8px;border:1px solid var(--linia);background:var(--sup2);color:var(--text);cursor:pointer}
 .r.comuna[aria-pressed="true"]{background:#C3CCD6;color:#11151B}.r.rara[aria-pressed="true"]{background:#5AB8E8;color:#07182A}.r.llegendaria[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre)}
+.prop>svg{cursor:zoom-in}
+.zoom{position:fixed;inset:0;background:rgba(5,7,10,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:10;padding:24px 16px;cursor:zoom-out}
+.zoom svg{width:min(88vw,62vh*.72);height:auto;max-height:78vh}.zoom.quadrat svg{width:min(88vw,70vh)}
+.zoom b{font:700 18px var(--display)}.zoom span{color:var(--suau);font-size:13px}
 .prop textarea{min-height:44px;font-size:13px}
 .prop:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 
@@ -41,6 +45,7 @@ label{font:600 13px var(--cos);color:var(--suau)}
   <div class="resum" id="resum" aria-live="polite"></div>
   <p class="estat" id="estat">Carregant…</p>
   <div id="seccions"></div>
+  <div class="zoom" id="zoom" hidden role="dialog" aria-modal="true" aria-label="Disseny en gran"></div>
 </div>
 <script>
 const D=%%DADES%%;
@@ -68,7 +73,15 @@ function pinta(){
   resum();
 }
 function desaLocal(){try{localStorage.setItem('extres3',JSON.stringify(vals))}catch(e){}}
+function obreZoom(card){
+  const z=$('zoom'), svg=card.querySelector('svg').outerHTML, nom=card.querySelector('b').textContent;
+  z.className='zoom'+(card.classList.contains('portada')?'':' quadrat');
+  z.innerHTML=svg+`<b>${esc(nom)}</b><span>Toca per tancar</span>`; z.hidden=false;
+}
+$('zoom').addEventListener('click',()=>{$('zoom').hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('zoom').hidden=true});
 document.addEventListener('click',ev=>{
+  const fig=ev.target.closest('.prop>svg'); if(fig){obreZoom(fig.closest('.prop'));return}
   const rb=ev.target.closest('.r');
   if(rb){const card=rb.closest('.prop'),k=card.dataset.k,v=vals[k]||{};v.raresa=v.raresa===rb.dataset.r?undefined:rb.dataset.r;vals[k]=v;
     card.querySelectorAll('.r').forEach(y=>y.setAttribute('aria-pressed',y.dataset.r===v.raresa));resum();desaLocal();desa(k);return}

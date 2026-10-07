@@ -6,7 +6,7 @@ g={'__file__':os.path.join(AQUI,'..','passaport','gen-passaport.py')}
 exec(open(g['__file__']).read().split("if __name__=='__main__':")[0],g)
 silueta,COM,TXT=g['silueta'],g['COM'],g['TXT']
 TOTS=[c for v in COM.values() for c in v['municipis']]
-CAT=lambda color,cx=50,cy=66,mida=52: silueta(TOTS,cx,cy,mida,color,pas=1.2)
+CAT=lambda color,cx=50,cy=66,mida=52: silueta(TOTS,cx,cy,mida,color,pas=.45)
 
 def tapa(fons,daurat,patro='',sil=True,text=None):
     t=text or daurat
