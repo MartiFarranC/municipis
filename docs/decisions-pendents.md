@@ -58,6 +58,24 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - Es classifica per **municipis descoberts**.
 - Cada rànquing té dues versions: **de sempre** (històric) i **del mes** en curs, que es reinicia l'1 de cada mes. Al del mes compten els municipis descoberts aquell mes.
 
+## Medalles
+
+Les medalles substitueixen els assoliments: al perfil hi ha una **vitrina de medalles** i els assoliments deixen d'existir com a cosa a part.
+
+- **Medalla de comarca (43), amb tres nivells:**
+  - **Bronze:** tots els municipis de la comarca descoberts.
+  - **Plata:** a més, totes les missions automàtiques dels seus municipis fetes (les missions pròpies no compten, com que no donen punts).
+  - **Or:** a més, la foto del cartell d'entrada de cada municipi de la comarca.
+- **Fites de municipis:** 10, 50, 100, 250, 500 i 947 municipis descoberts (abans eren assoliments).
+- **Capitals de comarca:** medalla per haver descobert totes les capitals de comarca.
+- **Cartells:** fites de fotos del cartell d'entrada: 1, 25, 100, 500 i 947.
+- **El repte** (947 municipis) i la **medalla física**: com s'explica a «Coses per fer».
+- **Quan en guanyes una:** surt la celebració de la sardana amb la medalla, i els que et segueixen reben un avís per poder-te animar amb reaccions.
+- **Punts (pocs):** comarca bronze 25, plata 50, or 100; fites de municipis 20; cartells 20; capitals de comarca 100. Com que desbloquejar un municipi costa entre 60 i 200 punts, ajuden una mica sense trencar el joc. Els valors aniran a `dades/configuracio_joc.json`, amb tests.
+- **Vitrina:** es veuen totes les medalles; les que encara no tens, en gris i amb el progrés (per exemple, «12 de 23 municipis»).
+- **Primer municipi, primera missió i primera foto:** no seran medalles. Seran una altra cosa, encara per decidir (segurament sacs).
+- **Disseny:** de moment, un disseny comú per a totes: la silueta de la comarca (o una icona per a les altres) i el nom, amb el color segons el nivell (bronze, plata, or).
+
 ## Coses per fer
 
 - **Catàleg de municipis:**
@@ -78,6 +96,7 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
   - Les fotos s'han de fer amb la càmera de l'app, que ja no deixa triar fotos de la galeria i valida la ubicació amb el GPS.
   - Ara les fotos només es guarden al mòbil. Per poder comprovar el repte caldrà pujar-les (o almenys la del cartell) al núvol, o guardar-ne una prova verificable.
   - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos).
+- **Medalles amb estil propi per comarca:** més endavant, cada comarca tindrà una medalla amb un dibuix propi. Per triar-lo, el Martí respondrà un **qüestionari per comarca** (què és el més representatiu de cada una), perquè no s'inventi res.
 - **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
   - emojis per a les reaccions;
   - colors secundaris;
