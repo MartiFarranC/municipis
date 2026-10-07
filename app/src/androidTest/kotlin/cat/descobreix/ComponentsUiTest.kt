@@ -44,15 +44,15 @@ class ComponentsUiTest {
             }
         }
         regla.onNodeWithText("Municipi bloquejat").assertIsDisplayed()
-        regla.onNodeWithText("Et falten 25 punts", substring = true).assertIsDisplayed()
+        regla.onNodeWithText("Et falten 25 barretines", substring = true).assertIsDisplayed()
     }
 
     @Test
     fun botoDesactivat() {
         regla.setContent {
-            DescobreixTheme { BotoPrincipal("Desbloqueja · 60 pts", onClick = {}, enabled = false) }
+            DescobreixTheme { BotoPrincipal("Desbloqueja · 60 barretines", onClick = {}, enabled = false) }
         }
-        regla.onNodeWithText("Desbloqueja · 60 pts").assertIsNotEnabled()
+        regla.onNodeWithText("Desbloqueja · 60 barretines").assertIsNotEnabled()
     }
 
     @Test
@@ -64,7 +64,7 @@ class ComponentsUiTest {
             }
         }
         // Amb animacions, primer surt la confirmació; amb les animacions reduïdes, es va directament al premi.
-        // En tots dos casos, al final hi ha els punts i el botó per continuar.
+        // En tots dos casos, al final hi ha les barretines i el botó per continuar.
         regla.mainClock.advanceTimeBy(3000)
         regla.onNodeWithText("+100").assertIsDisplayed()
         regla.onNodeWithText("Continua").performClick()

@@ -14,6 +14,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cat.descobreix.R
 import cat.descobreix.ui.components.BotoPrincipal
+import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.SardanaConfirmacio
 import cat.descobreix.ui.components.SardanaPremi
 import cat.descobreix.ui.theme.ChakraPetch
@@ -127,13 +129,16 @@ private fun Premi(missatge: Missatge, onTanca: () -> Unit) {
     ) {
         SardanaPremi(Modifier.size(220.dp))
         if (total > 0) {
-            Text(
-                stringResource(R.string.celebracio_punts, compte.value.toInt()),
-                fontFamily = ChakraPetch,
-                fontWeight = FontWeight.Bold,
-                fontSize = 46.sp,
-                color = Colors.Ambre,
-            )
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text(
+                    stringResource(R.string.celebracio_punts, compte.value.toInt()),
+                    fontFamily = ChakraPetch,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 46.sp,
+                    color = Colors.Ambre,
+                )
+                IconaBarretina(Modifier.size(44.dp))
+            }
         }
         Text(textDe(missatge), style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
         BotoPrincipal(stringResource(R.string.continua), onTanca, Modifier.padding(top = 12.dp))

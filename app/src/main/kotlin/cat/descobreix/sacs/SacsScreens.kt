@@ -73,6 +73,7 @@ import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.joc.config.ConfiguracioJoc.Objecte
 import cat.descobreix.joc.config.ConfiguracioJoc.Raresa
 import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
+import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
@@ -376,7 +377,10 @@ private fun ObrintSac(
                     ) {
                         when (sortit) {
                             is Sortit.Nou -> DibuixObjecte(sortit.objecte, Modifier.fillMaxSize())
-                            is Sortit.Punts -> Text("+${sortit.punts}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 48.sp, color = Colors.Ambre)
+                            is Sortit.Punts -> Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                Text("+${sortit.punts}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 48.sp, color = Colors.Ambre)
+                                IconaBarretina(Modifier.size(46.dp))
+                            }
                         }
                     }
                 }
@@ -406,7 +410,7 @@ private fun ObrintSac(
                         if (o.tipus != TipusObjecte.EMOJI) BotoPrincipal(stringResource(R.string.sacs_fes_servir), { onFesServir(o) })
                     }
                     is Sortit.Punts -> Text(
-                        stringResource(R.string.sacs_ja_ho_tens_tot, sortit.punts),
+                        plural(R.plurals.sacs_ja_ho_tens_tot, sortit.punts, sortit.punts),
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Center,
                     )

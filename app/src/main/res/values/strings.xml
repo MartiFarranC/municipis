@@ -31,8 +31,11 @@
     <string name="comptador_curt">%1$d / %2$d</string>
     <string name="comptador_llarg">de %1$d municipis descoberts</string>
     <string name="nivell">Nivell %1$d</string>
-    <string name="punts">Punts</string>
-    <string name="punts_curt">%1$d pts</string>
+    <string name="punts">Barretines</string>
+    <plurals name="punts_curt">
+        <item quantity="one">%1$d barretina</item>
+        <item quantity="other">%1$d barretines</item>
+    </plurals>
     <string name="cerca_municipi">Cerca un municipi</string>
     <string name="centra_territori">Centra el mapa al teu municipi</string>
     <string name="on_soc">On sóc?</string>
@@ -56,7 +59,10 @@
 
     <!-- Fitxa del municipi -->
     <string name="comarca_inici">%1$s · El teu municipi d\'inici</string>
-    <string name="de_punts">de %1$d pts</string>
+    <plurals name="de_punts">
+        <item quantity="one">d\'%1$d barretina</item>
+        <item quantity="other">de %1$d barretines</item>
+    </plurals>
     <string name="progres_missions">%1$d de %2$d missions · Completa-les totes i guanya +%3$d de bonus</string>
     <string name="prova_gps">GPS</string>
     <string name="prova_foto">Foto</string>
@@ -69,7 +75,7 @@
     <string name="missio_cartell">Fes una foto del cartell d\'entrada</string>
     <string name="missio_ajuntament">Fes una foto de l\'ajuntament</string>
     <string name="les_teves_missions">Les teves missions</string>
-    <string name="les_teves_missions_text">Les missions que proposes només les veus tu i no donen punts.</string>
+    <string name="les_teves_missions_text">Les missions que proposes només les veus tu i no donen barretines.</string>
     <string name="afegeix_missio">Proposa una missió</string>
     <string name="nova_missio">Nova missió</string>
     <string name="nova_missio_text">Què vols fer en aquest municipi? Només la veuràs tu.</string>
@@ -84,18 +90,30 @@
     <string name="veins">Municipis veïns</string>
 
     <!-- Fitxa d'un municipi bloquejat -->
-    <string name="bloquejat_text">Encara és a la boira. Desbloqueja\'l amb punts per veure\'n les missions.</string>
+    <string name="bloquejat_text">Encara és a la boira. Desbloqueja\'l amb barretines per veure\'n les missions.</string>
     <plurals name="boira_text">
         <item quantity="one">És a %1$d municipi del teu territori. Primer has de desbloquejar un veí.</item>
         <item quantity="other">És a %1$d municipis del teu territori. Primer has de desbloquejar els que hi ha entremig.</item>
     </plurals>
     <string name="missions_ocultes_titol">Missions ocultes</string>
-    <string name="punts_en_joc">Punts en joc</string>
+    <string name="punts_en_joc">Barretines en joc</string>
     <string name="fins_a">fins a %1$d</string>
-    <string name="tens_punts">Tens %1$d pts</string>
-    <string name="despres_punts">Després: %1$d pts</string>
-    <string name="desbloqueja_cost">Desbloqueja · %1$d pts</string>
-    <string name="et_falten">Et falten %1$d punts. Fes missions als municipis que ja tens per guanyar-ne.</string>
+    <plurals name="tens_punts">
+        <item quantity="one">Tens %1$d barretina</item>
+        <item quantity="other">Tens %1$d barretines</item>
+    </plurals>
+    <plurals name="despres_punts">
+        <item quantity="one">Després: %1$d barretina</item>
+        <item quantity="other">Després: %1$d barretines</item>
+    </plurals>
+    <plurals name="desbloqueja_cost">
+        <item quantity="one">Desbloqueja · %1$d barretina</item>
+        <item quantity="other">Desbloqueja · %1$d barretines</item>
+    </plurals>
+    <plurals name="et_falten">
+        <item quantity="one">Et falta %1$d barretina. Fes missions als municipis que ja tens per guanyar-la.</item>
+        <item quantity="other">Et falten %1$d barretines. Fes missions als municipis que ja tens per guanyar-ne.</item>
+    </plurals>
 
     <!-- Càmera -->
     <string name="camera_text">Fes una foto. Ha de ser feta dins del municipi.</string>
@@ -111,19 +129,25 @@
     <string name="fes_portada">Fes-la la portada del municipi</string>
     <string name="es_portada">És la portada del municipi.</string>
     <string name="esborra_foto">Esborra la foto</string>
-    <string name="esborra_foto_text">La foto s\'esborrarà del mòbil. Els punts que hagis guanyat amb ella no es perden.</string>
+    <string name="esborra_foto_text">La foto s\'esborrarà del mòbil. Les barretines que hagis guanyat amb ella no es perden.</string>
 
     <!-- Missions -->
-    <string name="missions_resum">%1$d missions completades · %2$d punts per gastar</string>
-    <string name="missions_municipi">%1$s · %2$d de %3$d missions · %4$d de %5$d pts</string>
+    <string name="missions_resum">%1$d missions completades · Barretines per gastar: %2$d</string>
+    <string name="missions_municipi">%1$s · %2$d de %3$d missions · %4$d de %5$d barretines</string>
 
     <!-- Perfil -->
-    <string name="punts_per_al_nivell">%1$d pts per al nivell %2$d</string>
+    <plurals name="punts_per_al_nivell">
+        <item quantity="one">%1$d barretina per al nivell %2$d</item>
+        <item quantity="other">%1$d barretines per al nivell %2$d</item>
+    </plurals>
     <string name="stat_municipis">municipis</string>
     <string name="stat_missions">missions</string>
     <string name="stat_fotos">fotos</string>
     <string name="stat_comarques">comarques</string>
-    <string name="punts_resum">Tens %1$d punts per gastar. N\'has guanyat %2$d en total.</string>
+    <plurals name="punts_resum">
+        <item quantity="one">Tens %1$d barretina per gastar. N\'has guanyat %2$d en total.</item>
+        <item quantity="other">Tens %1$d barretines per gastar. N\'has guanyat %2$d en total.</item>
+    </plurals>
     <string name="album">El meu àlbum</string>
     <string name="album_buit">Encara no has fet cap foto. Les pots fer des de la fitxa de cada municipi.</string>
     <string name="passaport">El meu passaport</string>
@@ -176,7 +200,7 @@
     <string name="exportacio_feta">S\'ha exportat el teu progrés, amb les fotos.</string>
     <string name="exportacio_error">No s\'ha pogut exportar el progrés.</string>
     <string name="esborra_tot">Esborra tot el progrés</string>
-    <string name="esborra_tot_text">S\'esborraran els municipis descoberts, els punts, les missions, les fotos, les preferències i el teu nom d\'usuari, en aquest mòbil i al servidor. El compte es manté. No es pot desfer.</string>
+    <string name="esborra_tot_text">S\'esborraran els municipis descoberts, les barretines, les missions, les fotos, les preferències i el teu nom d\'usuari, en aquest mòbil i al servidor. El compte es manté. No es pot desfer.</string>
 
     <!-- Sobre l'app -->
     <string name="sobre_app">Sobre l\'app</string>
@@ -195,17 +219,32 @@
     <!-- Missatges -->
     <string name="titol_no_ha_funcionat">No ha funcionat</string>
     <string name="titol_municipi_bloquejat">Municipi bloquejat</string>
-    <string name="missatge_punts">Missió completada! +%1$d punts</string>
-    <string name="missatge_punts_amb_bonus">Missió completada! +%1$d punts i +%2$d de bonus per completar-les totes</string>
+    <plurals name="missatge_punts">
+        <item quantity="one">Missió completada! +%1$d barretina</item>
+        <item quantity="other">Missió completada! +%1$d barretines</item>
+    </plurals>
+    <plurals name="missatge_punts_amb_bonus">
+        <item quantity="one">Missió completada! +%1$d barretina i +%2$d de bonus per completar-les totes</item>
+        <item quantity="other">Missió completada! +%1$d barretines i +%2$d de bonus per completar-les totes</item>
+    </plurals>
     <string name="missatge_foto_desada">Foto desada</string>
-    <string name="missatge_foto_punts">Foto desada. Missió completada! +%1$d punts</string>
-    <string name="missatge_foto_punts_amb_bonus">Foto desada. Missió completada! +%1$d punts i +%2$d de bonus</string>
+    <plurals name="missatge_foto_punts">
+        <item quantity="one">Foto desada. Missió completada! +%1$d barretina</item>
+        <item quantity="other">Foto desada. Missió completada! +%1$d barretines</item>
+    </plurals>
+    <plurals name="missatge_foto_punts_amb_bonus">
+        <item quantity="one">Foto desada. Missió completada! +%1$d barretina i +%2$d de bonus</item>
+        <item quantity="other">Foto desada. Missió completada! +%1$d barretines i +%2$d de bonus</item>
+    </plurals>
     <string name="missatge_desbloquejat">Has desbloquejat %1$s!</string>
     <string name="missatge_precisio">El GPS no és prou precís (%1$d m). Cal una precisió de %2$d m o millor. Prova-ho a l\'aire lliure.</string>
     <string name="missatge_massa_lluny">Ets a %1$d m del lloc. Has d\'estar a menys de %2$d m.</string>
     <string name="missatge_altre_municipi">Ara ets a %1$s. Aquesta prova s\'ha de fer dins del municipi de la missió.</string>
-    <string name="missatge_bloquejat_falten">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falten %2$d punts per desbloquejar-lo.</string>
-    <string name="missatge_bloquejat_pots">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Ja tens prou punts: desbloqueja\'l des del mapa.</string>
+    <plurals name="missatge_bloquejat_falten">
+        <item quantity="one">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falta %2$d barretina per desbloquejar-lo.</item>
+        <item quantity="other">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falten %2$d barretines per desbloquejar-lo.</item>
+    </plurals>
+    <string name="missatge_bloquejat_pots">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Ja tens prou barretines: desbloqueja\'l des del mapa.</string>
     <plurals name="missatge_bloquejat_boira">
         <item quantity="one">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipi del teu territori.</item>
         <item quantity="other">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipis del teu territori.</item>
@@ -292,7 +331,10 @@
         <item quantity="one">Obre l\'altre sac</item>
         <item quantity="other">Obre\'n un altre (en queden %1$d)</item>
     </plurals>
-    <string name="sacs_ja_ho_tens_tot">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d punts.</string>
+    <plurals name="sacs_ja_ho_tens_tot">
+        <item quantity="one">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d barretina.</item>
+        <item quantity="other">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d barretines.</item>
+    </plurals>
     <string name="sacs_sortit_emoji">Un emoji nou per reaccionar.</string>
     <string name="sacs_sortit_portada">Una tapa nova per al passaport.</string>
     <string name="sacs_sortit_animacio">Una animació nova per quan l\'app carrega.</string>

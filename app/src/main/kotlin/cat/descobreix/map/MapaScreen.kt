@@ -39,6 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
@@ -55,6 +57,7 @@ import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.Carregant
+import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
@@ -262,7 +265,7 @@ private fun Capcalera(estat: MapaEstat) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            Icon(Icones.Punts, contentDescription = stringResource(R.string.punts), tint = Colors.Ambre, modifier = Modifier.size(18.dp))
+            IconaBarretina(Modifier.size(18.dp), descripcio = stringResource(R.string.punts))
             Text("${estat.saldo}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold)
         }
     }
@@ -317,7 +320,15 @@ private fun TargetaSeleccio(
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Colors.Ambre, contentColor = Colors.TintaAmbre),
             ) {
-                Text(stringResource(R.string.punts_curt, s.cost), fontFamily = ChakraPetch, fontWeight = FontWeight.Bold)
+                val cost = plural(R.plurals.punts_curt, s.cost, s.cost)
+                Row(
+                    Modifier.clearAndSetSemantics { contentDescription = cost },
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Text("${s.cost}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold)
+                    IconaBarretina(Modifier.size(18.dp), color = Colors.TintaAmbre)
+                }
             }
             else -> Button(
                 onClick = onObre,
