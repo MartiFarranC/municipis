@@ -1,0 +1,209 @@
+<title>Segellar el passaport</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Una sola columna com la pantalla del mòbil: missió completada → el passaport s'obre → l'usuari tria on segellar. */
+:root{
+  --fons:#0B0E13; --sup:#151A22; --linia:#273041; --text:#EEF1F5; --suau:#9AA4B2;
+  --ambre:#F2B544; --ambre-fosc:#B8862F; --tinta-ambre:#1A1305;
+  --paper:#F3EBD8; --paper-vora:#D8CCB0; --paper-text:#4A3E28; --paper-suau:#8A7A5A;
+  --granat:#6E1B22; --daurat:#E8C36A;
+  --display:"Chakra Petch",system-ui,sans-serif; --cos:"Source Sans 3",system-ui,sans-serif;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:16px;line-height:1.45}
+.app{max-width:440px;margin:0 auto;padding-inline:16px;padding-block:20px 32px;display:flex;flex-direction:column;gap:16px;min-height:100%}
+h1{font-family:var(--display);font-size:22px;margin:0;text-wrap:balance}
+.nota{color:var(--suau);font-size:14px;margin:0}
+.boto{font:700 16px var(--display);border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:var(--ambre);color:var(--tinta-ambre)}
+.boto.sec{background:var(--sup);color:var(--text);border:1px solid var(--linia)}
+.boto:focus-visible{outline:3px solid var(--text);outline-offset:2px}
+.botons{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* 1 · Missió completada */
+.premi{background:var(--sup);border:1px solid var(--linia);border-radius:20px;padding:24px 20px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;position:relative;overflow:hidden}
+.premi .eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+.premi .muni{font:700 30px var(--display);margin:0}
+.premi .punts{font:700 44px var(--display);color:var(--ambre);font-variant-numeric:tabular-nums}
+.confeti{position:absolute;top:-10px;width:6px;height:10px;border-radius:1px;animation:cau 1.8s ease-in forwards}
+@keyframes cau{to{transform:translateY(320px) rotate(540deg);opacity:0}}
+
+/* 2 · Passaport */
+.escena{perspective:1400px;width:100%}
+.passaport{position:relative;width:100%;aspect-ratio:.72;max-width:100%}
+.pagina{position:absolute;inset:0;background:var(--paper);border-radius:6px 14px 14px 6px;box-shadow:inset 10px 0 18px -10px rgba(74,62,40,.45),0 10px 30px rgba(0,0,0,.45);overflow:hidden;touch-action:manipulation;cursor:crosshair}
+.pagina::before{content:"";position:absolute;inset:10px;border:1px solid var(--paper-vora);border-radius:4px;pointer-events:none}
+.capcalera{position:absolute;left:18px;right:18px;top:16px;display:flex;justify-content:space-between;align-items:baseline;color:var(--paper-text);pointer-events:none}
+.capcalera b{font:700 15px var(--display);letter-spacing:.12em}
+.capcalera span{font:500 13px var(--display);color:var(--paper-suau);font-variant-numeric:tabular-nums}
+.filigrana{position:absolute;inset:14% 8% 6%;opacity:.07;pointer-events:none}
+.num-pagina{position:absolute;bottom:14px;left:0;right:0;text-align:center;font:500 11px var(--display);color:var(--paper-suau);letter-spacing:.1em;pointer-events:none}
+.segell{position:absolute;width:34%;pointer-events:none;transform-origin:center}
+.segell svg{display:block;width:100%;height:auto}
+.tapa{position:absolute;inset:0;border-radius:6px 14px 14px 6px;background:var(--granat);transform-origin:left center;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:5}
+.tapa::before{content:"";position:absolute;inset:10px;border:1px solid var(--daurat);opacity:.6;border-radius:6px}
+.tapa .t1{font:700 22px var(--display);letter-spacing:.2em;color:var(--daurat)}
+.tapa .t2{font:700 11px var(--display);letter-spacing:.14em;color:var(--daurat)}
+.tapa svg{width:62%}
+.tampo{position:absolute;width:25%;pointer-events:none;z-index:4;transform-origin:center bottom}
+.ajuda{font:600 15px var(--cos);color:var(--text);text-align:center;margin:0;min-height:1.45em}
+.pols{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid var(--ambre-fosc);pointer-events:none;animation:pols 1.4s ease-out infinite}
+@keyframes pols{from{transform:scale(.4);opacity:1}to{transform:scale(1.4);opacity:0}}
+.toast{background:var(--sup);border:1px solid var(--linia);border-radius:12px;padding:10px 14px;text-align:center;font-weight:600}
+@media (prefers-reduced-motion:reduce){.confeti,.pols{animation:none;display:none}}
+</style>
+
+<div class="app" id="app">
+  <section id="pas-premi" class="premi" aria-live="polite">
+    <span class="eti">Municipi completat</span>
+    <p class="muni" id="premi-muni">Besalú</p>
+    <span class="punts" id="premi-punts">+200</span>
+    <p class="nota">Has fet totes les missions. Ara toca segellar-lo al passaport.</p>
+    <button class="boto" id="obre">Segella el passaport</button>
+  </section>
+
+  <section id="pas-passaport" hidden>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p class="ajuda" id="ajuda">Toca on vols posar el segell</p>
+      <div class="escena">
+        <div class="passaport">
+          <div class="pagina" id="pagina" role="button" tabindex="0" aria-label="Pàgina del passaport: toca on vols posar el segell">
+            <svg class="filigrana" viewBox="0 0 100 100" aria-hidden="true"><path id="filigrana" fill="#4A3E28"/></svg>
+            <div class="capcalera"><b id="cap-comarca">GARROTXA</b><span id="cap-recompte"></span></div>
+            <div id="segells"></div>
+            <div class="num-pagina">PÀGINA 19</div>
+          </div>
+          <div class="tapa" id="tapa" aria-hidden="true">
+            <span class="t1">PASSAPORT</span>
+            <svg viewBox="0 0 100 100"><path id="tapa-silueta" fill="#E8C36A"/></svg>
+            <span class="t2">DESCOBREIX CATALUNYA</span>
+          </div>
+        </div>
+      </div>
+      <div class="botons" id="decideix" hidden>
+        <button class="boto sec" id="repeteix">Repeteix</button>
+        <button class="boto" id="accepta">Queda bé</button>
+      </div>
+      <div id="fet" hidden style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div class="toast" id="fet-text">Segellat!</div>
+        <button class="boto" id="altre">Completa un altre municipi</button>
+      </div>
+    </div>
+  </section>
+  <p class="nota">Prototip. Els noms i les siluetes són reals; els segells que ja hi ha a la pàgina i les seves dates són d'exemple.</p>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="tinta" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="soroll"/>
+      <feDisplacementMap in="SourceGraphic" in2="soroll" scale="1.6" result="mogut"/>
+      <feComponentTransfer in="soroll" result="clapes"><feFuncA type="discrete" tableValues="1 1 1 .55 1 1"/></feComponentTransfer>
+      <feComposite in="mogut" in2="clapes" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<script>
+const D=%%DADES%%;
+const TINTES=['#2F5FA8','#B0303A','#2E7D4F','#6A3FA0','#1F7A8C'];
+const $=id=>document.getElementById(id);
+const reduir=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const segellats=[...D.ja];
+let pendents=[...D.pendents];
+let actual=pendents.includes('Besalú')?'Besalú':pendents[0];
+let provisional=null, ocupat=false, obert=false;
+
+$('filigrana').setAttribute('d',D.silueta);
+$('tapa-silueta').setAttribute('d',D.silueta);
+$('cap-comarca').textContent=D.comarca.toUpperCase();
+
+function avui(){const d=new Date();return String(d.getDate()).padStart(2,'0')+'·'+String(d.getMonth()+1).padStart(2,'0')+'·'+d.getFullYear()}
+function svgSegell(nom,tinta,data){
+  const n=nom.toUpperCase(), mida=Math.min(8,78/n.length).toFixed(1);
+  return `<svg viewBox="0 0 100 60" aria-hidden="true"><g filter="url(#tinta)" fill="none" stroke="${tinta}">
+    <rect x="3" y="3" width="94" height="54" rx="5" stroke-width="3"/><rect x="8" y="8" width="84" height="44" rx="3" stroke-width="1"/>
+    <path d="${D.munis[nom]}" fill="${tinta}" stroke-width=".4"/>
+    <text x="64" y="28" text-anchor="middle" font-family="Chakra Petch,system-ui,sans-serif" font-weight="700" font-size="${mida}" fill="${tinta}" stroke="none">${n}</text>
+    <text x="64" y="41" text-anchor="middle" font-family="Chakra Petch,system-ui,sans-serif" font-weight="700" font-size="7" fill="${tinta}" stroke="none">${data}</text></g></svg>`;
+}
+function posaSegell(s){
+  const el=document.createElement('div'); el.className='segell';
+  el.style.left=s.x+'%'; el.style.top=s.y+'%'; el.style.transform=`translate(-50%,-50%) rotate(${s.rot}deg)`; el.style.opacity=.9;
+  el.innerHTML=svgSegell(s.nom,TINTES[s.tinta%TINTES.length],s.data); $('segells').appendChild(el); return el;
+}
+function recompte(){$('cap-recompte').textContent=`${segellats.length} de ${D.total}`}
+segellats.forEach(posaSegell); recompte();
+
+// 1 · Premi amb confeti
+function confeti(){
+  if(reduir) return; const p=$('pas-premi');
+  for(let i=0;i<22;i++){const c=document.createElement('span');c.className='confeti';c.style.left=Math.random()*100+'%';
+    c.style.background=['#F2B544','#D7262B','#FFE3A3','#5AB8E8'][i%4];c.style.animationDelay=(Math.random()*.6)+'s';p.appendChild(c);setTimeout(()=>c.remove(),2600)}
+}
+function mostraPremi(){
+  $('premi-muni').textContent=actual; $('pas-premi').hidden=false; $('pas-passaport').hidden=true; confeti();
+}
+$('obre').onclick=()=>{
+  $('pas-premi').hidden=true; $('pas-passaport').hidden=false; $('fet').hidden=true; $('decideix').hidden=true;
+  $('ajuda').textContent='S\'obre el passaport…'; obre();
+};
+
+// 2 · El passaport s'obre (la tapa gira sobre el llom)
+function obre(){
+  const t=$('tapa'); t.style.display='flex'; t.style.transform='none'; t.style.opacity=1; obert=false;
+  const acaba=()=>{t.style.display='none';obert=true;$('ajuda').textContent=`Toca on vols posar el segell de ${actual}`;indicador()};
+  if(reduir){acaba();return}
+  t.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(-165deg)',opacity:.2}],{duration:1100,delay:350,easing:'cubic-bezier(.5,0,.3,1)',fill:'forwards'}).onfinish=acaba;
+}
+let pols=null;
+function indicador(){ if(reduir||pols) return; pols=document.createElement('span'); pols.className='pols'; pols.style.left='50%'; pols.style.top='58%'; $('pagina').appendChild(pols) }
+function treuIndicador(){ if(pols){pols.remove();pols=null} }
+
+// 3 · Tocar la pàgina: baixa el tampó i deixa el segell on s'ha tocat
+function tampoSVG(tinta){return `<svg viewBox="0 0 60 80" aria-hidden="true"><ellipse cx="30" cy="12" rx="13" ry="11" fill="#8A5A34"/><rect x="25" y="18" width="10" height="34" rx="3" fill="#B07A4A"/>
+  <rect x="6" y="50" width="48" height="16" rx="3" fill="#5A3A1E"/><rect x="4" y="66" width="52" height="10" rx="2" fill="${tinta}"/></svg>`}
+function toca(ev){
+  if(!obert||ocupat||provisional) return;
+  const r=$('pagina').getBoundingClientRect();
+  let px, py;
+  if(ev.type==='keydown'){px=.5;py=.6}else{px=(ev.clientX-r.left)/r.width; py=(ev.clientY-r.top)/r.height}
+  // El segell sencer ha de cabre dins la pàgina, sota la capçalera.
+  px=Math.min(.81,Math.max(.19,px)); py=Math.min(.88,Math.max(.18,py));
+  treuIndicador(); ocupat=true;
+  const s={nom:actual,x:px*100,y:py*100,rot:Math.round(Math.random()*20-10),tinta:Math.floor(Math.random()*TINTES.length),data:avui()};
+  const tinta=TINTES[s.tinta];
+  const posa=()=>{provisional={s,el:posaSegell(s)}; if(!reduir) provisional.el.animate([{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(1.12)`,opacity:0},{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(1)`,opacity:.9}],{duration:180,easing:'ease-out'})};
+  const fi=()=>{ocupat=false;$('decideix').hidden=false;$('ajuda').textContent='T\'agrada on ha quedat?';$('accepta').focus()};
+  if(reduir){posa();fi();return}
+  const t=document.createElement('div'); t.className='tampo'; t.innerHTML=tampoSVG(tinta);
+  t.style.left=(px*100)+'%'; t.style.top=(py*100)+'%'; $('pagina').appendChild(t);
+  const base=`translate(-50%,-92%) rotate(${s.rot}deg)`;
+  const a=t.animate([
+    {transform:`${base} translateY(-160%)`,opacity:0},
+    {transform:`${base} translateY(-12%)`,opacity:1,offset:.45},
+    {transform:`${base} translateY(4%) scaleY(.9)`,offset:.55},
+    {transform:`${base} translateY(4%) scaleY(.9)`,offset:.7},
+    {transform:`${base} translateY(-160%)`,opacity:0}
+  ],{duration:1200,easing:'ease-in-out'});
+  setTimeout(posa,640);
+  a.onfinish=()=>{t.remove();fi()};
+}
+$('pagina').addEventListener('pointerup',toca);
+$('pagina').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toca(e)}});
+
+$('repeteix').onclick=()=>{
+  if(!provisional) return; const el=provisional.el; provisional=null; $('decideix').hidden=true;
+  const fora=()=>{el.remove();$('ajuda').textContent='Toca un altre lloc de la pàgina';};
+  if(reduir) fora(); else el.animate([{opacity:.9},{opacity:0}],{duration:200}).onfinish=fora;
+};
+$('accepta').onclick=()=>{
+  if(!provisional) return; segellats.push(provisional.s); provisional=null; recompte();
+  pendents=pendents.filter(n=>n!==actual); $('decideix').hidden=true; $('ajuda').textContent='';
+  $('fet-text').textContent=`${actual} ja és al teu passaport`; $('fet').hidden=false; obert=false;
+  $('altre').hidden=pendents.length===0;
+};
+$('altre').onclick=()=>{ actual=pendents[Math.floor(Math.random()*pendents.length)]; mostraPremi() };
+mostraPremi();
+</script>
