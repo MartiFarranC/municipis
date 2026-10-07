@@ -1,4 +1,4 @@
-# Dibuixa un galet com un tub en espiral: una tira d el·lipses (les estries) que es fan grosses fins a la boca.
+# Dibuixa un galet com un tub en espiral: una tira d'el·lipses (les estries) que es fan grosses fins a la boca.
 import math,sys
 def galet(n=13,a0=200,a1=-70,R=5.2,r0=1.6,r1=4.6,k=.55,cx=12,cy=12.5,sw=.7):
     out=[]
