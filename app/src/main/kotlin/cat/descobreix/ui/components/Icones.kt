@@ -32,6 +32,7 @@ object Icones {
     val Mapa = icona("mapa", "M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z", "M9 3v15M15 6v15")
     val Missions = icona("missions", "M9 6h11M9 12h11M9 18h11", "M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11")
     val Perfil = icona("perfil", cercle(12f, 8f, 4f), "M4 21a8 8 0 0 1 16 0")
+    val Gent = icona("gent", cercle(9f, 8f, 3.5f), "M2 20a7 7 0 0 1 14 0", "M15.5 4.5a3.5 3.5 0 0 1 0 7", "M18 13.5a7 7 0 0 1 4 6.5")
     val Cadenat = icona("cadenat", "M7 11h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z", "M8 11V8a4 4 0 0 1 8 0v3")
     val Camera = icona("camera", "M4 8h3l2-3h6l2 3h3v11H4z", cercle(12f, 13f, 3.5f))
     val Centrar = icona("centrar", cercle(12f, 12f, 3f), "M12 2v4M12 18v4M2 12h4M18 12h4")

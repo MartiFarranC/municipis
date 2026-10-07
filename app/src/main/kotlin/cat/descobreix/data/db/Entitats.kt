@@ -85,7 +85,7 @@ data class FotoEntity(
     val miniatura: String,
     val lat: Double?,
     val lon: Double?,
-    /** PRIVADA, AMICS o PUBLICA. */
+    /** PRIVADA, SEGUIDORS o PUBLICA. */
     val visibilitat: String,
     val esPortada: Boolean,
     val missioId: String?,

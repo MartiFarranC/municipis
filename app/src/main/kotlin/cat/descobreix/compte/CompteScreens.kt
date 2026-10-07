@@ -1,5 +1,7 @@
 package cat.descobreix.compte
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,7 +26,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
@@ -38,6 +43,7 @@ import cat.descobreix.R
 import cat.descobreix.data.compte.CONTRASENYA_MINIM
 import cat.descobreix.data.compte.ErrorCompte
 import cat.descobreix.data.compte.NomUsuari
+import cat.descobreix.data.compte.TipusPerfil
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.theme.Colors
@@ -161,13 +167,72 @@ fun NomUsuariScreen(viewModel: CompteViewModel = hiltViewModel()) {
             onAccio = viewModel::creaPerfil,
             ajuda = stringResource(R.string.compte_nom_ajuda, NomUsuari.MIN, NomUsuari.MAX),
         )
+        Text(stringResource(R.string.compte_com_jugaras), style = MaterialTheme.typography.titleMedium)
+        Opcio(
+            stringResource(R.string.perfil_explorador),
+            stringResource(R.string.perfil_explorador_text),
+            estat.tipus == TipusPerfil.EXPLORADOR,
+        ) { viewModel.triaTipus(TipusPerfil.EXPLORADOR) }
+        Opcio(
+            stringResource(R.string.perfil_espectador),
+            stringResource(R.string.perfil_espectador_text),
+            estat.tipus == TipusPerfil.ESPECTADOR,
+        ) { viewModel.triaTipus(TipusPerfil.ESPECTADOR) }
+        Text(stringResource(R.string.compte_per_sempre), style = MaterialTheme.typography.bodySmall.copy(color = Colors.TextSecundari))
+        OpcionsVisibilitat(estat.public, viewModel::triaPublic)
         BotoPrincipal(
             text = stringResource(R.string.compte_desa_nom),
             onClick = viewModel::creaPerfil,
-            enabled = estat.nomUsuariValid,
+            enabled = estat.potCrearPerfil,
             carregant = estat.treballant,
         )
         Enllac(stringResource(R.string.compte_surt)) { viewModel.surt() }
+    }
+}
+
+/** Els perfils d'abans dels comptes públics i privats: cal triar-ho una vegada. */
+@Composable
+fun VisibilitatScreen(nomUsuari: String, viewModel: CompteViewModel = hiltViewModel()) {
+    val estat by viewModel.estat.collectAsStateWithLifecycle()
+    PantallaCompte(
+        titol = stringResource(R.string.compte_titol_visibilitat, nomUsuari),
+        text = stringResource(R.string.compte_text_visibilitat),
+        error = estat.error,
+    ) {
+        OpcionsVisibilitat(estat.public, viewModel::triaPublic)
+        BotoPrincipal(
+            text = stringResource(R.string.continua),
+            onClick = viewModel::desaVisibilitat,
+            enabled = estat.public != null,
+            carregant = estat.treballant,
+        )
+        Enllac(stringResource(R.string.compte_surt)) { viewModel.surt() }
+    }
+}
+
+@Composable
+private fun OpcionsVisibilitat(public: Boolean?, onTria: (Boolean) -> Unit) {
+    Text(stringResource(R.string.compte_qui_et_pot_seguir), style = MaterialTheme.typography.titleMedium)
+    Opcio(stringResource(R.string.compte_public), stringResource(R.string.compte_public_text), public == true) { onTria(true) }
+    Opcio(stringResource(R.string.compte_privat), stringResource(R.string.compte_privat_text), public == false) { onTria(false) }
+}
+
+/** Una opció per triar, com un botó de ràdio gran amb el nom i què vol dir. */
+@Composable
+private fun Opcio(nom: String, text: String, triada: Boolean, onTria: () -> Unit) {
+    val forma = RoundedCornerShape(14.dp)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(forma)
+            .background(if (triada) Colors.Disponible1 else Colors.Superficie)
+            .border(if (triada) 2.dp else 1.dp, if (triada) Colors.Ambre else Colors.Linia, forma)
+            .selectable(selected = triada, role = Role.RadioButton, onClick = onTria)
+            .padding(14.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
+        Text(nom, style = MaterialTheme.typography.titleMedium.copy(color = if (triada) Colors.Ambre else Colors.Text))
+        Text(text, style = MaterialTheme.typography.bodySmall.copy(color = Colors.TextSecundari))
     }
 }
 

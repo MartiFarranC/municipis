@@ -104,7 +104,7 @@ fun FotoScreen(onEnrere: () -> Unit, viewModel: FotoViewModel = hiltViewModel())
                         stringResource(
                             when (v) {
                                 Visibilitat.PRIVADA -> R.string.visibilitat_privada
-                                Visibilitat.AMICS -> R.string.visibilitat_amics
+                                Visibilitat.SEGUIDORS -> R.string.visibilitat_seguidors
                                 Visibilitat.PUBLICA -> R.string.visibilitat_publica
                             },
                         ),

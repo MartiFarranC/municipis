@@ -5,6 +5,7 @@ import cat.descobreix.data.compte.EstatCompte
 import cat.descobreix.data.compte.Perfil
 import cat.descobreix.data.compte.ResultatRegistre
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.TipusPerfil
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /** Un compte sense servidor: entrar sempre funciona i el perfil es crea a l'instant. */
@@ -28,8 +29,12 @@ class CompteFals(inicial: EstatCompte = EstatCompte.Llest(PERFIL)) : ServeiCompt
         estat.value = EstatCompte.Llest(PERFIL)
     }
 
-    override suspend fun creaPerfil(nomUsuari: String) {
-        estat.value = EstatCompte.Llest(Perfil(PERFIL.usuariId, nomUsuari))
+    override suspend fun creaPerfil(nomUsuari: String, tipus: TipusPerfil, public: Boolean) {
+        estat.value = EstatCompte.Llest(Perfil(PERFIL.usuariId, nomUsuari, tipus, public))
+    }
+
+    override suspend fun triaVisibilitat(public: Boolean) {
+        estat.value = EstatCompte.Llest(PERFIL.copy(public = public))
     }
 
     override suspend fun reintenta() = Unit
