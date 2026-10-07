@@ -60,8 +60,11 @@ interface FotosRepositori {
 
     fun foto(id: String): Flow<Foto?>
 
-    /** Desa una foto feta amb la càmera (JPEG). La primera foto d'un municipi en serà la portada. */
-    suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto
+    /**
+     * Desa una foto feta amb la càmera (JPEG). La primera foto d'un municipi en serà la portada.
+     * @param esCromo si és la foto del cartell retallada amb el requadre (la que va al catàleg).
+     */
+    suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?, esCromo: Boolean = false): Foto
 
     suspend fun canviaVisibilitat(id: String, visibilitat: Visibilitat)
 

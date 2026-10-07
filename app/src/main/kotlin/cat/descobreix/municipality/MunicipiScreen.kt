@@ -63,6 +63,7 @@ import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.model.Missio
 import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
+import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
@@ -256,7 +257,19 @@ private fun FitxaDescoberta(
             }
         }
         items(estat.missions, key = { it.missio.id }) { f ->
-            FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) })
+            Column {
+                FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) })
+                // La foto del cartell ja feta es pot repetir (sense punts) per canviar el cromo del catàleg.
+                if (f.completada && f.missio.clau == Medalles.CLAU_CARTELL) {
+                    val teCromo = estat.fotos.any { it.esCromo }
+                    BotoSecundari(
+                        stringResource(if (teCromo) R.string.torna_a_fer_foto_cartell else R.string.fes_foto_cartell_cataleg),
+                        { onProva(f.missio) },
+                        icona = Icones.Camera,
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp),
+                    )
+                }
+            }
         }
         item {
             Seccio(stringResource(R.string.les_teves_missions)) {

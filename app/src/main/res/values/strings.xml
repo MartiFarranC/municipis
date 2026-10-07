@@ -318,4 +318,19 @@
     <string name="tipus_portades">Tapes del passaport</string>
     <string name="tipus_animacions">Animacions de càrrega</string>
     <string name="tipus_colors">Colors</string>
+    <!-- Foto del cartell i catàleg -->
+    <string name="camera_cartell">Ajusta el requadre al cartell d\'entrada: arrossega\'l pel mig o per les cantonades. Només es desa el que hi ha dins.</string>
+    <string name="camera_requadre">Requadre del cartell</string>
+    <string name="missatge_cartell_no_llegit">No s\'hi llegeix «%1$s». Ajusta el requadre només al cartell, que es vegi net i dret, i torna-ho a provar.</string>
+    <string name="missatge_cromo_nou">Foto del cartell canviada al catàleg.</string>
+    <string name="torna_a_fer_foto_cartell">Torna a fer la foto del cartell</string>
+    <string name="fes_foto_cartell_cataleg">Fes la foto del cartell per al catàleg</string>
+    <string name="cataleg">Catàleg de cartells</string>
+    <string name="cataleg_recompte">Tens %1$d dels %2$d cartells.</string>
+    <string name="cataleg_per_comarques">Per comarques</string>
+    <string name="cataleg_alfabetic">Per ordre alfabètic</string>
+    <string name="cataleg_cartell_de">Cartell d\'entrada de %1$s</string>
+    <string name="cataleg_sense_foto">%1$s: encara no tens la foto del cartell</string>
+    <string name="cataleg_tapat">Municipi per descobrir</string>
+    <string name="cataleg_ves_al_municipi">Vés al municipi</string>
 </resources>

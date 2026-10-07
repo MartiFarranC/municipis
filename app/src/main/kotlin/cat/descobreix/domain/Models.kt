@@ -56,6 +56,8 @@ data class Foto(
     val esPortada: Boolean,
     val missioId: String?,
     val creatEl: Long,
+    /** La foto del cartell feta amb el requadre: va al catàleg. */
+    val esCromo: Boolean = false,
 )
 
 /** Un segell del passaport amb la data en què es va posar. */

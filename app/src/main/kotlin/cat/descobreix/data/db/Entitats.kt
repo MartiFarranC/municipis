@@ -1,5 +1,6 @@
 package cat.descobreix.data.db
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -88,6 +89,8 @@ data class FotoEntity(
     val missioId: String?,
     val creatEl: Long,
     val modificatEl: Long,
+    /** És la foto del cartell feta amb el requadre (ja retallada): la que va al catàleg. */
+    @ColumnInfo(defaultValue = "0") val esCromo: Boolean = false,
 )
 
 /**
