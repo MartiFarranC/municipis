@@ -42,7 +42,7 @@ textarea{width:100%;min-height:42px;background:var(--fons);color:var(--text);bor
 <div class="app">
   <span class="eti">Descobreix Catalunya · moneda</span>
   <h1>La moneda del joc</h1>
-  <p>Tercera ronda: les dues que et van agradar. Els galets, vistos des d'altres angles perquè s'entenguin millor, i les barretines, amb el mateix dibuix que les dels emojis. Cada una surt dibuixada a tres mides i com es veuria a l'app: el saldo, el botó de desbloquejar un municipi i el que guanyes amb una missió. Marca les que t'agraden. Si escrius una nota, queda com «Millorar». Quan acabis, digues «ja està».</p>
+  <p>Quarta ronda: els galets, redibuixats de zero com un tub en espiral amb estries, i al costat les dues barretines que et van agradar, per comparar. Cada una surt dibuixada a tres mides i com es veuria a l'app: el saldo, el botó de desbloquejar un municipi i el que guanyes amb una missió. Marca les que t'agraden. Si escrius una nota, queda com «Millorar». Quan acabis, digues «ja està».</p>
   <div class="resum"><span class="pill" id="compte"></span><span class="estat" id="estat">Carregant…</span></div>
   <div class="graella" id="graella"></div>
 </div>
@@ -55,26 +55,24 @@ const BC="M50,290 L48,222 C30,226 6,214 4,180 C2,140 28,92 70,78 C120,62 200,66 
 // La barretina dels emojis (calcada del dibuix de referència), encabida en 24 × 24.
 const barr=(c,d,vora,ratlla,gir=0)=>`<g transform="rotate(${gir} 12 12) translate(.6 1.6) scale(.068)"><path d="${BC}" fill="${c}"/>${ratlla?`<path d="${BS}" fill="none" stroke="${d}" stroke-width="16" stroke-linecap="round"/>`:''}<path d="${BV}" fill="${vora?d:c}" ${vora?`stroke="${c}" stroke-width="14"`:''}/></g>`;
 const I={
- galets_costat:(c,d)=>`<path d="M5.5 4.2C9.5 4.6 13.2 5.8 16 7.6L18.6 18.4C13.4 20.4 7.6 18.6 4.8 13.2 3.6 10.4 3.9 6.6 5.5 4.2z" fill="${c}"/><path d="M8.6 5c-1 3.2-.3 8.4 1.6 12.9M11.6 5.8c-1 3.4-.4 8.6 1.6 12.9M6.2 5.4c-.9 2.4-.5 6.4.8 9.4" stroke="${d}" stroke-width="1.1" fill="none" stroke-linecap="round"/><ellipse cx="17.3" cy="13" rx="3.1" ry="5.6" transform="rotate(-14 17.3 13)" fill="${c}"/><ellipse cx="17.5" cy="13.1" rx="2" ry="4.2" transform="rotate(-14 17.5 13.1)" fill="${d}"/>`,
- galets_dos:(c,d)=>`<g transform="translate(-1 5) scale(.62)">${I.galets_costat(c,d)}</g><g transform="translate(8.5 -.5) scale(.66)">${I.galets_costat(c,d)}</g>`,
- galets_sopa:(c,d)=>`<path d="M2.5 12.5h19c0 4.6-4.2 8-9.5 8s-9.5-3.4-9.5-8z" fill="${c}"/><path d="M2.5 12.5h19" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><path d="M5 12c0-2.6 1.8-4.6 4-4.6s3.6 1.6 3.6 3.6c0 .4 0 .7-.2 1z" fill="${c}"/><ellipse cx="10.5" cy="11" rx="1.4" ry="1.2" fill="${d}"/><path d="M12.6 12c0-2 1.6-3.8 3.5-3.8s3.4 1.6 3.4 3.4c0 .1 0 .3-.1.4z" fill="${c}"/><ellipse cx="17.8" cy="11.1" rx="1.2" ry="1" fill="${d}"/><path d="M7 8.5c-.4 1-.4 2.2 0 3.3M14.5 9.3c-.3.9-.3 1.8 0 2.6" stroke="${d}" stroke-width=".8" fill="none"/><path d="M9 5.5c.5-1 .5-1.8 0-3M14 5.5c.5-1 .5-1.8 0-3" stroke="${c}" stroke-width="1.2" stroke-linecap="round" fill="none"/>`,
+ galets_fi:(c,d)=>`<ellipse cx="8.54" cy="15.52" rx="2.40" ry="2.28" transform="rotate(-230.0 8.54 15.52)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="7.43" cy="14.28" rx="2.50" ry="2.37" transform="rotate(-209.2 7.43 14.28)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="6.83" cy="12.69" rx="2.65" ry="2.51" transform="rotate(-188.5 6.83 12.69)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="6.83" cy="10.98" rx="2.82" ry="2.68" transform="rotate(-167.7 6.83 10.98)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="7.44" cy="9.36" rx="3.00" ry="2.85" transform="rotate(-146.9 7.44 9.36)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="8.60" cy="8.04" rx="3.21" ry="3.05" transform="rotate(-126.2 8.60 8.04)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="10.18" cy="7.21" rx="3.42" ry="3.25" transform="rotate(-105.4 10.18 7.21)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="11.97" cy="6.99" rx="3.65" ry="3.47" transform="rotate(-84.6 11.97 6.99)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="13.74" cy="7.43" rx="3.89" ry="3.70" transform="rotate(-63.8 13.74 7.43)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="15.26" cy="8.48" rx="4.14" ry="3.93" transform="rotate(-43.1 15.26 8.48)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="16.33" cy="10.02" rx="4.39" ry="4.17" transform="rotate(-22.3 16.33 10.02)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="16.78" cy="11.86" rx="4.65" ry="4.42" transform="rotate(-1.5 16.78 11.86)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="16.54" cy="13.76" rx="4.92" ry="4.68" transform="rotate(19.2 16.54 13.76)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="15.64" cy="15.47" rx="5.20" ry="4.94" transform="rotate(40.0 15.64 15.47)" fill="${c}" stroke="${d}" stroke-width="0.5"/><ellipse cx="15.64" cy="15.47" rx="3.64" ry="3.06" transform="rotate(40.0 15.64 15.47)" fill="${d}"/>`,
+ galets_estries:(c,d)=>`<ellipse cx="8.54" cy="15.52" rx="2.60" ry="2.47" transform="rotate(-230.0 8.54 15.52)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="6.99" cy="13.32" rx="2.77" ry="2.64" transform="rotate(-196.2 6.99 13.32)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="6.92" cy="10.56" rx="3.03" ry="2.88" transform="rotate(-162.5 6.92 10.56)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="8.43" cy="8.18" rx="3.33" ry="3.16" transform="rotate(-128.8 8.43 8.18)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="11.06" cy="7.02" rx="3.66" ry="3.47" transform="rotate(-95.0 11.06 7.02)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="13.95" cy="7.53" rx="4.01" ry="3.81" transform="rotate(-61.3 13.95 7.53)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="16.11" cy="9.60" rx="4.39" ry="4.17" transform="rotate(-27.5 16.11 9.60)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="16.77" cy="12.58" rx="4.79" ry="4.55" transform="rotate(6.2 16.77 12.58)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="15.64" cy="15.47" rx="5.20" ry="4.94" transform="rotate(40.0 15.64 15.47)" fill="${c}" stroke="${d}" stroke-width="0.9"/><ellipse cx="15.64" cy="15.47" rx="3.64" ry="3.06" transform="rotate(40.0 15.64 15.47)" fill="${d}"/>`,
+ galets_gros:(c,d)=>`<ellipse cx="9.53" cy="16.54" rx="2.80" ry="2.80" transform="rotate(-250.0 9.53 16.54)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="7.80" cy="15.49" rx="2.94" ry="2.94" transform="rotate(-223.0 7.80 15.49)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="6.71" cy="13.73" rx="3.15" ry="3.15" transform="rotate(-196.0 6.71 13.73)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="6.54" cy="11.63" rx="3.39" ry="3.39" transform="rotate(-169.0 6.54 11.63)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="7.36" cy="9.66" rx="3.65" ry="3.65" transform="rotate(-142.0 7.36 9.66)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="9.01" cy="8.24" rx="3.94" ry="3.94" transform="rotate(-115.0 9.01 8.24)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="11.17" cy="7.72" rx="4.24" ry="4.24" transform="rotate(-88.0 11.17 7.72)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="13.36" cy="8.25" rx="4.56" ry="4.56" transform="rotate(-61.0 13.36 8.25)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="15.10" cy="9.74" rx="4.89" ry="4.89" transform="rotate(-34.0 15.10 9.74)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="15.98" cy="11.89" rx="5.24" ry="5.24" transform="rotate(-7.0 15.98 11.89)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="15.79" cy="14.24" rx="5.60" ry="5.60" transform="rotate(20.0 15.79 14.24)" fill="${c}" stroke="${d}" stroke-width="0.7"/><ellipse cx="15.79" cy="14.24" rx="3.92" ry="3.47" transform="rotate(20.0 15.79 14.24)" fill="${d}"/>`,
  barretines_emoji:(c,d)=>barr(c,d,true,true),
  barretines_plena:(c,d)=>barr(c,d,false,false),
- barretines_inclinada:(c,d)=>barr(c,d,true,true,-12),
 };
 const M=[
- {id:'galets_costat',un:'galet',pl:'galets',t:'Galets · de costat',d:'El galet de costat, amb les estries i la boca oberta, com un cargol.'},
- {id:'galets_dos',un:'galet',pl:'galets',t:'Galets · un parell',d:'Dos galets, l\'un davant de l\'altre: es llegeix com «molts».'},
- {id:'galets_sopa',un:'galet',pl:'galets',t:'Galets · a la sopa',d:'Dos galets sortint d\'un plat de sopa calenta. És el que més s\'entén, però en petit té més detall.'},
+ {id:'galets_fi',un:'galet',pl:'galets',t:'Galets · estries fines',d:'Un galet de veritat: el tub que es va fent gros en espiral, amb les estries i la boca oberta.'},
+ {id:'galets_estries',un:'galet',pl:'galets',t:'Galets · estries marcades',d:'El mateix galet, amb menys estries i més marcades: es llegeix millor en petit.'},
+ {id:'galets_gros',un:'galet',pl:'galets',t:'Galets · boca grossa',d:'Una mica més girat, amb la boca més gran i rodona.'},
  {id:'barretines_emoji',un:'barretina',pl:'barretines',t:'Barretines · com als emojis',d:'La mateixa barretina dels emojis, amb la ratlla i la vora fosca.'},
  {id:'barretines_plena',un:'barretina',pl:'barretines',t:'Barretines · plena',d:'La mateixa forma, d\'un sol color: la més clara en petit.'},
- {id:'barretines_inclinada',un:'barretina',pl:'barretines',t:'Barretines · inclinada',d:'La dels emojis, una mica tombada, amb més moviment.'},
 ];
 const svg=(id,c,mida,cls='')=>`<svg class="${cls}" viewBox="0 0 24 24" width="${mida}" height="${mida}" aria-hidden="true">${I[id](c,c===A?'#0B0E13':c===T?'#F2B544':'#151A22')}</svg>`;
 let vals={},db=null;const temps={};
 const $=x=>document.getElementById(x);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-try{const m=JSON.parse(localStorage.getItem('moneda3')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+try{const m=JSON.parse(localStorage.getItem('moneda4')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
 function estat(t){$('estat').textContent=t}
 function compte(){const n=M.filter(m=>vals[m.id]?.valor==='si').length;$('compte').innerHTML=`<b>${n}</b> que t'agraden · ${M.filter(m=>vals[m.id]?.valor).length} de ${M.length} mirades`}
 function pinta(){
@@ -89,7 +87,7 @@ function pinta(){
    <textarea id="nota-${m.id}" aria-label="Nota sobre ${esc(m.pl)}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></article>`}).join('');
   compte();
 }
-function desaLocal(){try{localStorage.setItem('moneda3',JSON.stringify(vals))}catch(e){}}
+function desaLocal(){try{localStorage.setItem('moneda4',JSON.stringify(vals))}catch(e){}}
 $('graella').addEventListener('click',e=>{
   const b=e.target.closest('.v');if(!b)return;const card=b.closest('.mon'),id=card.dataset.id,v=vals[id]||(vals[id]={});
   v.valor=v.valor===b.dataset.x?undefined:b.dataset.x;card.dataset.v=v.valor||'';
@@ -104,8 +102,8 @@ async function desa(id){
   if(!db){estat('Desat en aquest navegador.');return}
   const v=vals[id]||{},m=M.find(x=>x.id===id);
   try{
-    if(!v.valor&&!v.nota)await db.collection('moneda3').doc(id).delete();
-    else await db.collection('moneda3').doc(id).set({id,nom:m.pl,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
+    if(!v.valor&&!v.nota)await db.collection('moneda4').doc(id).delete();
+    else await db.collection('moneda4').doc(id).set({id,nom:m.pl,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
     estat('Desat. Claude podrà llegir les teves respostes.');
   }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
 }
@@ -114,7 +112,7 @@ pinta();
   try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
   if(!db){estat('Les respostes es desen en aquest navegador.');return}
   try{
-    const q=await db.collection('moneda3').get();let n=0;
+    const q=await db.collection('moneda4').get();let n=0;
     for(const d of q.docs){const x=d.data();if(x&&x.id){vals[x.id]={valor:x.valor||undefined,nota:x.nota||''};n++}}
     pinta();estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
   }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
