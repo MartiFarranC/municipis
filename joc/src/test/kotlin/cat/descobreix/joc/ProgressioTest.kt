@@ -4,7 +4,9 @@ import cat.descobreix.joc.progressio.DadesMedalles
 import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.progressio.NivellMedalla
 import cat.descobreix.joc.progressio.Nivells
+import cat.descobreix.joc.progressio.Passaport
 import cat.descobreix.joc.progressio.TipusMedalla
+import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -108,5 +110,41 @@ class ProgressioTest {
         // 43 comarques, i el Vallès Occidental en té dues (Sabadell i Terrassa).
         assertEquals(44, capitals.size)
         assertTrue(Repositori.codi("Vielha e Mijaran") in capitals)
+    }
+
+    @Test
+    fun `pàgines del passaport de 20 segells`() {
+        val p = Passaport(Repositori.config.passaport)
+        assertEquals(0, p.paginaNova(0))
+        assertEquals(0, p.paginaNova(19))
+        assertEquals(1, p.paginaNova(20))
+        assertEquals(1, p.pagines(0))
+        assertEquals(1, p.pagines(20))
+        // L'Alt Empordà, amb 68 municipis, té 4 pàgines.
+        val altEmporda = Repositori.geografia.comarques.single { it.nom == "Alt Empordà" }
+        assertEquals(4, p.pagines(Repositori.geografia.municipisDeComarca(altEmporda.codi).size))
+    }
+
+    @Test
+    fun `el segell sempre cap sencer dins la pàgina`() {
+        val p = Passaport(Repositori.config.passaport)
+        val (amplada, alcada) = .34f to .15f
+        for ((x, y) in listOf(0f to 0f, 1f to 1f, .5f to .5f, -3f to 7f)) {
+            val (lx, ly) = p.limita(x, y, amplada, alcada)
+            assertTrue(lx - amplada / 2 >= 0f && lx + amplada / 2 <= 1f)
+            assertTrue(ly - alcada / 2 >= Passaport.CAPCALERA && ly + alcada / 2 <= 1f)
+        }
+        assertEquals(.5f to .5f, p.limita(.5f, .5f, amplada, alcada))
+    }
+
+    @Test
+    fun `cada segell té un gir petit i una tinta vàlida`() {
+        val p = Passaport(Repositori.config.passaport)
+        val atzar = Random(1)
+        repeat(200) {
+            val (gir, tinta) = p.estil(atzar)
+            assertTrue(gir in -Passaport.GIR_MAXIM..Passaport.GIR_MAXIM)
+            assertTrue(tinta in 0 until Passaport.TINTES)
+        }
     }
 }

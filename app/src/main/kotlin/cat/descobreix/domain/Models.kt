@@ -2,6 +2,7 @@ package cat.descobreix.domain
 
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.EstatJoc
 
 /** Progrés de l'usuari. */
@@ -55,3 +56,7 @@ data class Foto(
     val missioId: String?,
     val creatEl: Long,
 )
+
+/** Un segell del passaport amb la data en què es va posar. */
+data class Segell(val posat: SegellPosat, val creatEl: Long)
+

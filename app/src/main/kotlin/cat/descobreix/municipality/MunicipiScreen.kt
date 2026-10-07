@@ -87,9 +87,18 @@ fun MunicipiScreen(
     onFesFoto: (CodiIne, String?) -> Unit,
     onObreFoto: (String) -> Unit,
     onVeureAlMapa: (CodiIne) -> Unit,
+    onSegella: (CodiIne) -> Unit,
     viewModel: MunicipiViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
+    // Quan es tanca la celebració del check-in, s'obre el passaport per posar-hi el segell.
+    val segell = estat.segellPendent
+    LaunchedEffect(segell, estat.avis) {
+        if (segell != null && estat.avis == null) {
+            viewModel.segellObert()
+            onSegella(segell)
+        }
+    }
     if (estat.carregant) {
         Carregant(Modifier.fillMaxSize())
         return

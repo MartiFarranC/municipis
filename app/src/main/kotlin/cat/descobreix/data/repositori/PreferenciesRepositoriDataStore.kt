@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -26,9 +27,18 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         }
     }
 
+    override val tapaPassaport: Flow<TapaPassaport> = dataStore.data.map { p ->
+        TapaPassaport.entries.firstOrNull { it.name == p[TAPA] } ?: TapaPassaport.GRANAT
+    }
+
+    override suspend fun desaTapaPassaport(tapa: TapaPassaport) {
+        dataStore.edit { it[TAPA] = tapa.name }
+    }
+
     private companion object {
         val X = floatPreferencesKey("mapa_x")
         val Y = floatPreferencesKey("mapa_y")
         val ESCALA = floatPreferencesKey("mapa_escala")
+        val TAPA = stringPreferencesKey("tapa_passaport")
     }
 }

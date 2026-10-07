@@ -87,3 +87,16 @@ interface FotosDao {
     @Query("DELETE FROM fotos WHERE id = :id")
     suspend fun esborra(id: String)
 }
+
+@Dao
+interface SegellsDao {
+    @Query("SELECT * FROM segells ORDER BY creatEl")
+    fun tots(): Flow<List<SegellEntity>>
+
+    @Query("SELECT * FROM segells ORDER BY creatEl")
+    suspend fun totsAra(): List<SegellEntity>
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insereix(s: SegellEntity)
+}
+
