@@ -50,6 +50,21 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - **Missatges lliures** curts.
 - Com que hi ha text lliure, cal poder **bloquejar** i **denunciar** algú que molesta.
 
+## Decisions de seguir i animar (pàgina «Seguir i animar», `disseny/social/`)
+
+- **Només seguir:** desapareixen els amics dels requisits. La visibilitat de les fotos passa a ser Privada, Qui em segueix o Pública.
+- **Explorador o Espectador:** es tria en crear el compte i és **per sempre** (per canviar-ho caldria un compte nou).
+- **Explorador:** veu la gent que segueix en una **pestanya nova, «Gent»**, a la barra de baix (el mur i buscar gent).
+- **Espectador:** en obrir l'app veu **el mur**: el que ha fet la gent que segueix, del més nou al més antic.
+- **Avisos:** notificacions del mòbil amb **Firebase Cloud Messaging** (cal canviar la norma de `CLAUDE.md`), que es poden apagar a Ajustos.
+  - Avisen de: **municipi desbloquejat** per algú que segueixes, **t'han animat** i **sol·licituds** (algú et vol seguir o t'ha acceptat).
+  - **Un resum al dia** amb el que ha fet la gent que segueixes.
+- **Emojis:** cadascú només pot enviar **els que té** (els 6 de tothom i els que li han sortit dels sacs).
+- **Es pot reaccionar a:** municipis desbloquejats i fotos.
+- **Frases fetes:** les dels emojis (cada emoji s'envia amb la seva frase).
+- **Missatges lliures:** com a molt **80 caràcters**, i te'ls pot escriure **qualsevol que et segueixi** (es pot bloquejar i denunciar).
+- **Denúncies:** es guarden en una taula del servidor i les revisa el Martí.
+
 ## Rànquings
 
 - **Entre la gent que segueixo**, amb mi inclòs.
