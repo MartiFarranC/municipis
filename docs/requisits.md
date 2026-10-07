@@ -228,7 +228,12 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
   - **Municipis descoberts, missions completades i moviments de punts** només s'afegeixen, mai es modifiquen: es fusionen per UUID. Si dos dispositius completen la mateixa missió, val la primera (`missioId` és únic per usuari).
   - **Missions pròpies i fotos:** guanya la modificació més recent (`modificatEl`).
   - Els esborrats són **lògics** (`esborratEl`) perquè es puguin sincronitzar.
-- Les regles del joc s'han de continuar complint després de fusionar (per exemple, el saldo no pot ser negatiu). Si una fusió dona un estat invàlid, cal un test que ho cobreixi i una regla clara per resoldre-ho.
+- Les regles del joc s'han de continuar complint després de fusionar. Si una fusió dona un estat invàlid, cal un test que ho cobreixi i una regla clara per resoldre-ho.
+- **Com està fet** (`app/.../data/sincronitzacio/`):
+  - Uns triggers de SQLite apunten a la cua (`canvis_pendents`) cada fila que canvia; el `Sincronitzador` primer baixa el que ha canviat al servidor (per `sincronitzat_el`, des de l'últim cursor) i ho ajunta (`Fusio`, amb tests), i després puja la cua. Les fotos es pugen a Storage (`<usuari>/<fitxer>` i `<usuari>/miniatures/<fitxer>`).
+  - Si dos mòbils han fet el mateix sense connexió (el mateix municipi, la mateixa missió, el mateix segell o el mateix sac), val la fila del servidor. D'un sac, es manté el que n'hagi sortit si només s'havia obert en un mòbil.
+  - Limitació coneguda: en aquest cas, els moviments de punts dels dos mòbils es mantenen (es poden comptar dues vegades). Si el saldo queda negatiu, no es desfà res: cal guanyar punts abans de tornar a desbloquejar (test a `ReglesJocTest`).
+  - WorkManager sincronitza cada 6 hores i, amb connexió, uns segons després de cada canvi.
 
 ### 9.3 Rànquing
 

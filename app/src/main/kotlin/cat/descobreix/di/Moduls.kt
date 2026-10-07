@@ -11,13 +11,12 @@ import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.compte.ServeiCompteSupabase
 import cat.descobreix.data.db.BaseDades
+import cat.descobreix.data.db.TriggersSincronitzacio
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.FotosRepositoriRoom
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositoriRoom
 import cat.descobreix.data.repositori.PreferenciesRepositori
-import cat.descobreix.photos.LectorCartell
-import cat.descobreix.photos.LectorTesseract
 import cat.descobreix.data.repositori.PreferenciesRepositoriDataStore
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.ProgresRepositoriRoom
@@ -26,8 +25,12 @@ import cat.descobreix.data.repositori.SacsRepositori
 import cat.descobreix.data.repositori.SacsRepositoriRoom
 import cat.descobreix.data.repositori.SegellsRepositori
 import cat.descobreix.data.repositori.SegellsRepositoriRoom
+import cat.descobreix.data.sincronitzacio.ServidorSincronitzacio
+import cat.descobreix.data.sincronitzacio.ServidorSupabase
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.data.ubicacio.ServeiUbicacioFused
+import cat.descobreix.photos.LectorCartell
+import cat.descobreix.photos.LectorTesseract
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -39,6 +42,7 @@ import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.FlowType
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.storage.Storage
 import javax.inject.Singleton
 
 private val Context.preferenciesDataStore: DataStore<Preferences> by preferencesDataStore("preferencies")
@@ -49,7 +53,8 @@ object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4).build()
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5)
+            .addCallback(TriggersSincronitzacio.callback).build()
 
     // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
     @Provides
@@ -69,6 +74,7 @@ object ModulDades {
         }
         // Totes les dades de l'app són a l'esquema descobreix (docs/requisits.md, secció 9.0).
         install(Postgrest) { defaultSchema = "descobreix" }
+        install(Storage)
     }
 }
 
@@ -105,6 +111,10 @@ abstract class ModulRepositoris {
     @Binds
     @Singleton
     abstract fun lectorCartell(l: LectorTesseract): LectorCartell
+
+    @Binds
+    @Singleton
+    abstract fun servidorSincronitzacio(s: ServidorSupabase): ServidorSincronitzacio
 
     @Binds
     @Singleton

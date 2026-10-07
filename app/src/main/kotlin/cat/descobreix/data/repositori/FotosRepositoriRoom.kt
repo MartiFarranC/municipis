@@ -74,7 +74,7 @@ class FotosRepositoriRoom @Inject constructor(
     override suspend fun esborra(id: String) {
         val f = dao.perIdAra(id) ?: return
         db.withTransaction {
-            dao.esborra(id)
+            dao.esborra(id, rellotge.ara())
             if (f.esPortada) {
                 dao.totesAra().firstOrNull { it.codiIne == f.codiIne }?.let { dao.fesPortada(f.codiIne, it.id, rellotge.ara()) }
             }

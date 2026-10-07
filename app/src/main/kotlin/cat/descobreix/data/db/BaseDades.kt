@@ -14,8 +14,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         FotoEntity::class,
         SegellEntity::class,
         SacEntity::class,
+        CanviPendentEntity::class,
+        ControlSincronitzacioEntity::class,
     ],
-    version = 4,
+    version = 5,
     exportSchema = true,
 )
 abstract class BaseDades : RoomDatabase() {
@@ -28,6 +30,8 @@ abstract class BaseDades : RoomDatabase() {
     abstract fun segells(): SegellsDao
 
     abstract fun sacs(): SacsDao
+
+    abstract fun sincronitzacio(): SincronitzacioDao
 
     companion object {
         const val NOM = "descobreix.db"
@@ -42,6 +46,21 @@ abstract class BaseDades : RoomDatabase() {
                 )
                 db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_segells_codiIne` ON `segells` (`codiIne`)")
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_segells_comarca` ON `segells` (`comarca`)")
+            }
+        }
+
+        /**
+         * Versió 5: la sincronització. La cua del que s'ha de pujar (tot el que ja hi havia hi entra) i els esborrats
+         * lògics de les missions pròpies i les fotos.
+         */
+        val MIGRACIO_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `missions_propies` ADD COLUMN `esborratEl` INTEGER")
+                db.execSQL("ALTER TABLE `fotos` ADD COLUMN `esborratEl` INTEGER")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `canvis_pendents` (`taula` TEXT NOT NULL, `id` TEXT NOT NULL, PRIMARY KEY(`taula`, `id`))")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `control_sincronitzacio` (`id` INTEGER NOT NULL, `aplicant` INTEGER NOT NULL, PRIMARY KEY(`id`))")
+                TriggersSincronitzacio.crea(db)
+                for (t in TriggersSincronitzacio.TAULES) db.execSQL("INSERT OR IGNORE INTO canvis_pendents (taula, id) SELECT '$t', id FROM `$t`")
             }
         }
 
@@ -62,5 +81,33 @@ abstract class BaseDades : RoomDatabase() {
                 db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_sacs_origen` ON `sacs` (`origen`)")
             }
         }
+    }
+}
+
+/**
+ * Triggers que apunten a la cua (`canvis_pendents`) cada fila que s'afegeix o es modifica a les taules que es
+ * sincronitzen, excepte mentre s'apliquen les dades baixades del servidor. Així cap escriptura es queda sense pujar.
+ */
+object TriggersSincronitzacio {
+    val TAULES = listOf("municipis_descoberts", "missions_completades", "moviments_punts", "missions_propies", "fotos", "segells", "sacs")
+
+    fun crea(db: SupportSQLiteDatabase) {
+        db.execSQL("INSERT OR IGNORE INTO control_sincronitzacio (id, aplicant) VALUES (0, 0)")
+        for (t in TAULES) {
+            for (quan in listOf("INSERT", "UPDATE")) {
+                db.execSQL(
+                    "CREATE TRIGGER IF NOT EXISTS `cua_${t}_${quan.lowercase()}` AFTER $quan ON `$t` " +
+                        "WHEN COALESCE((SELECT aplicant FROM control_sincronitzacio WHERE id = 0), 0) = 0 " +
+                        "BEGIN INSERT OR IGNORE INTO canvis_pendents (taula, id) VALUES ('$t', NEW.id); END",
+                )
+            }
+        }
+    }
+
+    /** En crear la base de dades de zero (instal·lació nova) i en obrir-la, per si de cas. */
+    val callback = object : RoomDatabase.Callback() {
+        override fun onCreate(db: SupportSQLiteDatabase) = crea(db)
+
+        override fun onOpen(db: SupportSQLiteDatabase) = crea(db)
     }
 }

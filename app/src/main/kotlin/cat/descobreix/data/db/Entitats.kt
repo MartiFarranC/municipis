@@ -72,6 +72,8 @@ data class MissioPropiaEntity(
     val completada: Boolean,
     val creatEl: Long,
     val modificatEl: Long,
+    /** Esborrat lògic, perquè l'esborrat es pugui sincronitzar. */
+    val esborratEl: Long? = null,
 )
 
 @Entity(tableName = "fotos", indices = [Index(value = ["codiIne"])])
@@ -91,6 +93,8 @@ data class FotoEntity(
     val modificatEl: Long,
     /** És la foto del cartell feta amb el requadre (ja retallada): la que va al catàleg. */
     @ColumnInfo(defaultValue = "0") val esCromo: Boolean = false,
+    /** Esborrat lògic, perquè l'esborrat es pugui sincronitzar. */
+    val esborratEl: Long? = null,
 )
 
 /**
@@ -127,3 +131,11 @@ data class SacEntity(
     val creatEl: Long,
     val modificatEl: Long,
 )
+
+/** Una fila que ha canviat al mòbil i s'ha de pujar al servidor: el nom de la taula i l'id de la fila. */
+@Entity(tableName = "canvis_pendents", primaryKeys = ["taula", "id"])
+data class CanviPendentEntity(val taula: String, val id: String)
+
+/** Una sola fila (id 0): si s'estan aplicant dades del servidor, que els triggers no han de posar a la cua. */
+@Entity(tableName = "control_sincronitzacio")
+data class ControlSincronitzacioEntity(@PrimaryKey val id: Int = 0, val aplicant: Boolean = false)
