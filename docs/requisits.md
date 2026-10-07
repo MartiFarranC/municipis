@@ -254,6 +254,9 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - Un seguidor veu el mapa (municipis descoberts) de l'altre.
 - **Pestanya «Gent»** (l'Espectador hi entra directament): el mur amb el que fa la gent que segueixes (municipis desbloquejats i fotos), buscar gent pel nom d'usuari i les sol·licituds per seguir-te. El perfil d'una persona mostra a quanta gent segueix i quants la segueixen, el botó de seguir i, si et deixa, el mapa, les fotos i a qui segueix.
 - Al perfil: el compte públic o privat i la gent que segueixes.
+- **Animar:** al mur, cada municipi desbloquejat i cada foto té el botó «Anima»: un emoji dels que tens (els 6 de tothom i els dels sacs), que s'envia amb la seva frase, o un missatge de 80 caràcters com a molt. Només es pot animar algú que segueixes. Les reaccions només les veuen qui les envia i qui les rep; a la pestanya «Gent» hi ha les que t'han enviat.
+  - Que l'emoji sigui teu només ho comprova l'app (el servidor no sap quins emojis tens).
+- **Bloquejar i denunciar:** des d'una reacció rebuda o des del perfil d'algú. Bloquejar fa que deixeu de seguir-vos i que no et pugui tornar a seguir ni escriure; el bloquejat no ho sap. Les denúncies es guarden a `descobreix.denuncies` (amb el text denunciat) i les revisa el Martí des del servidor.
 
 ### 9.5 Seguretat
 

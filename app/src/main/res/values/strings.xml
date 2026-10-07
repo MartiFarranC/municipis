@@ -386,4 +386,27 @@
         <item quantity="one">Segueixes %1$d persona</item>
         <item quantity="other">Segueixes %1$d persones</item>
     </plurals>
+    <!-- Animar, bloquejar i denunciar -->
+    <string name="anima">Anima</string>
+    <string name="anima_a">Anima %1$s</string>
+    <string name="anima_missatge">Escriu un missatge curt</string>
+    <string name="anima_envia">Envia el missatge</string>
+    <string name="anima_o_emoji">O envia un emoji</string>
+    <string name="anima_mes_emojis">N\'aconseguiràs més obrint sacs.</string>
+    <string name="anima_enviat">Enviat!</string>
+    <string name="gent_t_han_animat">T\'han animat</string>
+    <string name="reaccio_de_per_municipi">%1$s, per %2$s</string>
+    <string name="reaccio_de_per_foto">%1$s, per una foto</string>
+    <string name="reaccio_treu">Treu</string>
+    <string name="gent_bloqueja">Bloqueja</string>
+    <string name="gent_desbloqueja">Desbloqueja</string>
+    <string name="gent_l_has_bloquejat">L\'has bloquejat: no et pot seguir ni escriure.</string>
+    <string name="gent_bloquejat">Bloquejat.</string>
+    <string name="bloqueja_titol">Vols bloquejar %1$s?</string>
+    <string name="bloqueja_text">Deixareu de seguir-vos i no et podrà tornar a seguir ni escriure. No li direm res.</string>
+    <string name="gent_denuncia">Denuncia</string>
+    <string name="gent_denunciat">Denúncia enviada. La revisarem.</string>
+    <string name="denuncia_titol">Denunciar %1$s</string>
+    <string name="denuncia_text">Si et molesta o escriu coses que no toquen, digues-nos què passa i ho revisarem.</string>
+    <string name="denuncia_motiu">Què ha passat? (opcional)</string>
 </resources>

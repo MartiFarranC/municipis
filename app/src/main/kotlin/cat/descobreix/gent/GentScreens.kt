@@ -1,10 +1,12 @@
 package cat.descobreix.gent
 
+import android.widget.Toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,22 +18,30 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,12 +49,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,8 +66,14 @@ import cat.descobreix.data.compte.TipusPerfil
 import cat.descobreix.data.social.EstatSeguiment
 import cat.descobreix.data.social.EventMur
 import cat.descobreix.data.social.Persona
+import cat.descobreix.data.social.ReaccioRebuda
 import cat.descobreix.data.social.TipusEvent
+import cat.descobreix.joc.config.ConfiguracioJoc.Objecte
+import cat.descobreix.joc.config.ConfiguracioJoc.Raresa
+import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
 import cat.descobreix.joc.model.CodiIne
+import cat.descobreix.sacs.dibuixEmoji
+import cat.descobreix.sacs.nomObjecte
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
@@ -74,6 +93,8 @@ fun GentScreen(onObrePersona: (String) -> Unit, viewModel: GentViewModel = hiltV
         Carregant(Modifier.fillMaxSize())
         return
     }
+    Avis(estat.avis, viewModel::tancaAvis)
+    var denunciant by remember { mutableStateOf<ReaccioRebuda?>(null) }
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -125,15 +146,197 @@ fun GentScreen(onObrePersona: (String) -> Unit, viewModel: GentViewModel = hiltV
                 }
             }
         }
+        if (estat.reaccions.isNotEmpty()) {
+            item { Titol(stringResource(R.string.gent_t_han_animat)) }
+            items(estat.reaccions.take(10), key = { "a" + it.id }) { r ->
+                TargetaReaccio(
+                    r,
+                    if (r.objectiu == TipusEvent.MUNICIPI) estat.noms[r.objectiuId] else null,
+                    onObre = { onObrePersona(r.autorId) },
+                    onTreu = { viewModel.treuReaccio(r) },
+                    onBloqueja = { viewModel.bloqueja(r) },
+                    onDenuncia = { denunciant = r },
+                )
+            }
+        }
         item { Titol(stringResource(R.string.gent_mur)) }
         if (estat.mur.isEmpty() && !estat.senseConnexio) {
             item { Text(stringResource(R.string.gent_mur_buit), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari)) }
         }
         items(estat.mur, key = { it.usuariId + it.tipus + it.codiIne + (it.fotoId ?: "") + it.creatEl }) { e ->
-            Event(e, estat.noms[e.codiIne] ?: e.codiIne, viewModel.imatges, { onObrePersona(e.usuariId) })
+            Event(e, estat.noms[e.codiIne] ?: e.codiIne, viewModel.imatges, { onObrePersona(e.usuariId) }, { viewModel.obreAnima(e) })
         }
         if (estat.hiHaMes) item { BotoSecundari(stringResource(R.string.gent_mes), viewModel::mes) }
     }
+    estat.animant?.let { e -> FinestraAnima(e.nom, estat.emojis, onEmoji = { viewModel.anima(it, null) }, onMissatge = { viewModel.anima(null, it) }, onTanca = viewModel::tancaAnima) }
+    denunciant?.let { r ->
+        DialegDenuncia(r.autorNom, onEnvia = { motiu ->
+            viewModel.denuncia(r, motiu)
+            denunciant = null
+        }, onTanca = { denunciant = null })
+    }
+}
+
+/** Un avís breu (una notificació de pantalla) després d'una acció. */
+@Composable
+private fun Avis(avis: AvisGent?, onTancat: () -> Unit) {
+    val context = LocalContext.current
+    val text = avis?.let {
+        stringResource(
+            when (it) {
+                AvisGent.ENVIAT -> R.string.anima_enviat
+                AvisGent.BLOQUEJAT -> R.string.gent_bloquejat
+                AvisGent.DENUNCIAT -> R.string.gent_denunciat
+                AvisGent.ERROR -> R.string.gent_sense_connexio
+            },
+        )
+    }
+    LaunchedEffect(avis) {
+        if (text != null) {
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+            onTancat()
+        }
+    }
+}
+
+/** Una reacció que t'han enviat: qui, l'emoji amb la frase (o el missatge) i per què; es pot treure, bloquejar o denunciar. */
+@Composable
+private fun TargetaReaccio(
+    r: ReaccioRebuda,
+    municipi: String?,
+    onObre: () -> Unit,
+    onTreu: () -> Unit,
+    onBloqueja: () -> Unit,
+    onDenuncia: () -> Unit,
+) {
+    val forma = RoundedCornerShape(14.dp)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(forma)
+            .background(Colors.Superficie)
+            .border(1.dp, Colors.Linia, forma)
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Row(
+            Modifier.clickable(role = Role.Button, onClick = onObre),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            val emoji = r.emoji
+            val dibuix = emoji?.let { dibuixEmoji(it) }
+            if (dibuix != null) Image(painterResource(dibuix), null, Modifier.size(48.dp)) else Inicial(r.autorNom)
+            Column(Modifier.weight(1f)) {
+                Text(
+                    if (emoji != null) "«" + nomObjecte(Objecte(TipusObjecte.EMOJI, emoji, Raresa.INICIAL)) + "»" else "«" + r.missatge.orEmpty() + "»",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                Text(
+                    if (municipi != null) stringResource(R.string.reaccio_de_per_municipi, r.autorNom, municipi) else stringResource(R.string.reaccio_de_per_foto, r.autorNom),
+                    style = MaterialTheme.typography.bodySmall.copy(color = Colors.TextSecundari),
+                )
+            }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            TextButton(onClick = onTreu) { Text(stringResource(R.string.reaccio_treu)) }
+            TextButton(onClick = onBloqueja) { Text(stringResource(R.string.gent_bloqueja), color = Colors.Error) }
+            TextButton(onClick = onDenuncia) { Text(stringResource(R.string.gent_denuncia), color = Colors.Error) }
+        }
+    }
+}
+
+/** Animar algú: els emojis que tens (cadascun amb la seva frase) o un missatge curt. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun FinestraAnima(nom: String, emojis: List<String>, onEmoji: (String) -> Unit, onMissatge: (String) -> Unit, onTanca: () -> Unit) {
+    var missatge by remember { mutableStateOf("") }
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Colors.Fons.copy(alpha = .96f))
+            .clickable(remember { MutableInteractionSource() }, indication = null, onClick = {}),
+    ) {
+        LazyColumn(
+            Modifier
+                .fillMaxSize()
+                .systemBarsPadding()
+                .imePadding(),
+            contentPadding = PaddingValues(20.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp),
+        ) {
+            item {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    BotoIcona(Icones.Tancar, stringResource(R.string.tanca), onTanca)
+                    Text(stringResource(R.string.anima_a, nom), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
+                }
+            }
+            item {
+                OutlinedTextField(
+                    value = missatge,
+                    onValueChange = { missatge = it.take(GentViewModel.MAX_MISSATGE) },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(stringResource(R.string.anima_missatge)) },
+                    supportingText = { Text("${missatge.length}/${GentViewModel.MAX_MISSATGE}") },
+                    shape = RoundedCornerShape(14.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Colors.Ambre,
+                        unfocusedBorderColor = Colors.Linia,
+                        focusedContainerColor = Colors.Superficie,
+                        unfocusedContainerColor = Colors.Superficie,
+                        focusedLabelColor = Colors.Ambre,
+                        cursorColor = Colors.Ambre,
+                    ),
+                )
+            }
+            item { BotoPrincipal(stringResource(R.string.anima_envia), { onMissatge(missatge) }, enabled = missatge.isNotBlank()) }
+            item { Text(stringResource(R.string.anima_o_emoji), style = MaterialTheme.typography.titleMedium) }
+            item {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    for (id in emojis) {
+                        val frase = nomObjecte(Objecte(TipusObjecte.EMOJI, id, Raresa.INICIAL))
+                        Column(
+                            Modifier
+                                .size(width = 84.dp, height = 104.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(Colors.Superficie)
+                                .clickable(role = Role.Button, onClickLabel = frase) { onEmoji(id) }
+                                .padding(6.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            dibuixEmoji(id)?.let { Image(painterResource(it), null, Modifier.size(56.dp)) }
+                            Text(frase, style = MaterialTheme.typography.labelSmall, maxLines = 2, textAlign = TextAlign.Center)
+                        }
+                    }
+                }
+            }
+            item { Text(stringResource(R.string.anima_mes_emojis), style = MaterialTheme.typography.bodySmall.copy(color = Colors.TextSecundari)) }
+        }
+    }
+}
+
+/** Denunciar algú: un motiu opcional. Les denúncies les revisa el Martí. */
+@Composable
+private fun DialegDenuncia(nom: String, onEnvia: (String?) -> Unit, onTanca: () -> Unit) {
+    var motiu by remember { mutableStateOf("") }
+    AlertDialog(
+        onDismissRequest = onTanca,
+        containerColor = Colors.Superficie,
+        title = { Text(stringResource(R.string.denuncia_titol, nom)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(stringResource(R.string.denuncia_text), style = MaterialTheme.typography.bodyMedium)
+                OutlinedTextField(
+                    value = motiu,
+                    onValueChange = { motiu = it.take(500) },
+                    label = { Text(stringResource(R.string.denuncia_motiu)) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        },
+        confirmButton = { TextButton(onClick = { onEnvia(motiu.ifBlank { null }) }) { Text(stringResource(R.string.gent_denuncia)) } },
+        dismissButton = { TextButton(onClick = onTanca) { Text(stringResource(R.string.cancela)) } },
+    )
 }
 
 @Composable
@@ -190,7 +393,7 @@ fun nomTipus(t: TipusPerfil): String = stringResource(if (t == TipusPerfil.EXPLO
 
 /** Una cosa del mur: qui, què i quan; si és una foto, la miniatura. */
 @Composable
-private fun Event(e: EventMur, municipi: String, imatges: ImatgesRemotes, onObre: () -> Unit) {
+private fun Event(e: EventMur, municipi: String, imatges: ImatgesRemotes, onObre: () -> Unit, onAnima: () -> Unit) {
     val forma = RoundedCornerShape(14.dp)
     Column(
         Modifier
@@ -214,6 +417,7 @@ private fun Event(e: EventMur, municipi: String, imatges: ImatgesRemotes, onObre
         }
         val ruta = e.rutaMiniatura
         if (ruta != null) ImatgeRemota(ruta, imatges, stringResource(R.string.mur_foto_de, municipi), Modifier.fillMaxWidth().aspectRatio(4f / 3f).clip(RoundedCornerShape(10.dp)))
+        BotoSecundari(stringResource(R.string.anima), onAnima)
     }
 }
 
@@ -240,7 +444,31 @@ fun PersonaScreen(onEnrere: () -> Unit, onObrePersona: (String) -> Unit, viewMod
         Carregant(Modifier.fillMaxSize())
         return
     }
+    Avis(estat.avis, viewModel::tancaAvis)
+    var denunciant by remember { mutableStateOf(false) }
+    var bloquejant by remember { mutableStateOf(false) }
     val p = estat.perfil
+    if (denunciant && p != null) {
+        DialegDenuncia(p.nom, onEnvia = {
+            viewModel.denuncia(it)
+            denunciant = false
+        }, onTanca = { denunciant = false })
+    }
+    if (bloquejant && p != null) {
+        AlertDialog(
+            onDismissRequest = { bloquejant = false },
+            containerColor = Colors.Superficie,
+            title = { Text(stringResource(R.string.bloqueja_titol, p.nom)) },
+            text = { Text(stringResource(R.string.bloqueja_text)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    bloquejant = false
+                    viewModel.bloqueja()
+                }) { Text(stringResource(R.string.gent_bloqueja)) }
+            },
+            dismissButton = { TextButton(onClick = { bloquejant = false }) { Text(stringResource(R.string.cancela)) } },
+        )
+    }
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -272,7 +500,14 @@ fun PersonaScreen(onEnrere: () -> Unit, onObrePersona: (String) -> Unit, viewMod
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
-        item {
+        if (estat.bloquejat) {
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(stringResource(R.string.gent_l_has_bloquejat), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
+                    BotoSecundari(stringResource(R.string.gent_desbloqueja), viewModel::desbloqueja, enabled = !estat.treballant)
+                }
+            }
+        } else item {
             when (p.elSegueixo) {
                 null -> BotoPrincipal(stringResource(R.string.gent_segueix), viewModel::segueix, carregant = estat.treballant)
                 EstatSeguiment.PENDENT -> Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -307,6 +542,12 @@ fun PersonaScreen(onEnrere: () -> Unit, onObrePersona: (String) -> Unit, viewMod
         if (estat.seguits.isNotEmpty()) {
             item { Titol(stringResource(R.string.gent_a_qui_segueix)) }
             items(estat.seguits, key = { "q" + it.id }) { s -> FilaPersona(s, { onObrePersona(s.id) }) }
+        }
+        item {
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                if (!estat.bloquejat) TextButton(onClick = { bloquejant = true }) { Text(stringResource(R.string.gent_bloqueja), color = Colors.Error) }
+                TextButton(onClick = { denunciant = true }) { Text(stringResource(R.string.gent_denuncia), color = Colors.Error) }
+            }
         }
     }
 }
