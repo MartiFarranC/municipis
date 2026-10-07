@@ -1,5 +1,6 @@
 package cat.descobreix.joc.config
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -20,6 +21,7 @@ data class ConfiguracioJoc(
     val nivells: Nivells,
     val medalles: Medalles,
     val passaport: Passaport,
+    val sacs: Sacs,
 ) {
     @Serializable
     data class Desbloqueig(
@@ -97,6 +99,54 @@ data class ConfiguracioJoc(
         /** Quan una pàgina d'una comarca té aquests segells, se'n comença una altra. */
         val segellsPerPagina: Int,
     )
+
+    /** Els sacs: què hi ha a dins i amb quina probabilitat surt cada raresa. */
+    @Serializable
+    data class Sacs(
+        /** Percentatge de cada raresa (sumen 100). */
+        val probabilitats: Map<Raresa, Int>,
+        /** Punts que dona un sac quan ja no queda res per sortir. */
+        val puntsSiJaTensTot: Int,
+        /** Tot el que es pot tenir: el que es té des del principi i el que surt dels sacs. */
+        val objectes: List<Objecte>,
+    )
+
+    @Serializable
+    data class Objecte(val tipus: TipusObjecte, val id: String, val raresa: Raresa)
+
+    @Serializable
+    enum class TipusObjecte {
+        @SerialName("emoji")
+        EMOJI,
+
+        /** Tapa del passaport. */
+        @SerialName("portada")
+        PORTADA,
+
+        /** Animació de càrrega. */
+        @SerialName("animacio")
+        ANIMACIO,
+
+        /** Color secundari de l'app. */
+        @SerialName("color")
+        COLOR,
+    }
+
+    @Serializable
+    enum class Raresa {
+        /** No surt dels sacs: la té tothom des del principi. */
+        @SerialName("inicial")
+        INICIAL,
+
+        @SerialName("comuna")
+        COMUNA,
+
+        @SerialName("rara")
+        RARA,
+
+        @SerialName("llegendaria")
+        LLEGENDARIA,
+    }
 
     /** Punts que donen les missions genèriques, que es poden fer a qualsevol municipi. */
     val puntsGenericsPerMunicipi: Int get() = missionsGeneriques.sumOf { it.punts }
