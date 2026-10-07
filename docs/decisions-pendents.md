@@ -74,7 +74,11 @@ Les medalles substitueixen els assoliments: al perfil hi ha una **vitrina de med
 - **Punts (pocs):** comarca bronze 25, plata 50, or 100; fites de municipis 20; cartells 20; capitals de comarca 100. Com que desbloquejar un municipi costa entre 60 i 200 punts, ajuden una mica sense trencar el joc. Els valors aniran a `dades/configuracio_joc.json`, amb tests.
 - **Vitrina:** es veuen totes les medalles; les que encara no tens, en gris i amb el progrés (per exemple, «12 de 23 municipis»).
 - **Primer municipi, primera missió i primera foto:** no seran medalles. Seran una altra cosa, encara per decidir (segurament sacs).
-- **Disseny:** de moment, un disseny comú per a totes: la silueta de la comarca (o una icona per a les altres) i el nom, amb el color segons el nivell (bronze, plata, or).
+- **Disseny:** estil **A, clàssica**: medalla rodona penjada d'una cinta amb la senyera, la silueta de la comarca (o una icona per a les altres) al mig i el nom en una banda a sota; el color segons el nivell (bronze, plata, or). Les que encara no tens, en gris. Generador: `disseny/medalles/`.
+
+## Passaport
+
+A més de les medalles, l'app té un **passaport**: cada municipi descobert hi posa el seu **segell**, com els segells d'un passaport de viatge (inspirat en l'estil C de les propostes de medalla). El passaport té una pàgina per comarca. Pendent de concretar el disseny.
 
 ## Coses per fer
 
