@@ -111,13 +111,13 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
   - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos). **Serà de les últimes coses que es faran**, perquè encara no se sap si hi haurà medalla física.
 - **Medalles amb estil propi per comarca:** més endavant, cada comarca tindrà una medalla amb un dibuix propi. Per triar-lo, el Martí respondrà un **qüestionari per comarca** (què és el més representatiu de cada una), perquè no s'inventi res.
 - **Col·laboracions amb els ajuntaments** dels municipis. Pendent de decidir què s'hi ofereix i com.
-- **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
-  - emojis per a les reaccions;
-  - colors secundaris;
-  - animacions de càrrega;
-  - etc.
-
-  Pendent de decidir com es guanyen (punts, missions, nivells…) i si algunes coses són més rares que d'altres.
+- **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar una cosa per personalitzar l'app.
+  - **Com es guanyen:** les primeres vegades (primer municipi, primera missió i primera foto: un sac cadascuna) i cada **municipi complet** (totes les missions fetes).
+  - **Què hi surt:** emojis per a les reaccions, tapes noves per al passaport (a més de les tres que es poden triar sempre), colors secundaris de l'app i animacions de càrrega.
+  - **Raresa:** tres raritats, comuna (70 %), rara (25 %) i llegendària (5 %). Les probabilitats van a la configuració del joc, amb tests.
+  - **Repetides:** mai. El sac només dona coses que encara no tens; quan ja ho tens tot, dona punts.
+  - **Obrir-lo:** el sac surt tancat, l'usuari el toca i s'obre amb una animació; la cosa surt amb el color de la seva raresa.
+  - **Emojis:** el Martí tria un per un quins es tenen des del principi i quins surten dels sacs (i amb quina raresa).
 - **Emojis propis:** proposta a l'artifact «Emojis propis». Totes les persones porten barretina. El brindis és un porró i una ampolla amb estrella, sense cap marca comercial.
 
 ## Valoració dels emojis
