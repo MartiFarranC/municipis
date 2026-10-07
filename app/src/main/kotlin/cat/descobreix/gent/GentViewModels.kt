@@ -14,8 +14,11 @@ import cat.descobreix.data.social.EventMur
 import cat.descobreix.data.social.FotoPersona
 import cat.descobreix.data.social.PerfilPersona
 import cat.descobreix.data.social.Persona
+import cat.descobreix.data.social.ReaccioRebuda
 import cat.descobreix.data.social.ServeiSocial
+import cat.descobreix.data.social.TipusEvent
 import cat.descobreix.domain.Joc
+import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.map.CaminsMapa
@@ -70,7 +73,17 @@ data class GentEstat(
     val hiHaMes: Boolean = false,
     /** El nom de cada municipi, per escriure el mur. */
     val noms: Map<CodiIne, String> = emptyMap(),
+    /** Les reaccions que t'han enviat. */
+    val reaccions: List<ReaccioRebuda> = emptyList(),
+    /** Els emojis que tens (els de tothom i els dels sacs): només aquests es poden enviar. */
+    val emojis: List<String> = emptyList(),
+    /** La cosa del mur a què s'està reaccionant (s'obre la finestra per animar). */
+    val animant: EventMur? = null,
+    /** Avís breu després d'una acció: s'ha enviat la reacció, s'ha bloquejat algú, la denúncia… */
+    val avis: AvisGent? = null,
 )
+
+enum class AvisGent { ENVIAT, BLOQUEJAT, DENUNCIAT, ERROR }
 
 /** La pestanya «Gent»: el mur de la gent que segueixes, buscar gent i les sol·licituds per seguir-te. */
 @HiltViewModel
@@ -89,21 +102,70 @@ class GentViewModel @Inject constructor(
             _estat.update { it.copy(noms = noms) }
             actualitza()
         }
+        viewModelScope.launch {
+            joc.colleccio.collect { c ->
+                _estat.update { it.copy(emojis = c.filter { o -> o.tipus == TipusObjecte.EMOJI }.map { o -> o.id }) }
+            }
+        }
     }
 
     fun actualitza() {
         viewModelScope.launch {
             val sollicituds = remot { social.sollicituds() }
             val mur = remot { social.mur(null) }
+            val reaccions = remot { social.reaccionsRebudes() }
             _estat.update {
                 it.copy(
                     carregant = false,
                     senseConnexio = sollicituds == null || mur == null,
                     sollicituds = sollicituds ?: it.sollicituds,
                     mur = mur ?: it.mur,
+                    reaccions = reaccions ?: it.reaccions,
                     hiHaMes = (mur?.size ?: 0) >= PAGINA,
                 )
             }
+        }
+    }
+
+    fun obreAnima(e: EventMur) = _estat.update { it.copy(animant = e) }
+
+    fun tancaAnima() = _estat.update { it.copy(animant = null) }
+
+    fun tancaAvis() = _estat.update { it.copy(avis = null) }
+
+    /** Envia un emoji (si [emoji]) o un missatge a qui ha fet la cosa del mur que s'està animant. */
+    fun anima(emoji: String?, missatge: String?) {
+        val e = _estat.value.animant ?: return
+        if (emoji != null && emoji !in _estat.value.emojis) return
+        val text = missatge?.trim()?.take(MAX_MISSATGE)?.takeIf { it.isNotEmpty() }
+        if ((emoji == null) == (text == null)) return
+        _estat.update { it.copy(animant = null) }
+        viewModelScope.launch {
+            val objectiu = if (e.tipus == TipusEvent.FOTO) e.fotoId ?: return@launch else e.codiIne
+            val fet = remot { social.anima(e.usuariId, e.tipus, objectiu, emoji, text) } != null
+            _estat.update { it.copy(avis = if (fet) AvisGent.ENVIAT else AvisGent.ERROR) }
+        }
+    }
+
+    fun treuReaccio(r: ReaccioRebuda) {
+        viewModelScope.launch {
+            if (remot { social.treuReaccio(r.id) } != null) _estat.update { it.copy(reaccions = it.reaccions - r) }
+        }
+    }
+
+    /** Bloqueja qui t'ha enviat una reacció: deixa de seguir-te i se'n treuen les reaccions. */
+    fun bloqueja(r: ReaccioRebuda) {
+        viewModelScope.launch {
+            val fet = remot { social.bloqueja(r.autorId) } != null
+            if (fet) _estat.update { e -> e.copy(reaccions = e.reaccions.filterNot { it.autorId == r.autorId }, avis = AvisGent.BLOQUEJAT) }
+            else _estat.update { it.copy(avis = AvisGent.ERROR) }
+        }
+    }
+
+    fun denuncia(r: ReaccioRebuda, motiu: String?) {
+        viewModelScope.launch {
+            val fet = remot { social.denuncia(r.autorId, r, motiu) } != null
+            _estat.update { it.copy(avis = if (fet) AvisGent.DENUNCIAT else AvisGent.ERROR) }
         }
     }
 
@@ -135,8 +197,9 @@ class GentViewModel @Inject constructor(
         }
     }
 
-    private companion object {
-        const val PAGINA = 50
+    companion object {
+        private const val PAGINA = 50
+        const val MAX_MISSATGE = 80
     }
 }
 
@@ -153,6 +216,8 @@ data class PersonaEstat(
     val index: Map<CodiIne, Int> = emptyMap(),
     val noms: Map<CodiIne, String> = emptyMap(),
     val treballant: Boolean = false,
+    val bloquejat: Boolean = false,
+    val avis: AvisGent? = null,
 )
 
 /** El perfil d'una altra persona: seguir-la i, si et deixa, veure'n el mapa, les fotos i a qui segueix. */
@@ -187,6 +252,7 @@ class PersonaViewModel @Inject constructor(
 
     private suspend fun carrega() {
         val p = remot { social.perfil(id) }
+        val bloquejat = remot { social.hasBloquejat(id) } ?: false
         if (p == null) {
             _estat.update { it.copy(carregant = false, senseConnexio = true, treballant = false) }
             return
@@ -198,7 +264,7 @@ class PersonaViewModel @Inject constructor(
         _estat.update {
             it.copy(
                 carregant = false, senseConnexio = false, perfil = p, municipis = municipis, fotos = fotos,
-                seguits = seguits, treballant = false,
+                seguits = seguits, treballant = false, bloquejat = bloquejat,
             )
         }
     }
@@ -206,6 +272,19 @@ class PersonaViewModel @Inject constructor(
     fun segueix() = accio { social.segueix(id) }
 
     fun deixaDeSeguir() = accio { social.deixaDeSeguir(id) }
+
+    fun bloqueja() = accio { social.bloqueja(id) }
+
+    fun desbloqueja() = accio { social.desbloqueja(id) }
+
+    fun denuncia(motiu: String?) {
+        viewModelScope.launch {
+            val fet = remot { social.denuncia(id, null, motiu) } != null
+            _estat.update { it.copy(avis = if (fet) AvisGent.DENUNCIAT else AvisGent.ERROR) }
+        }
+    }
+
+    fun tancaAvis() = _estat.update { it.copy(avis = null) }
 
     private fun accio(bloc: suspend () -> Unit) {
         if (_estat.value.treballant) return

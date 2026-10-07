@@ -12,6 +12,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import java.time.OffsetDateTime
 import javax.inject.Inject
 
 // Seguir altra gent (docs/decisions-pendents.md). Tot això passa al servidor: cal connexió.
@@ -53,6 +54,18 @@ data class EventMur(
 /** Una foto d'una altra persona que es pot veure. */
 data class FotoPersona(val id: String, val codiIne: CodiIne, val ruta: String, val rutaMiniatura: String, val creatEl: Long)
 
+/** Una reacció que t'han enviat: un emoji (amb la seva frase) o un missatge, per un municipi o per una foto. */
+data class ReaccioRebuda(
+    val id: String,
+    val autorId: String,
+    val autorNom: String,
+    val objectiu: TipusEvent,
+    val objectiuId: String,
+    val emoji: String?,
+    val missatge: String?,
+    val creatEl: Long,
+)
+
 /** Totes les operacions poden llançar excepcions (sense connexió, per exemple). */
 interface ServeiSocial {
     suspend fun cerca(text: String): List<Persona>
@@ -85,6 +98,24 @@ interface ServeiSocial {
 
     /** El fitxer d'una foto (o d'una miniatura) d'algú altre que es pot veure. */
     suspend fun imatge(ruta: String): ByteArray
+
+    /** Anima algú que segueixes per un municipi o per una foto: amb un emoji o amb un missatge (no tots dos). */
+    suspend fun anima(destinatari: String, objectiu: TipusEvent, objectiuId: String, emoji: String?, missatge: String?)
+
+    /** Les reaccions que t'han enviat, de la més nova a la més antiga. */
+    suspend fun reaccionsRebudes(): List<ReaccioRebuda>
+
+    /** Treu una reacció que t'han enviat. */
+    suspend fun treuReaccio(id: String)
+
+    suspend fun bloqueja(id: String)
+
+    suspend fun desbloqueja(id: String)
+
+    suspend fun hasBloquejat(id: String): Boolean
+
+    /** Denuncia algú; si és per una reacció, se'n desa el text perquè es pugui revisar. */
+    suspend fun denuncia(id: String, reaccio: ReaccioRebuda?, motiu: String?)
 }
 
 class ServeiSocialSupabase @Inject constructor(client: dagger.Lazy<SupabaseClient>) : ServeiSocial {
@@ -182,6 +213,62 @@ class ServeiSocialSupabase @Inject constructor(client: dagger.Lazy<SupabaseClien
 
     override suspend fun imatge(ruta: String): ByteArray = supabase.storage.from(BUCKET).downloadAuthenticated(ruta)
 
+    override suspend fun anima(destinatari: String, objectiu: TipusEvent, objectiuId: String, emoji: String?, missatge: String?) {
+        require((emoji == null) != (missatge == null)) { "Un emoji o un missatge" }
+        supabase.from(REACCIONS).insert(
+            buildJsonObject {
+                put("destinatari_id", destinatari)
+                put("objectiu_tipus", objectiu.name)
+                put("objectiu_id", objectiuId)
+                if (emoji != null) put("emoji", emoji)
+                if (missatge != null) put("missatge", missatge.trim())
+            },
+        )
+    }
+
+    override suspend fun reaccionsRebudes(): List<ReaccioRebuda> {
+        val r = supabase.from(REACCIONS).select {
+            filter { eq("destinatari_id", jo()) }
+            order("creat_el", Order.DESCENDING)
+            limit(50)
+        }.decodeList<ReaccioRemota>()
+        val noms = persones(r.map { it.autorId }.distinct()).associate { it.id to it.nom }
+        return r.map {
+            ReaccioRebuda(
+                it.id, it.autorId, noms[it.autorId] ?: "", if (it.objectiuTipus == "FOTO") TipusEvent.FOTO else TipusEvent.MUNICIPI,
+                it.objectiuId, it.emoji, it.missatge, OffsetDateTime.parse(it.creatEl).toInstant().toEpochMilli(),
+            )
+        }
+    }
+
+    override suspend fun treuReaccio(id: String) {
+        supabase.from(REACCIONS).delete { filter { eq("id", id) } }
+    }
+
+    override suspend fun bloqueja(id: String) {
+        supabase.from(BLOQUEJOS).insert(buildJsonObject { put("bloquejat_id", id) })
+    }
+
+    override suspend fun desbloqueja(id: String) {
+        supabase.from(BLOQUEJOS).delete { filter { eq("bloquejador_id", jo()); eq("bloquejat_id", id) } }
+    }
+
+    override suspend fun hasBloquejat(id: String): Boolean =
+        supabase.from(BLOQUEJOS).select { filter { eq("bloquejador_id", jo()); eq("bloquejat_id", id) } }.decodeList<BloqueigRemot>().isNotEmpty()
+
+    override suspend fun denuncia(id: String, reaccio: ReaccioRebuda?, motiu: String?) {
+        supabase.from(DENUNCIES).insert(
+            buildJsonObject {
+                put("denunciat_id", id)
+                if (reaccio != null) {
+                    put("reaccio_id", reaccio.id)
+                    put("text_denunciat", reaccio.missatge ?: reaccio.emoji)
+                }
+                motiu?.trim()?.takeIf { it.isNotEmpty() }?.let { put("motiu", it.take(500)) }
+            },
+        )
+    }
+
     private suspend fun persones(ids: List<String>): List<Persona> {
         if (ids.isEmpty()) return emptyList()
         return supabase.from(PERFILS).select { filter { isIn("id", ids) } }.decodeList<PerfilRemot>().map { it.persona() }
@@ -234,7 +321,24 @@ class ServeiSocialSupabase @Inject constructor(client: dagger.Lazy<SupabaseClien
         @SerialName("creat_el") val creatEl: Long,
     )
 
+    @Serializable
+    private data class ReaccioRemota(
+        val id: String,
+        @SerialName("autor_id") val autorId: String,
+        @SerialName("objectiu_tipus") val objectiuTipus: String,
+        @SerialName("objectiu_id") val objectiuId: String,
+        val emoji: String? = null,
+        val missatge: String? = null,
+        @SerialName("creat_el") val creatEl: String,
+    )
+
+    @Serializable
+    private data class BloqueigRemot(@SerialName("bloquejat_id") val bloquejatId: String)
+
     private companion object {
+        const val REACCIONS = "reaccions"
+        const val BLOQUEJOS = "bloquejos"
+        const val DENUNCIES = "denuncies"
         const val PERFILS = "perfils"
         const val SEGUIMENTS = "seguiments"
         const val BUCKET = "descobreix-fotos"
