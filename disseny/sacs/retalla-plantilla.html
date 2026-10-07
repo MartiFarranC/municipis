@@ -19,6 +19,8 @@ h2{font:700 15px var(--display);letter-spacing:.1em;text-transform:uppercase;mar
 .prop[data-v="sac"]{border-color:var(--ok)}.prop[data-v="principi"]{border-color:#5AB8E8}.prop[data-v="fora"]{border-color:var(--massa);opacity:.6}.prop i{font-style:normal;font-size:12px;color:var(--ambre)}.prop[data-v="arreglar"]{border-color:var(--ambre)}
 .botons{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;width:100%}.v{font:600 12px var(--cos);padding:6px 0;border-radius:8px;border:1px solid var(--linia);background:var(--sup2);color:var(--text);cursor:pointer}
 .v:focus-visible{outline:2px solid var(--text)}.v.sac[aria-pressed="true"]{background:var(--ok);color:#0B1A10;border-color:var(--ok)}.v.principi[aria-pressed="true"]{background:#5AB8E8;color:#07182A;border-color:#5AB8E8}.v.fora[aria-pressed="true"]{background:var(--massa);color:#2A0E0A;border-color:var(--massa)}.v.arreglar[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre);border-color:var(--ambre)}
+.raresa{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:4px;width:100%}.r{font:600 11px var(--cos);padding:5px 0;border-radius:8px;border:1px solid var(--linia);background:var(--sup2);color:var(--text);cursor:pointer}
+.r.comuna[aria-pressed="true"]{background:#C3CCD6;color:#11151B}.r.rara[aria-pressed="true"]{background:#5AB8E8;color:#07182A}.r.llegendaria[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre)}
 .prop textarea{min-height:44px;font-size:13px}
 .prop:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 
@@ -35,7 +37,7 @@ label{font:600 13px var(--cos);color:var(--suau)}
 <div class="app">
   <span class="eti">Descobreix Catalunya · sacs</span>
   <h1>Retallem els extres</h1>
-  <p>Aquí només hi ha les que et van agradar i les que he arreglat. Per a cada una, tria <b>Sac</b> (surt dels sacs), <b>Principi</b> (la té tothom des del principi) o <b>Fora</b>. Si encara s'ha d'arreglar, tria <b>Arreglar</b> i escriu què. Als sacs n'hi han de quedar 10 portades, 10 animacions i 9 colors.</p>
+  <p>Aquí només hi ha les que et van agradar i les que he arreglat. Per a cada una, tria <b>Sac</b> (surt dels sacs), <b>Principi</b> (la té tothom des del principi) o <b>Fora</b>. Si encara s'ha d'arreglar, tria <b>Arreglar</b> i escriu què. Als sacs n'hi han de quedar 10 portades, 10 animacions i 9 colors. A les que van al sac, tria també la raresa: comuna, rara o llegendària.</p>
   <div class="resum" id="resum" aria-live="polite"></div>
   <p class="estat" id="estat">Carregant…</p>
   <div id="seccions"></div>
@@ -51,13 +53,14 @@ const estat=t=>{$('estat').textContent=t};
 const clau=(t,id)=>t+'--'+id;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function resum(){
-  $('resum').innerHTML=SECCIONS.map(([t,nom,n])=>{const ps=D[t].map(p=>vals[clau(t,p.id)]?.valor);const sac=ps.filter(v=>v==='sac').length,pr=ps.filter(v=>v==='principi').length,ar=ps.filter(v=>v==='arreglar').length,pend=ps.filter(v=>!v).length;
-    return `<span class="pill ${sac===n?'ok':sac>n?'massa':''}"><b>${sac}</b>/${n} ${nom.split(' ')[0].toLowerCase()} al sac · ${pr} principi · ${ar} arreglar · ${pend} per mirar</span>`}).join('');
+  $('resum').innerHTML=SECCIONS.map(([t,nom,n])=>{const ps=D[t].map(p=>vals[clau(t,p.id)]?.valor);const sac=ps.filter(v=>v==='sac').length,pr=ps.filter(v=>v==='principi').length,ar=ps.filter(v=>v==='arreglar').length,pend=ps.filter(v=>!v).length;const sr=D[t].filter(p=>vals[clau(t,p.id)]?.valor==='sac'&&!vals[clau(t,p.id)]?.raresa).length;
+    return `<span class="pill ${sac===n?'ok':sac>n?'massa':''}"><b>${sac}</b>/${n} ${nom.split(' ')[0].toLowerCase()} al sac · ${pr} principi · ${ar} arreglar · ${pend} per mirar${sr?` · ${sr} sense raresa`:''}</span>`}).join('');
 }
 function targeta(t,p,cls){
   const k=clau(t,p.id), v=vals[k]||{};
   return `<div class="prop ${cls}" data-k="${k}" data-v="${v.valor||''}">${p.svg}<b>${p.nom}</b>${p.arreglat?`<i>Arreglat: «${esc(p.arreglat)}»</i>`:''}
     <div class="botons" role="group" aria-label="${esc(p.nom)}">${VALORS.map(([x,txt])=>`<button class="v ${x}" data-x="${x}" aria-pressed="${v.valor===x}">${txt}</button>`).join('')}</div>
+    <div class="raresa" role="group" aria-label="Raresa de ${esc(p.nom)}" ${v.valor==='sac'?'':'hidden'}>${[['comuna','Comuna'],['rara','Rara'],['llegendaria','Llegendària']].map(([x,txt])=>`<button class="r ${x}" data-r="${x}" aria-pressed="${v.raresa===x}">${txt}</button>`).join('')}</div>
     <textarea aria-label="Què s'ha d'arreglar de ${esc(p.nom)}" placeholder="Què s'ha d'arreglar?" ${v.valor==='arreglar'||v.nota?'':'hidden'}>${esc(v.nota||'')}</textarea></div>`;
 }
 function pinta(){
@@ -66,10 +69,14 @@ function pinta(){
 }
 function desaLocal(){try{localStorage.setItem('extres3',JSON.stringify(vals))}catch(e){}}
 document.addEventListener('click',ev=>{
+  const rb=ev.target.closest('.r');
+  if(rb){const card=rb.closest('.prop'),k=card.dataset.k,v=vals[k]||{};v.raresa=v.raresa===rb.dataset.r?undefined:rb.dataset.r;vals[k]=v;
+    card.querySelectorAll('.r').forEach(y=>y.setAttribute('aria-pressed',y.dataset.r===v.raresa));resum();desaLocal();desa(k);return}
   const b=ev.target.closest('.v'); if(!b) return;
   const card=b.closest('.prop'), k=card.dataset.k, x=b.dataset.x;
   const v=vals[k]||{}; v.valor=v.valor===x?undefined:x; vals[k]=v;
   card.dataset.v=v.valor||''; card.querySelectorAll('.v').forEach(y=>y.setAttribute('aria-pressed',y.dataset.x===v.valor));
+  card.querySelector('.raresa').hidden=v.valor!=='sac';
   const ta=card.querySelector('textarea'); ta.hidden=!(v.valor==='arreglar'||v.nota); if(v.valor==='arreglar') ta.focus();
   resum(); desaLocal(); desa(k);
 });
@@ -85,7 +92,7 @@ async function desa(k){
   const [t,id]=k.split('--'), v=vals[k]||{};
   try{
     if(!v.valor&&!v.nota) await db.collection('extres3').doc(k).delete();
-    else await db.collection('extres3').doc(k).set({tipus:t,id,nom:D[t].find(p=>p.id===id).nom,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
+    else await db.collection('extres3').doc(k).set({tipus:t,id,nom:D[t].find(p=>p.id===id).nom,valor:v.valor||null,raresa:v.raresa||null,nota:v.nota||'',ts:Date.now()});
     estat('Desat. Claude podrà llegir les teves tries.');
   }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
 }
@@ -95,7 +102,7 @@ pinta();
   if(!db){estat('Les tries es desen en aquest navegador.');return}
   try{
     const q=await db.collection('extres3').get(); let n=0;
-    for(const d of q.docs){const x=d.data(); if(x&&x.tipus&&x.id){vals[clau(x.tipus,x.id)]={valor:x.valor||undefined,nota:x.nota||''};n++}}
+    for(const d of q.docs){const x=d.data(); if(x&&x.tipus&&x.id){vals[clau(x.tipus,x.id)]={valor:x.valor||undefined,raresa:x.raresa||undefined,nota:x.nota||''};n++}}
     pinta(); estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
   }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
 })();
