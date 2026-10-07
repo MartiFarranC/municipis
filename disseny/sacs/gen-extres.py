@@ -27,7 +27,22 @@ def rajola(c1,c2):
     return f'<g opacity=".35">{o}</g>'
 def barres(): return ''.join(f'<rect x="{x}" y="0" width="7" height="140" fill="#D7262B"/>' for x in (15,35,55,75))+'<rect x="10" y="14" width="80" height="14" rx="3" fill="#F2C230"/><rect x="8" y="106" width="84" height="12" rx="3" fill="#F2C230"/>'
 def estrelles(): return ''.join(f'<circle cx="{rnd.uniform(4,96):.1f}" cy="{rnd.uniform(4,136):.1f}" r="{rnd.choice([.4,.6,.8,1.1])}" fill="#FFE3A3" opacity="{rnd.uniform(.4,1):.2f}"/>' for _ in range(70))
-def muntanyes(c): return f'<path d="M0,140V112L14,96L24,106L40,84L54,102L66,90L80,104L100,86V140Z" fill="{c}" opacity=".55"/><path d="M35,90L40,84L45,90L42,89L40,92L38,89Z" fill="#fff" opacity=".6"/><path d="M76,92L80,88L84,92L82,91L80,93L78,91Z" fill="#fff" opacity=".6"/>'
+def muntanyes(c):
+    # Dues serralades; la neu només als cims, enganxada als vessants.
+    def serra(pts,color,op):
+        return f'<path d="M0,140V{pts[0][1]}'+''.join(f'L{x},{y}' for x,y in pts)+f'V140Z" fill="{color}" opacity="{op}"/>'
+    def neu(pts,alt):
+        o=''
+        for i in range(1,len(pts)-1):
+            (x0,y0),(x,y),(x1,y1)=pts[i-1],pts[i],pts[i+1]
+            if y>=y0 or y>=y1: continue
+            k=lambda xa,ya: (x+(xa-x)*alt/(ya-y), y+alt)
+            (xe,ye),(xd,yd)=k(x0,y0),k(x1,y1)
+            o+=f'<path d="M{x},{y}L{xd:.1f},{yd:.1f}L{(x+xd)/2+1:.1f},{y+alt-1.6:.1f}L{x:.1f},{y+alt-.4:.1f}L{(x+xe)/2-1:.1f},{y+alt-1.8:.1f}L{xe:.1f},{ye:.1f}Z" fill="#fff" opacity=".7"/>'
+        return o
+    lluny=[(0,104),(12,94),(22,100),(34,86),(46,98),(58,82),(70,96),(84,88),(100,98)]
+    a_prop=[(0,118),(14,104),(26,114),(42,96),(56,112),(68,102),(82,116),(100,106)]
+    return serra(lluny,c,.35)+neu(lluny,5)+serra(a_prop,c,.75)+neu(a_prop,5)
 def trencadis():
     o=''
     cols=['#2F8F9D','#E8B04A','#D9573B','#3E6FB0','#F1E7D0','#6BAA4F']
@@ -70,14 +85,19 @@ def barretines():
 
 
 def montserrat(c):
-    # Les agulles arrodonides de Montserrat, una al costat de l'altra.
-    o='M0,140V112'
-    x=0
-    for h,w in [(10,6),(18,7),(14,6),(24,8),(30,7),(22,6),(34,8),(26,7),(16,6),(28,8),(20,7),(12,6)]:
-        o+=f'C{x},{112-h} {x+w},{112-h} {x+w},112'
+    # El perfil de Montserrat: el massís s'enfila des dels costats fins a Sant Jeroni i acaba en una cresta serrada
+    # d'agulles arrodonides i atapeïdes, amb canals fondes de tant en tant. A sota, les canals verticals de la roca.
+    r=random.Random(11)
+    sostre=lambda x: 120-30*math.exp(-((x-60)/26)**2)-14*math.exp(-((x-26)/14)**2)
+    x=-4; d=f'M-4,140V{sostre(-4):.1f}'
+    while x<104:
+        w=r.uniform(4,8); dalt=sostre(x+w/2)-r.uniform(2,8)
+        vall=dalt+(r.uniform(10,16) if r.random()<.2 else r.uniform(3,6))
+        d+=f'L{x:.1f},{dalt+w*.5:.1f}A{w/2:.2f},{w*.55:.2f} 0 0 1 {x+w:.1f},{dalt+w*.5:.1f}L{x+w:.1f},{vall:.1f}'
         x+=w
-    o+=f'H100V140Z'
-    return f'<path d="{o}" fill="{c}" opacity=".7"/><path d="{o}" fill="none" stroke="#E8C36A" stroke-width=".6" opacity=".4"/>'
+    d+='L104,140Z'
+    canals=''.join(f'<path d="M{x:.1f},{sostre(x)+r.uniform(6,12):.1f}q{r.uniform(-1,1):.1f},10 0,{r.uniform(12,24):.1f}" fill="none" stroke="#E8C36A" stroke-width=".4" opacity=".22"/>' for x in [r.uniform(4,96) for _ in range(22)])
+    return f'<path d="{d}" fill="{c}" opacity=".85"/>{canals}'
 def delta(): return ''.join(f'<path d="M0,{y}h100" stroke="#9CC27A" stroke-width=".8" opacity=".35"/>' for y in range(40,140,5))+''.join(f'<path d="M{x},{y}q3,-3 6,0q3,-3 6,0" fill="none" stroke="#F4EEDD" stroke-width=".8" opacity=".6"/>' for x,y in [(14,40),(70,48),(40,32),(80,30)])
 def costa(): return '<path d="M0,96C20,90 30,104 50,98S80,86 100,92V140H0Z" fill="#E8D2A0" opacity=".5"/><path d="M0,100C20,94 30,108 50,102S80,90 100,96" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".6"/>'
 def terrats(c): return f'<path d="M0,140V112h10v-8h8v12h10v-18h6v-6h4v24h12v-10h10v-14h8v20h10v-8h8v-6h6V140Z" fill="{c}" opacity=".6"/>'
@@ -87,13 +107,26 @@ def roses():
         f'<path d="M-5,0c0,-5 3,-7 5,-7s5,2 5,7c0,4 -2,5 -5,5s-5,-1 -5,-5z" fill="#C8202A"/><path d="M-2,-2c1,-2 4,-2 4,1c0,2 -3,2 -3,0" fill="none" stroke="#7A0E14" stroke-width=".8"/><path d="M-4,1c2,2 6,2 8,-1" fill="none" stroke="#7A0E14" stroke-width=".7"/></g>')
     return '<g opacity=".55">'+''.join(rosa(x,y) for x in range(14,100,24) for y in range(18,140,30))+'</g>'
 def sardana_p(c): return ''.join(f'<g fill="{c}" opacity=".3"><circle cx="{50+38*math.cos(math.radians(a)):.1f}" cy="{70+44*math.sin(math.radians(a)):.1f}" r="2.4"/></g>' for a in range(0,360,20))
-def gotic(c):
-    # Silueta de la Sagrada Família: les torres punxegudes de la façana i la torre central més alta.
-    # Torres en forma de bala, molt punxegudes, acabades amb un pinacle rodó.
-    torre=lambda x,b,h,w: f'<path d="M{x-w},{b}V{b-h*.45}C{x-w},{b-h*.8} {x-w*.3},{b-h*.95} {x},{b-h}C{x+w*.3},{b-h*.95} {x+w},{b-h*.8} {x+w},{b-h*.45}V{b}Z"/><circle cx="{x}" cy="{b-h-2}" r="{w*.5}"/>'
-    o=''.join(torre(x,140,h,w) for x,h,w in [(30,58,3.4),(38,66,3.6),(62,66,3.6),(70,58,3.4),(50,84,4.2),(18,40,3),(82,40,3)])
-    o+='<path d="M8,140V118h84V140Z"/>'
-    return f'<g fill="{c}" opacity=".45">{o}</g>'
+def gotic(c,fons):
+    # La Sagrada Família vista des de la façana del Naixement: els quatre campanars (els de fora més baixos), amb els
+    # pinacles rodons, les torres dels evangelistes, la de Maria amb l'estrella i la de Jesús, la més alta, amb la creu.
+    def torre(x,dalt,w,base=124,finestres=True):
+        h=base-dalt
+        t=(f'<path d="M{x-w},{base}V{dalt+h*.42:.1f}C{x-w},{dalt+h*.14:.1f} {x-w*.35:.1f},{dalt+3:.1f} {x},{dalt}'
+           f'C{x+w*.35:.1f},{dalt+3:.1f} {x+w},{dalt+h*.14:.1f} {x+w},{dalt+h*.42:.1f}V{base}Z"/>')
+        if finestres:
+            t+=''.join(f'<path d="M{x-w*.55:.1f},{y:.1f}l{w*1.1:.1f},-1.4" stroke="{fons}" stroke-width=".7"/>' for y in [dalt+h*k for k in (.36,.44,.52,.6,.68,.76)])
+        return t
+    pinacle=lambda x,y,r: f'<circle cx="{x}" cy="{y}" r="{r}"/><path d="M{x},{y-r-2.4}v{2.6}M{x-1},{y-r-1.6}h2" stroke="{c}" stroke-width=".6"/>'
+    o=torre(50,30,4.2,finestres=False)+f'<path d="M49.6,30V20M47,23.4h6" stroke="{c}" stroke-width="1.2"/>'
+    o+=torre(41,44,3.2,finestres=False)+torre(59,44,3.2,finestres=False)+pinacle(41,43,1.4)+pinacle(59,43,1.4)
+    o+=torre(64,40,3.4,finestres=False)+f'<path d="M64,33l.9,2.3h2.4l-1.9,1.5l.7,2.4l-2.1,-1.4l-2.1,1.4l.7,-2.4l-1.9,-1.5h2.4z"/>'
+    for x,dalt,w in [(21,64,3.6),(33,54,3.8),(67,54,3.8),(79,64,3.6)]:
+        o+=torre(x,dalt,w)+pinacle(x,dalt-1.6,1.8)
+    # La façana: el cos de l'edifici i el xiprer punxegut entre els campanars del mig.
+    o+=f'<path d="M10,140V120h80V140Z"/><path d="M38,124L50,92L62,124Z"/><path d="M44,140V130a6,6 0 0 1 12,0V140Z" fill="{fons}"/>'
+    o+=f'<path d="M29,140V132a4,4 0 0 1 8,0V140ZM63,140V132a4,4 0 0 1 8,0V140Z" fill="{fons}"/>'
+    return f'<g fill="{c}" opacity=".5">{o}</g>'
 def oliveres(): return ''.join(f'<ellipse cx="{x}" cy="{y}" rx="3.4" ry="1.3" fill="#B8C48A" opacity=".45" transform="rotate({(x*7+y)%60-30} {x} {y})"/>' for x in range(6,100,9) for y in range(8,140,10))
 def pedra(): return ''.join(f'<rect x="{x+(6 if (y//10)%2 else 0)}" y="{y}" width="{rnd.uniform(9,13):.1f}" height="8" rx="3" fill="#C9B89A" opacity=".35"/>' for x in range(-6,100,13) for y in range(0,140,10))
 def riu(): return '<path d="M30,0C60,30 10,60 50,90S70,130 60,140" fill="none" stroke="#5AB8E8" stroke-width="7" opacity=".5"/>'
@@ -128,7 +161,7 @@ PORTADES=[
  ('roses','Roses de Sant Jordi',tapa('#F3E6D6','#9E1C20',roses(),text='#9E1C20')),
  ('rotllana','Rotllana de sardana',tapa('#14324A','#E8C36A',sardana_p('#E8C36A'))),
  ('fanal','Llum de fanal',tapa('#0B0E13','#F2B544',fanal_p())),
- ('gotic','Gòtic',tapa('#4A4038','#E8D7B0',gotic('#E8D7B0'))),
+ ('gotic','Gòtic',tapa('#4A4038','#E8D7B0',gotic('#E8D7B0','#4A4038'))),
  ('blau-intens','Blau intens',tapa('#1A2FA0','#E8ECF0')),
  ('oliveres','Oliveres',tapa('#5C6B3A','#F4EEDD',oliveres())),
  ('pedra-seca','Pedra seca',tapa('#6E5E48','#F4EEDD',pedra())),
@@ -164,8 +197,8 @@ def G(cls,inner,orig=None,x=''):
 persona=lambda x,y,s=1,c=A: C(x,y-7*s,2.4*s,c)+f'<path d="M{x-3*s},{y-3.5*s}h{6*s}l{1*s},{9*s}h{-8*s}z" fill="{c}"/>'
 ANIMACIONS=[
  ('castell','Castell que es fa',''.join(G('c-pis',''.join(persona(50+dx,86-14*i,1) for dx in ([-12,0,12] if i==0 else [-6,6] if i==1 else [0])),x=f'style="--i:{i};transform-box:view-box"') for i in range(3))+L('M20,90h60',1.4,AF)),
- ('fanal','Fanal que s\'encén',L('M18,22h18M22,22v-4',2.2,AF)+L('M36,22c8,0 12,4 12,10',2.2,AF)+G('c-halo',C(48,58,24,A,'opacity=".18"'))+L('M48,32v4M40,36h16l-2,4H42z',2)+G('c-vidre',f'<path d="M41,40h14l-2,24H43z" fill="{A}"/>')+L('M41,40h14l-2,24H43zM48,40v24',1.4,'#7A5410')+L('M42,64h12l-2,4H44z',2)),
- ('porro','Porró que aboca',G('c-porro',f'<path d="M36,72c-10,0 -14,-8 -10,-16c3,-6 10,-8 12,-14V30h8v12c2,6 9,8 12,14c4,8 0,16 -10,16z" fill="none" stroke="{A}" stroke-width="2.4" stroke-linejoin="round"/>'+L('M54,58l22,-20',3)+L('M38,30h8',3)+f'<path d="M29,62c3,4 14,4 18,0v6c-4,3 -15,3 -18,0z" fill="{AF}" opacity=".7"/>','42px 60px')+G('c-raig',L('M78,36q6,14 0,34',1.6,A,'stroke-dasharray="2 3"'))),
+ ('fanal','Fanal que s\'encén',L('M50,8v8',1.6,AF)+G('c-fanalet',G('c-llum',C(50,52,26,A,'opacity=".16"'),'50px 52px')+L('M43,24a7,7 0 0 1 14,0',2,AF)+f'<path d="M38,32h24l-4,-8H42z" fill="{A}"/>'+G('c-vidre',f'<path d="M40,34h20l-2,32H42z" fill="{A}" opacity=".35"/>')+L('M40,34h20l-2,32H42zM45,34v32M55,34v32',1.8)+G('c-flama',f'<path d="M50,44c-3,4 -4,8 0,12c4,-4 3,-8 0,-12z" fill="{A}"/>','50px 56px')+f'<rect x="48" y="56" width="4" height="8" fill="{AF}"/><path d="M38,66h24l-3,6H41z" fill="{A}"/>','50px 10px')),
+ ('porro','Porró que aboca',G('c-porro',f'<path d="M36,72c-10,0 -14,-8 -10,-16c3,-6 10,-8 12,-14V30h8v12c2,6 9,8 12,14c4,8 0,16 -10,16z" fill="none" stroke="{A}" stroke-width="2.4" stroke-linejoin="round"/>'+L('M54,58l22,-20',3)+L('M38,30h8',3),'42px 60px')+G('c-raig',L('M82,65q3,8 1,15',1.8,A,'stroke-dasharray="3 2"'))+f'<path d="M76,80h14l-2,12H78z" fill="none" stroke="{AF}" stroke-width="1.8" stroke-linejoin="round"/>'+G('c-got',f'<path d="M77.6,88h10.8l-.6,3.6H78.2z" fill="{A}"/>','83px 92px')),
  ('tio','El tió es mou',G('c-tio',f'<rect x="22" y="56" width="50" height="22" rx="11" fill="{AF}"/><circle cx="72" cy="67" r="11" fill="{A}"/>'+C(76,64,1.6,'#1A1305')+L('M64,76q4,3 8,0',1.4,'#1A1305'),'50px 78px')+G('c-bastonet',L('M20,30l22,20',3),'20px 30px')),
  ('bastons','Ball de bastons',G('c-bas-e',L('M30,76L58,28',3.4),'30px 76px')+G('c-bas-d',L('M70,76L42,28',3.4),'70px 76px')+G('c-xoc',L('M50,22v-8M42,24l-5,-6M58,24l5,-6',2,AF))),
  ('gegants','Gegants ballant',G('c-gegant',persona(34,80,2.6),'34px 84px')+G('c-gegant2',persona(66,80,2.6,AF),'66px 84px')),
@@ -198,10 +231,12 @@ ANIMACIONS=[
 ]
 CSS_ANIM='''
 .c-pis{animation:cpis 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*.3s)}@keyframes cpis{0%,10%{opacity:0;transform:translateY(-8px)}25%,75%{opacity:1;transform:none}90%,100%{opacity:0}}
-.c-halo{animation:chalo 1.6s ease-in-out infinite}@keyframes chalo{0%,100%{opacity:.3;transform:scale(.85)}50%{opacity:1;transform:scale(1.1)}}
-.c-vidre{animation:cvidre 1.6s steps(1) infinite}@keyframes cvidre{0%,100%{opacity:1}55%{opacity:.35}62%{opacity:1}70%{opacity:.5}}
-.c-porro{animation:cporro 2s ease-in-out infinite}@keyframes cporro{0%,100%{transform:rotate(0)}40%,70%{transform:rotate(-14deg)}}
-.c-raig{animation:craig 2s ease-in-out infinite}@keyframes craig{0%,30%,85%,100%{opacity:0}45%,70%{opacity:1}}
+.c-fanalet{animation:cfanalet 2.4s ease-in-out infinite}@keyframes cfanalet{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.c-llum{animation:cllum 2.4s ease-in-out infinite}@keyframes cllum{0%,8%{opacity:0;transform:scale(.4)}14%{opacity:.6}18%{opacity:.1}26%,100%{opacity:1;transform:scale(1)}}
+.c-vidre{animation:cvidre 2.4s steps(1) infinite}@keyframes cvidre{0%,8%{opacity:.25}14%{opacity:1}18%{opacity:.4}26%,100%{opacity:1}}
+.c-porro{animation:cporro 2.4s ease-in-out infinite}@keyframes cporro{0%,100%{transform:rotate(0)}35%,75%{transform:rotate(40deg)}}
+.c-raig{animation:craig 2.4s linear infinite}@keyframes craig{0%,36%,76%,100%{opacity:0}40%,72%{opacity:1;stroke-dashoffset:0}73%{stroke-dashoffset:-20}}
+.c-got{animation:cgot 2.4s ease-in-out infinite}@keyframes cgot{0%,40%{transform:scaleY(.2)}75%,100%{transform:scaleY(1)}}
 .c-tio{animation:ctio .8s ease-in-out infinite alternate}@keyframes ctio{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
 .c-bastonet{animation:cbast .8s ease-in-out infinite alternate}@keyframes cbast{from{transform:rotate(-20deg)}to{transform:rotate(10deg)}}
 .c-bas-e{animation:cbase .6s ease-in-out infinite alternate}@keyframes cbase{from{transform:rotate(-14deg)}to{transform:rotate(4deg)}}
