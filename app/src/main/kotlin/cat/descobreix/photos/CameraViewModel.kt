@@ -6,9 +6,12 @@ import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.domain.Joc
+import cat.descobreix.joc.cartell.Cartell
+import cat.descobreix.joc.cartell.Requadre
 import cat.descobreix.joc.geo.Localitzacio
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Missio
+import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.regles.ResultatProva
 import cat.descobreix.joc.regles.Ubicacio
 import cat.descobreix.ui.Missatge
@@ -32,7 +35,12 @@ data class CameraEstat(
     val missatge: Missatge? = null,
     /** Quan la foto s'ha desat: el missatge de confirmació. La pantalla es tanca. */
     val desada: Missatge? = null,
+    /** És la foto del cartell: es fa amb el requadre i es comprova que hi diu el nom del municipi. */
+    val esCartell: Boolean = false,
 )
+
+/** El requadre que l'usuari ha ajustat sobre la vista de la càmera, amb la mida de la vista en píxels. */
+data class RequadreVista(val requadre: Requadre, val amplada: Int, val alcada: Int)
 
 /** Fa fotos per a un municipi (i, si n'hi ha, per a una missió amb prova de foto). */
 @HiltViewModel
@@ -40,6 +48,7 @@ class CameraViewModel @Inject constructor(
     private val joc: Joc,
     private val fotos: FotosRepositori,
     private val ubicacio: ServeiUbicacio,
+    private val lector: LectorCartell,
     estatDesat: SavedStateHandle,
 ) : ViewModel() {
     private val codi: CodiIne = checkNotNull(estatDesat["codi"])
@@ -50,12 +59,13 @@ class CameraViewModel @Inject constructor(
 
     private var pendent: Pendent? = null
 
-    private class Pendent(val jpeg: ByteArray, val rotacio: Int, val ubicacio: Ubicacio, val localitzacio: Localitzacio)
+    private class Pendent(val jpeg: ByteArray, val rotacio: Int, val ubicacio: Ubicacio, val localitzacio: Localitzacio, val requadre: RequadreVista?)
 
     init {
         viewModelScope.launch {
             val d = joc.dades()
-            _estat.update { it.copy(nom = d.geografia.municipi(codi).nom, missio = missioId?.let { id -> d.missions.missio(id) }) }
+            val missio = missioId?.let { id -> d.missions.missio(id) }
+            _estat.update { it.copy(nom = d.geografia.municipi(codi).nom, missio = missio, esCartell = missio?.clau == Medalles.CLAU_CARTELL) }
         }
     }
 
@@ -66,7 +76,7 @@ class CameraViewModel @Inject constructor(
     fun comencaCaptura() = _estat.update { it.copy(processant = true) }
 
     /** La foto s'acaba de fer: es comprova que l'usuari és dins del municipi i es desa. */
-    fun fotoFeta(jpeg: ByteArray, rotacio: Int) {
+    fun fotoFeta(jpeg: ByteArray, rotacio: Int, requadre: RequadreVista? = null) {
         _estat.update { it.copy(processant = true) }
         viewModelScope.launch {
             val u = ubicacio.ubicacioActual()
@@ -76,7 +86,7 @@ class CameraViewModel @Inject constructor(
             }
             val d = joc.dades()
             val loc = withContext(Dispatchers.Default) { d.localitzador.localitza(u.lat, u.lon, u.precisioMetres) }
-            valida(Pendent(jpeg, rotacio, u, loc), null)
+            valida(Pendent(jpeg, rotacio, u, loc, requadre), null)
         }
     }
 
@@ -101,6 +111,11 @@ class CameraViewModel @Inject constructor(
             ResultatProva.Valida -> {
                 try {
                     val missio = _estat.value.missio
+                    val requadre = p.requadre
+                    if (_estat.value.esCartell && missio != null && requadre != null) {
+                        desaCartell(p, missio, requadre)
+                        return
+                    }
                     val foto = fotos.desa(codi, p.jpeg, p.rotacio, p.ubicacio, missio?.id)
                     val punts = missio?.let { joc.completaMissio(it, p.ubicacio, foto.id) }
                     if (missio == null) joc.fotoDesada()
@@ -118,6 +133,32 @@ class CameraViewModel @Inject constructor(
                 val m = joc.missatgeDe(r)
                 _estat.update { it.copy(processant = false, missatge = m) }
             }
+        }
+    }
+
+    /**
+     * La foto del cartell: es retalla pel requadre, es comprova que s'hi llegeix el nom del municipi i es desa com a
+     * cromo del catàleg. Si la missió ja estava feta (es repeteix la foto), no dona punts.
+     */
+    private suspend fun desaCartell(p: Pendent, missio: Missio, requadre: RequadreVista) {
+        val d = joc.dades()
+        val config = d.config.fotos
+        val nom = d.geografia.municipi(codi).nom
+        val retall = withContext(Dispatchers.Default) {
+            retallaCartell(p.jpeg, p.rotacio, requadre.requadre, requadre.amplada, requadre.alcada, config.costatLlargMaxim)
+        }
+        try {
+            if (!Cartell.diuElNom(lector.llegeix(retall), nom)) {
+                _estat.update { it.copy(processant = false, missatge = Missatge.CartellNoLlegit(nom)) }
+                return
+            }
+            val jpeg = withContext(Dispatchers.Default) { retall.aJpeg(config.qualitatJpeg) }
+            val foto = fotos.desa(codi, jpeg, 0, p.ubicacio, missio.id, esCromo = true)
+            val jaFeta = missio.id in joc.progres.first().completades
+            val punts = if (jaFeta) null else joc.completaMissio(missio, p.ubicacio, foto.id)
+            _estat.update { it.copy(processant = false, desada = if (punts == null) Missatge.CromoNou else Missatge.FotoDesada(punts.missio, punts.bonus)) }
+        } finally {
+            retall.recycle()
         }
     }
 }

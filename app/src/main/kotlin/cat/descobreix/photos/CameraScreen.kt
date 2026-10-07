@@ -8,9 +8,11 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,15 +32,24 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -46,6 +57,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
+import cat.descobreix.joc.cartell.Requadre
 import cat.descobreix.municipality.titolMissio
 import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
@@ -93,14 +105,19 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
 
     val captura = remember { ImageCapture.Builder().setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY).build() }
     val context = LocalContext.current
+    // El requadre del cartell, en fracció de la vista, i la mida de la vista per passar-lo a píxels de la foto.
+    var requadre by remember { mutableStateOf(Requadre(.08f, .36f, .92f, .58f)) }
+    var midaVista by remember { mutableStateOf(IntSize.Zero) }
 
     Box(
         Modifier
             .fillMaxSize()
-            .background(Colors.Fons),
+            .background(Colors.Fons)
+            .onSizeChanged { midaVista = it },
     ) {
         if (permisCamera == true) {
             VistaPrevia(captura, Modifier.fillMaxSize())
+            if (estat.esCartell) RequadreCartell(requadre, { requadre = it }, Modifier.fillMaxSize())
         }
         Column(
             Modifier
@@ -119,7 +136,11 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
                 Text(estat.nom, style = MaterialTheme.typography.titleLarge)
                 val m = estat.missio
                 Text(
-                    if (m != null) stringResource(R.string.camera_missio, titolMissio(m)) else stringResource(R.string.camera_text),
+                    when {
+                        estat.esCartell -> stringResource(R.string.camera_cartell)
+                        m != null -> stringResource(R.string.camera_missio, titolMissio(m))
+                        else -> stringResource(R.string.camera_text)
+                    },
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -145,7 +166,8 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
                             .background(Colors.Text)
                             .clickable(role = Role.Button) {
                                 viewModel.comencaCaptura()
-                                fesFoto(context, captura, viewModel::fotoFeta, viewModel::error)
+                                val r = if (estat.esCartell) RequadreVista(requadre, midaVista.width, midaVista.height) else null
+                                fesFoto(context, captura, { jpeg, rotacio -> viewModel.fotoFeta(jpeg, rotacio, r) }, viewModel::error)
                             }
                             .semantics { contentDescription = descripcio },
                     )
@@ -202,4 +224,65 @@ private fun fesFoto(
             override fun onError(exception: ImageCaptureException) = alFallar()
         },
     )
+}
+
+/**
+ * El requadre del cartell sobre la càmera: fora queda enfosquit. Es mou arrossegant-lo pel mig i es fa més gran o
+ * més petit arrossegant-ne les cantonades.
+ */
+@Composable
+private fun RequadreCartell(requadre: Requadre, onCanvia: (Requadre) -> Unit, modifier: Modifier) {
+    val actual by rememberUpdatedState(requadre)
+    val descripcio = stringResource(R.string.camera_requadre)
+    Canvas(
+        modifier
+            .semantics { contentDescription = descripcio }
+            .pointerInput(Unit) {
+                var cantonada = -1
+                detectDragGestures(
+                    onDragStart = { p ->
+                        val r = actual
+                        val punts = listOf(
+                            Offset(r.esquerra * size.width, r.dalt * size.height),
+                            Offset(r.dreta * size.width, r.dalt * size.height),
+                            Offset(r.esquerra * size.width, r.baix * size.height),
+                            Offset(r.dreta * size.width, r.baix * size.height),
+                        )
+                        val propera = punts.indices.minBy { (punts[it] - p).getDistance() }
+                        cantonada = if ((punts[propera] - p).getDistance() < 48.dp.toPx()) propera else 4
+                    },
+                ) { canvi, d ->
+                    canvi.consume()
+                    val dx = d.x / size.width
+                    val dy = d.y / size.height
+                    val r = actual
+                    val minim = .12f
+                    onCanvia(
+                        when (cantonada) {
+                            0 -> r.copy(esquerra = (r.esquerra + dx).coerceIn(0f, r.dreta - minim), dalt = (r.dalt + dy).coerceIn(0f, r.baix - minim))
+                            1 -> r.copy(dreta = (r.dreta + dx).coerceIn(r.esquerra + minim, 1f), dalt = (r.dalt + dy).coerceIn(0f, r.baix - minim))
+                            2 -> r.copy(esquerra = (r.esquerra + dx).coerceIn(0f, r.dreta - minim), baix = (r.baix + dy).coerceIn(r.dalt + minim, 1f))
+                            3 -> r.copy(dreta = (r.dreta + dx).coerceIn(r.esquerra + minim, 1f), baix = (r.baix + dy).coerceIn(r.dalt + minim, 1f))
+                            else -> {
+                                val mx = dx.coerceIn(-r.esquerra, 1f - r.dreta)
+                                val my = dy.coerceIn(-r.dalt, 1f - r.baix)
+                                Requadre(r.esquerra + mx, r.dalt + my, r.dreta + mx, r.baix + my)
+                            }
+                        },
+                    )
+                }
+            },
+    ) {
+        val l = requadre.esquerra * size.width
+        val t = requadre.dalt * size.height
+        val rr = requadre.dreta * size.width
+        val b = requadre.baix * size.height
+        val fosc = Color.Black.copy(alpha = .5f)
+        drawRect(fosc, Offset.Zero, Size(size.width, t))
+        drawRect(fosc, Offset(0f, b), Size(size.width, size.height - b))
+        drawRect(fosc, Offset(0f, t), Size(l, b - t))
+        drawRect(fosc, Offset(rr, t), Size(size.width - rr, b - t))
+        drawRoundRect(Colors.Ambre, Offset(l, t), Size(rr - l, b - t), CornerRadius(6.dp.toPx()), style = Stroke(3.dp.toPx()))
+        for (p in listOf(Offset(l, t), Offset(rr, t), Offset(l, b), Offset(rr, b))) drawCircle(Colors.Ambre, 9.dp.toPx(), p)
+    }
 }

@@ -45,6 +45,7 @@ import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
+import cat.descobreix.cataleg.CatalegScreen
 import cat.descobreix.sacs.AvisSacs
 import cat.descobreix.sacs.SacsScreen
 import cat.descobreix.ui.CelebracioMedalles
@@ -64,6 +65,7 @@ object Rutes {
     const val PASSAPORT = "passaport"
     const val SEGELLA = "segella/{codi}"
     const val SACS = "sacs?obre={obre}"
+    const val CATALEG = "cataleg"
 
     fun mapa(centre: String? = null) = if (centre == null) "mapa" else "mapa?centre=$centre"
     fun municipi(codi: String) = "municipi/$codi"
@@ -146,6 +148,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
                     onObreSobre = { nav.navigate(Rutes.SOBRE) },
                     onObrePassaport = { nav.navigate(Rutes.PASSAPORT) },
                     onObreSacs = { nav.navigate(Rutes.sacs()) },
+                    onObreCataleg = { nav.navigate(Rutes.CATALEG) },
                 )
             }
             composable(Rutes.MUNICIPI, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
@@ -178,6 +181,9 @@ private fun PantallesJoc(viewModel: AppViewModel) {
             }
             composable(Rutes.SEGELLA, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
                 SegellarScreen(onFet = { nav.popBackStack() })
+            }
+            composable(Rutes.CATALEG) {
+                CatalegScreen(onEnrere = { nav.popBackStack() }, onObreMunicipi = { nav.navigate(Rutes.municipi(it)) })
             }
             composable(Rutes.SACS, arguments = listOf(navArgument("obre") { type = NavType.BoolType; defaultValue = false })) { e ->
                 SacsScreen(onEnrere = { nav.popBackStack() }, obreAra = e.arguments?.getBoolean("obre") == true)

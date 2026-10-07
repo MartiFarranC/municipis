@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SegellEntity::class,
         SacEntity::class,
     ],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class BaseDades : RoomDatabase() {
@@ -42,6 +42,13 @@ abstract class BaseDades : RoomDatabase() {
                 )
                 db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_segells_codiIne` ON `segells` (`codiIne`)")
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_segells_comarca` ON `segells` (`comarca`)")
+            }
+        }
+
+        /** Versió 4: les fotos del cartell que van al catàleg. */
+        val MIGRACIO_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `fotos` ADD COLUMN `esCromo` INTEGER NOT NULL DEFAULT 0")
             }
         }
 

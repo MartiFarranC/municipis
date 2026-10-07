@@ -138,8 +138,8 @@ class FotosEnMemoria : FotosRepositori {
 
     override fun foto(id: String): Flow<Foto?> = llista.map { l -> l.firstOrNull { it.id == id } }
 
-    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto {
-        val f = Foto("f${llista.value.size}", codi, "", "", ubicacio?.lat, ubicacio?.lon, Visibilitat.PRIVADA, llista.value.none { it.codiIne == codi }, missioId, 0)
+    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?, esCromo: Boolean): Foto {
+        val f = Foto("f${llista.value.size}", codi, "", "", ubicacio?.lat, ubicacio?.lon, Visibilitat.PRIVADA, llista.value.none { it.codiIne == codi }, missioId, 0, esCromo)
         llista.value = llista.value + f
         return f
     }

@@ -45,7 +45,7 @@ class GestioDades @Inject constructor(
                 Exportacio.Propia(it.id, it.codiIne, it.titol, it.descripcio, it.completada, it.creatEl, it.modificatEl)
             },
             fotos = db.fotos().totesAra().map {
-                Exportacio.FotoExportada(it.id, it.codiIne, "fotos/${it.fitxer}", it.lat, it.lon, it.visibilitat, it.esPortada, it.missioId, it.creatEl, it.modificatEl)
+                Exportacio.FotoExportada(it.id, it.codiIne, "fotos/${it.fitxer}", it.lat, it.lon, it.visibilitat, it.esPortada, it.missioId, it.creatEl, it.modificatEl, it.esCromo)
             },
             segells = db.segells().totsAra().map {
                 Exportacio.SegellExportat(it.id, it.codiIne, it.comarca, it.pagina, it.x, it.y, it.gir, it.tinta, it.creatEl, it.modificatEl)
@@ -168,6 +168,7 @@ class GestioDades @Inject constructor(
             val missioId: String?,
             val creatEl: Long,
             val modificatEl: Long,
+            val esCromo: Boolean = false,
         )
     }
 }

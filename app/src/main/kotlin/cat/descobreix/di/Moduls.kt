@@ -16,6 +16,8 @@ import cat.descobreix.data.repositori.FotosRepositoriRoom
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositoriRoom
 import cat.descobreix.data.repositori.PreferenciesRepositori
+import cat.descobreix.photos.LectorCartell
+import cat.descobreix.photos.LectorTesseract
 import cat.descobreix.data.repositori.PreferenciesRepositoriDataStore
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.ProgresRepositoriRoom
@@ -47,7 +49,7 @@ object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3).build()
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4).build()
 
     // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
     @Provides
@@ -99,6 +101,10 @@ abstract class ModulRepositoris {
 
     @Binds
     abstract fun dades(d: DadesJoc): FontDadesJoc
+
+    @Binds
+    @Singleton
+    abstract fun lectorCartell(l: LectorTesseract): LectorCartell
 
     @Binds
     @Singleton

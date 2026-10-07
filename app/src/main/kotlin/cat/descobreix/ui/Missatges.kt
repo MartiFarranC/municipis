@@ -50,6 +50,12 @@ sealed interface Missatge {
     data object SensePermisCamera : Missatge
 
     data object Error : Missatge
+
+    /** No es llegeix el nom del municipi a la foto del cartell. */
+    data class CartellNoLlegit(val nom: String) : Missatge
+
+    /** S'ha canviat la foto del cartell del catàleg (sense punts: la missió ja estava feta). */
+    data object CromoNou : Missatge
 }
 
 /** Converteix el resultat d'una prova en un missatge per a l'usuari. */
@@ -103,12 +109,14 @@ fun textDe(m: Missatge): String = when (m) {
     Missatge.SensePermisUbicacio -> stringResource(R.string.missatge_sense_permis_ubicacio)
     Missatge.SensePermisCamera -> stringResource(R.string.missatge_sense_permis_camera)
     Missatge.Error -> stringResource(R.string.missatge_error)
+    is Missatge.CartellNoLlegit -> stringResource(R.string.missatge_cartell_no_llegit, m.nom)
+    Missatge.CromoNou -> stringResource(R.string.missatge_cromo_nou)
 }
 
 /** Si el missatge és prou important per mostrar-lo en un diàleg (i no en una notificació breu). */
 val Missatge.esDialeg: Boolean
     get() = this is Missatge.MunicipiBloquejat || this is Missatge.MassaLluny || this is Missatge.PrecisioInsuficient ||
-        this is Missatge.AltreMunicipi || this is Missatge.ForaDeCatalunya
+        this is Missatge.AltreMunicipi || this is Missatge.ForaDeCatalunya || this is Missatge.CartellNoLlegit
 
 @Composable
 fun DialegMissatge(missatge: Missatge, onTanca: () -> Unit) {
