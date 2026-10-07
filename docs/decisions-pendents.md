@@ -78,7 +78,12 @@ Les medalles substitueixen els assoliments: al perfil hi ha una **vitrina de med
 
 ## Passaport
 
-A més de les medalles, l'app té un **passaport**: cada municipi descobert hi posa el seu **segell**, com els segells d'un passaport de viatge (inspirat en l'estil C de les propostes de medalla). El passaport té una pàgina per comarca. Pendent de concretar el disseny.
+A més de les medalles, l'app té un **passaport**: cada municipi descobert hi posa el seu **segell**, com els segells d'un passaport de viatge (inspirat en l'estil C de les propostes de medalla). El passaport té una pàgina per comarca, amb la silueta i el recompte (per exemple, «12 de 21 municipis»).
+
+- **Tapa:** l'usuari tria el color entre tres opcions: **granat**, **blau fosc** o **els colors de l'app** (fosc amb ambre). Totes amb la silueta de Catalunya en daurat.
+- **Segell:** **rectangular**, amb la silueta del municipi, el nom i la data del descobriment. Cada segell surt amb un color de tinta i una mica girat, com en un passaport de veritat.
+- Pendent: si els municipis que encara no tens es veuen amb la silueta i el nom en pàl·lid o són sorpresa («?»).
+- Generador de propostes: `disseny/passaport/`.
 
 ## Coses per fer
 
@@ -101,6 +106,7 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
   - Ara les fotos només es guarden al mòbil. Per poder comprovar el repte caldrà pujar-les (o almenys la del cartell) al núvol, o guardar-ne una prova verificable.
   - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos).
 - **Medalles amb estil propi per comarca:** més endavant, cada comarca tindrà una medalla amb un dibuix propi. Per triar-lo, el Martí respondrà un **qüestionari per comarca** (què és el més representatiu de cada una), perquè no s'inventi res.
+- **Col·laboracions amb els ajuntaments** dels municipis. Pendent de decidir què s'hi ofereix i com.
 - **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
   - emojis per a les reaccions;
   - colors secundaris;
