@@ -28,5 +28,5 @@ class MissionsPropiesRepositoriRoom @Inject constructor(
         dao.actualitza(m.copy(completada = completada, modificatEl = rellotge.ara()))
     }
 
-    override suspend fun esborra(id: String) = dao.esborra(id)
+    override suspend fun esborra(id: String) = dao.esborra(id, rellotge.ara())
 }
