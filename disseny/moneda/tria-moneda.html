@@ -1,0 +1,128 @@
+<title>La moneda del joc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Una targeta per moneda: el dibuix a tres mides i com es llegeix a l'app (saldo, botó, guany). Fosc, com l'app. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;--tinta:#1A1305;--ok:#7FD1A0;--no:#F08A7A;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Source Sans 3",system-ui,sans-serif;color-scheme:dark}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:15px;line-height:1.45}
+.app{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:16px}
+.eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+h1{font:700 26px var(--display);margin:0;text-wrap:balance}
+p{margin:0;color:var(--suau);max-width:66ch}
+.resum{position:sticky;top:env(safe-area-inset-top,0px);background:var(--fons);padding-block:8px;z-index:2;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia);font-variant-numeric:tabular-nums}
+.pill b{font-family:var(--display);color:var(--ambre)}
+.estat{font-size:13px;color:var(--suau)}
+.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:12px}
+.mon{background:var(--sup);border:2px solid var(--linia);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.mon[data-v="si"]{border-color:var(--ok)}.mon[data-v="no"]{border-color:var(--no);opacity:.65}.mon[data-v="millorar"]{border-color:var(--ambre)}
+.cap{display:flex;align-items:center;gap:12px}
+.cap svg.gran{width:72px;height:72px;flex:none}
+.cap h2{margin:0;font:700 19px var(--display)}
+.cap small{display:block;color:var(--suau);font-size:13px}
+.mides{display:flex;align-items:center;gap:10px;margin-left:auto}
+.mides svg{display:block}
+.mostra{background:var(--fons);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.saldo{display:flex;align-items:center;gap:6px;font:700 20px var(--display);color:var(--ambre);font-variant-numeric:tabular-nums}
+.saldo svg{width:22px;height:22px}
+.boto{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--ambre);color:var(--tinta);border-radius:12px;padding:9px;font:700 14px var(--display)}
+.boto svg{width:16px;height:16px}
+.guany{font:700 15px var(--display);color:var(--ambre);display:flex;align-items:center;gap:6px}
+.guany svg{width:18px;height:18px}
+.desc{font-size:14px;color:var(--suau)}
+.botons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.v{font:600 13px var(--cos);padding:8px 0;border-radius:10px;border:1px solid var(--linia);background:var(--sup2);color:var(--text);cursor:pointer}
+.v:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.v.si[aria-pressed="true"]{background:var(--ok);color:#0B1A10;border-color:var(--ok)}
+.v.no[aria-pressed="true"]{background:var(--no);color:#2A0E0A;border-color:var(--no)}
+.v.millorar[aria-pressed="true"]{background:var(--ambre);color:var(--tinta);border-color:var(--ambre)}
+textarea{width:100%;min-height:42px;background:var(--fons);color:var(--text);border:1px solid var(--linia);border-radius:10px;padding:8px;font:inherit;font-size:14px;box-sizing:border-box}
+</style>
+<div class="app">
+  <span class="eti">Descobreix Catalunya · moneda</span>
+  <h1>La moneda del joc</h1>
+  <p>Ara es diuen «punts». Aquí tens opcions per canviar-los per una cosa amb més personalitat. Cada una surt dibuixada a tres mides i com es veuria a l'app: el saldo, el botó de desbloquejar un municipi i el que guanyes amb una missió. Marca les que t'agraden. Si escrius una nota, queda com «Millorar». Quan acabis, digues «ja està».</p>
+  <div class="resum"><span class="pill" id="compte"></span><span class="estat" id="estat">Carregant…</span></div>
+  <div class="graella" id="graella"></div>
+</div>
+<script>
+const A='#F2B544',AF='#B8862F',T='#1A1305';
+// Cada icona en un quadrat de 24 × 24, en ambre. c = color principal (per poder-la posar dins del botó en fosc).
+const I={
+ llums:c=>`<circle cx="12" cy="12" r="4.6" fill="${c}"/>${[0,45,90,135,180,225,270,315].map(a=>{const r=Math.PI*a/180;return `<path d="M${(12+7*Math.cos(r)).toFixed(1)} ${(12+7*Math.sin(r)).toFixed(1)}L${(12+10*Math.cos(r)).toFixed(1)} ${(12+10*Math.sin(r)).toFixed(1)}" stroke="${c}" stroke-width="2" stroke-linecap="round"/>`}).join('')}`,
+ espurnes:c=>`<path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z" fill="${c}"/><circle cx="19" cy="18" r="1.6" fill="${c}"/><circle cx="5" cy="19" r="1.1" fill="${c}"/>`,
+ estels:c=>`<path d="M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8 6.2 20l1.4-6.4L2.7 9.2l6.5-.7z" fill="${c}"/>`,
+ petjades:c=>`<ellipse cx="8" cy="9" rx="3" ry="4.4" fill="${c}"/><circle cx="8" cy="15.4" r="1.9" fill="${c}"/><ellipse cx="16" cy="12" rx="3" ry="4.4" fill="${c}"/><circle cx="16" cy="18.4" r="1.9" fill="${c}"/>`,
+ mollons:c=>`<path d="M8.5 20V7.5l3.5-3 3.5 3V20z" fill="${c}"/><path d="M12 7v13" stroke="${c===A?T:'#F2B544'}" stroke-width="1.4"/><path d="M3 20h18" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M4 16.5l2-1M20 16.5l-2-1" stroke="${c}" stroke-width="1.4" stroke-linecap="round"/>`,
+ claus:c=>`<circle cx="7.5" cy="12" r="4.5" fill="none" stroke="${c}" stroke-width="2.4"/><path d="M12 12h9M17.5 12v3.5M20.5 12v2.5" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>`,
+ rals:c=>`<circle cx="12" cy="12" r="9" fill="${c}"/><circle cx="12" cy="12" r="7" fill="none" stroke="${c===A?AF:'#0000'}" stroke-width="1"/><text x="12" y="16" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="10" fill="${c===A?T:'#F2B544'}">R</text>`,
+ croats:c=>`<circle cx="12" cy="12" r="9" fill="${c}"/><path d="M12 6v12M6 12h12" stroke="${c===A?T:'#F2B544'}" stroke-width="2.2"/><circle cx="8.6" cy="8.6" r="1" fill="${c===A?T:'#F2B544'}"/><circle cx="15.4" cy="8.6" r="1" fill="${c===A?T:'#F2B544'}"/><circle cx="8.6" cy="15.4" r="1" fill="${c===A?T:'#F2B544'}"/><circle cx="15.4" cy="15.4" r="1" fill="${c===A?T:'#F2B544'}"/>`,
+ diners:c=>`<circle cx="9" cy="10" r="6.5" fill="${c}"/><circle cx="15" cy="14" r="6.5" fill="${c}" stroke="${c===A?'#0B0E13':'#F2B544'}" stroke-width="1.4"/><circle cx="15" cy="14" r="2.6" fill="none" stroke="${c===A?T:'#F2B544'}" stroke-width="1.3"/>`,
+ castanyes:c=>`<path d="M12 4c-1.5 1.6-6.5 5-6.5 10.5a6.5 6.5 0 0 0 13 0C18.5 9 13.5 5.6 12 4z" fill="${c}"/><path d="M7 15.5c3 1.4 7 1.4 10 0" stroke="${c===A?AF:'#F2B544'}" stroke-width="1.2" fill="none"/><path d="M12 4V2.5" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
+ galets:c=>`<path d="M4 9c0-3.5 3.6-6 8-6s8 2.5 8 6v2c0 5-3.6 9-8 9s-8-4-8-9z" fill="${c}"/><path d="M8 6.5c1 2 1 9 0 11.5M12 5v14M16 6.5c-1 2-1 9 0 11.5" stroke="${c===A?AF:'#F2B544'}" stroke-width="1.2" fill="none"/>`,
+ segells:c=>`<rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="${c}" stroke-width="2"/><rect x="5.6" y="8.6" width="12.8" height="6.8" rx="1" fill="none" stroke="${c}" stroke-width="1"/><path d="M8 12h8" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
+};
+const M=[
+ {id:'llums',un:'llum',pl:'llums',d:'La llum del fanal del logo: amb llum s\'aixeca la boira dels municipis.'},
+ {id:'espurnes',un:'espurna',pl:'espurnes',d:'Espurnes de foc, com les del correfoc: guspires que encenen el mapa.'},
+ {id:'estels',un:'estel',pl:'estels',d:'Estels del cel de nit, com el fons de l\'app.'},
+ {id:'petjades',un:'petjada',pl:'petjades',d:'Cada pas que fas: es guanyen caminant i es gasten per arribar més lluny.'},
+ {id:'mollons',un:'molló',pl:'mollons',d:'El molló és la fita de pedra que marca el límit entre dos termes municipals. Gastar-ne és passar al municipi veí.'},
+ {id:'claus',un:'clau',pl:'claus',d:'Les claus obren els municipis bloquejats.'},
+ {id:'rals',un:'ral',pl:'rals',d:'El ral, una moneda antiga dels territoris catalans.'},
+ {id:'croats',un:'croat',pl:'croats',d:'El croat, la moneda de plata medieval de Barcelona, amb la creu.'},
+ {id:'diners',un:'diner',pl:'diners',d:'El diner, la moneda medieval més petita. I tothom entén «tinc 250 diners».'},
+ {id:'castanyes',un:'castanya',pl:'castanyes',d:'Més de broma: les castanyes de la castanyada.'},
+ {id:'galets',un:'galet',pl:'galets',d:'Més de broma: els galets de la sopa de Nadal.'},
+ {id:'segells',un:'segell',pl:'segells',d:'Segells, com els del passaport. Pot confondre\'s amb els segells de veritat del passaport.'},
+];
+const svg=(id,c,mida,cls='')=>`<svg class="${cls}" viewBox="0 0 24 24" width="${mida}" height="${mida}" aria-hidden="true">${I[id](c)}</svg>`;
+let vals={},db=null;const temps={};
+const $=x=>document.getElementById(x);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+try{const m=JSON.parse(localStorage.getItem('moneda1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function estat(t){$('estat').textContent=t}
+function compte(){const n=M.filter(m=>vals[m.id]?.valor==='si').length;$('compte').innerHTML=`<b>${n}</b> que t'agraden · ${M.filter(m=>vals[m.id]?.valor).length} de ${M.length} mirades`}
+function pinta(){
+  $('graella').innerHTML=M.map(m=>{const v=vals[m.id]||{};return `<article class="mon" data-id="${m.id}" data-v="${v.valor||''}">
+   <div class="cap">${svg(m.id,A,72,'gran')}<div><h2>${m.pl[0].toUpperCase()+m.pl.slice(1)}</h2><small>1 ${m.un} · 2 ${m.pl}</small></div>
+     <div class="mides">${svg(m.id,A,32)}${svg(m.id,A,20)}${svg(m.id,'#C9D1DC',20)}</div></div>
+   <div class="mostra"><div class="saldo">${svg(m.id,A,22)} 250 ${m.pl}</div>
+     <div class="boto">Desbloqueja · 60 ${svg(m.id,T,16)}</div>
+     <div class="guany">${svg(m.id,A,18)} +100 ${m.pl} · Missió completada!</div></div>
+   <p class="desc">${m.d}</p>
+   <div class="botons" role="group" aria-label="${esc(m.pl)}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([x,t])=>`<button class="v ${x}" data-x="${x}" aria-pressed="${v.valor===x}">${t}</button>`).join('')}</div>
+   <textarea id="nota-${m.id}" aria-label="Nota sobre ${esc(m.pl)}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></article>`}).join('');
+  compte();
+}
+function desaLocal(){try{localStorage.setItem('moneda1',JSON.stringify(vals))}catch(e){}}
+$('graella').addEventListener('click',e=>{
+  const b=e.target.closest('.v');if(!b)return;const card=b.closest('.mon'),id=card.dataset.id,v=vals[id]||(vals[id]={});
+  v.valor=v.valor===b.dataset.x?undefined:b.dataset.x;card.dataset.v=v.valor||'';
+  card.querySelectorAll('.v').forEach(y=>y.setAttribute('aria-pressed',y.dataset.x===v.valor));compte();desaLocal();desa(id);
+});
+$('graella').addEventListener('input',e=>{
+  if(e.target.tagName!=='TEXTAREA')return;const card=e.target.closest('.mon'),id=card.dataset.id,v=vals[id]||(vals[id]={});
+  v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';card.dataset.v='millorar';card.querySelectorAll('.v').forEach(y=>y.setAttribute('aria-pressed',y.dataset.x==='millorar'))}
+  compte();desaLocal();clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700);
+});
+async function desa(id){
+  if(!db){estat('Desat en aquest navegador.');return}
+  const v=vals[id]||{},m=M.find(x=>x.id===id);
+  try{
+    if(!v.valor&&!v.nota)await db.collection('moneda1').doc(id).delete();
+    else await db.collection('moneda1').doc(id).set({id,nom:m.pl,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
+    estat('Desat. Claude podrà llegir les teves respostes.');
+  }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){estat('Les respostes es desen en aquest navegador.');return}
+  try{
+    const q=await db.collection('moneda1').get();let n=0;
+    for(const d of q.docs){const x=d.data();if(x&&x.id){vals[x.id]={valor:x.valor||undefined,nota:x.nota||''};n++}}
+    pinta();estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
+})();
+</script>
