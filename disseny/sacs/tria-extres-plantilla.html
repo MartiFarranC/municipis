@@ -1,0 +1,90 @@
+<title>Extres dels sacs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Tres seccions (portades, animacions, colors) amb una graella de propostes; es tria tocant cada proposta. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--tinta-ambre:#1A1305;--ok:#7FD1A0;--massa:#F08A7A;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Source Sans 3",system-ui,sans-serif;color-scheme:dark}
+[hidden]{display:none!important}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:15px;line-height:1.4}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:flex;flex-direction:column;gap:14px}
+h1{font:700 24px var(--display);margin:0;text-wrap:balance}
+.eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+p{margin:0;color:var(--suau);max-width:64ch}
+.resum{display:flex;flex-wrap:wrap;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--fons);padding-block:8px;z-index:2}
+.pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia);font-variant-numeric:tabular-nums}
+.pill b{font-family:var(--display);color:var(--ambre)}.pill.ok b{color:var(--ok)}.pill.massa b{color:var(--massa)}
+h2{font:700 15px var(--display);letter-spacing:.1em;text-transform:uppercase;margin:16px 0 2px}
+.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.prop{background:var(--sup);border:2px solid var(--linia);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;align-items:center;cursor:pointer;color:var(--text);font:inherit;text-align:center}
+.prop:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.prop[aria-pressed="true"]{border-color:var(--ambre);background:color-mix(in srgb,var(--ambre) 10%,var(--sup))}
+.prop svg{width:100%;height:auto;display:block}
+.portada svg{max-width:110px}.anim svg{max-width:110px;background:var(--fons);border-radius:12px}
+.prop b{font-weight:600;font-size:14px}
+.prop .marca{font:700 12px var(--display);letter-spacing:.06em;color:var(--suau)}
+.prop[aria-pressed="true"] .marca{color:var(--ambre)}
+.estat{font-size:13px;color:var(--suau)}
+textarea{width:100%;min-height:60px;background:var(--sup);color:var(--text);border:1px solid var(--linia);border-radius:10px;padding:8px;font:inherit}
+label{font:600 13px var(--cos);color:var(--suau)}
+%%CSS%%
+</style>
+<div class="app">
+  <span class="eti">Descobreix Catalunya · sacs</span>
+  <h1>Portades, animacions i colors</h1>
+  <p>Toca les que vulguis que surtin als sacs: 10 portades del passaport, 10 animacions de càrrega i 9 colors per a l'app. Els colors substitueixen l'ambre (botons, municipis descoberts, xifres). Es desa sol. Si vols canviar alguna cosa d'una proposta, escriu-ho a la nota de la secció.</p>
+  <div class="resum" id="resum" aria-live="polite"></div>
+  <p class="estat" id="estat">Carregant…</p>
+  <div id="seccions"></div>
+</div>
+<script>
+const D=%%DADES%%;
+const SECCIONS=[['portades','Portades del passaport',10,'portada'],['animacions','Animacions de càrrega',10,'anim'],['colors','Colors de l\'app',9,'color']];
+const $=id=>document.getElementById(id);
+let tries={}, notes={}, db=null, temps={};
+try{const m=JSON.parse(localStorage.getItem('extres')||'{}');tries=m.tries||{};notes=m.notes||{}}catch(e){}
+const estat=t=>{$('estat').textContent=t};
+const clau=(t,id)=>t+'--'+id;
+function resum(){
+  $('resum').innerHTML=SECCIONS.map(([t,nom,n])=>{const k=D[t].filter(p=>tries[clau(t,p.id)]).length;return `<span class="pill ${k===n?'ok':k>n?'massa':''}"><b>${k}</b> de ${n} ${nom.split(' ')[0].toLowerCase()}</span>`}).join('');
+}
+function pinta(){
+  $('seccions').innerHTML=SECCIONS.map(([t,nom,n,cls])=>`<h2>${nom} · tria'n ${n}</h2><div class="graella">${D[t].map(p=>`
+    <button class="prop ${cls}" data-k="${clau(t,p.id)}" aria-pressed="${!!tries[clau(t,p.id)]}">${p.svg}<b>${p.nom}</b><span class="marca">${tries[clau(t,p.id)]?'TRIADA':'TOCA PER TRIAR'}</span></button>`).join('')}</div>
+    <label for="nota-${t}">Nota sobre les ${nom.toLowerCase()} (opcional)</label><textarea id="nota-${t}" data-t="${t}">${notes[t]||''}</textarea>`).join('');
+  resum();
+}
+function desaLocal(){try{localStorage.setItem('extres',JSON.stringify({tries,notes}))}catch(e){}}
+document.addEventListener('click',ev=>{
+  const b=ev.target.closest('.prop'); if(!b) return;
+  const k=b.dataset.k; if(tries[k]) delete tries[k]; else tries[k]=true;
+  b.setAttribute('aria-pressed',!!tries[k]); b.querySelector('.marca').textContent=tries[k]?'TRIADA':'TOCA PER TRIAR';
+  resum(); desaLocal(); desa(k);
+});
+document.addEventListener('input',ev=>{
+  const t=ev.target.dataset?.t; if(!t) return; notes[t]=ev.target.value; desaLocal();
+  clearTimeout(temps[t]); temps[t]=setTimeout(()=>desaNota(t),700);
+});
+async function desa(k){
+  if(!db){estat('Desat en aquest navegador.');return}
+  const [t,id]=k.split('--');
+  try{
+    if(!tries[k]) await db.collection('extres').doc(k).delete();
+    else await db.collection('extres').doc(k).set({tipus:t,id,nom:D[t].find(p=>p.id===id).nom,tria:true,ts:Date.now()});
+    estat('Desat. Claude podrà llegir les teves tries.');
+  }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+async function desaNota(t){
+  if(!db) return;
+  try{ if(notes[t]) await db.collection('extres').doc('nota--'+t).set({tipus:t,nota:notes[t],ts:Date.now()}); else await db.collection('extres').doc('nota--'+t).delete(); estat('Nota desada.') }catch(e){}
+}
+pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){estat('Les tries es desen en aquest navegador.');return}
+  try{
+    const q=await db.collection('extres').get(); let n=0;
+    for(const d of q.docs){const x=d.data(); if(!x) continue; if(x.nota!==undefined){notes[x.tipus]=x.nota}else if(x.tria){tries[clau(x.tipus,x.id)]=true;n++}}
+    pinta(); estat(n?`Hi havia ${n} tries desades.`:'Les tries es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les tries del núvol.')}
+})();
+</script>
