@@ -106,7 +106,7 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
     - ha fet la **foto del cartell d'entrada de cada municipi** (la missió «Fes una foto del cartell d'entrada»).
   - Les fotos s'han de fer amb la càmera de l'app, que ja no deixa triar fotos de la galeria i valida la ubicació amb el GPS.
   - Ara les fotos només es guarden al mòbil. Per poder comprovar el repte caldrà pujar-les (o almenys la del cartell) al núvol, o guardar-ne una prova verificable.
-  - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos).
+  - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos). **Serà de les últimes coses que es faran**, perquè encara no se sap si hi haurà medalla física.
 - **Medalles amb estil propi per comarca:** més endavant, cada comarca tindrà una medalla amb un dibuix propi. Per triar-lo, el Martí respondrà un **qüestionari per comarca** (què és el més representatiu de cada una), perquè no s'inventi res.
 - **Col·laboracions amb els ajuntaments** dels municipis. Pendent de decidir què s'hi ofereix i com.
 - **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar coses per personalitzar l'app:
