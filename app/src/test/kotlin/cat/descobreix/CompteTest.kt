@@ -219,7 +219,7 @@ class CompteTest {
     }
 
     @Test
-    fun `cal triar explorador o espectador i públic o privat: no hi ha res per defecte`() = runTest {
+    fun `cal triar explorador o espectador i públic o privat, no hi ha res per defecte`() = runTest {
         val vm = CompteViewModel(compte)
         vm.canviaNomUsuari("anna")
         assertFalse(vm.estat.value.potCrearPerfil)
