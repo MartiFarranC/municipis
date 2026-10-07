@@ -5,6 +5,7 @@ import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 
@@ -30,6 +31,12 @@ interface ProgresRepositori {
      * @throws IllegalStateException si ja estava completada.
      */
     suspend fun completaMissio(missioId: String, codi: CodiIne, punts: Int, bonus: Int, ubicacio: Ubicacio?, fotoId: String?)
+
+    /**
+     * Suma els punts de les medalles guanyades que encara no s'havien sumat (cada una només una vegada).
+     * Retorna les que són noves.
+     */
+    suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada>
 }
 
 interface MissionsPropiesRepositori {

@@ -41,8 +41,19 @@
     "puntsPrimerNivell": 150,
     "increment": 150
   },
-  "assoliments": {
+  "medalles": {
     "municipis": [10, 50, 100, 250, 500, 947],
-    "fotos": [1, 25, 100]
+    "cartells": [1, 25, 100, 500, 947],
+    "punts": {
+      "comarcaBronze": 25,
+      "comarcaPlata": 50,
+      "comarcaOr": 100,
+      "fitaMunicipis": 20,
+      "fitaCartells": 20,
+      "capitals": 100
+    }
+  },
+  "passaport": {
+    "segellsPerPagina": 20
   }
 }

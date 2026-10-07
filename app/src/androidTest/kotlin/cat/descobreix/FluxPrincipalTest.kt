@@ -98,6 +98,6 @@ class FluxPrincipalTest {
         escenari?.onActivity { it.onBackPressedDispatcher.onBackPressed() }
         regla.onNodeWithText("Perfil").performClick()
         espera("Nivell 1")
-        regla.onNode(hasScrollAction()).performScrollToNode(hasText("Assoliments"))
+        regla.onNode(hasScrollAction()).performScrollToNode(hasText("Medalles"))
     }
 }

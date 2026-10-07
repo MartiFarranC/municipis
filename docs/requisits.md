@@ -95,7 +95,7 @@ Totes dues proves només funcionen si el municipi ja està **desbloquejat**.
 ### 3.7 Progressió
 
 - Hi ha nivells calculats a partir dels punts totals guanyats. Els punts gastats en desbloquejar també compten.
-- **Assoliments.** Exemples: primer municipi, primera comarca completa, 10 / 50 / 100 municipis, totes les capitals de comarca.
+- **Medalles.** Substitueixen els assoliments. Una per comarca amb tres nivells (bronze: tots els municipis descoberts; plata: a més, totes les missions automàtiques; or: a més, la foto del cartell de cada municipi), fites de 10 / 50 / 100 / 250 / 500 / 947 municipis, totes les capitals de comarca i fites de 1 / 25 / 100 / 500 / 947 cartells. Cada medalla (i cada nivell de comarca) dona uns quants punts una sola vegada. Els valors són a `configuracio_joc.json`. Detall a `docs/decisions-pendents.md`.
 - **Comarques.** Les dades de comarques s'han de treure de l'Idescat, amb les 43 comarques actuals (el Lluçanès inclòs). No s'ha de fer servir el camp de comarca de la font de l'IGN, perquè no està al dia.
 
 ## 4. Pantalles
@@ -114,7 +114,7 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
 4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
-5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, els assoliments i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
+5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, la vitrina de medalles i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
 6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
 7. **Rànquing.** Classificació general i classificació entre amics.
 8. **Amics.** Buscar per nom d'usuari, enviar, acceptar i rebutjar sol·licituds, eliminar amics, i veure el mapa i les fotos visibles d'un amic.
@@ -259,7 +259,7 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 4. **Onboarding i regles de joc.** Desbloqueig, economia de punts, i tests que demostrin que el joc no es pot quedar encallat.
 5. **Fitxa i missions.** Proves amb GPS i amb foto, i missions pròpies.
 6. **Fotos i àlbum.** Amb la visibilitat de cada foto.
-7. **Perfil.** Nivells, assoliments i comarques.
+7. **Perfil.** Nivells, medalles i comarques.
 8. **Poliment.** Accessibilitat, rendiment, exportar i esborrar dades, atribucions.
 9. **Servidor.** Projecte Supabase, esquema, RLS i migracions amb tests.
 10. **Comptes.** Pantalla d'inici de sessió amb els tres mètodes, perfil, tancar sessió i esborrar les dades del joc.

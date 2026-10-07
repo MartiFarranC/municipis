@@ -10,17 +10,21 @@ import cat.descobreix.data.exportacio.GestioDades
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.Joc
-import cat.descobreix.joc.progressio.Assoliment
-import cat.descobreix.joc.progressio.DadesAssoliments
+import cat.descobreix.joc.progressio.Medalla
 import cat.descobreix.joc.progressio.Nivell
 import cat.descobreix.joc.progressio.ProgresComarca
+import cat.descobreix.joc.progressio.TipusMedalla
+import cat.descobreix.ui.components.Silueta
+import cat.descobreix.ui.components.siluetesComarques
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class GrupFotos(val nom: String, val fotos: List<Foto>)
@@ -36,7 +40,11 @@ data class PerfilEstat(
     val fotos: Int = 0,
     val comarquesCompletes: Int = 0,
     val comarques: List<ProgresComarca> = emptyList(),
-    val assoliments: List<Assoliment> = emptyList(),
+    /** La vitrina: primer les comarques (les més avançades al davant) i després les fites. */
+    val medalles: List<Medalla> = emptyList(),
+    val nomsComarques: Map<String, String> = emptyMap(),
+    /** Siluetes de les comarques per dibuixar les medalles. Buit fins que s'ha carregat el mapa. */
+    val siluetes: Map<String, Silueta> = emptyMap(),
     val album: List<GrupFotos> = emptyList(),
     val treballant: Boolean = false,
     /** Resultat de l'última exportació: true si ha anat bé. */
@@ -64,9 +72,16 @@ class PerfilViewModel @Inject constructor(
         }
         viewModelScope.launch {
             val d = joc.dades()
+            val mapa = joc.mapa()
+            val siluetes = withContext(Dispatchers.Default) { siluetesComarques(mapa, d.geografia) }
+            _estat.update { it.copy(siluetes = siluetes) }
+        }
+        viewModelScope.launch {
+            val d = joc.dades()
+            val noms = d.geografia.comarques.associate { it.codi to it.nom }
             combine(joc.progres, fotos.totes) { p, f -> p to f }.collect { (p, f) ->
-                val municipisComplets = p.descoberts.count { d.regles.municipiComplet(it, p.completades.keys) }
-                val comarques = d.assoliments.progresComarques(p.conjuntDescoberts)
+                val comarques = d.medalles.progresComarques(p.conjuntDescoberts)
+                val medalles = d.medalles.calcula(d.medalles.dades(p.conjuntDescoberts, p.completades.keys))
                 _estat.update {
                     it.copy(
                         carregant = false,
@@ -79,7 +94,8 @@ class PerfilViewModel @Inject constructor(
                         fotos = f.size,
                         comarquesCompletes = comarques.count { c -> c.completa },
                         comarques = comarques.sortedWith(compareByDescending<ProgresComarca> { c -> c.descoberts.toFloat() / c.total }.thenBy { c -> c.nom }),
-                        assoliments = d.assoliments.calcula(DadesAssoliments(p.conjuntDescoberts, p.completades.size, municipisComplets, f.size)),
+                        medalles = ordenaVitrina(medalles, noms),
+                        nomsComarques = noms,
                         album = f.groupBy { x -> x.codiIne }.map { (codi, l) -> GrupFotos(d.geografia.municipi(codi).nom, l) },
                     )
                 }
@@ -120,4 +136,15 @@ class PerfilViewModel @Inject constructor(
             _estat.update { it.copy(treballant = false) }
         }
     }
+}
+
+/** Les comarques primer, de més a menys avançades (i per nom), i després les fites en l'ordre de sempre. */
+internal fun ordenaVitrina(medalles: List<Medalla>, noms: Map<String, String>): List<Medalla> {
+    val (comarques, fites) = medalles.partition { it.tipus == TipusMedalla.COMARCA }
+    val ordenades = comarques.sortedWith(
+        compareByDescending<Medalla> { it.nivell?.ordinal ?: -1 }
+            .thenByDescending { it.actual.toFloat() / it.necessari }
+            .thenBy { noms[it.comarca].orEmpty() },
+    )
+    return ordenades + fites
 }

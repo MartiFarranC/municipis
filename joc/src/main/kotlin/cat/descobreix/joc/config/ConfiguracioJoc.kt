@@ -18,7 +18,8 @@ data class ConfiguracioJoc(
     val gps: Gps,
     val fotos: Fotos,
     val nivells: Nivells,
-    val assoliments: Assoliments,
+    val medalles: Medalles,
+    val passaport: Passaport,
 ) {
     @Serializable
     data class Desbloqueig(
@@ -72,9 +73,29 @@ data class ConfiguracioJoc(
     )
 
     @Serializable
-    data class Assoliments(
+    data class Medalles(
+        /** Fites de municipis descoberts. */
         val municipis: List<Int>,
-        val fotos: List<Int>,
+        /** Fites de fotos del cartell d'entrada. */
+        val cartells: List<Int>,
+        val punts: PuntsMedalles,
+    )
+
+    /** Punts que dona cada medalla (o cada nivell de les de comarca). */
+    @Serializable
+    data class PuntsMedalles(
+        val comarcaBronze: Int,
+        val comarcaPlata: Int,
+        val comarcaOr: Int,
+        val fitaMunicipis: Int,
+        val fitaCartells: Int,
+        val capitals: Int,
+    )
+
+    @Serializable
+    data class Passaport(
+        /** Quan una pàgina d'una comarca té aquests segells, se'n comença una altra. */
+        val segellsPerPagina: Int,
     )
 
     /** Punts que donen les missions genèriques, que es poden fer a qualsevol municipi. */
