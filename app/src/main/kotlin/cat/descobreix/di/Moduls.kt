@@ -2,9 +2,8 @@ package cat.descobreix.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import cat.descobreix.BuildConfig
 import cat.descobreix.data.assets.DadesJoc
@@ -40,6 +39,8 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import javax.inject.Singleton
 
+private val Context.preferenciesDataStore: DataStore<Preferences> by preferencesDataStore("preferencies")
+
 @Module
 @InstallIn(SingletonComponent::class)
 object ModulDades {
@@ -48,10 +49,10 @@ object ModulDades {
     fun baseDades(@ApplicationContext context: Context): BaseDades =
         Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3).build()
 
+    // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
     @Provides
     @Singleton
-    fun preferencies(@ApplicationContext context: Context): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("preferencies") }
+    fun preferencies(@ApplicationContext context: Context): DataStore<Preferences> = context.preferenciesDataStore
 
     @Provides
     fun rellotge(): Rellotge = Rellotge { System.currentTimeMillis() }
