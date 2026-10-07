@@ -50,6 +50,7 @@ import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.components.Xifra
+import cat.descobreix.ui.plural
 import cat.descobreix.ui.theme.Colors
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -93,7 +94,7 @@ fun PerfilScreen(
         }
         item {
             Text(
-                stringResource(R.string.punts_resum, estat.saldo, estat.puntsGuanyats),
+                plural(R.plurals.punts_resum, estat.saldo, estat.saldo, estat.puntsGuanyats),
                 style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari),
             )
         }
@@ -236,7 +237,7 @@ private fun Capcalera(estat: PerfilEstat) {
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
-            Text(stringResource(R.string.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
+            Text(plural(R.plurals.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
             BarraProgres(nivell.progres, alcada = 6)
         }
     }

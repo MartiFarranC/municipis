@@ -48,6 +48,8 @@ La relació de veïnatge surt de `dades/municipis_veins.json`, i s'ha de regener
 
 ### 3.3 Economia de punts
 
+**La moneda es diu «barretines».** A l'app, els punts es mostren com a barretines, amb la icona de la barretina dels emojis (`IconaBarretina`). Als textos sempre amb plural correcte: «1 barretina», «2 barretines». Al codi, a la configuració i al servidor es continuen dient «punts»; en aquest document també.
+
 **Regla obligatòria: el joc no pot quedar mai encallat.** Ha de ser impossible arribar a un estat en què l'usuari no pugui guanyar prou punts per desbloquejar cap altre municipi. Això ha de quedar cobert per tests.
 
 **Valors inicials.** Han de viure en un sol lloc de configuració, perquè s'hauran d'ajustar:

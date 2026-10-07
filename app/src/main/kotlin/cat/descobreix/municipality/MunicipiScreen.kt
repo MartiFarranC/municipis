@@ -246,7 +246,7 @@ private fun FitxaDescoberta(
                     }
                     Column(horizontalAlignment = Alignment.End, modifier = Modifier.semantics(mergeDescendants = true) {}) {
                         Text("${estat.puntsGuanyats}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
-                        Text(stringResource(R.string.de_punts, estat.puntsPossibles), style = MaterialTheme.typography.bodySmall)
+                        Text(plural(R.plurals.de_punts, estat.puntsPossibles, estat.puntsPossibles), style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 BarraProgres(if (estat.puntsPossibles == 0) 0f else estat.puntsGuanyats.toFloat() / estat.puntsPossibles)
@@ -566,20 +566,20 @@ private fun FitxaBloquejada(
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text(stringResource(R.string.tens_punts, estat.saldo), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
+                        Text(plural(R.plurals.tens_punts, estat.saldo, estat.saldo), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
                         if (estat.potDesbloquejar) {
-                            Text(stringResource(R.string.despres_punts, estat.saldo - estat.cost), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
+                            Text(plural(R.plurals.despres_punts, estat.saldo - estat.cost, estat.saldo - estat.cost), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
                         }
                     }
                     BotoPrincipal(
-                        stringResource(R.string.desbloqueja_cost, estat.cost),
+                        plural(R.plurals.desbloqueja_cost, estat.cost, estat.cost),
                         onDesbloqueja,
                         enabled = estat.potDesbloquejar,
                         carregant = estat.desbloquejant,
                     )
                     if (!estat.potDesbloquejar) {
                         Text(
-                            stringResource(R.string.et_falten, estat.cost - estat.saldo),
+                            plural(R.plurals.et_falten, estat.cost - estat.saldo, estat.cost - estat.saldo),
                             style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre),
                         )
                     }

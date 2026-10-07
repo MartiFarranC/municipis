@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,6 +41,7 @@ import cat.descobreix.joc.progressio.NivellMedalla
 import cat.descobreix.joc.progressio.TipusMedalla
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.DibuixMedalla
+import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.SardanaPremi
 import cat.descobreix.ui.components.Silueta
 import cat.descobreix.ui.theme.ChakraPetch
@@ -159,13 +161,16 @@ fun CelebracioMedalles(noves: MedallesNoves, nomsComarques: Map<String, String>,
                 }
             }
             if (noves.punts > 0) {
-                Text(
-                    stringResource(R.string.celebracio_punts, compte.value.toInt()),
-                    fontFamily = ChakraPetch,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 40.sp,
-                    color = Colors.Ambre,
-                )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        stringResource(R.string.celebracio_punts, compte.value.toInt()),
+                        fontFamily = ChakraPetch,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 40.sp,
+                        color = Colors.Ambre,
+                    )
+                    IconaBarretina(Modifier.size(38.dp))
+                }
             }
             BotoPrincipal(stringResource(R.string.continua), onTanca, Modifier.padding(top = 8.dp))
         }
