@@ -46,7 +46,14 @@ h1{font-family:var(--display);font-size:22px;margin:0;text-wrap:balance}
 .tapa .t1{font:700 22px var(--display);letter-spacing:.2em;color:var(--daurat)}
 .tapa .t2{font:700 11px var(--display);letter-spacing:.14em;color:var(--daurat)}
 .tapa svg{width:62%}
-.tampo{position:absolute;width:25%;pointer-events:none;z-index:4;transform-origin:center bottom}
+.tampo{position:absolute;width:38%;pointer-events:none;z-index:4;transform-origin:center bottom;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))}
+.ombra-tampo{position:absolute;width:36%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(40,30,15,.8),transparent);pointer-events:none;z-index:3}
+.ona{position:absolute;width:40%;aspect-ratio:1.6;border:3px solid;border-radius:12px;pointer-events:none;z-index:3}
+.esquitx{position:absolute;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:3}
+.models{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.models span{font:600 13px var(--cos);color:var(--suau);align-self:center}
+.model{font:600 14px var(--cos);padding:7px 12px;border-radius:999px;border:1px solid var(--linia);background:var(--sup);color:var(--text);cursor:pointer}
+.model[aria-pressed="true"]{background:var(--ambre);color:var(--tinta-ambre);border-color:var(--ambre)}
 .ajuda{font:600 15px var(--cos);color:var(--text);text-align:center;margin:0;min-height:1.45em}
 .pols{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid var(--ambre-fosc);pointer-events:none;animation:pols 1.4s ease-out infinite}
 @keyframes pols{from{transform:scale(.4);opacity:1}to{transform:scale(1.4);opacity:0}}
@@ -65,6 +72,8 @@ h1{font-family:var(--display);font-size:22px;margin:0;text-wrap:balance}
 
   <section id="pas-passaport" hidden>
     <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="models" role="group" aria-label="Tampó"><span>Tampó:</span>
+        <button class="model" data-m="fusta">De fusta</button><button class="model" data-m="modern">Modern</button><button class="model" data-m="sol">Sense tampó</button></div>
       <p class="ajuda" id="ajuda">Toca on vols posar el segell</p>
       <div class="escena">
         <div class="passaport">
@@ -162,8 +171,32 @@ function indicador(){ if(reduir||pols) return; pols=document.createElement('span
 function treuIndicador(){ if(pols){pols.remove();pols=null} }
 
 // 3 · Tocar la pàgina: baixa el tampó i deixa el segell on s'ha tocat
-function tampoSVG(tinta){return `<svg viewBox="0 0 60 80" aria-hidden="true"><ellipse cx="30" cy="12" rx="13" ry="11" fill="#8A5A34"/><rect x="25" y="18" width="10" height="34" rx="3" fill="#B07A4A"/>
-  <rect x="6" y="50" width="48" height="16" rx="3" fill="#5A3A1E"/><rect x="4" y="66" width="52" height="10" rx="2" fill="${tinta}"/></svg>`}
+// Tres tampons per provar: de fusta clàssic, automàtic modern, o cap (el segell cau sol).
+let model='fusta';
+try{const m=localStorage.getItem('tampo');if(['fusta','modern','sol'].includes(m))model=m}catch(e){}
+function tampoSVG(tinta){
+  if(model==='fusta') return `<svg viewBox="0 0 100 112" aria-hidden="true">
+    <defs><radialGradient id="pom" cx=".38" cy=".3" r=".8"><stop offset="0" stop-color="#C08A58"/><stop offset=".55" stop-color="#8A5A34"/><stop offset="1" stop-color="#5A3418"/></radialGradient>
+    <linearGradient id="coll" x1="0" x2="1"><stop offset="0" stop-color="#6A4222"/><stop offset=".4" stop-color="#B07A4A"/><stop offset="1" stop-color="#6A4222"/></linearGradient>
+    <linearGradient id="bloc" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#A06E40"/><stop offset="1" stop-color="#6E4524"/></linearGradient></defs>
+    <ellipse cx="50" cy="20" rx="19" ry="17" fill="url(#pom)"/><ellipse cx="44" cy="13" rx="6" ry="3.5" fill="#E8C49A" opacity=".55"/>
+    <path d="M42,34C42,44 38,50 36,58H64C62,50 58,44 58,34Z" fill="url(#coll)"/>
+    <rect x="30" y="56" width="40" height="7" rx="3" fill="#5A3418"/>
+    <rect x="4" y="62" width="92" height="28" rx="6" fill="url(#bloc)"/>
+    <path d="M12,70C30,68 50,72 88,69M12,79C34,77 58,81 88,78" fill="none" stroke="#C08A58" stroke-width="1" opacity=".5"/>
+    <rect x="4" y="89" width="92" height="5" fill="#B9BFC8"/><rect x="4" y="89" width="92" height="1.5" fill="#E8ECF0"/>
+    <rect x="6" y="94" width="88" height="10" rx="2" fill="${tinta}"/><rect x="6" y="101" width="88" height="3" rx="1" fill="#000" opacity=".25"/></svg>`;
+  return `<svg viewBox="0 0 100 112" aria-hidden="true">
+    <defs><linearGradient id="cos" x1="0" x2="1"><stop offset="0" stop-color="#1C2330"/><stop offset=".35" stop-color="#3A4558"/><stop offset="1" stop-color="#1C2330"/></linearGradient></defs>
+    <rect x="26" y="4" width="48" height="20" rx="9" fill="#F2B544"/><rect x="30" y="7" width="22" height="4" rx="2" fill="#FFE3A3" opacity=".7"/>
+    <rect x="36" y="22" width="28" height="10" fill="#151A22"/>
+    <path d="M14,32H86L92,90H8Z" fill="url(#cos)"/><path d="M14,32H86L87,40H13Z" fill="#F2B544" opacity=".9"/>
+    <rect x="22" y="50" width="56" height="24" rx="4" fill="#0B0E13"/><rect x="26" y="54" width="48" height="16" rx="2" fill="${tinta}" opacity=".8"/>
+    <rect x="6" y="90" width="88" height="6" fill="#273041"/><rect x="8" y="96" width="84" height="9" rx="2" fill="${tinta}"/></svg>`;
+}
+function ombra(px,py){
+  const o=document.createElement('div'); o.className='ombra-tampo'; o.style.left=(px*100)+'%'; o.style.top=(py*100)+'%'; $('pagina').appendChild(o); return o;
+}
 function toca(ev){
   if(!obert||ocupat||provisional) return;
   const r=$('pagina').getBoundingClientRect();
@@ -177,19 +210,37 @@ function toca(ev){
   const posa=()=>{provisional={s,el:posaSegell(s)}; if(!reduir) provisional.el.animate([{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(1.12)`,opacity:0},{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(1)`,opacity:.9}],{duration:180,easing:'ease-out'})};
   const fi=()=>{ocupat=false;$('decideix').hidden=false;$('ajuda').textContent='T\'agrada on ha quedat?';$('accepta').focus()};
   if(reduir){posa();fi();return}
+  if(model==='sol'){
+    // Sense tampó: el segell cau de dalt, pica i esquitxa una mica de tinta.
+    provisional={s,el:posaSegell(s)};
+    provisional.el.animate([{transform:`translate(-50%,-50%) rotate(${s.rot-8}deg) scale(1.9)`,opacity:0},{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(.96)`,opacity:.95,offset:.75},{transform:`translate(-50%,-50%) rotate(${s.rot}deg) scale(1)`,opacity:.9}],{duration:520,easing:'cubic-bezier(.5,0,.75,0)'});
+    setTimeout(()=>{
+      const ona=document.createElement('div'); ona.className='ona'; ona.style.left=(px*100)+'%'; ona.style.top=(py*100)+'%'; ona.style.borderColor=tinta; $('pagina').appendChild(ona);
+      ona.animate([{transform:'translate(-50%,-50%) scale(.6)',opacity:.7},{transform:'translate(-50%,-50%) scale(1.25)',opacity:0}],{duration:420,easing:'ease-out'}).onfinish=()=>ona.remove();
+      for(let i=0;i<7;i++){const g=document.createElement('span');g.className='esquitx';g.style.background=tinta;g.style.left=(px*100)+'%';g.style.top=(py*100)+'%';$('pagina').appendChild(g);
+        const ang=Math.random()*Math.PI*2, d=60+Math.random()*40;
+        g.animate([{transform:'translate(-50%,-50%)',opacity:.9},{transform:`translate(calc(-50% + ${Math.cos(ang)*d}px),calc(-50% + ${Math.sin(ang)*d*.6}px)) scale(.6)`,opacity:0}],{duration:450,easing:'ease-out'}).onfinish=()=>g.remove()}
+      $('pagina').animate([{transform:'translateY(0)'},{transform:'translateY(2px)'},{transform:'translateY(0)'}],{duration:160});
+    },380);
+    setTimeout(fi,700); return;
+  }
+  const o=ombra(px,py);
   const t=document.createElement('div'); t.className='tampo'; t.innerHTML=tampoSVG(tinta);
   t.style.left=(px*100)+'%'; t.style.top=(py*100)+'%'; $('pagina').appendChild(t);
-  const base=`translate(-50%,-92%) rotate(${s.rot}deg)`;
+  const base=`translate(-50%,-95%) rotate(${s.rot}deg)`;
   const a=t.animate([
-    {transform:`${base} translateY(-160%)`,opacity:0},
-    {transform:`${base} translateY(-12%)`,opacity:1,offset:.45},
-    {transform:`${base} translateY(4%) scaleY(.9)`,offset:.55},
-    {transform:`${base} translateY(4%) scaleY(.9)`,offset:.7},
-    {transform:`${base} translateY(-160%)`,opacity:0}
-  ],{duration:1200,easing:'ease-in-out'});
-  setTimeout(posa,640);
+    {transform:`${base} translateY(-120%) scale(1.15)`,opacity:0},
+    {transform:`${base} translateY(-6%) scale(1)`,opacity:1,offset:.42},
+    {transform:`${base} translateY(3%) scale(1.02,.94)`,offset:.5},
+    {transform:`${base} translateY(3%) scale(1.02,.94)`,offset:.66},
+    {transform:`${base} translateY(-30%) scale(1.04)`,opacity:1,offset:.82},
+    {transform:`${base} translateY(-120%) scale(1.15)`,opacity:0}
+  ],{duration:1300,easing:'ease-in-out'});
+  o.animate([{transform:'translate(-50%,-50%) scale(1.6)',opacity:0},{transform:'translate(-50%,-50%) scale(1)',opacity:.35,offset:.45},{transform:'translate(-50%,-50%) scale(1)',opacity:.35,offset:.66},{transform:'translate(-50%,-50%) scale(1.6)',opacity:0}],{duration:1300,easing:'ease-in-out'}).onfinish=()=>o.remove();
+  setTimeout(()=>{posa();$('pagina').animate([{transform:'translateY(0)'},{transform:'translateY(2px)'},{transform:'translateY(0)'}],{duration:160})},650);
   a.onfinish=()=>{t.remove();fi()};
 }
+
 $('pagina').addEventListener('pointerup',toca);
 $('pagina').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toca(e)}});
 
@@ -205,5 +256,7 @@ $('accepta').onclick=()=>{
   $('altre').hidden=pendents.length===0;
 };
 $('altre').onclick=()=>{ actual=pendents[Math.floor(Math.random()*pendents.length)]; mostraPremi() };
+document.querySelectorAll('.model').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.m===model);b.onclick=()=>{model=b.dataset.m;try{localStorage.setItem('tampo',model)}catch(e){}
+  document.querySelectorAll('.model').forEach(x=>x.setAttribute('aria-pressed',x===b))}});
 mostraPremi();
 </script>
