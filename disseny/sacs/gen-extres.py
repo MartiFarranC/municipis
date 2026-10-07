@@ -27,7 +27,7 @@ def rajola(c1,c2):
     return f'<g opacity=".35">{o}</g>'
 def barres(): return ''.join(f'<rect x="{x}" y="0" width="7" height="140" fill="#D7262B"/>' for x in (15,35,55,75))+'<rect x="10" y="14" width="80" height="14" rx="3" fill="#F2C230"/><rect x="8" y="106" width="84" height="12" rx="3" fill="#F2C230"/>'
 def estrelles(): return ''.join(f'<circle cx="{rnd.uniform(4,96):.1f}" cy="{rnd.uniform(4,136):.1f}" r="{rnd.choice([.4,.6,.8,1.1])}" fill="#FFE3A3" opacity="{rnd.uniform(.4,1):.2f}"/>' for _ in range(70))
-def muntanyes(c): return f'<path d="M0,140V112L14,96L24,106L40,84L54,102L66,90L80,104L100,86V140Z" fill="{c}" opacity=".55"/><path d="M40,84L45,91L49,88M80,104" fill="none" stroke="#fff" stroke-width="1.2" opacity=".5"/>'
+def muntanyes(c): return f'<path d="M0,140V112L14,96L24,106L40,84L54,102L66,90L80,104L100,86V140Z" fill="{c}" opacity=".55"/><path d="M35,90L40,84L45,90L42,89L40,92L38,89Z" fill="#fff" opacity=".6"/><path d="M76,92L80,88L84,92L82,91L80,93L78,91Z" fill="#fff" opacity=".6"/>'
 def trencadis():
     o=''
     cols=['#2F8F9D','#E8B04A','#D9573B','#3E6FB0','#F1E7D0','#6BAA4F']
@@ -36,26 +36,72 @@ def trencadis():
         pts=' '.join(f'{x+r*math.cos(a+rnd.uniform(-.4,.4)):.1f},{y+r*math.sin(a+rnd.uniform(-.4,.4)):.1f}' for a in [k*2*math.pi/5 for k in range(5)])
         o+=f'<polygon points="{pts}" fill="{rnd.choice(cols)}" stroke="#F4EEDD" stroke-width=".8"/>'
     return f'<g opacity=".55">{o}</g>'
-def corbes(c): return ''.join(f'<path d="M-5,{y} C20,{y-10} 35,{y+12} 55,{y} S90,{y-8} 105,{y+4}" fill="none" stroke="{c}" stroke-width=".8" opacity=".35"/>' for y in range(10,140,7))
-def vinya(): return ''.join(f'<circle cx="{x}" cy="{y}" r="2.6" fill="#7A3B6E" opacity=".5"/>' for x in range(8,100,10) for y in range(8,140,10) if (x+y)%3) 
+def corbes(c):
+    # Mapa topogràfic: corbes de nivell tancades al voltant de dos cims, amb el triangle del vèrtex i la quadrícula.
+    o=''.join(f'<ellipse cx="34" cy="48" rx="{6+i*6}" ry="{4+i*5}" transform="rotate(-15 34 48)"/>' for i in range(6))
+    o+=''.join(f'<ellipse cx="72" cy="104" rx="{5+i*6}" ry="{4+i*4.5}" transform="rotate(20 72 104)"/>' for i in range(5))
+    grid=''.join(f'<path d="M{x},0V140"/>' for x in range(0,101,20))+''.join(f'<path d="M0,{y}H100"/>' for y in range(0,141,20))
+    return (f'<g fill="none" stroke="{c}" stroke-width=".8" opacity=".45">{o}</g><g stroke="{c}" stroke-width=".4" opacity=".2">{grid}</g>'
+        f'<path d="M34,44l3,5h-6z" fill="{c}" opacity=".8"/><path d="M72,100l3,5h-6z" fill="{c}" opacity=".8"/>')
+def vinya():
+    # Vinya: rengs de ceps amb fulles i raïms.
+    def raim(x,y): return ''.join(f'<circle cx="{x+dx}" cy="{y+dy}" r="1.7" fill="#6A2A5E"/>' for dx,dy in [(-3,0),(0,0),(3,0),(-1.5,2.6),(1.5,2.6),(0,5.2)])
+    fulla=lambda x,y: f'<path d="M{x},{y}l-4,-2l1,-3l3,1l0,-3l3,2l1,3l-2,2z" fill="#4E7A3A"/>'
+    rengs=''.join(f'<path d="M0,{y}q25,-4 50,0t50,0" fill="none" stroke="#8A5A34" stroke-width="1.4"/>' for y in range(34,140,26))
+    return '<g opacity=".7">'+rengs+''.join(fulla(x,y-3)+raim(x+4,y) for x in range(10,100,22) for y in range(36,140,26))+'</g>'
 def cuir(): return '<rect x="9" y="9" width="82" height="122" rx="3" fill="none" stroke="#E9C9A0" stroke-width=".8" stroke-dasharray="2 2" opacity=".7"/>'
 def albada(): return '<defs><linearGradient id="alb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B2457"/><stop offset=".55" stop-color="#C2456A"/><stop offset="1" stop-color="#F2A65A"/></linearGradient></defs><rect width="100" height="140" fill="url(#alb)"/>'
 def neu(): return ''.join(f'<path d="M{x},{y-2.5}v5M{x-2.2},{y-1.2}l4.4,2.4M{x-2.2},{y+1.2}l4.4,-2.4" stroke="#FFFFFF" stroke-width=".6" opacity=".55"/>' for x,y in [(rnd.uniform(5,95),rnd.uniform(5,135)) for _ in range(40)])
-def castellers(c): return ''.join(f'<g opacity=".18" fill="{c}"><circle cx="{x}" cy="{y}" r="2.2"/><rect x="{x-2.6}" y="{y+2.6}" width="5.2" height="6" rx="1.5"/></g>' for x in range(10,100,12) for y in range(12,140,14))
-def barretines(): return ''.join(f'<path d="M{x-5},{y+3}c0,-6 2,-9 6,-9c3,0 4,2 3,4c-1,2 -3,1 -3,3h4v2h-10z" fill="#D7262B" opacity=".3"/>' for x in range(10,100,16) for y in range(14,140,18))
+def castellers(c):
+    # Castells: pisos de persones que s'enfilen, amb l'enxaneta a dalt.
+    p=lambda x,y,k=1: f'<circle cx="{x}" cy="{y-5*k}" r="{1.6*k}"/><path d="M{x-2*k},{y-3*k}h{4*k}l{.6*k},{6*k}h{-5.2*k}z"/>'
+    def castell(cx,base,k):
+        o=''
+        for i,n in enumerate([4,3,2,1]):
+            for j in range(n): o+=p(cx+(j-(n-1)/2)*5.2*k, base-i*8.5*k, k)
+        return o
+    return f'<g fill="{c}" opacity=".3">'+castell(20,136,1)+castell(80,136,1)+castell(50,136,1.2)+'</g>'
+BARR_COS='M50,290 L48,222 C30,226 6,214 4,180 C2,140 28,92 70,78 C120,62 200,66 245,90 C284,112 298,160 300,232 L301,260 Z'
+BARR_VORA='M38,271 L312,233 C318,232 321,235 322,241 L325,270 C326,276 323,280 317,281 L45,318 C39,319 36,316 35,310 L32,281 C31,275 33,272 38,271 Z'
+def barretines():
+    # La mateixa barretina dels emojis (calcada del dibuix de referència), petita i repetida.
+    una=f'<path d="{BARR_COS}" fill="#C8262C"/><path d="M188,104 C210,110 232,124 246,150" fill="none" stroke="#A01E25" stroke-width="14" stroke-linecap="round"/><path d="{BARR_VORA}" fill="#0E0E10"/>'
+    return ''.join(f'<g transform="translate({x} {y}) scale(.075) translate(-180 -190)" opacity=".85">{una}</g>' for x,y in [(16,34),(84,30),(14,92),(86,96),(30,128),(70,128)])
 
 
-def montserrat(c): return f'<path d="M0,140V108c4,-10 6,-18 10,-18s4,10 8,10s4,-16 8,-16s4,14 8,14s4,-20 9,-20s4,18 8,18s5,-14 9,-14s4,12 8,12s5,-18 9,-18s4,16 8,16s5,-8 7,-8V140Z" fill="{c}" opacity=".6"/>'
+def montserrat(c):
+    # Les agulles arrodonides de Montserrat, una al costat de l'altra.
+    o='M0,140V112'
+    x=0
+    for h,w in [(10,6),(18,7),(14,6),(24,8),(30,7),(22,6),(34,8),(26,7),(16,6),(28,8),(20,7),(12,6)]:
+        o+=f'C{x},{112-h} {x+w},{112-h} {x+w},112'
+        x+=w
+    o+=f'H100V140Z'
+    return f'<path d="{o}" fill="{c}" opacity=".7"/><path d="{o}" fill="none" stroke="#E8C36A" stroke-width=".6" opacity=".4"/>'
 def delta(): return ''.join(f'<path d="M0,{y}h100" stroke="#9CC27A" stroke-width=".8" opacity=".35"/>' for y in range(40,140,5))+''.join(f'<path d="M{x},{y}q3,-3 6,0q3,-3 6,0" fill="none" stroke="#F4EEDD" stroke-width=".8" opacity=".6"/>' for x,y in [(14,40),(70,48),(40,32),(80,30)])
 def costa(): return '<path d="M0,96C20,90 30,104 50,98S80,86 100,92V140H0Z" fill="#E8D2A0" opacity=".5"/><path d="M0,100C20,94 30,108 50,102S80,90 100,96" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".6"/>'
 def terrats(c): return f'<path d="M0,140V112h10v-8h8v12h10v-18h6v-6h4v24h12v-10h10v-14h8v20h10v-8h8v-6h6V140Z" fill="{c}" opacity=".6"/>'
-def roses(): return ''.join(f'<g opacity=".35"><circle cx="{x}" cy="{y}" r="3.2" fill="#D7262B"/><path d="M{x},{y+3}v7" stroke="#3E8A44" stroke-width="1"/><path d="M{x},{y+6}q4,-2 5,1" fill="#3E8A44"/></g>' for x in range(12,100,18) for y in range(14,140,20))
+def roses():
+    # Roses de Sant Jordi: capoll de pètals en espiral, tija i fulles.
+    def rosa(x,y): return (f'<g transform="translate({x} {y})"><path d="M0,4v12" stroke="#3E8A44" stroke-width="1.2"/><path d="M0,10q5,-3 6,1q-4,2 -6,-1z" fill="#3E8A44"/><path d="M0,12q-5,-3 -6,1q4,2 6,-1z" fill="#3E8A44"/>'
+        f'<path d="M-5,0c0,-5 3,-7 5,-7s5,2 5,7c0,4 -2,5 -5,5s-5,-1 -5,-5z" fill="#C8202A"/><path d="M-2,-2c1,-2 4,-2 4,1c0,2 -3,2 -3,0" fill="none" stroke="#7A0E14" stroke-width=".8"/><path d="M-4,1c2,2 6,2 8,-1" fill="none" stroke="#7A0E14" stroke-width=".7"/></g>')
+    return '<g opacity=".55">'+''.join(rosa(x,y) for x in range(14,100,24) for y in range(18,140,30))+'</g>'
 def sardana_p(c): return ''.join(f'<g fill="{c}" opacity=".3"><circle cx="{50+38*math.cos(math.radians(a)):.1f}" cy="{70+44*math.sin(math.radians(a)):.1f}" r="2.4"/></g>' for a in range(0,360,20))
-def gotic(c): return ''.join(f'<path d="M{x},140V60q8,-16 16,0V140" fill="none" stroke="{c}" stroke-width="1" opacity=".3"/>' for x in range(2,100,18))
+def gotic(c):
+    # Silueta de la Sagrada Família: les torres punxegudes de la façana i la torre central més alta.
+    # Torres en forma de bala, molt punxegudes, acabades amb un pinacle rodó.
+    torre=lambda x,b,h,w: f'<path d="M{x-w},{b}V{b-h*.45}C{x-w},{b-h*.8} {x-w*.3},{b-h*.95} {x},{b-h}C{x+w*.3},{b-h*.95} {x+w},{b-h*.8} {x+w},{b-h*.45}V{b}Z"/><circle cx="{x}" cy="{b-h-2}" r="{w*.5}"/>'
+    o=''.join(torre(x,140,h,w) for x,h,w in [(30,58,3.4),(38,66,3.6),(62,66,3.6),(70,58,3.4),(50,84,4.2),(18,40,3),(82,40,3)])
+    o+='<path d="M8,140V118h84V140Z"/>'
+    return f'<g fill="{c}" opacity=".45">{o}</g>'
 def oliveres(): return ''.join(f'<ellipse cx="{x}" cy="{y}" rx="3.4" ry="1.3" fill="#B8C48A" opacity=".45" transform="rotate({(x*7+y)%60-30} {x} {y})"/>' for x in range(6,100,9) for y in range(8,140,10))
 def pedra(): return ''.join(f'<rect x="{x+(6 if (y//10)%2 else 0)}" y="{y}" width="{rnd.uniform(9,13):.1f}" height="8" rx="3" fill="#C9B89A" opacity=".35"/>' for x in range(-6,100,13) for y in range(0,140,10))
 def riu(): return '<path d="M30,0C60,30 10,60 50,90S70,130 60,140" fill="none" stroke="#5AB8E8" stroke-width="7" opacity=".5"/>'
-def bolets(): return ''.join(f'<g opacity=".35"><path d="M{x-5},{y}a5,4 0 0 1 10,0z" fill="#D9573B"/><rect x="{x-1.5}" y="{y}" width="3" height="5" fill="#F4EEDD"/></g>' for x in range(10,100,16) for y in range(16,140,20))
+def bolets():
+    # Bolets de tardor: barret vermell amb punts blancs i peu blanc.
+    def bolet(x,y,k): return (f'<g transform="translate({x} {y}) scale({k})"><path d="M-3,0 q-1,7 1,9h4q2,-2 1,-9z" fill="#F4EEDD"/>'
+        f'<path d="M-9,1c0,-7 4,-11 9,-11s9,4 9,11z" fill="#C8302A"/><circle cx="-4" cy="-4" r="1.3" fill="#fff"/><circle cx="2" cy="-6" r="1.1" fill="#fff"/><circle cx="5" cy="-2" r="1" fill="#fff"/></g>')
+    return '<g opacity=".7">'+''.join(bolet(x,y,k) for x,y,k in [(14,40,.9),(84,34,1),(20,96,1.1),(80,100,.9),(12,128,.8),(88,128,1),(50,128,.7)])+'</g>'
 def fanal_p(): return '<defs><radialGradient id="llf" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#F2B544" stop-opacity=".55"/><stop offset="1" stop-color="#0B0E13" stop-opacity="0"/></radialGradient></defs><rect width="100" height="140" fill="url(#llf)"/>'
 
 PORTADES=[
@@ -118,8 +164,8 @@ def G(cls,inner,orig=None,x=''):
 persona=lambda x,y,s=1,c=A: C(x,y-7*s,2.4*s,c)+f'<path d="M{x-3*s},{y-3.5*s}h{6*s}l{1*s},{9*s}h{-8*s}z" fill="{c}"/>'
 ANIMACIONS=[
  ('castell','Castell que es fa',''.join(G('c-pis',''.join(persona(50+dx,86-14*i,1) for dx in ([-12,0,12] if i==0 else [-6,6] if i==1 else [0])),x=f'style="--i:{i};transform-box:view-box"') for i in range(3))+L('M20,90h60',1.4,AF)),
- ('fanal','Fanal que s\'encén',G('c-halo',C(50,52,26,A,'opacity=".18"'))+L('M50,14v10M38,26h24l-4,8H42z',2.2)+G('c-vidre',f'<path d="M42,34h16l-3,26H45z" fill="{A}"/>')+L('M40,60h20M50,60v26',2.2)),
- ('porro','Porró que aboca',G('c-porro',L('M34,62c-6,-14 6,-24 16,-24s22,10 16,24z',2.2)+L('M50,38v-14M66,52l18,-14',2.2),'50px 60px')+G('c-raig',L('M84,38q8,10 2,30',1.6,A,'stroke-dasharray="2 3"'))),
+ ('fanal','Fanal que s\'encén',L('M18,22h18M22,22v-4',2.2,AF)+L('M36,22c8,0 12,4 12,10',2.2,AF)+G('c-halo',C(48,58,24,A,'opacity=".18"'))+L('M48,32v4M40,36h16l-2,4H42z',2)+G('c-vidre',f'<path d="M41,40h14l-2,24H43z" fill="{A}"/>')+L('M41,40h14l-2,24H43zM48,40v24',1.4,'#7A5410')+L('M42,64h12l-2,4H44z',2)),
+ ('porro','Porró que aboca',G('c-porro',f'<path d="M36,72c-10,0 -14,-8 -10,-16c3,-6 10,-8 12,-14V30h8v12c2,6 9,8 12,14c4,8 0,16 -10,16z" fill="none" stroke="{A}" stroke-width="2.4" stroke-linejoin="round"/>'+L('M54,58l22,-20',3)+L('M38,30h8',3)+f'<path d="M29,62c3,4 14,4 18,0v6c-4,3 -15,3 -18,0z" fill="{AF}" opacity=".7"/>','42px 60px')+G('c-raig',L('M78,36q6,14 0,34',1.6,A,'stroke-dasharray="2 3"'))),
  ('tio','El tió es mou',G('c-tio',f'<rect x="22" y="56" width="50" height="22" rx="11" fill="{AF}"/><circle cx="72" cy="67" r="11" fill="{A}"/>'+C(76,64,1.6,'#1A1305')+L('M64,76q4,3 8,0',1.4,'#1A1305'),'50px 78px')+G('c-bastonet',L('M20,30l22,20',3),'20px 30px')),
  ('bastons','Ball de bastons',G('c-bas-e',L('M30,76L58,28',3.4),'30px 76px')+G('c-bas-d',L('M70,76L42,28',3.4),'70px 76px')+G('c-xoc',L('M50,22v-8M42,24l-5,-6M58,24l5,-6',2,AF))),
  ('gegants','Gegants ballant',G('c-gegant',persona(34,80,2.6),'34px 84px')+G('c-gegant2',persona(66,80,2.6,AF),'66px 84px')),
