@@ -4,7 +4,6 @@ import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isRoot
@@ -13,7 +12,7 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.printToString
@@ -91,11 +90,9 @@ class CompteUiTest {
         regla.onNode(hasSetTextAction()).performTextInput("anna_1")
         // Sense triar com jugarà ni si el compte és públic, tampoc.
         regla.onNodeWithText("Continua").assertIsNotEnabled()
-        regla.onNodeWithText("Explorador").performClick()
-        regla.onNode(hasScrollAction()).performScrollToNode(hasText("Compte privat"))
-        regla.onNodeWithText("Compte privat").performClick()
-        regla.onNode(hasScrollAction()).performScrollToNode(hasText("Continua"))
-        regla.onNodeWithText("Continua").performClick()
+        regla.onNodeWithText("Explorador").performScrollTo().performClick()
+        regla.onNodeWithText("Compte privat").performScrollTo().performClick()
+        regla.onNodeWithText("Continua").performScrollTo().performClick()
 
         espera("D'on ets?")
     }
