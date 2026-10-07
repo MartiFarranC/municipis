@@ -39,6 +39,8 @@ import cat.descobreix.map.MapaScreen
 import cat.descobreix.missions.MissionsScreen
 import cat.descobreix.municipality.MunicipiScreen
 import cat.descobreix.onboarding.OnboardingScreen
+import cat.descobreix.passaport.PassaportScreen
+import cat.descobreix.passaport.SegellarScreen
 import cat.descobreix.photos.CameraScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilScreen
@@ -57,11 +59,14 @@ object Rutes {
     const val CAMERA = "camera/{codi}?missio={missio}"
     const val FOTO = "foto/{id}"
     const val SOBRE = "sobre"
+    const val PASSAPORT = "passaport"
+    const val SEGELLA = "segella/{codi}"
 
     fun mapa(centre: String? = null) = if (centre == null) "mapa" else "mapa?centre=$centre"
     fun municipi(codi: String) = "municipi/$codi"
     fun camera(codi: String, missio: String? = null) = if (missio == null) "camera/$codi" else "camera/$codi?missio=$missio"
     fun foto(id: String) = "foto/$id"
+    fun segella(codi: String) = "segella/$codi"
 }
 
 private data class Pestanya(val ruta: String, val desti: String, val etiqueta: Int, val icona: ImageVector)
@@ -135,6 +140,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
                 PerfilScreen(
                     onObreFoto = { nav.navigate(Rutes.foto(it)) },
                     onObreSobre = { nav.navigate(Rutes.SOBRE) },
+                    onObrePassaport = { nav.navigate(Rutes.PASSAPORT) },
                 )
             }
             composable(Rutes.MUNICIPI, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
@@ -144,6 +150,7 @@ private fun PantallesJoc(viewModel: AppViewModel) {
                     onFesFoto = { codi, missio -> nav.navigate(Rutes.camera(codi, missio)) },
                     onObreFoto = { nav.navigate(Rutes.foto(it)) },
                     onVeureAlMapa = { codi -> irAlMapa(nav, codi) },
+                    onSegella = { nav.navigate(Rutes.segella(it)) },
                 )
             }
             composable(
@@ -160,6 +167,12 @@ private fun PantallesJoc(viewModel: AppViewModel) {
             }
             composable(Rutes.SOBRE) {
                 SobreScreen(onEnrere = { nav.popBackStack() })
+            }
+            composable(Rutes.PASSAPORT) {
+                PassaportScreen(onEnrere = { nav.popBackStack() }, onSegella = { nav.navigate(Rutes.segella(it)) })
+            }
+            composable(Rutes.SEGELLA, arguments = listOf(navArgument("codi") { type = NavType.StringType })) {
+                SegellarScreen(onFet = { nav.popBackStack() })
             }
         }
     }

@@ -5,12 +5,17 @@ import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.assets.construeixDades
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
+import cat.descobreix.data.repositori.CameraMapa
+import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.repositori.ProgresRepositori
+import cat.descobreix.data.repositori.SegellsRepositori
+import cat.descobreix.data.repositori.TapaPassaport
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioCompletada
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
+import cat.descobreix.domain.Segell
 import cat.descobreix.joc.dades.FormatLimits
 import cat.descobreix.joc.dades.FormatMapa
 import cat.descobreix.joc.dades.GeometriaMapa
@@ -18,6 +23,7 @@ import cat.descobreix.joc.geo.Localitzador
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
 import cat.descobreix.joc.progressio.MedallaGuanyada
+import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -149,3 +155,30 @@ class UbicacioFixa(var ubicacio: Ubicacio?) : ServeiUbicacio {
 
     override suspend fun ubicacioActual(): Ubicacio? = ubicacio
 }
+
+class SegellsEnMemoria : SegellsRepositori {
+    private val llista = MutableStateFlow<List<Segell>>(emptyList())
+    override val segells: Flow<List<Segell>> = llista
+
+    override suspend fun segellsAra(): List<Segell> = llista.value
+
+    override suspend fun posa(segell: SegellPosat) {
+        check(llista.value.none { it.posat.codi == segell.codi })
+        llista.value = llista.value + Segell(segell, 0)
+    }
+}
+
+class PreferenciesEnMemoria : PreferenciesRepositori {
+    private val camera = MutableStateFlow<CameraMapa?>(null)
+    private val tapa = MutableStateFlow(TapaPassaport.GRANAT)
+    override val cameraMapa: Flow<CameraMapa?> = camera
+    override suspend fun desaCameraMapa(camera: CameraMapa) {
+        this.camera.value = camera
+    }
+
+    override val tapaPassaport: Flow<TapaPassaport> = tapa
+    override suspend fun desaTapaPassaport(tapa: TapaPassaport) {
+        this.tapa.value = tapa
+    }
+}
+

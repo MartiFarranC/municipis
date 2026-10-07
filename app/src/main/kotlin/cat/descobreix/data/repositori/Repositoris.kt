@@ -3,9 +3,11 @@ package cat.descobreix.data.repositori
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
+import cat.descobreix.domain.Segell
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
 import cat.descobreix.joc.progressio.MedallaGuanyada
+import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 
@@ -72,6 +74,27 @@ interface PreferenciesRepositori {
     val cameraMapa: Flow<CameraMapa?>
 
     suspend fun desaCameraMapa(camera: CameraMapa)
+
+    /** El color de la tapa del passaport que ha triat l'usuari. */
+    val tapaPassaport: Flow<TapaPassaport>
+
+    suspend fun desaTapaPassaport(tapa: TapaPassaport)
+}
+
+/** Els tres colors que es poden triar per a la tapa del passaport. */
+enum class TapaPassaport { GRANAT, BLAU, APP }
+
+/** Els segells del passaport, al mòbil. */
+interface SegellsRepositori {
+    val segells: Flow<List<Segell>>
+
+    suspend fun segellsAra(): List<Segell>
+
+    /**
+     * Desa un segell nou.
+     * @throws IllegalStateException si el municipi ja té segell.
+     */
+    suspend fun posa(segell: SegellPosat)
 }
 
 data class CameraMapa(val x: Float, val y: Float, val escala: Float)

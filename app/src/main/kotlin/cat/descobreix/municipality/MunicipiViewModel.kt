@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
+import cat.descobreix.data.repositori.SegellsRepositori
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.Joc
@@ -17,6 +18,7 @@ import cat.descobreix.joc.model.Missio
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import cat.descobreix.joc.regles.ResultatProva
 import cat.descobreix.joc.regles.Ubicacio
+import cat.descobreix.passaport.PassaportViewModel
 import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.missatgeBloquejat
 import cat.descobreix.ui.missatgeDe
@@ -58,6 +60,8 @@ data class MunicipiEstat(
     val missatge: Missatge? = null,
     val avis: Missatge? = null,
     val desbloquejant: Boolean = false,
+    /** S'acaba de fer el check-in amb el GPS i el municipi encara no té segell: toca posar-lo al passaport. */
+    val segellPendent: CodiIne? = null,
 ) {
     val missionsFetes: Int get() = missions.count { it.completada }
     val portada: Foto? get() = fotos.firstOrNull { it.esPortada } ?: fotos.firstOrNull()
@@ -70,6 +74,7 @@ class MunicipiViewModel @Inject constructor(
     private val propies: MissionsPropiesRepositori,
     fotos: FotosRepositori,
     private val ubicacio: ServeiUbicacio,
+    private val segells: SegellsRepositori,
     estatDesat: SavedStateHandle,
 ) : ViewModel() {
     val codi: CodiIne = checkNotNull(estatDesat["codi"])
@@ -168,7 +173,10 @@ class MunicipiViewModel @Inject constructor(
         when (r) {
             ResultatProva.Valida -> {
                 val punts = joc.completaMissio(missio, u, null)
-                _estat.update { it.copy(provant = null, avis = Missatge.PuntsGuanyats(punts.missio, punts.bonus)) }
+                val segell = missio.clau == PassaportViewModel.CLAU_CHECKIN && segells.segellsAra().none { it.posat.codi == missio.municipi }
+                _estat.update {
+                    it.copy(provant = null, avis = Missatge.PuntsGuanyats(punts.missio, punts.bonus), segellPendent = if (segell) missio.municipi else it.segellPendent)
+                }
             }
             is ResultatProva.CalTriarMunicipi -> {
                 pendent = Triple(missio, u, loc)
@@ -197,4 +205,6 @@ class MunicipiViewModel @Inject constructor(
     fun tancaMissatge() = _estat.update { it.copy(missatge = null) }
 
     fun tancaAvis() = _estat.update { it.copy(avis = null) }
+
+    fun segellObert() = _estat.update { it.copy(segellPendent = null) }
 }

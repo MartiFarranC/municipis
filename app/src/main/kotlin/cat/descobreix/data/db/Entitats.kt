@@ -88,3 +88,22 @@ data class FotoEntity(
     val creatEl: Long,
     val modificatEl: Long,
 )
+
+/**
+ * Un segell del passaport: un per municipi, on l'usuari l'ha posat a la pàgina de la seva comarca.
+ * [x] i [y] són el centre del segell en fracció de la pàgina; [gir] en graus; [tinta] l'índex del color.
+ */
+@Entity(tableName = "segells", indices = [Index(value = ["codiIne"], unique = true), Index(value = ["comarca"])])
+data class SegellEntity(
+    @PrimaryKey val id: String,
+    val codiIne: String,
+    val comarca: String,
+    val pagina: Int,
+    val x: Float,
+    val y: Float,
+    val gir: Float,
+    val tinta: Int,
+    val creatEl: Long,
+    val modificatEl: Long,
+)
+

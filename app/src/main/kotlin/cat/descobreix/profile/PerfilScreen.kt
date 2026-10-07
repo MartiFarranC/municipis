@@ -56,6 +56,7 @@ import cat.descobreix.ui.theme.Colors
 fun PerfilScreen(
     onObreFoto: (String) -> Unit,
     onObreSobre: () -> Unit,
+    onObrePassaport: () -> Unit,
     viewModel: PerfilViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -116,6 +117,8 @@ fun PerfilScreen(
                 }
             }
         }
+
+        item { BotoSecundari(stringResource(R.string.passaport), onObrePassaport, icona = Icones.Mapa) }
 
         item { Titol(stringResource(R.string.medalles)) }
         item {

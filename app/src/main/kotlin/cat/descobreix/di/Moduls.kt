@@ -21,6 +21,8 @@ import cat.descobreix.data.repositori.PreferenciesRepositoriDataStore
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.ProgresRepositoriRoom
 import cat.descobreix.data.repositori.Rellotge
+import cat.descobreix.data.repositori.SegellsRepositori
+import cat.descobreix.data.repositori.SegellsRepositoriRoom
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.data.ubicacio.ServeiUbicacioFused
 import dagger.Binds
@@ -42,7 +44,7 @@ object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).build()
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2).build()
 
     @Provides
     @Singleton
@@ -83,6 +85,10 @@ abstract class ModulRepositoris {
     @Binds
     @Singleton
     abstract fun preferencies(r: PreferenciesRepositoriDataStore): PreferenciesRepositori
+
+    @Binds
+    @Singleton
+    abstract fun segells(r: SegellsRepositoriRoom): SegellsRepositori
 
     @Binds
     abstract fun dades(d: DadesJoc): FontDadesJoc
