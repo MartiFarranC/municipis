@@ -100,6 +100,18 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
   - Només es guarda la part de dins del requadre (la foto queda retallada a la mida del cartell).
   - Es comprova amb el GPS que la foto s'ha fet al municipi, com les altres missions de foto.
   - Si és vàlida, completa la missió del cartell i la foto passa al catàleg. És també la prova per a la medalla física.
+- **Decisions del catàleg i la càmera del cartell** (pàgina «Catàleg i càmera del cartell», `disseny/cataleg/`):
+  - El catàleg és un botó al perfil (no una pestanya).
+  - La foto va a la casella en fer la foto del cartell.
+  - Caselles sense foto: els municipis descoberts surten amb el nom i un marc buit; els altres, tapats.
+  - Cada casella només té la foto (sense el nom a sota).
+  - A la pantalla hi ha el recompte per comarca (sense cercador ni filtre).
+  - En tocar una casella amb foto, s'obre en gran, amb un botó per anar al municipi.
+  - El requadre de la càmera s'ajusta amb els dits.
+  - Només es desa el retall.
+  - La foto del cartell es pot repetir per canviar el cromo, sense punts.
+  - Les fotos del cartell fetes abans, sense requadre, no valen per al catàleg: la missió es manté feta, però la casella queda buida fins que es torni a fer la foto amb el requadre.
+  - Es comprova el GPS i també que el cartell digui el nom del municipi (llegint el text de la foto al mòbil).
 - **Medalles per comarca:**
   - Cada comarca completada (tots els seus municipis descoberts) dona una **medalla digital**, que es veu al perfil.
   - **El repte** és completar els **947 municipis**.
