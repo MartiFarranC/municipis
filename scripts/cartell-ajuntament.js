@@ -50,7 +50,7 @@ async function main() {
   <div class="distintiu">★ Municipi col·laborador</div>
   <div class="peu">
     <div class="qr">${qr}</div>
-    <p><b>Escaneja el codi</b> amb el mòbil per instal·lar l'app. No té anuncis i, de moment, només és per a Android.</p>
+    <p><b>Escaneja el codi</b> amb el mòbil per instal·lar l'app. És gratuïta, sense anuncis, i de moment només per a Android.</p>
   </div>
 </div>
 </html>

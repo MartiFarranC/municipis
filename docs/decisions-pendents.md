@@ -9,6 +9,11 @@ Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin
 - **Abans de parlar amb els ajuntaments:** crear els comptes d'**Instagram** i **TikTok** del projecte.
 - Guia i llista del que falta: `docs/web-collaboradors.md`.
 
+## Gratuïta, amb donacions
+
+- L'app és **gratuïta**, sense anuncis.
+- Sempre hi haurà l'opció de fer una **donació**, amb un servei com Buy Me a Coffee. **Pendent:** triar el servei i on va l'enllaç (a la web i a «Sobre l'app»). Només un enllaç: cap SDK de pagaments dins de l'app.
+
 ## Per més endavant: Obtainium
 
 - La publicació ja és a la CI (`docs/obtainium.md`), però encara no s'ha posat en marxa: falta crear la clau de signatura, afegir els secrets a GitHub i configurar Obtainium al mòbil.
