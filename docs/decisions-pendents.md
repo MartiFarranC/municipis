@@ -2,17 +2,6 @@
 
 Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin, passen a `requisits.md` i s'esborren d'aquí.
 
-## Actualitzacions automàtiques al mòbil (Obtainium)
-
-- L'app s'instal·la i s'actualitza amb [Obtainium](https://github.com/ImranR98/Obtainium), que vigila les publicacions (releases) de GitHub.
-- **Quan:** cada vegada que la compilació passa a `main`, la CI publica una release amb l'APK.
-- **Repositori:** públic. Obtainium hi accedeix sense token.
-- **Cal fer:**
-  - una clau de signatura fixa per a les versions de prova, perquè cada APK s'instal·li sobre l'anterior;
-  - un número de versió (`versionCode`) que creixi a cada compilació, perquè Android accepti l'actualització;
-  - un pas a la CI que publiqui la release;
-  - les passes per configurar Obtainium al mòbil.
-
 ## Perfils: Explorador i Espectador
 
 - En entrar, l'usuari tria entre dos perfils:

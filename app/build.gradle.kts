@@ -17,8 +17,11 @@ android {
         applicationId = "cat.descobreix"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        // A la CI, el número de la compilació, que sempre creix: Android només accepta una actualització
+        // si el versionCode és més gran que el de l'app instal·lada (docs/obtainium.md).
+        val compilacio = System.getenv("VERSIO_CODI")?.toIntOrNull()
+        versionCode = compilacio ?: 1
+        versionName = if (compilacio != null) "1.0.$compilacio" else "1.0"
         testInstrumentationRunner = "cat.descobreix.HiltTestRunner"
 
         // Projecte de Supabase (docs/requisits.md, secció 9). Només la URL i la clau pública
@@ -26,12 +29,30 @@ android {
         val local = Properties().apply {
             rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
         }
-        buildConfigField("String", "SUPABASE_URL", "\"${local.getProperty("supabase.url", "")}\"")
-        buildConfigField("String", "SUPABASE_ANON_KEY", "\"${local.getProperty("supabase.anonKey", "")}\"")
+        // A la CI que publica l'app, surten dels secrets del repositori.
+        val url = local.getProperty("supabase.url") ?: System.getenv("SUPABASE_URL") ?: ""
+        val anonKey = local.getProperty("supabase.anonKey") ?: System.getenv("SUPABASE_ANON_KEY") ?: ""
+        buildConfigField("String", "SUPABASE_URL", "\"$url\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$anonKey\"")
+    }
+
+    // La clau de signatura de les versions publicades (docs/obtainium.md). Mai al repositori: la CI la treu
+    // dels secrets i la deixa en un fitxer temporal. Sempre la mateixa, perquè cada APK s'instal·li sobre l'anterior.
+    val fitxerClau = System.getenv("SIGNATURA_FITXER")
+    signingConfigs {
+        if (fitxerClau != null) {
+            create("publicacio") {
+                storeFile = file(fitxerClau)
+                storePassword = System.getenv("SIGNATURA_CONTRASENYA")
+                keyAlias = System.getenv("SIGNATURA_ALIES")
+                keyPassword = System.getenv("SIGNATURA_CONTRASENYA_CLAU") ?: System.getenv("SIGNATURA_CONTRASENYA")
+            }
+        }
     }
 
     buildTypes {
         release {
+            if (fitxerClau != null) signingConfig = signingConfigs.getByName("publicacio")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
