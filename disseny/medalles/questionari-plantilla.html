@@ -1,0 +1,124 @@
+<title>Medalles de comarca</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Punt 7: què ha de sortir a la medalla de cada comarca. Generat per gen-questionari.py. Fosc, com l'app. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;--tinta:#1A1305;
+  --bronze:#C98A4E;--bronze-f:#8A5A2E;--bronze-c:#EDBB8A;--bronze-t:#5E3A1A;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Source Sans 3",system-ui,sans-serif;color-scheme:dark}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:15px;line-height:1.45;margin:0}
+.app{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:16px}
+.eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+h1{font:700 26px var(--display);margin:0;text-wrap:balance}
+p{margin:0;color:var(--suau);max-width:64ch}
+.resum{position:sticky;top:0;background:var(--fons);padding-block:8px;z-index:2;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia);font-variant-numeric:tabular-nums}
+.pill b{font-family:var(--display);color:var(--ambre)}
+.filtre{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:none;border:1px solid var(--linia);color:var(--suau);cursor:pointer;min-height:32px}
+.filtre[aria-pressed="true"]{border-color:var(--ambre);color:var(--ambre)}
+.estat{font-size:13px;color:var(--suau)}
+h2{font:700 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--suau);margin:14px 0 0}
+.preg{background:var(--sup);border:1px solid var(--linia);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.preg h3{margin:0;font:700 17px var(--display)}
+.opcions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:10px}
+.op{background:var(--sup2);border:2px solid var(--linia);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px;color:var(--text);text-align:left;font:inherit;cursor:pointer;min-width:0}
+.op[aria-pressed="true"]{border-color:var(--ambre);background:#221E14}
+.op:focus-visible,.filtre:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.op b{font-weight:600;font-size:14px}.op small{color:var(--suau);font-size:13px}
+.op svg{width:100%;max-width:150px;align-self:center}
+.prop{align-self:flex-start;font:700 11px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--tinta);background:var(--ambre-f);padding:2px 7px;border-radius:6px}
+.marca{font:700 12px var(--display);color:var(--suau)}.op[aria-pressed="true"] .marca{color:var(--ambre)}
+.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:12px}
+.com{background:var(--sup);border:1px solid var(--linia);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.com.feta{border-color:var(--ambre-f)}
+.cap{display:flex;gap:12px;align-items:center}
+.cap svg{width:64px;height:64px;flex:none}
+.cap h3{margin:0;font:700 17px var(--display)}
+.cap small{color:var(--suau);font-size:13px}
+textarea{width:100%;min-height:64px;background:var(--fons);color:var(--text);border:1px solid var(--linia);border-radius:10px;padding:8px;font:inherit;font-size:14px;box-sizing:border-box;resize:vertical}
+label.nose{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--suau);min-height:32px;cursor:pointer}
+label.nose input{width:18px;height:18px;accent-color:var(--ambre)}
+@media (prefers-reduced-motion:no-preference){.op{transition:border-color .15s,background .15s}}
+</style>
+<div class="app">
+  <span class="eti">Descobreix Catalunya · punt 7</span>
+  <h1>Les medalles de cada comarca</h1>
+  <p>Cada comarca tindrà una medalla amb un dibuix propi. Primer tria com hi va el dibuix. Després, per a cada comarca, escriu què hi ha de sortir: el que trobis més representatiu (un monument, un paisatge, una festa, un producte, un animal…). Jo només dibuixaré el que diguis tu. Si d'alguna no ho saps, marca «Encara no ho sé». Les respostes es desen soles; quan acabis, digues «ja està».</p>
+  <div class="resum"><span class="pill" id="compte"></span><button class="filtre" id="filtre" type="button" aria-pressed="false">Només les que falten</button><span class="estat" id="estat">Carregant…</span></div>
+  <section class="preg" data-q="estil">
+    <h3>Com hi va el dibuix?</h3>
+    <p>Ara la medalla porta la silueta de la comarca. A l'exemple, la d'Osona, i el cercle de punts és on aniria el dibuix.</p>
+    <div class="opcions" role="group" aria-label="Com hi va el dibuix" id="estils"></div>
+    <textarea id="nota-estil" aria-label="Nota sobre com hi va el dibuix" placeholder="Nota (opcional)"></textarea>
+  </section>
+  <h2>Comarques</h2>
+  <div class="graella" id="graella"></div>
+</div>
+<script>
+const COMARQUES=/*COMARQUES*/[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const osona=COMARQUES.find(c=>c.nom==='Osona')||COMARQUES[0];
+// Medalla de bronze d'exemple, en un quadrat de 100 × 100. El dibuix és un cercle de punts: no s'inventa res.
+const lloc=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#5E3A1A" stroke-width="1.6" stroke-dasharray="3 3"/>`;
+const sil=(x,y,mida,op)=>`<g transform="translate(${x-mida/2} ${y-mida/2}) scale(${mida/100})"><path d="${osona.d}" fill="#5E3A1A" opacity="${op}"/></g>`;
+const medalla=dins=>`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="40" fill="#8A5A2E"/><circle cx="50" cy="52" r="35" fill="#C98A4E"/><circle cx="50" cy="52" r="30" fill="none" stroke="#EDBB8A" stroke-width="1.4" opacity=".7"/>${dins}<path d="M14,86h72l-6,6l6,6H14l6,-6Z" fill="#8A5A2E"/><text x="50" y="95" text-anchor="middle" font-size="7.5" fill="#fff" font-family="Chakra Petch,sans-serif" font-weight="700">${esc(osona.nom.toUpperCase())}</text></svg>`;
+const ESTILS=[
+  {id:'fons',n:'La silueta de fons i el dibuix a sobre',d:'Es reconeix la comarca i el dibuix mana.',prop:1,m:medalla(sil(50,50,46,.35)+lloc(50,50,15))},
+  {id:'dibuix',n:'Només el dibuix',d:'Més net. La comarca es reconeix pel nom.',m:medalla(lloc(50,50,20))},
+  {id:'petita',n:'El dibuix al mig i la silueta petita',d:'La silueta, petita, en un racó.',m:medalla(lloc(46,48,16)+sil(70,64,16,.9))},
+];
+let vals={},db=null;const temps={};let nomesFalten=false;
+try{const m=JSON.parse(localStorage.getItem('medalles1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function estat(t){$('estat').textContent=t}
+const respost=c=>{const v=vals[c.codi]||{};return !!((v.text||'').trim()||v.nose)};
+function compte(){$('compte').innerHTML=`<b>${COMARQUES.filter(respost).length}</b> de ${COMARQUES.length} comarques`}
+function pintaEstils(){
+  const tria=(vals.estil||{}).opcio;
+  $('estils').innerHTML=ESTILS.map(o=>`<button class="op" type="button" data-o="${o.id}" aria-pressed="${tria===o.id}">${o.prop?'<span class="prop">Proposta</span>':''}${o.m}<b>${o.n}</b><small>${o.d}</small><span class="marca">${tria===o.id?'✓ Triada':'Toca per triar'}</span></button>`).join('');
+  $('nota-estil').value=(vals.estil||{}).nota||'';
+}
+function pinta(){
+  $('graella').innerHTML=COMARQUES.filter(c=>!nomesFalten||!respost(c)).map(c=>{const v=vals[c.codi]||{};
+    return `<section class="com${respost(c)?' feta':''}" data-c="${c.codi}">
+      <div class="cap"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="${c.d}" fill="#C98A4E"/></svg><div><h3>${esc(c.nom)}</h3><small>${c.n} municipis</small></div></div>
+      <textarea aria-label="Què ha de sortir a la medalla de ${esc(c.nom)}" placeholder="Què hi ha de sortir?" ${v.nose?'disabled':''}>${esc(v.text||'')}</textarea>
+      <label class="nose"><input type="checkbox" ${v.nose?'checked':''}> Encara no ho sé</label></section>`}).join('')||'<p>Ja les tens totes!</p>';
+  compte();
+}
+function desaLocal(){try{localStorage.setItem('medalles1',JSON.stringify(vals))}catch(e){}}
+async function desa(id){
+  if(!db){estat('Desat en aquest navegador.');return}
+  const v=vals[id]||{};
+  try{
+    if(id==='estil'){
+      if(!v.opcio&&!v.nota)await db.collection('medalles1').doc('estil').delete();
+      else await db.collection('medalles1').doc('estil').set({id:'estil',opcio:v.opcio||null,nom:(ESTILS.find(e=>e.id===v.opcio)||{}).n||null,nota:v.nota||'',ts:Date.now()});
+    }else{
+      const c=COMARQUES.find(x=>x.codi===id);
+      if(!(v.text||'').trim()&&!v.nose)await db.collection('medalles1').doc(id).delete();
+      else await db.collection('medalles1').doc(id).set({id,comarca:c.nom,text:v.text||'',nose:!!v.nose,ts:Date.now()});
+    }
+    estat('Desat. Claude podrà llegir les teves respostes.');
+  }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+$('estils').addEventListener('click',e=>{const b=e.target.closest('.op');if(!b)return;const v=vals.estil||(vals.estil={});v.opcio=v.opcio===b.dataset.o?null:b.dataset.o;pintaEstils();desaLocal();desa('estil')});
+$('nota-estil').addEventListener('input',e=>{(vals.estil||(vals.estil={})).nota=e.target.value;desaLocal();clearTimeout(temps.estil);temps.estil=setTimeout(()=>desa('estil'),700)});
+$('graella').addEventListener('input',e=>{
+  const s=e.target.closest('.com');if(!s)return;const id=s.dataset.c;const v=vals[id]||(vals[id]={});
+  if(e.target.tagName==='TEXTAREA'){v.text=e.target.value;clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)}
+  else{v.nose=e.target.checked;s.querySelector('textarea').disabled=v.nose;desa(id)}
+  s.classList.toggle('feta',respost(COMARQUES.find(c=>c.codi===id)));compte();desaLocal();
+});
+$('filtre').addEventListener('click',()=>{nomesFalten=!nomesFalten;$('filtre').setAttribute('aria-pressed',nomesFalten);pinta()});
+pintaEstils();pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){estat('Les respostes es desen en aquest navegador.');return}
+  try{
+    const q=await db.collection('medalles1').get();let n=0;
+    for(const d of q.docs){const x=d.data();if(!x)continue;const id=x.id||d.id;
+      vals[id]=id==='estil'?{opcio:x.opcio||null,nota:x.nota||''}:{text:x.text||'',nose:!!x.nose};n++}
+    pintaEstils();pinta();estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
+})();
+</script>
