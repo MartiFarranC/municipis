@@ -1,0 +1,154 @@
+<title>Col·laboracions amb ajuntaments</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Punt 6. Una pregunta per targeta; les opcions són maquetes petites de l'app que es trien tocant-les. Fosc, com l'app. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;--tinta:#1A1305;--boira:#161B23;--blau:#5AB8E8;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Source Sans 3",system-ui,sans-serif;color-scheme:dark}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:15px;line-height:1.45}
+.app{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:16px}
+.eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+h1{font:700 26px var(--display);margin:0;text-wrap:balance}
+p{margin:0;color:var(--suau);max-width:64ch}
+.resum{position:sticky;top:env(safe-area-inset-top,0px);background:var(--fons);padding-block:8px;z-index:2;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia);font-variant-numeric:tabular-nums}
+.pill b{font-family:var(--display);color:var(--ambre)}
+.estat{font-size:13px;color:var(--suau)}
+h2{font:700 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--suau);margin:14px 0 0}
+.preg{background:var(--sup);border:1px solid var(--linia);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.preg h3{margin:0;font:700 17px var(--display);text-wrap:balance}
+.preg h3 span{color:var(--ambre);font-variant-numeric:tabular-nums;margin-right:6px}
+.preg>p{font-size:14px}
+.opcions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:10px}
+.op{background:var(--sup2);border:2px solid var(--linia);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;color:var(--text);text-align:left;font:inherit;cursor:pointer;min-width:0}
+.op:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.op[aria-pressed="true"]{border-color:var(--ambre);background:#221E14}
+.op b{font-weight:600;font-size:14px}.op small{color:var(--suau);font-size:13px}
+.prop{align-self:flex-start;font:700 11px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--tinta);background:var(--ambre-f);padding:2px 7px;border-radius:6px}
+.marca{font:700 12px var(--display);color:var(--suau)}.op[aria-pressed="true"] .marca{color:var(--ambre)}
+textarea{width:100%;min-height:44px;background:var(--fons);color:var(--text);border:1px solid var(--linia);border-radius:10px;padding:8px;font:inherit;font-size:14px;box-sizing:border-box}
+/* Maquetes */
+.mq{background:var(--fons);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:96px;justify-content:center}
+.barra{display:flex;justify-content:space-around;border-top:1px solid var(--linia);padding-top:6px;font-size:10px;color:var(--suau)}
+.barra .on{color:var(--ambre);font-weight:600}
+.boto{border:1px solid var(--linia);border-radius:8px;padding:5px 8px;font-size:11px;color:var(--blau)}
+.boto.on{border-color:var(--ambre);color:var(--ambre)}
+.cromos{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.cr{aspect-ratio:1.5;border-radius:5px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;font-size:9px;max-width:100%}
+.cr .n{padding:1px 3px;background:rgba(11,14,19,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.foto{background:linear-gradient(180deg,#5B86A8 0 45%,#6E8F5A 45% 70%,#57534C 70%);position:relative}
+.foto::after{content:"";position:absolute;left:24%;top:24%;width:52%;height:30%;background:#F4F1EA;border:1.5px solid #B0303A;border-radius:2px}
+.foto.sol::after{left:10%;top:15%;width:80%;height:70%}
+.buit{background:var(--sup2);border:1px dashed var(--linia);color:var(--suau)}
+.gris{background:#20262F;color:#6B7584}
+.tapat{background:repeating-linear-gradient(45deg,var(--boira) 0 4px,#1B212B 4px 8px);color:#56606E;align-items:center;justify-content:center;font:700 14px var(--display)}
+.visor{position:relative;aspect-ratio:3/4;max-height:150px;margin:0 auto;width:auto;border-radius:8px;background:linear-gradient(180deg,#4F7898 0 40%,#66804F 40% 72%,#4B4842 72%);overflow:hidden;max-width:100%}
+.visor .req{position:absolute;left:12%;top:30%;width:76%;height:26%;border:2px solid var(--ambre);border-radius:4px;box-shadow:0 0 0 999px rgba(0,0,0,.45)}
+.visor .req.mans::before,.visor .req.mans::after{content:"";position:absolute;width:8px;height:8px;background:var(--ambre);border-radius:50%}
+.visor .req.mans::before{left:-5px;top:-5px}.visor .req.mans::after{right:-5px;bottom:-5px}
+.visor .cartell{position:absolute;left:18%;top:34%;width:64%;height:18%;background:#F4F1EA;border:2px solid #B0303A;border-radius:2px;font:700 10px var(--display);color:#222;display:flex;align-items:center;justify-content:center}
+.visor .dispara{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:#EEF1F5;border:3px solid #9AA4B2}
+.files{display:flex;flex-direction:column;gap:4px;font-size:11px}
+.fila{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;background:var(--sup);border-radius:6px}
+.fila b{font-family:var(--display);color:var(--ambre);font-weight:700}
+.cerca{border:1px solid var(--linia);border-radius:8px;padding:4px 8px;font-size:11px;color:var(--suau)}
+.chips{display:flex;gap:4px;flex-wrap:wrap}.chip{font-size:10px;padding:2px 6px;border-radius:99px;border:1px solid var(--linia);color:var(--suau)}.chip.on{border-color:var(--ambre);color:var(--ambre)}
+.text-mq{font-size:12px;color:var(--suau);text-align:center}
+.text-mq em{font-style:normal;color:var(--text);font-weight:600}
+@media (prefers-reduced-motion:no-preference){.op{transition:border-color .15s,background .15s}}
+</style>
+<div class="app">
+  <span class="eti">Descobreix Catalunya · punt 6</span>
+  <h1>Col·laboracions amb els ajuntaments</h1>
+  <p>Encara no s'havia decidit què s'ofereix als ajuntaments ni com es fa. Toca l'opció que vulguis a cada pregunta. La que porta «Proposta» és la que faria jo. Si vols una altra cosa, escriu-la a la nota. Les respostes es desen soles; quan acabis, digues «ja està».</p>
+  <div class="resum"><span class="pill" id="compte"></span><span class="estat" id="estat">Carregant…</span></div>
+  <div id="preguntes"></div>
+</div>
+<script>
+const mq=s=>`<div class="mq">${s}</div>`;
+const cromos=(cel)=>mq(`<div class="cromos">${cel.join('')}</div>`);
+const C={foto:n=>`<div class="cr foto"><span class="n">${n}</span></div>`,fotoSol:()=>`<div class="cr foto sol"></div>`,buit:n=>`<div class="cr buit"><span class="n" style="background:none">${n}</span></div>`,gris:n=>`<div class="cr gris"><span class="n" style="background:none">${n}</span></div>`,tapat:()=>`<div class="cr tapat">?</div>`};
+const visor=(mans,txt='VIC')=>mq(`<div class="visor"><div class="cartell">${txt}</div><div class="req${mans?' mans':''}"></div><div class="dispara"></div></div>`);
+const fila=(a,b)=>`<div class="fila">${a}<b>${b}</b></div>`;
+const SECCIONS=[
+ ['Què hi posen els ajuntaments',[
+  {id:'aporten',multi:1,t:'Què pot afegir un ajuntament a l\'app?',p:'Pots triar-ne més d\'una. Tot el que posi un ajuntament surt marcat com a seu, i així les missions i els textos tenen una font real: no me\'ls invento.',o:[
+   {id:'missions',n:'Missions oficials',d:'Missions pròpies del municipi, marcades «De l\'ajuntament». Donen barretines com les altres i tenen la mateixa comprovació de GPS o foto.',prop:1,m:mq(`<div class="files">${fila('Puja al campanar de Sant Pere','80')}</div><div class="chips"><span class="chip on">De l'ajuntament</span></div>`)},
+   {id:'fitxa',n:'Presentació del municipi',d:'Un text curt, el web i on és l\'oficina de turisme, a la fitxa del municipi.',prop:1,m:mq(`<div class="text-mq"><em>Vic</em><br>Ciutat de mercat des del segle XI…<br>vic.cat · Oficina de turisme</div>`)},
+   {id:'segell',n:'Segell propi al passaport',d:'Un dibuix del municipi per al segell del passaport, en lloc del genèric.',m:mq(`<div class="text-mq"><em>◎ VIC</em><br>segell dibuixat pel municipi</div>`)},
+   {id:'festes',n:'Festes i fires',d:'Missions que només es poden fer durant la festa major o una fira, amb un bonus.',m:mq(`<div class="files">${fila('Mercat del Ram · 5-6 d\'abril','+50')}</div>`)},
+   {id:'rutes',n:'Rutes',d:'Un itinerari de diversos punts del municipi. En acabar-lo, un bonus.',m:mq(`<div class="files">${fila('Ruta del modernisme','3/6')}</div>`)},
+   {id:'qr',n:'Punt de segellat físic',d:'Un codi QR a l\'ajuntament o a l\'oficina de turisme: en llegir-lo (i amb el GPS a dins) es fa una missió.',m:mq(`<div class="text-mq">▦ QR a l'oficina de turisme<br><em>Missió feta</em></div>`)}]},
+  {id:'recompenses',t:'Hi ha premis fora de l\'app?',p:'Per exemple, un descompte al museu del poble ensenyant el passaport de l\'app.',o:[
+   {id:'no',n:'No, només dins de l\'app',d:'Tot el que dona l\'app es queda a l\'app: barretines, segells, medalles. Més senzill i sense comerços pel mig.',prop:1,m:mq(`<div class="text-mq">Barretines, segells i medalles</div>`)},
+   {id:'si',n:'Sí, si l\'ajuntament ho ofereix',d:'L\'ajuntament pot afegir un avantatge (entrada reduïda, regal). L\'app només el mostra; el gestiona l\'ajuntament.',m:mq(`<div class="files">${fila('Museu Episcopal','-20 %')}</div>`)}]},
+ ]],
+ ['Què en treu l\'ajuntament',[
+  {id:'reben',multi:1,t:'Què rep un ajuntament que col·labora?',p:'Pots triar-ne més d\'una.',o:[
+   {id:'xifres',n:'Xifres anònimes',d:'Quanta gent ha desbloquejat el municipi i quantes missions s\'hi fan cada mes. Només totals, mai qui ni on, i només si hi ha prou gent (10 o més). Surten del servidor: no cal cap SDK d\'analítica.',prop:1,m:mq(`<div class="files">${fila('Han desbloquejat Vic','214')}${fila('Missions aquest mes','87')}</div>`)},
+   {id:'distintiu',n:'Distintiu de col·laborador',d:'Una marca a la fitxa i al mapa: «Municipi col·laborador».',prop:1,m:mq(`<div class="chips"><span class="chip on">★ Municipi col·laborador</span></div>`)},
+   {id:'cartell',n:'Cartell per promocionar-ho',d:'Un cartell amb un QR per instal·lar l\'app, per penjar a l\'oficina de turisme.',m:mq(`<div class="text-mq"><em>Descobreix Vic jugant</em><br>▦ Instal·la l'app</div>`)},
+   {id:'res',n:'Només la visibilitat',d:'Res més: el municipi surt més complet a l\'app.',m:''}]},
+ ]],
+ ['Com es fa',[
+  {id:'alta',t:'Com s\'apunta un ajuntament?',o:[
+   {id:'correu',n:'Per correu, i ho entro jo',d:'L\'ajuntament escriu al Martí amb el contingut, i el Martí l\'entra al servidor. Per començar, el més senzill.',prop:1,m:mq(`<div class="text-mq">✉ ajuntaments@…<br>→ el Martí ho entra</div>`)},
+   {id:'panell',n:'Un panell web per als ajuntaments',d:'Cada ajuntament té un compte i edita el seu contingut ell mateix. Molta més feina, i cal comprovar que qui entra és de debò de l\'ajuntament.',m:mq(`<div class="cerca">Panell · Ajuntament de Vic</div><div class="files">${fila('Missions','3')}${fila('Presentació','✓')}</div>`)}]},
+  {id:'revisio',t:'Qui revisa el contingut abans que surti a l\'app?',o:[
+   {id:'marti',n:'El Martí, sempre',d:'Res no surt fins que el Martí l\'aprova.',prop:1,m:mq(`<div class="files">${fila('Missió nova · Vic','pendent')}</div>`)},
+   {id:'directe',n:'Surt directament',d:'L\'ajuntament és la font: el que posa surt de seguida.',m:mq(`<div class="files">${fila('Missió nova · Vic','publicada')}</div>`)}]},
+  {id:'arriba',t:'Com arriba el contingut als mòbils?',o:[
+   {id:'servidor',n:'Pel servidor',d:'Es desa a Supabase i l\'app el baixa en sincronitzar. Surt sense publicar cap versió nova, i queda guardat per fer-lo servir sense connexió.',prop:1,m:mq(`<div class="text-mq">Supabase → sincronització → app</div>`)},
+   {id:'versio',n:'Amb una versió nova de l\'app',d:'Va amb les dades generades. Cal publicar l\'app cada vegada que un ajuntament canvia alguna cosa.',m:mq(`<div class="text-mq">dades/ → versió nova → app</div>`)}]},
+  {id:'quan',t:'Què fem ara?',o:[
+   {id:'base',n:'Preparar-ho ara, sense cap ajuntament',d:'Faig la part de l\'app i del servidor perquè pugui rebre contingut d\'ajuntaments. Queda buida fins que n\'hi hagi un.',prop:1,m:mq(`<div class="text-mq">App preparada · <em>0 ajuntaments</em></div>`)},
+   {id:'esperar',n:'Esperar a tenir-ne un',d:'Primer parles amb algun ajuntament, i ho fem segons el que demani.',m:mq(`<div class="text-mq">Primer, un ajuntament interessat</div>`)},
+   {id:'proposta',n:'Una proposta per enviar-los',d:'Abans de programar res, faig un document per presentar la idea als ajuntaments.',m:mq(`<div class="text-mq">📄 Proposta de col·laboració</div>`)}]},
+ ]],
+];
+const TOTES=SECCIONS.flatMap(s=>s[1]);
+let vals={},db=null;const temps={};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+try{const m=JSON.parse(localStorage.getItem('ajuntaments1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function estat(t){$('estat').textContent=t}
+function compte(){const n=TOTES.filter(q=>(vals[q.id]?.opcions||[]).length).length;$('compte').innerHTML=`<b>${n}</b> de ${TOTES.length} respostes`}
+function pinta(){
+  let k=0;
+  $('preguntes').innerHTML=SECCIONS.map(([nom,qs])=>`<h2>${nom}</h2>`+qs.map(q=>{k++;const v=vals[q.id]||{};const tri=v.opcions||[];
+    return `<section class="preg" data-q="${q.id}"><h3><span>${k}</span>${q.t}</h3>${q.p?`<p>${q.p}</p>`:''}
+    <div class="opcions" role="group" aria-label="${esc(q.t)}">${q.o.map(o=>`<button class="op" type="button" data-o="${o.id}" aria-pressed="${tri.includes(o.id)}">${o.prop?'<span class="prop">Proposta</span>':''}${o.m}<b>${o.n}</b><small>${o.d}</small><span class="marca">${tri.includes(o.id)?'✓ Triada':(q.multi?'Toca per afegir':'Toca per triar')}</span></button>`).join('')}</div>
+    <textarea id="nota-${q.id}" aria-label="Nota sobre ${esc(q.t)}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></section>`}).join('')).join('');
+  compte();
+}
+function desaLocal(){try{localStorage.setItem('ajuntaments1',JSON.stringify(vals))}catch(e){}}
+$('preguntes').addEventListener('click',e=>{
+  const b=e.target.closest('.op');if(!b)return;const qid=b.closest('.preg').dataset.q,q=TOTES.find(x=>x.id===qid),o=b.dataset.o;
+  const v=vals[qid]||(vals[qid]={});let t=v.opcions||[];
+  t=q.multi?(t.includes(o)?t.filter(x=>x!==o):[...t,o]):(t[0]===o?[]:[o]);v.opcions=t;
+  b.closest('.opcions').querySelectorAll('.op').forEach(x=>{const on=t.includes(x.dataset.o);x.setAttribute('aria-pressed',on);x.querySelector('.marca').textContent=on?'✓ Triada':(q.multi?'Toca per afegir':'Toca per triar')});
+  compte();desaLocal();desa(qid);
+});
+$('preguntes').addEventListener('input',e=>{
+  if(e.target.tagName!=='TEXTAREA')return;const qid=e.target.closest('.preg').dataset.q;(vals[qid]||(vals[qid]={})).nota=e.target.value;
+  desaLocal();clearTimeout(temps[qid]);temps[qid]=setTimeout(()=>desa(qid),700);
+});
+async function desa(qid){
+  if(!db){estat('Desat en aquest navegador.');return}
+  const q=TOTES.find(x=>x.id===qid),v=vals[qid]||{};
+  try{
+    if(!(v.opcions||[]).length&&!v.nota)await db.collection('ajuntaments1').doc(qid).delete();
+    else await db.collection('ajuntaments1').doc(qid).set({id:qid,pregunta:q.t,opcions:v.opcions||[],noms:(v.opcions||[]).map(o=>q.o.find(x=>x.id===o).n),nota:v.nota||'',ts:Date.now()});
+    estat('Desat. Claude podrà llegir les teves respostes.');
+  }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){estat('Les respostes es desen en aquest navegador.');return}
+  try{
+    const q=await db.collection('ajuntaments1').get();let n=0;
+    for(const d of q.docs){const x=d.data();if(x&&(x.id||d.id)){vals[x.id||d.id]={opcions:x.opcions||[],nota:x.nota||''};n++}}
+    pinta();estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
+})();
+</script>
