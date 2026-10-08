@@ -2,11 +2,13 @@ package cat.descobreix
 
 import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isRoot
+import androidx.compose.ui.test.isSelected
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onLast
@@ -72,6 +74,26 @@ class CompteUiTest {
         }
     }
 
+    /**
+     * Toca una opció i espera que quedi triada. Primer cal que el desplaçament s'acabi: un toc enmig del desplaçament
+     * es pot perdre.
+     */
+    private fun tria(text: String) {
+        val triada = hasText(text, substring = true) and isSelected()
+        repeat(3) {
+            regla.onNodeWithText(text).performScrollTo()
+            regla.waitForIdle()
+            regla.onNodeWithText(text).performClick()
+            try {
+                regla.waitUntilAtLeastOneExists(triada, 3_000)
+                return
+            } catch (_: ComposeTimeoutException) {
+                // El toc s'ha perdut: es torna a provar.
+            }
+        }
+        regla.waitUntilAtLeastOneExists(triada, 3_000)
+    }
+
     @Test
     fun entrarITriarElNomAbansDeJugar() {
         espera("Correu electrònic")
@@ -90,9 +112,11 @@ class CompteUiTest {
         regla.onNode(hasSetTextAction()).performTextInput("anna_1")
         // Sense triar com jugarà ni si el compte és públic, tampoc.
         regla.onNodeWithText("Continua").assertIsNotEnabled()
-        regla.onNodeWithText("Explorador").performScrollTo().performClick()
-        regla.onNodeWithText("Compte privat").performScrollTo().performClick()
-        regla.onNodeWithText("Continua").performScrollTo().performClick()
+        tria("Explorador")
+        tria("Compte privat")
+        regla.onNodeWithText("Continua").performScrollTo()
+        regla.waitForIdle()
+        regla.onNodeWithText("Continua").assertIsEnabled().performClick()
 
         espera("D'on ets?")
     }
