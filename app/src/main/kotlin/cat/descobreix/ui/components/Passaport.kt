@@ -228,7 +228,7 @@ fun SegellALaPagina(s: SegellDibuix, amplada: Dp, alcada: Dp, modifier: Modifier
         s.silueta,
         ColorsPassaport.tinta(s.posat.tinta),
         propi = rememberSegellPropi(s.posat.codi),
-        modifier
+        modifier = modifier
             .size(w, h)
             .offset(amplada * s.posat.x - w / 2, alcada * s.posat.y - h / 2)
             .graphicsLayer {
