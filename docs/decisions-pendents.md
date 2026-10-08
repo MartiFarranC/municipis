@@ -2,6 +2,11 @@
 
 Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin, passen a `requisits.md` i s'esborren d'aquí.
 
+## Per més endavant: Obtainium
+
+- La publicació ja és a la CI (`docs/obtainium.md`), però encara no s'ha posat en marxa: falta crear la clau de signatura, afegir els secrets a GitHub i configurar Obtainium al mòbil.
+- Per decidir: fer que la versió de l'Android Studio sigui una app a part («Descobreix (prova)», amb un altre identificador), perquè pugui conviure al mòbil amb la d'Obtainium.
+
 ## Perfils: Explorador i Espectador
 
 - En entrar, l'usuari tria entre dos perfils:
