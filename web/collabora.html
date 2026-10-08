@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espai de col·laboració · Descobreix Catalunya</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="estil.css">
+<script src="config.js"></script>
+<script src="collabora.js" defer></script>
+</head>
+<body>
+<header class="barra">
+  <a class="marca" href="./">Descobreix Catalunya</a>
+  <nav aria-label="Seccions">
+    <a href="./">Inici</a>
+    <a href="collabora.html" aria-current="page">Espai de col·laboració</a>
+  </nav>
+</header>
+<main>
+  <section class="portada">
+    <span class="eti">Espai de col·laboració</span>
+    <h1 id="titol">Entreu amb el vostre codi</h1>
+    <p id="subtitol">El codi us l'hem enviat per correu. Si no el teniu, demaneu-lo.</p>
+  </section>
+
+  <form id="entrada">
+    <label>Codi de col·laboració
+      <input id="codi" name="codi" autocomplete="off" required>
+    </label>
+    <button class="boto" type="submit">Entra</button>
+    <p class="missatge" id="msg-entrada" role="status"></p>
+  </form>
+
+  <div id="espai" hidden>
+    <p><button class="boto secundari" type="button" id="surt">Surt</button></p>
+
+    <h2>Persona de contacte</h2>
+    <p>Perquè us puguem respondre i avisar quan surtin les propostes a l'app.</p>
+    <form id="contacte">
+      <div class="fila">
+        <label>Nom i cognoms <input name="nom" required maxlength="120" autocomplete="name"></label>
+        <label>Càrrec o departament <input name="carrec" maxlength="120"></label>
+      </div>
+      <label>Correu electrònic <input name="correu" type="email" required maxlength="200" autocomplete="email"></label>
+      <label class="casella"><input type="checkbox" name="consentiment" required>
+        <span>Accepto que es guardin aquestes dades només per contactar amb mi sobre aquest projecte. No es comparteixen amb ningú i es poden esborrar demanant-ho.</span>
+      </label>
+      <button class="boto" type="submit">Desa el contacte</button>
+      <p class="missatge" id="msg-contacte" role="status"></p>
+    </form>
+
+    <h2>La medalla de la comarca</h2>
+    <p>Què ha de sortir al dibuix de la medalla? El més representatiu: un monument, un paisatge, una festa, un producte… Podeu fer més d'una proposta.</p>
+    <form id="medalla">
+      <label>Què hi ha de sortir? <textarea name="que_hi_surt" required maxlength="1000"></textarea></label>
+      <label>Per què és representatiu? <small>Opcional</small><textarea name="per_que" maxlength="1000"></textarea></label>
+      <label>Enllaç a una imatge de referència <small>Opcional: una foto o un dibuix que ens ajudi a fer-lo.</small><input name="referencia" type="url" maxlength="500"></label>
+      <button class="boto" type="submit">Envia la proposta</button>
+      <p class="missatge" id="msg-medalla" role="status"></p>
+    </form>
+    <ul class="llista" id="llista-medalla" aria-label="Propostes de medalla enviades"></ul>
+
+    <h2>Missions</h2>
+    <p>Llocs emblemàtics, festes i tradicions dels municipis. Cada missió és una cosa concreta que la gent pot fer quan hi va.</p>
+    <form id="missio">
+      <label>Municipi <select name="codi_ine" id="municipi" required></select></label>
+      <label>Què s'ha de fer? <small>Curt, com un títol. Per exemple: «Puja al campanar» o «Visita el mercat setmanal».</small><input name="titol" required maxlength="120"></label>
+      <label>Descripció <small>Opcional: què hi ha, per què val la pena, horaris…</small><textarea name="descripcio" maxlength="1000"></textarea></label>
+      <div class="fila">
+        <label>On és? <small>Adreça o com s'hi arriba</small><input name="lloc" maxlength="300"></label>
+        <label>Coordenades <small>Opcional: latitud i longitud, com «41.93, 2.25»</small><input name="coordenades" inputmode="decimal" maxlength="60"></label>
+      </div>
+      <label>Com es comprova que s'ha fet?
+        <select name="prova">
+          <option value="GPS">Anant al lloc (GPS)</option>
+          <option value="FOTO">Fent-hi una foto</option>
+          <option value="QR">Llegint un codi QR que hi posaríem</option>
+          <option value="ALTRE">Una altra manera (expliqueu-la a la descripció)</option>
+        </select>
+      </label>
+      <div class="fila">
+        <label>Si és una festa o fira: primer dia <input name="data_inici" type="date"></label>
+        <label>Últim dia <input name="data_fi" type="date"></label>
+      </div>
+      <button class="boto" type="submit">Envia la missió</button>
+      <p class="missatge" id="msg-missio" role="status"></p>
+    </form>
+    <ul class="llista" id="llista-missions" aria-label="Missions enviades"></ul>
+  </div>
+</main>
+<footer>Descobreix Catalunya</footer>
+</body>
+</html>
