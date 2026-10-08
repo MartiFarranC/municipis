@@ -261,6 +261,36 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
   - Que l'emoji sigui teu només ho comprova l'app (el servidor no sap quins emojis tens).
 - **Bloquejar i denunciar:** des d'una reacció rebuda o des del perfil d'algú. Bloquejar fa que deixeu de seguir-vos i que no et pugui tornar a seguir ni escriure; el bloquejat no ho sap. Les denúncies es guarden a `descobreix.denuncies` (amb el text denunciat) i les revisa el Martí des del servidor.
 
+### 9.6 Col·laboracions amb els ajuntaments
+
+Decidit amb la pàgina `disseny/ajuntaments/tria-ajuntaments.html`. Es prepara ara, encara que no hi hagi cap ajuntament.
+
+**Què hi posa un ajuntament** (tot és opcional i surt marcat «De l'ajuntament»):
+
+- **Missions oficials.** Es fan com les altres: amb GPS (un punt i el radi de la configuració), amb una foto (dins del municipi) o llegint un **codi QR** (vegeu més avall).
+  - Donen les barretines que diu la configuració (`ajuntaments.puntsMissio`), no les que posa l'ajuntament.
+  - Com a molt `ajuntaments.maximMissionsPerMunicipi` missions actives per municipi; el servidor no en deixa entrar més.
+  - Van a part de les missions automàtiques: no compten per al bonus de completar-les totes, ni per a «municipi complet», ni per als punts màxims del municipi.
+  - Si una missió es retira, qui ja l'havia feta no perd les barretines.
+- **Festes i fires.** Una missió oficial pot tenir unes dates (de la festa major, d'una fira…). Només es pot fer aquells dies (hora de Catalunya, dates incloses) i dona un bonus (`ajuntaments.bonusFesta`). Abans, es veu amb les dates; quan han passat, només es veu si s'havia fet.
+- **Punt de segellat (QR).** Un codi QR penjat a l'ajuntament o a l'oficina de turisme. La missió es fa llegint-lo amb la càmera de l'app des de dins del municipi.
+  - El servidor només en guarda el resum (SHA-256), no el codi. L'app el comprova sense connexió.
+  - El QR és un enllaç a la pàgina de l'app: qui no la té, hi va a parar.
+- **Presentació del municipi:** un text curt (500 caràcters com a molt), el web i l'oficina de turisme, a la fitxa del municipi.
+- **Segell propi al passaport:** un dibuix d'un sol color (PNG amb transparència, 512 × 512) a Storage (`descobreix-ajuntaments/<codi>/segell.png`). L'app el pinta amb la tinta del segell i el fa servir en lloc del genèric, també als segells que ja hi eren.
+- **Avantatges fora de l'app** (entrada reduïda, regal…): l'app només els mostra a la fitxa, amb les condicions i fins quan valen. Els gestiona l'ajuntament.
+
+**Què rep l'ajuntament:**
+
+- **Xifres anònimes:** quanta gent ha desbloquejat el municipi i quantes missions s'hi han fet cada mes. Només totals, i cap xifra per sota de 10 persones. Les treu el Martí des del servidor (funció `descobreix.xifres_ajuntament`, només amb el rol de servei). No hi ha cap SDK d'analítica.
+- **Distintiu «Municipi col·laborador»** a la fitxa i a la targeta del mapa.
+- **Cartell per promocionar l'app**, amb un QR per instal·lar-la (`scripts/cartell-ajuntament.js`).
+
+**Com es fa:**
+
+- L'ajuntament escriu al Martí, que entra el contingut al servidor. No hi ha cap pas de revisió a part: el que s'entra **surt directament**. La guia és a [`ajuntaments.md`](ajuntaments.md).
+- El contingut va a Supabase (taules `ajuntaments`, `missions_ajuntament` i `avantatges`) i l'app el baixa en sincronitzar. Qualsevol usuari amb sessió el pot llegir, i només el rol de servei el pot escriure. L'app el desa a Room per fer-lo servir sense connexió.
+
 ### 9.5 Seguretat
 
 - **Totes les taules tenen RLS activat.** Un usuari només pot escriure les seves pròpies files.
