@@ -186,3 +186,27 @@ interface SincronitzacioDao {
     @Query("SELECT * FROM sacs")
     suspend fun totsElsSacs(): List<SacEntity>
 }
+
+@Dao
+interface AjuntamentsDao {
+    @Query("SELECT * FROM ajuntaments WHERE NOT retirat")
+    fun ajuntaments(): Flow<List<AjuntamentEntity>>
+
+    @Query("SELECT * FROM missions_ajuntament")
+    fun missions(): Flow<List<MissioAjuntamentEntity>>
+
+    @Query("SELECT * FROM missions_ajuntament")
+    suspend fun missionsAra(): List<MissioAjuntamentEntity>
+
+    @Query("SELECT * FROM avantatges WHERE NOT retirat")
+    fun avantatges(): Flow<List<AvantatgeEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun desaAjuntaments(a: List<AjuntamentEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun desaMissions(m: List<MissioAjuntamentEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun desaAvantatges(a: List<AvantatgeEntity>)
+}

@@ -24,6 +24,12 @@ interface ServidorSincronitzacio {
     /** Les files de l'[usuari] a la taula que han canviat des de [des] (instant ISO del servidor), en ordre. */
     suspend fun <T> baixa(taula: String, serialitzador: KSerializer<T>, usuari: String, des: String?, limit: Int): List<T>
 
+    /** Les files d'una taula de contingut comú (la dels ajuntaments) que han canviat des de [des], en ordre. */
+    suspend fun <T> baixaComu(taula: String, serialitzador: KSerializer<T>, des: String?, limit: Int): List<T>
+
+    /** Un fitxer d'un bucket públic (els segells dels ajuntaments). */
+    suspend fun baixaFitxerPublic(bucket: String, ruta: String): ByteArray
+
     suspend fun pujaFitxer(ruta: String, bytes: ByteArray)
 
     suspend fun baixaFitxer(ruta: String): ByteArray
@@ -57,6 +63,17 @@ class ServidorSupabase @Inject constructor(private val supabase: SupabaseClient)
         }
         return json.decodeFromString(ListSerializer(serialitzador), resposta.data)
     }
+
+    override suspend fun <T> baixaComu(taula: String, serialitzador: KSerializer<T>, des: String?, limit: Int): List<T> {
+        val resposta = supabase.from(taula).select {
+            if (des != null) filter { gt("sincronitzat_el", des) }
+            order("sincronitzat_el", Order.ASCENDING)
+            limit(limit.toLong())
+        }
+        return json.decodeFromString(ListSerializer(serialitzador), resposta.data)
+    }
+
+    override suspend fun baixaFitxerPublic(bucket: String, ruta: String): ByteArray = supabase.storage.from(bucket).downloadPublic(ruta)
 
     override suspend fun pujaFitxer(ruta: String, bytes: ByteArray) {
         supabase.storage.from(BUCKET).upload(ruta, bytes) { upsert = true }

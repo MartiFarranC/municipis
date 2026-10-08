@@ -277,7 +277,7 @@ Decidit amb la pàgina `disseny/ajuntaments/tria-ajuntaments.html`. Es prepara a
   - El servidor només en guarda el resum (SHA-256), no el codi. L'app el comprova sense connexió.
   - El QR és un enllaç a la pàgina de l'app: qui no la té, hi va a parar.
 - **Presentació del municipi:** un text curt (500 caràcters com a molt), el web i l'oficina de turisme, a la fitxa del municipi.
-- **Segell propi al passaport:** un dibuix d'un sol color (PNG amb transparència, 512 × 512) a Storage (`descobreix-ajuntaments/<codi>/segell.png`). L'app el pinta amb la tinta del segell i el fa servir en lloc del genèric, també als segells que ja hi eren.
+- **Segell propi al passaport:** un dibuix d'un sol color (PNG amb transparència, 512 × 512) a Storage (`descobreix-ajuntaments/<codi>/segell.png`). L'app el pinta amb la tinta del segell i el posa en lloc de la silueta del municipi (la vora, el nom i la data es mantenen), també als segells que ja hi eren.
 - **Avantatges fora de l'app** (entrada reduïda, regal…): l'app només els mostra a la fitxa, amb les condicions i fins quan valen. Els gestiona l'ajuntament.
 
 **Què rep l'ajuntament:**

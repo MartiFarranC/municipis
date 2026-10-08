@@ -48,6 +48,7 @@ import cat.descobreix.onboarding.OnboardingScreen
 import cat.descobreix.passaport.PassaportScreen
 import cat.descobreix.passaport.SegellarScreen
 import cat.descobreix.photos.CameraScreen
+import cat.descobreix.photos.LectorQrScreen
 import cat.descobreix.photos.FotoScreen
 import cat.descobreix.profile.PerfilEspectadorScreen
 import cat.descobreix.profile.PerfilScreen
@@ -66,6 +67,7 @@ object Rutes {
     const val PERFIL = "perfil"
     const val MUNICIPI = "municipi/{codi}"
     const val CAMERA = "camera/{codi}?missio={missio}"
+    const val QR = "qr/{codi}/{missio}"
     const val FOTO = "foto/{id}"
     const val SOBRE = "sobre"
     const val PASSAPORT = "passaport"
@@ -79,6 +81,7 @@ object Rutes {
     fun mapa(centre: String? = null) = if (centre == null) "mapa" else "mapa?centre=$centre"
     fun municipi(codi: String) = "municipi/$codi"
     fun camera(codi: String, missio: String? = null) = if (missio == null) "camera/$codi" else "camera/$codi?missio=$missio"
+    fun qr(codi: String, missio: String) = "qr/$codi/$missio"
     fun foto(id: String) = "foto/$id"
     fun segella(codi: String) = "segella/$codi"
     fun sacs(obre: Boolean = false) = "sacs?obre=$obre"
@@ -198,7 +201,14 @@ private fun PantallesJoc(viewModel: AppViewModel, esEspectador: Boolean) {
                     onObreFoto = { nav.navigate(Rutes.foto(it)) },
                     onVeureAlMapa = { codi -> irAlMapa(nav, codi) },
                     onSegella = { nav.navigate(Rutes.segella(it)) },
+                    onLlegeixQr = { codi, missio -> nav.navigate(Rutes.qr(codi, missio)) },
                 )
+            }
+            composable(
+                Rutes.QR,
+                arguments = listOf(navArgument("codi") { type = NavType.StringType }, navArgument("missio") { type = NavType.StringType }),
+            ) {
+                LectorQrScreen(onTanca = { nav.popBackStack() })
             }
             composable(
                 Rutes.CAMERA,

@@ -23,6 +23,8 @@ import cat.descobreix.data.repositori.ProgresRepositoriRoom
 import cat.descobreix.data.repositori.Rellotge
 import cat.descobreix.data.repositori.SacsRepositori
 import cat.descobreix.data.repositori.SacsRepositoriRoom
+import cat.descobreix.data.repositori.AjuntamentsRepositori
+import cat.descobreix.data.repositori.AjuntamentsRepositoriRoom
 import cat.descobreix.data.repositori.SegellsRepositori
 import cat.descobreix.data.repositori.SegellsRepositoriRoom
 import cat.descobreix.data.sincronitzacio.ServidorSincronitzacio
@@ -55,7 +57,7 @@ object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5, BaseDades.MIGRACIO_5_6)
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5, BaseDades.MIGRACIO_5_6, BaseDades.MIGRACIO_6_7)
             .addCallback(TriggersSincronitzacio.callback).build()
 
     // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
@@ -102,6 +104,10 @@ abstract class ModulRepositoris {
     @Binds
     @Singleton
     abstract fun segells(r: SegellsRepositoriRoom): SegellsRepositori
+
+    @Binds
+    @Singleton
+    abstract fun ajuntaments(r: AjuntamentsRepositoriRoom): AjuntamentsRepositori
 
     @Binds
     @Singleton

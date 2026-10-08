@@ -11,6 +11,7 @@ import cat.descobreix.data.db.BaseDades
 import cat.descobreix.data.db.FotoEntity
 import cat.descobreix.data.db.MissioPropiaEntity
 import cat.descobreix.data.db.SacEntity
+import cat.descobreix.data.repositori.AjuntamentsRepositoriRoom
 import cat.descobreix.data.repositori.FotosRepositoriRoom
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +44,52 @@ class Sincronitzador @Inject constructor(
         val usuari = servidor.usuari() ?: return false
         baixa(usuari)
         puja(usuari)
+        baixaContingutAjuntaments()
         true
+    }
+
+    // Contingut dels ajuntaments (secció 9.6) ------------------------------------------------------------
+
+    /** Baixa el que han posat els ajuntaments (és comú a tothom) i els segells propis que encara no hi són. */
+    private suspend fun baixaContingutAjuntaments() {
+        val dao = db.ajuntaments()
+        baixaComu(T_AJUNTAMENTS, AjuntamentRemot.serializer(), { it.sincronitzatEl }) { remotes ->
+            // Si ha canviat, potser també ha canviat el segell: es torna a baixar.
+            for (a in remotes) AjuntamentsRepositoriRoom.fitxerSegell(context, a.codiIne).delete()
+            dao.desaAjuntaments(remotes.map { it.local() })
+        }
+        baixaComu(T_MISSIONS_AJUNTAMENT, MissioAjuntamentRemota.serializer(), { it.sincronitzatEl }) { remotes ->
+            dao.desaMissions(remotes.map { it.local() })
+        }
+        baixaComu(T_AVANTATGES, AvantatgeRemot.serializer(), { it.sincronitzatEl }) { remotes ->
+            dao.desaAvantatges(remotes.map { it.local() })
+        }
+        for (a in dao.ajuntaments().first()) {
+            val fitxer = AjuntamentsRepositoriRoom.fitxerSegell(context, a.codiIne)
+            if (!a.teSegell || fitxer.exists()) continue
+            try {
+                val bytes = servidor.baixaFitxerPublic(BUCKET_AJUNTAMENTS, "${a.codiIne}/segell.png")
+                withContext(Dispatchers.IO) { fitxer.writeBytes(bytes) }
+            } catch (e: Exception) {
+                if (e is kotlinx.coroutines.CancellationException) throw e
+                // Es tornarà a provar a la propera sincronització; mentrestant, el segell genèric.
+                Log.w(TAG, "No s'ha pogut baixar el segell de ${a.codiIne}", e)
+            }
+        }
+    }
+
+    private suspend fun <T> baixaComu(taula: String, serialitzador: KSerializer<T>, sincronitzatEl: (T) -> String?, aplica: suspend (List<T>) -> Unit) {
+        val clau = stringPreferencesKey("cursor_$taula")
+        var cursor = preferencies.data.first()[clau]?.let { OffsetDateTime.parse(it).toInstant().minusSeconds(MARGE_S).toString() }
+        while (true) {
+            val pagina = servidor.baixaComu(taula, serialitzador, cursor, PAGINA)
+            if (pagina.isEmpty()) break
+            aplica(pagina)
+            val ultim = pagina.mapNotNull(sincronitzatEl).maxOrNull() ?: break
+            preferencies.edit { it[clau] = ultim }
+            if (pagina.size < PAGINA || ultim == cursor) break
+            cursor = ultim
+        }
     }
 
     // Baixar ------------------------------------------------------------------------------------------
@@ -197,6 +243,10 @@ class Sincronitzador @Inject constructor(
         const val T_FOTOS = "fotos"
         const val T_SEGELLS = "segells"
         const val T_SACS = "sacs"
+        const val T_AJUNTAMENTS = "ajuntaments"
+        const val T_MISSIONS_AJUNTAMENT = "missions_ajuntament"
+        const val T_AVANTATGES = "avantatges"
+        private const val BUCKET_AJUNTAMENTS = "descobreix-ajuntaments"
         private val TAULES = listOf(T_DESCOBERTS, T_COMPLETADES, T_MOVIMENTS, T_PROPIES, T_FOTOS, T_SEGELLS, T_SACS)
     }
 }

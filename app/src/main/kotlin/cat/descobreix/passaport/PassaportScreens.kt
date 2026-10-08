@@ -42,6 +42,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
@@ -72,6 +73,7 @@ import cat.descobreix.ui.components.PROPORCIO_SEGELL
 import cat.descobreix.ui.components.PaginaPassaport
 import cat.descobreix.ui.components.Silueta
 import cat.descobreix.ui.components.TapaDelPassaport
+import cat.descobreix.ui.components.rememberSegellPropi
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
 import kotlin.math.cos
@@ -243,7 +245,7 @@ fun SegellarScreen(onFet: () -> Unit, viewModel: SegellarViewModel = hiltViewMod
                 },
             ) { amplada, alcada ->
                 estat.provisional?.let { p ->
-                    SegellQueCau(estat.nom, estat.siluetaMunicipi, p.x, p.y, p.gir, p.tinta, amplada, alcada, reduir)
+                    SegellQueCau(estat.nom, estat.siluetaMunicipi, rememberSegellPropi(estat.codi), p.x, p.y, p.gir, p.tinta, amplada, alcada, reduir)
                 }
             }
             if (tapa.value > -165f && !reduir) {
@@ -278,6 +280,7 @@ fun SegellarScreen(onFet: () -> Unit, viewModel: SegellarViewModel = hiltViewMod
 private fun SegellQueCau(
     nom: String,
     silueta: Silueta?,
+    propi: ImageBitmap?,
     x: Float,
     y: Float,
     gir: Float,
@@ -324,7 +327,8 @@ private fun SegellQueCau(
         dataSegell(System.currentTimeMillis()),
         silueta,
         color,
-        Modifier
+        propi = propi,
+        modifier = Modifier
             .size(w, h)
             .offset(amplada * x - w / 2, alcada * y - h / 2)
             .graphicsLayer {

@@ -46,6 +46,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -56,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
+import cat.descobreix.data.repositori.Avantatge
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.joc.model.CodiIne
@@ -64,6 +66,7 @@ import cat.descobreix.joc.model.Missio
 import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.progressio.Medalles
+import cat.descobreix.joc.regles.DisponibilitatOficial
 import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
@@ -80,6 +83,8 @@ import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
 import cat.descobreix.ui.theme.ChakraPetch
 import cat.descobreix.ui.theme.Colors
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun MunicipiScreen(
@@ -89,6 +94,7 @@ fun MunicipiScreen(
     onObreFoto: (String) -> Unit,
     onVeureAlMapa: (CodiIne) -> Unit,
     onSegella: (CodiIne) -> Unit,
+    onLlegeixQr: (CodiIne, String) -> Unit,
     viewModel: MunicipiViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -130,6 +136,7 @@ fun MunicipiScreen(
                             demanaUbicacio()
                         }
                         TipusProva.FOTO -> onFesFoto(estat.codi, m.id)
+                        TipusProva.QR -> onLlegeixQr(estat.codi, m.id)
                     }
                 },
                 onFesFoto = { onFesFoto(estat.codi, null) },
@@ -271,6 +278,27 @@ private fun FitxaDescoberta(
                 }
             }
         }
+        if (estat.ajuntament != null || estat.oficials.isNotEmpty() || estat.avantatges.isNotEmpty()) {
+            item { CapAjuntament(estat) }
+            items(estat.oficials, key = { it.missio.id }) { o ->
+                val disponible = o.disponibilitat == DisponibilitatOficial.Disponible
+                FilaDeMissio(
+                    FilaMissio(o.missio, o.completada),
+                    provant = estat.provant == o.missio.id,
+                    onProva = { onProva(o.missio) },
+                    etiqueta = etiquetaOficial(o),
+                    activa = disponible,
+                )
+            }
+            if (estat.avantatges.isNotEmpty()) {
+                item {
+                    Seccio(stringResource(R.string.ajuntament_avantatges)) {
+                        Text(stringResource(R.string.ajuntament_avantatges_text), style = MaterialTheme.typography.bodySmall)
+                        for (a in estat.avantatges) TargetaAvantatge(a)
+                    }
+                }
+            }
+        }
         item {
             Seccio(stringResource(R.string.les_teves_missions)) {
                 Text(stringResource(R.string.les_teves_missions_text), style = MaterialTheme.typography.bodySmall)
@@ -323,10 +351,22 @@ private fun Seccio(titol: String, contingut: @Composable () -> Unit) {
 }
 
 @Composable
-private fun FilaDeMissio(f: FilaMissio, provant: Boolean, onProva: () -> Unit) {
+private fun FilaDeMissio(
+    f: FilaMissio,
+    provant: Boolean,
+    onProva: () -> Unit,
+    etiqueta: String? = null,
+    activa: Boolean = true,
+) {
     val m = f.missio
     val titol = titolMissio(m)
-    val prova = stringResource(if (m.prova == TipusProva.GPS) R.string.prova_gps else R.string.prova_foto)
+    val prova = stringResource(
+        when (m.prova) {
+            TipusProva.GPS -> R.string.prova_gps
+            TipusProva.FOTO -> R.string.prova_foto
+            TipusProva.QR -> R.string.prova_qr
+        },
+    )
     val estatText = stringResource(if (f.completada) R.string.completada else R.string.pendent)
     Row(
         Modifier
@@ -336,7 +376,7 @@ private fun FilaDeMissio(f: FilaMissio, provant: Boolean, onProva: () -> Unit) {
             .clip(RoundedCornerShape(14.dp))
             .background(if (f.completada) Colors.FonsCompletada else Colors.Superficie)
             .border(1.dp, if (f.completada) Colors.Disponible2 else Colors.Linia, RoundedCornerShape(14.dp))
-            .clickable(enabled = !f.completada && !provant, role = Role.Button, onClick = onProva)
+            .clickable(enabled = !f.completada && !provant && activa, role = Role.Button, onClick = onProva)
             .semantics(mergeDescendants = true) { stateDescription = estatText }
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -358,12 +398,17 @@ private fun FilaDeMissio(f: FilaMissio, provant: Boolean, onProva: () -> Unit) {
                 if (f.completada) stringResource(R.string.prova_feta, prova) else stringResource(R.string.prova_toca, prova),
                 style = MaterialTheme.typography.bodySmall,
             )
+            if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.Ambre))
         }
         if (provant) {
             CircularProgressIndicator(Modifier.size(20.dp), color = Colors.Ambre, strokeWidth = 2.dp)
         } else {
             Icon(
-                if (m.prova == TipusProva.GPS) Icones.Gps else Icones.Camera,
+                when (m.prova) {
+                    TipusProva.GPS -> Icones.Gps
+                    TipusProva.FOTO -> Icones.Camera
+                    TipusProva.QR -> Icones.Qr
+                },
                 contentDescription = null,
                 tint = Colors.TextSecundari,
                 modifier = Modifier.size(18.dp),
@@ -614,3 +659,73 @@ private fun Dada(etiqueta: String, valor: String, modifier: Modifier = Modifier,
     }
 }
 
+
+// Ajuntaments (requisits.md, secció 9.6) ------------------------------------------------------------------
+
+private val formatDia = DateTimeFormatter.ofPattern("d MMMM", Locale.forLanguageTag("ca"))
+
+/** «De l'ajuntament», i si és una festa, quins dies es pot fer. */
+@Composable
+private fun etiquetaOficial(o: FilaOficial): String {
+    val de = stringResource(R.string.de_l_ajuntament)
+    return when (val d = o.disponibilitat) {
+        is DisponibilitatOficial.Abans -> stringResource(R.string.festa_dies, de, d.inici.format(formatDia), d.fi.format(formatDia))
+        is DisponibilitatOficial.Passada -> stringResource(R.string.festa_passada, de)
+        DisponibilitatOficial.Disponible -> {
+            val fi = o.origen.dataFi
+            if (o.origen.esFesta && fi != null) stringResource(R.string.festa_fins, de, fi.format(formatDia)) else de
+        }
+    }
+}
+
+/** El distintiu de col·laborador i el que l'ajuntament explica del municipi. */
+@Composable
+private fun CapAjuntament(estat: MunicipiEstat) {
+    val aj = estat.ajuntament
+    val obre = LocalUriHandler.current
+    Seccio(stringResource(R.string.de_l_ajuntament)) {
+        if (aj != null) Distintiu()
+        aj?.presentacio?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+        aj?.oficinaTurisme?.let {
+            Text(stringResource(R.string.ajuntament_oficina, it), style = MaterialTheme.typography.bodySmall)
+        }
+        aj?.web?.let { web ->
+            BotoSecundari(stringResource(R.string.ajuntament_web), { obre.openUri(web) }, icona = Icones.Exportar)
+        }
+    }
+}
+
+/** «Municipi col·laborador»: a la fitxa i a la targeta del mapa. */
+@Composable
+fun Distintiu(modifier: Modifier = Modifier) {
+    Row(
+        modifier
+            .clip(RoundedCornerShape(999.dp))
+            .border(1.dp, Colors.Ambre, RoundedCornerShape(999.dp))
+            .padding(horizontal = 10.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Icon(Icones.Estrella, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(14.dp))
+        Text(stringResource(R.string.municipi_collaborador), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Ambre))
+    }
+}
+
+@Composable
+private fun TargetaAvantatge(a: Avantatge) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(14.dp))
+            .background(Colors.Superficie)
+            .border(1.dp, Colors.Linia, RoundedCornerShape(14.dp))
+            .semantics(mergeDescendants = true) {}
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(a.titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold))
+        a.descripcio?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+        a.condicions?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+        a.validFins?.let { Text(stringResource(R.string.avantatge_fins, it.format(formatDia)), style = MaterialTheme.typography.bodySmall) }
+    }
+}

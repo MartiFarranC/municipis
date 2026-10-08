@@ -14,6 +14,7 @@ import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.progressio.Nivells
 import cat.descobreix.joc.progressio.Sacs
 import cat.descobreix.joc.regles.GrafVeins
+import cat.descobreix.joc.regles.ReglesAjuntaments
 import cat.descobreix.joc.regles.ReglesJoc
 import cat.descobreix.joc.regles.ValidadorProves
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -41,6 +42,7 @@ class Dades(
     val medalles: Medalles,
     val sacs: Sacs,
     val localitzador: Localitzador,
+    val ajuntaments: ReglesAjuntaments = ReglesAjuntaments(config),
 )
 
 /** D'on surten les dades estàtiques. És una interfície perquè els tests en puguin fer servir d'altres. */

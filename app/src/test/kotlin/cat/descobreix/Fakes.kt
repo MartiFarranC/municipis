@@ -3,6 +3,9 @@ package cat.descobreix
 import cat.descobreix.data.assets.Dades
 import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.assets.construeixDades
+import cat.descobreix.data.repositori.Ajuntament
+import cat.descobreix.data.repositori.AjuntamentsRepositori
+import cat.descobreix.data.repositori.Avantatge
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
 import cat.descobreix.data.repositori.CameraMapa
@@ -28,9 +31,11 @@ import cat.descobreix.joc.model.Visibilitat
 import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.progressio.SegellPosat
+import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import java.io.File
 import java.io.RandomAccessFile
@@ -225,3 +230,13 @@ class SacsEnMemoria(private val progres: ProgresEnMemoria) : SacsRepositori {
     }
 }
 
+
+class AjuntamentsEnMemoria(var llista: List<MissioAjuntament> = emptyList()) : AjuntamentsRepositori {
+    override val ajuntaments: Flow<Map<CodiIne, Ajuntament>> = flowOf(emptyMap())
+    override val missions: Flow<List<MissioAjuntament>> get() = flowOf(llista)
+    override val avantatges: Flow<List<Avantatge>> = flowOf(emptyList())
+
+    override suspend fun missionsAra(): List<MissioAjuntament> = llista
+
+    override fun segell(codi: CodiIne): File? = null
+}

@@ -56,4 +56,5 @@ object Icones {
     val Imatge = icona("imatge", "M4 5h16v14H4z", cercle(9f, 10f, 1.5f), "M20 16l-5-5-8 8")
     val Gps = icona("gps", cercle(12f, 12f, 8f), cercle(12f, 12f, 2f), "M12 2v2M12 20v2M2 12h2M20 12h2")
     val Ratlla = icona("ratlla", "M5 12h14")
+    val Qr = icona("qr", "M4 4h6v6H4z", "M14 4h6v6h-6z", "M4 14h6v6H4z", "M14 14h2v2h-2z", "M18 18h2v2h-2z", "M18 14h2M14 18h2")
 }

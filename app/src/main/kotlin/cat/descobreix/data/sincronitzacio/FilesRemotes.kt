@@ -1,6 +1,9 @@
 package cat.descobreix.data.sincronitzacio
 
+import cat.descobreix.data.db.AjuntamentEntity
+import cat.descobreix.data.db.AvantatgeEntity
 import cat.descobreix.data.db.FotoEntity
+import cat.descobreix.data.db.MissioAjuntamentEntity
 import cat.descobreix.data.db.MissioCompletadaEntity
 import cat.descobreix.data.db.MissioPropiaEntity
 import cat.descobreix.data.db.MovimentPuntsEntity
@@ -149,3 +152,51 @@ fun SegellRemot.local() = SegellEntity(id, codiIne, comarca, pagina, x, y, gir, 
 
 fun SacEntity.remot() = SacRemot(id, origen, objecteTipus, objecteId, punts, obertEl, creatEl, modificatEl)
 fun SacRemot.local() = SacEntity(id, origen, objecteTipus, objecteId, punts, obertEl, creatEl, modificatEl)
+
+// Contingut dels ajuntaments (secció 9.6): només es baixa. `esborrat_el` és l'esborrat lògic del servidor.
+
+@Serializable
+data class AjuntamentRemot(
+    @SerialName("codi_ine") val codiIne: String,
+    val presentacio: String? = null,
+    val web: String? = null,
+    @SerialName("oficina_turisme") val oficinaTurisme: String? = null,
+    @SerialName("te_segell") val teSegell: Boolean = false,
+    @SerialName("esborrat_el") val esborratEl: Long? = null,
+    @SerialName("sincronitzat_el") val sincronitzatEl: String? = null,
+) {
+    fun local() = AjuntamentEntity(codiIne, presentacio, web, oficinaTurisme, teSegell, retirat = esborratEl != null)
+}
+
+@Serializable
+data class MissioAjuntamentRemota(
+    val id: String,
+    @SerialName("codi_ine") val codiIne: String,
+    val titol: String,
+    val descripcio: String? = null,
+    val prova: String,
+    val lat: Double? = null,
+    val lon: Double? = null,
+    @SerialName("resum_qr") val resumQr: String? = null,
+    @SerialName("data_inici") val dataInici: String? = null,
+    @SerialName("data_fi") val dataFi: String? = null,
+    val ordre: Int = 0,
+    @SerialName("esborrat_el") val esborratEl: Long? = null,
+    @SerialName("sincronitzat_el") val sincronitzatEl: String? = null,
+) {
+    fun local() = MissioAjuntamentEntity(id, codiIne, titol, descripcio, prova, lat, lon, resumQr, dataInici, dataFi, ordre, retirada = esborratEl != null)
+}
+
+@Serializable
+data class AvantatgeRemot(
+    val id: String,
+    @SerialName("codi_ine") val codiIne: String,
+    val titol: String,
+    val descripcio: String? = null,
+    val condicions: String? = null,
+    @SerialName("valid_fins") val validFins: String? = null,
+    @SerialName("esborrat_el") val esborratEl: Long? = null,
+    @SerialName("sincronitzat_el") val sincronitzatEl: String? = null,
+) {
+    fun local() = AvantatgeEntity(id, codiIne, titol, descripcio, condicions, validFins, retirat = esborratEl != null)
+}
