@@ -1,0 +1,102 @@
+<title>Textos de la web</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Preguntes al Martí per escriure la web dels col·laboradors (web/index.html). Fosc, com l'app. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Source Sans 3",system-ui,sans-serif;color-scheme:dark}
+body{background:var(--fons);color:var(--text);font-family:var(--cos);font-size:16px;line-height:1.45;margin:0}
+.app{max-width:760px;margin:0 auto;padding:20px 16px 48px;display:flex;flex-direction:column;gap:14px}
+.eti{font:700 12px var(--display);letter-spacing:.12em;color:var(--ambre);text-transform:uppercase}
+h1{font:700 26px var(--display);margin:0}
+h2{font:700 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--suau);margin:16px 0 0}
+p{margin:0;color:var(--suau)}
+.resum{position:sticky;top:0;background:var(--fons);padding:8px 0;z-index:2;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font:600 13px var(--cos);padding:5px 10px;border-radius:999px;background:var(--sup);border:1px solid var(--linia)}
+.pill b{font-family:var(--display);color:var(--ambre)}
+.estat{font-size:13px;color:var(--suau)}
+.preg{background:var(--sup);border:1px solid var(--linia);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.preg.feta{border-color:var(--ambre-f)}
+.preg h3{margin:0;font:700 16px var(--display)}
+.preg small{color:var(--suau);font-size:14px}
+textarea{width:100%;min-height:64px;background:var(--fons);color:var(--text);border:1px solid var(--linia);border-radius:10px;padding:8px;font:inherit;box-sizing:border-box;resize:vertical}
+.opcions{display:flex;flex-wrap:wrap;gap:8px}
+.op{background:var(--sup2);border:2px solid var(--linia);border-radius:12px;padding:8px 12px;color:var(--text);font:inherit;font-size:15px;cursor:pointer;min-height:44px;text-align:left}
+.op[aria-pressed="true"]{border-color:var(--ambre);background:#221E14}
+.op:focus-visible,textarea:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+</style>
+<div class="app">
+  <span class="eti">Web per als col·laboradors</span>
+  <h1>Preguntes per escriure la web</h1>
+  <p>Amb les teves respostes escriuré la pàgina principal. No m'inventaré res: el que no contestis, no hi sortirà. Escriu com parlaries; ja ho arreglaré jo, i després t'ensenyaré el text per si vols canviar res. Les respostes es desen soles; quan acabis, digues «ja està».</p>
+  <div class="resum"><span class="pill" id="compte"></span><span class="estat" id="estat">Carregant…</span></div>
+  <div id="preguntes"></div>
+</div>
+<script>
+const SECCIONS=[
+ ['Qui ets',[
+  {id:'nom',t:'Com vols que et presentem?',a:'Per exemple, nom i cognoms, o només «Martí».'},
+  {id:'don',t:'D\'on ets i on vius?',a:'Si vols dir-ho.'},
+  {id:'feina',t:'A què et dediques?',a:'Estudis o feina. Opcional.'},
+  {id:'foto',t:'Hi vols posar una foto teva?',o:['Sí','No','Més endavant']},
+ ]],
+ ['Per què ho fas',[
+  {id:'idea',t:'Com et va venir la idea?',a:'Un viatge, una afició, alguna cosa que et va passar…'},
+  {id:'objectiu',t:'Què vols aconseguir?',a:'Per a la gent que la fa servir i per als pobles.'},
+  {id:'tipus',t:'Quin tipus de projecte és?',o:['Personal, sense ànim de lucre','Personal, però potser en trauré algun ingrés','Encara no ho sé'],a:'Ho poden preguntar els ajuntaments.'},
+  {id:'preu',t:'L\'app serà gratuïta?',o:['Sí, gratuïta','No','Encara no ho sé']},
+  {id:'quan',t:'Quan vols que surti l\'app?',a:'Una data aproximada, o «quan estigui a punt».'},
+ ]],
+ ['Què demanes als ajuntaments',[
+  {id:'mes',t:'Vols demanar-los res més, a part de la medalla i les missions?',a:'Per exemple, que ho difonguin, fotos, dades… O res més.'},
+  {id:'fisica',t:'Vols explicar-los la medalla física de qui completi els 947 municipis?',o:['Sí','No, encara no','Més endavant']},
+ ]],
+ ['Com es diu i com et trobem',[
+  {id:'nomprojecte',t:'Amb quin nom surt la web?',o:['Descobreix Catalunya','Bocins de Catalunya','Encara no ho sé']},
+  {id:'correu',t:'Quin correu de contacte hi poso?',a:'Sortirà públic a la web.'},
+  {id:'xarxes',t:'Comptes d\'Instagram i TikTok',a:'Si ja els tens, els noms d\'usuari. Si no, deixa-ho buit.'},
+  {id:'tracte',t:'Com t\'adreces als ajuntaments?',o:['De vosaltres (com ara)','De vostè','De tu']},
+ ]],
+ ['Res més',[
+  {id:'altres',t:'Hi ha res més que vulguis que hi surti?',a:'Opcional.'},
+ ]],
+];
+const TOTES=SECCIONS.flatMap(s=>s[1]);
+let vals={},db=null;const temps={};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+try{const m=JSON.parse(localStorage.getItem('web1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+const feta=q=>{const v=vals[q.id]||{};return !!(v.opcio||(v.text||'').trim())};
+function estat(t){$('estat').textContent=t}
+function compte(){$('compte').innerHTML=`<b>${TOTES.filter(feta).length}</b> de ${TOTES.length} respostes`}
+function pinta(){
+  $('preguntes').innerHTML=SECCIONS.map(([n,qs])=>`<h2>${n}</h2>`+qs.map(q=>{const v=vals[q.id]||{};
+    return `<section class="preg${feta(q)?' feta':''}" data-q="${q.id}"><h3>${q.t}</h3>${q.a?`<small>${q.a}</small>`:''}
+    ${q.o?`<div class="opcions" role="group" aria-label="${esc(q.t)}">${q.o.map(o=>`<button class="op" type="button" data-o="${esc(o)}" aria-pressed="${v.opcio===o}">${o}</button>`).join('')}</div>`:''}
+    <textarea aria-label="${esc(q.t)}" placeholder="${q.o?'Nota (opcional)':'Resposta'}">${esc(v.text||'')}</textarea></section>`}).join('')).join('');
+  compte();
+}
+function desaLocal(){try{localStorage.setItem('web1',JSON.stringify(vals))}catch(e){}}
+async function desa(id){
+  if(!db){estat('Desat en aquest navegador.');return}
+  const q=TOTES.find(x=>x.id===id),v=vals[id]||{};
+  try{
+    if(!feta(q))await db.collection('web1').doc(id).delete();
+    else await db.collection('web1').doc(id).set({id,pregunta:q.t,opcio:v.opcio||null,text:v.text||'',ts:Date.now()});
+    estat('Desat. Claude podrà llegir les teves respostes.');
+  }catch(e){estat('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+$('preguntes').addEventListener('click',e=>{const b=e.target.closest('.op');if(!b)return;const s=b.closest('.preg'),id=s.dataset.q,v=vals[id]||(vals[id]={});
+  v.opcio=v.opcio===b.dataset.o?null:b.dataset.o;s.querySelectorAll('.op').forEach(x=>x.setAttribute('aria-pressed',x.dataset.o===v.opcio));
+  s.classList.toggle('feta',feta(TOTES.find(q=>q.id===id)));compte();desaLocal();desa(id)});
+$('preguntes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.preg'),id=s.dataset.q;(vals[id]||(vals[id]={})).text=e.target.value;
+  s.classList.toggle('feta',feta(TOTES.find(q=>q.id===id)));compte();desaLocal();clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){estat('Les respostes es desen en aquest navegador.');return}
+  try{const q=await db.collection('web1').get();let n=0;
+    for(const d of q.docs){const x=d.data();if(x){vals[x.id||d.id]={opcio:x.opcio||null,text:x.text||''};n++}}
+    pinta();estat(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles i Claude les podrà llegir.');
+  }catch(e){estat('No s\'han pogut carregar les respostes del núvol.')}
+})();
+</script>
