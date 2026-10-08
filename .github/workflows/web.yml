@@ -1,0 +1,46 @@
+name: Web
+
+# Publica la web per als col·laboradors (web/) a GitHub Pages quan canvia a main (docs/web-collaboradors.md).
+on:
+  push:
+    branches: [main]
+    paths: ['web/**', 'app/src/main/assets/dades/municipis.json', '.github/workflows/web.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: web
+  cancel-in-progress: true
+
+jobs:
+  publica:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.desplegament.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepara la web
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          mkdir -p web/dades
+          cp app/src/main/assets/dades/municipis.json web/dades/
+          # Només la URL i la clau pública (anon). Sense secrets, la web es publica però no es pot entrar a l'espai.
+          printf "window.CONFIG = { supabaseUrl: '%s', anonKey: '%s' };\n" "$SUPABASE_URL" "$SUPABASE_ANON_KEY" > web/config.js
+          rm -f web/config.exemple.js
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+      - id: desplegament
+        uses: actions/deploy-pages@v4

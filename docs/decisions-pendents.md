@@ -2,6 +2,13 @@
 
 Decisions que ha pres el Martí i que encara no són al codi. Quan s'implementin, passen a `requisits.md` i s'esborren d'aquí.
 
+## Web per als col·laboradors
+
+- Es parla amb els **consells comarcals** (un per comarca), i els ajuntaments que vulguin també hi poden entrar. Proposen la medalla de la comarca i missions amb els llocs emblemàtics.
+- La web va en un **domini propi** (encara per triar i comprar). Les propostes es desen a Supabase, amb un codi d'accés per col·laborador.
+- **Abans de parlar amb els ajuntaments:** crear els comptes d'**Instagram** i **TikTok** del projecte.
+- Guia i llista del que falta: `docs/web-collaboradors.md`.
+
 ## Per més endavant: Obtainium
 
 - La publicació ja és a la CI (`docs/obtainium.md`), però encara no s'ha posat en marxa: falta crear la clau de signatura, afegir els secrets a GitHub i configurar Obtainium al mòbil.
