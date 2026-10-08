@@ -5,6 +5,7 @@ import cat.descobreix.joc.dades.Missions
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.model.Missio
+import cat.descobreix.joc.model.TipusMissio
 
 /** Estat del progrés de l'usuari necessari per aplicar les regles. */
 data class EstatJoc(
@@ -85,6 +86,8 @@ class ReglesJoc(
     /** Punts que dona completar [missio], tenint en compte les que ja estan [completades]. */
     fun puntsPerCompletar(missio: Missio, completades: Set<String>): PuntsMissio {
         if (missio.id in completades) return PuntsMissio(0, 0)
+        // Les oficials van a part: no donen el bonus de completar-les totes (secció 9.6).
+        if (missio.tipus == TipusMissio.OFICIAL) return PuntsMissio(missio.punts, 0)
         val ms = missions.de(missio.municipi)
         val totesFetes = ms.all { it.id == missio.id || it.id in completades }
         return PuntsMissio(missio.punts, if (totesFetes) config.punts.bonusTotesLesMissions else 0)

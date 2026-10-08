@@ -27,9 +27,11 @@ enum class EstatMunicipi {
     BOIRA,
 }
 
-enum class TipusMissio { LLOC, GENERICA }
+/** OFICIAL: les missions que posa un ajuntament (secció 9.6 de docs/requisits.md). */
+enum class TipusMissio { LLOC, GENERICA, OFICIAL }
 
-enum class TipusProva { GPS, FOTO }
+/** QR: llegir el codi d'un punt de segellat d'un ajuntament. */
+enum class TipusProva { GPS, FOTO, QR }
 
 /** Visibilitat d'una foto. A la versió 1 totes les fotos són locals, però el camp es guarda. */
 enum class Visibilitat { PRIVADA, SEGUIDORS, PUBLICA }
@@ -52,7 +54,7 @@ data class Missio(
 }
 
 data class FontMissio(
-    /** "generica", "wikidata" o "osm". */
+    /** "generica", "wikidata", "osm" o "ajuntament". */
     val tipus: String,
     /** Identificador a la font (Q123, node/123...), si en té. */
     val id: String?,

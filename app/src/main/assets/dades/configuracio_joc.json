@@ -53,6 +53,11 @@
       "capitals": 100
     }
   },
+  "ajuntaments": {
+    "puntsMissio": 40,
+    "bonusFesta": 25,
+    "maximMissionsPerMunicipi": 5
+  },
   "passaport": {
     "segellsPerPagina": 20
   },

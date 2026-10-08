@@ -22,6 +22,7 @@ data class ConfiguracioJoc(
     val medalles: Medalles,
     val passaport: Passaport,
     val sacs: Sacs,
+    val ajuntaments: Ajuntaments,
 ) {
     @Serializable
     data class Desbloqueig(
@@ -92,6 +93,17 @@ data class ConfiguracioJoc(
         val fitaMunicipis: Int,
         val fitaCartells: Int,
         val capitals: Int,
+    )
+
+    /** Les missions oficials dels ajuntaments (secció 9.6 de docs/requisits.md). */
+    @Serializable
+    data class Ajuntaments(
+        /** Barretines que dona cada missió oficial, la posi qui la posi. */
+        val puntsMissio: Int,
+        /** Barretines de més per fer una missió de festa o fira durant els seus dies. */
+        val bonusFesta: Int,
+        /** Si un ajuntament en té més, només es fan servir les primeres. */
+        val maximMissionsPerMunicipi: Int,
     )
 
     @Serializable
