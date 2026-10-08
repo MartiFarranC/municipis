@@ -131,7 +131,6 @@ A més de les medalles, l'app té un **passaport**: cada municipi descobert hi p
   - Ara les fotos només es guarden al mòbil. Per poder comprovar el repte caldrà pujar-les (o almenys la del cartell) al núvol, o guardar-ne una prova verificable.
   - Pendent de decidir com es fa arribar la medalla física (adreça d'enviament i revisió de les fotos). **Serà de les últimes coses que es faran**, perquè encara no se sap si hi haurà medalla física.
 - **Medalles amb estil propi per comarca:** més endavant, cada comarca tindrà una medalla amb un dibuix propi. Per triar-lo, el Martí respondrà un **qüestionari per comarca** (què és el més representatiu de cada una), perquè no s'inventi res.
-- **Col·laboracions amb els ajuntaments** dels municipis. Pendent de decidir què s'hi ofereix i com.
 - **Sistema de sacs:** sacs que es guanyen jugant i que, en obrir-los, donen a l'atzar una cosa per personalitzar l'app.
   - **Com es guanyen:** les primeres vegades (primer municipi, primera missió i primera foto: un sac cadascuna) i **un sac per cada nivell de medalla de comarca** (bronze, plata i or): 43 × 3 = 129 sacs, més els 3 primers. Quadra amb tot el que hi ha als sacs, perquè com que mai no surten repetides, cada sac dona una cosa nova.
   - **Què hi surt:** emojis per a les reaccions, tapes noves per al passaport (a més de les tres que es poden triar sempre), colors secundaris de l'app i animacions de càrrega.
