@@ -269,7 +269,7 @@ Decidit amb la pàgina `disseny/ajuntaments/tria-ajuntaments.html`. Es prepara a
 
 - **Missions oficials.** Es fan com les altres: amb GPS (un punt i el radi de la configuració), amb una foto (dins del municipi) o llegint un **codi QR** (vegeu més avall).
   - Donen les barretines que diu la configuració (`ajuntaments.puntsMissio`), no les que posa l'ajuntament.
-  - Com a molt `ajuntaments.maximMissionsPerMunicipi` missions actives per municipi; el servidor no en deixa entrar més.
+  - Com a molt `ajuntaments.maximMissionsPerMunicipi` missions per municipi: si n'hi ha més, l'app només fa servir les primeres (per `ordre`).
   - Van a part de les missions automàtiques: no compten per al bonus de completar-les totes, ni per a «municipi complet», ni per als punts màxims del municipi.
   - Si una missió es retira, qui ja l'havia feta no perd les barretines.
 - **Festes i fires.** Una missió oficial pot tenir unes dates (de la festa major, d'una fira…). Només es pot fer aquells dies (hora de Catalunya, dates incloses) i dona un bonus (`ajuntaments.bonusFesta`). Abans, es veu amb les dates; quan han passat, només es veu si s'havia fet.
