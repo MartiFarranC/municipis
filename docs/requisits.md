@@ -150,6 +150,7 @@ Requisits d'accessibilitat:
 | Mòduls | Al principi un sol mòdul `:app`, organitzat per paquets de funcionalitat (`map`, `municipality`, `missions`, `photos`, `profile`, `onboarding`) i una capa `data` / `domain` |
 | SDK | `minSdk 26`; `targetSdk` i `compileSdk` a l'última versió estable |
 | Tests | Unitaris per a les regles del joc (secció 3), la geometria (punt dins de polígon, distància a frontera) i els ViewModels. Tests de UI de Compose per als fluxos principals. |
+| Distribució | Obtainium, des de les releases de GitHub. La CI publica una release amb l'APK signat cada vegada que tot passa a `main` (vegeu [`obtainium.md`](obtainium.md)) |
 
 ### 6.1 Mapa
 
