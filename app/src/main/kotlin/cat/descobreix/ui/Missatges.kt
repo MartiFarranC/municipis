@@ -54,6 +54,9 @@ sealed interface Missatge {
     /** No es llegeix el nom del municipi a la foto del cartell. */
     data class CartellNoLlegit(val nom: String) : Missatge
 
+    /** El codi QR llegit no és el del punt de segellat de la missió. */
+    data object QrNoValid : Missatge
+
     /** S'ha canviat la foto del cartell del catàleg (sense punts: la missió ja estava feta). */
     data object CromoNou : Missatge
 }
@@ -111,12 +114,14 @@ fun textDe(m: Missatge): String = when (m) {
     Missatge.Error -> stringResource(R.string.missatge_error)
     is Missatge.CartellNoLlegit -> stringResource(R.string.missatge_cartell_no_llegit, m.nom)
     Missatge.CromoNou -> stringResource(R.string.missatge_cromo_nou)
+    Missatge.QrNoValid -> stringResource(R.string.missatge_qr_no_valid)
 }
 
 /** Si el missatge és prou important per mostrar-lo en un diàleg (i no en una notificació breu). */
 val Missatge.esDialeg: Boolean
     get() = this is Missatge.MunicipiBloquejat || this is Missatge.MassaLluny || this is Missatge.PrecisioInsuficient ||
-        this is Missatge.AltreMunicipi || this is Missatge.ForaDeCatalunya || this is Missatge.CartellNoLlegit
+        this is Missatge.AltreMunicipi || this is Missatge.ForaDeCatalunya || this is Missatge.CartellNoLlegit ||
+        this is Missatge.QrNoValid
 
 @Composable
 fun DialegMissatge(missatge: Missatge, onTanca: () -> Unit) {

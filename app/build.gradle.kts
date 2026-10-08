@@ -127,6 +127,8 @@ dependencies {
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
+    // Llegir els codis QR dels punts de segellat dels ajuntaments, sense connexió (sense Google Play Services).
+    implementation(libs.zxing.core)
 
     implementation(libs.play.services.location)
     implementation(libs.kotlinx.coroutines.play.services)

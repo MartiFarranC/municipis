@@ -3,10 +3,12 @@ package cat.descobreix
 import cat.descobreix.domain.Joc
 import cat.descobreix.domain.MedallesNoves
 import cat.descobreix.joc.model.TipusMissio
+import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.progressio.Sacs
 import cat.descobreix.joc.progressio.TipusMedalla
+import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -107,5 +109,29 @@ class JocTest {
     fun `no es poden fer missions d'un municipi bloquejat`() = runTest {
         joc.iniciaPartida(vic)
         joc.completaMissio(DadesDeProva.dades.missions.de(gurb).first(), null, null)
+    }
+
+    @Test
+    fun `una missio oficial dona les barretines de la configuracio, sense el bonus`() = runTest {
+        val c = DadesDeProva.dades.config.ajuntaments
+        val m = MissioAjuntament("u1", vic, "Puja al campanar", null, TipusProva.FOTO, null, null, null, null, null, 0, false)
+        val j = Joc(DadesDeProva, repositori, sacs, fotos, AjuntamentsEnMemoria(listOf(m)))
+        j.iniciaPartida(vic)
+        val oficial = checkNotNull(j.missio(m.idMissio))
+        assertEquals(TipusMissio.OFICIAL, oficial.tipus)
+        // Encara que ja s'hagin fet totes les automàtiques, no torna a donar el bonus.
+        DadesDeProva.dades.missions.de(vic).forEach { j.completaMissio(it, null, null) }
+        val punts = j.completaMissio(oficial, null, null)
+        assertEquals(c.puntsMissio, punts.missio)
+        assertEquals(0, punts.bonus)
+    }
+
+    @Test
+    fun `una festa que no es avui no dona barretines`() = runTest {
+        val dema = Joc.avui().plusDays(1)
+        val m = MissioAjuntament("u2", vic, "Fira", null, TipusProva.FOTO, null, null, null, dema, dema, 0, false)
+        val j = Joc(DadesDeProva, repositori, sacs, fotos, AjuntamentsEnMemoria(listOf(m)))
+        j.iniciaPartida(vic)
+        assertEquals(0, j.completaMissio(checkNotNull(j.missio(m.idMissio)), null, null).total)
     }
 }

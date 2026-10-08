@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.assets.Dades
+import cat.descobreix.data.repositori.AjuntamentsRepositori
 import cat.descobreix.data.repositori.CameraMapa as CameraDesada
 import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.ubicacio.ServeiUbicacio
@@ -72,6 +73,8 @@ data class MapaEstat(
     val ordre: OrdreCamera? = null,
     val cameraInicial: CameraDesada? = null,
     val desbloquejant: Boolean = false,
+    /** Els municipis amb un ajuntament que col·labora (secció 9.6): la targeta en mostra el distintiu. */
+    val collaboradors: Set<CodiIne> = emptySet(),
 )
 
 @HiltViewModel
@@ -79,6 +82,7 @@ class MapaViewModel @Inject constructor(
     private val joc: Joc,
     private val preferencies: PreferenciesRepositori,
     private val ubicacio: ServeiUbicacio,
+    ajuntaments: AjuntamentsRepositori,
     estatDesat: SavedStateHandle,
 ) : ViewModel() {
     private val _estat = MutableStateFlow(MapaEstat())
@@ -90,6 +94,9 @@ class MapaViewModel @Inject constructor(
     private var comptadorOrdres = 0L
 
     init {
+        viewModelScope.launch {
+            ajuntaments.ajuntaments.collect { a -> _estat.update { it.copy(collaboradors = a.keys) } }
+        }
         viewModelScope.launch {
             val d = joc.dades()
             dades = d

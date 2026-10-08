@@ -66,6 +66,7 @@
     <string name="progres_missions">%1$d de %2$d missions · Completa-les totes i guanya +%3$d de bonus</string>
     <string name="prova_gps">GPS</string>
     <string name="prova_foto">Foto</string>
+    <string name="prova_qr">Codi QR</string>
     <string name="prova_toca">Prova: %1$s · Toca per fer-la</string>
     <string name="prova_feta">Prova: %1$s · Feta</string>
     <string name="completada">Completada</string>
@@ -365,6 +366,20 @@
     <string name="camera_requadre">Requadre del cartell</string>
     <string name="missatge_cartell_no_llegit">No s\'hi llegeix «%1$s». Ajusta el requadre només al cartell, que es vegi net i dret, i torna-ho a provar.</string>
     <string name="missatge_cromo_nou">Foto del cartell canviada al catàleg.</string>
+    <string name="missatge_qr_no_valid">Aquest codi QR no és el d\'aquesta missió. Busca el del punt de segellat de l\'ajuntament.</string>
+
+    <!-- Ajuntaments que col·laboren (requisits.md, secció 9.6) -->
+    <string name="de_l_ajuntament">De l\'ajuntament</string>
+    <string name="municipi_collaborador">Municipi col·laborador</string>
+    <string name="festa_dies">%1$s · Només del %2$s al %3$s</string>
+    <string name="festa_fins">%1$s · Festa: fins al %2$s</string>
+    <string name="festa_passada">%1$s · La festa ja ha passat</string>
+    <string name="ajuntament_oficina">Oficina de turisme: %1$s</string>
+    <string name="ajuntament_web">Web de l\'ajuntament</string>
+    <string name="ajuntament_avantatges">Avantatges</string>
+    <string name="ajuntament_avantatges_text">Els ofereix l\'ajuntament, fora de l\'app. Pregunta-hi les condicions.</string>
+    <string name="avantatge_fins">Fins al %1$s</string>
+    <string name="qr_text">Missió: %1$s. Enfoca el codi QR del punt de segellat.</string>
     <string name="torna_a_fer_foto_cartell">Torna a fer la foto del cartell</string>
     <string name="fes_foto_cartell_cataleg">Fes la foto del cartell per al catàleg</string>
     <string name="cataleg">Catàleg de cartells</string>

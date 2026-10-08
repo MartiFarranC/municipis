@@ -2,6 +2,7 @@ package cat.descobreix.domain
 
 import cat.descobreix.data.assets.Dades
 import cat.descobreix.data.assets.FontDadesJoc
+import cat.descobreix.data.repositori.AjuntamentsRepositori
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.SacsRepositori
@@ -13,6 +14,9 @@ import cat.descobreix.joc.progressio.ContingutSac
 import cat.descobreix.joc.progressio.DadesSacs
 import cat.descobreix.joc.progressio.Medalla
 import cat.descobreix.joc.progressio.Sacs
+import cat.descobreix.joc.model.TipusMissio
+import cat.descobreix.joc.regles.DisponibilitatOficial
+import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.PuntsMissio
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import cat.descobreix.joc.regles.Ubicacio
@@ -24,6 +28,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.time.LocalDate
+import java.time.ZoneId
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.random.Random
@@ -38,6 +44,7 @@ class Joc @Inject constructor(
     private val repositori: ProgresRepositori,
     private val sacsRepositori: SacsRepositori,
     private val fotos: FotosRepositori,
+    private val ajuntaments: AjuntamentsRepositori = AjuntamentsRepositori.Buit,
 ) {
     private val mutex = Mutex()
 
@@ -58,6 +65,14 @@ class Joc @Inject constructor(
     suspend fun dades(): Dades = dadesJoc.obte()
 
     suspend fun mapa(): GeometriaMapa = dadesJoc.mapa()
+
+    /** Una missió pel seu id: una de les automàtiques o una oficial d'un ajuntament (secció 9.6). */
+    suspend fun missio(id: String): Missio? {
+        val d = dades()
+        if (!id.startsWith(MissioAjuntament.PREFIX)) return d.missions.missio(id)
+        val m = ajuntaments.missionsAra().firstOrNull { it.idMissio == id } ?: return null
+        return d.ajuntaments.comMissio(m)
+    }
 
     suspend fun iniciaPartida(codi: CodiIne) = mutex.withLock {
         dades().geografia.municipi(codi)
@@ -84,12 +99,19 @@ class Joc @Inject constructor(
     suspend fun completaMissio(missio: Missio, ubicacio: Ubicacio?, fotoId: String?): PuntsMissio = mutex.withLock {
         val progres = repositori.progresAra()
         check(missio.municipi in progres.conjuntDescoberts) { "El municipi ${missio.municipi} no està desbloquejat" }
+        if (missio.tipus == TipusMissio.OFICIAL && !oficialDisponible(missio.id)) return@withLock PuntsMissio(0, 0)
         val punts = dades().regles.puntsPerCompletar(missio, progres.completades.keys)
         if (punts.total > 0) {
             repositori.completaMissio(missio.id, missio.municipi, punts.missio, punts.bonus, ubicacio, fotoId)
             actualitzaMedalles()
         }
         punts
+    }
+
+    /** Si una missió oficial encara existeix i es pot fer avui (les festes, només els seus dies). */
+    private suspend fun oficialDisponible(id: String): Boolean {
+        val m = ajuntaments.missionsAra().firstOrNull { it.idMissio == id && !it.retirada } ?: return false
+        return dades().ajuntaments.disponibilitat(m, avui()) == DisponibilitatOficial.Disponible
     }
 
     /** Després de desar una foto que no és d'una missió: la primera dona un sac. */
@@ -131,6 +153,11 @@ class Joc @Inject constructor(
             _medallesNoves.tryEmit(MedallesNoves(medalles.filter { md -> m.guanyades(md).any { it.id in ids } }, noves.sumOf { it.punts }))
         }
         actualitzaSacs()
+    }
+
+    companion object {
+        /** Avui a Catalunya: les dates de les festes dels ajuntaments són d'aquí. */
+        fun avui(): LocalDate = LocalDate.now(ZoneId.of("Europe/Madrid"))
     }
 
     /** Desa els sacs nous i els anuncia. Es crida amb el mutex agafat. */

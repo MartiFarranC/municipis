@@ -1,5 +1,6 @@
 package cat.descobreix.ui.components
 
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +18,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,13 +28,17 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
@@ -39,12 +46,18 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cat.descobreix.data.repositori.AjuntamentsRepositoriRoom
 import cat.descobreix.joc.dades.GeometriaMapa
+import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.sacs.portada
 import cat.descobreix.ui.theme.ChakraPetch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 // El passaport (docs/decisions-pendents.md): pàgines de paper, una (o més) per comarca, on l'usuari
 // posa el segell rectangular de cada municipi on vol. Els dibuixos segueixen el prototip de disseny/passaport.
@@ -88,16 +101,23 @@ fun siluetaMunicipi(mapa: GeometriaMapa, index: Int): Silueta {
 /** Un segell ja posat, amb el que cal per dibuixar-lo. */
 data class SegellDibuix(val posat: SegellPosat, val nom: String, val data: String, val silueta: Silueta?)
 
-/** El segell rectangular: doble vora, la silueta del municipi, el nom i la data, tot del color de la tinta. */
+/**
+ * El segell rectangular: doble vora, la silueta del municipi, el nom i la data, tot del color de la tinta.
+ * Si l'ajuntament hi ha posat un dibuix propi ([propi], secció 9.6 dels requisits), va en lloc de la silueta.
+ */
 @Composable
-fun DibuixSegell(nom: String, data: String, silueta: Silueta?, tinta: Color, modifier: Modifier = Modifier) {
+fun DibuixSegell(nom: String, data: String, silueta: Silueta?, tinta: Color, modifier: Modifier = Modifier, propi: ImageBitmap? = null) {
     val mesurador = rememberTextMeasurer()
     Canvas(modifier.aspectRatio(1f / PROPORCIO_SEGELL)) {
         val s = size.width / 100f
         scale(s, pivot = Offset.Zero) {
             drawRoundRect(tinta, Offset(3f, 3f), Size(94f, 54f), CornerRadius(5f), style = Stroke(3f))
             drawRoundRect(tinta, Offset(8f, 8f), Size(84f, 44f), CornerRadius(3f), style = Stroke(1f))
-            silueta?.let { encabeix(it, Offset(20f, 30f), 26f, tinta) }
+            if (propi != null) {
+                drawImage(propi, dstOffset = IntOffset(7, 17), dstSize = IntSize(26, 26), colorFilter = ColorFilter.tint(tinta))
+            } else {
+                silueta?.let { encabeix(it, Offset(20f, 30f), 26f, tinta) }
+            }
             textSegell(mesurador, nom.uppercase(), Offset(64f, 26f), 8f, 50f, tinta, s)
             textSegell(mesurador, data, Offset(64f, 39f), 7f, 50f, tinta, s)
         }
@@ -187,6 +207,16 @@ fun PaginaPassaport(
     }
 }
 
+/** El dibuix propi del segell d'un municipi, si el seu ajuntament n'ha posat un i ja s'ha baixat. */
+@Composable
+fun rememberSegellPropi(codi: CodiIne): ImageBitmap? {
+    val fitxer = AjuntamentsRepositoriRoom.fitxerSegell(LocalContext.current, codi)
+    val imatge by produceState<ImageBitmap?>(null, fitxer.path, fitxer.lastModified()) {
+        value = withContext(Dispatchers.IO) { if (fitxer.exists()) BitmapFactory.decodeFile(fitxer.path)?.asImageBitmap() else null }
+    }
+    return imatge
+}
+
 /** Col·loca un segell al seu lloc de la pàgina, girat. */
 @Composable
 fun SegellALaPagina(s: SegellDibuix, amplada: Dp, alcada: Dp, modifier: Modifier = Modifier) {
@@ -197,6 +227,7 @@ fun SegellALaPagina(s: SegellDibuix, amplada: Dp, alcada: Dp, modifier: Modifier
         s.data,
         s.silueta,
         ColorsPassaport.tinta(s.posat.tinta),
+        propi = rememberSegellPropi(s.posat.codi),
         modifier
             .size(w, h)
             .offset(amplada * s.posat.x - w / 2, alcada * s.posat.y - h / 2)

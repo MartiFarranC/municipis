@@ -16,8 +16,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         SacEntity::class,
         CanviPendentEntity::class,
         ControlSincronitzacioEntity::class,
+        AjuntamentEntity::class,
+        MissioAjuntamentEntity::class,
+        AvantatgeEntity::class,
     ],
-    version = 6,
+    version = 7,
     exportSchema = true,
 )
 abstract class BaseDades : RoomDatabase() {
@@ -32,6 +35,8 @@ abstract class BaseDades : RoomDatabase() {
     abstract fun sacs(): SacsDao
 
     abstract fun sincronitzacio(): SincronitzacioDao
+
+    abstract fun ajuntaments(): AjuntamentsDao
 
     companion object {
         const val NOM = "descobreix.db"
@@ -68,6 +73,27 @@ abstract class BaseDades : RoomDatabase() {
         val MIGRACIO_5_6 = object : Migration(5, 6) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("UPDATE fotos SET visibilitat = 'SEGUIDORS' WHERE visibilitat = 'AMICS'")
+            }
+        }
+
+        /** Versió 7: el contingut dels ajuntaments que col·laboren, baixat del servidor. */
+        val MIGRACIO_6_7 = object : Migration(6, 7) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `ajuntaments` (`codiIne` TEXT NOT NULL, `presentacio` TEXT, `web` TEXT, `oficinaTurisme` TEXT, " +
+                        "`teSegell` INTEGER NOT NULL, `retirat` INTEGER NOT NULL, PRIMARY KEY(`codiIne`))",
+                )
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `missions_ajuntament` (`id` TEXT NOT NULL, `codiIne` TEXT NOT NULL, `titol` TEXT NOT NULL, " +
+                        "`descripcio` TEXT, `prova` TEXT NOT NULL, `lat` REAL, `lon` REAL, `resumQr` TEXT, `dataInici` TEXT, `dataFi` TEXT, " +
+                        "`ordre` INTEGER NOT NULL, `retirada` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+                )
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_missions_ajuntament_codiIne` ON `missions_ajuntament` (`codiIne`)")
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `avantatges` (`id` TEXT NOT NULL, `codiIne` TEXT NOT NULL, `titol` TEXT NOT NULL, " +
+                        "`descripcio` TEXT, `condicions` TEXT, `validFins` TEXT, `retirat` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+                )
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_avantatges_codiIne` ON `avantatges` (`codiIne`)")
             }
         }
 

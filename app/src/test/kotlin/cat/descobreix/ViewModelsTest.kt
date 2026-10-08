@@ -1,6 +1,7 @@
 package cat.descobreix
 
 import androidx.lifecycle.SavedStateHandle
+import cat.descobreix.data.repositori.AjuntamentsRepositori
 import cat.descobreix.domain.Joc
 import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.regles.Ubicacio
@@ -130,6 +131,7 @@ class ViewModelsTest {
         fotos,
         ubicacio,
         segells,
+        AjuntamentsRepositori.Buit,
         SavedStateHandle(mapOf("codi" to codi)),
     )
 

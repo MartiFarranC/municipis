@@ -64,7 +64,7 @@ class CameraViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val d = joc.dades()
-            val missio = missioId?.let { id -> d.missions.missio(id) }
+            val missio = missioId?.let { id -> joc.missio(id) }
             _estat.update { it.copy(nom = d.geografia.municipi(codi).nom, missio = missio, esCartell = missio?.clau == Medalles.CLAU_CARTELL) }
         }
     }

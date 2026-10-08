@@ -139,3 +139,46 @@ data class CanviPendentEntity(val taula: String, val id: String)
 /** Una sola fila (id 0): si s'estan aplicant dades del servidor, que els triggers no han de posar a la cua. */
 @Entity(tableName = "control_sincronitzacio")
 data class ControlSincronitzacioEntity(@PrimaryKey val id: Int = 0, val aplicant: Boolean = false)
+
+// Contingut dels ajuntaments (requisits.md, secció 9.6). És una còpia del servidor, que l'app només llegeix: no es
+// puja mai i no té triggers de la cua. [retirada] és l'esborrat lògic del servidor.
+
+/** Un ajuntament que col·labora. */
+@Entity(tableName = "ajuntaments")
+data class AjuntamentEntity(
+    @PrimaryKey val codiIne: String,
+    val presentacio: String?,
+    val web: String?,
+    val oficinaTurisme: String?,
+    val teSegell: Boolean,
+    val retirat: Boolean,
+)
+
+/** Una missió oficial d'un ajuntament. Les dates són ISO (`2026-04-05`). */
+@Entity(tableName = "missions_ajuntament", indices = [Index(value = ["codiIne"])])
+data class MissioAjuntamentEntity(
+    @PrimaryKey val id: String,
+    val codiIne: String,
+    val titol: String,
+    val descripcio: String?,
+    val prova: String,
+    val lat: Double?,
+    val lon: Double?,
+    val resumQr: String?,
+    val dataInici: String?,
+    val dataFi: String?,
+    val ordre: Int,
+    val retirada: Boolean,
+)
+
+/** Un avantatge fora de l'app que ofereix un ajuntament. */
+@Entity(tableName = "avantatges", indices = [Index(value = ["codiIne"])])
+data class AvantatgeEntity(
+    @PrimaryKey val id: String,
+    val codiIne: String,
+    val titol: String,
+    val descripcio: String?,
+    val condicions: String?,
+    val validFins: String?,
+    val retirat: Boolean,
+)

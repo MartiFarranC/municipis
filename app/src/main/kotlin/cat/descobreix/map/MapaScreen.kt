@@ -51,6 +51,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
+import cat.descobreix.municipality.Distintiu
 import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
@@ -197,6 +198,7 @@ fun MapaScreen(
             if (s != null) {
                 TargetaSeleccio(
                     s,
+                    collaborador = s.codi in estat.collaboradors,
                     desbloquejant = estat.desbloquejant,
                     onObre = { onObreMunicipi(s.codi) },
                     onDesbloqueja = viewModel::desbloqueja,
@@ -274,6 +276,7 @@ private fun Capcalera(estat: MapaEstat) {
 @Composable
 private fun TargetaSeleccio(
     s: Seleccio,
+    collaborador: Boolean,
     desbloquejant: Boolean,
     onObre: () -> Unit,
     onDesbloqueja: () -> Unit,
@@ -311,6 +314,7 @@ private fun TargetaSeleccio(
                 EstatMunicipi.BOIRA -> s.distancia?.let { plural(R.plurals.distancia_territori, it, it) } ?: s.comarca
             }
             Text("${s.comarca} · $detall", style = MaterialTheme.typography.bodySmall)
+            if (collaborador) Distintiu(Modifier.padding(top = 4.dp))
         }
         when {
             s.estat == EstatMunicipi.DISPONIBLE && s.potDesbloquejar -> Button(
