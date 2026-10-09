@@ -32,7 +32,7 @@ osona=[m for m in MU['municipis'] if nomcom[m['comarca']]=='Osona']
 dades={'mapa':peces,'missions':missions,'cfg':{'base':CFG['desbloqueig']['costBase'],'inc':CFG['desbloqueig']['costIncrementPerMunicipi'],
        'max':CFG['desbloqueig']['costMaxim'],'bonus':CFG['punts']['bonusTotesLesMissions'],'nivell1':CFG['nivells']['puntsPrimerNivell'],'nivellInc':CFG['nivells']['increment']},
        'osona':sorted(m['nom'] for m in osona),'nOsona':len(osona),'total':len(MU['municipis']),'comarques':len(MU['comarques'])}
-for plantilla,sortida in [('prototip-plantilla.html','prototip-app.html'),('estils-plantilla.html','estils-app.html')]:
+for plantilla,sortida in [('prototip-plantilla.html','prototip-app.html'),('estils-plantilla.html','estils-app.html'),('paletes-plantilla.html','paletes-app.html')]:
     t=open(f'{AQUI}/{plantilla}').read()
     open(f'{AQUI}/{sortida}','w').write(t.replace('/*DADES*/{}',json.dumps(dades,ensure_ascii=False)))
 print(len(peces),'municipis;',sum(len(v) for v in missions.values()),'missions')
