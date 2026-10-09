@@ -44,7 +44,7 @@ async function main() {
   .peu b { color: #EEF1F5 }
 </style>
 <div class="pagina">
-  <div class="eti">Descobreix Catalunya</div>
+  <div class="eti">Bocins de Catalunya</div>
   <h1>Descobreix <span>${escapa(m.nom)}</span> jugant</h1>
   <p>Una app per recórrer els 947 municipis de Catalunya com si fos un joc: desbloqueja municipis, fes-hi missions i omple el passaport de segells.</p>
   <div class="distintiu">★ Municipi col·laborador</div>
