@@ -1,0 +1,155 @@
+<title>Estil Nothing</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Proposta d'estètica a l'estil de Nothing OS: tres variants, cadascuna amb el mapa, la fitxa i la web.
+   Generat per gen-mostres.py. Les lletres són obertes (Doto, Space Grotesk, Space Mono): la de Nothing no ho és. */
+:root{color-scheme:dark}
+body{margin:0;background:#0A0A0A;color:#EDEDED;font-family:"Space Grotesk",system-ui,sans-serif;font-size:15px;line-height:1.45}
+.pagina{max-width:1040px;margin:0 auto;padding:20px 16px 48px;display:flex;flex-direction:column;gap:18px}
+.eti{font:700 12px "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#D71921}
+h1{font:900 34px "Doto",monospace;margin:0;letter-spacing:.02em}
+.pagina>p{margin:0;color:#9A9A9A;max-width:68ch}
+.resum{position:sticky;top:0;background:#0A0A0A;padding:8px 0;z-index:3;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font:13px "Space Mono",monospace;color:#9A9A9A}
+.resum b{color:#EDEDED}
+.variant{border:1px solid #2A2A2A;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.variant h2{margin:0;font:700 20px "Space Grotesk",sans-serif}
+.variant>p{margin:0;color:#9A9A9A}
+.pantalles{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.pantalles>figure{margin:0;display:flex;flex-direction:column;gap:6px;scroll-snap-align:start;flex:none}
+figcaption{font:12px "Space Mono",monospace;color:#9A9A9A;text-transform:uppercase;letter-spacing:.1em}
+.botons{display:flex;gap:8px;flex-wrap:wrap}
+.botons button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #3A3A3A;background:none;color:#EDEDED;font:700 13px "Space Mono",monospace;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
+.botons button[aria-pressed="true"]{background:#EDEDED;color:#000;border-color:#EDEDED}
+.botons button:focus-visible,textarea:focus-visible{outline:2px solid #D71921;outline-offset:2px}
+textarea{width:100%;min-height:52px;background:#000;color:#EDEDED;border:1px solid #2A2A2A;border-radius:12px;padding:8px;font:inherit;box-sizing:border-box}
+
+/* El telèfon: tot el que hi ha a dins fa servir les variables de la variant. */
+.tel{width:300px;height:620px;border-radius:34px;border:6px solid #1A1A1A;background:var(--f);color:var(--t);overflow:hidden;position:relative;display:flex;flex-direction:column;
+  font-family:"Space Grotesk",sans-serif;box-shadow:0 0 0 1px #333}
+.tel .estatus{display:flex;justify-content:space-between;padding:10px 18px 0;font:11px "Space Mono",monospace;color:var(--m)}
+.tel .dot{font-family:"Doto",monospace;font-weight:900}
+.tel .mono{font-family:"Space Mono",monospace}
+.tel .eti2{font:700 10px "Space Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--m)}
+.tel .acc{color:var(--a)}
+.tel .boto{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;border-radius:999px;background:var(--t);color:var(--f);font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+.tel .boto.acc-bg{background:var(--a);color:var(--ta)}
+.tel .targ{border:1px solid var(--l);border-radius:18px;background:var(--s);padding:12px}
+.tel .barra{display:flex;justify-content:space-around;border-top:1px solid var(--l);padding:10px 0 14px;margin-top:auto;font:10px "Space Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--m)}
+.tel .barra .on{color:var(--t)}
+.tel .barra .on::before{content:"";display:block;width:4px;height:4px;border-radius:50%;background:var(--a);margin:0 auto 4px}
+.punts{display:flex;gap:3px;flex-wrap:wrap}
+.punts i{width:6px;height:6px;border-radius:50%;background:var(--l)}
+.punts i.ple{background:var(--t)}
+.fila{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--l)}
+.fila .cb{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--m);flex:none}
+.fila .cb.fet{background:var(--a);border-color:var(--a)}
+.fila .tt{flex:1;font-size:13px}
+.fila .tt.fet{color:var(--m);text-decoration:line-through}
+</style>
+<div class="pagina">
+  <span class="eti">Bocins de Catalunya · estètica</span>
+  <h1>A l'estil Nothing</h1>
+  <p>Tres variants de la mateixa idea: blanc i negre, lletres de punts com una pantalla de LEDs, lletra monoespaiada per als detalls, línies fines i un sol color d'accent. Cada variant té el mapa, la fitxa de Vic i la web. El mapa és un tros real d'Osona (Vic i Gurb descoberts) i les missions són les reals de Vic. Llisca les pantalles cap al costat. Marca-les i, si escrius una nota, queda com «Millorar». Quan acabis, digues «ja està».</p>
+  <div class="resum" id="resum"></div>
+  <div id="variants"></div>
+</div>
+<script>
+const DADES=/*DADES*/{};
+// La barretina, la moneda del joc, amb el mateix dibuix que a l'app.
+const VARIANTS=[
+ {id:'fosc',n:'Fosc i vermell',d:'El més fidel a Nothing: fons negre, blanc i el vermell com a únic color.',v:{f:'#000000',s:'#0E0E0E',t:'#F2F2F2',m:'#8C8C8C',l:'#262626',a:'#D71921',ta:'#FFFFFF',b:'#5A5A5A'}},
+ {id:'clar',n:'Clar i vermell',d:'El mode clar de Nothing: fons blanc trencat, negre i vermell.',v:{f:'#F4F4F2',s:'#FFFFFF',t:'#111111',m:'#7A7A7A',l:'#DADADA',a:'#D71921',ta:'#FFFFFF',b:'#B5B5B5'}},
+ {id:'ambre',n:'Fosc i ambre',d:'L\'estil Nothing, però amb l\'ambre de l\'app com a accent: es manté el «fanal».',v:{f:'#000000',s:'#0E0E0E',t:'#F2F2F2',m:'#8C8C8C',l:'#262626',a:'#F2B544',ta:'#1A1305',b:'#5A5A5A'}},
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const vars=v=>`--f:${v.f};--s:${v.s};--t:${v.t};--m:${v.m};--l:${v.l};--a:${v.a};--ta:${v.ta};--b:${v.b}`;
+const estatus=`<div class="estatus"><span>9:41</span><span>●●● 5G</span></div>`;
+const barra=on=>`<div class="barra">${['Mapa','Missions','Gent','Perfil'].map(x=>`<span class="${x===on?'on':''}">${x}</span>`).join('')}</div>`;
+
+function mapa(id){
+  // La boira és una trama de punts; els disponibles, vora d'accent; els descoberts, plens.
+  const peces=DADES.mapa.map(p=>p.e==='D'?`<path d="${p.d}" fill="var(--t)" stroke="var(--f)" stroke-width="1.2"/>`
+    :p.e==='V'?`<path d="${p.d}" fill="var(--s)" stroke="var(--a)" stroke-width="${p.c==='08037'?2.4:1.2}" stroke-dasharray="${p.c==='08037'?'none':'3 2.5'}"/>`
+    :`<path d="${p.d}" fill="url(#boira-${id})" stroke="var(--l)" stroke-width=".6"/>`).join('');
+  const noms=DADES.mapa.filter(p=>p.e==='D'||p.c==='08037').map(p=>`<text x="${p.x}" y="${p.y}" text-anchor="middle" font-family="Space Mono" font-size="9" font-weight="700" fill="${p.e==='D'?'var(--f)':'var(--t)'}">${esc(p.n.toUpperCase())}</text>`).join('');
+  return `<div class="tel" style="${vars(VARIANTS.find(v=>v.id===id).v)}">${estatus}
+   <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:12px 18px 6px">
+     <div><div class="eti2">Descoberts</div><div class="dot" style="font-size:30px;line-height:1">002<span style="color:var(--m)">/947</span></div></div>
+     <div style="text-align:right"><div class="eti2">Barretines</div><div class="dot acc" style="font-size:30px;line-height:1">250</div></div>
+   </div>
+   <svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona: Vic i Gurb descoberts">
+     <defs><pattern id="boira-${id}" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r=".9" fill="var(--b)"/></pattern></defs>
+     ${peces}${noms}
+   </svg>
+   <div class="targ" style="margin:0 12px;display:flex;align-items:center;gap:10px">
+     <div style="flex:1"><div class="eti2 acc">Disponible · veí de Vic</div><div style="font-weight:700;font-size:17px">Calldetenes</div><div class="mono" style="font-size:10px;color:var(--m)">OSONA</div></div>
+     <div class="boto acc-bg" style="padding:0 14px">65 <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><g transform="translate(.6 1.6) scale(.068)"><path d="M50,290 L48,222 C30,226 6,214 4,180 C2,140 28,92 70,78 C120,62 200,66 245,90 C284,112 298,160 300,232 L301,260 Z" fill="currentColor"/><path d="M38,271 L312,233 C318,232 321,235 322,241 L325,270 C326,276 323,280 317,281 L45,318 C39,319 36,316 35,310 L32,281 C31,275 33,272 38,271 Z" fill="currentColor"/></g></svg></div>
+   </div>
+   ${barra('Mapa')}</div>`;
+}
+
+function fitxa(id){
+  const v=DADES.vic, fetes=2, guanyats=v.slice(0,fetes).reduce((a,m)=>a+m.p,0);
+  const segments=Math.round(guanyats/DADES.total*30);
+  return `<div class="tel" style="${vars(VARIANTS.find(x=>x.id===id).v)}">${estatus}
+   <div style="padding:14px 18px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0">
+     <div class="eti2">‹ Osona</div>
+     <div class="dot" style="font-size:54px;line-height:.95">VIC</div>
+     <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="eti2">Barretines</span><span class="mono"><b class="acc">${guanyats}</b><span style="color:var(--m)"> / ${DADES.total}</span></span></div>
+     <div class="punts">${Array.from({length:30},(_,i)=>`<i class="${i<segments?'ple':''}"></i>`).join('')}</div>
+     <div class="eti2" style="margin-top:6px">Missions · ${fetes}/${DADES.nmissions}</div>
+     <div style="overflow:hidden">${v.map((m,i)=>`<div class="fila"><span class="cb ${i<fetes?'fet':''}"></span><span class="tt ${i<fetes?'fet':''}">${esc(m.t)}</span><span class="mono" style="font-size:11px;color:${i<fetes?'var(--m)':'var(--t)'}">+${m.p}</span></div>`).join('')}</div>
+   </div>
+   ${barra('Missions')}</div>`;
+}
+
+function web(id){
+  return `<div class="tel" style="${vars(VARIANTS.find(x=>x.id===id).v)}">${estatus}
+   <div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px;flex:1">
+     <div style="display:flex;justify-content:space-between;align-items:center"><span class="dot" style="font-size:15px">BOCINS</span><span class="eti2">Col·labora</span></div>
+     <div class="eti2 acc" style="margin-top:20px">Un projecte per als 947 municipis</div>
+     <div style="font-weight:700;font-size:30px;line-height:1.05">Recórrer tot Catalunya, poble a poble, com en un joc</div>
+     <div style="font-size:13px;color:var(--m)">Bocins de Catalunya és una app per visitar els municipis de Catalunya. Cada visita desbloqueja un tros del mapa.</div>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+       <div class="targ"><div class="dot" style="font-size:28px">947</div><div class="eti2">Municipis</div></div>
+       <div class="targ"><div class="dot" style="font-size:28px">43</div><div class="eti2">Comarques</div></div>
+     </div>
+     <div class="boto acc-bg" style="margin-top:auto">Tinc un codi de col·laboració</div>
+     <div class="boto" style="background:none;color:var(--t);border:1px solid var(--l)">Qui sóc</div>
+   </div></div>`;
+}
+
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('estil1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function resum(t){$r=document.getElementById('resum');$r.innerHTML=`<span><b>${VARIANTS.filter(v=>vals[v.id]?.valor).length}</b> de ${VARIANTS.length} mirades</span><span>${t||''}</span>`}
+function pinta(){
+  document.getElementById('variants').innerHTML=VARIANTS.map(v=>{const x=vals[v.id]||{};
+    return `<section class="variant" data-v="${v.id}" style="margin-bottom:16px"><h2>${v.n}</h2><p>${v.d}</p>
+    <div class="pantalles"><figure>${mapa(v.id)}<figcaption>El mapa</figcaption></figure><figure>${fitxa(v.id)}<figcaption>La fitxa</figcaption></figure><figure>${web(v.id)}<figcaption>La web</figcaption></figure></div>
+    <div class="botons" role="group" aria-label="Valoració de ${esc(v.n)}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${x.valor===k}">${t}</button>`).join('')}</div>
+    <textarea aria-label="Nota sobre ${esc(v.n)}" placeholder="Nota (opcional)">${esc(x.nota||'')}</textarea></section>`}).join('');
+  resum();
+}
+function desaLocal(){try{localStorage.setItem('estil1',JSON.stringify(vals))}catch(e){}}
+async function desa(id){
+  if(!db){resum('Desat en aquest navegador.');return}
+  const v=vals[id]||{};
+  try{
+    if(!v.valor&&!v.nota)await db.collection('estil1').doc(id).delete();
+    else await db.collection('estil1').doc(id).set({id,nom:VARIANTS.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
+    resum('Desat. Claude podrà llegir les teves respostes.');
+  }catch(e){resum('No s\'ha pogut desar al núvol: es queda en aquest navegador.')}
+}
+document.getElementById('variants').addEventListener('click',e=>{const b=e.target.closest('.botons button');if(!b)return;const s=b.closest('.variant'),id=s.dataset.v,v=vals[id]||(vals[id]={});
+  v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('.botons button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desaLocal();desa(id)});
+document.getElementById('variants').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.variant'),id=s.dataset.v,v=vals[id]||(vals[id]={});
+  v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}
+  desaLocal();clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){resum('Les respostes es desen en aquest navegador.');return}
+  try{const q=await db.collection('estil1').get();let n=0;for(const d of q.docs){const x=d.data();if(x){vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''};n++}}
+    pinta();resum(n?`Hi havia ${n} respostes desades.`:'Les respostes es desen soles.');}catch(e){resum('No s\'han pogut carregar les respostes.')}
+})();
+</script>
