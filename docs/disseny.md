@@ -1,8 +1,12 @@
 # Disseny
 
-## Estètica nova: "rètols esmaltats" (escollida, pendent d'aplicar)
+## Estètica nova: encara per decidir
 
-Escollida l'octubre de 2026 després de diverses rondes de conceptes (`disseny/estil/conceptes*.html`). Encara no s'ha aplicat a l'app: fins aleshores mana l'estètica "nit i fanals" de sota.
+Els "rètols esmaltats" es van escollir i després es van descartar (octubre de 2026): la paleta agradava, però l'estètica sencera no. Ara es tria peça a peça al taller d'estil (`disseny/estil/taller.html`). Del sac, agrada la idea de la capsa de llauna (`disseny/sacs/sacs-estil.html`). Fins que es decideixi, mana l'estètica "nit i fanals" de sota.
+
+El que s'ha après de les rondes: fons blanc net (mai blanc trencat), colors apagats o madurs (mai cridaners ni infantils), res que sembli vell, i res de botons de píndola ni paletes genèriques. La festa major (programa d'actes, lletra de tipus de fusta, dues tintes) és el concepte que més ha agradat.
+
+### Rètols esmaltats (descartat)
 
 Les plaques de llauna esmaltada de les botigues i dels carrers: plaques amb la vora blanca interior, les cantonades arrodonides i dos cargols. Fons blanc net (mai blanc trencat), colors apagats (mai cridaners) i res que sembli vell.
 

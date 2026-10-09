@@ -1,0 +1,222 @@
+<title>Taller d'estil</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Alfa+Slab+One&family=Oswald:wght@400;600&family=Archivo+Black&family=Chakra+Petch:wght@600;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Serif+Display&family=Work+Sans:wght@400;600;800&family=Public+Sans:wght@400;600;800&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Taller d'estil: en comptes de conceptes tancats, cada peça de l'estètica es tria per separat i el mòbil s'actualitza.
+   Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+.cap{max-width:70ch;margin-bottom:20px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.taller{display:grid;grid-template-columns:350px 1fr;gap:28px;align-items:start}
+.previ{position:sticky;top:12px}
+.pestanyes{display:flex;gap:6px;margin-bottom:8px}
+.pestanyes button,.opcions button,.desa button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.05em;padding:8px 12px;border:1.5px solid #1B1A17;background:#F7F4EC;cursor:pointer;min-height:40px;color:#1B1A17}
+.pestanyes button[aria-pressed="true"],.opcions button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+#caixa{overflow:hidden}
+.marc-tel{width:330px;height:680px;transform-origin:0 0}
+.grup{border-top:2px solid #1B1A17;padding:12px 0 16px}
+.grup h2{font:600 20px "Newsreader",serif;margin:0 0 2px}
+.grup p{margin:0 0 8px;color:#5C574D;font-size:14px}
+.opcions{display:flex;flex-wrap:wrap;gap:6px}
+.opcions button{display:flex;align-items:center;gap:8px}
+.opcions .mostra{display:inline-flex;height:18px;border:1px solid rgba(0,0,0,.25)}.opcions .mostra i{width:12px;height:100%}
+.opcions .lletra{font-size:18px;letter-spacing:0;text-transform:none}
+textarea{width:100%;box-sizing:border-box;min-height:70px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+.estat{font:500 13px "Alegreya Sans SC",sans-serif;color:#5C574D;margin-top:6px}
+@media (max-width:800px){
+  .taller{grid-template-columns:1fr}
+  .previ{top:0;z-index:2;background:#E9E6DF;padding:8px 0;display:flex;flex-direction:column;align-items:center;border-bottom:2px solid #1B1A17}
+}
+
+/* ── El mòbil: tot surt de variables i de classes que posen les tries ─────────────────────────── */
+.tel{width:330px;height:680px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;box-sizing:border-box;
+  background:var(--fons);color:var(--t);font-family:var(--cos);font-size:14px;line-height:1.35}
+.tel .dins{padding:30px 14px 0;flex:1;overflow:hidden;display:flex;flex-direction:column}
+.tel .tit{font-family:var(--tit);font-weight:var(--titw);line-height:.95;letter-spacing:-.01em}
+.tel.maj .tit{text-transform:uppercase}
+.tel .etq{font-family:var(--cos);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--al)}
+.tel .gran{color:var(--b)}
+.tel.dec-ombra .gran{text-shadow:3px 2px 0 var(--a)}
+.tel .xifres{display:flex;justify-content:space-between;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding-top:4px;margin-top:6px;border-top:2px solid var(--b)}
+.tel.dec-doble .xifres{border-top:4px double var(--b)}
+/* Botons */
+.tel .bt{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;background:var(--a);color:var(--onA);position:relative}
+.tel .bt.b2{background:var(--b);color:var(--onB)}
+.tel.bt-cantonada .bt{border-radius:6px}
+.tel.bt-cargols .bt{border-radius:9px;box-shadow:inset 0 0 0 3px var(--a),inset 0 0 0 5px var(--fons);padding-left:24px;padding-right:24px}
+.tel.bt-cargols .bt.b2{box-shadow:inset 0 0 0 3px var(--b),inset 0 0 0 5px var(--fons)}
+.tel.bt-cargols .bt::before,.tel.bt-cargols .bt::after{content:"";position:absolute;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.tel.bt-cargols .bt::before{left:9px}.tel.bt-cargols .bt::after{right:9px}
+.tel.bt-ombra .bt{border:2px solid var(--t);box-shadow:4px 4px 0 var(--t);margin-right:4px}
+.tel.bt-contorn .bt{background:transparent;color:var(--al);box-shadow:inset 0 0 0 2px var(--a)}
+.tel.bt-contorn .bt.b2{color:var(--b);box-shadow:inset 0 0 0 2px var(--b)}
+.tel .xip{padding:3px 7px;font-weight:700;font-size:12px;text-transform:uppercase;background:var(--b);color:var(--onB)}
+.tel .xip.a{background:var(--a);color:var(--onA)}
+.tel.bt-cantonada .xip,.tel.bt-cargols .xip{border-radius:4px}
+.tel.bt-contorn .xip{background:transparent;color:var(--b);box-shadow:inset 0 0 0 1.5px var(--b)}.tel.bt-contorn .xip.a{color:var(--al);box-shadow:inset 0 0 0 1.5px var(--a)}
+/* Llistes */
+.tel .fila{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:8px 0}
+.tel .fila .n{font-weight:800;font-size:12px;color:var(--al);min-width:0}
+.tel .fila .t{font-weight:600}
+.tel .fila .p{font-family:var(--tit);font-weight:var(--titw);font-size:18px;color:var(--b)}
+.tel.ll-gruixut .fila{border-top:2px solid var(--b)}
+.tel.ll-fi .fila{border-bottom:1px solid var(--linia)}
+.tel.ll-targetes .fila{background:var(--sup2);padding:9px 10px;margin-bottom:5px}
+.tel.ll-targetes.bt-cantonada .fila,.tel.ll-targetes.bt-cargols .fila{border-radius:6px}
+.tel.ll-targetes.bt-ombra .fila{background:var(--fons);border:1.5px solid var(--t);box-shadow:3px 3px 0 var(--t);margin-right:3px;margin-bottom:7px}
+.tel.ll-marc .llista{box-shadow:inset 0 0 0 2px var(--b);padding:2px 12px}
+.tel.ll-marc.bt-cantonada .llista,.tel.ll-marc.bt-cargols .llista{border-radius:8px}
+.tel.ll-marc .fila+.fila{border-top:1px solid var(--linia)}
+.tel.fet-ratllat .fila.fet .t{text-decoration:line-through;text-decoration-color:var(--a);text-decoration-thickness:2.5px}
+.tel.fet-ratllat .fila.fet .t,.tel.fet-check .fila.fet .t,.tel.fet-atenuat .fila.fet{opacity:.55}
+.tel .pic{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:var(--b);color:var(--onB)}
+.tel .fila.fet .pic{background:var(--a);color:var(--onA)}
+.tel.bt-cantonada .pic,.tel.bt-cargols .pic{border-radius:4px}
+/* Navegació */
+.tel .nav{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto}
+.tel .nav span{padding:10px 0 14px;text-align:center;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+.tel.nav-plena .nav{background:var(--b);color:var(--onB)}.tel.nav-plena .nav span{opacity:.7}.tel.nav-plena .nav span.on{background:var(--a);color:var(--onA);opacity:1}
+.tel.nav-neta .nav{border-top:1px solid var(--t);color:var(--suau)}.tel.nav-neta .nav span.on{color:var(--t);box-shadow:inset 0 3px 0 var(--a)}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · taller d'estil</small>
+    <h1>Munta-te l'estètica peça a peça</h1>
+    <p>Fins ara t'he ensenyat conceptes tancats i, quan una part no t'agradava, se n'anava tot. Aquí tries cada peça per separat: els colors, les lletres, els botons, les llistes, el mapa i els detalls. El mòbil canvia a mesura que tries, i pots mirar les tres pantalles.</p>
+    <p>Hi ha peces de tots els conceptes que hem vist (la festa major, els esmalts, el programa…) i algunes de noves. Quan tinguis una combinació que t'agradi, escriu a la nota què hi falta o què hi sobra, i digues "ja està". La tria es desa sola.</p>
+  </div>
+  <div class="taller">
+    <div class="previ">
+      <div class="pestanyes" role="group" aria-label="Pantalla">
+        <button type="button" data-pant="mapa" aria-pressed="true">Mapa</button><button type="button" data-pant="fitxa" aria-pressed="false">Fitxa</button><button type="button" data-pant="perfil" aria-pressed="false">Perfil</button>
+      </div>
+      <div id="caixa"><div class="marc-tel" id="mobil"></div></div>
+    </div>
+    <div>
+      <div id="grups"></div>
+      <div class="grup"><h2>Nota</h2><p>Què hi falta, què hi sobra, o què t'ha recordat.</p><textarea id="nota" aria-label="Nota"></textarea><div class="estat" id="estat" aria-live="polite"></div></div>
+    </div>
+  </div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base;
+const nCall=(D.missions[SEL]||[]).length;
+
+// a: la tinta viva; al: la mateixa, prou fosca per a text; b: la tinta de fons; t: el text; tou: els veïns; boira: la resta.
+const PAL={
+ tomaquet:{n:'Tomàquet i blau marí',fons:'#fff',sup2:'#F2F4F7',t:'#14213D',suau:'#7D8597',linia:'#E3E6EC',a:'#E2412E',al:'#C8321F',onA:'#fff',b:'#1E3A6E',onB:'#fff',tou:'#D3DBE8',boira:'#F4F5F7'},
+ taronja:{n:'Taronja i verd ampolla',fons:'#fff',sup2:'#F1F5F3',t:'#0F2E27',suau:'#74867F',linia:'#E1E8E5',a:'#EE6A2C',al:'#C4501A',onA:'#fff',b:'#13594B',onB:'#fff',tou:'#CFE0DA',boira:'#F3F6F5'},
+ corall:{n:'Corall i verd mar',fons:'#fff',sup2:'#F0F6F6',t:'#0B3B3E',suau:'#6E8889',linia:'#DFE9E9',a:'#F2604B',al:'#CC3F2B',onA:'#fff',b:'#0E6E73',onB:'#fff',tou:'#CBE2E3',boira:'#F3F7F7'},
+ risografia:{n:'Rosa i blau (risografia)',fons:'#fff',sup2:'#F3F4FA',t:'#1D2A6B',suau:'#7880A6',linia:'#E2E4F0',a:'#E8478B',al:'#C92A6E',onA:'#fff',b:'#1D4FA3',onB:'#fff',tou:'#D3DDF0',boira:'#F4F5F9'},
+ nit:{n:'Blau nit i terracota',fons:'#fff',sup2:'#F2F3F5',t:'#28364F',suau:'#9097A3',linia:'#E2E5EA',a:'#A9503F',al:'#A9503F',onA:'#fff',b:'#28364F',onB:'#fff',tou:'#C9D0DB',boira:'#F3F4F5'},
+ negre:{n:'Negre i vermell',fons:'#fff',sup2:'#F3F3F3',t:'#16181D',suau:'#85878C',linia:'#E5E5E7',a:'#D9412B',al:'#C0331F',onA:'#fff',b:'#16181D',onB:'#fff',tou:'#DADADC',boira:'#F5F5F6'},
+ groc:{n:'Groc i negre',fons:'#fff',sup2:'#F5F5F2',t:'#16181D',suau:'#85878C',linia:'#E7E6E1',a:'#F2B544',al:'#8F6408',onA:'#16181D',b:'#16181D',onB:'#fff',tou:'#F6E3B4',boira:'#F5F5F3'},
+ fosc:{n:'Fosc (la d\'ara)',fons:'#10141B',sup2:'#1A2029',t:'#EEF1F5',suau:'#98A2B0',linia:'#2A3240',a:'#F2B544',al:'#F2B544',onA:'#1A1305',b:'#5AB8E8',onB:'#0B0E13',tou:'#3A3420',boira:'#161B23'},
+};
+const TIT={
+ alfa:{n:'Alfa Slab One',f:'"Alfa Slab One",serif',w:400},
+ oswald:{n:'Oswald',f:'"Oswald",sans-serif',w:600},
+ archivo:{n:'Archivo Black',f:'"Archivo Black",sans-serif',w:400},
+ chakra:{n:'Chakra Petch',f:'"Chakra Petch",sans-serif',w:700},
+ bricolage:{n:'Bricolage',f:'"Bricolage Grotesque",sans-serif',w:800},
+ dmserif:{n:'DM Serif',f:'"DM Serif Display",serif',w:400},
+};
+const COS={
+ work:{n:'Work Sans',f:'"Work Sans",sans-serif'},
+ public:{n:'Public Sans',f:'"Public Sans",sans-serif'},
+ plex:{n:'IBM Plex Sans',f:'"IBM Plex Sans",sans-serif'},
+ serif:{n:'Source Serif',f:'"Source Serif 4",serif'},
+};
+const GRUPS=[
+ {k:'pal',n:'Colors',d:'Dues tintes i el text. Totes sobre blanc net, menys la fosca.',o:Object.fromEntries(Object.entries(PAL).map(([k,p])=>[k,{n:p.n,m:[p.a,p.b,p.t]}]))},
+ {k:'tit',n:'Lletra dels títols',d:'La del nom dels pobles, les xifres grosses i les barretines.',o:Object.fromEntries(Object.entries(TIT).map(([k,x])=>[k,{n:x.n,f:x.f}]))},
+ {k:'maj',n:'Títols en majúscules',d:'',o:{si:{n:'Sí'},no:{n:'No'}}},
+ {k:'cos',n:'Lletra del text',d:'La de les missions, les etiquetes i els botons.',o:Object.fromEntries(Object.entries(COS).map(([k,x])=>[k,{n:x.n,f:x.f}]))},
+ {k:'bt',n:'Botons',d:'També marca la forma de les etiquetes i les targetes.',o:{recte:{n:'Rectes'},cantonada:{n:'Cantonada petita'},cargols:{n:'Placa amb cargols'},ombra:{n:'Ombra dura'},contorn:{n:'Només contorn'}}},
+ {k:'ll',n:'Llistes de missions',d:'',o:{gruixut:{n:'Filets gruixuts (programa)'},fi:{n:'Filets fins'},targetes:{n:'Targetes'},marc:{n:'Tot en un marc'}}},
+ {k:'num',n:'Davant de cada missió',d:'',o:{n:{n:'Nº 01'},pic:{n:'Icona del tipus'},res:{n:'Res'}}},
+ {k:'fet',n:'Missions fetes',d:'',o:{ratllat:{n:'Ratllades'},check:{n:'Amb ✓'},atenuat:{n:'Més clares'}}},
+ {k:'mapa',n:'Mapa',d:'',o:{pla:{n:'Colors plans'},ratllat:{n:'Veïns ratllats'},contorn:{n:'Contorns'},desplacat:{n:'Tinta desplaçada'}}},
+ {k:'dec',n:'Detalls',d:'',o:{cap:{n:'Cap'},banderetes:{n:'Banderetes de festa'},ombra:{n:'Ombra de color als títols'},doble:{n:'Filet doble'}}},
+ {k:'nav',n:'Barra de baix',d:'',o:{plena:{n:'Plena de color'},neta:{n:'Neta, amb una ratlla'}}},
+];
+const DEF={pal:'tomaquet',tit:'alfa',maj:'no',cos:'work',bt:'recte',ll:'gruixut',num:'n',fet:'ratllat',mapa:'ratllat',dec:'banderetes',nav:'plena'};
+let tria={...DEF},nota='',pant='mapa',db=null,doc=null;
+try{const m=JSON.parse(localStorage.getItem('taller1')||'null');if(m&&m.tria){tria={...DEF,...m.tria};nota=m.nota||''}}catch(e){}
+
+const ICONA={GPS:'<svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>',
+ FOTO:'<svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>',
+ FET:'<svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12l5 5L20 7" fill="none" stroke="currentColor" stroke-width="3"/></svg>'};
+const banderes=P=>`<svg viewBox="0 0 316 26" width="100%" height="24" aria-hidden="true" style="display:block;flex:none"><path d="M-2 3 Q158 15 318 3" fill="none" stroke="${P.t}" stroke-width="1"/>${Array.from({length:13},(_,k)=>{const x=6+k*24,y=3+12*(1-Math.pow((x-158)/160,2));return `<path d="M${x} ${y} l14 0 l-7 ${13+(k%3)}z" fill="${k%2?P.b:P.a}"/>`}).join('')}</svg>`;
+function mapa(P){
+  const m=tria.mapa;let defs='',off='';
+  if(m==='ratllat')defs=`<defs><pattern id="ratlla" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="5" height="5" fill="${P.fons}"/><rect width="2" height="5" fill="${P.a}" opacity=".8"/></pattern></defs>`;
+  const D_=p=>m==='contorn'?`fill="${p.c==='08298'?P.a:P.b}" stroke="${P.fons}" stroke-width="1"`:`fill="${p.c==='08298'?P.a:P.b}" stroke="${P.fons}" stroke-width="1"`;
+  const V_=p=>m==='ratllat'?`fill="url(#ratlla)" stroke="${P.b}" stroke-width=".7"`:m==='contorn'?`fill="${P.fons}" stroke="${P.b}" stroke-width="1.4"`:`fill="${P.tou}" stroke="${P.fons}" stroke-width="1.2"`;
+  const B_=p=>m==='contorn'?`fill="${P.fons}" stroke="${P.linia}" stroke-width=".7"`:`fill="${P.boira}" stroke="${P.fons}" stroke-width=".8"`;
+  if(m==='desplacat')off=`<g transform="translate(3 2.5)" opacity=".9">${D.mapa.filter(p=>estat(p.c)==='D').map(p=>`<path d="${p.d}" fill="${P.a}"/>`).join('')}</g>`;
+  const s=PER[SEL];
+  return `<svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0;display:block" aria-label="Mapa d'Osona">${defs}<rect width="300" height="330" fill="${P.fons}"/>
+    ${D.mapa.filter(p=>estat(p.c)!=='D').map(p=>`<path d="${p.d}" ${estat(p.c)==='V'?V_(p):B_(p)}/>`).join('')}${off}
+    ${D.mapa.filter(p=>estat(p.c)==='D').map(p=>`<path d="${p.d}" ${D_(p)} ${m==='desplacat'?'style="mix-blend-mode:multiply"':''}/>`).join('')}
+    <path d="${s.d}" fill="${P.a}" fill-opacity=".22" stroke="${P.a}" stroke-width="2.5"/></svg>`;
+}
+const nav=on=>`<div class="nav">${['Mapa','Missions','Gent','Perfil'].map((n,i)=>`<span class="${i===on?'on':''}">${n}</span>`).join('')}</div>`;
+const fila=(m,i)=>{const fet=i<FETES;const cap=tria.num==='n'?`<span class="n">Nº ${String(i+1).padStart(2,'0')}</span>`:tria.num==='pic'?`<span class="pic">${fet&&tria.fet==='check'?ICONA.FET:ICONA[m.g]||ICONA.GPS}</span>`:'<span></span>';
+  return `<div class="fila ${fet?'fet':''}">${cap}<span class="t">${esc(m.t)}</span><span class="p">${fet&&tria.fet==='check'&&tria.num!=='pic'?'✓ ':''}${m.p}</span></div>`};
+const PANT={
+ mapa:P=>`<div class="dins" style="padding:0">${tria.dec==='banderetes'?banderes(P):'<div style="height:26px"></div>'}<div style="padding:6px 14px 6px">
+   <div class="tit gran" style="font-size:28px">Bocins de Catalunya</div>
+   <div class="xifres"><span>${DESC.length} de ${D.total} pobles</span><span style="color:${P.al}">${saldo} barretines</span></div></div>
+   ${mapa(P)}
+   <div style="padding:8px 14px 12px;border-top:2px solid ${P.b}">
+     <div class="etq">Proper poble</div><div class="tit" style="font-size:28px">${esc(PER[SEL].n)}</div>
+     <div style="font-size:13px;color:${P.suau}">${esc(PER[SEL].k)} · ${nCall} missions</div>
+     <div class="bt" style="margin-top:8px"><span>Desbloqueja</span><span>${cost} barretines</span></div></div></div>${nav(0)}`,
+ fitxa:P=>`<div class="dins" style="padding:0">${tria.dec==='banderetes'?banderes(P):'<div style="height:26px"></div>'}<div style="padding:4px 14px 0;flex:1;overflow:hidden">
+   <div class="etq">Osona</div><div class="tit gran" style="font-size:72px">Vic</div>
+   <div style="display:flex;gap:6px;margin:6px 0 8px"><span class="xip">${FETES}/${VIC.length} missions</span><span class="xip a">${guanyats}/${total} barretines</span></div>
+   <div class="llista">${VIC.slice(0,8).map(fila).join('')}</div></div></div>${nav(1)}`,
+ perfil:P=>`<div class="dins" style="padding:0">${tria.dec==='banderetes'?banderes(P):'<div style="height:26px"></div>'}<div style="padding:4px 14px 0;flex:1">
+   <div class="etq">Explorador · nivell 2</div><div class="tit gran" style="font-size:54px">marti</div>
+   <div class="llista" style="margin-top:12px">${[['Municipis',`${DESC.length} de ${D.total}`],['Missions','3'],['Comarques','0 de 43'],['Segells','2']].map(([a,b])=>`<div class="fila" style="grid-template-columns:1fr auto"><span class="t">${a}</span><span class="p">${b}</span></div>`).join('')}</div>
+   <div class="bt b2" style="margin-top:14px"><span>El passaport</span><span>→</span></div>
+   <div class="bt" style="margin-top:8px"><span>Catàleg de cartells</span><span>→</span></div></div></div>${nav(3)}`,
+};
+function pintaMobil(){
+  const P=PAL[tria.pal],T=TIT[tria.tit];
+  const st=`--fons:${P.fons};--sup2:${P.sup2};--t:${P.t};--suau:${P.suau};--linia:${P.linia};--a:${P.a};--al:${P.al};--onA:${P.onA};--b:${P.b};--onB:${P.onB};--tit:${T.f};--titw:${T.w};--cos:${COS[tria.cos].f}`;
+  const cl=['tel','bt-'+tria.bt,'ll-'+tria.ll,'fet-'+tria.fet,'nav-'+tria.nav,'dec-'+tria.dec,tria.maj==='si'?'maj':''].join(' ');
+  document.getElementById('mobil').innerHTML=`<div class="${cl}" style="${st}">${PANT[pant](P)}</div>`;
+}
+function pintaGrups(){
+  document.getElementById('grups').innerHTML=GRUPS.map(g=>`<div class="grup"><h2>${g.n}</h2>${g.d?`<p>${g.d}</p>`:''}<div class="opcions" role="group" aria-label="${g.n}">${Object.entries(g.o).map(([k,o])=>`<button type="button" data-g="${g.k}" data-v="${k}" aria-pressed="${tria[g.k]===k}">${o.m?`<span class="mostra">${o.m.map(c=>`<i style="background:${c}"></i>`).join('')}</span>`:''}<span class="${o.f?'lletra':''}" ${o.f?`style="font-family:${o.f}"`:''}>${o.n}</span></button>`).join('')}</div></div>`).join('');
+  document.getElementById('nota').value=nota;
+}
+function escala(){const c=document.getElementById('caixa'),m=document.getElementById('mobil');
+  const s=innerWidth<=800?Math.min(1,(innerHeight*.5)/680):1;m.style.transform=s<1?`scale(${s})`:'';c.style.width=330*s+'px';c.style.height=680*s+'px'}
+let temps=null;
+function desa(){try{localStorage.setItem('taller1',JSON.stringify({tria,nota}))}catch(e){}
+  clearTimeout(temps);temps=setTimeout(async()=>{if(!db)return;try{await db.collection('taller1').doc('tria').set({...tria,nota,ts:Date.now()});document.getElementById('estat').textContent='Desat.'}catch(e){document.getElementById('estat').textContent='No s\'ha pogut desar.'}},500)}
+document.getElementById('grups').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;tria[b.dataset.g]=b.dataset.v;
+  b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));pintaMobil();desa()});
+document.querySelector('.pestanyes').addEventListener('click',e=>{const b=e.target.closest('[data-pant]');if(!b)return;pant=b.dataset.pant;
+  b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));pintaMobil()});
+document.getElementById('nota').addEventListener('input',e=>{nota=e.target.value;desa()});
+addEventListener('resize',escala);
+pintaGrups();pintaMobil();escala();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;
+  try{const q=await db.collection('taller1').get();const d=q.docs.find(d=>d.id==='tria');const x=d&&d.data();if(x){const {nota:n,ts,...r}=x;tria={...DEF,...r};nota=n||'';pintaGrups();pintaMobil()}}catch(e){}})();
+</script>
