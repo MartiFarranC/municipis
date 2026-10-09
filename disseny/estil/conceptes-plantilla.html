@@ -1,0 +1,244 @@
+<title>Tres conceptes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&family=Alegreya+Sans+SC:wght@500;700&family=Overpass:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap">
+<style>
+/* Tres conceptes de disseny que surten del projecte, no d'una plantilla: el mapa topogràfic imprès, la senyalització
+   de carretera i el bitllet de tren. Generat per gen-prototip.py amb dades reals (Osona, les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px}
+.concepte header{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;max-width:900px}
+.concepte header .n{font:600 44px/1 "Newsreader",serif;grid-row:span 2}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:0}
+.concepte header p{margin:0;max-width:72ch}
+.pantalles{display:flex;gap:22px;overflow-x:auto;padding:20px 0 8px}
+figure{margin:0;flex:none}
+figcaption{font:500 13px "Alegreya Sans SC",sans-serif;letter-spacing:.08em;margin-top:8px;color:#5C574D}
+.tel{width:330px;height:700px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+
+/* ── A · Quadern de camp ─────────────────────────────────────────────── */
+.qa{background:#F4EFE3;color:#22201B;font-family:"Newsreader",serif}
+.qa .sc{font:600 11px "Alegreya Sans SC",sans-serif;letter-spacing:.14em}
+.qa .xifra{font-variant-numeric:oldstyle-nums proportional-nums}
+.qa .regla{border-top:1px solid #22201B}
+.qa .reglaf{border-top:.5px solid #B7AE9C}
+.qa-fila{display:grid;grid-template-columns:26px 1fr auto;gap:0 10px;padding:9px 0;border-top:.5px solid #B7AE9C;align-items:baseline}
+.qa-fila .num{font:600 11px "Alegreya Sans SC",sans-serif;color:#8C8473}
+.qa-fila.feta .tit{text-decoration:line-through;text-decoration-thickness:1px;color:#8C8473}
+.qa-fila .pt{font:600 15px "Newsreader",serif;font-variant-numeric:tabular-nums}
+.qa-boto{display:block;width:100%;padding:13px 0;border:0;border-top:1.5px solid #22201B;border-bottom:1.5px solid #22201B;background:none;font:600 13px "Alegreya Sans SC",sans-serif;letter-spacing:.14em;color:#22201B;text-align:left}
+.qa-nav{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #22201B;margin-top:auto}
+.qa-nav span{padding:10px 0 14px;text-align:center;font:500 12px "Alegreya Sans SC",sans-serif;letter-spacing:.1em;color:#8C8473}
+.qa-nav span.on{color:#22201B;box-shadow:inset 0 2px 0 #A8432A}
+
+/* ── B · Carretera ───────────────────────────────────────────────────── */
+.cb{background:#ECEBE6;color:#111;font-family:"Overpass",sans-serif}
+.cb .entrada{background:#fff;border:5px solid #C8102E;border-radius:7px;box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px #9A9A94;padding:8px 12px 6px;text-align:center}
+.cb .entrada b{display:block;font:900 30px/1 "Overpass",sans-serif;letter-spacing:-.01em}
+.cb .entrada small{font:600 12px "Overpass",sans-serif;color:#444}
+.cb-turistic{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;background:#6B4423;color:#fff;border-radius:5px;padding:7px 8px;box-shadow:inset 0 0 0 2px #6B4423,inset 0 0 0 3.5px #fff}
+.cb-turistic .picto{width:40px;height:40px;background:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#6B4423}
+.cb-turistic .t{font:800 14px/1.15 "Overpass",sans-serif}
+.cb-turistic .km{font:900 18px "Overpass",sans-serif;font-variant-numeric:tabular-nums}
+.cb-turistic.feta{background:#8C7A68;box-shadow:inset 0 0 0 2px #8C7A68,inset 0 0 0 3.5px #fff;opacity:.85}
+.cb-blau{background:#1F4E9C;color:#fff;border-radius:6px;box-shadow:inset 0 0 0 2px #1F4E9C,inset 0 0 0 3.5px #fff;padding:10px 12px;font:800 16px "Overpass",sans-serif;display:flex;justify-content:space-between;align-items:center}
+.cb-nav{display:grid;grid-template-columns:repeat(4,1fr);background:#1F4E9C;color:#C9D6EE;margin-top:auto}
+.cb-nav span{padding:10px 0 14px;text-align:center;font:800 11px "Overpass",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.cb-nav span.on{color:#fff;box-shadow:inset 0 -4px 0 #F2C200}
+
+/* ── C · Bitllet ─────────────────────────────────────────────────────── */
+.cc{background:#D9D3C7;color:#1E1C19;font-family:"IBM Plex Sans Condensed",sans-serif}
+.cc .mono{font-family:"IBM Plex Mono",monospace}
+.bitllet{background:#F6EFDF;position:relative;padding:12px 14px;
+  -webkit-mask:radial-gradient(circle 8px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 8px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.bitllet .tall{position:absolute;top:8px;bottom:60px;right:62px;border-left:1.5px dashed #B8AE98}
+.resguard{display:grid;grid-template-columns:1fr 54px;background:#F6EFDF;border-left:4px solid #1E1C19;position:relative}
+.resguard>div{padding:9px 10px}
+.resguard .preu{border-left:1.5px dashed #B8AE98;text-align:center;font:600 15px "IBM Plex Mono",monospace;display:flex;flex-direction:column;justify-content:center}
+.resguard .preu small{font-size:9px;letter-spacing:.08em;color:#7A7262}
+.segell{position:absolute;right:62px;top:50%;transform:translateY(-50%) rotate(-9deg);border:2px solid #B8322A;color:#B8322A;font:700 12px "IBM Plex Mono",monospace;letter-spacing:.12em;padding:2px 8px;border-radius:3px;opacity:.85;mix-blend-mode:multiply}
+.cc-nav{display:grid;grid-template-columns:repeat(4,1fr);background:#1E1C19;color:#9A9384;margin-top:auto}
+.cc-nav span{padding:11px 0 14px;text-align:center;font:600 11px "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+.cc-nav span.on{color:#F6EFDF}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · tres conceptes</small>
+    <h1>Un disseny que surti del viatge, no d'una plantilla</h1>
+    <p>Cada concepte parteix d'un objecte real del viatge pels municipis, i n'agafa les lletres, els colors i les formes. Res de targetes arrodonides, ni botons de píndola, ni resplendors. Les dades són reals: un tros d'Osona i les missions de Vic.</p>
+    <p>Són en clar. Quan en triïs un, en faré la versió fosca a partir del mateix objecte: un mapa vist de nit, els senyals reflectant els fars, un bitllet sota la llum de l'andana. Valora cada concepte a sota de les seves pantalles.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+// Estat d'exemple: Vic (inici) i Gurb descoberts; Calldetenes seleccionat; tres missions de Vic fetes.
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base; // el que s'ha guanyat a Vic, menys el que va costar desbloquejar Gurb
+const nMissionsCall=(D.missions[SEL]||[]).length;
+const F=D.finestra, KM=(F.lon1-F.lon0)*Math.cos(41.93*Math.PI/180)*111.32, U5=300*5/KM;
+const graus=v=>{const g=Math.floor(v),m=Math.round((v-g)*60);return `${g}°${String(m).padStart(2,'0')}′`};
+const xLon=lo=>(lo-F.lon0)/(F.lon1-F.lon0)*300, yLat=la=>(F.lat1-la)/(F.lat1-F.lat0)*330;
+
+// ── A · Quadern de camp ────────────────────────────────────────────────
+function aMapa(){
+  const pat=`<pattern id="a-ratlla" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="#F4EFE3"/><rect width="1" height="4" fill="#A8432A"/></pattern>`;
+  const peces=D.mapa.map(p=>{const e=estat(p.c);
+    return `<path d="${p.d}" fill="${e==='D'?'#A8432A':e==='V'?'url(#a-ratlla)':'#F4EFE3'}" fill-opacity="${e==='D'?(p.c==='08298'?1:.8):1}" stroke="#22201B" stroke-width="${e==='B'?.35:.6}" stroke-opacity="${e==='B'?.45:1}"/>`}).join('');
+  const s=PER[SEL];
+  const ticksLon=[2.1,2.2,2.3,2.4].filter(v=>v>F.lon0&&v<F.lon1).map(v=>`<line x1="${xLon(v)}" y1="0" x2="${xLon(v)}" y2="5" stroke="#22201B" stroke-width=".6"/><text x="${xLon(v)}" y="13" font-size="6.5" text-anchor="middle" font-family="Alegreya Sans SC" fill="#5C574D">${graus(v)} E</text>`).join('');
+  const ticksLat=[41.85,41.95,42.05].filter(v=>v>F.lat0&&v<F.lat1).map(v=>`<line x1="0" y1="${yLat(v)}" x2="5" y2="${yLat(v)}" stroke="#22201B" stroke-width=".6"/><text x="8" y="${yLat(v)+2}" font-size="6.5" font-family="Alegreya Sans SC" fill="#5C574D">${graus(v)} N</text>`).join('');
+  return `<div class="tel qa">
+   <div style="padding:34px 16px 8px;display:flex;justify-content:space-between;align-items:baseline" class="regla"><span class="sc">Bocins de Catalunya</span><span class="sc" style="color:#8C8473">Full 24 · Osona</span></div>
+   <div style="display:flex;justify-content:space-between;align-items:baseline;padding:2px 16px 8px"><span><span class="xifra" style="font:600 30px 'Newsreader'">${DESC.length}</span> <span style="font-style:italic">de ${D.total} municipis</span></span><span><span class="xifra" style="font:600 22px 'Newsreader'">${saldo}</span> <span style="font-style:italic">barretines</span></span></div>
+   <svg viewBox="-2 -2 304 334" style="width:100%;flex:1;min-height:0;border-top:1px solid #22201B;border-bottom:1px solid #22201B" aria-label="Mapa d'Osona">
+     <defs>${pat}</defs><rect x="-2" y="-2" width="304" height="334" fill="#F4EFE3"/>${peces}
+     <path d="${s.d}" fill="none" stroke="#22201B" stroke-width="2.2"/>
+     <line x1="${s.x}" y1="${s.y}" x2="${s.x+38}" y2="${s.y-46}" stroke="#22201B" stroke-width=".7"/>
+     <text x="${s.x+40}" y="${s.y-49}" font-family="Newsreader" font-style="italic" font-size="13" fill="#22201B">${esc(s.n)}</text>
+     <text x="${PER['08298'].x}" y="${PER['08298'].y+2}" text-anchor="middle" font-family="Alegreya Sans SC" font-weight="700" font-size="8" letter-spacing=".1em" fill="#F4EFE3">VIC</text>
+     ${ticksLon}${ticksLat}
+     <g transform="translate(206 312)"><rect width="${U5/2}" height="3" fill="#22201B"/><rect x="${U5/2}" width="${U5/2}" height="3" fill="none" stroke="#22201B" stroke-width=".6"/><text y="-3" font-size="6.5" font-family="Alegreya Sans SC" fill="#22201B">0</text><text x="${U5}" y="-3" font-size="6.5" text-anchor="middle" font-family="Alegreya Sans SC" fill="#22201B">5 km</text></g>
+   </svg>
+   <div style="padding:10px 16px 0">
+     <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:italic 600 24px 'Newsreader'">${esc(s.n)}</span><span class="sc" style="color:#8C8473">Veí de Vic</span></div>
+     <div style="font-size:13px;color:#5C574D;margin-bottom:8px">${esc(s.k)} · ${nMissionsCall} missions per descobrir</div>
+     <button class="qa-boto">Desbloqueja-ho per ${cost} barretines &nbsp;→</button>
+   </div>
+   <div class="qa-nav"><span class="on">Mapa</span><span>Quadern</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function aFitxa(){
+  return `<div class="tel qa"><div style="padding:34px 16px 0;flex:1;overflow:hidden">
+   <div style="display:flex;justify-content:space-between" class="sc"><span>← Mapa</span><span style="color:#8C8473">Osona · Municipi d'inici</span></div>
+   <div style="font:italic 400 64px/1 'Newsreader';margin:18px 0 6px;letter-spacing:-.02em">Vic</div>
+   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #22201B;border-bottom:.5px solid #B7AE9C;margin:8px 0 14px">
+     ${[[`${FETES}/${VIC.length}`,'missions'],[`${guanyats}`,`de ${total}`],[`+${D.cfg.bonus}`,'si les fas totes']].map(([a,b],i)=>`<div style="padding:8px 0 6px;${i?'padding-left:10px;border-left:.5px solid #B7AE9C':''}"><div class="xifra" style="font:600 22px 'Newsreader'">${a}</div><div style="font-style:italic;font-size:12px;color:#5C574D">${b}</div></div>`).join('')}
+   </div>
+   <div class="sc" style="margin-bottom:2px">Missions</div>
+   ${VIC.slice(0,9).map((m,i)=>`<div class="qa-fila ${i<FETES?'feta':''}"><span class="num">${String(i+1).padStart(2,'0')}</span><span><span class="tit">${esc(m.t)}</span><br><span class="sc" style="color:#8C8473;font-size:10px">${m.g==='GPS'?'Anar-hi':'Fotografiar'}${i<FETES?' · Feta':''}</span></span><span class="pt">${m.p}</span></div>`).join('')}
+   </div><div class="qa-nav"><span>Mapa</span><span class="on">Quadern</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function aPerfil(){
+  return `<div class="tel qa"><div style="padding:34px 16px 0;flex:1">
+   <div class="sc" style="color:#8C8473">Quadern de</div><div style="font:italic 400 44px/1.05 'Newsreader'">marti</div>
+   <div style="font-size:14px;margin:6px 0 16px">Explorador des d'octubre de 2026 · nivell 2</div>
+   <div class="regla"></div>
+   ${[['Municipis','2','de 947'],['Missions','3','fetes'],['Comarques','0','de 43'],['Segells','2','al passaport']].map(([a,b,c])=>`<div style="display:grid;grid-template-columns:1fr auto;padding:10px 0;border-bottom:.5px solid #B7AE9C"><span><span class="sc">${a}</span><br><span style="font-style:italic;font-size:12px;color:#5C574D">${c}</span></span><span class="xifra" style="font:600 30px 'Newsreader'">${b}</span></div>`).join('')}
+   <div class="sc" style="margin:18px 0 6px">Medalles</div>
+   <div style="display:flex;gap:14px">${[['Osona','2/42'],['10 municipis','2/10'],['Primer cartell','0/1']].map(([t,p],i)=>`<div style="text-align:center;width:84px"><svg viewBox="0 0 60 60" width="56"><circle cx="30" cy="30" r="26" fill="none" stroke="#22201B" stroke-width="${i?.6:1.6}"/><circle cx="30" cy="30" r="21" fill="${i?'none':'#A8432A'}" stroke="#22201B" stroke-width=".6"/></svg><div style="font-size:12px">${t}</div><div class="sc" style="font-size:10px;color:#8C8473">${p}</div></div>`).join('')}</div>
+   <button class="qa-boto" style="margin-top:18px">El passaport &nbsp;→</button><button class="qa-boto" style="border-top:0">Catàleg de cartells &nbsp;→</button>
+   </div><div class="qa-nav"><span>Mapa</span><span>Quadern</span><span>Gent</span><span class="on">Perfil</span></div></div>`;
+}
+
+// ── B · Carretera ──────────────────────────────────────────────────────
+const PICTO={GPS:'<svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 21h16M6 21V10l6-5 6 5v11M10 21v-5h4v5" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+             FOTO:'<svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>'};
+const fletxa='<svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3"/></svg>';
+function bMapa(){
+  const pat=`<pattern id="b-ratlla" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#ECEBE6"/><rect width="2.5" height="6" fill="#F2C200"/></pattern>`;
+  const peces=D.mapa.map(p=>{const e=estat(p.c);
+    return `<path d="${p.d}" fill="${e==='D'?'#F2C200':e==='V'?'url(#b-ratlla)':'#DCDBD4'}" stroke="${e==='B'?'#C9C7BE':'#6E6B62'}" stroke-width="${e==='B'?.6:.9}"/>`}).join('');
+  const s=PER[SEL];
+  return `<div class="tel cb">
+   <div style="padding:30px 12px 8px;display:flex;gap:8px;align-items:stretch">
+     <div class="cb-blau" style="flex:1;padding:6px 10px;font-size:13px"><span>Municipis</span><span style="font-size:20px">${DESC.length}<span style="opacity:.7;font-size:13px">/${D.total}</span></span></div>
+     <div class="cb-blau" style="padding:6px 10px;font-size:13px;gap:8px"><span>Barretines</span><span style="font-size:20px">${saldo}</span></div></div>
+   <svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona"><defs>${pat}</defs><rect width="300" height="330" fill="#ECEBE6"/>${peces}
+     <path d="${s.d}" fill="none" stroke="#C8102E" stroke-width="3"/></svg>
+   <div style="padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px;background:#ECEBE6">
+     <div class="entrada"><b>${esc(s.n)}</b><small>${esc(s.k)}</small></div>
+     <div class="cb-blau"><span>Desbloqueja · ${nMissionsCall} missions</span><span style="display:flex;align-items:center;gap:6px">${cost} ${fletxa}</span></div></div>
+   <div class="cb-nav"><span class="on">Mapa</span><span>Missions</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function bFitxa(){
+  return `<div class="tel cb"><div style="padding:30px 12px 0;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:7px">
+   <div class="entrada" style="padding:12px"><b style="font-size:44px">Vic</b><small>Osona</small></div>
+   <div style="display:flex;justify-content:space-between;font:800 13px Overpass;padding:4px 2px;text-transform:uppercase;letter-spacing:.04em"><span>${FETES} de ${VIC.length} missions</span><span>${guanyats} / ${total} barretines</span></div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="cb-turistic ${i<FETES?'feta':''}"><span class="picto">${i<FETES?'<svg viewBox="0 0 24 24" width="24" height="24"><path d="M5 12l5 5L20 7" fill="none" stroke="currentColor" stroke-width="3"/></svg>':PICTO[m.g]}</span><span class="t">${esc(m.t)}</span><span class="km">${m.p}</span></div>`).join('')}
+   </div><div class="cb-nav"><span>Mapa</span><span class="on">Missions</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function bPerfil(){
+  return `<div class="tel cb"><div style="padding:30px 12px 0;flex:1;display:flex;flex-direction:column;gap:10px">
+   <div class="cb-blau" style="flex-direction:column;align-items:flex-start;gap:2px;padding:14px"><span style="font-size:13px;opacity:.85">Explorador · nivell 2</span><span style="font:900 30px Overpass">marti</span></div>
+   <div style="background:#1F4E9C;color:#fff;border-radius:6px;box-shadow:inset 0 0 0 2px #1F4E9C,inset 0 0 0 3.5px #fff;padding:6px 12px">
+     ${[['Municipis',`${DESC.length}`],['Missions','3'],['Comarques','0/43'],['Segells','2']].map(([a,b],i)=>`<div style="display:flex;justify-content:space-between;padding:7px 0;${i?'border-top:1.5px solid rgba(255,255,255,.35)':''};font:800 16px Overpass"><span>${a}</span><span>${b}</span></div>`).join('')}</div>
+   <div style="font:800 13px Overpass;text-transform:uppercase;letter-spacing:.04em;margin-top:4px">Medalles</div>
+   <div style="display:flex;gap:10px">${[['Osona',1],['10 mun.',0],['Cartell',0]].map(([t,on])=>`<div style="flex:1;text-align:center"><svg viewBox="0 0 60 60" width="54"><path d="M30 4l24 13v26L30 56 6 43V17z" fill="${on?'#F2C200':'#DCDBD4'}" stroke="#111" stroke-width="2"/></svg><div style="font:800 12px Overpass">${t}</div></div>`).join('')}</div>
+   <div class="cb-blau" style="margin-top:6px"><span>Passaport</span>${fletxa}</div><div class="cb-blau"><span>Catàleg de cartells</span>${fletxa}</div>
+   </div><div class="cb-nav"><span>Mapa</span><span>Missions</span><span>Gent</span><span class="on">Perfil</span></div></div>`;
+}
+
+// ── C · Bitllet ────────────────────────────────────────────────────────
+function cMapa(){
+  const peces=D.mapa.map(p=>{const e=estat(p.c);
+    return `<path d="${p.d}" fill="${e==='D'?'#1E1C19':e==='V'?'#F6EFDF':'#CBC4B6'}" stroke="${e==='V'?'#1E1C19':'#B8AE98'}" stroke-width="${e==='V'?.9:.5}" ${e==='V'?'stroke-dasharray="3 2"':''}/>`}).join('');
+  const s=PER[SEL];
+  return `<div class="tel cc">
+   <div style="padding:30px 14px 8px;display:flex;justify-content:space-between;align-items:baseline" class="mono"><span style="font-size:12px;letter-spacing:.1em">BOCINS·CAT</span><span style="font-size:12px">${DESC.length}/${D.total} · ${saldo} B</span></div>
+   <svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona"><rect width="300" height="330" fill="#D9D3C7"/>${peces}
+     <path d="${s.d}" fill="#B8322A" fill-opacity=".85" stroke="#1E1C19" stroke-width="1.2"/></svg>
+   <div style="padding:10px 12px 12px">
+     <div class="bitllet"><div class="tall"></div>
+       <div style="display:grid;grid-template-columns:1fr 54px;gap:8px">
+         <div><div class="mono" style="font-size:10px;letter-spacing:.12em;color:#7A7262">ORIGEN → DESTINACIÓ</div>
+           <div style="font:700 19px 'IBM Plex Sans Condensed'">Vic → ${esc(s.n)}</div>
+           <div class="mono" style="font-size:11px;color:#5A5346">${esc(s.k.toUpperCase())} · ${nMissionsCall} MISSIONS</div></div>
+         <div style="text-align:center"><div class="mono" style="font-size:9px;letter-spacing:.1em;color:#7A7262">PREU</div><div class="mono" style="font:600 22px 'IBM Plex Mono'">${cost}</div><div class="mono" style="font-size:9px;color:#7A7262">BARRET.</div></div></div>
+       <div style="margin-top:10px;background:#1E1C19;color:#F6EFDF;text-align:center;padding:10px;font:700 14px 'IBM Plex Sans Condensed';letter-spacing:.1em">TREU EL BITLLET</div></div></div>
+   <div class="cc-nav"><span class="on">Mapa</span><span>Missions</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function cFitxa(){
+  return `<div class="tel cc"><div style="padding:30px 12px 0;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:6px">
+   <div style="background:#1E1C19;color:#F6EFDF;padding:12px 14px">
+     <div class="mono" style="font-size:10px;letter-spacing:.14em;color:#B8AE98">OSONA · ESTACIÓ D'INICI</div>
+     <div style="font:700 46px/1 'IBM Plex Sans Condensed';letter-spacing:-.01em">VIC</div>
+     <div class="mono" style="font-size:12px;margin-top:4px">${FETES}/${VIC.length} MISSIONS · ${guanyats}/${total} BARRETINES</div></div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="resguard"><div><div style="font:600 14px/1.2 'IBM Plex Sans Condensed'">${esc(m.t)}</div><div class="mono" style="font-size:10px;color:#7A7262;letter-spacing:.06em">${m.g==='GPS'?'ANAR-HI':'FOTO'} · Nº ${String(i+1).padStart(3,'0')}</div></div><div class="preu">${m.p}<small>BARRET.</small></div>${i<FETES?'<span class="segell">FETA</span>':''}</div>`).join('')}
+   </div><div class="cc-nav"><span>Mapa</span><span class="on">Missions</span><span>Gent</span><span>Perfil</span></div></div>`;
+}
+function cPerfil(){
+  return `<div class="tel cc"><div style="padding:30px 12px 0;flex:1;display:flex;flex-direction:column;gap:10px">
+   <div class="bitllet" style="padding:16px"><div class="mono" style="font-size:10px;letter-spacing:.14em;color:#7A7262">ABONAMENT · EXPLORADOR</div><div style="font:700 32px 'IBM Plex Sans Condensed'">marti</div><div class="mono" style="font-size:12px">NIVELL 02 · DES DE 10.2026</div></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${[['MUNICIPIS',`${DESC.length}`],['MISSIONS','3'],['COMARQUES','0/43'],['SEGELLS','2']].map(([a,b])=>`<div style="background:#F6EFDF;padding:10px 12px"><div class="mono" style="font-size:10px;letter-spacing:.1em;color:#7A7262">${a}</div><div style="font:700 28px 'IBM Plex Sans Condensed'">${b}</div></div>`).join('')}</div>
+   <div style="background:#F3EAD8;padding:12px;position:relative;height:150px">
+     <div class="mono" style="font-size:10px;letter-spacing:.12em;color:#7A7262">PASSAPORT · OSONA · PÀG. 1</div>
+     ${['VIC','GURB'].map((n,i)=>`<div style="position:absolute;left:${16+i*120}px;top:${40+i*14}px;border:2.5px solid ${['#2A4E8C','#B8322A'][i]};color:${['#2A4E8C','#B8322A'][i]};padding:8px 12px;transform:rotate(${i?7:-5}deg);font:700 16px 'IBM Plex Mono';text-align:center;mix-blend-mode:multiply">${n}<div style="font-size:9px">09·10·2026</div></div>`).join('')}</div>
+   <div style="background:#1E1C19;color:#F6EFDF;text-align:center;padding:12px;font:700 14px 'IBM Plex Sans Condensed';letter-spacing:.1em">OBRE EL PASSAPORT</div>
+   </div><div class="cc-nav"><span>Mapa</span><span>Missions</span><span>Gent</span><span class="on">Perfil</span></div></div>`;
+}
+
+const C=[
+ {id:'quadern',n:'Quadern de camp',d:'Com un full del mapa topogràfic: paper, tinta negra i un sol color, el vermell teula. Els municipis per descobrir són paper en blanc, els veïns es ratllen com als mapes impresos i els descoberts s\'omplen. Coordenades als marges, escala, noms en cursiva. Les missions són l\'índex d\'una guia, numerades. Lletres: Newsreader i versaletes.',f:[aMapa,aFitxa,aPerfil]},
+ {id:'carretera',n:'Carretera',d:'La senyalització de les carreteres. El municipi és el seu cartell d\'entrada (el que fotografies al joc), les missions són els senyals marrons d\'interès turístic i les barretines hi van on hi anirien els quilòmetres. Les accions són senyals blaus amb fletxa. Lletra: Overpass, feta a partir de la de les autopistes.',f:[bMapa,bFitxa,bPerfil]},
+ {id:'bitllet',n:'Bitllet',d:'Bitllets de tren, resguards i segells de goma. Desbloquejar un municipi és treure un bitllet d\'origen a destinació, cada missió és un resguard amb el seu preu i, quan la fas, s\'hi estampa «FETA». El perfil és un abonament. Lletres: IBM Plex Sans Condensed i Plex Mono.',f:[cMapa,cFitxa,cPerfil]},
+];
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('concepte1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{};return `<section class="concepte" data-c="${c.id}">
+  <header><span class="n">${i+1}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="pantalles">${c.f.map((f,j)=>`<figure>${f()}<figcaption>${['El mapa','La fitxa de Vic','El perfil'][j]}</figcaption></figure>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></section>`}).join('')}
+async function desa(id){try{localStorage.setItem('concepte1',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('concepte1').doc(id).delete();else await db.collection('concepte1').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+document.getElementById('conceptes').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const s=b.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+document.getElementById('conceptes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('concepte1').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
