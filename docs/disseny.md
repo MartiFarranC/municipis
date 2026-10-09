@@ -1,6 +1,24 @@
 # Disseny
 
-## Estètica: "nit i fanals"
+## Estètica nova: "rètols esmaltats" (escollida, pendent d'aplicar)
+
+Escollida l'octubre de 2026 després de diverses rondes de conceptes (`disseny/estil/conceptes*.html`). Encara no s'ha aplicat a l'app: fins aleshores mana l'estètica "nit i fanals" de sota.
+
+Les plaques de llauna esmaltada de les botigues i dels carrers: plaques amb la vora blanca interior, les cantonades arrodonides i dos cargols. Fons blanc net (mai blanc trencat), colors apagats (mai cridaners) i res que sembli vell.
+
+| Element | Color |
+|---|---|
+| Fons | `#FFFFFF` |
+| Esmalt principal (plaques, barra de navegació, text) | `#28364F` (blau nit) |
+| Accent (acció principal, el teu municipi, missions fetes) | `#A9503F` (terracota) |
+| Disponible (veí) | `#C9D0DB` |
+| A la boira | `#F3F4F5` |
+| Filets / text secundari | `#E2E5EA` / `#9097A3` |
+| Cargols | `#D5D7DA` amb vora `#8D9096` |
+
+Tipografia: **Oswald**. Les llistes (missions, xifres del perfil) van dins d'una sola placa blanca amb filets, no una placa per línia. Referència: `disseny/estil/conceptes6.html`, paleta A.
+
+## Estètica actual: "nit i fanals"
 
 El mapa és de nit. Els municipis descoberts brillen en ambre, com pobles amb els llums encesos. Els que encara no has descobert són a la boira.
 
