@@ -1,0 +1,198 @@
+<title>Síntesis contemporànies</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Public+Sans:wght@400;500;700;800;900&family=Archivo:wdth,wght@62..125,400;62..125,600;62..125,800;62..125,900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Quatre conceptes més, tots d'objectes que es troben als pobles de Catalunya: el programa de festa major, els senders
+   (marques de pintura i pals indicadors), el calendari de pagès i les façanes esgrafiades.
+   Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px}
+.concepte header{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;max-width:900px}
+.concepte header .n{font:600 44px/1 "Newsreader",serif;grid-row:span 2}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:0}
+.concepte header p{margin:0;max-width:72ch}
+.pantalles{display:flex;gap:22px;overflow-x:auto;padding:20px 0 8px}
+figure{margin:0;flex:none}
+figcaption{font:500 13px "Alegreya Sans SC",sans-serif;letter-spacing:.08em;margin-top:8px;color:#5C574D}
+.tel{width:330px;height:700px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto}
+.nav span{padding:10px 0 14px;text-align:center}
+
+/* Blanc pur, negre i colors apagats: res de blanc trencat, ni textures, ni envelliments. */
+
+/* ── A · Senyals: senyalística d'ara, sòbria ─────────────────────────────────────────────────────────── */
+.sy{background:#fff;color:#141518;font-family:"Public Sans",sans-serif}
+.sy .entrada{border:3px solid #A63A2E;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-end}
+.sy .entrada b{font:800 30px/1 "Public Sans";letter-spacing:-.02em}
+.sy .entrada small{font:500 12px "Public Sans";color:#5B5E66}
+.sy .fila{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #E3E4E7}
+.sy .picto{width:30px;height:30px;background:#3E3A36;color:#fff;display:flex;align-items:center;justify-content:center}
+.sy .fila.feta .picto{background:#fff;color:#141518;box-shadow:inset 0 0 0 1.5px #141518}
+.sy .fila.feta .t{color:#8A8D94}
+.sy .fila .t{font:500 15px/1.2 "Public Sans"}
+.sy .fila .p{font:700 15px "Public Sans";font-variant-numeric:tabular-nums}
+.sy .accio{background:#2C3E50;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font:700 15px "Public Sans"}
+.sy .nav{border-top:1px solid #141518}.sy .nav span{font:700 11px "Public Sans";text-transform:uppercase;letter-spacing:.08em;color:#8A8D94}.sy .nav span.on{color:#141518;box-shadow:inset 0 3px 0 #A63A2E}
+
+/* ── B · Programa: l'estètica de festa major amb colors sobris ─────────────────────────────────────────── */
+.pg{background:#fff;color:#16181D;font-family:"Archivo",sans-serif}
+.pg .gros{font-family:"Archivo";font-weight:900;font-stretch:115%;line-height:.88;letter-spacing:-.02em}
+.pg .estret{font-stretch:75%}
+.pg .tinta1{color:#2D4A3E}.pg .tinta2{color:#9C8F7C}
+.pg .acte{display:grid;grid-template-columns:40px 1fr auto;gap:8px;align-items:baseline;padding:9px 0;border-top:2px solid #16181D}
+.pg .acte .n{font:800 13px "Archivo";font-stretch:75%;color:#2D4A3E}
+.pg .acte .t{font:600 15px/1.15 "Archivo"}
+.pg .acte .p{font:900 20px "Archivo";font-stretch:115%}
+.pg .acte.fet .t,.pg .acte.fet .p{color:#A8ABB2}
+.pg .nav{background:#16181D;color:#8E929B}.pg .nav span{font:800 11px "Archivo";font-stretch:75%;text-transform:uppercase;letter-spacing:.06em}.pg .nav span.on{color:#fff}
+
+/* ── C · Almanac: la densitat del calendari, en modern, amb un mapa d'estil topogràfic actual ──────────────── */
+.al{background:#fff;color:#1A1A1A;font-family:"Source Serif 4",serif}
+.al .mono{font-family:"IBM Plex Mono",monospace}
+.al .vermell{color:#B33A2B}
+.al .filet{border-top:1px solid #1A1A1A}
+.al .dia{display:grid;grid-template-columns:28px 1fr auto;gap:10px;padding:6px 0;border-bottom:1px solid #EAEAEA;align-items:baseline;font-size:15px}
+.al .dia .n{font:500 12px "IBM Plex Mono";color:#8A8A8A;text-align:right}
+.al .dia .p{font:500 13px "IBM Plex Mono"}
+.al .dia.fet{color:#9A9A9A}
+.al .nav{border-top:1px solid #1A1A1A}.al .nav span{font:400 12px "IBM Plex Mono";color:#8A8A8A;text-transform:lowercase}.al .nav span.on{color:#1A1A1A;text-decoration:underline;text-underline-offset:4px}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · síntesi</small>
+    <h1>Les idees que t'agraden, en versió d'ara</h1>
+    <p>De les teves notes: t'agraden les idees (els senyals, el programa de festa major, la tipografia del calendari, les plaques), però no els colors cridaners, el blanc trencat que fa brut ni l'aire vell. Aquí les tens en versió contemporània: blanc pur, negre i colors apagats, sense textures ni envelliments.</p>
+    <p>No m'he inventat res dels pobles: no hi ha dates de festes, ni horaris, ni temps de camí. On l'objecte de veritat posaria una hora o uns minuts, hi he posat les barretines o el número de la missió.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base;
+const nCall=(D.missions[SEL]||[]).length;
+const veins=PER['08298'].v.filter(v=>PER[v]&&estat(v)==='V').slice(0,4);
+const mapa=(f)=>`<svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona">${f.defs||''}<rect width="300" height="330" fill="${f.fons}"/>${D.mapa.map(p=>{const e=estat(p.c);return `<path d="${p.d}" ${f[e](p)}/>`}).join('')}${f.sel?f.sel(PER[SEL]):''}</svg>`;
+const nav=(on,noms=['Mapa','Missions','Gent','Perfil'])=>`<div class="nav">${noms.map((n,i)=>`<span class="${i===on?'on':''}">${n}</span>`).join('')}</div>`;
+
+const PIC={GPS:'<svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="currentColor"/></svg>',
+ FOTO:'<svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ FET:'<svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>'};
+const fl='<svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>';
+
+// ── A · Senyals ─────────────────────────────────────────────────────
+const sy={
+ mapa:()=>`<div class="tel sy"><div style="padding:32px 16px 10px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #141518"><span style="font:800 15px 'Public Sans';letter-spacing:-.01em">Bocins de Catalunya</span><span style="font:500 13px 'Public Sans'"><b>${DESC.length}</b>/${D.total} · <b>${saldo}</b> barretines</span></div>
+   ${mapa({fons:'#fff',D:p=>`fill="${p.c==='08298'?'#141518':'#5B5E66'}" stroke="#fff" stroke-width="1"`,V:p=>`fill="#fff" stroke="#141518" stroke-width="1.2"`,B:p=>`fill="#F1F2F4" stroke="#fff" stroke-width="1"`,
+     sel:s=>`<path d="${s.d}" fill="#A63A2E" fill-opacity=".14" stroke="#A63A2E" stroke-width="2.2"/>`})}
+   <div style="padding:10px 16px 14px;display:flex;flex-direction:column;gap:8px;border-top:1px solid #141518">
+     <div class="entrada"><b>${esc(PER[SEL].n)}</b><small>${esc(PER[SEL].k)}</small></div>
+     <div class="accio"><span>Desbloqueja · ${nCall} missions</span><span style="display:flex;gap:6px;align-items:center">${cost} ${fl}</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel sy"><div style="padding:32px 16px 0;flex:1;overflow:hidden">
+   <div class="entrada" style="padding:14px 16px"><b style="font-size:46px">Vic</b><small>Osona</small></div>
+   <div style="display:flex;justify-content:space-between;font:500 13px 'Public Sans';color:#5B5E66;padding:10px 0 4px"><span>${FETES} de ${VIC.length} missions</span><span>${guanyats} / ${total} barretines</span></div>
+   <div style="height:3px;background:#E3E4E7;margin-bottom:4px"><div style="height:100%;width:${guanyats/total*100}%;background:#141518"></div></div>
+   ${VIC.slice(0,9).map((m,i)=>`<div class="fila ${i<FETES?'feta':''}"><span class="picto">${i<FETES?PIC.FET:PIC[m.g]}</span><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel sy"><div style="padding:32px 16px 0;flex:1;display:flex;flex-direction:column">
+   <div style="font:500 13px 'Public Sans';color:#5B5E66">Explorador · nivell 2</div><div style="font:800 44px/1.05 'Public Sans';letter-spacing:-.03em">marti</div>
+   <div style="margin-top:14px;border-top:1px solid #141518">${[['Municipis',`${DESC.length}`,`de ${D.total}`],['Missions','3','fetes'],['Comarques','0','de 43'],['Segells','2','al passaport']].map(([a,b,c])=>`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid #E3E4E7"><span style="font:500 15px 'Public Sans'">${a} <span style="color:#8A8D94;font-size:13px">${c}</span></span><span style="font:800 26px 'Public Sans'">${b}</span></div>`).join('')}</div>
+   <div class="accio" style="margin-top:16px"><span>Passaport</span>${fl}</div><div class="accio" style="margin-top:6px;background:#fff;color:#141518;box-shadow:inset 0 0 0 1.5px #141518"><span>Catàleg de cartells</span>${fl}</div>
+   </div>${nav(3)}</div>`,
+};
+
+// ── B · Programa ────────────────────────────────────────────────────
+const pg={
+ mapa:()=>`<div class="tel pg"><div style="padding:32px 14px 8px">
+   <div class="gros" style="font-size:34px">BOCINS</div><div class="gros tinta1" style="font-size:34px">DE CATALUNYA</div>
+   <div style="display:flex;justify-content:space-between;font:800 13px 'Archivo';font-stretch:75%;text-transform:uppercase;border-top:2px solid #16181D;margin-top:6px;padding-top:4px"><span>${DESC.length} de ${D.total} pobles</span><span class="tinta1">${saldo} barretines</span></div></div>
+   ${mapa({fons:'#fff',D:p=>`fill="${p.c==='08298'?'#16181D':'#2D4A3E'}" stroke="#fff" stroke-width="1.2"`,V:p=>`fill="#fff" stroke="#16181D" stroke-width="1.4"`,B:p=>`fill="#EEEDEA" stroke="#fff" stroke-width="1"`,
+     sel:s=>`<path d="${s.d}" fill="#9C8F7C" stroke="#16181D" stroke-width="2"/>`})}
+   <div style="padding:8px 14px 12px;border-top:2px solid #16181D">
+     <div style="font:800 12px 'Archivo';font-stretch:75%;text-transform:uppercase" class="tinta1">Proper poble · ${esc(PER[SEL].k)}</div>
+     <div class="gros" style="font-size:32px">${esc(PER[SEL].n.toUpperCase())}</div>
+     <div style="margin-top:8px;background:#16181D;color:#fff;padding:11px 12px;display:flex;justify-content:space-between;font:800 15px 'Archivo';font-stretch:75%;text-transform:uppercase"><span>Desbloqueja · ${nCall} actes</span><span>${cost}</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel pg"><div style="padding:32px 14px 0;flex:1;overflow:hidden">
+   <div style="font:800 12px 'Archivo';font-stretch:75%;text-transform:uppercase" class="tinta1">Programa · Osona</div>
+   <div class="gros" style="font-size:86px">VIC</div>
+   <div style="display:flex;justify-content:space-between;font:800 13px 'Archivo';font-stretch:75%;text-transform:uppercase;margin:4px 0 6px"><span>${FETES}/${VIC.length} actes</span><span class="tinta1">${guanyats}/${total} barretines</span></div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="acte ${i<FETES?'fet':''}"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel pg"><div style="padding:32px 14px 0;flex:1">
+   <div style="font:800 12px 'Archivo';font-stretch:75%;text-transform:uppercase" class="tinta1">Explorador · nivell 2</div>
+   <div class="gros" style="font-size:62px">MARTI</div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;margin-top:12px">${[['Pobles',DESC.length],['Actes',3],['Comarques','0/43'],['Segells',2]].map(([a,b],i)=>`<div style="padding:8px 0;border-top:2px solid #16181D;${i%2?'padding-left:10px':''}"><div style="font:800 12px 'Archivo';font-stretch:75%;text-transform:uppercase" class="tinta1">${a}</div><div class="gros" style="font-size:36px">${b}</div></div>`).join('')}</div>
+   <div style="margin-top:14px;background:#16181D;color:#fff;padding:12px;font:800 15px 'Archivo';font-stretch:75%;text-transform:uppercase;display:flex;justify-content:space-between"><span>El passaport</span><span>→</span></div>
+   <div style="margin-top:6px;box-shadow:inset 0 0 0 2px #16181D;padding:12px;font:800 15px 'Archivo';font-stretch:75%;text-transform:uppercase;display:flex;justify-content:space-between"><span>Catàleg de cartells</span><span>→</span></div>
+   </div>${nav(3)}</div>`,
+};
+
+// ── C · Almanac ─────────────────────────────────────────────────────
+const F=D.finestra, KM=(F.lon1-F.lon0)*Math.cos(41.93*Math.PI/180)*111.32, U5=300*5/KM;
+const graella=[1,2,3,4,5].map(i=>`<line x1="${i*60}" y1="0" x2="${i*60}" y2="330" stroke="#E4E4E4" stroke-width=".6"/><line x1="0" y1="${i*66}" x2="300" y2="${i*66}" stroke="#E4E4E4" stroke-width=".6"/>`).join('');
+const al={
+ mapa:()=>`<div class="tel al"><div style="padding:32px 16px 8px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 20px 'Source Serif 4'">Bocins de Catalunya</span><span class="mono" style="font-size:12px">${DESC.length}/${D.total}</span></div>
+   <div class="filet" style="margin-top:6px"></div><div class="mono" style="font-size:11px;color:#8A8A8A;padding-top:3px;display:flex;justify-content:space-between"><span>osona · full 1</span><span class="vermell">${saldo} barretines</span></div></div>
+   ${mapa({fons:'#fff',defs:'',D:p=>`fill="${p.c==='08298'?'#B33A2B':'#D9907F'}" stroke="#fff" stroke-width="1.2"`,V:p=>`fill="#F3E3DE" stroke="#fff" stroke-width="1.2"`,B:p=>`fill="#F2F2F0" stroke="#fff" stroke-width="1.2"`,
+     sel:s=>`<path d="${s.d}" fill="none" stroke="#1A1A1A" stroke-width="1.6"/><text x="${s.x}" y="${s.y+3}" text-anchor="middle" font-family="Source Serif 4" font-style="italic" font-size="11" fill="#1A1A1A" stroke="#fff" stroke-width="3" paint-order="stroke">${esc(s.n)}</text>`}).replace('<rect width="300" height="330" fill="#fff"/>','<rect width="300" height="330" fill="#fff"/>'+graella).replace('</svg>',`<text x="${PER['08298'].x}" y="${PER['08298'].y+3}" text-anchor="middle" font-family="Source Serif 4" font-weight="600" font-size="10" fill="#fff">Vic</text><g transform="translate(222 316)"><rect width="${U5}" height="2" fill="#1A1A1A"/><text y="-4" font-family="IBM Plex Mono" font-size="7" fill="#1A1A1A">0</text><text x="${U5}" y="-4" text-anchor="end" font-family="IBM Plex Mono" font-size="7" fill="#1A1A1A">5 km</text></g></svg>`)}
+   <div style="padding:8px 16px 12px"><div class="filet"></div>
+     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px"><span style="font:600 24px 'Source Serif 4'">${esc(PER[SEL].n)}</span><span class="mono" style="font-size:11px;color:#8A8A8A">${esc(PER[SEL].k.toLowerCase())}</span></div>
+     <div style="font-size:14px">${nCall} missions. Es desbloqueja amb <span class="vermell">${cost} barretines</span>.</div>
+     <div style="margin-top:8px;border:1px solid #1A1A1A;padding:9px 12px;display:flex;justify-content:space-between" class="mono"><span style="font-size:13px">desbloqueja</span><span style="font-size:13px">→</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel al"><div style="padding:32px 16px 0;flex:1;overflow:hidden">
+   <div class="mono" style="font-size:11px;color:#8A8A8A">osona · municipi d'inici</div>
+   <div style="font:600 60px/1 'Source Serif 4';letter-spacing:-.02em">Vic</div>
+   <div class="mono" style="font-size:12px;margin:6px 0 2px">${FETES}/${VIC.length} missions · <span class="vermell">${guanyats}/${total} barretines</span></div>
+   <div class="filet" style="margin:6px 0 2px"></div>
+   ${VIC.slice(0,11).map((m,i)=>`<div class="dia ${i<FETES?'fet':''}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${esc(m.t)}</span><span class="p ${m.p>=50&&i>=FETES?'vermell':''}">${i<FETES?'✓ ':''}${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel al"><div style="padding:32px 16px 0;flex:1">
+   <div class="mono" style="font-size:11px;color:#8A8A8A">explorador · nivell 2</div>
+   <div style="font:600 46px/1 'Source Serif 4'">marti</div>
+   <div class="filet" style="margin:12px 0 8px"></div>
+   <div style="column-count:2;column-gap:18px;column-rule:1px solid #EAEAEA;font-size:15px;line-height:1.45">
+     <p style="margin:0 0 8px"><b>Municipis.</b> ${DESC.length} de ${D.total}.</p><p style="margin:0 0 8px"><b>Missions.</b> 3, totes a Vic.</p>
+     <p style="margin:0 0 8px"><b class="vermell">Barretines.</b> ${saldo} per gastar.</p><p style="margin:0 0 8px"><b>Comarques.</b> Cap de les 43.</p><p style="margin:0"><b>Segells.</b> 2 al passaport.</p></div>
+   <div class="filet" style="margin:12px 0 0"></div>
+   ${['El passaport','Catàleg de cartells'].map(t=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EAEAEA;font-size:16px"><span>${t}</span><span class="mono">→</span></div>`).join('')}
+   </div>${nav(3)}</div>`,
+};
+
+const C=[
+ {id:'senyals',n:'Senyals',d:'Carretera i rètols, en versió d\'ara: com la senyalització d\'un edifici públic actual. Blanc pur i negre; el cartell d\'entrada amb la vora d\'un vermell apagat; les missions com una llista neta amb pictogrames; les accions en blau pissarra. Lletra: Public Sans.',o:sy},
+ {id:'programa',n:'Programa',d:'L\'estètica del programa de festa major (lletra molt gran i gruixuda, actes numerats separats per filets gruixuts, tot en majúscules) però sense colors de fira: negre, blanc, un verd fosc i un gris càlid. Lletra: Archivo, ampla per als títols i estreta per als detalls.',o:pg},
+ {id:'almanac',n:'Almanac',d:'La densitat del calendari de pagès en tipografia d\'ara (Source Serif i Plex Mono), amb un sol color, el vermell. El mapa és d\'estil topogràfic actual: colors plans i suaus, una graella fina, els noms amb halo blanc i l\'escala. El relleu real (corbes de nivell) s\'hi podria afegir amb dades de l\'ICGC.',o:al},
+];
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('concepte4')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{};return `<section class="concepte" data-c="${c.id}">
+  <header><span class="n">${['A','B','C'][i]}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="pantalles">${['mapa','fitxa','perfil'].map((k,j)=>`<figure>${c.o[k]()}<figcaption>${['El mapa','La fitxa de Vic','El perfil'][j]}</figcaption></figure>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></section>`}).join('')}
+async function desa(id){try{localStorage.setItem('concepte4',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('concepte4').doc(id).delete();else await db.collection('concepte4').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+document.getElementById('conceptes').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const s=b.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+document.getElementById('conceptes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('concepte4').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
