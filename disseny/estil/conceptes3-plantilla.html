@@ -1,0 +1,208 @@
+<title>Encara més conceptes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Josefin+Sans:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Kalam:wght@400;700&family=Archivo+Narrow:wght@400;600;700&family=Special+Elite&family=Courier+Prime:wght@400;700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+/* Quatre conceptes més, tots d'objectes que es troben als pobles de Catalunya: el programa de festa major, els senders
+   (marques de pintura i pals indicadors), el calendari de pagès i les façanes esgrafiades.
+   Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px}
+.concepte header{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;max-width:900px}
+.concepte header .n{font:600 44px/1 "Newsreader",serif;grid-row:span 2}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:0}
+.concepte header p{margin:0;max-width:72ch}
+.pantalles{display:flex;gap:22px;overflow-x:auto;padding:20px 0 8px}
+figure{margin:0;flex:none}
+figcaption{font:500 13px "Alegreya Sans SC",sans-serif;letter-spacing:.08em;margin-top:8px;color:#5C574D}
+.tel{width:330px;height:700px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto}
+.nav span{padding:10px 0 14px;text-align:center}
+
+/* ── 8 · Rajola hidràulica: els motius dels terres de les cases velles, en ciment de colors ─────────────────── */
+.rh{background:#EFE4CF;color:#2E2A26;font-family:"Lora",serif}
+.rh .lt{font-family:"Josefin Sans",sans-serif;text-transform:uppercase;letter-spacing:.14em}
+.rh .vora{height:14px;background:repeating-linear-gradient(90deg,#8E2F2A 0 14px,#EFE4CF 14px 16px,#C9973F 16px 30px,#EFE4CF 30px 32px)}
+.rh .m{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;padding:9px 12px;border-bottom:1px solid #D6C7A8}
+.rh .m .q{width:22px;height:22px;background:conic-gradient(#8E2F2A 0 25%,#EFE4CF 0 50%,#8E2F2A 0 75%,#EFE4CF 0);border:1.5px solid #2E2A26}
+.rh .m.feta .q{background:conic-gradient(#C9973F 0 25%,#4A5560 0 50%,#C9973F 0 75%,#4A5560 0)}
+.rh .m.feta .t{color:#8A7F6C;font-style:italic}
+.rh .nav{background:#4A5560;color:#D9CFBC}.rh .nav span{font:600 11px "Josefin Sans";text-transform:uppercase;letter-spacing:.14em}.rh .nav span.on{color:#fff;box-shadow:inset 0 3px 0 #C9973F}
+
+/* ── 9 · Mercat setmanal: tendals ratllats, pissarretes de guix i paper d'estrassa ─────────────────────────── */
+.ms{background:#D8C3A0;color:#2A2118;font-family:"Archivo Narrow",sans-serif}
+.ms .tendal{height:30px;background:repeating-linear-gradient(90deg,#2F6B4F 0 22px,#F3EEE2 22px 44px);-webkit-mask:radial-gradient(circle 11px at 11px 30px,#0000 98%,#000) 0 0/22px 30px;mask:radial-gradient(circle 11px at 11px 30px,#0000 98%,#000) 0 0/22px 30px}
+.ms .pissarra{background:#2B2B28;color:#F1EDE3;font-family:"Kalam",cursive;border:6px solid #8B6B45;padding:8px 12px}
+.ms .etiqueta{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:#E9DCC2;padding:8px 10px 8px 22px;position:relative;margin:0 12px 6px}
+.ms .etiqueta::before{content:"";position:absolute;left:8px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#D8C3A0;box-shadow:inset 0 0 0 1.5px #8B6B45}
+.ms .etiqueta .t{font:600 15px/1.15 "Archivo Narrow"}
+.ms .etiqueta .p{font:700 22px "Kalam";color:#B23A2E}
+.ms .etiqueta.feta{opacity:.6}.ms .etiqueta.feta .t{text-decoration:line-through}
+.ms .nav{background:#2F6B4F;color:#CFE0D3}.ms .nav span{font:700 13px "Archivo Narrow";text-transform:uppercase;letter-spacing:.06em}.ms .nav span.on{color:#fff;background:#24543D}
+
+/* ── 10 · Paperassa de l'Ajuntament: carpeta, màquina d'escriure, segells de goma ──────────────────────────── */
+.pa{background:#E8D29A;color:#22252E;font-family:"Courier Prime",monospace}
+.pa .full{background:#FBF8EF;box-shadow:2px 3px 0 #C9B274;padding:12px 14px}
+.pa .maq{font-family:"Special Elite",monospace}
+.pa .camp{border-bottom:1px solid #22252E;padding:2px 0;font-family:"Special Elite"}
+.pa .goma{display:inline-block;border:2.5px solid #5B3E8C;color:#5B3E8C;padding:2px 8px;font:700 12px "Courier Prime";letter-spacing:.1em;transform:rotate(-6deg);mix-blend-mode:multiply;border-radius:2px}
+.pa .tramit{display:grid;grid-template-columns:44px 1fr auto;gap:8px;padding:8px 0;border-bottom:1px solid #D9D2BE;align-items:baseline;position:relative}
+.pa .tramit .n{font:700 12px "Courier Prime";color:#6E6A5E}
+.pa .tramit .t{font:400 14px/1.2 "Special Elite"}
+.pa .tramit .p{font:700 14px "Courier Prime"}
+.pa .nav{background:#22252E;color:#BFB89F}.pa .nav span{font:700 12px "Courier Prime";text-transform:uppercase}.pa .nav span.on{color:#FBF8EF;text-decoration:underline}
+
+/* ── 11 · Rètols esmaltats: plaques de llauna esmaltada, amb vora i cargols ─────────────────────────────────── */
+.re{background:#E7E1D4;color:#14233F;font-family:"Oswald",sans-serif}
+.re .placa{background:#163C7A;color:#F5F1E6;border-radius:10px;box-shadow:inset 0 0 0 3px #163C7A,inset 0 0 0 5px #F5F1E6;position:relative;padding:10px 26px;text-align:center}
+.re .placa::before,.re .placa::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#C8C2B4;box-shadow:inset 0 0 0 1px #6E6A60}
+.re .placa::before{left:9px}.re .placa::after{right:9px}
+.re .placa.vermella{background:#B2262D;box-shadow:inset 0 0 0 3px #B2262D,inset 0 0 0 5px #F5F1E6}
+.re .placa.crema{background:#F5F1E6;color:#163C7A;box-shadow:inset 0 0 0 3px #F5F1E6,inset 0 0 0 5px #163C7A}
+.re .mini{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;text-align:left;padding:7px 26px;margin-bottom:6px}
+.re .mini .t{font:500 15px/1.15 "Oswald"}
+.re .mini .p{font:600 18px "Oswald"}
+.re .mini.feta{opacity:.55}
+.re .nav{background:#14233F;color:#AEB8CC}.re .nav span{font:500 13px "Oswald";text-transform:uppercase;letter-spacing:.1em}.re .nav span.on{color:#fff;box-shadow:inset 0 -3px 0 #B2262D}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · encara més conceptes</small>
+    <h1>Més coses de poble</h1>
+    <p>Quatre conceptes més (del 8 a l'11), també d'objectes que trobes als pobles. Com abans, de cada objecte en surten les lletres, els colors i les formes, i les dades són reals: un tros d'Osona i les missions de Vic.</p>
+    <p>No m'he inventat res dels pobles: no hi ha dates de festes, ni horaris, ni temps de camí. On l'objecte de veritat posaria una hora o uns minuts, hi he posat les barretines o el número de la missió. Tampoc no hi ha cap marca comercial als rètols ni a les etiquetes.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base;
+const nCall=(D.missions[SEL]||[]).length;
+const veins=PER['08298'].v.filter(v=>PER[v]&&estat(v)==='V').slice(0,4);
+const mapa=(f)=>`<svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona">${f.defs||''}<rect width="300" height="330" fill="${f.fons}"/>${D.mapa.map(p=>{const e=estat(p.c);return `<path d="${p.d}" ${f[e](p)}/>`}).join('')}${f.sel?f.sel(PER[SEL]):''}</svg>`;
+const nav=(on,noms=['Mapa','Missions','Gent','Perfil'])=>`<div class="nav">${noms.map((n,i)=>`<span class="${i===on?'on':''}">${n}</span>`).join('')}</div>`;
+
+// ── 8 · Rajola hidràulica ──────────────────────────────────────────────
+const RAJ=`<defs><pattern id="rh-d" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#8E2F2A"/><path d="M8 1L15 8 8 15 1 8Z" fill="#C9973F"/><circle cx="8" cy="8" r="2.2" fill="#EFE4CF"/></pattern>
+ <pattern id="rh-i" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#C9973F"/><path d="M8 1L15 8 8 15 1 8Z" fill="#8E2F2A"/><circle cx="8" cy="8" r="2.2" fill="#EFE4CF"/></pattern>
+ <pattern id="rh-v" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#EFE4CF"/><path d="M0 0h5v5H0zM5 5h5v5H5z" fill="#D9C9A6"/></pattern></defs>`;
+const rh={
+ mapa:()=>`<div class="tel rh"><div style="padding:32px 14px 8px;display:flex;justify-content:space-between;align-items:baseline"><span class="lt" style="font-weight:700;font-size:15px">Bocins de Catalunya</span><span class="lt" style="font-size:12px">${DESC.length}/${D.total}</span></div><div class="vora"></div>
+   ${mapa({fons:'#BDB6A6',defs:RAJ,D:p=>`fill="url(#${p.c==='08298'?'rh-i':'rh-d'})" stroke="#2E2A26" stroke-width="1"`,V:p=>`fill="url(#rh-v)" stroke="#2E2A26" stroke-width=".8"`,B:p=>`fill="#B3AC9C" stroke="#A39C8C" stroke-width=".6"`,
+     sel:s=>`<path d="${s.d}" fill="#4A5560" stroke="#2E2A26" stroke-width="1.5"/>`})}
+   <div class="vora"></div><div style="padding:10px 14px 12px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 26px 'Lora'">${esc(PER[SEL].n)}</span><span class="lt" style="font-size:11px">${esc(PER[SEL].k)}</span></div>
+     <div style="font-size:14px;font-style:italic">${nCall} missions per descobrir</div>
+     <div style="margin-top:8px;background:#8E2F2A;color:#EFE4CF;padding:10px 12px;display:flex;justify-content:space-between" class="lt"><span style="font-weight:700;font-size:13px">Desbloqueja</span><span style="font-weight:700">${cost} barretines</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel rh"><div style="flex:1;overflow:hidden">
+   <div style="background:#4A5560;color:#EFE4CF;padding:32px 14px 14px;text-align:center"><div class="lt" style="font-size:11px">Osona</div><div style="font:600 56px/1 'Lora'">Vic</div><div class="lt" style="font-size:11px;margin-top:6px">${FETES} de ${VIC.length} missions · ${guanyats} de ${total}</div></div><div class="vora"></div>
+   ${VIC.slice(0,9).map((m,i)=>`<div class="m ${i<FETES?'feta':''}"><span class="q"></span><span class="t">${esc(m.t)}</span><span style="font:600 15px 'Josefin Sans'">${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel rh"><div style="padding:32px 14px 0;flex:1;display:flex;flex-direction:column;gap:10px">
+   <div class="lt" style="font-size:11px">Explorador · nivell 2</div><div style="font:600 46px/1 'Lora'">marti</div><div class="vora"></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #2E2A26">${[['Municipis',DESC.length],['Missions',3],['Comarques','0/43'],['Segells',2]].map(([a,b],i)=>`<div style="padding:10px;${i%2?'border-left:1.5px solid #2E2A26':''};${i>1?'border-top:1.5px solid #2E2A26':''}"><div class="lt" style="font-size:10px">${a}</div><div style="font:600 30px 'Lora'">${b}</div></div>`).join('')}</div>
+   <div class="lt" style="font-size:11px;margin-top:4px">Medalles</div>
+   <div style="display:flex;gap:10px">${['rh-d','rh-v','rh-v'].map((p,i)=>`<svg viewBox="0 0 48 48" width="56" aria-hidden="true">${i?'':RAJ}<rect x="2" y="2" width="44" height="44" fill="${i?'#D9C9A6':'url(#rh-d)'}" stroke="#2E2A26" stroke-width="2"/></svg>`).join('')}</div>
+   </div>${nav(3)}</div>`,
+};
+
+// ── 9 · Mercat setmanal ───────────────────────────────────────────────
+const ms={
+ mapa:()=>`<div class="tel ms"><div style="padding-top:26px;background:#2F6B4F"></div><div class="tendal"></div>
+   <div style="padding:6px 12px;display:flex;justify-content:space-between;align-items:baseline"><span style="font:700 20px 'Kalam'">Bocins de Catalunya</span><span style="font:700 14px 'Archivo Narrow'">${DESC.length} de ${D.total} pobles</span></div>
+   ${mapa({fons:'#D8C3A0',D:p=>`fill="${p.c==='08298'?'#B23A2E':'#2F6B4F'}" stroke="#D8C3A0" stroke-width="1"`,V:p=>`fill="#E9DCC2" stroke="#2A2118" stroke-width=".8"`,B:p=>`fill="#CDB68F" stroke="#BFA77F" stroke-width=".5"`,
+     sel:s=>`<path d="${s.d}" fill="#F3EEE2" stroke="#B23A2E" stroke-width="2.5"/>`})}
+   <div style="padding:8px 12px 12px"><div class="pissarra"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:26px;font-weight:700">${esc(PER[SEL].n)}</span><span style="font-size:15px">${nCall} missions</span></div>
+     <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #77746C;margin-top:4px;padding-top:4px"><span style="font-size:17px">Desbloqueja'l</span><span style="font-size:24px;font-weight:700;color:#F2C94C">${cost} barretines</span></div></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel ms"><div style="flex:1;overflow:hidden"><div style="padding-top:26px;background:#2F6B4F"></div><div class="tendal"></div>
+   <div style="padding:6px 12px 10px"><div class="pissarra" style="text-align:center"><div style="font-size:15px">Parada d'Osona</div><div style="font:700 50px/1 'Kalam'">Vic</div><div style="font-size:15px">${FETES} de ${VIC.length} fetes · ${guanyats} de ${total} barretines</div></div></div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="etiqueta ${i<FETES?'feta':''}"><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel ms"><div style="padding-top:26px;background:#2F6B4F"></div><div class="tendal"></div><div style="padding:6px 12px 0;flex:1;display:flex;flex-direction:column;gap:8px">
+   <div style="font:700 15px 'Archivo Narrow';text-transform:uppercase;letter-spacing:.06em">Explorador · nivell 2</div><div style="font:700 48px/1 'Kalam'">marti</div>
+   <div class="pissarra">${[['Pobles',DESC.length],['Missions',3],['Comarques','0 de 43'],['Segells',2],['Barretines',saldo]].map(([a,b])=>`<div style="display:flex;justify-content:space-between;font-size:19px;line-height:1.5"><span>${a}</span><span style="font-weight:700">${b}</span></div>`).join('')}</div>
+   <div class="etiqueta" style="margin:0"><span class="t">El passaport</span><span class="p">→</span></div><div class="etiqueta" style="margin:0"><span class="t">Catàleg de cartells</span><span class="p">→</span></div>
+   </div>${nav(3)}</div>`,
+};
+
+// ── 10 · Paperassa de l'Ajuntament ────────────────────────────────────
+const pa={
+ mapa:()=>`<div class="tel pa"><div style="padding:30px 12px 8px"><div class="full" style="padding:8px 12px"><div style="display:flex;justify-content:space-between;font:700 12px 'Courier Prime'"><span>BOCINS DE CATALUNYA</span><span>FULL Nº ${String(DESC.length).padStart(3,'0')}/${D.total}</span></div>
+     <div style="font:400 12px 'Special Elite'">Plànol de situació · Osona</div></div></div>
+   <div style="margin:0 12px;background:#FBF8EF;flex:1;min-height:0;display:flex;box-shadow:2px 3px 0 #C9B274">${mapa({fons:'#FBF8EF',defs:'<defs><pattern id="pa-r" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="#FBF8EF"/><rect width="1" height="4" fill="#2B3A8C"/></pattern></defs>',
+     D:p=>`fill="${p.c==='08298'?'#2B3A8C':'#7A86C2'}" stroke="#FBF8EF" stroke-width=".8"`,V:p=>`fill="url(#pa-r)" stroke="#2B3A8C" stroke-width=".6"`,B:p=>`fill="#FBF8EF" stroke="#22252E" stroke-opacity=".35" stroke-width=".4"`,
+     sel:s=>`<path d="${s.d}" fill="none" stroke="#B23A2E" stroke-width="2.2"/>`})}</div>
+   <div style="padding:10px 12px 12px"><div class="full"><div style="font:700 11px 'Courier Prime';color:#6E6A5E">SOL·LICITUD DE DESBLOQUEIG</div>
+     <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:13px;margin-top:4px"><span>Municipi:</span><span class="camp">${esc(PER[SEL].n)}</span><span>Missions:</span><span class="camp">${nCall}</span><span>Taxa:</span><span class="camp">${cost} barretines</span></div>
+     <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><span style="background:#22252E;color:#FBF8EF;padding:8px 14px;font:700 13px 'Courier Prime'">PRESENTA-LA</span><span class="goma">PENDENT</span></div></div></div>
+   ${nav(0,['Plànol','Tràmits','Veïns','Fitxa'])}</div>`,
+ fitxa:()=>`<div class="tel pa"><div style="padding:30px 12px 0;flex:1;overflow:hidden"><div class="full" style="height:100%">
+   <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font:700 11px 'Courier Prime';color:#6E6A5E">EXPEDIENT · OSONA</div><div class="maq" style="font-size:40px;line-height:1.1">VIC</div></div><span class="goma" style="transform:rotate(8deg);border-color:#B23A2E;color:#B23A2E">MUNICIPI D'INICI</span></div>
+   <div style="font-size:12px;border-top:1px solid #22252E;border-bottom:1px solid #22252E;padding:3px 0;margin:6px 0 2px">TRÀMITS RESOLTS: ${FETES}/${VIC.length} · IMPORT: ${guanyats}/${total} BARRETINES</div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="tramit"><span class="n">${String(i+1).padStart(3,'0')}</span><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span>${i<FETES?`<span class="goma" style="position:absolute;left:-6px;top:5px;font-size:9px;padding:1px 4px;background:#FBF8EF">RESOLT</span>`:''}</div>`).join('')}
+   </div></div>${nav(1,['Plànol','Tràmits','Veïns','Fitxa'])}</div>`,
+ perfil:()=>`<div class="tel pa"><div style="padding:30px 12px 0;flex:1;display:flex;flex-direction:column;gap:10px">
+   <div class="full"><div style="font:700 11px 'Courier Prime';color:#6E6A5E">CARNET DE VEÍ</div><div class="maq" style="font-size:36px">marti</div>
+     <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 8px;font-size:13px"><span>Condició:</span><span class="camp">Explorador, nivell 2</span><span>Municipis:</span><span class="camp">${DESC.length} de ${D.total}</span><span>Tràmits:</span><span class="camp">3 resolts</span><span>Comarques:</span><span class="camp">0 de 43</span><span>Segells:</span><span class="camp">2</span></div>
+     <div style="text-align:right;margin-top:8px"><span class="goma" style="transform:rotate(-4deg)">REGISTRE D'ENTRADA</span></div></div>
+   <div class="full" style="display:flex;justify-content:space-between"><span class="maq">El passaport</span><span>→</span></div><div class="full" style="display:flex;justify-content:space-between"><span class="maq">Catàleg de cartells</span><span>→</span></div>
+   </div>${nav(3,['Plànol','Tràmits','Veïns','Fitxa'])}</div>`,
+};
+
+// ── 11 · Rètols esmaltats ─────────────────────────────────────────────
+const re={
+ mapa:()=>`<div class="tel re"><div style="padding:30px 12px 8px"><div class="placa"><div style="font:600 20px 'Oswald';text-transform:uppercase;letter-spacing:.08em">Bocins de Catalunya</div></div></div>
+   ${mapa({fons:'#E7E1D4',D:p=>`fill="${p.c==='08298'?'#B2262D':'#163C7A'}" stroke="#F5F1E6" stroke-width="1.2"`,V:p=>`fill="#F5F1E6" stroke="#163C7A" stroke-width="1.2"`,B:p=>`fill="#D9D2C2" stroke="#C9C1AF" stroke-width=".6"`,
+     sel:s=>`<path d="${s.d}" fill="#E9B949" stroke="#14233F" stroke-width="1.5"/>`})}
+   <div style="padding:8px 12px 12px;display:flex;flex-direction:column;gap:6px"><div class="placa crema"><div style="font:600 26px 'Oswald';text-transform:uppercase">${esc(PER[SEL].n)}</div><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.1em">${esc(PER[SEL].k)} · ${nCall} missions</div></div>
+     <div class="placa vermella" style="display:flex;justify-content:space-between;font:600 15px 'Oswald';text-transform:uppercase;letter-spacing:.04em;white-space:nowrap"><span>Desbloqueja</span><span>${cost} barretines</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel re"><div style="padding:30px 12px 0;flex:1;overflow:hidden">
+   <div class="placa" style="padding:14px 26px"><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.16em">Osona</div><div style="font:600 54px/1 'Oswald';text-transform:uppercase">Vic</div><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.06em">${FETES} de ${VIC.length} missions · ${guanyats} de ${total}</div></div>
+   <div style="height:10px"></div>
+   ${VIC.slice(0,8).map((m,i)=>`<div class="placa crema mini ${i<FETES?'feta':''}"><span class="t">${esc(m.t)}</span><span class="p">${i<FETES?'✓':''} ${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel re"><div style="padding:30px 12px 0;flex:1;display:flex;flex-direction:column;gap:8px">
+   <div class="placa"><div style="font:400 12px 'Oswald';text-transform:uppercase;letter-spacing:.14em">Explorador · nivell 2</div><div style="font:600 40px 'Oswald'">marti</div></div>
+   ${[['Municipis',`${DESC.length} de ${D.total}`],['Missions','3'],['Comarques','0 de 43'],['Segells','2']].map(([a,b])=>`<div class="placa crema mini"><span class="t" style="text-transform:uppercase;letter-spacing:.06em">${a}</span><span class="p">${b}</span></div>`).join('')}
+   <div class="placa vermella" style="display:flex;justify-content:space-between;font:600 15px 'Oswald';text-transform:uppercase"><span>El passaport</span><span>→</span></div>
+   </div>${nav(3)}</div>`,
+};
+
+const C=[
+ {id:'rajola',n:'Rajola hidràulica',d:'Els terres de les cases velles: ciment de colors (carmí, ocre, pissarra i crema) i motius geomètrics. Al mapa, cada municipi descobert és una rajola amb el seu dibuix; els veïns, un escacat suau; la resta, ciment gris. Una sanefa de rajoletes separa les parts.',o:rh},
+ {id:'mercat',n:'Mercat setmanal',d:'El tendal ratllat de la parada, les pissarretes amb els preus escrits amb guix i les etiquetes de paper d\'estrassa. El municipi seleccionat i el seu preu van a la pissarra; cada missió és una etiqueta amb les barretines escrites a mà.',o:ms},
+ {id:'paperassa',n:'Paperassa de l\'Ajuntament',d:'La carpeta groga, els fulls escrits a màquina, els camps per omplir i els segells de goma. Desbloquejar és presentar una sol·licitud, cada missió és un tràmit de l\'expedient del municipi i, quan la fas, s\'hi estampa «RESOLT». El perfil és un carnet de veí. Amb una mica d\'humor.',o:pa},
+ {id:'esmaltats',n:'Rètols esmaltats',d:'Les plaques de llauna esmaltada de les botigues i dels carrers: blau fosc, vermell i crema, amb la vora clara i els cargols. El nom del municipi i cada missió són una placa.',o:re},
+];
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('concepte3')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{};return `<section class="concepte" data-c="${c.id}">
+  <header><span class="n">${i+8}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="pantalles">${['mapa','fitxa','perfil'].map((k,j)=>`<figure>${c.o[k]()}<figcaption>${['El mapa','La fitxa de Vic','El perfil'][j]}</figcaption></figure>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></section>`}).join('')}
+async function desa(id){try{localStorage.setItem('concepte3',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('concepte3').doc(id).delete();else await db.collection('concepte3').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+document.getElementById('conceptes').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const s=b.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+document.getElementById('conceptes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('concepte3').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
