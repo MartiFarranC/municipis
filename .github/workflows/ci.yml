@@ -38,6 +38,10 @@ jobs:
         run: ./gradlew -p joc test --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: Compila l'app
+        # Amb els secrets, l'APK de prova es connecta al servidor (es pot entrar amb el compte). Sense, compila igual.
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: ./gradlew :app:assembleDebug :app:assembleRelease --continue 2>&1 | tee -a build.log; exit ${PIPESTATUS[0]}
 
       - name: Tests unitaris de l'app
