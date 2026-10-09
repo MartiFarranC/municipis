@@ -1,0 +1,112 @@
+<title>Rètols esmaltats</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+/* Els rètols esmaltats amb quatre paletes apagades sobre blanc net.
+   Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px}
+.concepte header{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;max-width:900px}
+.concepte header .n{font:600 44px/1 "Newsreader",serif;grid-row:span 2}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:0}
+.concepte header p{margin:0;max-width:72ch}
+.pantalles{display:flex;gap:22px;overflow-x:auto;padding:20px 0 8px}
+figure{margin:0;flex:none}
+figcaption{font:500 13px "Alegreya Sans SC",sans-serif;letter-spacing:.08em;margin-top:8px;color:#5C574D}
+.tel{width:330px;height:700px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto}
+.nav span{padding:10px 0 14px;text-align:center}
+
+/* ── Rètols esmaltats: plaques de llauna esmaltada sobre blanc net, amb colors apagats i paràmetres per paleta ── */
+.re{background:#fff;color:var(--f);font-family:"Oswald",sans-serif}
+.re .placa{background:var(--f);color:#fff;border-radius:10px;box-shadow:inset 0 0 0 3px var(--f),inset 0 0 0 5px #fff;position:relative;padding:10px 26px;text-align:center}
+.re .placa::before,.re .placa::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.re .placa.cargols4::before{top:12px;margin-top:0}.re .placa.cargols4::after{top:12px;margin-top:0}
+.re .placa::before{left:9px}.re .placa::after{right:9px}
+.re .placa.acc{background:var(--a);box-shadow:inset 0 0 0 3px var(--a),inset 0 0 0 5px #fff}
+.re .placa.blanca{background:#fff;color:var(--f);box-shadow:inset 0 0 0 2px var(--f),inset 0 0 0 4px #fff,inset 0 0 0 5px var(--f)}
+.re .fila{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--linia);text-align:left}
+.re .fila:first-child{border-top:0}
+.re .fila .t{font:400 15px/1.15 "Oswald"}
+.re .fila .p{font:600 17px "Oswald"}
+.re .fila .c{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--f)}
+.re .fila.feta{color:var(--suau)}.re .fila.feta .c{background:var(--a);box-shadow:none}
+.re .nav{background:var(--f);color:rgba(255,255,255,.6)}.re .nav span{font:500 13px "Oswald";text-transform:uppercase;letter-spacing:.1em}.re .nav span.on{color:#fff;box-shadow:inset 0 -3px 0 var(--a)}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · rètols esmaltats</small>
+    <h1>Els rètols esmaltats, millorats</h1>
+    <p>Els rètols esmaltats, corregint el que no t'agradava: el fons ja no és crema sinó blanc net, i els colors són apagats en comptes de vius. També he tret plaques: les missions i les xifres del perfil ara són una sola placa blanca amb filets, en comptes d'una placa per línia, perquè no carregui tant.</p><p>Hi ha quatre parelles d'esmalts. Digues quina t'agrada, o barreja-les a la nota.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base;
+const nCall=(D.missions[SEL]||[]).length;
+const veins=PER['08298'].v.filter(v=>PER[v]&&estat(v)==='V').slice(0,4);
+const mapa=(f)=>`<svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona">${f.defs||''}<rect width="300" height="330" fill="${f.fons}"/>${D.mapa.map(p=>{const e=estat(p.c);return `<path d="${p.d}" ${f[e](p)}/>`}).join('')}${f.sel?f.sel(PER[SEL]):''}</svg>`;
+const nav=(on,noms=['Mapa','Missions','Gent','Perfil'])=>`<div class="nav">${noms.map((n,i)=>`<span class="${i===on?'on':''}">${n}</span>`).join('')}</div>`;
+
+// ── Rètols esmaltats, amb una paleta per paràmetre ─────────────────────
+// f: l'esmalt de fons (fosc), a: l'esmalt d'accent, tou: el color dels veïns al mapa, linia i suau: grisos de la paleta.
+const re=(P)=>{const st=`--f:${P.f};--a:${P.a};--linia:${P.linia};--suau:${P.suau}`;return {
+ mapa:()=>`<div class="tel re" style="${st}"><div style="padding:30px 12px 8px"><div class="placa"><div style="font:600 20px 'Oswald';text-transform:uppercase;letter-spacing:.08em">Bocins de Catalunya</div></div>
+   <div style="display:flex;justify-content:space-between;font:500 13px 'Oswald';text-transform:uppercase;letter-spacing:.08em;padding:6px 4px 0"><span>${DESC.length} de ${D.total} municipis</span><span style="color:${P.a}">${saldo} barretines</span></div></div>
+   ${mapa({fons:'#fff',D:p=>`fill="${p.c==='08298'?P.a:P.f}" stroke="#fff" stroke-width="1.2"`,V:p=>`fill="${P.tou}" stroke="#fff" stroke-width="1.2"`,B:p=>`fill="#F3F4F5" stroke="#fff" stroke-width=".8"`,
+     sel:s=>`<path d="${s.d}" fill="#fff" stroke="${P.a}" stroke-width="2.5"/>`})}
+   <div style="padding:8px 12px 12px;display:flex;flex-direction:column;gap:6px"><div class="placa blanca"><div style="font:600 26px 'Oswald';text-transform:uppercase">${esc(PER[SEL].n)}</div><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.1em">${esc(PER[SEL].k)} · ${nCall} missions</div></div>
+     <div class="placa acc" style="display:flex;justify-content:space-between;font:600 15px 'Oswald';text-transform:uppercase;letter-spacing:.04em;white-space:nowrap"><span>Desbloqueja</span><span>${cost} barretines</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel re" style="${st}"><div style="padding:30px 12px 0;flex:1;overflow:hidden">
+   <div class="placa" style="padding:14px 26px"><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.16em">Osona</div><div style="font:600 54px/1 'Oswald';text-transform:uppercase">Vic</div><div style="font:400 13px 'Oswald';text-transform:uppercase;letter-spacing:.06em">${FETES} de ${VIC.length} missions · ${guanyats} de ${total}</div></div>
+   <div class="placa blanca cargols4" style="margin-top:10px;padding:10px 26px 6px">
+   ${VIC.slice(0,9).map((m,i)=>`<div class="fila ${i<FETES?'feta':''}"><span class="c"></span><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span></div>`).join('')}</div>
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel re" style="${st}"><div style="padding:30px 12px 0;flex:1;display:flex;flex-direction:column;gap:8px">
+   <div class="placa"><div style="font:400 12px 'Oswald';text-transform:uppercase;letter-spacing:.14em">Explorador · nivell 2</div><div style="font:600 40px 'Oswald'">marti</div></div>
+   <div class="placa blanca cargols4" style="padding:8px 26px 4px">${[['Municipis',`${DESC.length} de ${D.total}`],['Missions','3'],['Comarques','0 de 43'],['Segells','2']].map(([a,b])=>`<div class="fila" style="grid-template-columns:1fr auto"><span class="t" style="text-transform:uppercase;letter-spacing:.06em">${a}</span><span class="p">${b}</span></div>`).join('')}</div>
+   <div class="placa acc" style="display:flex;justify-content:space-between;font:600 15px 'Oswald';text-transform:uppercase"><span>El passaport</span><span>→</span></div>
+   <div class="placa" style="display:flex;justify-content:space-between;font:600 15px 'Oswald';text-transform:uppercase"><span>Catàleg de cartells</span><span>→</span></div>
+   </div>${nav(3)}</div>`,
+}};
+const PAL=[
+ {id:'nit',n:'Blau nit i terracota',f:'#28364F',a:'#A9503F',tou:'#C9D0DB',linia:'#E2E5EA',suau:'#9097A3',d:'Un blau fosc gairebé de nit, que no és el blau elèctric d\'abans, i una terracota de teula com a accent.'},
+ {id:'verd',n:'Verd fosc i ocre',f:'#24463C',a:'#B07D33',tou:'#C6D3CD',linia:'#E1E7E4',suau:'#8C9A94',d:'El verd fosc dels porticons i de les plaques de farmàcia, amb un ocre de pedra com a accent.'},
+ {id:'negre',n:'Grafit i vermell apagat',f:'#24262A',a:'#9E3F35',tou:'#D3D4D6',linia:'#E4E5E7',suau:'#95979B',d:'Gairebé negre, com les plaques de ferro dels carrers, amb un vermell de maó apagat. La més sòbria.'},
+ {id:'granat',n:'Granat i blau grisós',f:'#5E2930',a:'#4C6478',tou:'#E0CFCF',linia:'#EBE3E3',suau:'#A39192',d:'Un granat de vi fosc com a esmalt principal, amb un blau grisós com a accent. La menys habitual.'},
+];
+
+const C=PAL.map(P=>({id:P.id,n:P.n,d:P.d,o:re(P)}));
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('concepte6')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{};return `<section class="concepte" data-c="${c.id}">
+  <header><span class="n">${['A','B','C','D'][i]}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="pantalles">${['mapa','fitxa','perfil'].map((k,j)=>`<figure>${c.o[k]()}<figcaption>${['El mapa','La fitxa de Vic','El perfil'][j]}</figcaption></figure>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></section>`}).join('')}
+async function desa(id){try{localStorage.setItem('concepte6',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('concepte6').doc(id).delete();else await db.collection('concepte6').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+document.getElementById('conceptes').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const s=b.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+document.getElementById('conceptes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('concepte6').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
