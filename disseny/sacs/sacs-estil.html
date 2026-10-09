@@ -1,0 +1,445 @@
+<title>Com s'obre un sac</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+/* Quatre maneres de dibuixar i obrir el sac, amb l'estètica triada: rètols esmaltats en blau nit i terracota, sobre blanc net.
+   Generat per gen-sacs-estil.py, que hi posa els emojis de debò de recursos.json. */
+:root{--f:#28364F;--a:#A9503F;--ocre:#B07D33;--pissarra:#6E7787;--linia:#E2E5EA;--suau:#9097A3}
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px;display:grid;grid-template-columns:330px 1fr;gap:16px 32px;align-items:start}
+@media (max-width:760px){.concepte{grid-template-columns:1fr}}
+.concepte header .n{font:600 44px/1 "Newsreader",serif}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:4px 0 6px}
+.concepte header p{margin:0 0 10px;max-width:60ch}
+.raresa{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.raresa button,.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.raresa button[aria-pressed="true"],.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible,.escena:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+
+/* ── El telèfon, amb l'estètica de l'app ────────────────────────────────────────────── */
+.tel{width:330px;max-width:100%;height:680px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;background:#fff;color:var(--f);font-family:"Oswald",sans-serif;box-sizing:border-box}
+.placa{background:var(--f);color:#fff;border-radius:10px;box-shadow:inset 0 0 0 3px var(--f),inset 0 0 0 5px #fff;position:relative;padding:10px 26px;text-align:center}
+.placa::before,.placa::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.placa::before{left:9px}.placa::after{right:9px}
+.placa.acc{background:var(--a);box-shadow:inset 0 0 0 3px var(--a),inset 0 0 0 5px #fff}
+.placa.blanca{background:#fff;color:var(--f);box-shadow:inset 0 0 0 2px var(--f),inset 0 0 0 4px #fff,inset 0 0 0 5px var(--f)}
+.tel .titol{margin:34px 16px 0;align-self:stretch;font:600 20px "Oswald";text-transform:uppercase;letter-spacing:.08em}
+.escena{position:relative;width:300px;height:300px;margin-top:18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.escena svg.cont{position:absolute;inset:40px;width:220px;height:220px;overflow:visible}
+.escena svg.cont *{transform-box:fill-box}
+.ajuda{font:400 14px "Oswald";text-transform:uppercase;letter-spacing:.1em;color:var(--suau);margin-top:6px}
+.resultat{display:none;flex-direction:column;align-items:center;gap:8px;padding:0 16px;align-self:stretch;text-align:center}
+.tel[data-fase="obert"] .resultat{display:flex;animation:puja .5s .25s both}
+.tel[data-fase="obert"] .ajuda{display:none}
+.resultat .nom{font:600 26px/1.1 "Oswald";text-transform:uppercase}
+.resultat .que{font:400 14px "Oswald";color:var(--suau);letter-spacing:.03em}
+.resultat .botons{display:flex;flex-direction:column;gap:6px;align-self:stretch;margin-top:6px}
+.resultat .botons .placa{font:600 15px "Oswald";text-transform:uppercase;letter-spacing:.04em;display:flex;justify-content:space-between}
+.etiqueta{font:500 12px "Oswald";text-transform:uppercase;letter-spacing:.16em;padding:4px 22px;border-radius:6px;color:#fff}
+.etiqueta::before,.etiqueta::after{width:5px;height:5px;margin-top:-2.5px}.etiqueta::before{left:7px}.etiqueta::after{right:7px}
+@keyframes puja{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ── El que surt: una placa rodona esmaltada que gira, com un rètol de doble cara, amb l'emoji ── */
+.revela{position:absolute;left:50%;top:50%;width:170px;height:170px;margin:-85px 0 0 -85px;perspective:600px;pointer-events:none;opacity:0}
+.revela .disc{width:100%;height:100%;border-radius:50%;background:var(--r);box-shadow:inset 0 0 0 5px var(--r),inset 0 0 0 8px #fff,0 10px 24px rgba(40,54,79,.25);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.revela .disc .em{width:122px;height:122px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.revela .disc .em svg{width:112px;height:112px}
+.revela .cargol{position:absolute;width:8px;height:8px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.tel[data-r="comuna"]{--r:var(--pissarra)}.tel[data-r="rara"]{--r:var(--a)}.tel[data-r="llegendaria"]{--r:var(--ocre)}
+.tel[data-fase="obert"] .revela{opacity:1;animation:gira .9s cubic-bezier(.2,.9,.25,1.15) both}
+@keyframes gira{0%{opacity:0;transform:translateY(60px) scale(.35) rotateY(90deg)}45%{opacity:1}100%{opacity:1;transform:none}}
+/* La llegendària, a més, té una lluentor que passa per sobre de l'esmalt, com quan hi toca el sol. */
+.tel[data-r="llegendaria"][data-fase="obert"] .disc::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);animation:lluu 2.6s 1s ease-in-out infinite}
+@keyframes lluu{from{transform:translateX(-80%)}60%,to{transform:translateX(80%)}}
+.tel[data-fase="obert"] svg.cont{animation:fora .5s ease-in both}
+@keyframes fora{to{opacity:0;transform:translateY(30px) scale(.9)}}
+
+/* L'espera abans d'obrir: tremola; com més rar, més vegades (1, 2 o 3 sacsejades). */
+.tel[data-fase="tancat"] svg.cont{animation:respira 2.4s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes respira{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.tel[data-fase="obrint"] svg.cont{transform-origin:50% 90%;animation:sacseja .36s ease-in-out var(--cops)}
+.tel[data-r="comuna"]{--cops:1}.tel[data-r="rara"]{--cops:2}.tel[data-r="llegendaria"]{--cops:3}
+@keyframes sacseja{0%,100%{transform:none}20%{transform:rotate(-9deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(4deg)}}
+
+/* ── 1 · Sac de roba: la corda es deslliga i la boca s'obre ── */
+.sac .corda{transition:transform .45s ease-in,opacity .45s}
+.tel[data-fase="obert"] .sac .corda.e{transform:translate(-40px,30px) rotate(-60deg);opacity:0}
+.tel[data-fase="obert"] .sac .corda.d{transform:translate(40px,34px) rotate(70deg);opacity:0}
+.sac .boca{transform-origin:50% 100%;transition:transform .4s}
+.tel[data-fase="obert"] .sac .boca{transform:scaleX(1.45) scaleY(.5)}
+
+/* ── 2 · Farcell: el nus es desfà, les puntes cauen i el mocador queda estès ── */
+.farcell .punta{transition:transform .5s cubic-bezier(.5,0,.6,1),opacity .5s}
+.farcell .punta.o{transform-origin:100% 100%}.farcell .punta.e{transform-origin:0 100%}
+.tel[data-fase="obert"] .farcell .punta.o{transform:rotate(-115deg);opacity:0}
+.tel[data-fase="obert"] .farcell .punta.e{transform:rotate(115deg);opacity:0}
+.farcell .nus{transform-origin:center;transition:transform .3s,opacity .3s}
+.tel[data-fase="obert"] .farcell .nus{transform:scale(0);opacity:0}
+.farcell .cos{transform-origin:50% 100%;transition:transform .5s .15s}
+.tel[data-fase="obert"] .farcell .cos{transform:scale(1.25,.3)}
+
+/* ── 3 · Capsa de llauna: la tapa salta ── */
+.llauna .tapa{transform-origin:0 100%;transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .6s .2s}
+.tel[data-fase="obert"] .llauna .tapa{transform:translate(20px,-60px) rotate(-38deg);opacity:0}
+
+/* ── 4 · Paquet de pastisseria: el cordill es trenca i el paper es desplega ── */
+.paquet .cordill{transition:transform .4s ease-in,opacity .4s}
+.tel[data-fase="obert"] .paquet .cordill.e{transform:translate(-30px,40px) rotate(-30deg);opacity:0}
+.tel[data-fase="obert"] .paquet .cordill.d{transform:translate(30px,40px) rotate(30deg);opacity:0}
+.paquet .ala{transition:transform .5s .15s cubic-bezier(.5,0,.6,1.2)}
+.paquet .ala.e{transform-origin:100% 50%}.paquet .ala.d{transform-origin:0 50%}
+.tel[data-fase="obert"] .paquet .ala.e{transform:scaleX(-1)}
+.tel[data-fase="obert"] .paquet .ala.d{transform:scaleX(-1)}
+
+@media (prefers-reduced-motion:reduce){.tel *,.tel{animation:none!important;transition:none!important}.tel[data-fase="obert"] .revela{opacity:1}.tel[data-fase="obert"] svg.cont{opacity:0}}
+
+.em *{transform-box:fill-box;transform-origin:center}
+.anim .e-halo{animation:ehalo 2.4s ease-in-out infinite}@keyframes ehalo{0%,100%{opacity:.7}50%{opacity:1}}
+.anim .e-vidre{animation:evidre 3s steps(1) infinite}@keyframes evidre{0%,100%{fill:#F2B544}62%{fill:#FFE3A3}66%{fill:#F2B544}70%{fill:#FFE3A3}}
+.anim .e-braç{transform-origin:0 100%;animation:ebrac .5s ease-in-out infinite alternate}@keyframes ebrac{from{transform:rotate(-18deg)}to{transform:rotate(16deg)}}
+.anim .e-enxaneta{animation:eenx 2s ease-in-out infinite}@keyframes eenx{0%,100%{transform:none}50%{transform:translateY(-2px)}}
+.anim .e-bandera{transform-origin:0 50%;animation:eband .7s ease-in-out infinite alternate}@keyframes eband{from{transform:scaleX(1) skewY(0)}to{transform:scaleX(.82) skewY(6deg)}}
+.anim .e-pas{transform-origin:20% 100%;animation:epas 1.2s ease-in-out infinite}@keyframes epas{0%,100%{transform:none}30%{transform:rotate(-8deg) translateY(-4px)}60%{transform:none}}
+.anim .e-flama{transform-origin:50% 100%;animation:eflama .45s ease-in-out infinite alternate}@keyframes eflama{from{transform:scale(1,1)}to{transform:scale(.94,1.06)}}
+.anim .e-bot{animation:ebot .5s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.12s)}@keyframes ebot{from{transform:none}to{transform:translateY(-6px)}}
+.anim .e-espurna{animation:eesp 1.4s ease-out infinite;animation-delay:calc(var(--i)*.03s)}@keyframes eesp{0%{transform:scale(.2);opacity:0}20%{opacity:1}70%{transform:scale(1);opacity:1}100%{transform:scale(1.1);opacity:0}}
+.anim .e-nucli{animation:enuc 1.4s ease-out infinite}@keyframes enuc{0%{transform:scale(1.4)}30%{transform:scale(.6)}100%{transform:scale(1)}}
+.anim .e-porro{transform-origin:40% 80%;animation:eporro 2.4s ease-in-out infinite}@keyframes eporro{0%,100%{transform:none}40%,70%{transform:rotate(-10deg)}}
+.anim .e-raig{animation:eraig .4s linear infinite;stroke-dashoffset:0}@keyframes eraig{to{stroke-dashoffset:-8}}
+.anim .e-gegant{transform-origin:50% 100%;animation:egeg 1.6s ease-in-out infinite}@keyframes egeg{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.anim .e-cor{animation:ecor 1s ease-in-out infinite}@keyframes ecor{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+.anim .e-pin{animation:epin 1.6s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes epin{0%{transform:translateY(-18px);opacity:0}30%,85%{transform:none;opacity:1}100%{opacity:1}}
+.anim .e-bolet{transform-origin:50% 100%;animation:ebolet 2s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes ebolet{0%{transform:scaleY(.3)}25%,100%{transform:none}}
+.anim .e-mira{animation:emira 2.4s ease-in-out infinite}@keyframes emira{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+.anim .e-minutera{transform-origin:0 50%;animation:emin 2s linear infinite}@keyframes emin{to{transform:rotate(360deg)}}
+.anim .e-caganer{animation:ecag 1.6s ease-in-out infinite}@keyframes ecag{0%,100%{transform:none}50%{transform:translateY(2px) scaleY(.97)}}
+.anim .e-pila{animation:epila 1.6s ease-out infinite}@keyframes epila{0%,40%{transform:scale(0);opacity:0}60%,100%{transform:none;opacity:1}}
+.anim .e-sol{animation:esol 2.8s ease-out infinite}@keyframes esol{0%{transform:translateY(14px)}50%,100%{transform:none}}
+.anim .e-estel{animation:eest 1.6s ease-in-out infinite;animation-delay:calc(var(--i)*.4s)}@keyframes eest{0%,100%{transform:scale(.5);opacity:.4}50%{transform:scale(1.1);opacity:1}}
+.anim .e-oli{animation:eoli 1.8s ease-in infinite}@keyframes eoli{0%{transform:translateY(-6px);opacity:0}20%{opacity:1}80%{transform:translateY(26px);opacity:1}100%{transform:translateY(30px);opacity:0}}
+.anim .e-calcot{transform-origin:100% 0;animation:ecal 2s ease-in-out infinite}@keyframes ecal{0%,100%{transform:translateY(-6px)}45%,60%{transform:translateY(4px)}}
+.anim .e-barretina{transform-origin:30% 100%;animation:ebar 1.8s ease-in-out infinite}@keyframes ebar{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg)}}
+.anim .e-esq{transform-origin:50% 100%;animation:eesq 1.6s ease-in-out infinite}@keyframes eesq{0%,100%{transform:rotate(-4deg)}40%,55%{transform:rotate(8deg) translateX(3px)}}
+.anim .e-dre{transform-origin:50% 100%;animation:edre 1.6s ease-in-out infinite}@keyframes edre{0%,100%{transform:rotate(4deg)}40%,55%{transform:rotate(-8deg) translateX(-3px)}}
+.anim .e-xoc{animation:exoc 1.6s ease-out infinite}@keyframes exoc{0%,40%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}75%,100%{opacity:0;transform:scale(1.2)}}
+.anim .e-riu{animation:eriu .35s ease-in-out infinite alternate}@keyframes eriu{from{transform:rotate(-4deg)}to{transform:rotate(4deg) translateY(-2px)}}
+.anim .e-llagrima{animation:ellag 1s ease-in infinite}@keyframes ellag{0%{transform:translateY(-3px);opacity:0}30%{opacity:1}100%{transform:translateY(8px);opacity:0}}
+.anim .e-parpella{animation:eparp 3s infinite}@keyframes eparp{0%,92%,100%{transform:none}95%{transform:scaleY(.1)}}
+.anim .e-cors{animation:ecors .8s ease-in-out infinite}@keyframes ecors{0%,100%{transform:scale(1)}40%{transform:scale(1.18)}}
+.anim .e-salt{animation:esalt 1.6s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes esalt{0%,60%,100%{transform:none}20%{transform:translateY(-8px) scale(1.04)}}
+.anim .e-gota{animation:egota 1.4s ease-in infinite}@keyframes egota{0%{transform:translateY(-2px);opacity:0}25%{opacity:1}100%{transform:translateY(14px);opacity:0}}
+.anim .e-sacseja{animation:esac .12s linear infinite alternate}@keyframes esac{from{transform:translateX(-1.5px)}to{transform:translateX(1.5px)}}
+.anim .e-brill{animation:ebrill 2.2s ease-in-out infinite}@keyframes ebrill{0%,70%,100%{opacity:0;transform:translateX(0)}80%{opacity:1}90%{opacity:0;transform:translateX(30px)}}
+.anim .e-mirada{animation:emir 2.4s ease-in-out infinite}@keyframes emir{0%,100%{transform:none}40%,60%{transform:translate(4px,-3px)}}
+.anim .e-punts circle{animation:epun 1.4s ease-in-out infinite;animation-delay:calc(var(--i)*.3s)}@keyframes epun{0%,100%{opacity:.3}50%{opacity:1}}
+.anim .e-ullet{animation:eull 2s infinite}@keyframes eull{0%,60%,100%{transform:none}70%,85%{transform:scaleY(.2)}}
+.anim .k-confeti2{opacity:0;animation:kc2 2.4s ease-in infinite;animation-delay:calc(var(--i)*.25s)}@keyframes kc2{0%{opacity:0;transform:translateY(0)}10%{opacity:1}100%{opacity:0;transform:translateY(90px) rotate(200deg)}}
+.anim .e-estels2{animation:eest2 1.2s ease-in-out infinite}@keyframes eest2{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.2) rotate(20deg)}}
+.anim .e-z{opacity:0;animation:ez 2.4s ease-out infinite;animation-delay:calc(var(--i)*.5s)}@keyframes ez{0%{opacity:0;transform:translateY(6px)}30%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+.anim .e-suor{animation:egota 1.6s ease-in infinite}
+.anim .e-cor-vola{animation:ecv 1.8s ease-out infinite}@keyframes ecv{0%{transform:translate(-8px,6px) scale(.4);opacity:0}25%{opacity:1}100%{transform:translate(8px,-28px) scale(1.1);opacity:0}}
+.anim .e-galtes{animation:egal 2s ease-in-out infinite}@keyframes egal{0%,100%{opacity:.5}50%{opacity:1}}
+.anim .e-bota{transform-origin:50% 100%;animation:ebota .7s cubic-bezier(.3,0,.5,1) infinite}@keyframes ebota{0%,100%{transform:translateY(0) scale(1.06,.94)}50%{transform:translateY(-8px) scale(.96,1.04)}}
+.anim .e-flota{animation:eflota 1.6s ease-in-out infinite}@keyframes eflota{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-6px) rotate(4deg)}}
+.anim .e-inclina{transform-origin:50% 90%;animation:einc 2s ease-in-out infinite}@keyframes einc{0%,55%,100%{transform:none}65%,85%{transform:rotate(-12deg)}}
+.anim .e-balla{transform-origin:50% 100%;animation:eballa .8s ease-in-out infinite}@keyframes eballa{0%,100%{transform:rotate(-10deg) translateX(-4px)}50%{transform:rotate(10deg) translateX(4px)}}
+.anim .e-respira{transform-origin:50% 100%;animation:eresp 2.4s ease-in-out infinite}@keyframes eresp{0%,100%{transform:scale(1)}50%{transform:scale(1.05,.97)}}
+.anim .e-encongeix{transform-origin:50% 100%;animation:eenc 2s ease-in-out infinite}@keyframes eenc{0%,100%{transform:none}40%,70%{transform:scale(.9) translateY(4px) rotate(-6deg)}}
+.anim .e-sanglot{transform-origin:50% 100%;animation:esang .5s ease-in-out infinite}@keyframes esang{0%,100%{transform:none}30%{transform:translateY(-3px) scale(1.02,.97)}}
+.anim .e-rodola{animation:erod 1.4s cubic-bezier(.5,0,.5,1) infinite}@keyframes erod{0%{transform:translateX(-14px) rotate(-30deg)}50%{transform:translateX(14px) rotate(330deg)}100%{transform:translateX(-14px) rotate(-30deg)}}
+.anim .e-barr-vola{animation:evola 1.8s cubic-bezier(.2,.8,.3,1) infinite}@keyframes evola{0%,15%{transform:none}35%{transform:translateY(-34px) rotate(-25deg)}60%{transform:translateY(-30px) rotate(10deg)}85%,100%{transform:none}}
+.anim .e-fum{opacity:0;animation:efum 1.8s ease-out infinite}@keyframes efum{0%,15%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1)}70%{opacity:0;transform:scale(1.4) translateY(-6px)}100%{opacity:0}}
+.anim .e-ma-esq{animation:emesq .3s ease-in-out infinite alternate}@keyframes emesq{from{transform:translateX(-4px) rotate(-8deg)}to{transform:translateX(8px)}}
+.anim .e-ma-dre{animation:emdre .3s ease-in-out infinite alternate}@keyframes emdre{from{transform:translateX(4px) rotate(8deg)}to{transform:translateX(-8px)}}
+.anim .e-saluda{transform-origin:50% 100%;animation:esal .35s ease-in-out infinite alternate}@keyframes esal{from{transform:rotate(-22deg)}to{transform:rotate(18deg)}}
+.anim .e-nota{opacity:0;animation:enota 1.6s ease-out infinite;animation-delay:calc(var(--i)*.8s)}@keyframes enota{0%{opacity:0;transform:translateY(8px)}30%{opacity:1}100%{opacity:0;transform:translateY(-16px) rotate(15deg)}}
+.anim .e-arcada{transform-origin:50% 100%;animation:earc 1.2s ease-in-out infinite}@keyframes earc{0%,100%{transform:none}20%{transform:scale(1.04,.92)}35%{transform:scale(.96,1.06) translateY(-3px)}50%{transform:none}}
+.anim .e-tremola{animation:etrem .08s linear infinite alternate}@keyframes etrem{from{transform:translate(-2px,1px)}to{transform:translate(2px,-1px)}}
+.anim .e-fon{transform-origin:50% 100%;animation:efon 2.4s ease-in-out infinite}@keyframes efon{0%,100%{transform:none}50%,70%{transform:scale(1.12,.78)}}
+.anim .e-trontolla{animation:etron 1.6s ease-in-out infinite}@keyframes etron{0%,100%{transform:rotate(-10deg) translateX(-3px)}50%{transform:rotate(10deg) translateX(3px)}}
+.anim .e-espiral{transform-box:view-box;animation:eesp2 .9s linear infinite}@keyframes eesp2{to{transform:rotate(360deg)}}
+.anim .e-crida{transform-origin:50% 100%;animation:ecrida .6s cubic-bezier(.3,1.5,.5,1) infinite}@keyframes ecrida{0%,100%{transform:none}40%{transform:translateY(-10px) scale(1.06)}}
+.anim .e-crit{animation:ecrit .6s steps(2) infinite}@keyframes ecrit{0%{opacity:1}50%{opacity:.2}}
+.anim .e-enrere{transform-origin:50% 100%;animation:eenr 2s ease-in-out infinite}@keyframes eenr{0%,100%{transform:none}30%,80%{transform:rotate(-14deg)}}
+.anim .e-raig2{animation:eraig 0.3s linear infinite}
+.anim .e-banyes{animation:eban .5s ease-in-out infinite alternate}@keyframes eban{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.anim .e-aureola{animation:eaur 1.6s ease-in-out infinite}@keyframes eaur{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.anim .e-esternut{transform-origin:50% 100%;animation:ester 1.8s ease-in infinite}@keyframes ester{0%{transform:none}35%{transform:rotate(-10deg) translateY(-4px)}45%{transform:rotate(14deg) translateY(4px) scale(1.04)}60%,100%{transform:none}}
+.anim .e-gotes{opacity:0;animation:egotes 1.8s ease-out infinite}@keyframes egotes{0%,42%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.5) translateY(4px)}}
+.anim .e-corre{transform-origin:50% 100%;animation:ecorre .25s ease-in-out infinite alternate}@keyframes ecorre{from{transform:rotate(8deg) translateY(0)}to{transform:rotate(8deg) translateY(-4px)}}
+.anim .e-velocitat{animation:evel .3s linear infinite}@keyframes evel{from{transform:translateX(6px);opacity:.3}to{transform:translateX(-6px);opacity:1}}
+.anim .e-porro2{transform-origin:80% 70%;animation:eporro2 2s ease-in-out infinite}@keyframes eporro2{0%,100%{transform:rotate(6deg)}30%,80%{transform:rotate(-4deg)}}
+.anim .e-clap{animation:eclap .6s steps(1) infinite}@keyframes eclap{0%{opacity:0}50%{opacity:1}}
+.anim .e-nega{animation:enega .35s ease-in-out infinite alternate}@keyframes enega{from{transform:translateX(-6px) rotate(-6deg)}to{transform:translateX(6px) rotate(6deg)}}
+.anim .e-assent{transform-origin:50% 100%;animation:eass .4s ease-in-out infinite alternate}@keyframes eass{from{transform:translateY(-4px) rotate(0)}to{transform:translateY(4px) scale(1,.96)}}
+.anim .e-xxt{animation:exxt 2s ease-in-out infinite}@keyframes exxt{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.anim .e-ones{animation:eones 1s ease-out infinite}@keyframes eones{0%{opacity:0;transform:translateX(-4px)}50%{opacity:1}100%{opacity:0;transform:translateX(4px)}}
+.anim .e-mandibula{transform-origin:50% 0;animation:emand 1.6s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes emand{0%,20%{transform:scaleY(.4)}50%,90%{transform:scaleY(1.5) translateY(4px)}100%{transform:scaleY(.4)}}
+.anim .e-cascada{animation:ecasc .3s linear infinite alternate}@keyframes ecasc{from{opacity:.6}to{opacity:1}}
+.anim .e-llengua{transform-origin:50% 0;animation:ellen .25s ease-in-out infinite alternate}@keyframes ellen{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.anim .e-arronsa{animation:earr 1.6s ease-in-out infinite}@keyframes earr{0%,100%{transform:none}30%,60%{transform:translateY(-6px) scale(1.03,.97)}}
+.anim .e-giraull{transform-box:view-box;transform-origin:50px 54px;animation:egir 2.2s ease-in-out infinite}@keyframes egir{0%,100%{transform:translateY(0)}20%{transform:translate(-3px,-2px)}50%{transform:translate(0,-3px)}80%{transform:translate(3px,-2px)}}
+.anim .e-reull{animation:ereull 2.4s ease-in-out infinite}@keyframes ereull{0%,100%{transform:translateX(-4px)}45%,55%{transform:translateX(5px)}}
+.anim .e-tremola-lent{animation:etrem .18s linear infinite alternate}
+.anim .e-espurneig{animation:eest 1.2s ease-in-out infinite;animation-delay:calc(var(--i)*.3s)}
+.anim .e-vapor{opacity:0;animation:evap 1s ease-out infinite}@keyframes evap{0%{opacity:0;transform:scale(.4) translateY(4px)}40%{opacity:1}100%{opacity:0;transform:scale(1.3) translateY(-14px)}}
+.anim .e-badall{transform-origin:50% 100%;animation:ebad 3s ease-in-out infinite}@keyframes ebad{0%,100%{transform:none}40%,60%{transform:scale(1.02,1.06) rotate(-4deg)}}
+.anim .e-boca-badall{animation:eboca 3s ease-in-out infinite}@keyframes eboca{0%,100%{transform:scaleY(.5)}40%,60%{transform:scaleY(1.4)}}
+.anim .e-ma-badall{animation:emab 3s ease-in-out infinite}@keyframes emab{0%,25%,75%,100%{transform:translate(10px,10px);opacity:0}40%,60%{transform:none;opacity:1}}
+.anim .e-llepa{transform-origin:0 50%;animation:ellepa .5s ease-in-out infinite alternate}@keyframes ellepa{from{transform:rotate(-20deg)}to{transform:rotate(20deg)}}
+.anim .e-baba{animation:ebaba 2s ease-in infinite}@keyframes ebaba{0%,40%{transform:scaleY(.4);opacity:.6}80%{transform:scaleY(1.3) translateY(3px);opacity:1}100%{opacity:0}}
+.anim .e-rosa{transform-box:view-box;transform-origin:50px 72px;animation:erosa 2s ease-in-out infinite}@keyframes erosa{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.anim .e-drac{transform-origin:20% 80%;animation:edrac 2s ease-in-out infinite}@keyframes edrac{0%,100%{transform:none}50%{transform:rotate(-4deg) translateY(-2px)}}
+.anim .e-foc-drac{transform-origin:0 50%;animation:efocd 2s ease-out infinite}@keyframes efocd{0%,40%{opacity:0;transform:scale(.2)}55%{opacity:1;transform:scale(1.3)}85%,100%{opacity:0;transform:scale(1.6) translateX(4px)}}
+.anim .e-tio{transform-origin:50% 100%;animation:etio .9s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes etio{0%,100%{transform:none}30%{transform:translateY(-8px) rotate(-4deg)}50%{transform:translateY(0) scale(1.05,.92)}}
+.anim .e-ou{transform-origin:50% 100%;animation:eou 1.2s ease-in-out infinite}@keyframes eou{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.anim .e-espurna-puja{opacity:0;animation:epuja 1.6s ease-out infinite;animation-delay:calc(var(--i)*.35s)}@keyframes epuja{0%{opacity:0;transform:translateY(10px)}20%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+.anim .e-roda{animation:eroda .6s linear infinite}@keyframes eroda{to{transform:rotate(360deg)}}
+.anim .e-baston-esq{transform-origin:0 100%;animation:ebesq .5s ease-in-out infinite alternate}@keyframes ebesq{from{transform:rotate(-8deg)}to{transform:rotate(2deg)}}
+.anim .e-baston-dre{transform-origin:100% 100%;animation:ebdre .5s ease-in-out infinite alternate}@keyframes ebdre{from{transform:rotate(8deg)}to{transform:rotate(-2deg)}}
+.anim .e-clap2{animation:eclap .5s steps(1) infinite}
+.anim .e-gralla{transform-origin:30% 80%;animation:egra 1s ease-in-out infinite alternate}@keyframes egra{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+.anim .e-ou-balla{animation:eoub .7s ease-in-out infinite alternate}@keyframes eoub{from{transform:translateY(0) rotate(-10deg)}to{transform:translateY(-8px) rotate(14deg)}}
+.anim .e-raig-aigua{animation:eraigw .7s ease-in-out infinite alternate}@keyframes eraigw{from{opacity:.7}to{opacity:1}}
+.anim .e-tap{animation:etap 1.8s cubic-bezier(.2,.8,.3,1) infinite}@keyframes etap{0%,30%{transform:none}50%{transform:translate(18px,-26px) rotate(80deg)}70%{opacity:0;transform:translate(26px,-36px) rotate(160deg)}71%,100%{opacity:0}}
+.anim .e-bombolla{opacity:0;animation:ebomb 1.8s ease-out infinite;animation-delay:calc(.5s + var(--i)*.15s)}@keyframes ebomb{0%{opacity:0;transform:translateY(14px)}20%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+.anim .e-cremat{animation:ecrem 1.6s ease-in-out infinite}@keyframes ecrem{0%,100%{fill:#C4782A}50%{fill:#A85A1A}}
+.anim .e-brill2{animation:ebrill3 1.6s ease-in-out infinite}@keyframes ebrill3{0%,100%{opacity:0}50%{opacity:1}}
+.anim .e-botifarra{animation:ebot2 .2s linear infinite alternate}@keyframes ebot2{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
+.anim .e-xiula{animation:evap 1.2s ease-out infinite}
+.anim .e-caragol{animation:ecarg 4s linear infinite}@keyframes ecarg{0%{transform:translateX(-10px)}100%{transform:translateX(10px)}}
+.anim .e-vapor-puja{animation:evap 1.6s ease-out infinite}
+.anim .e-corona{animation:ecor2 1s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes ecor2{0%,100%{transform:none}40%{transform:translateY(-8px) rotate(6deg)}}
+.anim .e-onada{animation:eonada 1.4s linear infinite}@keyframes eonada{from{transform:translateX(0)}to{transform:translateX(-20px)}}
+.anim .e-balanceig{transform-origin:50% 90%;animation:ebal 2s ease-in-out infinite}@keyframes ebal{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(2px)}}
+.anim .e-orella-esq{animation:eoesq 1.6s ease-in-out infinite}@keyframes eoesq{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(-14deg)}90%{transform:rotate(4deg)}}
+.anim .e-orella-dre{animation:eodre 1.6s ease-in-out infinite;animation-delay:.3s}@keyframes eodre{0%,70%,100%{transform:rotate(0)}80%{transform:rotate(14deg)}90%{transform:rotate(-4deg)}}
+.anim .e-campana{animation:ecamp 1s ease-in-out infinite alternate}@keyframes ecamp{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.anim .e-so{animation:eclap 1s steps(1) infinite}
+.anim .e-esbufega{transform-origin:50% 100%;animation:eesb 2s ease-in-out infinite}@keyframes eesb{0%,100%{transform:none}40%,60%{transform:scale(1.03,.95) translateY(3px)}}
+.anim .e-buf{opacity:0;animation:ebuf 2s ease-out infinite}@keyframes ebuf{0%,40%{opacity:0;transform:translate(0,0) scale(.4)}55%{opacity:1}100%{opacity:0;transform:translate(12px,4px) scale(1.4)}}
+.e-flash,.e-fum,.e-gotes,.e-buf{opacity:0}
+.anim .e-flash{opacity:0;animation:eflash 1.8s steps(1) infinite}@keyframes eflash{0%,80%,100%{opacity:0}84%{opacity:.9}}
+.anim .e-bombeta{animation:ebomb2 1.6s steps(1) infinite}@keyframes ebomb2{0%,30%{opacity:.25}35%,100%{opacity:1}}
+.anim .e-gel{transform-origin:40% 100%;animation:egel 1.6s ease-in-out infinite}@keyframes egel{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+.anim .e-sacseja-lent{animation:enega 1s ease-in-out infinite alternate}
+.anim .e-nas{animation:enas 2s ease-in-out infinite}@keyframes enas{0%,20%{transform:scaleX(1)}60%,85%{transform:scaleX(3.4)}100%{transform:scaleX(1)}}
+.anim .e-capgira{animation:ecapg 2.4s cubic-bezier(.6,0,.4,1) infinite}@keyframes ecapg{0%,35%{transform:rotate(0)}50%,85%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
+.anim .e-tamboreja{animation:etamb .3s ease-in-out infinite alternate}@keyframes etamb{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.anim .e-agulla-rapida{animation:emin 1s linear infinite}
+.anim .e-biceps{animation:ebic .5s ease-in-out infinite alternate}@keyframes ebic{from{transform:rotate(10deg)}to{transform:rotate(-12deg) scale(1.08)}}
+.anim .e-sinia{animation:emin 6s linear infinite}
+.anim .e-estrella-nadal{animation:eest2 1.4s ease-in-out infinite}
+.anim .e-mascara{transform-origin:20% 90%;animation:emasc 1.4s ease-in-out infinite}@keyframes emasc{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) translateY(-3px)}}
+.anim .e-estel-vola{animation:eestv 2.4s ease-in-out infinite}@keyframes eestv{0%,100%{transform:translate(0,0) rotate(-6deg)}50%{transform:translate(4px,-6px) rotate(8deg)}}
+.anim .e-fuet{transform-origin:50% 50%;animation:egel 2s ease-in-out infinite}
+.anim .e-melindro{animation:emel 2s ease-in-out infinite}@keyframes emel{0%,100%{transform:translateY(0)}40%,60%{transform:translateY(10px)}}
+.anim .e-panellet{animation:ebot .5s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.1s)}
+.anim .e-ma-morter{animation:emort .5s ease-in-out infinite alternate}@keyframes emort{from{transform:rotate(-10deg)}to{transform:rotate(10deg)}}
+.anim .e-agulla-brui{animation:ebrui 2.4s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes ebrui{0%{transform:rotate(-60deg)}30%{transform:rotate(20deg)}50%{transform:rotate(-8deg)}70%,100%{transform:rotate(0)}}
+.anim .e-motxilla{transform-origin:50% 100%;animation:ebota 1s cubic-bezier(.3,0,.5,1) infinite}
+.anim .e-tren{animation:etren 3s ease-in-out infinite}@keyframes etren{0%{transform:translateX(-6px)}40%{transform:translateX(6px)}45%,100%{transform:translateX(6px)}}
+.anim .e-rellotget{animation:emin .8s linear infinite}
+.anim .e-cotxe{animation:etamb .2s ease-in-out infinite alternate}
+.anim .e-roda-bici{animation:emin .8s linear infinite}
+.anim .e-bandereta{transform-origin:0 50%;animation:eband .5s ease-in-out infinite alternate}
+.anim .e-cartell{animation:ecart 1.8s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes ecart{0%{transform:scale(.6);opacity:0}25%,100%{transform:none;opacity:1}}
+.anim .e-marca{animation:ebrill3 1.6s ease-in-out infinite}
+.anim .e-esquiador{animation:eesq2 1.4s ease-in-out infinite}@keyframes eesq2{0%{transform:translate(-10px,4px)}100%{transform:translate(10px,-4px)}}
+.anim .e-puny{transform-origin:50% 100%;animation:epuny .5s cubic-bezier(.3,1.6,.5,1) infinite alternate}@keyframes epuny{from{transform:translateY(6px)}to{transform:translateY(-6px) rotate(-4deg)}}
+.anim .e-fletxa{animation:efl .8s ease-in-out infinite alternate}@keyframes efl{from{transform:translateX(-4px)}to{transform:translateX(4px)}}
+.anim .e-progres{animation:eprog 2.4s ease-out infinite}@keyframes eprog{0%{transform:scaleX(.1)}70%,100%{transform:scaleX(.9)}}
+.anim .e-carrega{animation:ecarr 2s steps(5) infinite}@keyframes ecarr{from{transform:scaleX(.1)}to{transform:scaleX(1)}}
+.anim .e-petjada{opacity:0;animation:epetj 2s ease-out infinite;animation-delay:calc(var(--i)*.4s)}@keyframes epetj{0%{opacity:0}15%,60%{opacity:1}100%{opacity:0}}
+.anim .e-trofeu{transform-origin:50% 100%;animation:ebota .8s cubic-bezier(.3,0,.5,1) infinite}
+.anim .e-medalla{animation:emed 1.6s ease-in-out infinite}@keyframes emed{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+.anim .e-flameta{transform-origin:50% 100%;animation:eflama .3s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.1s)}
+.anim .e-globus{animation:eglob 2s ease-in-out infinite;animation-delay:calc(var(--i)*-.6s)}@keyframes eglob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+.anim .e-cano{transform-origin:20% 90%;animation:ecano 1.6s ease-out infinite}@keyframes ecano{0%,10%{transform:none}15%{transform:scale(.92) rotate(-4deg)}30%,100%{transform:none}}
+.anim .e-confeti-surt{opacity:0;animation:econf 1.6s ease-out infinite}@keyframes econf{0%,12%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(220deg)}}
+.anim .e-lupa{animation:elupa 2.4s ease-in-out infinite}@keyframes elupa{0%,100%{transform:translate(-4px,0)}25%{transform:translate(4px,-4px)}50%{transform:translate(4px,4px)}75%{transform:translate(-4px,4px)}}
+.anim .e-llapis{animation:ellap .3s ease-in-out infinite alternate}@keyframes ellap{from{transform:translate(-3px,2px)}to{transform:translate(3px,-2px)}}
+.anim .e-alerta{animation:eclap .8s steps(1) infinite}
+.anim .e-barra-cob{animation:eclap 1s steps(1) infinite}
+.anim .e-creu{animation:ecor 1s ease-in-out infinite}
+.anim .e-interrogant{transform-origin:50% 100%;animation:ebota .7s cubic-bezier(.3,0,.5,1) infinite}
+.anim .e-nuvol{animation:efl 2s ease-in-out infinite alternate}
+.anim .e-gota-pluja{opacity:0;animation:egp .8s linear infinite;animation-delay:calc(var(--i)*.2s)}@keyframes egp{0%{opacity:0;transform:translateY(-4px)}20%{opacity:1}100%{opacity:0;transform:translateY(18px)}}
+.anim .e-mercuri{animation:emerc 2s ease-in-out infinite}@keyframes emerc{0%,100%{transform:scaleY(.5)}60%{transform:scaleY(1)}}
+.anim .e-floc{animation:efloc 2.4s linear infinite;animation-delay:calc(var(--i)*-.5s)}@keyframes efloc{0%{transform:translateY(-10px);opacity:0}20%{opacity:1}100%{transform:translateY(20px) translateX(4px);opacity:0}}
+.anim .e-oliva{transform-origin:50% 50%;animation:ebota .6s cubic-bezier(.3,0,.5,1) infinite}
+.anim .e-raim{transform-origin:50% 0;animation:erosa 2s ease-in-out infinite}
+.anim .e-copa{transform-origin:50% 100%;animation:eresp 2.4s ease-in-out infinite}
+.anim .e-ovella{transform-origin:50% 100%;animation:ebota .9s cubic-bezier(.3,0,.5,1) infinite}
+.anim .e-pi{transform-origin:50% 100%;animation:egeg 2s ease-in-out infinite;animation-delay:calc(var(--i)*-.4s)}
+.anim .e-aigua-cau{animation:ecasc .2s linear infinite alternate}
+.anim .e-esquitx{animation:esalt .6s cubic-bezier(.3,1.6,.5,1) infinite}
+.anim .e-tractor{animation:etamb .25s ease-in-out infinite alternate}
+.anim .e-moto{transform-origin:20% 90%;animation:emoto 1.2s ease-in-out infinite}@keyframes emoto{0%,100%{transform:none}40%,60%{transform:rotate(-10deg)}}
+.anim .e-fum2{animation:evap 1s ease-out infinite}
+.anim .e-bus{animation:etamb .3s ease-in-out infinite alternate}
+.anim .e-avio{animation:eavio 2s ease-in-out infinite}@keyframes eavio{0%,100%{transform:translate(-4px,4px) rotate(-6deg)}50%{transform:translate(4px,-4px) rotate(-10deg)}}
+.anim .e-cremallera{animation:ecrem2 2.4s ease-in-out infinite alternate}@keyframes ecrem2{from{transform:translate(-14px,9px)}to{transform:translate(14px,-9px)}}
+.anim .e-teleferic{animation:etel 3s ease-in-out infinite alternate}@keyframes etel{from{transform:translate(-20px,-5px)}to{transform:translate(20px,5px)}}
+.anim .e-patinet{animation:etamb .2s ease-in-out infinite alternate}
+
+.anim .e-nega2{animation:enega2 .25s ease-in-out infinite alternate}@keyframes enega2{from{transform:translateX(-9px) rotate(-10deg)}to{transform:translateX(9px) rotate(10deg)}}
+.anim .e-moviment{animation:eclap .5s steps(1) infinite}
+.anim .e-assent2{transform-origin:50% 100%;animation:eass2 .3s ease-in-out infinite alternate}@keyframes eass2{from{transform:translateY(-7px) scaleY(1.03)}to{transform:translateY(5px) scaleY(.9)}}
+.anim .e-llagrima2{animation:ellag2 .5s ease-in-out infinite alternate}@keyframes ellag2{from{transform:scale(.9)}to{transform:scale(1.1) translateY(2px)}}
+.anim .e-giraull2{transform-box:view-box;animation:egir2 2s ease-in-out infinite}@keyframes egir2{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+.anim .e-degota{animation:edeg 1.6s ease-in infinite}@keyframes edeg{0%{transform:translateY(-4px) scaleY(.5)}80%{transform:translateY(4px) scaleY(1.2)}100%{opacity:0}}
+.anim .e-baba2{transform-box:view-box;transform-origin:38px 74px;animation:ebaba2 2s ease-in-out infinite}@keyframes ebaba2{0%,100%{transform:scaleY(.6)}60%{transform:scaleY(1.15)}}
+.anim .e-moc{animation:egota 1.8s ease-in infinite}
+.anim .e-pas-esq{animation:epasx 1s ease-in-out infinite}.anim .e-pas-dre{animation:epasx 1s ease-in-out infinite;animation-delay:-.5s}
+@keyframes epasx{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(4px,-10px) rotate(-10deg)}50%{transform:translate(8px,0) rotate(0)}}
+.anim .e-pols{opacity:0;animation:evap 1s ease-out infinite}
+.anim .e-escuma{opacity:0;animation:econf2 1.6s ease-out infinite}@keyframes econf2{0%,40%{opacity:0;transform:translateY(4px)}50%{opacity:1}100%{opacity:0;transform:translateY(-12px)}}
+.anim .e-cames{animation:etamb .3s ease-in-out infinite alternate}
+.anim .e-escrit{animation:eescrit 1.6s ease-out infinite}@keyframes eescrit{0%{transform:scaleX(0)}70%,100%{transform:scaleX(1)}}
+.anim .e-espurna-cau{opacity:0;animation:ecau 1s ease-in infinite;animation-delay:calc(var(--i)*.2s)}@keyframes ecau{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(40px)}}
+.anim .e-segell{animation:eseg 2s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes eseg{0%,20%{transform:scale(2.2);opacity:0}35%,100%{transform:scale(1);opacity:1}}
+.e-segell{transform-origin:center}
+.anim .e-sardana-esq{animation:esard 1.2s ease-in-out infinite}.anim .e-sardana-dre{animation:esard 1.2s ease-in-out infinite;animation-delay:-.6s}
+@keyframes esard{0%,100%{transform:translateY(0)}20%{transform:translateY(-10px)}40%{transform:translateY(0)}}
+
+.anim .e-castell{transform-origin:50% 100%;animation:egel 3s ease-in-out infinite}
+.anim .e-esclat{opacity:0;animation:eescl 2.4s ease-out infinite;animation-delay:calc(var(--i)*.55s)}@keyframes eescl{0%{opacity:0;transform:scale(.1)}12%{opacity:1}55%{opacity:1;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.15) translateY(4px)}}
+.anim .e-coet{animation:ecoet 2.4s ease-in infinite}@keyframes ecoet{0%{transform:translateY(20px);opacity:0}10%{opacity:1}50%{transform:translateY(-40px);opacity:1}55%,100%{opacity:0}}
+.anim .e-calcot2{animation:ecal2 2.2s ease-in-out infinite}@keyframes ecal2{0%,100%{transform:translateY(-8px)}45%,60%{transform:translateY(6px)}}
+.anim .e-sifo{animation:eraig .3s linear infinite}
+.anim .e-regal{animation:eregal 1.8s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes eregal{0%,40%{transform:translate(-14px,0) scale(.2);opacity:0}60%,100%{transform:none;opacity:1}}
+.anim .e-nuvol2{animation:enuv 3s linear infinite}@keyframes enuv{from{transform:translateX(16px)}to{transform:translateX(-16px)}}
+
+.anim .e-ull-obre{animation:eullob 2.4s ease-in-out infinite}@keyframes eullob{0%,40%,100%{transform:scale(1)}50%,70%{transform:scale(1.18)}}
+.anim .e-celles{animation:ecelles 2.4s ease-in-out infinite}@keyframes ecelles{0%,40%,100%{transform:none}50%,70%{transform:translateY(-4px)}}
+.anim .e-boca-o{animation:ebocao 2.4s ease-in-out infinite}@keyframes ebocao{0%,40%,100%{transform:scale(1)}50%,70%{transform:scale(1.2,1.3)}}
+.anim .e-galtes2{animation:egal2 1.4s ease-in-out infinite}@keyframes egal2{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:.95;transform:scale(1.15)}}
+.e-galtes2{opacity:.7}
+.anim .e-llengua2{animation:ellen2 .5s ease-in-out infinite alternate}@keyframes ellen2{from{transform:scaleY(.85)}to{transform:scaleY(1.1)}}
+.anim .e-ulls-nega{animation:eullnega .25s ease-in-out infinite alternate}@keyframes eullnega{from{transform:translateX(-2px)}to{transform:translateX(2px)}}
+.anim .e-bandereta-planta{animation:eplanta 2s cubic-bezier(.3,1.6,.5,1) infinite}@keyframes eplanta{0%,15%{transform:translateY(-30px);opacity:0}35%,100%{transform:none;opacity:1}}
+
+.anim .e-bicep{animation:ebicep .6s ease-in-out infinite alternate}@keyframes ebicep{from{transform:scale(.85)}to{transform:scale(1.15)}}
+.anim .e-flexio{animation:eflex .6s ease-in-out infinite alternate}@keyframes eflex{from{transform:rotate(4deg)}to{transform:rotate(-4deg)}}
+
+.anim .e-llamp{animation:ellamp .9s steps(1) infinite;animation-delay:calc(var(--i)*.22s)}@keyframes ellamp{0%{opacity:1;transform:scale(1)}50%{opacity:.15;transform:scale(.8)}}
+
+.anim .e-gira-no{animation:egirano .5s ease-in-out infinite alternate}@keyframes egirano{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.anim .e-gira-si{animation:egirasi .45s ease-in-out infinite alternate}@keyframes egirasi{from{transform:translateY(-6px) scaleY(1.04)}to{transform:translateY(6px) scaleY(.94)}}
+
+.anim .e-morret{animation:emorret 1.6s ease-in-out infinite}@keyframes emorret{0%,100%{transform:scale(1)}40%{transform:scale(1.35)}55%{transform:scale(.9)}}
+.anim .e-petons{opacity:0;animation:epetons 2.4s ease-out infinite;animation-delay:calc(var(--i)*.8s)}@keyframes epetons{0%{opacity:0;transform:translate(-14px,10px) scale(.3)}15%{opacity:1}100%{opacity:0;transform:translate(14px,-38px) scale(1.2)}}
+.e-petons{opacity:0}.e-petons[style*="--i:0"]{opacity:1}
+.anim .e-raig-ll{animation:eraigll .35s ease-in-out infinite alternate}@keyframes eraigll{from{transform:scale(.8)}to{transform:scale(1.1)}}
+.anim .e-ulleres{animation:eull 2.4s ease-in-out infinite}@keyframes eull{0%,55%,100%{transform:none}65%,80%{transform:translateY(5px)}}
+.anim .e-llum-lent{animation:ellum 2.4s ease-in-out infinite}@keyframes ellum{0%,15%{opacity:0;transform:translateX(-8px)}30%{opacity:1}45%,100%{opacity:0;transform:translateX(10px)}}
+.anim .e-espuma{animation:eespuma 2.2s ease-in-out infinite}@keyframes eespuma{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(-4px);opacity:.5}}
+.anim .e-campana2{animation:ecamp2 1.2s ease-in-out infinite alternate}@keyframes ecamp2{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
+.anim .e-batall{animation:ebat 1.2s ease-in-out infinite alternate}@keyframes ebat{from{transform:rotate(18deg)}to{transform:rotate(-18deg)}}
+.anim .e-ona-so{opacity:0;animation:eonaso 1.2s ease-out infinite;animation-delay:calc(var(--i)*.3s)}@keyframes eonaso{0%{opacity:0;transform:scale(.6)}30%{opacity:1}100%{opacity:0;transform:scale(1.3)}}
+.anim .e-bus{animation:ebus .5s ease-in-out infinite alternate}@keyframes ebus{from{transform:translateY(0)}to{transform:translateY(-2px)}}
+.anim .e-fars{animation:efars 1.6s steps(1) infinite}@keyframes efars{0%,60%{opacity:1}70%{opacity:.35}80%,100%{opacity:1}}
+.anim .e-retol{animation:eretol 2s steps(1) infinite}@keyframes eretol{0%,50%{opacity:1}55%,100%{opacity:.6}}
+
+.anim .e-campana3{animation:ecamp3 .9s ease-in-out infinite alternate}@keyframes ecamp3{from{transform:rotate(-32deg)}to{transform:rotate(32deg)}}
+.anim .e-campana3 .e-batall{animation:ebat .9s ease-in-out infinite alternate}
+.anim .e-ulls-darrere{animation:eullsd 2.4s ease-in-out infinite}@keyframes eullsd{0%,55%,100%{opacity:0}62%,82%{opacity:1}}
+.e-ulls-darrere{opacity:0}
+.anim .e-ulleres{animation:eull2 2.4s ease-in-out infinite}@keyframes eull2{0%,55%,100%{transform:none}62%,82%{transform:translateY(8px) rotate(-4deg)}}
+.anim .e-sol-gira{animation:esolg 6s linear infinite}@keyframes esolg{to{transform:rotate(360deg)}}
+
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · el sac</small>
+    <h1>Com és el sac i com s'obre</h1>
+    <p>Amb l'estètica que has triat (rètols esmaltats, blau nit i terracota), quatre maneres de dibuixar el sac i d'obrir-lo. <b>Toca el sac de cada mòbil per obrir-lo</b>, i torna'l a tocar per tancar-lo. Pots canviar la raresa per veure com canvia.</p>
+    <p>Tots quatre comparteixen dues idees. La primera: abans d'obrir-se, el sac <b>tremola una vegada si és comú, dues si és rar i tres si és llegendari</b>, i així ja t'ho fa esperar. La segona: el que surt és <b>una placa rodona esmaltada que gira com un rètol de doble cara</b>, del color de la raresa (pissarra, terracota o ocre). Substitueix els raigs que giren d'ara. Els emojis són els de l'app.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const EM={"cares--festa": {"svg": "<svg viewBox=\"-12 -12 124 124\" xmlns=\"http://www.w3.org/2000/svg\"><defs>\n<radialGradient id=\"halo-0\"><stop offset=\"0\" stop-color=\"#F2B544\" stop-opacity=\".55\"/><stop offset=\"1\" stop-color=\"#F2B544\" stop-opacity=\"0\"/></radialGradient>\n</defs><g transform=\"translate(5,7) scale(.9)\" style=\"transform-box:view-box;transform-origin:0 0\"><g class=\"e-balla\" ><circle cx=\"50\" cy=\"58\" r=\"33\" fill=\"#F2B544\"/><path d=\"M32,54q7,-6 14,0M54,54q7,-6 14,0\" fill=\"none\" stroke=\"#3A2410\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M32,64h36c0,10 -8,16 -18,16s-18,-6 -18,-16Z\" fill=\"#3A2410\" /><path d=\"M42,74c3,-3 13,-3 16,0c-3,4 -13,4 -16,0Z\" fill=\"#D7262B\" /><path d=\"M 24.00 41.40 L 23.60 27.80 C 20.00 28.60 15.20 26.20 14.80 19.40 C 14.40 11.40 19.60 1.80 28.00 -1.00 C 38.00 -4.20 54.00 -3.40 63.00 1.40 C 70.80 5.80 73.60 15.40 74.00 29.80 L 74.20 35.40 Z\" fill=\"#C8262C\"/><path d=\"M 24.00 36.60 L 23.80 27.80 C 26.80 27.00 29.80 25.80 32.20 24.40 C 31.00 28.60 28.00 33.00 24.40 36.40 Z\" fill=\"#A01E25\"/><path d=\"M 51.60 4.20 C 56.00 5.40 60.40 8.20 63.20 13.40\" fill=\"none\" stroke=\"#A01E25\" stroke-width=\"2.80\" stroke-linecap=\"round\"/><path d=\"M 21.60 37.60 L 76.40 30.00 C 77.60 29.80 78.20 30.40 78.40 31.60 L 79.00 37.40 C 79.20 38.60 78.60 39.40 77.40 39.60 L 23.00 47.00 C 21.80 47.20 21.20 46.60 21.00 45.40 L 20.40 39.60 C 20.20 38.40 20.60 37.80 21.60 37.60 Z\" fill=\"#1E1E22\"/><rect class=\"k-confeti2\" style=\"--i:0\" x=\"10\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#FFE3A3\"/><rect class=\"k-confeti2\" style=\"--i:1\" x=\"22\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#5AB8E8\"/><rect class=\"k-confeti2\" style=\"--i:2\" x=\"84\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#FFE3A3\"/><rect class=\"k-confeti2\" style=\"--i:3\" x=\"92\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#D7262B\"/><rect class=\"k-confeti2\" style=\"--i:4\" x=\"6\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#D7262B\"/><rect class=\"k-confeti2\" style=\"--i:5\" x=\"94\" y=\"4\" width=\"3\" height=\"5\" rx=\".6\" fill=\"#5AB8E8\"/></g></g></svg>", "frase": "Festa major!"}, "anims--castell": {"svg": "<svg viewBox=\"-12 -12 124 124\" xmlns=\"http://www.w3.org/2000/svg\"><defs>\n<radialGradient id=\"halo-1\"><stop offset=\"0\" stop-color=\"#F2B544\" stop-opacity=\".55\"/><stop offset=\"1\" stop-color=\"#F2B544\" stop-opacity=\"0\"/></radialGradient>\n</defs><g class=\"e-castell\" ><path d=\"M7.2,93.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M7.2,81.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"6.3500000000000005\" y=\"89.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"14\" cy=\"75.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 9.98 72.68 L 9.92 70.58 C 9.36 70.71 8.62 70.34 8.56 69.28 C 8.50 68.05 9.30 66.56 10.60 66.13 C 12.15 65.64 14.62 65.76 16.01 66.50 C 17.21 67.18 17.65 68.67 17.71 70.89 L 17.74 71.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 9.61 72.10 L 18.08 70.92 C 18.27 70.89 18.36 70.98 18.39 71.17 L 18.48 72.07 C 18.51 72.25 18.42 72.38 18.23 72.41 L 9.83 73.55 C 9.64 73.58 9.55 73.49 9.52 73.30 L 9.43 72.41 C 9.39 72.22 9.46 72.13 9.61 72.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M25.2,93.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M25.2,81.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"24.35\" y=\"89.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"32\" cy=\"75.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 27.98 72.68 L 27.92 70.58 C 27.36 70.71 26.62 70.34 26.56 69.28 C 26.50 68.05 27.30 66.56 28.60 66.13 C 30.15 65.64 32.62 65.76 34.01 66.50 C 35.21 67.18 35.65 68.67 35.71 70.89 L 35.74 71.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 27.61 72.10 L 36.08 70.92 C 36.27 70.89 36.36 70.98 36.39 71.17 L 36.48 72.07 C 36.51 72.25 36.42 72.38 36.23 72.41 L 27.83 73.55 C 27.64 73.58 27.55 73.49 27.52 73.30 L 27.43 72.41 C 27.39 72.22 27.46 72.13 27.61 72.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M43.2,93.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M43.2,81.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"42.35\" y=\"89.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"50\" cy=\"75.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 45.98 72.68 L 45.92 70.58 C 45.36 70.71 44.62 70.34 44.56 69.28 C 44.50 68.05 45.30 66.56 46.60 66.13 C 48.15 65.64 50.62 65.76 52.01 66.50 C 53.21 67.18 53.65 68.67 53.71 70.89 L 53.74 71.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 45.61 72.10 L 54.08 70.92 C 54.27 70.89 54.36 70.98 54.39 71.17 L 54.48 72.07 C 54.51 72.25 54.42 72.38 54.23 72.41 L 45.83 73.55 C 45.64 73.58 45.55 73.49 45.52 73.30 L 45.43 72.41 C 45.39 72.22 45.46 72.13 45.61 72.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M61.2,93.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M61.2,81.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"60.35\" y=\"89.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"68\" cy=\"75.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 63.98 72.68 L 63.92 70.58 C 63.36 70.71 62.62 70.34 62.56 69.28 C 62.50 68.05 63.30 66.56 64.60 66.13 C 66.15 65.64 68.62 65.76 70.01 66.50 C 71.21 67.18 71.65 68.67 71.71 70.89 L 71.74 71.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 63.61 72.10 L 72.08 70.92 C 72.27 70.89 72.36 70.98 72.39 71.17 L 72.48 72.07 C 72.51 72.25 72.42 72.38 72.23 72.41 L 63.83 73.55 C 63.64 73.58 63.55 73.49 63.52 73.30 L 63.43 72.41 C 63.39 72.22 63.46 72.13 63.61 72.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M79.2,93.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M79.2,81.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"78.35\" y=\"89.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"86\" cy=\"75.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 81.98 72.68 L 81.92 70.58 C 81.36 70.71 80.62 70.34 80.56 69.28 C 80.50 68.05 81.30 66.56 82.60 66.13 C 84.15 65.64 86.62 65.76 88.01 66.50 C 89.21 67.18 89.65 68.67 89.71 70.89 L 89.74 71.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 81.61 72.10 L 90.08 70.92 C 90.27 70.89 90.36 70.98 90.39 71.17 L 90.48 72.07 C 90.51 72.25 90.42 72.38 90.23 72.41 L 81.83 73.55 C 81.64 73.58 81.55 73.49 81.52 73.30 L 81.43 72.41 C 81.39 72.22 81.46 72.13 81.61 72.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M25.2,69.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M25.2,57.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"24.35\" y=\"65.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"32\" cy=\"51.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 27.98 48.68 L 27.92 46.58 C 27.36 46.71 26.62 46.34 26.56 45.28 C 26.50 44.05 27.30 42.56 28.60 42.13 C 30.15 41.64 32.62 41.76 34.01 42.50 C 35.21 43.18 35.65 44.67 35.71 46.89 L 35.74 47.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 27.61 48.10 L 36.08 46.92 C 36.27 46.89 36.36 46.98 36.39 47.17 L 36.48 48.07 C 36.51 48.25 36.42 48.38 36.23 48.41 L 27.83 49.55 C 27.64 49.58 27.55 49.49 27.52 49.30 L 27.43 48.41 C 27.39 48.22 27.46 48.13 27.61 48.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M43.2,69.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M43.2,57.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"42.35\" y=\"65.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"50\" cy=\"51.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 45.98 48.68 L 45.92 46.58 C 45.36 46.71 44.62 46.34 44.56 45.28 C 44.50 44.05 45.30 42.56 46.60 42.13 C 48.15 41.64 50.62 41.76 52.01 42.50 C 53.21 43.18 53.65 44.67 53.71 46.89 L 53.74 47.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 45.61 48.10 L 54.08 46.92 C 54.27 46.89 54.36 46.98 54.39 47.17 L 54.48 48.07 C 54.51 48.25 54.42 48.38 54.23 48.41 L 45.83 49.55 C 45.64 49.58 45.55 49.49 45.52 49.30 L 45.43 48.41 C 45.39 48.22 45.46 48.13 45.61 48.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M61.2,69.1h13.6l-1,10.2h-11.9Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M61.2,57.2h13.6l1.7,11.9h-17.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"60.35\" y=\"65.7\" width=\"15.299999999999999\" height=\"3.06\" fill=\"#14171C\"/><circle cx=\"68\" cy=\"51.25\" r=\"5.1\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 63.98 48.68 L 63.92 46.58 C 63.36 46.71 62.62 46.34 62.56 45.28 C 62.50 44.05 63.30 42.56 64.60 42.13 C 66.15 41.64 68.62 41.76 70.01 42.50 C 71.21 43.18 71.65 44.67 71.71 46.89 L 71.74 47.76 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 63.61 48.10 L 72.08 46.92 C 72.27 46.89 72.36 46.98 72.39 47.17 L 72.48 48.07 C 72.51 48.25 72.42 48.38 72.23 48.41 L 63.83 49.55 C 63.64 49.58 63.55 49.49 63.52 49.30 L 63.43 48.41 C 63.39 48.22 63.46 48.13 63.61 48.10 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M34.6,46.8h12.8l-1,9.600000000000001h-11.200000000000001Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M34.6,35.6h12.8l1.6,11.200000000000001h-16.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"33.8\" y=\"43.6\" width=\"14.4\" height=\"2.8800000000000003\" fill=\"#14171C\"/><circle cx=\"41\" cy=\"30.0\" r=\"4.800000000000001\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 37.22 27.59 L 37.16 25.61 C 36.64 25.72 35.94 25.37 35.88 24.39 C 35.82 23.22 36.58 21.83 37.80 21.42 C 39.25 20.95 41.58 21.07 42.89 21.77 C 44.03 22.41 44.43 23.80 44.49 25.90 L 44.52 26.71 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 36.87 27.03 L 44.84 25.93 C 45.01 25.90 45.10 25.99 45.13 26.16 L 45.22 27.00 C 45.25 27.18 45.16 27.29 44.99 27.32 L 37.07 28.40 C 36.90 28.43 36.81 28.34 36.78 28.17 L 36.69 27.32 C 36.67 27.15 36.72 27.06 36.87 27.03 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M52.6,46.8h12.8l-1,9.600000000000001h-11.200000000000001Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M52.6,35.6h12.8l1.6,11.200000000000001h-16.0Z\" fill=\"#D7262B\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"51.8\" y=\"43.6\" width=\"14.4\" height=\"2.8800000000000003\" fill=\"#14171C\"/><circle cx=\"59\" cy=\"30.0\" r=\"4.800000000000001\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 55.22 27.59 L 55.16 25.61 C 54.64 25.72 53.94 25.37 53.88 24.39 C 53.82 23.22 54.58 21.83 55.80 21.42 C 57.25 20.95 59.58 21.07 60.89 21.77 C 62.03 22.41 62.43 23.80 62.49 25.90 L 62.52 26.71 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 54.87 27.03 L 62.84 25.93 C 63.01 25.90 63.10 25.99 63.13 26.16 L 63.22 27.00 C 63.25 27.18 63.16 27.29 62.99 27.32 L 55.07 28.40 C 54.90 28.43 54.81 28.34 54.78 28.17 L 54.69 27.32 C 54.67 27.15 54.72 27.06 54.87 27.03 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><g class=\"e-enxaneta\" ><path d=\"M44.8,25.9h10.4l-1,7.800000000000001h-9.1Z\" fill=\"#F4EDE0\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><path d=\"M44.8,16.8h10.4l1.3,9.1h-13.0Z\" fill=\"#F2B544\" stroke=\"#14171C\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\" /><rect x=\"44.15\" y=\"23.3\" width=\"11.700000000000001\" height=\"2.3400000000000003\" fill=\"#14171C\"/><circle cx=\"50\" cy=\"12.25\" r=\"3.9000000000000004\" fill=\"#E8B98A\" stroke=\"#14171C\" stroke-width=\"1.6\"/><path d=\"M 46.93 10.29 L 46.88 8.68 C 46.45 8.78 45.89 8.49 45.84 7.69 C 45.79 6.74 46.41 5.61 47.40 5.28 C 48.58 4.90 50.47 4.99 51.54 5.56 C 52.46 6.08 52.79 7.22 52.84 8.92 L 52.86 9.58 Z\" fill=\"#C8262C\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M 46.64 9.84 L 53.12 8.94 C 53.26 8.92 53.33 8.99 53.36 9.13 L 53.43 9.82 C 53.45 9.96 53.38 10.05 53.24 10.08 L 46.81 10.95 C 46.67 10.97 46.60 10.90 46.57 10.76 L 46.50 10.08 C 46.48 9.93 46.53 9.86 46.64 9.84 Z\" fill=\"#1E1E22\" stroke=\"#14171C\" stroke-width=\"0.90\" stroke-linejoin=\"round\"/><path d=\"M54,10l7,-8\" fill=\"none\" stroke=\"#F2B544\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"e-braç\"/></g></g></svg>", "frase": "Força!"}, "celebrar--sardana": {"svg": "<svg viewBox=\"-12 -12 124 124\" xmlns=\"http://www.w3.org/2000/svg\"><defs>\n<radialGradient id=\"halo-2\"><stop offset=\"0\" stop-color=\"#F2B544\" stop-opacity=\".55\"/><stop offset=\"1\" stop-color=\"#F2B544\" stop-opacity=\"0\"/></radialGradient>\n</defs><g class=\"e-bot\" style=\"--i:0\"><circle cx=\"20\" cy=\"34\" r=\"6\" fill=\"#E8B98A\" /><path d=\"M 15.27 30.98 L 15.20 28.51 C 14.55 28.65 13.67 28.22 13.60 26.98 C 13.53 25.53 14.47 23.78 16.00 23.27 C 17.82 22.69 20.73 22.84 22.36 23.71 C 23.78 24.51 24.29 26.25 24.36 28.87 L 24.40 29.89 Z\" fill=\"#C8262C\"/><path d=\"M 14.84 30.29 L 24.80 28.91 C 25.02 28.87 25.13 28.98 25.16 29.20 L 25.27 30.25 C 25.31 30.47 25.20 30.62 24.98 30.65 L 15.09 32.00 C 14.87 32.04 14.76 31.93 14.73 31.71 L 14.62 30.65 C 14.58 30.44 14.65 30.33 14.84 30.29 Z\" fill=\"#1E1E22\"/><path d=\"M12,42h16l4,30h-24Z\" fill=\"#B8862F\" /><path d=\"M13,45l-8,-14M27,45l8,-14\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></g><g class=\"e-bot\" style=\"--i:1\"><circle cx=\"50\" cy=\"34\" r=\"6\" fill=\"#E8B98A\" /><path d=\"M 45.27 30.98 L 45.20 28.51 C 44.55 28.65 43.67 28.22 43.60 26.98 C 43.53 25.53 44.47 23.78 46.00 23.27 C 47.82 22.69 50.73 22.84 52.36 23.71 C 53.78 24.51 54.29 26.25 54.36 28.87 L 54.40 29.89 Z\" fill=\"#C8262C\"/><path d=\"M 44.84 30.29 L 54.80 28.91 C 55.02 28.87 55.13 28.98 55.16 29.20 L 55.27 30.25 C 55.31 30.47 55.20 30.62 54.98 30.65 L 45.09 32.00 C 44.87 32.04 44.76 31.93 44.73 31.71 L 44.62 30.65 C 44.58 30.44 44.65 30.33 44.84 30.29 Z\" fill=\"#1E1E22\"/><path d=\"M42,42h16l4,30h-24Z\" fill=\"#F2B544\" /><path d=\"M43,45l-8,-14M57,45l8,-14\" fill=\"none\" stroke=\"#F2B544\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></g><g class=\"e-bot\" style=\"--i:2\"><circle cx=\"80\" cy=\"34\" r=\"6\" fill=\"#E8B98A\" /><path d=\"M 75.27 30.98 L 75.20 28.51 C 74.55 28.65 73.67 28.22 73.60 26.98 C 73.53 25.53 74.47 23.78 76.00 23.27 C 77.82 22.69 80.73 22.84 82.36 23.71 C 83.78 24.51 84.29 26.25 84.36 28.87 L 84.40 29.89 Z\" fill=\"#C8262C\"/><path d=\"M 74.84 30.29 L 84.80 28.91 C 85.02 28.87 85.13 28.98 85.16 29.20 L 85.27 30.25 C 85.31 30.47 85.20 30.62 84.98 30.65 L 75.09 32.00 C 74.87 32.04 74.76 31.93 74.73 31.71 L 74.62 30.65 C 74.58 30.44 74.65 30.33 74.84 30.29 Z\" fill=\"#1E1E22\"/><path d=\"M72,42h16l4,30h-24Z\" fill=\"#B8862F\" /><path d=\"M73,45l-8,-14M87,45l8,-14\" fill=\"none\" stroke=\"#B8862F\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></g><path d=\"M8,88h84\" fill=\"none\" stroke=\"#4A525F\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></svg>", "frase": "Ballem!"}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RAR={comuna:{n:'Comuna',em:'cares--festa'},rara:{n:'Rara',em:'anims--castell'},llegendaria:{n:'Llegendària',em:'celebrar--sardana'}};
+const F='#28364F',A='#A9503F';
+
+const SVG={
+ sac:`<svg class="cont sac" viewBox="0 0 100 100" aria-hidden="true">
+   <path d="M30 42C16 56 14 80 24 90Q50 98 76 90C86 80 84 56 70 42Z" fill="${F}"/>
+   <path d="M29 47C19 59 18 79 26 87Q50 94 74 87C82 79 81 59 71 47" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="2.5 2"/>
+   <path class="boca" d="M36 20Q44 26 42 36L58 36Q56 26 64 20Q56 24 50 18Q44 24 36 20Z" fill="${F}" stroke="#fff" stroke-width="1"/>
+   <rect x="36" y="35" width="28" height="6" rx="3" fill="${A}"/>
+   <g class="corda e"><path d="M50 38C42 30 36 33 40 38S48 41 50 38" fill="none" stroke="${A}" stroke-width="2.4"/><path d="M50 39L45 52" stroke="${A}" stroke-width="2.4" stroke-linecap="round"/></g>
+   <g class="corda d"><path d="M50 38C58 30 64 33 60 38S52 41 50 38" fill="none" stroke="${A}" stroke-width="2.4"/><path d="M50 39L56 51" stroke="${A}" stroke-width="2.4" stroke-linecap="round"/></g>
+   <circle cx="50" cy="69" r="10" fill="#fff"/><text x="50" y="73.5" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="12" fill="${F}">B</text>
+ </svg>`,
+ farcell:`<svg class="cont farcell" viewBox="0 0 100 100" aria-hidden="true">
+   <defs><pattern id="quadres" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${F}"/><path d="M0 4H8M4 0V8" stroke="#fff" stroke-width=".6" opacity=".55"/><rect x="3" y="3" width="2" height="2" fill="${A}"/></pattern></defs>
+   <path class="cos" d="M18 64Q16 42 50 42Q84 42 82 64Q84 92 50 92Q16 92 18 64Z" fill="url(#quadres)"/>
+   <path d="M24 52Q50 46 76 52" fill="none" stroke="#fff" stroke-width=".8" opacity=".6"/>
+   <path class="punta o" d="M47 41Q36 34 26 20Q38 24 49 36Z" fill="url(#quadres)" stroke="#fff" stroke-width="1"/>
+   <path class="punta e" d="M53 41Q64 34 74 20Q62 24 51 36Z" fill="url(#quadres)" stroke="#fff" stroke-width="1"/>
+   <g class="nus"><ellipse cx="50" cy="40" rx="8" ry="5.5" fill="${A}"/><path d="M44 40Q50 44 56 40" fill="none" stroke="#fff" stroke-width=".8"/></g>
+ </svg>`,
+ llauna:`<svg class="cont llauna" viewBox="0 0 100 100" aria-hidden="true">
+   <rect x="16" y="44" width="68" height="46" rx="5" fill="${F}"/>
+   <rect x="19" y="47" width="62" height="40" rx="3" fill="none" stroke="#fff" stroke-width="1"/>
+   <text x="50" y="72" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="11" letter-spacing="1.2" fill="#fff">BOCINS</text>
+   <rect x="34" y="76" width="32" height="1" fill="${A}"/>
+   <g class="tapa"><rect x="12" y="32" width="76" height="14" rx="4" fill="${A}"/><rect x="15" y="35" width="70" height="8" rx="2" fill="none" stroke="#fff" stroke-width="1"/>
+     <circle cx="20" cy="39" r="1.8" fill="#D5D7DA" stroke="#8D9096" stroke-width=".4"/><circle cx="80" cy="39" r="1.8" fill="#D5D7DA" stroke="#8D9096" stroke-width=".4"/></g>
+ </svg>`,
+ paquet:`<svg class="cont paquet" viewBox="0 0 100 100" aria-hidden="true">
+   <rect x="20" y="38" width="60" height="50" fill="#fff" stroke="${F}" stroke-width="1.6"/>
+   <g class="ala e"><path d="M20 38H50V88H20Z" fill="#fff" stroke="${F}" stroke-width="1.6"/><path d="M24 44H46M24 50H46M24 76H46M24 82H46" stroke="${F}" stroke-width=".6" opacity=".5"/></g>
+   <g class="ala d"><path d="M50 38H80V88H50Z" fill="#fff" stroke="${F}" stroke-width="1.6"/><path d="M54 44H76M54 50H76M54 76H76M54 82H76" stroke="${F}" stroke-width=".6" opacity=".5"/></g>
+   <rect x="34" y="57" width="32" height="12" rx="2" fill="${F}"/><text x="50" y="66" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="7" letter-spacing=".8" fill="#fff">BOCINS</text>
+   <g class="cordill e"><path d="M20 63H34M50 38V57M50 69V88" stroke="${A}" stroke-width="1.6"/><path d="M50 36C42 26 36 30 41 35S48 38 50 36" fill="none" stroke="${A}" stroke-width="1.6"/></g>
+   <g class="cordill d"><path d="M66 63H80" stroke="${A}" stroke-width="1.6"/><path d="M50 36C58 26 64 30 59 35S52 38 50 36M50 37L56 46" fill="none" stroke="${A}" stroke-width="1.6"/></g>
+ </svg>`,
+};
+const C=[
+ {id:'sac',n:'Sac de roba',d:'El sac d\'ara, redibuixat amb els esmalts: roba blau nit amb un pespunt blanc, la corda terracota i la B de Bocins en una xapa. En obrir-se, la corda es deslliga i la boca s\'eixampla.'},
+ {id:'farcell',n:'Farcell',d:'El mocador de quadres lligat amb un nus, com el farcell que es duia per anar a treballar al camp o de viatge. En obrir-se, el nus es desfà, les puntes cauen i el mocador queda estès a terra.'},
+ {id:'llauna',n:'Capsa de llauna',d:'Una capsa de llauna esmaltada, com les de galetes o de neules que es guarden a l\'armari, amb la tapa terracota i cargolada. En obrir-se, la tapa salta i surt volant.'},
+ {id:'paquet',n:'Paquet de pastisseria',d:'El paquet del diumenge: paper blanc amb ratlles, l\'etiqueta de la botiga i el cordill amb el llaç. En obrir-se, el cordill es trenca i el paper es desplega a banda i banda.'},
+];
+const pantalla=(c,r)=>`<div class="tel" data-fase="tancat" data-r="${r}">
+  <div class="placa titol">Un sac nou!</div>
+  <div class="escena" role="button" tabindex="0" aria-label="Obre el sac">${SVG[c.id]}
+    <div class="revela"><div class="disc"><span class="cargol" style="top:12px;left:50%;margin-left:-4px"></span><span class="cargol" style="bottom:12px;left:50%;margin-left:-4px"></span><div class="em anim">${EM[RAR[r].em].svg}</div></div></div></div>
+  <div class="ajuda">Toca el sac per obrir-lo</div>
+  <div class="resultat"><span class="placa etiqueta" style="background:var(--r);box-shadow:inset 0 0 0 2px var(--r),inset 0 0 0 3px #fff">${RAR[r].n}</span>
+    <div class="nom">${esc(EM[RAR[r].em].frase)}</div><div class="que">Un emoji nou per reaccionar.</div>
+    <div class="botons"><div class="placa acc"><span>Obre'n un altre (2)</span><span>→</span></div><div class="placa blanca"><span>Continua</span><span>→</span></div></div></div>
+</div>`;
+let vals={},db=null;const rar={};
+try{const m=JSON.parse(localStorage.getItem('sac1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{},r=rar[c.id]||'comuna';return `<section class="concepte" data-c="${c.id}">
+  <div class="mobil">${pantalla(c,r)}</div>
+  <div><header><span class="n">${i+1}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="raresa" role="group" aria-label="Raresa">${Object.entries(RAR).map(([k,x])=>`<button type="button" data-r="${k}" aria-pressed="${k===r}">${x.n}</button>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></div></section>`}).join('')}
+function obre(t){if(t.dataset.fase==='tancat'){t.dataset.fase='obrint';const cops=({comuna:1,rara:2,llegendaria:3})[t.dataset.r];const reduir=matchMedia('(prefers-reduced-motion:reduce)').matches;setTimeout(()=>{if(t.dataset.fase==='obrint')t.dataset.fase='obert'},reduir?0:cops*360+80)}else if(t.dataset.fase==='obert')t.dataset.fase='tancat'}
+async function desa(id){try{localStorage.setItem('sac1',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('sac1').doc(id).delete();else await db.collection('sac1').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+const arrel=document.getElementById('conceptes');
+arrel.addEventListener('click',e=>{const s=e.target.closest('.concepte');if(!s)return;const id=s.dataset.c;
+  const esc_=e.target.closest('.escena');if(esc_){obre(esc_.closest('.tel'));return}
+  const r=e.target.closest('[data-r]');if(r&&r.tagName==='BUTTON'){rar[id]=r.dataset.r;const m=s.querySelector('.mobil');m.innerHTML=pantalla(C.find(x=>x.id===id),r.dataset.r);s.querySelectorAll('.raresa button').forEach(x=>x.setAttribute('aria-pressed',x===r));return}
+  const b=e.target.closest('[data-k]');if(!b)return;const v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+arrel.addEventListener('keydown',e=>{const esc_=e.target.closest('.escena');if(esc_&&(e.key==='Enter'||e.key===' ')){e.preventDefault();obre(esc_.closest('.tel'))}});
+const temps={};
+arrel.addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),600)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('sac1').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
