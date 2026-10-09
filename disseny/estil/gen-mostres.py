@@ -32,7 +32,9 @@ for f in GEO['features']:
     peces.append({'c':codi,'n':noms.get(codi,''),'e':estat,'d':''.join(ds),'x':round(sum(xs)/len(xs),1),'y':round(sum(ys)/len(ys),1)})
 vic=[{'t':m['titol'],'p':m['punts'],'g':m['prova']} for m in MI['missions'] if m['municipi']=='08298'][:6]
 totes=[m['punts'] for m in MI['missions'] if m['municipi']=='08298']
-dades={'mapa':peces,'vic':vic,'total':sum(totes)+50,'nmissions':len(totes)}
-t=open(f'{AQUI}/mostres-plantilla.html').read()
-open(f'{AQUI}/mostres-nothing.html','w').write(t.replace('/*DADES*/{}',json.dumps(dades,ensure_ascii=False)))
+dades={'mapa':peces,'vic':vic,'total':sum(totes)+50,'nmissions':len(totes),
+       'calldetenes':sum(1 for m in MI['missions'] if m['municipi']=='08037')}
+for plantilla,sortida in [('mostres-plantilla.html','mostres-nothing.html'),('actual-plantilla.html','mostres-actual.html')]:
+    t=open(f'{AQUI}/{plantilla}').read()
+    open(f'{AQUI}/{sortida}','w').write(t.replace('/*DADES*/{}',json.dumps(dades,ensure_ascii=False)))
 print(len(peces),'municipis al mapa')

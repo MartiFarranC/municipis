@@ -1,0 +1,121 @@
+<title>Estètica actual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* L'estètica actual de l'app («nit i fanals», docs/disseny.md), amb els colors de ui/theme/Color.kt.
+   Generat per gen-mostres.py: el mapa és un tros real d'Osona i les missions són les reals de Vic. */
+:root{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;--tinta:#1A1305;
+  --disp1:#2A2618;--disp2:#4A3E1E;--boira:#161B23;--vora-boira:#222A36;--blau:#5AB8E8;--completada:#1F1C12;
+  --display:"Chakra Petch",system-ui,sans-serif;--cos:"Atkinson Hyperlegible",system-ui,sans-serif;color-scheme:dark}
+body{margin:0;background:#06080B;color:var(--text);font-family:var(--cos);font-size:15px;line-height:1.45}
+.pagina{max-width:1040px;margin:0 auto;padding:20px 16px 48px;display:flex;flex-direction:column;gap:16px}
+.eti{font:700 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ambre)}
+h1{font:700 30px var(--display);margin:0}
+.pagina>p{margin:0;color:var(--suau);max-width:68ch}
+.pantalles{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+figure{margin:0;display:flex;flex-direction:column;gap:6px;flex:none;scroll-snap-align:start}
+figcaption{font:600 12px var(--display);color:var(--suau);text-transform:uppercase;letter-spacing:.1em}
+.tel{width:300px;height:620px;border-radius:34px;border:6px solid #1A1D22;background:var(--fons);overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 0 0 1px #2A2F38}
+.estatus{display:flex;justify-content:space-between;padding:10px 18px 0;font:12px var(--display);color:var(--suau)}
+.xip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--sup2);border:1px solid var(--linia);font:700 14px var(--display)}
+.boto{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 14px;border-radius:12px;background:var(--ambre);color:var(--tinta);font:700 14px var(--display)}
+.boto.sec{background:none;border:1px solid var(--linia);color:var(--text);font-weight:600}
+.barra{display:flex;justify-content:space-around;border-top:1px solid var(--linia);background:var(--sup);padding:10px 0 14px;margin-top:auto;font:600 11px var(--display);color:var(--suau)}
+.barra .on{color:var(--ambre)}
+.fila{display:flex;align-items:center;gap:10px;margin:0 12px 8px;padding:8px 10px;border-radius:14px;background:var(--sup);border:1px solid var(--linia)}
+.fila.fet{background:var(--completada);border-color:var(--disp2)}
+.fila .cb{width:22px;height:22px;border-radius:7px;border:2px solid #4B5566;flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--tinta)}
+.fila.fet .cb{background:var(--ambre);border-color:var(--ambre)}
+.fila .tt{flex:1;min-width:0}
+.fila .tt b{display:block;font-size:13px}
+.fila.fet .tt b{color:var(--suau)}
+.fila .tt small{font-size:11px;color:var(--suau)}
+.fila .pt{font:700 13px var(--display);color:var(--ambre)}
+textarea{width:100%;min-height:96px;background:var(--fons);color:var(--text);border:1px solid var(--linia);border-radius:12px;padding:10px;font:inherit;box-sizing:border-box}
+textarea:focus-visible{outline:2px solid var(--ambre);outline-offset:2px}
+.estat{font-size:13px;color:var(--suau)}
+</style>
+<div class="pagina">
+  <span class="eti">Bocins de Catalunya · estètica</span>
+  <h1>L'estètica d'ara: «nit i fanals»</h1>
+  <p>Així es veu ara l'app, amb els colors i les lletres que fa servir: fons de nit, els municipis descoberts en ambre com pobles amb els llums encesos, els veïns ratllats i la resta a la boira. Lletres: Chakra Petch per als títols i els números, i Atkinson Hyperlegible per al text. El mapa és un tros real d'Osona (Vic, el municipi d'inici, i Gurb descoberts) i les missions són les reals de Vic. Llisca les pantalles cap al costat.</p>
+  <div class="pantalles" id="pantalles"></div>
+  <h2 style="font:700 20px var(--display);margin:12px 0 0">Què t'agrada i què no?</h2>
+  <p style="color:var(--suau);margin:0">Com que tornem a començar, explica'm què vols mantenir i què vols canviar (colors, lletres, el mapa, les formes…). Si tens alguna app o web de referència, digues-la. Es desa sol; quan acabis, digues «ja està».</p>
+  <textarea id="nota" aria-label="Què t'agrada i què no de l'estètica d'ara"></textarea>
+  <span class="estat" id="estat">Carregant…</span>
+</div>
+<script>
+const DADES=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const barr='<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g transform="translate(.6 1.6) scale(.068)"><path d="M50,290 L48,222 C30,226 6,214 4,180 C2,140 28,92 70,78 C120,62 200,66 245,90 C284,112 298,160 300,232 L301,260 Z" fill="currentColor"/><path d="M38,271 L312,233 C318,232 321,235 322,241 L325,270 C326,276 323,280 317,281 L45,318 C39,319 36,316 35,310 L32,281 C31,275 33,272 38,271 Z" fill="currentColor"/></g></svg>';
+const estatus='<div class="estatus"><span>9:41</span><span>5G ▮</span></div>';
+const barra=on=>`<div class="barra">${['Mapa','Missions','Gent','Perfil'].map(x=>`<span class="${x===on?'on':''}">${x}</span>`).join('')}</div>`;
+function mapa(){
+  // Com MapaCanvas: inici en ambre, la resta de descoberts en ambre fosc, els veïns ratllats, la boira i la selecció en blau.
+  const peces=DADES.mapa.map(p=>{
+    const omplir=p.e==='D'?(p.c==='08298'?'var(--ambre)':'var(--ambre-f)'):p.e==='V'?'url(#ratllat)':'var(--boira)';
+    const vora=p.e==='D'?'var(--fons)':p.e==='V'?'var(--disp2)':'var(--vora-boira)';
+    return `<path d="${p.d}" fill="${omplir}" stroke="${vora}" stroke-width=".8"/>`}).join('');
+  const sel=DADES.mapa.find(p=>p.c==='08037');
+  return `<div class="tel">${estatus}
+   <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px">
+     <span class="xip">2 / 947</span><span class="xip"><span style="color:var(--ambre)">${barr}</span>250</span>
+   </div>
+   <svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona: Vic i Gurb descoberts, Calldetenes seleccionat">
+     <defs><pattern id="ratllat" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="var(--disp1)"/><rect width="6" height="12" fill="var(--disp2)"/></pattern></defs>
+     ${peces}${sel?`<path d="${sel.d}" fill="rgba(90,184,232,.25)" stroke="var(--blau)" stroke-width="2"/>`:''}
+   </svg>
+   <div style="margin:0 10px 8px;padding:10px 6px 10px 14px;border-radius:16px;background:var(--sup);border:1px solid var(--linia);display:flex;align-items:center;gap:8px">
+     <div style="flex:1"><div style="font:600 11px var(--display);letter-spacing:.06em;color:var(--blau)">VEÍ DE VIC</div><div style="font:700 20px var(--display)">Calldetenes</div><div style="font-size:12px;color:var(--suau)">Osona · ${DADES.calldetenes} missions amagades</div></div>
+     <div class="boto">65 ${barr}</div><span style="color:var(--suau);padding:0 6px">✕</span>
+   </div>
+   ${barra('Mapa')}</div>`;
+}
+function fitxa(){
+  const v=DADES.vic,fetes=2,g=v.slice(0,fetes).reduce((a,m)=>a+m.p,0),pct=Math.round(g/DADES.total*100);
+  return `<div class="tel">
+   <div style="height:150px;flex:none;background:repeating-linear-gradient(45deg,var(--sup) 0 12px,#11151C 12px 24px);display:flex;align-items:center;justify-content:center;position:relative">
+     <span style="position:absolute;top:30px;left:14px" class="xip">‹</span><span style="position:absolute;top:30px;right:14px" class="xip">⌖</span>
+     <span class="boto sec" style="background:var(--fons)">📷 Afegeix una foto de Vic</span>
+   </div>
+   <div style="padding:12px 18px 8px">
+     <div style="font-size:12px;color:var(--suau)">Osona · el teu municipi d'inici</div>
+     <div style="display:flex;align-items:flex-end;gap:8px"><div style="font:700 40px/1 var(--display);flex:1">Vic</div>
+       <div style="text-align:right"><div style="font:700 22px var(--display);color:var(--ambre)">${g}</div><div style="font-size:11px;color:var(--suau)">de ${DADES.total} barretines</div></div></div>
+     <div style="height:8px;border-radius:4px;background:var(--sup2);margin:10px 0 6px;overflow:hidden"><div style="height:100%;width:${pct}%;background:var(--ambre)"></div></div>
+     <div style="font-size:11px;color:var(--suau)">${fetes} de ${DADES.nmissions} missions · +50 de bonus si les fas totes</div>
+   </div>
+   <div style="overflow:hidden">${v.map((m,i)=>`<div class="fila ${i<fetes?'fet':''}"><span class="cb">${i<fetes?'✓':''}</span><span class="tt"><b>${esc(m.t)}</b><small>Prova: ${m.g==='GPS'?'GPS':'Foto'} · ${i<fetes?'Feta':'Toca per fer-la'}</small></span><span class="pt">+${m.p}</span></div>`).join('')}</div>
+   ${barra('Missions')}</div>`;
+}
+function web(){
+  return `<div class="tel">${estatus}
+   <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--linia)"><span style="font:700 11px var(--display);letter-spacing:.12em;color:var(--ambre)">BOCINS DE CATALUNYA</span><span style="font-size:11px;color:var(--suau)">Col·labora</span></div>
+   <div style="padding:22px 16px;display:flex;flex-direction:column;gap:12px;flex:1;background:radial-gradient(circle at 85% 0,rgba(242,181,68,.18),transparent 60%)">
+     <div style="font:700 10px var(--display);letter-spacing:.14em;color:var(--ambre)">UN PROJECTE PER ALS 947 MUNICIPIS</div>
+     <div style="font:700 28px/1.08 var(--display)">Recórrer tot Catalunya, poble a poble, com en un joc</div>
+     <div style="font-size:13px">Bocins de Catalunya és una app per visitar els municipis de Catalunya. Cada visita desbloqueja un tros del mapa.</div>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+       <div style="background:var(--sup);border:1px solid var(--linia);border-radius:14px;padding:10px"><div style="font:700 24px var(--display);color:var(--ambre)">947</div><div style="font-size:12px">municipis</div></div>
+       <div style="background:var(--sup);border:1px solid var(--linia);border-radius:14px;padding:10px"><div style="font:700 24px var(--display);color:var(--ambre)">43</div><div style="font-size:12px">comarques</div></div>
+     </div>
+     <div class="boto" style="margin-top:auto">Ja tinc un codi de col·laboració</div>
+   </div></div>`;
+}
+document.getElementById('pantalles').innerHTML=[[mapa(),'El mapa'],[fitxa(),'La fitxa'],[web(),'La web']].map(([h,c])=>`<figure>${h}<figcaption>${c}</figcaption></figure>`).join('');
+let db=null,temps;
+const $n=document.getElementById('nota'),$e=document.getElementById('estat');
+try{$n.value=localStorage.getItem('estil3')||''}catch(e){}
+$n.addEventListener('input',()=>{try{localStorage.setItem('estil3',$n.value)}catch(e){}clearTimeout(temps);temps=setTimeout(desa,700)});
+async function desa(){
+  if(!db){$e.textContent='Desat en aquest navegador.';return}
+  try{await db.collection('estil3').doc('nota').set({id:'nota',text:$n.value,ts:Date.now()});$e.textContent='Desat. Claude ho podrà llegir.'}
+  catch(e){$e.textContent='No s\'ha pogut desar al núvol: es queda en aquest navegador.'}
+}
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db){$e.textContent='Es desa en aquest navegador.';return}
+  try{const d=await db.collection('estil3').doc('nota').get();const x=d&&d.data&&d.data();if(x&&x.text&&!$n.value)$n.value=x.text;$e.textContent='Es desa sol i Claude ho podrà llegir.'}
+  catch(e){$e.textContent='No s\'ha pogut carregar.'}
+})();
+</script>
