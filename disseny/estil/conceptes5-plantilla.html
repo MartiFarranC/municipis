@@ -1,0 +1,120 @@
+<title>Festa major</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Alfa+Slab+One&family=Work+Sans:wght@400;600;800&family=Barlow+Condensed:wght@500;600;700;800&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Quatre conceptes més, tots d'objectes que es troben als pobles de Catalunya: el programa de festa major, els senders
+   (marques de pintura i pals indicadors), el calendari de pagès i les façanes esgrafiades.
+   Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions de Vic). */
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px}
+.concepte header{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;max-width:900px}
+.concepte header .n{font:600 44px/1 "Newsreader",serif;grid-row:span 2}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:0}
+.concepte header p{margin:0;max-width:72ch}
+.pantalles{display:flex;gap:22px;overflow-x:auto;padding:20px 0 8px}
+figure{margin:0;flex:none}
+figcaption{font:500 13px "Alegreya Sans SC",sans-serif;letter-spacing:.08em;margin-top:8px;color:#5C574D}
+.tel{width:330px;height:700px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);margin-top:auto}
+.nav span{padding:10px 0 14px;text-align:center}
+
+/* ── Festa major: el programa de dues tintes que se sobreposen, ara sobre blanc net i amb quatre parelles de tintes ── */
+.fm{background:#fff;color:var(--t);font-family:"Work Sans",sans-serif}
+.fm .ta{color:var(--al)}.fm .tb{color:var(--b)}
+.fm .titol{font-family:"Alfa Slab One",serif;line-height:.92;letter-spacing:-.01em}
+.fm .acte{display:grid;grid-template-columns:44px 1fr auto;gap:8px;align-items:baseline;padding:8px 0;border-top:2px solid var(--b)}
+.fm .acte .h{font:800 13px "Work Sans",sans-serif;color:var(--al)}
+.fm .acte .t{font:600 14px/1.2 "Work Sans",sans-serif}
+.fm .acte .p{font-family:"Alfa Slab One";font-size:18px;color:var(--b)}
+.fm .acte.fet .t{text-decoration:line-through;text-decoration-color:var(--a);text-decoration-thickness:3px;opacity:.6}
+.fm .nav{background:var(--b);color:#fff}.fm .nav span{font:800 11px "Work Sans";text-transform:uppercase;letter-spacing:.08em}.fm .nav span.on{background:var(--a);color:var(--onA)}
+.fm .boto{padding:11px 12px;display:flex;justify-content:space-between;font:800 14px "Work Sans";text-transform:uppercase}
+.fm .boto.a{background:var(--a);color:var(--onA)}.fm .boto.b{background:var(--b);color:#fff}
+.fm .tampo{mix-blend-mode:multiply}
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · festa major</small>
+    <h1>La festa major, amb quatre parelles de tintes</h1>
+    <p>Tornem a la festa major, que és la que més t'havia agradat. L'estructura és la mateixa (el programa d'actes, la lletra de tipus de fusta, les dues tintes que es trepitgen i les fetes ratllades), però amb tres canvis: paper blanc net en comptes del blanc trencat, una tira de banderetes de festa a dalt, i quatre parelles de tintes més adultes que el rosa i blau d'abans.</p><p>Digues quina parella t'agrada més, o barreja-les a la nota (per exemple, «el taronja amb el blau marí»).</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const DESC=['08298','08100'], SEL='08037';
+const estat=c=>DESC.includes(c)?'D':DESC.some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const VIC=D.missions['08298'], FETES=3;
+const guanyats=VIC.slice(0,FETES).reduce((a,m)=>a+m.p,0);
+const total=VIC.reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+const cost=Math.min(D.cfg.base+D.cfg.inc*(DESC.length-1),D.cfg.max);
+const saldo=guanyats-D.cfg.base;
+const nCall=(D.missions[SEL]||[]).length;
+const veins=PER['08298'].v.filter(v=>PER[v]&&estat(v)==='V').slice(0,4);
+const mapa=(f)=>`<svg viewBox="0 0 300 330" style="width:100%;flex:1;min-height:0" aria-label="Mapa d'Osona">${f.defs||''}<rect width="300" height="330" fill="${f.fons}"/>${D.mapa.map(p=>{const e=estat(p.c);return `<path d="${p.d}" ${f[e](p)}/>`}).join('')}${f.sel?f.sel(PER[SEL]):''}</svg>`;
+const nav=(on,noms=['Mapa','Missions','Gent','Perfil'])=>`<div class="nav">${noms.map((n,i)=>`<span class="${i===on?'on':''}">${n}</span>`).join('')}</div>`;
+
+// ── Festa major, amb una parella de tintes per paràmetre ──────────────
+// a: la tinta viva (fons i ratlles), al: la mateixa tinta prou fosca per a text, b: la tinta de fons, t: el text.
+const banderes=(P,n=13)=>`<svg viewBox="0 0 316 26" width="100%" height="26" aria-hidden="true" style="display:block"><path d="M-2 3 Q158 15 318 3" fill="none" stroke="${P.t}" stroke-width="1"/>${Array.from({length:n},(_,k)=>{const x=6+k*24,y=3+12*(1-Math.pow((x-158)/160,2));return `<path d="M${x} ${y} l14 0 l-7 ${13+(k%3)}z" fill="${k%2?P.b:P.a}" class="tampo"/>`}).join('')}</svg>`;
+const fm=(P)=>{const st=`--a:${P.a};--al:${P.al};--b:${P.b};--t:${P.t};--onA:${P.onA}`;const hid='fm-'+P.id;return {
+ mapa:()=>`<div class="tel fm" style="${st}">${banderes(P)}<div style="padding:6px 14px 6px">
+   <div class="titol ta" style="font-size:30px">Bocins</div><div class="titol tb tampo" style="font-size:30px;margin-top:-6px">de Catalunya</div>
+   <div style="display:flex;justify-content:space-between;font:800 12px 'Work Sans';text-transform:uppercase;letter-spacing:.06em;margin-top:6px;border-top:2px solid ${P.b};padding-top:4px"><span>${DESC.length} de ${D.total} pobles</span><span class="ta">${saldo} barretines</span></div></div>
+   ${mapa({fons:'#fff',defs:`<defs><pattern id="${hid}" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><rect width="5" height="5" fill="#fff"/><rect width="2" height="5" fill="${P.a}" opacity=".8"/></pattern></defs>`,
+     D:p=>`fill="${p.c==='08298'?P.a:P.b}" fill-opacity=".9" stroke="#fff" stroke-width="1"`,V:p=>`fill="url(#${hid})" stroke="${P.b}" stroke-width=".7"`,B:p=>`fill="#fff" stroke="${P.b}" stroke-opacity=".3" stroke-width=".5"`,
+     sel:s=>`<path d="${s.d}" fill="${P.b}" fill-opacity=".25" stroke="${P.b}" stroke-width="2.5"/>`})}
+   <div style="padding:8px 14px 12px;border-top:2px solid ${P.b}">
+     <div style="font:800 11px 'Work Sans';text-transform:uppercase;letter-spacing:.08em" class="ta">Proper poble</div>
+     <div class="titol" style="font-size:28px">${esc(PER[SEL].n)}</div>
+     <div style="font-size:13px">${esc(PER[SEL].k)} · ${nCall} actes al programa</div>
+     <div class="boto a" style="margin-top:8px"><span>Desbloqueja</span><span style="font-family:'Alfa Slab One'">${cost}</span></div></div>
+   ${nav(0)}</div>`,
+ fitxa:()=>`<div class="tel fm" style="${st}">${banderes(P)}<div style="padding:4px 14px 0;flex:1;overflow:hidden">
+   <div style="font:800 11px 'Work Sans';text-transform:uppercase;letter-spacing:.1em" class="ta">Programa d'actes · Osona</div>
+   <div style="position:relative;height:70px"><div class="titol" style="font-size:72px;color:${P.a};position:absolute;left:4px;top:3px">VIC</div><div class="titol tb tampo" style="font-size:72px;position:absolute;left:0;top:0">VIC</div></div>
+   <div style="display:flex;gap:6px;margin:4px 0 8px;font:800 12px 'Work Sans';text-transform:uppercase"><span style="background:${P.b};color:#fff;padding:3px 7px">${FETES}/${VIC.length} actes</span><span style="background:${P.a};color:${P.onA};padding:3px 7px">${guanyats}/${total} barretines</span></div>
+   ${VIC.slice(0,9).map((m,i)=>`<div class="acte ${i<FETES?'fet':''}"><span class="h">Nº ${String(i+1).padStart(2,'0')}</span><span class="t">${esc(m.t)}</span><span class="p">${m.p}</span></div>`).join('')}
+   </div>${nav(1)}</div>`,
+ perfil:()=>`<div class="tel fm" style="${st}">${banderes(P)}<div style="padding:4px 14px 0;flex:1">
+   <div style="font:800 11px 'Work Sans';text-transform:uppercase;letter-spacing:.1em" class="ta">Pregoner de la festa</div>
+   <div class="titol tb tampo" style="font-size:52px">marti</div>
+   <div style="font:600 13px 'Work Sans'">Explorador · nivell 2</div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border-top:2px solid ${P.b}">${[['Pobles',DESC.length],['Actes fets',3],['Comarques','0/43'],['Segells',2]].map(([a,b],i)=>`<div style="padding:8px 0;border-bottom:2px solid ${P.b};${i%2?'padding-left:10px;border-left:2px solid '+P.b:''}"><div style="font:800 11px 'Work Sans';text-transform:uppercase" class="ta">${a}</div><div class="titol tb" style="font-size:30px">${b}</div></div>`).join('')}</div>
+   <div class="boto b" style="margin-top:14px"><span>El passaport</span><span>→</span></div>
+   <div class="boto a" style="margin-top:6px"><span>Catàleg de cartells</span><span>→</span></div>
+   </div>${nav(3)}</div>`,
+}};
+const PAL=[
+ {id:'tomaquet',n:'Tomàquet i blau marí',a:'#E2412E',al:'#C8321F',b:'#1E3A6E',t:'#14213D',onA:'#fff',d:'Un vermell de tomàquet madur i un blau marí fosc. Les dues tintes més clàssiques dels programes impresos, però cap de les dues és de joguina.'},
+ {id:'taronja',n:'Taronja i verd ampolla',a:'#EE6A2C',al:'#C4501A',b:'#13594B',t:'#0F2E27',onA:'#fff',d:'Un taronja de fanalet de revetlla i el verd fosc de les ampolles de cava i dels porticons.'},
+ {id:'mostassa',n:'Mostassa i blau intens',a:'#E8A317',al:'#9A6A00',b:'#2F3FB0',t:'#1B2266',onA:'#1B2266',d:'Un groc de mostassa (només per a fons i ratlles, mai per a text) i un blau intens, com el de les samarretes de colla.'},
+ {id:'corall',n:'Corall i verd mar',a:'#F2604B',al:'#CC3F2B',b:'#0E6E73',t:'#0B3B3E',onA:'#fff',d:'Un corall càlid i un verd blavós de mar fosc. La parella més d\'estiu i de festa de platja.'},
+];
+
+const C=PAL.map(P=>({id:P.id,n:P.n,d:P.d,o:fm(P)}));
+let vals={},db=null;const temps={};
+try{const m=JSON.parse(localStorage.getItem('concepte5')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{};return `<section class="concepte" data-c="${c.id}">
+  <header><span class="n">${['A','B','C','D'][i]}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="pantalles">${['mapa','fitxa','perfil'].map((k,j)=>`<figure>${c.o[k]()}<figcaption>${['El mapa','La fitxa de Vic','El perfil'][j]}</figcaption></figure>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></section>`}).join('')}
+async function desa(id){try{localStorage.setItem('concepte5',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('concepte5').doc(id).delete();else await db.collection('concepte5').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+document.getElementById('conceptes').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const s=b.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+document.getElementById('conceptes').addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),700)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('concepte5').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
