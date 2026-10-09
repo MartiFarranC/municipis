@@ -319,7 +319,7 @@ Decidit amb la pàgina `disseny/ajuntaments/tria-ajuntaments.html`. Es prepara a
 - Baixar la base municipal de l'ICGC i decidir-ne el format d'entrada per a l'script.
 - Ajustar els valors de l'economia (secció 3.3) després de provar-la.
 - Quines categories de Wikidata i d'OSM es converteixen en missions, i quants punts val cada categoria.
-- Nom definitiu de l'app i icona. La icona ja és el fanal 06. Per al nom, el Martí proposa **«Bocins de Catalunya»**; encara s'ha de decidir (i comprovar que no el faci servir ningú).
+- Nom definitiu de l'app i icona. La icona ja és el fanal 06. El projecte es diu **«Bocins de Catalunya»** (la web per als col·laboradors ja el fa servir). Pendent: canviar el nom de l'app (`app_name`) i comprovar que no el faci servir ningú. L'identificador del paquet (`cat.descobreix`) no canvia.
 - Normes del nom d'usuari (llargada, caràcters permesos, paraules prohibides).
 - Si el rànquing és només de punts o també de municipis descoberts.
 - URL de la política de privacitat i de la pàgina per esborrar les dades.
