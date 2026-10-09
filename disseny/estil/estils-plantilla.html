@@ -1,0 +1,366 @@
+<title>Estils de l'app</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=Instrument+Serif&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Tres estils nous (inspirats en Wispr Flow, Any.do i Nothing OS, sense punts i amb l'ambre) i el d'ara, aplicats al prototip interactiu de totes les pantalles. Abans: prototip de l'estètica d'ara («nit i fanals», docs/disseny.md), en fosc i en clar.
+   Generat per gen-prototip.py. El mapa és un tros real d'Osona; les missions i les regles (costos, bonus, nivells) són les
+   reals de l'app. És una mostra de l'estètica: no es desa res i no es connecta a cap servidor. */
+:root{color-scheme:dark}
+body{margin:0;background:#06080B;color:#EEF1F5;font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:15px;line-height:1.45}
+.pagina{max-width:1100px;margin:0 auto;padding:16px;display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.costat{flex:1 1 280px;max-width:380px;display:flex;flex-direction:column;gap:12px}
+.eti{font:700 12px "Chakra Petch",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F2B544}
+h1{font:700 26px "Chakra Petch",sans-serif;margin:0}
+.costat p{margin:0;color:#9AA4B2;font-size:14px}
+.tema{display:flex;gap:6px}
+.tema button,.llista button{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #273041;background:#151A22;color:#EEF1F5;font:600 14px "Chakra Petch",sans-serif;cursor:pointer}
+.tema button[aria-pressed="true"]{background:#F2B544;color:#1A1305;border-color:#F2B544}
+.llista{display:flex;flex-wrap:wrap;gap:6px}
+.llista button[aria-current="true"]{border-color:#F2B544;color:#F2B544}
+button:focus-visible{outline:2px solid #5AB8E8;outline-offset:2px}
+.nota{font-size:13px;color:#9AA4B2;border-left:2px solid #273041;padding-left:10px}
+
+/* --- El telèfon --- */
+.tel{--fons:#0B0E13;--sup:#151A22;--sup2:#1C2330;--linia:#273041;--text:#EEF1F5;--suau:#9AA4B2;--ambre:#F2B544;--ambre-f:#B8862F;--ambre-t:#F2B544;
+  --tinta:#1A1305;--disp1:#2A2618;--disp2:#4A3E1E;--boira:#161B23;--vora-boira:#222A36;--blau:#5AB8E8;--completada:#1F1C12;--foto2:#11151C;--paper:#F3EAD8;
+  --display:"Chakra Petch",sans-serif;--cos-font:"Atkinson Hyperlegible",sans-serif;--mono:var(--display);
+  --r-boto:12px;--r-targ:16px;--r-fila:14px;--r-cb:8px;--vora-w:1px;--ombra:none;--pes-tit:700;--ls-tit:normal;
+  width:340px;height:720px;border-radius:40px;border:7px solid #1A1D22;background:var(--fons);color:var(--text);font-family:var(--cos-font);overflow:hidden;position:relative;
+  display:flex;flex-direction:column;box-shadow:0 0 0 1px #2A2F38,0 20px 60px rgba(0,0,0,.5);flex:none}
+.tel.clar{--fons:#F7F4EE;--sup:#FFFFFF;--sup2:#EFEAE1;--linia:#DED7CA;--text:#1C1B18;--suau:#6E685C;--ambre:#F2B544;--ambre-f:#D49A2E;--ambre-t:#A26E0C;
+  --disp1:#F6EBD0;--disp2:#EBD49A;--boira:#E7E3DB;--vora-boira:#D6D0C4;--blau:#2D86C0;--completada:#FCF4E0;--foto2:#EFEAE1;border-color:#D9D4CB;box-shadow:0 0 0 1px #BDB6A9,0 20px 60px rgba(0,0,0,.4)}
+.tel *{box-sizing:border-box}
+/* Calma (com Wispr Flow): crema càlid, títols amb lletra de serif, botons de píndola, ombres suaus i sense vores. */
+.tel.e-calma{--display:"Instrument Serif",serif;--cos-font:"Inter",sans-serif;--mono:"Inter",sans-serif;--pes-tit:400;--ls-tit:-.01em;
+  --r-boto:999px;--r-targ:22px;--r-fila:20px;--r-cb:999px;--vora-w:1px;--ombra:none;
+  --fons:#161412;--sup:#1F1C19;--sup2:#292522;--linia:#34302B;--text:#F2ECE3;--suau:#A39A8D;--ambre:#E9A63B;--ambre-f:#B98330;--ambre-t:#E9A63B;--tinta:#1E1407;
+  --disp1:#33291A;--disp2:#4F3F22;--boira:#211E1A;--vora-boira:#2D2925;--blau:#8FA9E8;--completada:#272116;--foto2:#1A1815}
+.tel.e-calma.clar{--fons:#F3EEE6;--sup:#FFFDF9;--sup2:#ECE5D9;--linia:#E6DED0;--text:#22201C;--suau:#7A7268;--ambre-f:#D8973A;--ambre-t:#9C6512;
+  --disp1:#F5E7C6;--disp2:#EAD3A0;--boira:#E6E0D5;--vora-boira:#D9D1C4;--blau:#4C6FC9;--completada:#FBF1DC;--foto2:#ECE5D9;--vora-w:0px;
+  --ombra:0 1px 2px rgba(60,40,10,.05),0 8px 24px rgba(60,40,10,.07)}
+/* Llista (com Any.do): net i amable, títols gruixuts, molt d'aire, caselles rodones i targetes amb una ombra lleu. */
+.tel.e-llista{--display:"Plus Jakarta Sans",sans-serif;--cos-font:"Plus Jakarta Sans",sans-serif;--mono:"Plus Jakarta Sans",sans-serif;--pes-tit:800;--ls-tit:-.02em;
+  --r-boto:14px;--r-targ:18px;--r-fila:16px;--r-cb:999px;--vora-w:1px;--ombra:none;
+  --fons:#0F1115;--sup:#181B21;--sup2:#22262E;--linia:#2A2F38;--text:#F3F4F6;--suau:#9CA3AF;--ambre:#F5A524;--ambre-f:#C27F12;--ambre-t:#F5A524;--tinta:#1E1302;
+  --disp1:#2C2416;--disp2:#4A3A1C;--boira:#191C22;--vora-boira:#252931;--blau:#60A5FA;--completada:#221D12;--foto2:#14171C}
+.tel.e-llista.clar{--fons:#FFFFFF;--sup:#FFFFFF;--sup2:#F2F3F5;--linia:#E6E8EC;--text:#111318;--suau:#6B7280;--ambre-f:#E09A2A;--ambre-t:#A86A06;
+  --disp1:#FFF2D6;--disp2:#F9DC9E;--boira:#EEF0F3;--vora-boira:#E1E4E9;--blau:#2563EB;--completada:#FFF7E6;--foto2:#F2F3F5;--vora-w:0px;
+  --ombra:0 1px 3px rgba(17,19,24,.08),0 4px 14px rgba(17,19,24,.04)}
+/* Precís (com Nothing OS, sense punts): monocrom amb l'ambre, línies fines, lletra monoespaiada per als detalls. */
+.tel.e-precis{--display:"Space Grotesk",sans-serif;--cos-font:"Inter",sans-serif;--mono:"Space Mono",monospace;--pes-tit:500;--ls-tit:-.03em;
+  --r-boto:999px;--r-targ:14px;--r-fila:12px;--r-cb:4px;--vora-w:1px;--ombra:none;
+  --fons:#000000;--sup:#0D0D0D;--sup2:#171717;--linia:#262626;--text:#F2F2F2;--suau:#8C8C8C;--ambre:#E9A632;--ambre-f:#A87A2A;--ambre-t:#E9A632;--tinta:#1A1305;
+  --disp1:#1F1A10;--disp2:#3A2F18;--boira:#111111;--vora-boira:#1F1F1F;--blau:#F2F2F2;--completada:#15120B;--foto2:#0A0A0A}
+.tel.e-precis.clar{--fons:#F2F2F0;--sup:#FFFFFF;--sup2:#E9E9E6;--linia:#D9D9D5;--text:#0E0E0E;--suau:#6E6E6A;--ambre-f:#D49A30;--ambre-t:#94650E;
+  --disp1:#F4E8CC;--disp2:#E6CF97;--boira:#E4E4E0;--vora-boira:#D2D2CD;--blau:#0E0E0E;--completada:#FAF3E3;--foto2:#E9E9E6}
+.estatus{display:flex;justify-content:space-between;padding:10px 20px 0;font:600 12px var(--mono);color:var(--suau);flex:none}
+.cos{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column}
+.barra{display:flex;justify-content:space-around;border-top:1px solid var(--linia);background:var(--sup);padding:8px 0 12px;flex:none}
+.barra button{background:none;border:0;color:var(--suau);font:600 11px var(--mono);display:flex;flex-direction:column;align-items:center;gap:2px;min-width:60px;min-height:44px;cursor:pointer}
+.barra button svg{width:22px;height:22px}
+.barra button.on{color:var(--ambre-t)}
+.t-display{font-family:var(--display);font-weight:var(--pes-tit);letter-spacing:var(--ls-tit)}
+.suau{color:var(--suau)}
+.acc{color:var(--ambre-t)}
+.xip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--sup2);border:var(--vora-w) solid var(--linia);font:700 14px var(--mono);color:var(--text)}
+.bp{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 16px;border-radius:var(--r-boto);background:var(--ambre);color:var(--tinta);font:700 15px var(--display);border:0;cursor:pointer;width:100%}
+.bp[disabled]{opacity:.45;cursor:default}
+.bs{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border-radius:var(--r-boto);background:none;border:1px solid var(--linia);color:var(--text);font:600 14px var(--display);cursor:pointer;width:100%}
+.bi{width:40px;height:40px;border-radius:50%;background:var(--sup2);border:1px solid var(--linia);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.bi svg{width:20px;height:20px}
+.bp svg,.bs svg,.fila svg,.xip svg{width:20px;height:20px;flex:none}
+.cos>*{flex-shrink:0}
+.camp{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--suau)}
+.camp input{min-height:48px;border-radius:var(--r-boto);border:1px solid var(--linia);background:var(--sup);color:var(--text);padding:0 12px;font:inherit;font-size:15px}
+.targ{background:var(--sup);border:var(--vora-w) solid var(--linia);border-radius:var(--r-targ);padding:12px;box-shadow:var(--ombra)}
+.seccio{padding:14px 16px 4px;font:var(--pes-tit) 20px var(--display);letter-spacing:var(--ls-tit)}
+.fila{display:flex;align-items:center;gap:10px;margin:0 14px 8px;padding:10px 12px;border-radius:var(--r-fila);background:var(--sup);border:var(--vora-w) solid var(--linia);box-shadow:var(--ombra);cursor:pointer;width:calc(100% - 28px);color:var(--text);text-align:left;font:inherit}
+.fila.fet{background:var(--completada);border-color:var(--disp2);cursor:default}
+.fila .cb{width:24px;height:24px;border-radius:var(--r-cb);border:2px solid #4B5566;flex:none;display:flex;align-items:center;justify-content:center;color:var(--tinta)}
+.fila.fet .cb{background:var(--ambre);border-color:var(--ambre)}
+.fila .tt{flex:1;min-width:0}
+.fila .tt b{display:block;font-size:14px}
+.fila.fet .tt b{color:var(--suau)}
+.fila .tt small{font-size:12px;color:var(--suau)}
+.fila .pt{font:700 14px var(--mono);color:var(--ambre-t)}
+.progres{height:8px;border-radius:4px;background:var(--sup2);overflow:hidden}
+.progres i{display:block;height:100%;background:var(--ambre);transition:width .4s}
+.ratllat{background:repeating-linear-gradient(45deg,var(--sup) 0 12px,var(--foto2) 12px 24px)}
+.capa{position:absolute;inset:0;background:color-mix(in srgb,var(--fons) 92%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;z-index:5}
+.medalla{width:64px;height:64px;flex:none}
+.graella{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 14px 14px}
+.cromo{aspect-ratio:1.4;border-radius:8px;display:flex;align-items:flex-end;padding:4px;font-size:10px;overflow:hidden}
+@keyframes obre{0%{transform:scale(.6) rotate(-8deg);opacity:0}60%{transform:scale(1.1) rotate(3deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+@keyframes cau{0%{transform:scale(1.8) rotate(-12deg);opacity:0}100%{transform:scale(1) rotate(-6deg);opacity:.9}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<div class="pagina">
+  <div class="costat">
+    <span class="eti">Bocins de Catalunya · prototip</span>
+    <h1>Tres estils nous, a totes les pantalles</h1>
+    <p>Tria un estil i un tema, i navega per l'app. Calma s'inspira en Wispr Flow, Llista en Any.do i Precís en Nothing OS (sense punts); tots fan servir l'ambre. «Ara» és l'estètica d'avui, per comparar. És un prototip que es pot tocar: desbloqueja municipis al mapa, fes missions, obre un sac o segella el passaport. Les regles i les missions són les reals; el mapa és un tros d'Osona. Res no es desa.</p>
+    <div class="tema" role="group" aria-label="Tema">
+      <button type="button" data-tema="fosc" aria-pressed="true">Fosc</button>
+      <button type="button" data-tema="clar" aria-pressed="false">Clar</button>
+    </div>
+    <span class="eti" style="margin-top:6px">Estil</span>
+    <div class="tema" role="group" aria-label="Estil" id="estils"></div>
+    <p id="descripcio-estil"></p>
+    <div class="tema" role="group" aria-label="Valoració de l'estil" id="valora"></div>
+    <textarea id="nota" aria-label="Nota sobre aquest estil" placeholder="Nota sobre aquest estil (opcional)" style="min-height:56px;background:#0B0E13;color:#EEF1F5;border:1px solid #273041;border-radius:12px;padding:8px;font:inherit"></textarea>
+    <span class="nota" id="estat-desa"></span>
+    <span class="eti" style="margin-top:6px">Pantalles</span>
+    <div class="llista" id="llista"></div>
+    <button type="button" class="bs" id="reinicia" style="background:#151A22;color:#EEF1F5;border-color:#273041">Torna a començar</button>
+    <p class="nota">Les persones de la pestanya «Gent» són d'exemple. Valora cada estil amb els botons; si escrius una nota, queda com «Millorar». Quan acabis, digues «ja està».</p>
+  </div>
+  <div class="tel" id="tel"></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const PERSONES=['anna_exemple','pau_exemple'];  // D'exemple: no són persones reals.
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const nom=c=>PER[c]?PER[c].n:c;
+const ICO={
+  mapa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg>',
+  missions:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11"/></svg>',
+  gent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M15.5 4.5a3.5 3.5 0 0 1 0 7M18 13.5a7 7 0 0 1 4 6.5"/></svg>',
+  perfil:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  enrere:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  tancar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  cercar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  gps:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>',
+  cadenat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zM8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  fet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="16" height="16"><path d="M5 12l5 5L20 7"/></svg>',
+  centrar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>',
+};
+const barr=(m=18)=>`<svg viewBox="0 0 24 24" width="${m}" height="${m}" aria-hidden="true"><g transform="translate(.6 1.6) scale(.068)"><path d="M50,290 L48,222 C30,226 6,214 4,180 C2,140 28,92 70,78 C120,62 200,66 245,90 C284,112 298,160 300,232 L301,260 Z" fill="currentColor"/><path d="M38,271 L312,233 C318,232 321,235 322,241 L325,270 C326,276 323,280 317,281 L45,318 C39,319 36,316 35,310 L32,281 C31,275 33,272 38,271 Z" fill="currentColor"/></g></svg>`;
+
+// --- Estat i regles (les de configuracio_joc.json) ---
+let S;
+function reinicia(){S={pantalla:'entra',inici:null,desc:[],fetes:new Set(),guanyats:0,gastats:0,sel:null,municipi:null,capa:null,sac:'tancat',segells:[],nomUsuari:'',tipus:null,public:null,historial:[]};}
+const saldo=()=>S.guanyats-S.gastats;
+const cost=()=>Math.min(D.cfg.base+D.cfg.inc*(Math.max(S.desc.length,1)-1),D.cfg.max);
+const estat=c=>S.desc.includes(c)?'D':S.desc.some(d=>(PER[d]?.v||[]).includes(c))?'V':'B';
+const ms=c=>D.missions[c]||[];
+const possibles=c=>ms(c).reduce((a,m)=>a+m.p,0)+(ms(c).length?D.cfg.bonus:0);
+const guanyatsA=c=>{const f=ms(c).filter(m=>S.fetes.has(m.id));return f.reduce((a,m)=>a+m.p,0)+(f.length&&f.length===ms(c).length?D.cfg.bonus:0)};
+const llindar=n=>{n=n-1;return D.cfg.nivell1*n+D.cfg.nivellInc*n*(n-1)/2};
+function nivell(){let n=1;while(llindar(n+1)<=S.guanyats)n++;return{n,ini:llindar(n),seg:llindar(n+1)}}
+const totesFetes=()=>S.desc.reduce((a,c)=>a+ms(c).filter(m=>S.fetes.has(m.id)).length,0);
+
+function ves(p,extra){S.historial.push(S.pantalla);Object.assign(S,extra||{});S.pantalla=p;S.capa=null;pinta()}
+function enrere(){S.pantalla=S.historial.pop()||'mapa';S.capa=null;pinta()}
+
+// --- Pantalles ---
+const estatus=`<div class="estatus"><span>9:41</span><span>5G ▮</span></div>`;
+function barra(on){return `<nav class="barra" aria-label="Navegació">${[['mapa','Mapa'],['missions','Missions'],['gent','Gent'],['perfil','Perfil']].map(([k,t])=>
+  `<button type="button" data-ves="${k}" class="${k===on?'on':''}" ${k===on?'aria-current="page"':''}>${ICO[k]}${t}</button>`).join('')}</nav>`}
+
+const P={
+ entra:()=>`${estatus}<div class="cos" style="padding:28px 22px;gap:14px">
+   <div style="display:flex;justify-content:center;margin:10px 0"><svg viewBox="0 0 100 100" width="96" height="96" aria-label="Logo"><circle cx="50" cy="50" r="46" fill="var(--sup2)"/><circle cx="62" cy="58" r="24" fill="var(--ambre)" opacity=".25"/><path d="M30 34h22v8H30z" fill="var(--suau)"/><path d="M52 38h10v22H52z" fill="var(--suau)"/><path d="M56 56h12l-2 16H58z" fill="var(--ambre)"/></svg></div>
+   <div class="t-display" style="font-size:28px">Entra</div>
+   <div class="suau" style="font-size:14px">Amb el teu compte, el progrés es guarda al núvol i el pots seguir des de qualsevol mòbil.</div>
+   <label class="camp">Correu electrònic<input type="email" value="marti@exemple.cat"></label>
+   <label class="camp">Contrasenya<input type="password" value="contrasenya"></label>
+   <button class="bp" data-accio="entra">Entra</button>
+   <button class="bs">Crea el teu compte</button></div>`,
+ nom:()=>`${estatus}<div class="cos" style="padding:28px 22px;gap:14px">
+   <div class="t-display" style="font-size:28px">Tria el teu nom</div>
+   <label class="camp">Nom d'usuari<input value="marti"></label>
+   <div class="suau" style="font-size:13px">Com jugaràs?</div>
+   ${[['EXPLORADOR','Explorador','Recorres els municipis i jugues: el mapa, les missions i els premis.'],['ESPECTADOR','Espectador','No jugues: segueixes altra gent per veure com van i animar-los.']].map(([k,t,d])=>
+     `<button class="targ" data-tipus="${k}" style="text-align:left;cursor:pointer;border-color:${S.tipus===k?'var(--ambre)':'var(--linia)'};color:var(--text);font:inherit"><b class="t-display">${t}</b><div class="suau" style="font-size:13px">${d}</div></button>`).join('')}
+   ${[[true,'Compte públic','Qualsevol et pot seguir directament.'],[false,'Compte privat','Tu acceptes o rebutges qui et vol seguir.']].map(([k,t,d])=>
+     `<button class="targ" data-public="${k}" style="text-align:left;cursor:pointer;border-color:${S.public===k?'var(--ambre)':'var(--linia)'};color:var(--text);font:inherit"><b class="t-display">${t}</b><div class="suau" style="font-size:13px">${d}</div></button>`).join('')}
+   <button class="bp" data-accio="nom" ${S.tipus&&S.public!==null?'':'disabled'}>Continua</button></div>`,
+ inici:()=>`${estatus}<div class="cos" style="padding:28px 22px;gap:12px">
+   <div class="t-display" style="font-size:30px">D'on ets?</div>
+   <div class="suau">El teu municipi serà el primer que s'il·lumina al mapa. Els altres són a la boira, esperant-te.</div>
+   <label class="camp">Busca el teu municipi<input value="Vic"></label>
+   ${['08298','08100','08037'].map(c=>`<button class="fila" data-inici="${c}" style="margin:0;width:100%;${S.inici===c?'border-color:var(--ambre)':''}"><span class="tt"><b>${esc(nom(c))}</b><small>${esc(PER[c].k)}</small></span></button>`).join('')}
+   <button class="bs">${ICO.gps} Fes servir la meva ubicació</button>
+   <div style="margin-top:auto">${S.inici?`<div class="suau" style="font-size:13px;margin-bottom:8px">Començaràs a ${esc(nom(S.inici))}.</div>`:''}<button class="bp" data-accio="comenca" ${S.inici?'':'disabled'}>Comença l'aventura</button></div></div>`,
+ mapa:()=>{
+   const peces=D.mapa.map(p=>{const e=estat(p.c);
+     const omplir=e==='D'?(p.c===S.inici?'var(--ambre)':'var(--ambre-f)'):e==='V'?'url(#ratllat)':'var(--boira)';
+     const vora=e==='D'?'var(--fons)':e==='V'?'var(--disp2)':'var(--vora-boira)';
+     return `<path d="${p.d}" fill="${omplir}" stroke="${vora}" stroke-width=".8" data-mun="${p.c}" style="cursor:pointer"><title>${esc(p.n)}</title></path>`}).join('');
+   const s=S.sel&&PER[S.sel];
+   const selPath=s?`<path d="${s.d}" fill="color-mix(in srgb,var(--blau) 25%,transparent)" stroke="var(--blau)" stroke-width="2" pointer-events="none"/>`:'';
+   let targ='';
+   if(s){const e=estat(s.c),c=cost(),pot=saldo()>=c;
+     const det=e==='D'?`${ms(s.c).filter(m=>S.fetes.has(m.id)).length} de ${ms(s.c).length} missions`:e==='V'?`${ms(s.c).length} missions amagades`:'A la boira';
+     const veiDe=e==='V'?S.desc.find(d=>(PER[d]?.v||[]).includes(s.c)):null;
+     targ=`<div class="targ" style="position:absolute;left:10px;right:10px;bottom:8px;display:flex;align-items:center;gap:8px;padding:10px 6px 10px 14px">
+       <button style="flex:1;text-align:left;background:none;border:0;color:var(--text);font:inherit;cursor:pointer" data-fitxa="${s.c}">
+         <div style="font:600 11px var(--display);letter-spacing:.06em;color:var(--blau)">${e==='D'?'DESCOBERT':e==='V'?`VEÍ DE ${esc(nom(veiDe).toUpperCase())}`:'A LA BOIRA'}</div>
+         <div class="t-display" style="font-size:20px">${esc(s.n)}</div><div class="suau" style="font-size:12px">${esc(s.k)} · ${det}</div></button>
+       ${e==='V'&&pot?`<button class="bp" style="width:auto" data-accio="desbloqueja">${c} ${barr()}</button>`:`<button class="bs" style="width:auto" data-fitxa="${s.c}">Obre</button>`}
+       <button class="bi" style="background:none;border:0" data-accio="treu" aria-label="Tanca">${ICO.tancar}</button></div>`}
+   return `${estatus}<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;flex:none">
+     <span class="xip">${S.desc.length} / ${D.total}</span><div style="display:flex;gap:6px"><button class="bi" aria-label="Busca un municipi">${ICO.cercar}</button><button class="bi" aria-label="Centra">${ICO.centrar}</button></div><span class="xip"><span class="acc">${barr()}</span>${saldo()}</span></div>
+     <div class="cos" style="position:relative;overflow:hidden"><svg viewBox="0 0 300 330" style="width:100%;height:100%" aria-label="Mapa">
+       <defs><pattern id="ratllat" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="var(--disp1)"/><rect width="6" height="12" fill="var(--disp2)"/></pattern></defs>
+       ${peces}${selPath}</svg>${targ||`<div style="position:absolute;left:10px;bottom:10px;display:flex;gap:10px;font-size:11px" class="suau"><span><i style="display:inline-block;width:10px;height:10px;background:var(--ambre);border-radius:2px"></i> Descobert</span><span><i style="display:inline-block;width:10px;height:10px;background:var(--disp2);border-radius:2px"></i> Disponible</span><span><i style="display:inline-block;width:10px;height:10px;background:var(--boira);border:1px solid var(--vora-boira);border-radius:2px"></i> Boira</span></div>`}</div>
+     ${barra('mapa')}`},
+ fitxa:()=>{
+   const c=S.municipi,p=PER[c],e=estat(c);
+   if(e!=='D'){const k=cost(),pot=e==='V'&&saldo()>=k;
+     return `<div class="cos"><div class="ratllat" style="height:170px;flex:none;position:relative;display:flex;align-items:center;justify-content:center">
+       <button class="bi" style="position:absolute;top:34px;left:14px" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button>
+       <span class="acc" style="width:64px;height:64px">${ICO.cadenat}</span></div>
+       <div style="padding:14px 18px;display:flex;flex-direction:column;gap:10px">
+       <div class="suau" style="font-size:13px">${esc(p.k)}</div><div class="t-display" style="font-size:36px;line-height:1">${esc(p.n)}</div>
+       <div class="suau">${e==='V'?'Encara és a la boira. Desbloqueja\'l amb barretines per veure\'n les missions.':'És lluny del teu territori. Primer has de desbloquejar els municipis que hi ha entremig.'}</div>
+       <div style="display:flex;gap:8px"><div class="targ" style="flex:1"><div class="suau" style="font-size:12px">Missions ocultes</div><div class="t-display" style="font-size:22px">${ms(c).length}</div></div>
+       <div class="targ" style="flex:1"><div class="suau" style="font-size:12px">Barretines en joc</div><div class="t-display acc" style="font-size:22px">fins a ${possibles(c)}</div></div></div>
+       ${e==='V'?`<div style="display:flex;justify-content:space-between;font-size:13px" class="suau"><span>Tens ${saldo()} barretines</span>${pot?`<span>Després: ${saldo()-k}</span>`:''}</div>
+       <button class="bp" data-accio="desbloqueja" ${pot?'':'disabled'}>Desbloqueja · ${k} ${barr()}</button>
+       ${pot?'':`<div class="acc" style="font-size:13px">Et falten ${k-saldo()} barretines. Fes missions als municipis que ja tens per guanyar-ne.</div>`}`:''}
+       </div></div>`}
+   const g=guanyatsA(c),t=possibles(c),fetes=ms(c).filter(m=>S.fetes.has(m.id)).length;
+   return `<div class="cos"><div class="ratllat" style="height:170px;flex:none;position:relative;display:flex;align-items:center;justify-content:center">
+     <button class="bi" style="position:absolute;top:34px;left:14px" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button>
+     <button class="bi" style="position:absolute;top:34px;right:14px" data-ves="mapa" aria-label="Veure al mapa">${ICO.mapa}</button>
+     <button class="bs" style="width:auto;background:var(--fons)" data-ves="camera">${ICO.camera} Afegeix una foto de ${esc(p.n)}</button></div>
+     <div style="padding:12px 18px 8px"><div class="suau" style="font-size:12px">${esc(p.k)}${c===S.inici?' · el teu municipi d\'inici':''}</div>
+       <div style="display:flex;align-items:flex-end;gap:8px"><div class="t-display" style="font-size:38px;line-height:1;flex:1">${esc(p.n)}</div>
+       <div style="text-align:right"><div class="t-display acc" style="font-size:24px">${g}</div><div class="suau" style="font-size:11px">de ${t} barretines</div></div></div>
+       <div class="progres" style="margin:10px 0 6px"><i style="width:${t?g/t*100:0}%"></i></div>
+       <div class="suau" style="font-size:12px">${fetes} de ${ms(c).length} missions · +${D.cfg.bonus} de bonus si les fas totes</div></div>
+     ${ms(c).map(m=>{const f=S.fetes.has(m.id);return `<button class="fila ${f?'fet':''}" data-missio="${m.id}" ${f?'disabled':''}><span class="cb">${f?ICO.fet:''}</span><span class="tt"><b>${esc(m.t)}</b><small>Prova: ${m.g==='GPS'?'GPS':'Foto'} · ${f?'Feta':'Toca per fer-la'}</small></span><span class="suau" style="width:18px">${m.g==='GPS'?ICO.gps:ICO.camera}</span><span class="pt">+${m.p}</span></button>`}).join('')}
+     <div class="seccio">Veïns</div><div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 16px">${(p.v||[]).filter(v=>PER[v]).map(v=>{const e=estat(v);return `<button class="xip" style="cursor:pointer;font-size:13px;${e==='D'?'border-color:var(--ambre-f)':''}" data-fitxa="${v}">${e==='D'?'':e==='V'?'◌ ':'🔒 '}${esc(nom(v))}</button>`}).join('')}</div></div>`},
+ missions:()=>`${estatus}<div class="seccio" style="font-size:24px">Missions</div><div class="suau" style="padding:0 16px 10px;font-size:13px">${totesFetes()} missions completades · Barretines per gastar: ${saldo()}</div>
+   <div class="cos">${S.desc.map(c=>{const g=guanyatsA(c),t=possibles(c),f=ms(c).filter(m=>S.fetes.has(m.id)).length;return `<button class="fila" data-fitxa="${c}" style="flex-direction:column;align-items:stretch;gap:6px"><span style="display:flex;justify-content:space-between"><b class="t-display" style="font-size:16px">${esc(nom(c))}</b><span class="pt">${g}/${t}</span></span><small class="suau">${esc(PER[c].k)} · ${f} de ${ms(c).length} missions · ${g} de ${t} barretines</small><span class="progres"><i style="width:${t?g/t*100:0}%"></i></span></button>`}).join('')}</div>${barra('missions')}`,
+ gent:()=>`${estatus}<div class="seccio" style="font-size:24px">Gent</div><div style="padding:0 14px 10px"><label class="camp"><input placeholder="Busca gent pel nom d'usuari"></label></div>
+   <div class="cos"><div class="seccio" style="font-size:16px">Et volen seguir</div>
+   <div class="targ" style="margin:0 14px 10px;display:flex;align-items:center;gap:10px"><span class="xip">PE</span><b style="flex:1">${PERSONES[1]}</b><button class="bp" style="width:auto;min-height:40px">Accepta</button></div>
+   <div class="seccio" style="font-size:16px">El que fa la gent que segueixes</div>
+   ${[[PERSONES[0],'ha desbloquejat','Calldetenes','fa 5 min'],[PERSONES[0],'ha fet una foto a','Gurb','ahir'],[PERSONES[1],'ha desbloquejat','Folgueroles','fa 2 dies']].map(([u,a,m,q])=>
+     `<div class="targ" style="margin:0 14px 10px;display:flex;flex-direction:column;gap:8px"><div><b>${u}</b> ${a} <b>${m}</b> <span class="suau" style="font-size:12px">· ${q}</span></div>${a.includes('foto')?'<div class="ratllat" style="height:110px;border-radius:10px"></div>':''}<div><button class="bs" style="width:auto;min-height:38px">Anima</button></div></div>`).join('')}
+   <div class="suau" style="font-size:11px;padding:0 16px 12px">Persones d'exemple.</div></div>${barra('gent')}`,
+ perfil:()=>{const nv=nivell();return `${estatus}<div class="cos">
+   <div style="padding:14px 18px;display:flex;align-items:center;gap:12px"><span class="xip" style="width:56px;height:56px;justify-content:center;font-size:20px">M</span><div style="flex:1"><div class="t-display" style="font-size:22px">marti</div><div class="suau" style="font-size:13px">Nivell ${nv.n}</div></div></div>
+   <div style="padding:0 18px"><div class="progres"><i style="width:${(S.guanyats-nv.ini)/(nv.seg-nv.ini)*100}%"></i></div><div class="suau" style="font-size:12px;margin-top:4px">${nv.seg-S.guanyats} barretines per al nivell ${nv.n+1}</div></div>
+   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:14px">${[[S.desc.length,'municipis'],[totesFetes(),'missions'],[0,'fotos'],[`0/${D.comarques}`,'comarques']].map(([n,t])=>`<div class="targ" style="padding:8px;text-align:center"><div class="t-display acc" style="font-size:18px">${n}</div><div class="suau" style="font-size:11px">${t}</div></div>`).join('')}</div>
+   <div class="suau" style="padding:0 18px;font-size:13px">Tens ${saldo()} barretines per gastar. N'has guanyat ${S.guanyats} en total.</div>
+   <div class="seccio">Medalles</div>
+   <div style="display:flex;gap:10px;padding:0 14px 6px;overflow-x:auto">${[['Osona','bronze',S.desc.length+' de '+D.nOsona],['10 municipis','gris',S.desc.length+' de 10'],['Primer cartell','gris','0 de 1']].map(([t,m,p])=>medalla(t,m,p)).join('')}</div>
+   <div style="display:flex;flex-direction:column;gap:8px;padding:14px">
+     <button class="bs" data-ves="passaport">${ICO.mapa} El meu passaport</button><button class="bs" data-ves="cataleg">${ICO.camera} Catàleg de cartells</button>
+     <button class="bs" data-ves="sacs">Sacs i col·lecció</button><button class="bs" data-ves="sobre">Sobre l'app</button></div></div>${barra('perfil')}`},
+ passaport:()=>`${estatus}<div style="display:flex;align-items:center;gap:10px;padding:8px 14px;flex:none"><button class="bi" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button><span class="t-display" style="font-size:20px">El meu passaport</span></div>
+   <div class="cos" style="padding:0 14px 14px;gap:12px">
+   <div style="border-radius:6px 14px 14px 6px;background:#5A1E24;aspect-ratio:.7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#E8C77A;box-shadow:inset 0 0 0 10px #5A1E24,inset 0 0 0 11px rgba(232,199,122,.5)"><b class="t-display" style="font-size:22px;letter-spacing:4px">PASSAPORT</b><svg viewBox="0 0 300 330" width="140" aria-hidden="true">${D.mapa.map(p=>`<path d="${p.d}" fill="#E8C77A" opacity=".85"/>`).join('')}</svg><b class="t-display" style="font-size:11px;letter-spacing:2px">BOCINS DE CATALUNYA</b></div>
+   <div class="suau" style="font-size:13px">${S.segells.length} de ${D.total} municipis segellats</div>
+   <div style="border-radius:6px 14px 14px 6px;background:var(--paper);aspect-ratio:.7;position:relative;color:#3A2E22;padding:14px">
+     <div style="display:flex;justify-content:space-between"><b class="t-display" style="letter-spacing:1.5px">OSONA</b><span class="t-display" style="font-size:12px;opacity:.7">${S.segells.length}/${D.nOsona}</span></div>
+     ${S.segells.map((c,i)=>`<div style="position:absolute;left:${18+(i%2)*44}%;top:${16+Math.floor(i/2)*20}%;width:38%;aspect-ratio:1.67;border:2.5px solid ${['#7A2E8E','#1E5AA8','#B23A3A'][i%3]};outline:1px solid ${['#7A2E8E','#1E5AA8','#B23A3A'][i%3]};outline-offset:-6px;border-radius:5px;color:${['#7A2E8E','#1E5AA8','#B23A3A'][i%3]};display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(${(i*7%13)-6}deg);opacity:.9;animation:cau .5s ease-out;font:700 11px var(--display)"><span>${esc(nom(c).toUpperCase())}</span><span style="font-size:9px;opacity:.8">9 OCT 2026</span></div>`).join('')}
+     <span class="t-display" style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:10px;opacity:.6">PÀGINA 1</span></div>
+   ${S.desc.filter(c=>!S.segells.includes(c)).length?`<div class="seccio" style="padding:0">Per segellar</div>${S.desc.filter(c=>!S.segells.includes(c)).map(c=>`<button class="fila" style="margin:0;width:100%" data-segella="${c}"><span class="tt"><b>${esc(nom(c))}</b></span><span class="pt">Segella</span></button>`).join('')}`:''}</div>`,
+ sacs:()=>`${estatus}<div style="display:flex;align-items:center;gap:10px;padding:8px 14px;flex:none"><button class="bi" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button><span class="t-display" style="font-size:20px">Sacs i col·lecció</span></div>
+   <div class="cos" style="padding:10px 18px;gap:14px;align-items:center;text-align:center">
+   ${S.sac==='tancat'?`<div class="t-display" style="font-size:20px">Un sac nou!</div><button data-accio="obre-sac" style="background:none;border:0;cursor:pointer" aria-label="Obre el sac"><svg viewBox="0 0 120 120" width="170"><path d="M38 44h44c16 16 22 38 16 56a8 8 0 0 1-8 6H30a8 8 0 0 1-8-6c-6-18 0-40 16-56z" fill="#8A6A3A"/><path d="M44 18l16 12 16-12-6 26H50z" fill="#A9864D"/><path d="M40 44h40" stroke="#5E4520" stroke-width="5" stroke-linecap="round"/></svg></button><div class="suau">Toca el sac per obrir-lo</div>`
+     :`<div class="suau" style="font:700 12px var(--display);letter-spacing:.1em;color:#5AB8E8">RARA</div><div style="animation:obre .6s ease-out;width:170px;aspect-ratio:.7;border-radius:6px 14px 14px 6px;background:linear-gradient(160deg,#1E5AA8,#123A6E);box-shadow:0 0 0 3px #5AB8E8,0 0 40px rgba(90,184,232,.4);display:flex;align-items:center;justify-content:center;color:#E8C77A;font:700 14px var(--display);letter-spacing:2px">PASSAPORT</div><div class="t-display" style="font-size:20px">Riu</div><div class="suau">Una tapa nova per al passaport.</div><button class="bp" data-accio="tanca-sac">Fes-lo servir</button>`}
+   <div class="suau" style="font-size:13px;margin-top:auto">Es guanyen la primera vegada que desbloqueges un municipi, fas una missió i fas una foto, i amb cada nivell de les medalles de comarca.</div></div>`,
+ cataleg:()=>`${estatus}<div style="display:flex;align-items:center;gap:10px;padding:8px 14px;flex:none"><button class="bi" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button><span class="t-display" style="font-size:20px">Catàleg de cartells</span></div>
+   <div class="suau" style="padding:0 16px 8px;font-size:13px">Tens 0 dels ${D.total} cartells.</div><div class="seccio" style="font-size:15px">Osona</div>
+   <div class="cos"><div class="graella">${D.osona.map(n=>{const c=Object.keys(PER).find(k=>PER[k].n===n);const e=c?estat(c):'B';return e==='D'?`<div class="cromo" style="background:var(--sup2);border:1px dashed var(--linia);color:var(--suau)">${esc(n)}</div>`:`<div class="cromo" style="background:repeating-linear-gradient(45deg,var(--boira) 0 4px,var(--sup) 4px 8px);color:var(--suau);justify-content:center;align-items:center;font:700 16px var(--display)">?</div>`}).join('')}</div></div>`,
+ camera:()=>`<div class="cos" style="background:linear-gradient(180deg,#4F7898 0 40%,#66804F 40% 72%,#4B4842 72%);position:relative">
+   <div style="position:absolute;inset:0;box-shadow:inset 0 0 0 999px rgba(0,0,0,.0)"></div>
+   <div style="position:absolute;left:18%;top:40%;width:64%;height:14%;background:#F4F1EA;border:3px solid #B0303A;border-radius:3px;display:flex;align-items:center;justify-content:center;font:700 18px var(--display);color:#222">${esc(nom(S.municipi||S.inici||'08298').toUpperCase())}</div>
+   <div style="position:absolute;left:10%;top:36%;width:80%;height:22%;border:2px solid #F2B544;border-radius:6px;box-shadow:0 0 0 999px rgba(0,0,0,.45)"></div>
+   <div style="padding:40px 16px 0;display:flex;flex-direction:column;gap:8px;position:relative"><button class="bi" data-accio="enrere" aria-label="Tanca">${ICO.tancar}</button>
+     <div style="background:rgba(11,14,19,.85);color:#EEF1F5;border-radius:14px;padding:10px 12px"><b class="t-display">${esc(nom(S.municipi||S.inici||'08298'))}</b><div style="font-size:12px;color:#9AA4B2">Ajusta el requadre perquè hi càpiga el cartell i fes la foto.</div></div></div>
+   <button aria-label="Fes la foto" data-accio="enrere" style="position:absolute;bottom:34px;left:50%;transform:translateX(-50%);width:76px;height:76px;border-radius:50%;border:4px solid #F2B544;background:#EEF1F5;background-clip:content-box;padding:6px;cursor:pointer"></button></div>`,
+ sobre:()=>`${estatus}<div style="display:flex;align-items:center;gap:10px;padding:8px 14px;flex:none"><button class="bi" data-accio="enrere" aria-label="Enrere">${ICO.enrere}</button><span class="t-display" style="font-size:20px">Sobre l'app</span></div>
+   <div class="cos" style="padding:14px 18px;gap:12px"><div class="t-display" style="font-size:26px">Bocins de Catalunya</div><div class="suau">Visita els 947 municipis de Catalunya com si fos un joc. L'app funciona sense connexió.</div>
+   <div class="targ"><b>Dades</b><div class="suau" style="font-size:13px">Límits municipals: Instituto Geográfico Nacional (IGN), CC BY 4.0. Llocs: Wikidata i OpenStreetMap.</div></div></div>`,
+};
+
+function medalla(t,m,p){
+  const M={bronze:['#8A5A2E','#C98A4E','#EDBB8A'],gris:['var(--sup2)','var(--sup)','var(--linia)']}[m];
+  return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:84px;flex:none"><svg class="medalla" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="${M[0]}"/><circle cx="50" cy="50" r="38" fill="${M[1]}"/><circle cx="50" cy="50" r="32" fill="none" stroke="${M[2]}" stroke-width="2"/></svg><b style="font-size:12px;text-align:center">${t}</b><span class="suau" style="font-size:11px">${p}</span></div>`}
+
+function celebracio(){const c=S.capa;return `<div class="capa" role="dialog" aria-label="${esc(c.titol)}"><svg viewBox="0 0 100 100" width="150" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="var(--ambre)" opacity=".18"/><circle cx="50" cy="50" r="26" fill="var(--ambre)" opacity=".35"/><circle cx="50" cy="50" r="12" fill="var(--ambre)"/></svg>
+  ${c.punts?`<div style="display:flex;align-items:center;gap:10px" class="acc"><span class="t-display" style="font-size:46px">+${c.punts}</span>${barr(44)}</div>`:''}
+  <div class="t-display" style="font-size:22px">${esc(c.titol)}</div>${c.text?`<div class="suau">${esc(c.text)}</div>`:''}<button class="bp" data-accio="tanca-capa">Continua</button></div>`}
+
+const NOMS={entra:'Entrar',nom:'Tria el nom',inici:'D\'on ets?',mapa:'Mapa',fitxa:'Fitxa',missions:'Missions',gent:'Gent',perfil:'Perfil',passaport:'Passaport',sacs:'Sacs',cataleg:'Catàleg',camera:'Càmera',sobre:'Sobre l\'app'};
+function pinta(){
+  if(!S.inici&&!['entra','nom','inici'].includes(S.pantalla)){S.inici='08298';S.desc=['08298'];S.segells=['08298']}
+  if(S.pantalla==='fitxa'&&!S.municipi)S.municipi=S.inici;
+  const t=document.getElementById('tel');
+  t.innerHTML=P[S.pantalla]()+(S.capa?celebracio():'');
+  document.getElementById('llista').innerHTML=Object.entries(NOMS).map(([k,n])=>`<button type="button" data-ves="${k}" ${k===S.pantalla?'aria-current="true"':''}>${n}</button>`).join('');
+}
+function completa(id){
+  const c=S.municipi;if(S.fetes.has(id))return;
+  const m=ms(c).find(x=>x.id===id);S.fetes.add(id);
+  const bonus=ms(c).every(x=>S.fetes.has(x.id))?D.cfg.bonus:0;
+  S.guanyats+=m.p+bonus;
+  S.capa={titol:'Missió completada!',punts:m.p+bonus,text:bonus?`Inclou +${bonus} de bonus per completar-les totes`:''};pinta();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button,[data-mun]');if(!b)return;
+  if(b.dataset.tema){const fosc=b.dataset.tema==='fosc';document.getElementById('tel').classList.toggle('clar',!fosc);document.querySelectorAll('[data-tema]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tema===b.dataset.tema));return}
+  if(b.id==='reinicia'){reinicia();pinta();return}
+  if(b.dataset.mun){S.sel=b.dataset.mun;pinta();return}
+  if(b.dataset.ves){ves(b.dataset.ves,b.dataset.ves==='fitxa'?{municipi:S.municipi||S.inici}:{});return}
+  if(b.dataset.fitxa){ves('fitxa',{municipi:b.dataset.fitxa});return}
+  if(b.dataset.missio){completa(b.dataset.missio);return}
+  if(b.dataset.tipus){S.tipus=b.dataset.tipus;pinta();return}
+  if(b.dataset.public){S.public=b.dataset.public==='true';pinta();return}
+  if(b.dataset.inici){S.inici=b.dataset.inici;pinta();return}
+  if(b.dataset.segella){S.segells.push(b.dataset.segella);pinta();return}
+  const a=b.dataset.accio;
+  if(a==='entra')ves('nom');
+  else if(a==='nom')ves('inici');
+  else if(a==='comenca'){S.desc=[S.inici];S.segells=[S.inici];S.historial=[];S.pantalla='mapa';pinta()}
+  else if(a==='treu'){S.sel=null;pinta()}
+  else if(a==='enrere')enrere();
+  else if(a==='desbloqueja'){const c=S.pantalla==='fitxa'?S.municipi:S.sel,k=cost();if(estat(c)!=='V'||saldo()<k)return;S.gastats+=k;S.desc.push(c);S.capa={titol:'Municipi desbloquejat!',text:`${nom(c)} ja és teu. Hi ha ${ms(c).length} missions per fer.`};pinta()}
+  else if(a==='tanca-capa'){S.capa=null;pinta()}
+  else if(a==='obre-sac'){S.sac='obert';pinta()}
+  else if(a==='tanca-sac'){S.sac='tancat';enrere()}
+});
+const ESTILS=[
+ {id:'calma',n:'Calma',d:'Inspirat en Wispr Flow: fons crema càlid, títols amb lletra de serif, botons de píndola, ombres suaus i res de vores. Tranquil i elegant.'},
+ {id:'llista',n:'Llista',d:'Inspirat en Any.do: net i amable, blanc de debò, títols molt gruixuts, caselles rodones i targetes amb una ombra lleu.'},
+ {id:'precis',n:'Precís',d:'Inspirat en Nothing OS, sense punts: blanc i negre amb l\'ambre, línies fines, lletra monoespaiada per als números i els detalls.'},
+ {id:'ara',n:'Ara',d:'L\'estètica d\'avui («nit i fanals»), per comparar.'},
+];
+let estil='calma',vals={},db=null,temps;
+try{const m=JSON.parse(localStorage.getItem('estil4')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function aplicaEstil(){
+  const t=document.getElementById('tel');ESTILS.forEach(x=>t.classList.toggle('e-'+x.id,x.id===estil&&x.id!=='ara'));
+  document.getElementById('estils').innerHTML=ESTILS.map(x=>`<button type="button" data-estil="${x.id}" aria-pressed="${x.id===estil}">${x.n}</button>`).join('');
+  document.getElementById('descripcio-estil').textContent=ESTILS.find(x=>x.id===estil).d;
+  const v=vals[estil]||{};
+  document.getElementById('valora').innerHTML=estil==='ara'?'':[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-valor="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('');
+  const n=document.getElementById('nota');n.hidden=estil==='ara';n.value=v.nota||'';
+}
+async function desa(){
+  try{localStorage.setItem('estil4',JSON.stringify(vals))}catch(e){}
+  const st=document.getElementById('estat-desa');
+  if(!db){st.textContent='Desat en aquest navegador.';return}
+  const v=vals[estil]||{};
+  try{
+    if(!v.valor&&!v.nota)await db.collection('estil4').doc(estil).delete();
+    else await db.collection('estil4').doc(estil).set({id:estil,nom:ESTILS.find(x=>x.id===estil).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()});
+    st.textContent='Desat. Claude ho podrà llegir.';
+  }catch(e){st.textContent='No s\'ha pogut desar al núvol: es queda en aquest navegador.'}
+}
+document.getElementById('estils').addEventListener('click',e=>{const b=e.target.closest('[data-estil]');if(!b)return;estil=b.dataset.estil;aplicaEstil()});
+document.getElementById('valora').addEventListener('click',e=>{const b=e.target.closest('[data-valor]');if(!b)return;const v=vals[estil]||(vals[estil]={});v.valor=v.valor===b.dataset.valor?null:b.dataset.valor;aplicaEstil();desa()});
+document.getElementById('nota').addEventListener('input',e=>{const v=vals[estil]||(vals[estil]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';aplicaEstil();document.getElementById('nota').focus()}clearTimeout(temps);temps=setTimeout(desa,700)});
+reinicia();pinta();aplicaEstil();
+(async()=>{
+  try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}
+  if(!db)return;
+  try{const q=await db.collection('estil4').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}aplicaEstil()}catch(e){}
+})();
+</script>
