@@ -195,6 +195,9 @@
     </plurals>
     <string name="comarques">Comarques</string>
     <string name="segell_fet">Fet</string>
+    <string name="sacs_comenta_comuna">Per algun lloc s\'ha de començar.</string>
+    <string name="sacs_comenta_rara">Ui, aquest no el té tothom.</string>
+    <string name="sacs_comenta_llegendaria">Llegendari! Guarda\'l bé.</string>
     <string name="so_i_vibracio">So i vibració</string>
     <string name="so_i_vibracio_text">Sons i vibracions quan prems un botó, desbloqueges un poble o fas una missió.</string>
     <string name="les_teves_dades">Les teves dades</string>

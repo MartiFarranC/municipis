@@ -53,11 +53,11 @@ fun nomObjecte(o: Objecte): String {
 @DrawableRes
 fun dibuixEmoji(id: String): Int? = DIBUIXOS_EMOJIS[id]
 
-/** El color de cada raresa: comuna, gris clar; rara, blau; llegendària, or. No canvien amb el color secundari. */
+/** El color de cada raresa: comuna, gris; rara, la tinta; llegendària, el color fort. */
 fun colorRaresa(r: Raresa): Color = when (r) {
     Raresa.INICIAL, Raresa.COMUNA -> Colors.TextSecundari
-    Raresa.RARA -> Color(0xFF5AB8E8)
-    Raresa.LLEGENDARIA -> Color(0xFFF2B544)
+    Raresa.RARA -> Colors.Text
+    Raresa.LLEGENDARIA -> Colors.Ambre
 }
 
 @Composable
