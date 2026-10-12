@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -151,7 +151,7 @@ fun CatalegScreen(onEnrere: () -> Unit, onObreMunicipi: (CodiIne) -> Unit, viewM
                         stringResource(R.string.cataleg_cartell_de, c.nom),
                         Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(10.dp)),
+                            .clip(RectangleShape),
                         contentScale = ContentScale.FillWidth,
                         midaMaxima = 2048,
                     )
@@ -168,7 +168,7 @@ fun CatalegScreen(onEnrere: () -> Unit, onObreMunicipi: (CodiIne) -> Unit, viewM
 
 @Composable
 private fun CasellaCataleg(c: Casella, onObre: () -> Unit) {
-    val forma = RoundedCornerShape(8.dp)
+    val forma = RectangleShape
     val base = Modifier
         .fillMaxWidth()
         .aspectRatio(1.5f)

@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -45,6 +44,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -373,9 +373,9 @@ private fun FilaDeMissio(
             .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .heightIn(min = 64.dp)
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(if (f.completada) Colors.FonsCompletada else Colors.Superficie)
-            .border(1.dp, if (f.completada) Colors.Disponible2 else Colors.Linia, RoundedCornerShape(14.dp))
+            .border(1.dp, if (f.completada) Colors.Disponible2 else Colors.Linia, RectangleShape)
             .clickable(enabled = !f.completada && !provant && activa, role = Role.Button, onClick = onProva)
             .semantics(mergeDescendants = true) { stateDescription = estatText }
             .padding(horizontal = 12.dp, vertical = 8.dp),
@@ -385,9 +385,9 @@ private fun FilaDeMissio(
         Box(
             Modifier
                 .size(26.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RectangleShape)
                 .background(if (f.completada) Colors.Ambre else Color.Transparent)
-                .border(2.dp, if (f.completada) Colors.AmbreText else Colors.TextSecundari, RoundedCornerShape(8.dp)),
+                .border(2.dp, if (f.completada) Colors.AmbreText else Colors.TextSecundari, RectangleShape),
             contentAlignment = Alignment.Center,
         ) {
             if (f.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(16.dp))
@@ -437,7 +437,7 @@ private fun FilaPropia(p: MissioPropia, onCanvia: (String, Boolean) -> Unit, onE
         Modifier
             .fillMaxWidth()
             .heightIn(min = 56.dp)
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
             .padding(start = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -454,9 +454,9 @@ private fun FilaPropia(p: MissioPropia, onCanvia: (String, Boolean) -> Unit, onE
             Box(
                 Modifier
                     .size(22.dp)
-                    .clip(RoundedCornerShape(6.dp))
+                    .clip(RectangleShape)
                     .background(if (p.completada) Colors.Blau else Color.Transparent)
-                    .border(2.dp, Colors.Blau, RoundedCornerShape(6.dp)),
+                    .border(2.dp, Colors.Blau, RectangleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 if (p.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.Fons, modifier = Modifier.size(14.dp))
@@ -483,7 +483,7 @@ private fun Miniatura(f: Foto, nom: String, onClick: () -> Unit) {
         stringResource(R.string.foto_de, nom),
         Modifier
             .size(96.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RectangleShape)
             .clickable(role = Role.Image, onClick = onClick),
         midaMaxima = 320,
     )
@@ -506,9 +506,9 @@ private fun XipVei(v: FilaVei, onClick: () -> Unit) {
     Row(
         Modifier
             .heightIn(min = 48.dp)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RectangleShape)
             .background(fons)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(12.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .clickable(role = Role.Button, onClick = onClick)
             .semantics { stateDescription = estat }
             .padding(horizontal = 14.dp),
@@ -571,15 +571,15 @@ private fun FitxaBloquejada(
                 Box(
                     Modifier
                         .size(200.dp, 150.dp)
-                        .clip(RoundedCornerShape(40.dp))
+                        .clip(RectangleShape)
                         .background(if (estat.estat == EstatMunicipi.DISPONIBLE) Colors.Disponible1 else Colors.Superficie),
                 )
                 Box(
                     Modifier
                         .size(64.dp)
-                        .clip(RoundedCornerShape(20.dp))
+                        .clip(RectangleShape)
                         .background(Colors.Fons)
-                        .border(2.dp, Colors.AmbreText, RoundedCornerShape(20.dp)),
+                        .border(2.dp, Colors.AmbreText, RectangleShape),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(Icones.Cadenat, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(30.dp))
@@ -647,9 +647,9 @@ private fun FitxaBloquejada(
 private fun Dada(etiqueta: String, valor: String, modifier: Modifier = Modifier, color: Color = Colors.Text) {
     Column(
         modifier
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(14.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .padding(14.dp)
             .semantics(mergeDescendants = true) {},
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -700,8 +700,8 @@ private fun CapAjuntament(estat: MunicipiEstat) {
 fun Distintiu(modifier: Modifier = Modifier) {
     Row(
         modifier
-            .clip(RoundedCornerShape(999.dp))
-            .border(1.dp, Colors.AmbreText, RoundedCornerShape(999.dp))
+            .clip(RectangleShape)
+            .border(1.dp, Colors.AmbreText, RectangleShape)
             .padding(horizontal = 10.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -716,9 +716,9 @@ private fun TargetaAvantatge(a: Avantatge) {
     Column(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(14.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .semantics(mergeDescendants = true) {}
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),

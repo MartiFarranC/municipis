@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,6 +40,7 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
@@ -129,7 +129,7 @@ fun CameraScreen(onTanca: () -> Unit, viewModel: CameraViewModel = hiltViewModel
             BotoIcona(Icones.Tancar, stringResource(R.string.tanca), onTanca)
             Column(
                 Modifier
-                    .clip(RoundedCornerShape(14.dp))
+                    .clip(RectangleShape)
                     .background(Colors.Fons.copy(alpha = 0.85f))
                     .padding(12.dp),
             ) {

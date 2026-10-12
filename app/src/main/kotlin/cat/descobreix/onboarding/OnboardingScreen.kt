@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -29,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -103,7 +103,7 @@ fun OnboardingScreen(
                     leadingIcon = { Icon(Icones.Cercar, contentDescription = null) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                    shape = RoundedCornerShape(14.dp),
+                    shape = RectangleShape,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Colors.AmbreText,
                         unfocusedBorderColor = Colors.Linia,
@@ -119,9 +119,9 @@ fun OnboardingScreen(
                     Column(
                         Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(RectangleShape)
                             .background(Colors.Superficie)
-                            .border(1.dp, Colors.Linia, RoundedCornerShape(16.dp)),
+                            .border(1.dp, Colors.Linia, RectangleShape),
                     ) {
                         estat.resultats.forEachIndexed { i, opcio ->
                             if (i > 0) HorizontalDivider(color = Colors.Linia)

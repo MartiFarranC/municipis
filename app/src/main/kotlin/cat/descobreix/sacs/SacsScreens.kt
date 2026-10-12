@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,6 +47,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -73,22 +73,22 @@ import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.joc.config.ConfiguracioJoc.Objecte
 import cat.descobreix.joc.config.ConfiguracioJoc.Raresa
 import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
-import cat.descobreix.ui.components.IconaBarretina
-import cat.descobreix.ui.plural
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
+import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.SardanaCarregant
+import cat.descobreix.ui.plural
 import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.ColorSecundari
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
-import kotlinx.coroutines.launch
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlinx.coroutines.launch
 
 /** Els sacs per obrir i la col·lecció: el que ha sortit dels sacs, i triar el color, l'animació i la tapa. */
 @OptIn(ExperimentalLayoutApi::class)
@@ -189,9 +189,9 @@ private fun PerObrir(n: Int, onObre: () -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(16.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(14.dp),
@@ -222,7 +222,7 @@ private fun Seccio(titol: String, ajuda: String) {
 /** Una fitxa de la col·lecció: el dibuix, el nom i, si es pot triar, si és la triada. */
 @Composable
 private fun Fitxa(nom: String, triada: Boolean, onTria: (() -> Unit)?, vora: Color = Colors.Linia, dibuix: @Composable () -> Unit) {
-    val forma = RoundedCornerShape(14.dp)
+    val forma = RectangleShape
     Column(
         Modifier
             .width(92.dp)
@@ -249,7 +249,7 @@ private fun FitxaObjecte(o: Objecte, laTinc: Boolean, triada: Boolean, onTria: (
             Box(
                 Modifier
                     .fillMaxSize()
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RectangleShape)
                     .background(Colors.Superficie2)
                     .semantics { contentDescription = amagada },
                 contentAlignment = Alignment.Center,
@@ -292,9 +292,9 @@ private fun MiniPortada(id: String) {
     Box(
         Modifier
             .size(44.dp, 62.dp)
-            .clip(RoundedCornerShape(5.dp))
+            .clip(RectangleShape)
             .background(p.fons)
-            .border(1.dp, p.daurat.copy(alpha = .6f), RoundedCornerShape(5.dp)),
+            .border(1.dp, p.daurat.copy(alpha = .6f), RectangleShape),
     ) {
         p.dibuix?.let { Image(painterResource(it), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop) }
     }
@@ -509,9 +509,9 @@ fun AvisSacs(n: Int, onObre: () -> Unit, onDespres: () -> Unit) {
                 .systemBarsPadding()
                 .padding(24.dp)
                 .widthIn(max = 360.dp)
-                .clip(RoundedCornerShape(20.dp))
+                .clip(RectangleShape)
                 .background(Colors.Superficie)
-                .border(1.dp, Colors.Linia, RoundedCornerShape(20.dp))
+                .border(1.dp, Colors.Linia, RectangleShape)
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),

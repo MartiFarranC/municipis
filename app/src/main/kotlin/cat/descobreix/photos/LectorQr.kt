@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -71,6 +71,8 @@ import com.google.zxing.ReaderException
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.concurrent.Executors
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -79,8 +81,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.Executors
-import javax.inject.Inject
 
 data class QrEstat(
     val nom: String = "",
@@ -211,7 +211,7 @@ fun LectorQrScreen(onTanca: () -> Unit, viewModel: LectorQrViewModel = hiltViewM
                 Modifier
                     .align(Alignment.Center)
                     .size(240.dp)
-                    .border(3.dp, Colors.Ambre, RoundedCornerShape(16.dp)),
+                    .border(3.dp, Colors.Ambre, RectangleShape),
             )
         }
         Column(
@@ -224,7 +224,7 @@ fun LectorQrScreen(onTanca: () -> Unit, viewModel: LectorQrViewModel = hiltViewM
             BotoIcona(Icones.Tancar, stringResource(R.string.tanca), onTanca)
             Column(
                 Modifier
-                    .clip(RoundedCornerShape(14.dp))
+                    .clip(RectangleShape)
                     .background(Colors.Fons.copy(alpha = 0.85f))
                     .padding(12.dp),
             ) {

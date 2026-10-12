@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -114,7 +114,7 @@ fun PerfilScreen(
                             Modifier
                                 .width(104.dp)
                                 .aspectRatio(1f)
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(RectangleShape)
                                 .clickable(role = Role.Image) { onObreFoto(f.id) },
                             midaMaxima = 320,
                         )
@@ -228,9 +228,9 @@ private fun Capcalera(estat: PerfilEstat) {
         Box(
             Modifier
                 .size(64.dp)
-                .clip(RoundedCornerShape(20.dp))
+                .clip(RectangleShape)
                 .background(Colors.Disponible1)
-                .border(2.dp, Colors.AmbreText, RoundedCornerShape(20.dp)),
+                .border(2.dp, Colors.AmbreText, RectangleShape),
             contentAlignment = Alignment.Center,
         ) {
             Text("${nivell.numero}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))

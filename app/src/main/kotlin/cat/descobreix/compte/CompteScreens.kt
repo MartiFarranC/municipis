@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -220,7 +220,7 @@ private fun OpcionsVisibilitat(public: Boolean?, onTria: (Boolean) -> Unit) {
 /** Una opció per triar, com un botó de ràdio gran amb el nom i què vol dir. */
 @Composable
 private fun Opcio(nom: String, text: String, triada: Boolean, onTria: () -> Unit) {
-    val forma = RoundedCornerShape(14.dp)
+    val forma = RectangleShape
     Column(
         Modifier
             .fillMaxWidth()
@@ -331,7 +331,7 @@ private fun Camp(
             autoCorrectEnabled = false,
         ),
         keyboardActions = KeyboardActions(onAny = { onAccio() }),
-        shape = RoundedCornerShape(14.dp),
+        shape = RectangleShape,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Colors.AmbreText,
             unfocusedBorderColor = Colors.Linia,

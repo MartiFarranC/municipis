@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -47,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -110,7 +110,7 @@ fun GentScreen(onObrePersona: (String) -> Unit, viewModel: GentViewModel = hiltV
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.gent_cerca)) },
                 singleLine = true,
-                shape = RoundedCornerShape(14.dp),
+                shape = RectangleShape,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Colors.AmbreText,
                     unfocusedBorderColor = Colors.Linia,
@@ -209,7 +209,7 @@ private fun TargetaReaccio(
     onBloqueja: () -> Unit,
     onDenuncia: () -> Unit,
 ) {
-    val forma = RoundedCornerShape(14.dp)
+    val forma = RectangleShape
     Column(
         Modifier
             .fillMaxWidth()
@@ -278,7 +278,7 @@ private fun FinestraAnima(nom: String, emojis: List<String>, onEmoji: (String) -
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(stringResource(R.string.anima_missatge)) },
                     supportingText = { Text("${missatge.length}/${GentViewModel.MAX_MISSATGE}") },
-                    shape = RoundedCornerShape(14.dp),
+                    shape = RectangleShape,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Colors.AmbreText,
                         unfocusedBorderColor = Colors.Linia,
@@ -298,7 +298,7 @@ private fun FinestraAnima(nom: String, emojis: List<String>, onEmoji: (String) -
                         Column(
                             Modifier
                                 .size(width = 84.dp, height = 104.dp)
-                                .clip(RoundedCornerShape(12.dp))
+                                .clip(RectangleShape)
                                 .background(Colors.Superficie)
                                 .clickable(role = Role.Button, onClickLabel = frase) { onEmoji(id) }
                                 .padding(6.dp),
@@ -347,7 +347,7 @@ private fun Titol(text: String) {
 /** Una persona en una llista: la inicial, el nom i si és Explorador o Espectador. */
 @Composable
 private fun FilaPersona(p: Persona, onObre: () -> Unit, sota: (@Composable () -> Unit)? = null) {
-    val forma = RoundedCornerShape(14.dp)
+    val forma = RectangleShape
     Column(
         Modifier
             .fillMaxWidth()
@@ -394,7 +394,7 @@ fun nomTipus(t: TipusPerfil): String = stringResource(if (t == TipusPerfil.EXPLO
 /** Una cosa del mur: qui, què i quan; si és una foto, la miniatura. */
 @Composable
 private fun Event(e: EventMur, municipi: String, imatges: ImatgesRemotes, onObre: () -> Unit, onAnima: () -> Unit) {
-    val forma = RoundedCornerShape(14.dp)
+    val forma = RectangleShape
     Column(
         Modifier
             .fillMaxWidth()
@@ -416,7 +416,7 @@ private fun Event(e: EventMur, municipi: String, imatges: ImatgesRemotes, onObre
             }
         }
         val ruta = e.rutaMiniatura
-        if (ruta != null) ImatgeRemota(ruta, imatges, stringResource(R.string.mur_foto_de, municipi), Modifier.fillMaxWidth().aspectRatio(4f / 3f).clip(RoundedCornerShape(10.dp)))
+        if (ruta != null) ImatgeRemota(ruta, imatges, stringResource(R.string.mur_foto_de, municipi), Modifier.fillMaxWidth().aspectRatio(4f / 3f).clip(RectangleShape))
         BotoSecundari(stringResource(R.string.anima), onAnima)
     }
 }
@@ -533,7 +533,7 @@ fun PersonaScreen(onEnrere: () -> Unit, onObrePersona: (String) -> Unit, viewMod
                             f.rutaMiniatura,
                             viewModel.imatges,
                             stringResource(R.string.mur_foto_de, estat.noms[f.codiIne] ?: f.codiIne),
-                            Modifier.size(104.dp).clip(RoundedCornerShape(10.dp)),
+                            Modifier.size(104.dp).clip(RectangleShape),
                         )
                     }
                 }
@@ -615,9 +615,9 @@ fun CompteSocial(onObreSeguits: () -> Unit, viewModel: SeguitsViewModel = hiltVi
         Row(
             Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(14.dp))
+                .clip(RectangleShape)
                 .background(Colors.Superficie)
-                .border(1.dp, Colors.Linia, RoundedCornerShape(14.dp))
+                .border(1.dp, Colors.Linia, RectangleShape)
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),

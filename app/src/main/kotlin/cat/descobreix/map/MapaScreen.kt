@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -36,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
@@ -152,9 +152,9 @@ fun MapaScreen(
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Column(
                     Modifier
-                        .clip(RoundedCornerShape(12.dp))
+                        .clip(RectangleShape)
                         .background(Colors.Fons.copy(alpha = 0.88f))
-                        .border(1.dp, Colors.Linia, RoundedCornerShape(12.dp))
+                        .border(1.dp, Colors.Linia, RectangleShape)
                         .padding(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
@@ -231,7 +231,7 @@ private fun Capcalera(estat: MapaEstat) {
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RectangleShape)
             .background(Colors.Fons.copy(alpha = 0.88f))
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -241,9 +241,9 @@ private fun Capcalera(estat: MapaEstat) {
             Box(
                 Modifier
                     .size(40.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RectangleShape)
                     .background(Colors.Superficie2)
-                    .border(1.dp, Colors.Linia, RoundedCornerShape(12.dp)),
+                    .border(1.dp, Colors.Linia, RectangleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 Text("${nivell.numero}", fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
@@ -259,9 +259,9 @@ private fun Capcalera(estat: MapaEstat) {
         }
         Row(
             Modifier
-                .clip(RoundedCornerShape(999.dp))
+                .clip(RectangleShape)
                 .background(Colors.Superficie2)
-                .border(1.dp, Colors.Linia, RoundedCornerShape(999.dp))
+                .border(1.dp, Colors.Linia, RectangleShape)
                 .padding(horizontal = 12.dp, vertical = 8.dp)
                 .semantics(mergeDescendants = true) {},
             verticalAlignment = Alignment.CenterVertically,
@@ -285,9 +285,9 @@ private fun TargetaSeleccio(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(16.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .semantics { liveRegion = LiveRegionMode.Polite }
             .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -321,7 +321,7 @@ private fun TargetaSeleccio(
                 onClick = onDesbloqueja,
                 enabled = !desbloquejant,
                 modifier = Modifier.heightIn(min = 48.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(containerColor = Colors.Ambre, contentColor = Colors.TintaAmbre),
             ) {
                 val cost = plural(R.plurals.punts_curt, s.cost, s.cost)
@@ -337,7 +337,7 @@ private fun TargetaSeleccio(
             else -> Button(
                 onClick = onObre,
                 modifier = Modifier.heightIn(min = 48.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(containerColor = Colors.Superficie2, contentColor = Colors.Text),
             ) {
                 Text(stringResource(R.string.obre_fitxa))
@@ -351,7 +351,7 @@ private fun TargetaSeleccio(
 private fun Llegenda() {
     Row(
         Modifier
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RectangleShape)
             .background(Colors.Fons.copy(alpha = 0.85f))
             .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -369,9 +369,9 @@ private fun ElementLlegenda(color: Color, text: String) {
         Box(
             Modifier
                 .size(10.dp)
-                .clip(RoundedCornerShape(3.dp))
+                .clip(RectangleShape)
                 .background(color)
-                .border(1.dp, Colors.Linia, RoundedCornerShape(3.dp)),
+                .border(1.dp, Colors.Linia, RectangleShape),
         )
         Text(text, style = MaterialTheme.typography.bodySmall)
     }
@@ -403,7 +403,7 @@ private fun PanellCerca(
                 placeholder = { Text(stringResource(R.string.cerca_municipi)) },
                 leadingIcon = { Icon(Icones.Cercar, contentDescription = null) },
                 singleLine = true,
-                shape = RoundedCornerShape(14.dp),
+                shape = RectangleShape,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Colors.AmbreText,
                     unfocusedBorderColor = Colors.Linia,
@@ -419,7 +419,7 @@ private fun PanellCerca(
                 Modifier
                     .fillMaxWidth()
                     .heightIn(min = 56.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RectangleShape)
                     .clickable(role = Role.Button) { onTria(r) }
                     .padding(horizontal = 12.dp, vertical = 8.dp),
             ) {
