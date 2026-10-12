@@ -1,0 +1,277 @@
+<title>Qüestionari d'estètica</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@800&family=Anton&family=Syne:wght@800&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@0;1&family=Rubik+Mono+One&family=Shrikhand&family=Space+Mono:wght@700&display=swap">
+<style>
+/* Qüestionari per trobar l'estètica de l'app des de zero. La pàgina és neutra (blanc, negre i un sol gris) perquè no
+   empenyi cap resposta. Les demostracions de moviment són en blanc i negre: aquí només compta com es mouen.
+   Generat per gen-prototip.py, que hi posa la forma de debò de Calldetenes per a les animacions de desbloqueig. */
+:root{--t:#111;--s:#666;--l:#DDD;--f:#FFF;--sup:#F4F4F4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--f);color:var(--t);font:16px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+.pagina{max-width:760px;margin:0 auto;padding:28px 16px 80px}
+header.cap small{font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--s)}
+header.cap h1{font-size:32px;line-height:1.1;margin:6px 0 12px}
+header.cap p{margin:0 0 10px}
+.progres{position:sticky;top:0;z-index:5;background:var(--f);padding:10px 0;border-bottom:1px solid var(--l);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--s)}
+.progres .barra{flex:1;height:4px;background:var(--l)}.progres .barra i{display:block;height:100%;background:var(--t);width:0;transition:width .3s}
+.bloc{margin-top:34px}
+.bloc>h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--s);margin:0 0 4px;font-weight:600}
+.q{padding:22px 0;border-bottom:1px solid var(--l)}
+.q h3{font-size:20px;line-height:1.25;margin:0 0 4px}
+.q .ajuda{margin:0 0 12px;color:var(--s);font-size:14px}
+.ops{display:grid;gap:8px}
+.ops.dues{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.ops.tres{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.op{border:1.5px solid var(--l);background:var(--f);padding:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:48px}
+.op[aria-pressed="true"]{border-color:var(--t);box-shadow:inset 0 0 0 1.5px var(--t)}
+.op .nom{font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.op .nom::after{content:"";flex:none;width:18px;height:18px;border:1.5px solid var(--t);border-radius:var(--marca,50%)}
+.op[aria-pressed="true"] .nom::after{background:var(--t);box-shadow:inset 0 0 0 3px var(--f)}
+.ops[data-multi] .op{--marca:3px}
+.op .desc{font-size:14px;color:var(--s)}
+.op:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #1A5FD0;outline-offset:2px}
+.extra{width:100%;margin-top:10px;border:1.5px solid var(--l);padding:10px;font:inherit;font-size:15px;min-height:44px;resize:vertical}
+.escala{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:8px 0}
+.escala span:first-child{text-align:right}
+.escala .punts{display:flex;gap:6px}
+.escala .punts button{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--t);background:var(--f);cursor:pointer;padding:0}
+.escala .punts button[aria-pressed="true"]{background:var(--t)}
+.escala .punts button:nth-child(3){width:22px;height:22px;margin:4px}
+@media (max-width:520px){.escala{grid-template-columns:1fr;gap:4px}.escala span:first-child{text-align:left}.escala .punts{justify-content:space-between}}
+.mostra-colors{display:flex;height:40px}.mostra-colors i{flex:1}
+.mostra-lletra{font-size:28px;line-height:1.05;color:var(--t)}
+.final{margin-top:30px;padding:16px;background:var(--sup)}
+.desat{font-size:13px;color:var(--s);margin-top:6px}
+
+/* ── Escenari de les demostracions ─────────────────────────────────────── */
+.esc{background:var(--sup);height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.esc.alt{height:170px}
+.prova{font-size:12px;color:var(--s);text-align:center}
+.b{font:700 15px "IBM Plex Sans";background:#111;color:#fff;border:0;padding:13px 22px;border-radius:10px;cursor:pointer;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+/* 1 aixafa */
+.b.aixafa.fes{animation:aixafa .42s cubic-bezier(.3,1.6,.5,1)}
+@keyframes aixafa{0%{transform:none}25%{transform:scale(1.08,.82)}55%{transform:scale(.95,1.06)}100%{transform:none}}
+/* 2 enfonsa */
+.b.enfonsa{box-shadow:0 6px 0 #555;transition:transform .08s,box-shadow .08s}
+.b.enfonsa.fes{transform:translateY(6px);box-shadow:0 0 0 #555}
+/* 3 gelatina */
+.b.gelatina.fes{animation:gelatina .7s}
+@keyframes gelatina{0%,100%{transform:none}20%{transform:scale(1.18,.84)}35%{transform:scale(.86,1.14)}50%{transform:scale(1.08,.94)}65%{transform:scale(.97,1.03)}80%{transform:scale(1.01,.99)}}
+/* 4 segell */
+.b.segell.fes{animation:segell .45s cubic-bezier(.2,1.4,.4,1)}
+.b.segell.fes::after{content:"";position:absolute;inset:-6px;border:3px solid #111;border-radius:14px;animation:tinta .55s ease-out forwards}
+@keyframes segell{0%{transform:scale(1.35) rotate(-8deg)}60%{transform:scale(.96) rotate(-3deg)}100%{transform:rotate(-3deg)}}
+@keyframes tinta{from{opacity:1;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
+/* 5 omple (mantén premut) */
+.b.omple{overflow:hidden;background:#555}
+.b.omple i{position:absolute;inset:0;background:#111;transform-origin:0 50%;transform:scaleX(0)}
+.b.omple.prem i{transform:scaleX(1);transition:transform .9s linear}
+.b.omple span{position:relative}
+/* 6 confeti */
+.espurna{position:absolute;width:7px;height:11px;background:#111;left:50%;top:50%;pointer-events:none;animation:espurna .8s ease-out forwards}
+.espurna:nth-child(odd){background:#888;border-radius:50%;width:8px;height:8px}
+@keyframes espurna{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r));opacity:0}}
+/* 7 inclina */
+.esc.persp{perspective:500px}
+.b.inclina{transition:transform .15s;transform-style:preserve-3d}
+/* 8 fa gràcia: el text canvia */
+.b.gracia span{display:inline-block;transition:transform .25s,opacity .25s}
+.b.gracia.fes span{animation:canvi .9s}
+@keyframes canvi{0%{transform:none}25%{transform:translateY(-120%);opacity:0}26%{transform:translateY(120%)}50%,80%{transform:none;opacity:1}}
+
+/* ── Desbloqueig d'un municipi ────────────────────────────────────────── */
+.mun{width:150px;height:150px;overflow:visible}
+.mun .forma{fill:#111}
+.mun .base{fill:#CFCFCF}
+.esc.d-boira .boira{animation:boira 1.1s ease-out forwards}
+@keyframes boira{to{opacity:0;filter:blur(8px);transform:scale(1.25)}}
+.esc.d-boira .forma{animation:apareix 1.1s ease-out forwards}
+@keyframes apareix{from{opacity:0}to{opacity:1}}
+.esc.d-peca .forma{animation:peca .8s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes peca{from{transform:translateY(-80px) rotate(-14deg);opacity:0}60%{opacity:1}to{transform:none}}
+.esc.d-pinzell .traç{animation:traç 1s ease-in-out forwards}
+.esc.d-pinzell .forma{animation:apareix .3s .9s both}
+@keyframes traç{from{stroke-dashoffset:var(--llarg)}to{stroke-dashoffset:0}}
+.esc .estampa{opacity:0}
+.esc.d-estampa .forma{animation:apareix .01s .35s both}
+.esc.d-estampa .estampa{animation:estampa .5s cubic-bezier(.2,1.5,.4,1) forwards}
+@keyframes estampa{from{opacity:0;transform:scale(2.4) rotate(-25deg)}to{opacity:1;transform:rotate(-12deg)}}
+.esc.d-focs .forma{animation:apareix .3s both}
+.esc.d-onada .ona{animation:ona 1s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes ona{from{transform:translateY(100%)}to{transform:none}}
+.mun *{transform-box:fill-box;transform-origin:center}
+
+/* ── Missió feta ──────────────────────────────────────────────────────── */
+.fila-m{background:#fff;width:min(300px,90%);display:flex;align-items:center;gap:10px;padding:12px;font-size:15px;position:relative}
+.fila-m .txt{flex:1;position:relative}
+.fila-m .pts{font-weight:700}
+.fila-m .ratlla{position:absolute;left:0;top:52%;height:2.5px;background:#111;width:0}
+.esc.m-ratlla .ratlla{animation:ratlla .5s ease-in-out forwards}
+@keyframes ratlla{to{width:100%}}
+.esc.m-ratlla .txt{animation:atenua .3s .45s forwards}
+@keyframes atenua{to{color:#999}}
+.fila-m svg.chk{width:24px;height:24px;flex:none}
+.fila-m svg.chk path{stroke-dasharray:24;stroke-dashoffset:24}
+.esc.m-check svg.chk path{animation:chk .4s .15s ease-out forwards}
+.esc.m-check svg.chk circle{animation:chkc .3s forwards}
+@keyframes chk{to{stroke-dashoffset:0}}
+@keyframes chkc{to{fill:#111}}
+.vola{position:absolute;font-weight:700;right:14px;top:10px;opacity:0}
+.esc.m-vola .vola{animation:vola .9s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes vola{0%{opacity:1;transform:none}100%{opacity:0;transform:translate(10px,-58px) scale(.7)}}
+.comptador{position:absolute;right:12px;top:8px;font-weight:700;font-size:13px;background:#111;color:#fff;padding:3px 8px;border-radius:20px}
+.esc.m-vola .comptador{animation:bump .3s .8s}
+@keyframes bump{50%{transform:scale(1.3)}}
+.esc.m-surt .fila-m{animation:surt 1.1s ease-in-out}
+@keyframes surt{0%{transform:none}40%{transform:translateX(110%);opacity:0}41%{transform:translateX(-110%)}100%{transform:none;opacity:1}}
+
+/* ── Transicions entre pantalles ──────────────────────────────────────── */
+.minitel{width:90px;height:150px;border:3px solid #111;border-radius:14px;position:relative;overflow:hidden;background:#fff}
+.minitel .p1,.minitel .p2{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.minitel .p1{background:#fff}.minitel .p2{background:#111;color:#fff;opacity:0}
+.esc.t-tall .p2{animation:tall 1.4s steps(1) forwards}
+@keyframes tall{50%,100%{opacity:1}}
+.esc.t-llisca .p2{opacity:1;transform:translateX(100%);animation:llisca .5s .3s ease-out forwards}
+@keyframes llisca{to{transform:none}}
+.esc.t-zoom .p2{animation:zoom .55s .3s cubic-bezier(.3,1.2,.5,1) forwards}
+@keyframes zoom{from{opacity:1;clip-path:circle(0% at 30% 40%)}to{opacity:1;clip-path:circle(150% at 30% 40%)}}
+.esc.t-cortina .p2{animation:cortina .6s .3s ease-in-out forwards}
+@keyframes cortina{from{opacity:1;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0)}}
+.mascota{width:84px;height:84px}
+@media (prefers-reduced-motion:reduce){.pagina *{animation-duration:.01s!important;transition:none!important}}
+</style>
+<div class="pagina">
+  <header class="cap">
+    <small>Bocins de Catalunya · tornem a començar</small>
+    <h1>Qüestionari d'estètica</h1>
+    <p>Busquem una app <b>cridanera per al jovent i seriosa per a la gent gran: professional, adulta, divertida i amb gràcia, sense passar-se</b>. I que els botons, les animacions i tot el disseny siguin propis, no els de qualsevol app.</p>
+    <p>Aquesta vegada no t'ensenyo pantalles acabades. Et pregunto per les peces, i les de moviment les pots <b>tocar</b> per veure-les (en blanc i negre, perquè aquí només importa com es mouen). No hi ha respostes bones ni dolentes, i a cada pregunta pots escriure el que vulguis. Es desa tot sol. Quan acabis, digues "ja està".</p>
+  </header>
+  <div class="progres" aria-live="polite"><span id="comptador">0 de 0</span><div class="barra"><i id="barra"></i></div></div>
+  <div id="preguntes"></div>
+  <div class="final"><h3 style="margin:0 0 6px">Per acabar</h3><p style="margin:0 0 6px;color:var(--s);font-size:14px">Explica'm com t'imagines un moment de l'app: per exemple, arribar a un poble nou i desbloquejar-lo. Què veus, què sents, què et fa riure.</p>
+    <textarea class="extra" id="lliure" style="min-height:110px" aria-label="Com t'imagines un moment de l'app"></textarea><div class="desat" id="desat"></div></div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CALL=D.mapa.find(p=>p.c==='08037');
+
+// Demostracions. Cada una és un escenari que es reprodueix quan el toques.
+const B=(cl,txt='Desbloqueja')=>`<div class="esc" data-demo="boto"><button type="button" class="b ${cl}">${cl==='omple'?'<i></i>':''}<span>${txt}</span></button></div><div class="prova">${cl==='omple'?'mantén-lo premut':cl==='inclina'?'mou el dit o el ratolí per sobre':'toca\'l'}</div>`;
+const MUN=(cl,extra='')=>`<div class="esc alt" data-demo="${cl}"><svg class="mun" viewBox="0 0 10 10" data-ajusta>${extra}</svg></div><div class="prova">toca per repetir</div>`;
+const FILA=cl=>`<div class="esc" data-demo="${cl}"><div class="fila-m">${cl==='m-check'?'<svg class="chk" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#fff" stroke="#111" stroke-width="1.5"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4"/></svg>':''}<span class="txt">Catedral de Vic<span class="ratlla"></span></span><span class="pts">16</span>${cl==='m-vola'?'<span class="vola">+16</span>':''}</div>${cl==='m-vola'?'<span class="comptador">140 → 156</span>':''}</div><div class="prova">toca per repetir</div>`;
+const TR=cl=>`<div class="esc alt" data-demo="${cl}"><div class="minitel"><div class="p1">Mapa</div><div class="p2">Vic</div></div></div><div class="prova">toca per repetir</div>`;
+const COL=cs=>`<div class="mostra-colors">${cs.map(c=>`<i style="background:${c}"></i>`).join('')}</div>`;
+const LL=(f,w='')=>`<div class="mostra-lletra" style="font-family:${f};${w}">Bocins de<br>Catalunya</div>`;
+const MASC={
+ barretina:`<svg class="mascota" viewBox="0 0 100 100"><path d="M18 78C22 50 40 22 70 14c8-2 14 4 10 12-6 12-10 30-8 52Z" fill="#111"/><path d="M18 78Q45 70 72 78" stroke="#fff" stroke-width="3" fill="none"/><circle cx="40" cy="58" r="7" fill="#fff"/><circle cx="58" cy="56" r="7" fill="#fff"/><circle cx="42" cy="59" r="3" fill="#111"/><circle cx="60" cy="57" r="3" fill="#111"/></svg>`,
+ persona:`<svg class="mascota" viewBox="0 0 100 100"><circle cx="50" cy="38" r="18" fill="#111"/><path d="M22 92c2-22 14-32 28-32s26 10 28 32Z" fill="#111"/><path d="M40 40q10 8 20 0" stroke="#fff" stroke-width="3" fill="none"/></svg>`,
+ cap:`<svg class="mascota" viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" fill="none" stroke="#bbb" stroke-width="3" stroke-dasharray="6 6"/></svg>`,
+ objectes:`<svg class="mascota" viewBox="0 0 100 100"><rect x="20" y="34" width="40" height="46" rx="4" fill="#111"/><circle cx="33" cy="52" r="4" fill="#fff"/><circle cx="47" cy="52" r="4" fill="#fff"/><path d="M33 64q7 6 14 0" stroke="#fff" stroke-width="3" fill="none"/><path d="M66 80V40l14-8v48Z" fill="#888"/><circle cx="71" cy="52" r="2.5" fill="#fff"/><circle cx="76" cy="50" r="2.5" fill="#fff"/></svg>`,
+};
+
+const BLOCS=[
+ {n:'La personalitat',q:[
+  {id:'escales',t:'On cau l\'app entre aquests dos extrems?',a:'Toca un punt de cada línia. El del mig vol dir "ni una cosa ni l\'altra".',escala:[['Seriosa','Juganera'],['Minimalista','Plena de detalls'],['Suau','Contrastada'],['Clàssica','Atrevida'],['Tranquil·la','Enèrgica'],['Càlida','Freda'],['Feta per ordinador','Feta a mà']]},
+  {id:'paraules',t:'Si l\'app fos una persona, com seria?',a:'Tria\'n fins a tres.',multi:3,ops:[['Una colla d\'amics de festa major','Sorollosa, propera, de poble.'],['Una guia de muntanya','Sap on va, et cuida, té bon humor.'],['Un presentador de la tele','Simpàtic, polit, sap fer riure sense ofendre.'],['Una dissenyadora jove','Moderna, amb criteri, una mica descarada.'],['Un avi que t\'explica històries','Savi, amb gràcia, sense presses.'],['Un esportista','Reptes, rànquings, energia.'],['Una botiga de barri','De confiança, coneix tothom.'],['Un còmic','Fa riure, però no a costa teva.']]},
+  {id:'apps',t:'Quines apps, marques o webs t\'agraden per com es veuen o com es mouen?',a:'Tria les que vulguis i escriu-ne d\'altres a sota. Em servirà molt saber-ho.',multi:99,dues:1,ops:[['Duolingo'],['Spotify (el Wrapped)'],['Nothing'],['Wispr Flow'],['Any.do'],['Notion'],['Headspace'],['Airbnb'],['Revolut'],['Monzo'],['Strava'],['Pokémon GO'],['BeReal'],['Letterboxd'],['Arc (navegador)'],['Teenage Engineering'],['Mailchimp'],['Apple'],['Instagram'],['TikTok'],['Cap d\'aquestes']]},
+ ]},
+ {n:'L\'humor',q:[
+  {id:'humor',t:'D\'on ha de sortir la gràcia?',a:'Tria\'n totes les que vulguis.',multi:99,ops:[['Dels textos','Frases amb picardia catalana a les pantalles i als avisos.'],['De les animacions','Botons i transicions que es mouen amb gràcia.'],['D\'un personatge','Una mascota que reacciona al que fas.'],['Dels dibuixos','Il·lustracions i icones amb un punt d\'ironia.'],['De sorpreses amagades','Coses que només descobreixes si toques on no toca.'],['Dels sons i la vibració','Petits sons i vibracions quan passen coses.']]},
+  {id:'to',t:'Quan desbloqueges un poble, quin text t\'agrada més?',a:'Cada opció és un to diferent, del més seriós al més de broma.',una:1,ops:[['Calldetenes desbloquejat.','Neutre. Diu el que passa.'],['Benvingut a Calldetenes!','Amable i proper.'],['Calldetenes ja és teu. Ara, a suar la samarreta.','Amb picardia, sense passar-se.'],['Ep! Calldetenes s\'apunta a la festa.','Festiu i de colla.'],['Calldetenes, a la butxaca. Quin crac.','Molt de broma, molt jove.']]},
+  {id:'to-error',t:'I quan el GPS diu que no ets al poble?',a:'',una:1,ops:[['No ets a Calldetenes.','Neutre.'],['Sembla que encara no hi ets. Torna-ho a provar quan hi arribis.','Amable.'],['Ui, el GPS diu que encara et queda camí.','Amb gràcia.'],['Tramposet! El GPS t\'ha enxampat.','De broma.']]},
+  {id:'mascota',t:'Hi ha d\'haver un personatge?',a:'',una:1,ops:[['Cap personatge','L\'app parla sola, sense ningú.',MASC.cap],['La barretina amb ulls','La moneda de l\'app fa de mascota.',MASC.barretina],['Una persona','Un explorador o exploradora dibuixat.',MASC.persona],['Objectes de poble amb cara','La bústia, la campana, el fanal… cadascun a la seva pantalla.',MASC.objectes]]},
+ ]},
+ {n:'Colors i lletres',q:[
+  {id:'colors',t:'Quina energia de color?',a:'Mira només la sensació, no els colors exactes. Tria\'n una o dues.',multi:2,dues:1,ops:[['Pop saturat','Colors plens i purs, sense degradats.',COL(['#FF4A1C','#1F5BFF','#FFD23F','#111'])],['Elèctric','Un fluor sobre negre.',COL(['#0D0D0D','#C6FF00','#0D0D0D','#F3F3F3'])],['Primaris','Vermell, blau i groc, com un cartell.',COL(['#E4202A','#0052A5','#FFCC00','#fff'])],['Madurs però vius','Colors intensos amb un punt de terra.',COL(['#D94F2B','#0F5C4D','#F2A93B','#1D1D2C'])],['Un sol color fort','Tot blanc i negre, i un color per a les coses importants.',COL(['#fff','#111','#fff','#FF3D00'])],['Caramel','Colors de llaminadura, però foscos de fons.',COL(['#2A1E5C','#FF6FB5','#5CE1E6','#FFE066'])]]},
+  {id:'fons',t:'De quin color és el fons?',a:'',una:1,ops:[['Blanc'],['Negre'],['D\'un color (cada pantalla el seu)'],['Clar i fosc, segons el mòbil']]},
+  {id:'lletra',t:'Quina lletra té la personalitat de l\'app?',a:'Tria\'n fins a tres.',multi:3,dues:1,ops:[['Ampla i rodona','',LL('"Unbounded"','font-weight:800;font-size:22px')],['Estreta i alta','',LL('"Anton"','font-size:32px')],['Atrevida i estranya','',LL('"Syne"','font-weight:800;font-size:24px')],['Grotesca amb caràcter','',LL('"Bricolage Grotesque"','font-weight:800')],['Elegant amb cursiva','',LL('"Instrument Serif"','font-style:italic;font-size:32px')],['Grossa i quadrada','',LL('"Rubik Mono One"','font-size:18px')],['Retro de rètol','',LL('"Shrikhand"','font-size:26px')],['De màquina','',LL('"Space Mono"','font-weight:700;font-size:21px')]]},
+ ]},
+ {n:'Botons',q:[
+  {id:'boto-moviment',t:'Com ha de reaccionar un botó quan el toques?',a:'Prova\'ls tots. Marca els que t\'agradin (fins a tres).',multi:3,dues:1,ops:[['S\'aixafa','Com una pilota.',B('aixafa')],['S\'enfonsa','Com una tecla de debò.',B('enfonsa')],['Gelatina','Tremola i torna al seu lloc.',B('gelatina')],['Segell','Cau com un segell de goma.',B('segell')],['S\'omple','Mantens premut i s\'omple, per a les accions importants.',B('omple','Mantén per desbloquejar')],['Confeti','Petites espurnes en tocar-lo.',B('confeti')],['S\'inclina','Segueix el dit en 3D.',B('inclina')],['Contesta','El text canvia i et respon.',B('gracia')]]},
+  {id:'boto-forma',t:'Quina forma han de tenir?',a:'Tria\'n una o dues.',multi:2,dues:1,ops:[['Rectangle','',`<div class="esc"><span class="b" style="border-radius:0">Desbloqueja</span></div>`],['Cantonades rodones','',`<div class="esc"><span class="b">Desbloqueja</span></div>`],['Píndola','',`<div class="esc"><span class="b" style="border-radius:99px">Desbloqueja</span></div>`],['Ombra dura','',`<div class="esc"><span class="b" style="background:#fff;color:#111;border:2px solid #111;border-radius:0;box-shadow:5px 5px 0 #111">Desbloqueja</span></div>`],['Cantonada tallada','',`<div class="esc"><span class="b" style="border-radius:0;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)">Desbloqueja</span></div>`],['Fet a mà','Una mica tort, com retallat.',`<div class="esc"><span class="b" style="border-radius:255px 15px 225px 15px/15px 225px 15px 255px;transform:rotate(-1.5deg)">Desbloqueja</span></div>`]]},
+ ]},
+ {n:'Animacions',q:[
+  {id:'desbloqueig',t:'Com s\'ha de veure que desbloqueges un poble?',a:'És el moment més important del joc. La forma és la de Calldetenes. Marca\'n fins a dues.',multi:2,dues:1,ops:[['La boira s\'esvaeix','',MUN('d-boira')],['Peça de trencaclosques','Cau al seu lloc del mapa.',MUN('d-peca')],['Pinzellada','Es pinta d\'una passada.',MUN('d-pinzell')],['Segell al damunt','Com al passaport.',MUN('d-estampa')],['Focs artificials','Com a la festa major.',MUN('d-focs')],['S\'omple','El color puja de baix a dalt.',MUN('d-onada')]]},
+  {id:'missio',t:'I quan fas una missió?',a:'Marca\'n fins a dues.',multi:2,dues:1,ops:[['Es ratlla','',FILA('m-ratlla')],['Check que es dibuixa','',FILA('m-check')],['Els punts volen al comptador','',FILA('m-vola')],['Surt i torna','La fila se\'n va i torna a les fetes.',FILA('m-surt')]]},
+  {id:'transicio',t:'Com es passa d\'una pantalla a l\'altra?',a:'',una:1,dues:1,ops:[['Tall directe','',TR('t-tall')],['Llisca','',TR('t-llisca')],['Zoom des del mapa','S\'obre des del poble que has tocat.',TR('t-zoom')],['Cortina','Baixa com la persiana d\'una botiga.',TR('t-cortina')]]},
+  {id:'quantitat',t:'Quanta animació hi ha d\'haver?',a:'',una:1,ops:[['Poca','Només als moments grans: desbloquejar, completar un poble, obrir un sac.'],['Bastant','Als moments grans i a cada botó.'],['Molta','Tot es mou una mica, sempre.'],['Que es pugui triar','Cadascú tria a la configuració.']]},
+ ]},
+ {n:'El que no vols',q:[
+  {id:'mai',t:'Què no vols veure mai a l\'app?',a:'Tria\'n totes les que vulguis.',multi:99,ops:[['Colors pastel infantils'],['Degradats'],['Ombres suaus de targeta'],['Emojis per tot arreu'],['Massa text'],['Botons de píndola'],['Aspecte de banc'],['Aspecte de joc per a nens'],['Aspecte vell o antic'],['Aspecte d\'app feta amb IA'],['Il·lustracions de gent sense cara'],['Fotos d\'estoc']]},
+ ]},
+];
+const Q=BLOCS.flatMap(b=>b.q);
+let R={},db=null,lliure='';
+try{const m=JSON.parse(localStorage.getItem('qestil1')||'null');if(m){R=m.R||{};lliure=m.lliure||''}}catch(e){}
+const resp=id=>R[id]||(R[id]={tria:[],escala:{},nota:''});
+
+function pinta(){
+  document.getElementById('preguntes').innerHTML=BLOCS.map(b=>`<section class="bloc"><h2>${b.n}</h2>${b.q.map(q=>{const r=R[q.id]||{tria:[],escala:{},nota:''};
+    let cos='';
+    if(q.escala)cos=q.escala.map(([a,z],i)=>`<div class="escala" role="group" aria-label="${a} o ${z}"><span>${a}</span><span class="punts">${[1,2,3,4,5].map(v=>`<button type="button" data-q="${q.id}" data-e="${i}" data-v="${v}" aria-pressed="${r.escala[i]===v}" aria-label="${v} de 5"></button>`).join('')}</span><span>${z}</span></div>`).join('');
+    else cos=`<div class="ops ${q.dues?'dues':''}" ${q.multi?`data-multi="${q.multi}"`:''} role="group" aria-label="${esc(q.t)}">${q.ops.map(([n,d,demo],i)=>`<div class="op" role="button" tabindex="0" data-q="${q.id}" data-i="${i}" aria-pressed="${r.tria.includes(i)}">${demo||''}<span class="nom">${esc(n)}</span>${d?`<span class="desc">${esc(d)}</span>`:''}</div>`).join('')}</div>`;
+    return `<div class="q" id="q-${q.id}"><h3>${q.t}</h3>${q.a?`<p class="ajuda">${q.a}</p>`:''}${cos}<textarea class="extra" data-nota="${q.id}" rows="1" placeholder="${q.id==='apps'?'Altres apps o webs que t\'agradin':'Alguna cosa a afegir? (opcional)'}" aria-label="Nota">${esc(r.nota||'')}</textarea></div>`}).join('')}</section>`).join('');
+  document.getElementById('lliure').value=lliure;
+  ajusta();progres();
+}
+// La forma de Calldetenes, ajustada a cada escenari de desbloqueig.
+function ajusta(){document.querySelectorAll('svg[data-ajusta]').forEach(s=>{
+  const demo=s.closest('.esc').dataset.demo;
+  s.innerHTML=`<path class="base" d="${CALL.d}"/>`;const bb=s.querySelector('path').getBBox();const m=Math.max(bb.width,bb.height)*.12;
+  s.setAttribute('viewBox',`${bb.x-m} ${bb.y-m} ${bb.width+2*m} ${bb.height+2*m}`);
+  const sw=Math.max(bb.width,bb.height)/40;let h=`<path class="base" d="${CALL.d}"/>`;
+  if(demo==='d-boira')h+=`<path class="forma" d="${CALL.d}"/><path class="boira" d="${CALL.d}" fill="#AAA"/>`;
+  else if(demo==='d-pinzell')h+=`<path class="forma" d="${CALL.d}"/><path class="traç" d="${CALL.d}" fill="none" stroke="#111" stroke-width="${sw*6}" stroke-linejoin="round" style="--llarg:${Math.round(bb.width*6)};stroke-dasharray:${Math.round(bb.width*6)}"/>`;
+  else if(demo==='d-estampa'){const r=Math.min(bb.width,bb.height)*.42,cx=bb.x+bb.width/2,cy=bb.y+bb.height/2;h+=`<path class="forma" d="${CALL.d}"/><g class="estampa"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#fff" stroke-width="${sw*1.6}"/><text x="${cx}" y="${cy+r*.12}" text-anchor="middle" font-size="${r*.34}" font-weight="700" fill="#fff" font-family="IBM Plex Sans">FET</text></g>`}
+  else if(demo==='d-focs'){const cx=bb.x+bb.width/2,cy=bb.y+bb.height/2,R_=Math.max(bb.width,bb.height)*.75;h+=`<path class="forma" d="${CALL.d}"/>`+Array.from({length:14},(_,k)=>{const a=k/14*Math.PI*2;return `<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(a)*R_}" y2="${cy+Math.sin(a)*R_}" stroke="${k%2?'#111':'#888'}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${R_*.25} ${R_*2}" stroke-dashoffset="${R_*.3}"><animate attributeName="stroke-dashoffset" from="${R_*.3}" to="${-R_*.9}" dur=".9s" begin="indefinite" fill="freeze"/></line>`}).join('')}
+  else if(demo==='d-onada')h+=`<clipPath id="cc"><path d="${CALL.d}"/></clipPath><g clip-path="url(#cc)"><rect class="ona" x="${bb.x-m}" y="${bb.y-m}" width="${bb.width+2*m}" height="${bb.height+2*m}" fill="#111"/></g>`;
+  else h+=`<path class="forma" d="${CALL.d}"/>`;
+  s.innerHTML=h;
+})}
+function reprodueix(e){const cl=e.dataset.demo;e.classList.remove(cl);void e.offsetWidth;e.classList.add(cl);e.querySelectorAll('animate').forEach(a=>a.beginElement())}
+function confeti(btn){const esc_=btn.closest('.esc');for(let k=0;k<14;k++){const s=document.createElement('span');s.className='espurna';const a=Math.random()*Math.PI*2,d=50+Math.random()*50;
+  s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d*.7+'px');s.style.setProperty('--r',(Math.random()*540-270)+'deg');esc_.appendChild(s);setTimeout(()=>s.remove(),900)}}
+function progres(){const fetes=Q.filter(q=>{const r=R[q.id];return r&&(r.tria.length||Object.keys(r.escala).length||r.nota.trim())}).length;
+  document.getElementById('comptador').textContent=`${fetes} de ${Q.length} preguntes`;document.getElementById('barra').style.width=fetes/Q.length*100+'%'}
+let temps={};
+function desa(id){try{localStorage.setItem('qestil1',JSON.stringify({R,lliure}))}catch(e){}progres();
+  clearTimeout(temps[id]);temps[id]=setTimeout(async()=>{if(!db)return;const el=document.getElementById('desat');
+    try{if(id==='lliure')await db.collection('qestil1').doc('lliure').set({id:'lliure',text:lliure,ts:Date.now()});
+      else{const q=Q.find(x=>x.id===id),r=R[id];await db.collection('qestil1').doc(id).set({id,pregunta:q.t,tria:r.tria.map(i=>q.ops[i][0]),escala:q.escala?Object.fromEntries(Object.entries(r.escala).map(([i,v])=>[q.escala[i].join(' ↔ '),v])):{},nota:r.nota,ts:Date.now()})}
+      el.textContent='Desat.'}catch(e){el.textContent='No s\'ha pogut desar al servidor; queda desat en aquest navegador.'}},600)}
+const arrel=document.getElementById('preguntes');
+function triaOp(op){const q=Q.find(x=>x.id===op.dataset.q),r=resp(q.id),i=+op.dataset.i;
+  if(q.multi){if(r.tria.includes(i))r.tria=r.tria.filter(x=>x!==i);else{r.tria.push(i);if(r.tria.length>q.multi)r.tria.shift()}}
+  else r.tria=r.tria[0]===i?[]:[i];
+  op.parentNode.querySelectorAll('.op').forEach(x=>x.setAttribute('aria-pressed',r.tria.includes(+x.dataset.i)));desa(q.id)}
+arrel.addEventListener('click',e=>{
+  const bt=e.target.closest('.b');const esc_=e.target.closest('.esc');
+  if(esc_&&esc_.dataset.demo){e.stopPropagation();
+    if(bt){if(bt.classList.contains('omple')||bt.classList.contains('inclina'))return;
+      if(bt.classList.contains('confeti')){confeti(bt)}
+      if(bt.classList.contains('enfonsa')){bt.classList.add('fes');setTimeout(()=>bt.classList.remove('fes'),160);return}
+      if(bt.classList.contains('gracia')){bt.classList.remove('fes');void bt.offsetWidth;bt.classList.add('fes');setTimeout(()=>{bt.querySelector('span').textContent=bt.querySelector('span').textContent==='Desbloqueja'?'Som-hi!':'Desbloqueja'},230);return}
+      bt.classList.remove('fes');void bt.offsetWidth;bt.classList.add('fes');return}
+    if(esc_.dataset.demo&&esc_.dataset.demo!=='boto')reprodueix(esc_);return}
+  const p=e.target.closest('.punts button');if(p){const r=resp(p.dataset.q);const v=+p.dataset.v;r.escala[p.dataset.e]=r.escala[p.dataset.e]===v?undefined:v;if(r.escala[p.dataset.e]===undefined)delete r.escala[p.dataset.e];
+    p.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',r.escala[p.dataset.e]===+x.dataset.v));desa(p.dataset.q);return}
+  const op=e.target.closest('.op');if(op)triaOp(op)});
+arrel.addEventListener('keydown',e=>{const op=e.target.closest('.op');if(op&&e.target===op&&(e.key==='Enter'||e.key===' ')){e.preventDefault();triaOp(op)}});
+arrel.addEventListener('input',e=>{const t=e.target.closest('[data-nota]');if(!t)return;resp(t.dataset.nota).nota=t.value;desa(t.dataset.nota)});
+// Botó que s'omple: mantenir premut.
+arrel.addEventListener('pointerdown',e=>{const b=e.target.closest('.b.omple');if(!b)return;b.classList.add('prem');b._t=setTimeout(()=>{b.querySelector('span').textContent='Desbloquejat!';b.classList.remove('prem');b.style.background='#111';setTimeout(()=>{b.querySelector('span').textContent='Mantén per desbloquejar';b.style.background=''},1200)},900)});
+['pointerup','pointerleave','pointercancel'].forEach(ev=>arrel.addEventListener(ev,e=>{const b=e.target.closest&&e.target.closest('.b.omple');if(!b)return;clearTimeout(b._t);b.classList.remove('prem')},true));
+// Botó que s'inclina cap al dit.
+arrel.addEventListener('pointermove',e=>{const b=e.target.closest('.b.inclina');if(!b)return;const r=b.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`rotateY(${x*30}deg) rotateX(${-y*30}deg) scale(1.05)`});
+arrel.addEventListener('pointerout',e=>{const b=e.target.closest('.b.inclina');if(b)b.style.transform=''});
+document.getElementById('lliure').addEventListener('input',e=>{lliure=e.target.value;desa('lliure')});
+pinta();
+document.querySelectorAll('.b.inclina').forEach(b=>b.closest('.esc').classList.add('persp'));
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;
+  try{const q=await db.collection('qestil1').get();let hi=false;for(const d of q.docs){const x=d.data();if(!x)continue;hi=true;
+    if(d.id==='lliure'){lliure=x.text||'';continue}const qq=Q.find(y=>y.id===d.id);if(!qq)continue;
+    R[d.id]={tria:(x.tria||[]).map(n=>qq.ops?qq.ops.findIndex(o=>o[0]===n):-1).filter(i=>i>=0),escala:qq.escala?Object.fromEntries(Object.entries(x.escala||{}).map(([k,v])=>[qq.escala.findIndex(p=>p.join(' ↔ ')===k),v]).filter(([k])=>k>=0)):{},nota:x.nota||''}}
+    if(hi){pinta();document.querySelectorAll('.b.inclina').forEach(b=>b.closest('.esc').classList.add('persp'))}}catch(e){}})();
+</script>
