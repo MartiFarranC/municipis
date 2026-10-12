@@ -15,7 +15,16 @@ for k, ident in enumerate(['cares--festa', 'anims--castell', 'celebrar--sardana'
     svg = re.sub(r'url\(#([^)]+)\)', lambda m: f'url(#{m.group(1)}-{k})', svg)
     frase = re.search(rf'<string name="{nom}_frase">([^<]+)</string>', xml).group(1)
     emojis[ident] = {'svg': svg, 'frase': frase}
-s = open(os.path.join(AQUI, 'sacs-estil-plantilla.html')).read()
-s = s.replace('/*EMOJIS*/', json.dumps(emojis, ensure_ascii=False)).replace('/*CSS-EMOJIS*/', r['css'])
-open(os.path.join(AQUI, 'sacs-estil.html'), 'w').write(s)
-print('sacs-estil.html')
+import sys
+sys.path.insert(0, os.path.join(AQUI, '..', 'estil'))
+import fonts  # noqa: E402  (posa les fonts a dins de la pàgina)
+for plantilla, sortida, families in [
+    ('sacs-estil-plantilla.html', 'sacs-estil.html', None),
+    ('sacs-estil2-plantilla.html', 'sacs-estil2.html', 'Archivo+Black&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600'),
+]:
+    s = open(os.path.join(AQUI, plantilla)).read()
+    s = s.replace('/*EMOJIS*/', json.dumps(emojis, ensure_ascii=False)).replace('/*CSS-EMOJIS*/', r['css'])
+    if families:
+        s = s.replace('/*FONTS*/', fonts.incrustades(families))
+    open(os.path.join(AQUI, sortida), 'w').write(s)
+    print(sortida)

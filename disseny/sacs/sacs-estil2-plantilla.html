@@ -1,0 +1,224 @@
+<meta charset="utf-8">
+<title>El sac, en l'estètica nova</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/*FONTS*/
+/* El sac amb l'estètica escollida (docs/disseny.md): blanc i negre, groc, Archivo Black, Instrument Sans, ombra dura.
+   Dos contenidors (la llauna, que agradava, i el sac de roba redibuixat) i dues maneres de mostrar el que surt.
+   Generat per gen-sacs-estil.py, que hi posa els emojis de debò de recursos.json i les fonts a dins. */
+*{box-sizing:border-box}
+body{margin:0;background:#F1F1F1;color:#111;font:16px/1.5 "Instrument Sans",system-ui,sans-serif}
+.pagina{max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+.cap small{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#666}
+.cap h1{font:400 32px/1.05 "Archivo Black",sans-serif;margin:6px 0 12px}
+.cap p{margin:0 0 10px;max-width:68ch}
+.disposicio{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;margin-top:20px}
+@media (max-width:860px){.disposicio{grid-template-columns:1fr}}
+.columna-tel{position:sticky;top:12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+@media (max-width:860px){.columna-tel{position:static}}
+.controls{display:flex;flex-direction:column;gap:6px;align-items:center;max-width:380px}
+.controls .grup{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:center}
+.controls .grup>span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#666;margin-right:2px}
+.controls button{font:600 14px "Instrument Sans";border:1.5px solid #111;background:#fff;color:#111;padding:6px 10px;min-height:36px;cursor:pointer}
+.controls button[aria-pressed="true"]{background:#111;color:#fff}
+.peca{background:#fff;border:1.5px solid #111;padding:14px 16px;margin-bottom:12px}
+.peca h2{font:400 21px "Archivo Black",sans-serif;margin:0 0 4px}
+.peca .tipus{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#666}
+.peca p{margin:0 0 10px}
+.peca .botons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.peca .botons button{font:600 15px "Instrument Sans";border:1.5px solid #111;background:#fff;padding:8px 14px;min-height:42px;cursor:pointer}
+.peca .botons button[aria-pressed="true"]{background:#111;color:#fff}
+.peca textarea{width:100%;min-height:52px;border:1.5px solid #111;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #1A5FD0;outline-offset:2px}
+
+/* ── El telèfon ─────────────────────────────────────────────────────────── */
+.marc{width:360px;height:740px;transform-origin:top center}
+.tel{--fons:#fff;--tinta:#111;--suau:#6B6B6B;--linia:#E4E4E4;--acc:#FFD000;--onacc:#111;
+  width:360px;height:740px;border:8px solid #111;border-radius:40px;overflow:hidden;position:relative;background:var(--fons);color:var(--tinta);
+  display:flex;flex-direction:column;align-items:center;user-select:none;-webkit-user-select:none}
+.tel[data-tema="fosc"]{--fons:#0F0F0F;--tinta:#F2F2F2;--suau:#9A9A9A;--linia:#2A2A2A;border-color:#333}
+.t{font-family:"Archivo Black",sans-serif;line-height:.95;letter-spacing:-.015em}
+.ma{font-family:"Caveat",cursive;font-weight:600}
+.tel .titol{margin-top:46px;font-size:30px;text-align:center}
+.tel .queden{font-size:13px;color:var(--suau);font-weight:600;margin-top:4px}
+.escena{position:relative;width:300px;height:300px;margin-top:14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.escena svg.cont{position:absolute;inset:30px;width:240px;height:240px;overflow:visible}
+.escena svg.cont *{transform-box:fill-box}
+.ajuda{font-size:24px;color:var(--suau);transform:rotate(-2deg)}
+.resultat{display:none;flex-direction:column;align-items:center;gap:6px;padding:0 20px;align-self:stretch;text-align:center}
+.tel[data-fase="obert"] .resultat{display:flex;animation:puja .45s .35s both}
+.tel[data-fase="obert"] .ajuda{display:none}
+.resultat .raresa{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.resultat .nom{font-size:26px}
+.resultat .que{font-size:14px;color:var(--suau)}
+.resultat .comenta{font-size:24px;transform:rotate(-2deg);margin:2px 0 4px}
+.bt{font:700 16px "Instrument Sans";display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;padding:13px 16px;cursor:pointer;
+  background:var(--acc);color:var(--onacc);border:2px solid var(--tinta);box-shadow:4px 4px 0 var(--tinta);transition:transform .07s,box-shadow .07s}
+.bt.sec{background:var(--fons);color:var(--tinta)}
+.bt.premut{transform:translate(4px,4px);box-shadow:0 0 0 var(--tinta)}
+@keyframes puja{from{opacity:0;transform:translateY(14px)}}
+
+/* L'espera abans d'obrir: tremola una vegada si és comú, dues si és rar i tres si és llegendari. */
+.tel[data-fase="tancat"] svg.cont{animation:respira 2.6s ease-in-out infinite;transform-origin:50% 92%}
+@keyframes respira{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+.tel[data-fase="obrint"] svg.cont{transform-origin:50% 92%;animation:sacseja .38s ease-in-out var(--cops)}
+.tel[data-r="comuna"]{--cops:1}.tel[data-r="rara"]{--cops:2}.tel[data-r="llegendaria"]{--cops:3}
+@keyframes sacseja{0%,100%{transform:none}20%{transform:rotate(-10deg) translateY(-4px)}40%{transform:rotate(9deg)}60%{transform:rotate(-6deg) translateY(-2px)}80%{transform:rotate(3deg)}}
+.tel[data-fase="obert"] svg.cont{animation:queda .5s .1s ease-in both}
+@keyframes queda{to{opacity:.0;transform:translateY(40px) scale(.85)}}
+
+/* ── La llauna ── */
+.llauna .tapa{transform-origin:0 100%;transition:transform .55s cubic-bezier(.3,1.5,.5,1),opacity .4s .25s}
+.tel[data-fase="obert"] .llauna .tapa{transform:translate(30px,-80px) rotate(-50deg);opacity:0}
+/* ── El sac ── */
+.sac .corda{transition:transform .45s ease-in,opacity .45s .1s}
+.tel[data-fase="obert"] .sac .corda.e{transform:translate(-40px,60px) rotate(-70deg);opacity:0}
+.tel[data-fase="obert"] .sac .corda.d{transform:translate(40px,60px) rotate(80deg);opacity:0}
+.sac .coll{transform-origin:50% 100%;transition:transform .35s .1s cubic-bezier(.3,1.6,.5,1)}
+.tel[data-fase="obert"] .sac .coll{transform:scale(1.5,.6)}
+.sac .cos{transform-origin:50% 100%;transition:transform .4s .1s}
+.tel[data-fase="obert"] .sac .cos{transform:scale(1.08,.86)}
+
+/* ── El que surt ── */
+.surt{position:absolute;left:50%;top:50%;pointer-events:none;opacity:0}
+.tel[data-fase="obert"] .surt{opacity:1}
+/* Cromo: una carta amb l'ombra dura, que surt de la capsa i es gira. */
+.cromo{width:150px;height:196px;margin:-98px 0 0 -75px;perspective:700px}
+.cromo .carta{width:100%;height:100%;background:var(--fons);border:2.5px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.cromo .banda{background:var(--acc);color:var(--onacc);border-bottom:2.5px solid var(--tinta);font:700 11px "Instrument Sans";letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;display:flex;justify-content:space-between}
+.cromo .em{flex:1;display:flex;align-items:center;justify-content:center}
+.cromo .em svg{width:118px;height:118px}
+.tel[data-fase="obert"] .cromo .carta{animation:carta .9s cubic-bezier(.2,.9,.25,1.15) both}
+@keyframes carta{0%{transform:translateY(90px) scale(.3) rotateY(180deg)}55%{transform:translateY(-12px) scale(1.04) rotateY(20deg)}100%{transform:rotate(-3deg)}}
+/* Adhesiu: un adhesiu groc d'estrella que s'enganxa de cop, com els de les ofertes. */
+.adhesiu{width:200px;height:200px;margin:-100px 0 0 -100px}
+.adhesiu svg.estrella{position:absolute;inset:0;width:100%;height:100%}
+.adhesiu .em{position:absolute;inset:40px;display:flex;align-items:center;justify-content:center}
+.adhesiu .em svg{width:120px;height:120px}
+.tel[data-fase="obert"] .adhesiu{animation:enganxa .5s .15s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes enganxa{0%{transform:scale(2.2) rotate(-30deg);opacity:0}60%{opacity:1}100%{transform:rotate(-8deg)}}
+/* La llegendària, a més, té una lluentor que passa per sobre. */
+.lluu{position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.8) 50%,transparent 58%);transform:translateX(-90%);pointer-events:none}
+.tel[data-r="llegendaria"][data-fase="obert"] .lluu{animation:lluu 2.4s 1.1s ease-in-out infinite}
+@keyframes lluu{60%,100%{transform:translateX(90%)}}
+@media (prefers-reduced-motion:reduce){.tel *{animation-duration:.01s!important;transition:none!important}}
+/*CSS-EMOJIS*/
+</style>
+<div class="pagina">
+  <header class="cap">
+    <small>Bocins de Catalunya · el sac</small>
+    <h1>El sac, amb l'estètica nova</h1>
+    <p>Amb l'estètica que has triat: blanc i negre, groc, Archivo i ombra dura. A l'esquerra, el mòbil. <b>Toca el sac per obrir-lo</b> i torna'l a tocar per tancar-lo. A dalt pots canviar el contenidor, com es mostra el que en surt i la raresa.</p>
+    <p>Com abans, abans d'obrir-se tremola una vegada si és comú, dues si és rar i tres si és llegendari. Ara també sona i vibra. I a sota del que surt hi ha un comentari escrit a mà, diferent per a cada raresa.</p>
+  </header>
+  <div class="disposicio">
+    <div class="columna-tel">
+      <div class="controls" aria-label="Opcions del prototip">
+        <div class="grup"><span>Contenidor</span><button type="button" data-k="cont" data-v="llauna">Llauna</button><button type="button" data-k="cont" data-v="sac">Sac de roba</button></div>
+        <div class="grup"><span>Què surt</span><button type="button" data-k="surt" data-v="cromo">Cromo</button><button type="button" data-k="surt" data-v="adhesiu">Adhesiu</button></div>
+        <div class="grup"><span>Raresa</span><button type="button" data-k="r" data-v="comuna">Comuna</button><button type="button" data-k="r" data-v="rara">Rara</button><button type="button" data-k="r" data-v="llegendaria">Llegendària</button></div>
+        <div class="grup"><span>Tema</span><button type="button" data-k="tema" data-v="clar">Clar</button><button type="button" data-k="tema" data-v="fosc">Fosc</button><span>So</span><button type="button" id="so" aria-pressed="true">Activat</button></div>
+      </div>
+      <div id="caixa"><div class="marc" id="marc"><div class="tel" id="tel"></div></div></div>
+    </div>
+    <div id="peces"></div>
+  </div>
+</div>
+<script>
+const EM=/*EMOJIS*/;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RAR={comuna:{n:'Comuna',em:'cares--festa',c:'Per algun lloc s\'ha de començar.',e:1},rara:{n:'Rara',em:'anims--castell',c:'Ui, aquest no el té tothom.',e:2},llegendaria:{n:'Llegendària',em:'celebrar--sardana',c:'Llegendari! Guarda\'l bé.',e:3}};
+const SVG={
+ llauna:`<svg class="cont llauna" viewBox="0 0 100 100" aria-hidden="true">
+   <rect x="21" y="47" width="64" height="44" rx="4" fill="var(--tinta)"/>
+   <rect x="17" y="43" width="64" height="44" rx="4" fill="var(--acc)" stroke="var(--tinta)" stroke-width="2.4"/>
+   <path d="M17 52H81M17 78H81" stroke="var(--tinta)" stroke-width="1.2"/>
+   <text x="49" y="70" text-anchor="middle" font-family="Archivo Black" font-size="12" fill="#111" letter-spacing=".3">BOCINS</text>
+   <g class="tapa"><rect x="17" y="35" width="72" height="12" rx="3" fill="var(--tinta)"/><rect x="13" y="31" width="72" height="12" rx="3" fill="var(--fons)" stroke="var(--tinta)" stroke-width="2.4"/>
+     <rect x="40" y="26" width="18" height="6" rx="2" fill="var(--fons)" stroke="var(--tinta)" stroke-width="2.2"/></g>
+ </svg>`,
+ sac:`<svg class="cont sac" viewBox="0 0 100 100" aria-hidden="true">
+   <defs><pattern id="trama" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="var(--fons)"/><path d="M0 1.5H3M1.5 0V3" stroke="var(--suau)" stroke-width=".35" opacity=".55"/></pattern>
+     <filter id="rugos" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="2"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></defs>
+   <g filter="url(#rugos)">
+   <g class="cos">
+     <path d="M34 47C18 54 12 72 16 86Q19 94 30 95Q50 98 70 95Q81 94 84 86C88 72 82 54 66 47Z" transform="translate(4 3)" fill="var(--tinta)"/>
+     <path d="M34 47C18 54 12 72 16 86Q19 94 30 95Q50 98 70 95Q81 94 84 86C88 72 82 54 66 47Z" fill="url(#trama)" stroke="var(--tinta)" stroke-width="2.4" stroke-linejoin="round"/>
+     <path d="M38 50Q34 66 36 86M62 50Q66 66 64 86M50 52V90" stroke="var(--tinta)" stroke-width=".9" fill="none" opacity=".5"/>
+     <text x="50" y="73" text-anchor="middle" font-family="Archivo Black" font-size="10" fill="var(--tinta)" letter-spacing="1" opacity=".85">BOCINS</text>
+     <rect x="26" y="77" width="48" height="7.5" fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.4" transform="rotate(-3 50 80)"/>
+     <text x="50" y="82.4" text-anchor="middle" font-family="Instrument Sans" font-weight="700" font-size="4.2" fill="#111" letter-spacing=".5" transform="rotate(-3 50 80)">DE CATALUNYA</text>
+   </g>
+   <g class="coll"><path d="M34 47Q30 36 24 28Q34 31 38 26Q42 32 46 25Q50 31 54 25Q58 32 62 26Q66 31 76 28Q70 36 66 47Z" fill="url(#trama)" stroke="var(--tinta)" stroke-width="2.2" stroke-linejoin="round"/>
+     <path d="M40 46L38 32M50 46V30M60 46L62 32" stroke="var(--tinta)" stroke-width=".9" opacity=".55"/></g>
+   <rect x="31" y="43" width="38" height="6" rx="2" fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.8"/>
+   <g class="corda e"><path d="M48 46C38 38 30 42 36 47S47 49 48 46" fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.6"/><path d="M47 48L40 62" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/><path d="M47 48L40 62" stroke="var(--acc)" stroke-width="1.2" stroke-linecap="round"/></g>
+   <g class="corda d"><path d="M52 46C62 38 70 42 64 47S53 49 52 46" fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.6"/><path d="M53 48L59 61" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/><path d="M53 48L59 61" stroke="var(--acc)" stroke-width="1.2" stroke-linecap="round"/></g>
+   </g>
+ </svg>`,
+};
+const ESTRELLA=(()=>{let d='';for(let i=0;i<28;i++){const r=i%2?86:100,a=i/28*Math.PI*2-Math.PI/2;d+=(i?'L':'M')+(100+r*Math.cos(a)).toFixed(1)+' '+(100+r*Math.sin(a)).toFixed(1)}return d+'Z'})();
+const PECES=[
+ {id:'llauna',tipus:'Contenidor',n:'Llauna',d:'La capsa de llauna que t\'agradava, ara groga i negra, amb ombra dura com els botons i la paraula BOCINS. En obrir-se, la tapa salta i surt volant, i fa «clonc». Si triem aquest, potser l\'hauríem de dir «llauna» en comptes de «sac».'},
+ {id:'sac',tipus:'Contenidor',n:'Sac de roba',d:'Redibuixat perquè sembli roba de debò: trama de teixit, plecs al coll, vora una mica torta com feta a mà, la corda groga amb el llaç i l\'etiqueta impresa, com un sac de patates. En obrir-se, la corda cau, el coll s\'eixampla i el sac s\'aixafa.'},
+ {id:'cromo',tipus:'Què surt',n:'Cromo',d:'Surt una carta amb l\'ombra dura, que puja i es gira. A dalt, una banda groga amb la raresa i les estrelles (una, dues o tres). La llegendària té una lluentor que hi passa per sobre.'},
+ {id:'adhesiu',tipus:'Què surt',n:'Adhesiu',d:'Surt un adhesiu groc en forma d\'estrella, com els d\'«OFERTA» de les botigues, que s\'enganxa de cop amb un cop sec. A sobre, l\'emoji nou.'},
+];
+const tria={cont:'llauna',surt:'cromo',r:'rara',tema:'clar'};
+let fase='tancat';
+const tel=document.getElementById('tel');
+function pinta(){const R=RAR[tria.r],em=EM[R.em];fase='tancat';
+  tel.dataset.fase=fase;tel.dataset.r=tria.r;tel.dataset.tema=tria.tema;
+  const estrelles='★'.repeat(R.e);
+  const surt=tria.surt==='cromo'
+    ?`<div class="surt cromo"><div class="carta"><div class="banda"><span>${R.n}</span><span>${estrelles}</span></div><div class="em anim">${em.svg}</div><div class="lluu"></div></div></div>`
+    :`<div class="surt adhesiu"><svg class="estrella" viewBox="-8 -8 216 216"><path d="${ESTRELLA}" transform="translate(5 5)" fill="var(--tinta)"/><path d="${ESTRELLA}" fill="var(--acc)" stroke="var(--tinta)" stroke-width="4" stroke-linejoin="round"/></svg><div class="em anim">${em.svg}</div><div class="lluu" style="border-radius:50%;overflow:hidden"></div></div>`;
+  tel.innerHTML=`<div class="t titol">${tria.cont==='llauna'?'Una llauna nova!':'Un sac nou!'}</div><div class="queden">En tens 3 per obrir</div>
+    <div class="escena" role="button" tabindex="0" aria-label="Obre-la">${SVG[tria.cont]}${surt}</div>
+    <div class="ma ajuda">toca'${tria.cont==='llauna'?'la':'l'} per obrir-${tria.cont==='llauna'?'la':'lo'}</div>
+    <div class="resultat"><div class="raresa">${R.n} · ${estrelles}</div><div class="t nom">${esc(em.frase)}</div><div class="que">Un emoji nou per reaccionar.</div><div class="ma comenta">${R.c}</div>
+      <button type="button" class="bt"><span>${tria.cont==='llauna'?'Obre\'n una altra (2)':'Obre\'n un altre (2)'}</span><span>→</span></button><div style="height:6px"></div><button type="button" class="bt sec"><span>Continua</span><span>→</span></button></div>`;
+  document.querySelectorAll('.controls [data-k]').forEach(b=>b.setAttribute('aria-pressed',tria[b.dataset.k]===b.dataset.v));
+  document.querySelectorAll('.peca').forEach(p=>p.style.boxShadow=(p.dataset.p===tria.cont||p.dataset.p===tria.surt)?'5px 5px 0 #111':'');
+}
+// ── So i vibració ──
+let so=true,ctx=null;
+function soroll(d){const b=ctx.createBuffer(1,ctx.sampleRate*d,ctx.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1;const s=ctx.createBufferSource();s.buffer=b;return s}
+function to(f,t0,d,tip='sine',v=.25,f2){const o=ctx.createOscillator(),g=ctx.createGain();o.type=tip;o.frequency.setValueAtTime(f,t0);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t0+d);g.gain.setValueAtTime(v,t0);g.gain.exponentialRampToValueAtTime(.001,t0+d);o.connect(g).connect(ctx.destination);o.start(t0);o.stop(t0+d)}
+function sona(q){if(!so)return;try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();const t=ctx.currentTime;
+  if(q==='sacseig'){const s=soroll(.12),f=ctx.createBiquadFilter(),g=ctx.createGain();f.type='bandpass';f.frequency.value=tria.cont==='llauna'?3800:900;g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.12);s.connect(f).connect(g).connect(ctx.destination);s.start(t);if(tria.cont==='llauna')to(1900,t,.06,'square',.03)}
+  if(q==='obre'){if(tria.cont==='llauna'){to(520,t,.12,'triangle',.25,300);to(1400,t+.02,.08,'square',.04)}else{const s=soroll(.25),f=ctx.createBiquadFilter(),g=ctx.createGain();f.type='lowpass';f.frequency.value=700;g.gain.setValueAtTime(.3,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);s.connect(f).connect(g).connect(ctx.destination);s.start(t)}}
+  if(q==='surt'){if(tria.surt==='adhesiu'){to(110,t,.14,'sine',.5,60)}else{to(660,t,.12,'triangle',.2);to(990,t+.1,.18,'triangle',.18)}
+    if(tria.r==='llegendaria'){to(1320,t+.22,.25,'triangle',.15);to(1760,t+.34,.35,'triangle',.12)}}
+}catch(e){}}
+const vibra=p=>{try{if(so&&navigator.vibrate)navigator.vibrate(p)}catch(e){}};
+function obre(){if(fase==='tancat'){fase='obrint';tel.dataset.fase=fase;const n=RAR[tria.r].e;
+    for(let i=0;i<n;i++)setTimeout(()=>{sona('sacseig');vibra(25)},i*380+60);
+    setTimeout(()=>{fase='obert';tel.dataset.fase=fase;sona('obre');vibra(40);setTimeout(()=>{sona('surt');vibra(tria.r==='llegendaria'?[30,60,30,60,80]:[20,40,30])},tria.surt==='adhesiu'?380:450)},n*380+80)}
+  else if(fase==='obert')pinta()}
+tel.addEventListener('click',e=>{if(e.target.closest('.escena'))obre()});
+tel.addEventListener('keydown',e=>{if(e.target.closest('.escena')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();obre()}});
+tel.addEventListener('pointerdown',e=>{const b=e.target.closest('.bt');if(b)b.classList.add('premut')});
+['pointerup','pointerleave','pointercancel'].forEach(t=>tel.addEventListener(t,()=>tel.querySelectorAll('.bt.premut').forEach(b=>b.classList.remove('premut'))));
+document.querySelector('.controls').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.id==='so'){so=!so;b.setAttribute('aria-pressed',so);b.textContent=so?'Activat':'Apagat';return}
+  tria[b.dataset.k]=b.dataset.v;pinta()});
+function escala(){const k=Math.min(1,(document.documentElement.clientWidth-24)/360);const m=document.getElementById('marc'),c=document.getElementById('caixa');m.style.transform=k<1?`scale(${k})`:'';c.style.width=360*k+'px';c.style.height=740*k+'px'}
+addEventListener('resize',escala);
+// ── Valoració ──
+let db=null,vals={},temps={};
+try{const m=JSON.parse(localStorage.getItem('sac2')||'null');if(m)vals=m}catch(e){}
+function pintaPeces(){document.getElementById('peces').innerHTML=PECES.map(p=>{const v=vals[p.id]||{};return `<div class="peca" data-p="${p.id}"><div class="tipus">${p.tipus}</div><h2>${p.n}</h2><p>${p.d}</p>
+  <div class="botons" role="group" aria-label="Valoració de ${p.n}">${[['si','M\'agrada'],['millorar','Millorar'],['no','No']].map(([k,t])=>`<button type="button" data-val="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}</div>
+  <textarea aria-label="Nota sobre ${p.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div>`}).join('')+`<div class="peca"><h2>I el nom?</h2><p>Ara a l'app es diu «sac». Si t'agrada més la llauna, escriu-me aquí si li canviem el nom o si es queda «sac» encara que es dibuixi com una llauna.</p><textarea data-nom aria-label="Nom del sac">${esc(vals.nom?.nota||'')}</textarea></div>`;pinta()}
+function desaVal(id){try{localStorage.setItem('sac2',JSON.stringify(vals))}catch(e){}clearTimeout(temps[id]);temps[id]=setTimeout(async()=>{if(!db)return;const v=vals[id]||{};
+  try{await db.collection('sac2').doc(id).set({id,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}},600)}
+const pEl=document.getElementById('peces');
+pEl.addEventListener('click',e=>{const b=e.target.closest('[data-val]');if(!b)return;const id=b.closest('.peca').dataset.p,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.val?null:b.dataset.val;
+  b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.val===v.valor));desaVal(id)});
+pEl.addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const id=e.target.dataset.nom!==undefined?'nom':e.target.closest('.peca').dataset.p,v=vals[id]||(vals[id]={});v.nota=e.target.value;
+  if(id!=='nom'&&v.nota.trim()&&!v.valor){v.valor='millorar';e.target.closest('.peca').querySelector('[data-val="millorar"]').setAttribute('aria-pressed','true')}desaVal(id)});
+pintaPeces();escala();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;
+  try{const q=await db.collection('sac2').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pintaPeces()}catch(e){}})();
+</script>
