@@ -6,6 +6,21 @@ Els "rètols esmaltats" es van escollir i després es van descartar (octubre de 
 
 El que s'ha après de les rondes: fons blanc net (mai blanc trencat), colors apagats o madurs (mai cridaners ni infantils), res que sembli vell, i res de botons de píndola ni paletes genèriques. La festa major (programa d'actes, lletra de tipus de fusta, dues tintes) és el concepte que més ha agradat.
 
+### Respostes del qüestionari (octubre de 2026)
+
+Després de descartar els conceptes tancats, es va tornar a començar amb un qüestionari (`disseny/estil/questionari-estil.html`). La proposta que en surt és a `disseny/estil/proposta1.html`.
+
+- Objectiu: cridanera per al jovent i professional per a la gent adulta; divertida i amb gràcia, sense passar-se.
+- Personalitat: un presentador de la tele. Ni seriosa ni juganera, una mica atrevida, més aviat minimalista i molt feta a mà.
+- Referències: Nothing, Any.do, Notion, Wispr Flow.
+- Color: blanc i negre amb un sol color fort. Clar i fosc segons el mòbil.
+- Botons: ombra dura; en prémer s'enfonsen, fan de segell o contesten (el text canvia).
+- Desbloquejar: la boira s'esvaeix, amb una frase feta catalana a l'atzar (idea del Martí).
+- Missió feta: es ratlla. Canvi de pantalla: zoom des del mapa, però no sempre la mateixa animació. Animació: bastant.
+- Humor: textos, animacions, so i vibració. Sense mascota. Avís del GPS en to amable.
+- Mai: degradats, pastels infantils, emojis per tot arreu, massa text, píndoles, aire d'app feta amb IA, il·lustracions de gent sense cara.
+- Les fonts de les pàgines de disseny no es veien al mòbil del Martí: ara van a dins de la pàgina (`disseny/estil/fonts.py`).
+
 ### Rètols esmaltats (descartat)
 
 Les plaques de llauna esmaltada de les botigues i dels carrers: plaques amb la vora blanca interior, les cantonades arrodonides i dos cargols. Fons blanc net (mai blanc trencat), colors apagats (mai cridaners) i res que sembli vell.

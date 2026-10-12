@@ -32,7 +32,11 @@ osona=[m for m in MU['municipis'] if nomcom[m['comarca']]=='Osona']
 dades={'mapa':peces,'missions':missions,'cfg':{'base':CFG['desbloqueig']['costBase'],'inc':CFG['desbloqueig']['costIncrementPerMunicipi'],
        'max':CFG['desbloqueig']['costMaxim'],'bonus':CFG['punts']['bonusTotesLesMissions'],'nivell1':CFG['nivells']['puntsPrimerNivell'],'nivellInc':CFG['nivells']['increment']},
        'osona':sorted(m['nom'] for m in osona),'nOsona':len(osona),'total':len(MU['municipis']),'comarques':len(MU['comarques']),'finestra':{'lon0':lon0,'lon1':lon1,'lat0':lat0,'lat1':lat1}}
-for plantilla,sortida in [('prototip-plantilla.html','prototip-app.html'),('estils-plantilla.html','estils-app.html'),('paletes-plantilla.html','paletes-app.html'),('conceptes-plantilla.html','conceptes.html'),('conceptes2-plantilla.html','conceptes2.html'),('conceptes3-plantilla.html','conceptes3.html'),('conceptes4-plantilla.html','conceptes4.html'),('conceptes5-plantilla.html','conceptes5.html'),('conceptes6-plantilla.html','conceptes6.html'),('taller-plantilla.html','taller.html'),('questionari-plantilla.html','questionari-estil.html')]:
+for plantilla,sortida in [('prototip-plantilla.html','prototip-app.html'),('estils-plantilla.html','estils-app.html'),('paletes-plantilla.html','paletes-app.html'),('conceptes-plantilla.html','conceptes.html'),('conceptes2-plantilla.html','conceptes2.html'),('conceptes3-plantilla.html','conceptes3.html'),('conceptes4-plantilla.html','conceptes4.html'),('conceptes5-plantilla.html','conceptes5.html'),('conceptes6-plantilla.html','conceptes6.html'),('taller-plantilla.html','taller.html'),('questionari-plantilla.html','questionari-estil.html'),('proposta1-plantilla.html','proposta1.html')]:
     t=open(f'{AQUI}/{plantilla}').read()
+    if '/*FONTS*/' in t:
+        # Les fonts van a dins de la pàgina (vegeu fonts.py).
+        import re as _re, fonts
+        t=t.replace('/*FONTS*/',fonts.incrustades(_re.search(r'<!--FONTS:(.*?)-->',t).group(1)))
     open(f'{AQUI}/{sortida}','w').write(t.replace('/*DADES*/{}',json.dumps(dades,ensure_ascii=False)))
 print(len(peces),'municipis;',sum(len(v) for v in missions.values()),'missions')
