@@ -122,7 +122,18 @@ jobs:
           target: google_apis
           arch: x86_64
           disable-animations: true
-          script: ./gradlew :app:connectedDebugAndroidTest --continue > ui.log 2>&1
+          # L'app es queda instal·lada en acabar perquè se'n puguin treure les captures (CapturesTest).
+          script: |
+            ./gradlew :app:connectedDebugAndroidTest --continue -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true > ui.log 2>&1 || (adb pull /sdcard/Android/data/cat.descobreix/files/captures captures; exit 1)
+            adb pull /sdcard/Android/data/cat.descobreix/files/captures captures || true
+
+      - name: Captures de pantalla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captures
+          path: captures/
+          if-no-files-found: ignore
 
       - name: Resum d'errors
         if: failure()
