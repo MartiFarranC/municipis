@@ -58,7 +58,7 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 
 /**
@@ -99,7 +99,7 @@ fun CatalegScreen(onEnrere: () -> Unit, onObreMunicipi: (CodiIne) -> Unit, viewM
                                 selected = estat.ordre == o,
                                 onClick = { viewModel.canviaOrdre(o) },
                                 label = { Text(stringResource(text)) },
-                                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Colors.Disponible1, selectedLabelColor = Colors.Ambre),
+                                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Colors.Disponible1, selectedLabelColor = Colors.AmbreText),
                             )
                         }
                     }
@@ -118,9 +118,9 @@ fun CatalegScreen(onEnrere: () -> Unit, onObreMunicipi: (CodiIne) -> Unit, viewM
                             Text(g.nom, style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
                             Text(
                                 stringResource(R.string.progres_de, g.cromos, g.caselles.size),
-                                fontFamily = ChakraPetch,
+                                fontFamily = Archivo,
                                 fontWeight = FontWeight.Bold,
-                                color = if (g.cromos == g.caselles.size) Colors.Ambre else Colors.TextSecundari,
+                                color = if (g.cromos == g.caselles.size) Colors.AmbreText else Colors.TextSecundari,
                             )
                         }
                     }
@@ -209,7 +209,7 @@ private fun CasellaCataleg(c: Casella, onObre: () -> Unit) {
                     .semantics { contentDescription = tapat },
                 contentAlignment = Alignment.Center,
             ) {
-                Text("?", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Colors.VoraBoira)
+                Text("?", fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Colors.VoraBoira)
             }
         }
     }

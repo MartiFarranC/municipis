@@ -85,7 +85,7 @@ fun OnboardingScreen(
             item {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     Logo(null, Modifier.size(52.dp), encen = true)
-                    Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.Ambre))
+                    Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.AmbreText))
                 }
             }
             item {
@@ -105,12 +105,12 @@ fun OnboardingScreen(
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     shape = RoundedCornerShape(14.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Colors.Ambre,
+                        focusedBorderColor = Colors.AmbreText,
                         unfocusedBorderColor = Colors.Linia,
                         focusedContainerColor = Colors.Superficie,
                         unfocusedContainerColor = Colors.Superficie,
-                        focusedLabelColor = Colors.Ambre,
-                        cursorColor = Colors.Ambre,
+                        focusedLabelColor = Colors.AmbreText,
+                        cursorColor = Colors.AmbreText,
                     ),
                 )
             }
@@ -142,7 +142,7 @@ fun OnboardingScreen(
         estat.seleccionat?.let {
             Text(
                 stringResource(R.string.onboarding_triat, it.nom),
-                style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre),
+                style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText),
             )
         }
         BotoPrincipal(
@@ -178,6 +178,6 @@ private fun FilaOpcio(opcio: OpcioMunicipi, triat: Boolean, onClick: () -> Unit)
             Text(opcio.nom, style = MaterialTheme.typography.bodyLarge)
             Text(opcio.comarca, style = MaterialTheme.typography.bodySmall)
         }
-        if (triat) Icon(Icones.Fet, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(20.dp))
+        if (triat) Icon(Icones.Fet, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(20.dp))
     }
 }

@@ -161,7 +161,7 @@ fun SardanaConfirmacio(modifier: Modifier = Modifier, durada: Int = 1400) {
         if (dibuixada > 0f) {
             val tros = Path()
             PathMeasure().apply { setPath(marca, false) }.getSegment(0f, llargada * dibuixada, tros, true)
-            drawPath(tros, Colors.Ambre, style = Stroke(3f, cap = StrokeCap.Round, join = StrokeJoin.Round))
+            drawPath(tros, Colors.AmbreText, style = Stroke(3f, cap = StrokeCap.Round, join = StrokeJoin.Round))
         }
     }
 }
@@ -186,8 +186,8 @@ fun SardanaPremi(modifier: Modifier = Modifier) {
             val f = if (fase < 1f) fase else 2f - fase
             val alt = if (reduir) 0f else -6f * (f * f * (3 - 2 * f))
             translate(top = alt) {
-                cos(posicions[k], Colors.Ambre)
-                bracosAmunt(posicions[k], Colors.Ambre)
+                cos(posicions[k], Colors.AmbreText)
+                bracosAmunt(posicions[k], Colors.AmbreText)
             }
         }
         if (!reduir) {

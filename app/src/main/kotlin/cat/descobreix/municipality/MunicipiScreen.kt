@@ -81,7 +81,7 @@ import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -170,8 +170,8 @@ fun MunicipiScreen(
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
 }
 
-private val ratllat = Brush.linearGradient(
-    0f to Colors.Superficie, 0.5f to Colors.Superficie, 0.5f to Color(0xFF11151C), 1f to Color(0xFF11151C),
+private val ratllat: Brush get() = Brush.linearGradient(
+    0f to Colors.Superficie, 0.5f to Colors.Superficie, 0.5f to Colors.Superficie2, 1f to Colors.Superficie2,
     start = Offset.Zero,
     end = Offset(34f, 34f),
     tileMode = TileMode.Repeated,
@@ -252,7 +252,7 @@ private fun FitxaDescoberta(
                         Text(estat.nom, style = MaterialTheme.typography.displayMedium, modifier = Modifier.semantics { heading() })
                     }
                     Column(horizontalAlignment = Alignment.End, modifier = Modifier.semantics(mergeDescendants = true) {}) {
-                        Text("${estat.puntsGuanyats}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
+                        Text("${estat.puntsGuanyats}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))
                         Text(plural(R.plurals.de_punts, estat.puntsPossibles, estat.puntsPossibles), style = MaterialTheme.typography.bodySmall)
                     }
                 }
@@ -387,7 +387,7 @@ private fun FilaDeMissio(
                 .size(26.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(if (f.completada) Colors.Ambre else Color.Transparent)
-                .border(2.dp, if (f.completada) Colors.Ambre else Color(0xFF4B5566), RoundedCornerShape(8.dp)),
+                .border(2.dp, if (f.completada) Colors.AmbreText else Colors.TextSecundari, RoundedCornerShape(8.dp)),
             contentAlignment = Alignment.Center,
         ) {
             if (f.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(16.dp))
@@ -398,10 +398,10 @@ private fun FilaDeMissio(
                 if (f.completada) stringResource(R.string.prova_feta, prova) else stringResource(R.string.prova_toca, prova),
                 style = MaterialTheme.typography.bodySmall,
             )
-            if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.Ambre))
+            if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
         }
         if (provant) {
-            CircularProgressIndicator(Modifier.size(20.dp), color = Colors.Ambre, strokeWidth = 2.dp)
+            CircularProgressIndicator(Modifier.size(20.dp), color = Colors.AmbreText, strokeWidth = 2.dp)
         } else {
             Icon(
                 when (m.prova) {
@@ -414,7 +414,7 @@ private fun FilaDeMissio(
                 modifier = Modifier.size(18.dp),
             )
         }
-        Text("+${m.punts}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, color = Colors.Ambre)
+        Text("+${m.punts}", fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
     }
 }
 
@@ -579,10 +579,10 @@ private fun FitxaBloquejada(
                         .size(64.dp)
                         .clip(RoundedCornerShape(20.dp))
                         .background(Colors.Fons)
-                        .border(2.dp, Colors.Ambre, RoundedCornerShape(20.dp)),
+                        .border(2.dp, Colors.AmbreText, RoundedCornerShape(20.dp)),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(Icones.Cadenat, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(30.dp))
+                    Icon(Icones.Cadenat, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(30.dp))
                 }
             }
         }
@@ -604,7 +604,7 @@ private fun FitxaBloquejada(
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Dada(stringResource(R.string.missions_ocultes_titol), "${estat.missions.size}", Modifier.weight(1f))
-                Dada(stringResource(R.string.punts_en_joc), stringResource(R.string.fins_a, estat.puntsPossibles), Modifier.weight(1f), Colors.Ambre)
+                Dada(stringResource(R.string.punts_en_joc), stringResource(R.string.fins_a, estat.puntsPossibles), Modifier.weight(1f), Colors.AmbreText)
             }
         }
         if (estat.estat == EstatMunicipi.DISPONIBLE) {
@@ -625,7 +625,7 @@ private fun FitxaBloquejada(
                     if (!estat.potDesbloquejar) {
                         Text(
                             plural(R.plurals.et_falten, estat.cost - estat.saldo, estat.cost - estat.saldo),
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre),
+                            style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText),
                         )
                     }
                 }
@@ -701,13 +701,13 @@ fun Distintiu(modifier: Modifier = Modifier) {
     Row(
         modifier
             .clip(RoundedCornerShape(999.dp))
-            .border(1.dp, Colors.Ambre, RoundedCornerShape(999.dp))
+            .border(1.dp, Colors.AmbreText, RoundedCornerShape(999.dp))
             .padding(horizontal = 10.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        Icon(Icones.Estrella, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(14.dp))
-        Text(stringResource(R.string.municipi_collaborador), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Ambre))
+        Icon(Icones.Estrella, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(14.dp))
+        Text(stringResource(R.string.municipi_collaborador), style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
     }
 }
 

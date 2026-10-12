@@ -23,7 +23,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.progressio.Medalla
 import cat.descobreix.joc.progressio.NivellMedalla
 import cat.descobreix.joc.progressio.TipusMedalla
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 
 // Medalla clàssica (estil A de disseny/medalles): rodona, penjada d'una cinta amb la senyera, amb la silueta
 // de la comarca (o una icona) al mig i el nom en una banda a sota. Es dibuixa en un quadrat de 100 × 100 unitats.
@@ -207,7 +207,7 @@ private fun DrawScope.text(
     escala: Float,
 ) {
     // Es mesura en píxels reals (el text no es pot escalar amb el llenç) i es torna a unitats.
-    fun estil(m: Float) = TextStyle(fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = (m * escala).toSp(), color = color)
+    fun estil(m: Float) = TextStyle(fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = (m * escala).toSp(), color = color)
     var resultat = mesurador.measure(text, estil(mida), softWrap = false, maxLines = 1)
     val amplada = resultat.size.width / escala
     if (amplada > ampladaMaxima) resultat = mesurador.measure(text, estil(mida * ampladaMaxima / amplada), softWrap = false, maxLines = 1)

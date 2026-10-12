@@ -226,12 +226,12 @@ private fun Opcio(nom: String, text: String, triada: Boolean, onTria: () -> Unit
             .fillMaxWidth()
             .clip(forma)
             .background(if (triada) Colors.Disponible1 else Colors.Superficie)
-            .border(if (triada) 2.dp else 1.dp, if (triada) Colors.Ambre else Colors.Linia, forma)
+            .border(if (triada) 2.dp else 1.dp, if (triada) Colors.AmbreText else Colors.Linia, forma)
             .selectable(selected = triada, role = Role.RadioButton, onClick = onTria)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
-        Text(nom, style = MaterialTheme.typography.titleMedium.copy(color = if (triada) Colors.Ambre else Colors.Text))
+        Text(nom, style = MaterialTheme.typography.titleMedium.copy(color = if (triada) Colors.AmbreText else Colors.Text))
         Text(text, style = MaterialTheme.typography.bodySmall.copy(color = Colors.TextSecundari))
     }
 }
@@ -293,7 +293,7 @@ private fun PantallaCompte(
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.Ambre))
+        Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.AmbreText))
         Text(titol, style = MaterialTheme.typography.displayLarge, modifier = Modifier.semantics { heading() })
         Text(text, style = MaterialTheme.typography.bodyLarge.copy(color = Colors.TextSecundari))
         if (error != null) {
@@ -333,12 +333,12 @@ private fun Camp(
         keyboardActions = KeyboardActions(onAny = { onAccio() }),
         shape = RoundedCornerShape(14.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Colors.Ambre,
+            focusedBorderColor = Colors.AmbreText,
             unfocusedBorderColor = Colors.Linia,
             focusedContainerColor = Colors.Superficie,
             unfocusedContainerColor = Colors.Superficie,
-            focusedLabelColor = Colors.Ambre,
-            cursorColor = Colors.Ambre,
+            focusedLabelColor = Colors.AmbreText,
+            cursorColor = Colors.AmbreText,
         ),
     )
 }

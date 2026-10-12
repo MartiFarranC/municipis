@@ -42,7 +42,7 @@ import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.SardanaConfirmacio
 import cat.descobreix.ui.components.SardanaPremi
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
 import kotlinx.coroutines.delay
@@ -132,10 +132,10 @@ private fun Premi(missatge: Missatge, onTanca: () -> Unit) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(
                     stringResource(R.string.celebracio_punts, compte.value.toInt()),
-                    fontFamily = ChakraPetch,
+                    fontFamily = Archivo,
                     fontWeight = FontWeight.Bold,
                     fontSize = 46.sp,
-                    color = Colors.Ambre,
+                    color = Colors.AmbreText,
                 )
                 IconaBarretina(Modifier.size(44.dp))
             }

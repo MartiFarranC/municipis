@@ -83,7 +83,7 @@ fun MissionsScreen(
                     BarraProgres(if (m.puntsPossibles == 0) 0f else m.punts.toFloat() / m.puntsPossibles, alcada = 6)
                 }
                 if (m.complet) {
-                    Icon(Icones.Fet, contentDescription = stringResource(R.string.completat), tint = Colors.Ambre, modifier = Modifier.size(22.dp))
+                    Icon(Icones.Fet, contentDescription = stringResource(R.string.completat), tint = Colors.AmbreText, modifier = Modifier.size(22.dp))
                 }
             }
         }

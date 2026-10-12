@@ -44,7 +44,7 @@ import cat.descobreix.ui.components.DibuixMedalla
 import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.SardanaPremi
 import cat.descobreix.ui.components.Silueta
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
 
@@ -102,7 +102,7 @@ fun TargetaMedalla(m: Medalla, nomComarca: String?, silueta: Silueta?, modifier:
         Text(titol, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center, maxLines = 2)
         Text(
             listOfNotNull(estat, progres.takeUnless { m.completa && estat != null }).joinToString(" · "),
-            style = MaterialTheme.typography.bodySmall.copy(color = if (m.aconseguida) Colors.Ambre else Colors.TextSecundari),
+            style = MaterialTheme.typography.bodySmall.copy(color = if (m.aconseguida) Colors.AmbreText else Colors.TextSecundari),
             textAlign = TextAlign.Center,
         )
     }
@@ -164,10 +164,10 @@ fun CelebracioMedalles(noves: MedallesNoves, nomsComarques: Map<String, String>,
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         stringResource(R.string.celebracio_punts, compte.value.toInt()),
-                        fontFamily = ChakraPetch,
+                        fontFamily = Archivo,
                         fontWeight = FontWeight.Bold,
                         fontSize = 40.sp,
-                        color = Colors.Ambre,
+                        color = Colors.AmbreText,
                     )
                     IconaBarretina(Modifier.size(38.dp))
                 }

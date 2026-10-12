@@ -58,7 +58,7 @@ El workflow `Genera les missions` (`missions.yml`, s'executa a mà des de la pes
 - **Límits municipals.** Instituto Geográfico Nacional (IGN), versió de desembre de 2024 publicada a [ArnauInes/geometries_cat_bcn_2024](https://github.com/ArnauInes/geometries_cat_bcn_2024), amb llicència CC BY 4.0.
 - **Comarques.** Les 43 comarques actuals (el Lluçanès inclòs), de la capa de comarques de la mateixa font. Cada municipi s'assigna a la comarca que en conté el punt interior.
 - **Missions.** Wikidata (CC0) i OpenStreetMap (ODbL, © col·laboradors d'OpenStreetMap), més les missions genèriques de `dades/configuracio_joc.json`.
-- **Tipografies.** Chakra Petch i Atkinson Hyperlegible (SIL Open Font License 1.1). Les llicències són a `app/src/main/assets/llicencies/`.
+- **Tipografies.** Archivo Black, Instrument Sans i Caveat (SIL Open Font License 1.1). Les llicències són a `app/src/main/assets/llicencies/`.
 
 ## Pendent
 

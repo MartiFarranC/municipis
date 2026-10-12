@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import cat.descobreix.R
 import cat.descobreix.sacs.ANIMACIONS_CARREGA
 import cat.descobreix.sacs.AnimacioCarrega
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalAnimacioCarrega
 
@@ -67,7 +67,7 @@ fun BotoPrincipal(
         if (carregant) {
             CircularProgressIndicator(Modifier.size(22.dp), color = Colors.TintaAmbre, strokeWidth = 2.dp)
         } else {
-            Text(text, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium.copy(color = Color.Unspecified))
+            Text(text, fontFamily = Archivo, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium.copy(color = Color.Unspecified))
         }
     }
 }

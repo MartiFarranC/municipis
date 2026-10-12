@@ -11,7 +11,6 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -31,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.EstatMunicipi
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import kotlinx.coroutines.launch
 
@@ -57,7 +56,7 @@ fun MapaCanvas(
 ) {
     val ambit = rememberCoroutineScope()
     val mesurador = rememberTextMeasurer(cacheSize = 256)
-    val estilEtiqueta = TextStyle(fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 0.04.em)
+    val estilEtiqueta = TextStyle(fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 0.04.em)
 
     Canvas(
         modifier
@@ -154,7 +153,7 @@ private fun DrawScope.dibuixaEtiquetes(
         val nom = noms.getOrNull(i) ?: continue
         val color = when {
             i == seleccionat -> Colors.Blau
-            estat == EstatMunicipi.DESCOBERT -> Colors.Ambre
+            estat == EstatMunicipi.DESCOBERT -> Colors.AmbreText
             estat == EstatMunicipi.DISPONIBLE -> Colors.Text
             else -> Colors.TextSecundari
         }
@@ -208,7 +207,7 @@ fun Minimapa(
             val f = factor(size)
             val v = camera.visible()
             drawRect(
-                Color.White,
+                Colors.Text,
                 topLeft = Offset(v.left * f, v.top * f),
                 size = Size(v.width * f, v.height * f),
                 style = Stroke(1.5.dp.toPx()),

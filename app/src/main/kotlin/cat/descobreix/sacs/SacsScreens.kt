@@ -81,7 +81,7 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.SardanaCarregant
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.ColorSecundari
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
@@ -125,8 +125,8 @@ fun SacsScreen(onEnrere: () -> Unit, obreAra: Boolean = false, viewModel: SacsVi
             item { Seccio(nomTipus(TipusObjecte.COLOR), stringResource(R.string.sacs_ajuda_colors)) }
             item {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Fitxa(stringResource(R.string.color_ambre), estat.color == null, onTria = { viewModel.colorDeSempre() }) {
-                        Mostra(ColorSecundari.Ambre)
+                    Fitxa(stringResource(R.string.color_groc), estat.color == null, onTria = { viewModel.colorDeSempre() }) {
+                        Mostra(ColorSecundari.Groc)
                     }
                     for (o in estat.tot.filter { it.tipus == TipusObjecte.COLOR }) {
                         FitxaObjecte(o, o in estat.tinc, estat.color == o.id) { viewModel.faServir(o) }
@@ -228,7 +228,7 @@ private fun Fitxa(nom: String, triada: Boolean, onTria: (() -> Unit)?, vora: Col
             .width(92.dp)
             .clip(forma)
             .background(Colors.Superficie)
-            .border(if (triada) 2.dp else 1.dp, if (triada) Colors.Ambre else vora, forma)
+            .border(if (triada) 2.dp else 1.dp, if (triada) Colors.AmbreText else vora, forma)
             .then(if (onTria != null) Modifier.clickable(role = Role.RadioButton, onClickLabel = nom, onClick = onTria) else Modifier)
             .semantics(mergeDescendants = true) { selected = triada }
             .padding(8.dp),
@@ -254,7 +254,7 @@ private fun FitxaObjecte(o: Objecte, laTinc: Boolean, triada: Boolean, onTria: (
                     .semantics { contentDescription = amagada },
                 contentAlignment = Alignment.Center,
             ) {
-                Text("?", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 26.sp, color = colorRaresa(o.raresa).copy(alpha = .6f))
+                Text("?", fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 26.sp, color = colorRaresa(o.raresa).copy(alpha = .6f))
             }
         }
         return
@@ -271,7 +271,7 @@ fun DibuixObjecte(o: Objecte, modifier: Modifier = Modifier) {
         TipusObjecte.EMOJI -> dibuixEmoji(o.id)?.let { Image(painterResource(it), null, modifier) }
         TipusObjecte.PORTADA -> Box(modifier, contentAlignment = Alignment.Center) { MiniPortada(o.id) }
         TipusObjecte.ANIMACIO -> AnimacioCarrega(o.id, modifier)
-        TipusObjecte.COLOR -> Box(modifier, contentAlignment = Alignment.Center) { Mostra(colorSac(o.id) ?: ColorSecundari.Ambre) }
+        TipusObjecte.COLOR -> Box(modifier, contentAlignment = Alignment.Center) { Mostra(colorSac(o.id) ?: ColorSecundari.Groc) }
     }
 }
 
@@ -378,7 +378,7 @@ private fun ObrintSac(
                         when (sortit) {
                             is Sortit.Nou -> DibuixObjecte(sortit.objecte, Modifier.fillMaxSize())
                             is Sortit.Punts -> Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Text("+${sortit.punts}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 48.sp, color = Colors.Ambre)
+                                Text("+${sortit.punts}", fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 48.sp, color = Colors.AmbreText)
                                 IconaBarretina(Modifier.size(46.dp))
                             }
                         }
@@ -389,7 +389,7 @@ private fun ObrintSac(
                         val o = sortit.objecte
                         Text(
                             nomRaresa(o.raresa).uppercase(),
-                            fontFamily = ChakraPetch,
+                            fontFamily = Archivo,
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 2.sp,
                             color = color,

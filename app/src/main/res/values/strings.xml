@@ -213,7 +213,7 @@
     <string name="atribucio_osm_titol">OpenStreetMap</string>
     <string name="atribucio_osm">Dades de llocs d\'interès © col·laboradors d\'OpenStreetMap, amb llicència ODbL.</string>
     <string name="atribucio_fonts_titol">Tipografies</string>
-    <string name="atribucio_fonts">Chakra Petch (© The Chakra Petch Project Authors) i Atkinson Hyperlegible (© Braille Institute of America), amb llicència SIL Open Font License 1.1.</string>
+    <string name="atribucio_fonts">Archivo Black (© The Archivo Black Project Authors), Instrument Sans (© The Instrument Sans Project Authors) i Caveat (© The Caveat Project Authors), amb llicència SIL Open Font License 1.1.</string>
     <string name="privacitat_titol">Privacitat</string>
     <string name="privacitat">La ubicació només es fa servir mentre utilitzes l\'app, quan fas una prova. Les fotos i el progrés es guarden només al mòbil.</string>
 
@@ -351,7 +351,7 @@
         <item quantity="other">Tens %1$d sacs nous per obrir.</item>
     </plurals>
     <string name="sacs_despres">Després</string>
-    <string name="color_ambre">Ambre</string>
+    <string name="color_groc">Groc</string>
     <string name="animacio_sardana">Sardana</string>
     <string name="raresa_inicial">De sempre</string>
     <string name="raresa_comuna">Comuna</string>

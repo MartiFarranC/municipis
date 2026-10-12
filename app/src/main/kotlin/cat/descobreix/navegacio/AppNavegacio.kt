@@ -281,8 +281,8 @@ private fun BarraInferior(nav: NavHostController, rutaActual: String?, pestanyes
                 icon = { Box { Icon(p.icona, contentDescription = null, modifier = Modifier.size(24.dp)) } },
                 label = { Text(stringResource(p.etiqueta)) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Colors.Ambre,
-                    selectedTextColor = Colors.Ambre,
+                    selectedIconColor = Colors.AmbreText,
+                    selectedTextColor = Colors.AmbreText,
                     indicatorColor = Colors.Superficie2,
                     unselectedIconColor = Colors.TextSecundari,
                     unselectedTextColor = Colors.TextSecundari,

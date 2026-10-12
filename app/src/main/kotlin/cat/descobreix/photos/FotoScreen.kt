@@ -118,7 +118,7 @@ fun FotoScreen(onEnrere: () -> Unit, viewModel: FotoViewModel = hiltViewModel())
         if (!foto.esPortada) {
             BotoSecundari(stringResource(R.string.fes_portada), viewModel::fesPortada, icona = Icones.Estrella)
         } else {
-            Text(stringResource(R.string.es_portada), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre))
+            Text(stringResource(R.string.es_portada), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText))
         }
         BotoSecundari(stringResource(R.string.esborra_foto), { confirmant = true }, icona = Icones.Esborrar)
     }

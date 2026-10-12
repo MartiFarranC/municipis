@@ -86,7 +86,7 @@ fun PerfilScreen(
         item { Capcalera(estat) }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Xifra("${estat.descoberts}", stringResource(R.string.stat_municipis), Modifier.weight(1f), Colors.Ambre)
+                Xifra("${estat.descoberts}", stringResource(R.string.stat_municipis), Modifier.weight(1f), Colors.AmbreText)
                 Xifra("${estat.missionsFetes}", stringResource(R.string.stat_missions), Modifier.weight(1f))
                 Xifra("${estat.fotos}", stringResource(R.string.stat_fotos), Modifier.weight(1f))
                 Xifra("${estat.comarquesCompletes}/${estat.comarques.size}", stringResource(R.string.stat_comarques), Modifier.weight(1f))
@@ -230,10 +230,10 @@ private fun Capcalera(estat: PerfilEstat) {
                 .size(64.dp)
                 .clip(RoundedCornerShape(20.dp))
                 .background(Colors.Disponible1)
-                .border(2.dp, Colors.Ambre, RoundedCornerShape(20.dp)),
+                .border(2.dp, Colors.AmbreText, RoundedCornerShape(20.dp)),
             contentAlignment = Alignment.Center,
         ) {
-            Text("${nivell.numero}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
+            Text("${nivell.numero}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })

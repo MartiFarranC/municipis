@@ -55,7 +55,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.sacs.portada
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -136,7 +136,7 @@ private fun DrawScope.encabeix(si: Silueta, centre: Offset, mida: Float, color: 
 }
 
 private fun DrawScope.textSegell(mesurador: TextMeasurer, text: String, centre: Offset, mida: Float, ampladaMaxima: Float, color: Color, escala: Float) {
-    fun estil(m: Float) = TextStyle(fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = (m * escala).toSp(), color = color)
+    fun estil(m: Float) = TextStyle(fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = (m * escala).toSp(), color = color)
     var r = mesurador.measure(text, estil(mida), softWrap = false, maxLines = 1)
     val amplada = r.size.width / escala
     if (amplada > ampladaMaxima) r = mesurador.measure(text, estil(mida * ampladaMaxima / amplada), softWrap = false, maxLines = 1)
@@ -188,13 +188,13 @@ fun PaginaPassaport(
         }
         Column(Modifier.padding(horizontal = 18.dp, vertical = 14.dp)) {
             Box(Modifier.fillMaxWidth()) {
-                Text(comarca.uppercase(), fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 15.sp, letterSpacing = 1.6.sp, color = ColorsPassaport.TextPaper)
-                Text(recompte, fontFamily = ChakraPetch, fontSize = 13.sp, color = ColorsPassaport.TextSuau, modifier = Modifier.align(Alignment.CenterEnd))
+                Text(comarca.uppercase(), fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 15.sp, letterSpacing = 1.6.sp, color = ColorsPassaport.TextPaper)
+                Text(recompte, fontFamily = Archivo, fontSize = 13.sp, color = ColorsPassaport.TextSuau, modifier = Modifier.align(Alignment.CenterEnd))
             }
         }
         Text(
             numero,
-            fontFamily = ChakraPetch,
+            fontFamily = Archivo,
             fontSize = 11.sp,
             letterSpacing = 1.sp,
             color = ColorsPassaport.TextSuau,
@@ -259,7 +259,7 @@ fun TapaDelPassaport(tapa: String, siluetaCatalunya: List<Silueta>, titol: Strin
                 .border(1.dp, daurat.copy(alpha = .6f), RoundedCornerShape(6.dp)),
         )
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(titol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 22.sp, letterSpacing = 4.sp, color = p.text)
+            Text(titol, fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 22.sp, letterSpacing = 4.sp, color = p.text)
             if (p.silueta && siluetaCatalunya.isNotEmpty()) {
                 Canvas(
                     Modifier
@@ -280,7 +280,7 @@ fun TapaDelPassaport(tapa: String, siluetaCatalunya: List<Silueta>, titol: Strin
                 }
             }
             if (!p.silueta) Spacer(Modifier.fillMaxWidth(.62f).aspectRatio(1f))
-            Text(subtitol, fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 1.6.sp, color = p.text)
+            Text(subtitol, fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 1.6.sp, color = p.text)
         }
     }
 }

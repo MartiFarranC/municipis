@@ -29,7 +29,7 @@ private fun cami(d: String): Path = PathParser().parsePathString(d).toPath()
 
 /** La icona de la moneda: una barretina d'un color, encabida en un quadrat de 24 × 24 com la resta d'icones. */
 @Composable
-fun IconaBarretina(modifier: Modifier = Modifier, color: Color = Colors.Ambre, descripcio: String? = null) {
+fun IconaBarretina(modifier: Modifier = Modifier, color: Color = Colors.AmbreText, descripcio: String? = null) {
     val semantica = if (descripcio != null) Modifier.semantics { contentDescription = descripcio } else Modifier
     Canvas(
         modifier

@@ -64,7 +64,7 @@ import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalReduirAnimacions
 import kotlinx.coroutines.FlowPreview
@@ -246,7 +246,7 @@ private fun Capcalera(estat: MapaEstat) {
                     .border(1.dp, Colors.Linia, RoundedCornerShape(12.dp)),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("${nivell.numero}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, color = Colors.Ambre)
+                Text("${nivell.numero}", fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
             }
             Column(Modifier.width(96.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(stringResource(R.string.nivell, nivell.numero).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.TextSecundari))
@@ -254,7 +254,7 @@ private fun Capcalera(estat: MapaEstat) {
             }
         }
         Column(Modifier.weight(1f).semantics(mergeDescendants = true) {}) {
-            Text("${estat.descoberts}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
+            Text("${estat.descoberts}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))
             Text(stringResource(R.string.comptador_llarg, estat.total), style = MaterialTheme.typography.bodySmall)
         }
         Row(
@@ -268,7 +268,7 @@ private fun Capcalera(estat: MapaEstat) {
             horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             IconaBarretina(Modifier.size(18.dp), descripcio = stringResource(R.string.punts))
-            Text("${estat.saldo}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold)
+            Text("${estat.saldo}", fontFamily = Archivo, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -330,7 +330,7 @@ private fun TargetaSeleccio(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Text("${s.cost}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold)
+                    Text("${s.cost}", fontFamily = Archivo, fontWeight = FontWeight.Bold)
                     IconaBarretina(Modifier.size(18.dp), color = Colors.TintaAmbre)
                 }
             }
@@ -405,11 +405,11 @@ private fun PanellCerca(
                 singleLine = true,
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Colors.Ambre,
+                    focusedBorderColor = Colors.AmbreText,
                     unfocusedBorderColor = Colors.Linia,
                     focusedContainerColor = Colors.Superficie,
                     unfocusedContainerColor = Colors.Superficie,
-                    cursorColor = Colors.Ambre,
+                    cursorColor = Colors.AmbreText,
                 ),
             )
             BotoIcona(Icones.Tancar, stringResource(R.string.tanca), onTanca)

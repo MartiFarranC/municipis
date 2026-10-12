@@ -180,13 +180,13 @@ private fun OpcioTapa(t: String, triada: Boolean, onTria: () -> Unit) {
                 .size(44.dp, 60.dp)
                 .clip(RoundedCornerShape(6.dp))
                 .background(p.fons)
-                .border(if (triada) 3.dp else 1.dp, if (triada) Colors.Ambre else p.daurat.copy(alpha = .5f), RoundedCornerShape(6.dp)),
+                .border(if (triada) 3.dp else 1.dp, if (triada) Colors.AmbreText else p.daurat.copy(alpha = .5f), RoundedCornerShape(6.dp)),
         ) {
             p.dibuix?.let { Image(painterResource(it), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop) }
         }
         Text(
             nom,
-            style = MaterialTheme.typography.labelMedium.copy(color = if (triada) Colors.Ambre else Colors.Text),
+            style = MaterialTheme.typography.labelMedium.copy(color = if (triada) Colors.AmbreText else Colors.Text),
             textAlign = TextAlign.Center,
             maxLines = 2,
             modifier = Modifier.width(72.dp),

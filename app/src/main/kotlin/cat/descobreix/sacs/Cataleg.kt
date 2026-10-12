@@ -9,6 +9,7 @@ import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.joc.config.ConfiguracioJoc.Objecte
 import cat.descobreix.joc.config.ConfiguracioJoc.Raresa
 import cat.descobreix.joc.config.ConfiguracioJoc.TipusObjecte
+import cat.descobreix.ui.theme.Colors
 
 /** Una tapa del passaport: el color de fons (i el dibuix, si en té), el daurat de la vora, el del text i si porta la silueta. */
 data class Portada(@DrawableRes val dibuix: Int?, val fons: Color, val daurat: Color, val text: Color, val silueta: Boolean)
@@ -54,7 +55,7 @@ fun dibuixEmoji(id: String): Int? = DIBUIXOS_EMOJIS[id]
 
 /** El color de cada raresa: comuna, gris clar; rara, blau; llegendària, or. No canvien amb el color secundari. */
 fun colorRaresa(r: Raresa): Color = when (r) {
-    Raresa.INICIAL, Raresa.COMUNA -> Color(0xFFC9D1DC)
+    Raresa.INICIAL, Raresa.COMUNA -> Colors.TextSecundari
     Raresa.RARA -> Color(0xFF5AB8E8)
     Raresa.LLEGENDARIA -> Color(0xFFF2B544)
 }

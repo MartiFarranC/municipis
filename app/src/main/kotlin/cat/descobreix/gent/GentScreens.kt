@@ -80,7 +80,7 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.plural
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import java.text.DateFormat
 import java.util.Date
@@ -112,12 +112,12 @@ fun GentScreen(onObrePersona: (String) -> Unit, viewModel: GentViewModel = hiltV
                 singleLine = true,
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Colors.Ambre,
+                    focusedBorderColor = Colors.AmbreText,
                     unfocusedBorderColor = Colors.Linia,
                     focusedContainerColor = Colors.Superficie,
                     unfocusedContainerColor = Colors.Superficie,
-                    focusedLabelColor = Colors.Ambre,
-                    cursorColor = Colors.Ambre,
+                    focusedLabelColor = Colors.AmbreText,
+                    cursorColor = Colors.AmbreText,
                 ),
             )
         }
@@ -280,12 +280,12 @@ private fun FinestraAnima(nom: String, emojis: List<String>, onEmoji: (String) -
                     supportingText = { Text("${missatge.length}/${GentViewModel.MAX_MISSATGE}") },
                     shape = RoundedCornerShape(14.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Colors.Ambre,
+                        focusedBorderColor = Colors.AmbreText,
                         unfocusedBorderColor = Colors.Linia,
                         focusedContainerColor = Colors.Superficie,
                         unfocusedContainerColor = Colors.Superficie,
-                        focusedLabelColor = Colors.Ambre,
-                        cursorColor = Colors.Ambre,
+                        focusedLabelColor = Colors.AmbreText,
+                        cursorColor = Colors.AmbreText,
                     ),
                 )
             }
@@ -384,7 +384,7 @@ private fun Inicial(nom: String, mida: Int = 40) {
             .background(Colors.Disponible1),
         contentAlignment = Alignment.Center,
     ) {
-        Text(nom.take(1).uppercase(), fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, color = Colors.Ambre)
+        Text(nom.take(1).uppercase(), fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
     }
 }
 
