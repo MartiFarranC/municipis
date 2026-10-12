@@ -41,7 +41,9 @@ fun AvisDesbloqueig(missatge: Missatge.Desbloquejat, onTanca: () -> Unit) {
     val frases = stringArrayResource(R.array.frases_fetes)
     val frase = remember(missatge) { frases.random() }
     val visible = remember(missatge) { Animatable(if (reduir) 1f else 0f) }
+    val efectes = LocalEfectes.current
     LaunchedEffect(missatge) {
+        efectes?.fes(Efectes.So.XIM)
         visible.animateTo(1f, tween(if (reduir) 0 else 350))
         delay(2600)
         visible.animateTo(0f, tween(if (reduir) 0 else 300))

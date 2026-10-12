@@ -205,6 +205,12 @@ class PreferenciesEnMemoria : PreferenciesRepositori {
     override suspend fun desaAnimacioCarrega(animacio: String?) {
         this.animacio.value = animacio
     }
+
+    private val so = MutableStateFlow(true)
+    override val soIVibracio: Flow<Boolean> = so
+    override suspend fun desaSoIVibracio(actiu: Boolean) {
+        so.value = actiu
+    }
 }
 
 class SacsEnMemoria(private val progres: ProgresEnMemoria) : SacsRepositori {

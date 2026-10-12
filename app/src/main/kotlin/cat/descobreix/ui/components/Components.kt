@@ -36,6 +36,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -57,6 +58,8 @@ import androidx.compose.ui.unit.sp
 import cat.descobreix.R
 import cat.descobreix.sacs.ANIMACIONS_CARREGA
 import cat.descobreix.sacs.AnimacioCarrega
+import cat.descobreix.ui.Efectes
+import cat.descobreix.ui.LocalEfectes
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalAnimacioCarrega
 import cat.descobreix.ui.theme.LocalReduirAnimacions
@@ -79,6 +82,8 @@ private fun BotoAmbOmbra(
 ) {
     val interaccio = remember { MutableInteractionSource() }
     val premut by interaccio.collectIsPressedAsState()
+    val efectes = LocalEfectes.current
+    LaunchedEffect(premut) { if (premut && enabled) efectes?.fes(Efectes.So.TOC) }
     val reduir = LocalReduirAnimacions.current
     val enfonsat by animateDpAsState(if (premut && enabled) ombra else 0.dp, tween(if (reduir) 0 else 70), label = "enfonsat")
     val tinta = Colors.Text

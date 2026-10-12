@@ -94,6 +94,11 @@ interface PreferenciesRepositori {
     val animacioCarrega: Flow<String?>
 
     suspend fun desaAnimacioCarrega(animacio: String?)
+
+    /** Si l'app fa sons i vibra quan passen coses (botons, desbloquejos, missions). Per defecte, sí. */
+    val soIVibracio: Flow<Boolean>
+
+    suspend fun desaSoIVibracio(actiu: Boolean)
 }
 
 /** Les tres tapes del passaport que hi ha sempre. */

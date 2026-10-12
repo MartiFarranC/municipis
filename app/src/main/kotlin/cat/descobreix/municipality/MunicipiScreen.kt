@@ -1,5 +1,8 @@
 package cat.descobreix.municipality
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -41,11 +44,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathMeasure
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -54,6 +64,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
@@ -67,11 +78,14 @@ import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.regles.DisponibilitatOficial
+import cat.descobreix.passaport.PassaportViewModel
 import cat.descobreix.ui.AvisDesbloqueig
 import cat.descobreix.ui.Celebracio
-import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
+import cat.descobreix.ui.Efectes
+import cat.descobreix.ui.LocalEfectes
+import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
@@ -85,8 +99,10 @@ import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
 import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.LocalReduirAnimacions
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.random.Random
 
 @Composable
 fun MunicipiScreen(
@@ -268,7 +284,7 @@ private fun FitxaDescoberta(
         }
         items(estat.missions, key = { it.missio.id }) { f ->
             Column {
-                FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) })
+                FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) }, potAnimar = estat.avis == null)
                 // La foto del cartell ja feta es pot repetir (sense punts) per canviar el cromo del catàleg.
                 if (f.completada && f.missio.clau == Medalles.CLAU_CARTELL) {
                     val teCromo = estat.fotos.any { it.esCromo }
@@ -291,6 +307,7 @@ private fun FitxaDescoberta(
                     onProva = { onProva(o.missio) },
                     etiqueta = etiquetaOficial(o),
                     activa = disponible,
+                    potAnimar = estat.avis == null,
                 )
             }
             if (estat.avantatges.isNotEmpty()) {
@@ -360,6 +377,7 @@ private fun FilaDeMissio(
     onProva: () -> Unit,
     etiqueta: String? = null,
     activa: Boolean = true,
+    potAnimar: Boolean = true,
 ) {
     val m = f.missio
     val titol = titolMissio(m)
@@ -371,41 +389,47 @@ private fun FilaDeMissio(
         },
     )
     val estatText = stringResource(if (f.completada) R.string.completada else R.string.pendent)
+    val esCheckin = m.tipus == TipusMissio.GENERICA && m.clau == PassaportViewModel.CLAU_CHECKIN
+    // Les missions que es fan ara (no les que ja venien fetes) es ratllen o es segellen amb animació, quan no hi ha
+    // cap celebració al damunt.
+    val eraFeta = remember(m.id) { f.completada }
+    val reduir = LocalReduirAnimacions.current
+    val traç = remember(m.id) { Animatable(if (f.completada) 1f else 0f) }
+    val efectes = LocalEfectes.current
+    LaunchedEffect(f.completada, potAnimar) {
+        if (f.completada && !eraFeta && potAnimar && traç.value < 1f) {
+            efectes?.fes(if (esCheckin) Efectes.So.SEGELL else Efectes.So.GARGOT)
+            traç.animateTo(1f, tween(if (reduir) 0 else if (esCheckin) 420 else 450))
+        }
+    }
+    val linia = Colors.Linia
     Row(
         Modifier
             .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .heightIn(min = 64.dp)
-            .clip(RectangleShape)
-            .background(if (f.completada) Colors.FonsCompletada else Colors.Superficie)
-            .border(1.dp, if (f.completada) Colors.Disponible2 else Colors.Linia, RectangleShape)
+            .drawBehind { drawLine(linia, Offset(0f, size.height), Offset(size.width, size.height), 1.5.dp.toPx()) }
             .clickable(enabled = !f.completada && !provant && activa, role = Role.Button, onClick = onProva)
             .semantics(mergeDescendants = true) { stateDescription = estatText }
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Box(
-            Modifier
-                .size(26.dp)
-                .clip(RectangleShape)
-                .background(if (f.completada) Colors.Ambre else Color.Transparent)
-                .border(2.dp, if (f.completada) Colors.AmbreText else Colors.TextSecundari, RectangleShape),
-            contentAlignment = Alignment.Center,
-        ) {
-            if (f.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(16.dp))
-        }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = if (f.completada) Colors.TextSecundari else Colors.Text))
+            Box {
+                Text(titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = if (f.completada) Colors.TextSecundari else Colors.Text))
+                if (f.completada && !esCheckin) Gargot(m.id, traç.value, Modifier.matchParentSize())
+            }
             Text(
                 if (f.completada) stringResource(R.string.prova_feta, prova) else stringResource(R.string.prova_toca, prova),
                 style = MaterialTheme.typography.bodySmall,
             )
             if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
         }
+        if (f.completada && esCheckin) Segell(traç.value)
         if (provant) {
             CircularProgressIndicator(Modifier.size(20.dp), color = Colors.AmbreText, strokeWidth = 2.dp)
-        } else {
+        } else if (!f.completada) {
             Icon(
                 when (m.prova) {
                     TipusProva.GPS -> Icones.Gps
@@ -417,7 +441,57 @@ private fun FilaDeMissio(
                 modifier = Modifier.size(18.dp),
             )
         }
-        Text("+${m.punts}", fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
+        Text("${m.punts}", fontFamily = Archivo, fontSize = 20.sp, color = if (f.completada) Colors.TextSecundari else Colors.Text)
+    }
+}
+
+/**
+ * El gargot fet a mà que ratlla una missió feta, amb el color fort. Cada missió té el seu (surt de l'id), i es dibuixa
+ * d'esquerra a dreta segons «progres».
+ */
+@Composable
+private fun Gargot(llavor: String, progres: Float, modifier: Modifier = Modifier) {
+    val color = Colors.Ambre
+    val vora = Colors.Text
+    Canvas(modifier) {
+        val r = Random(llavor.hashCode())
+        val y = size.height / 2
+        val trams = 5
+        val cami = Path().apply {
+            moveTo(-4.dp.toPx(), y + (r.nextFloat() - .5f) * 4.dp.toPx())
+            for (k in 1..trams) {
+                val x = size.width * k / trams + if (k == trams) 4.dp.toPx() else 0f
+                val ym = y + (r.nextFloat() - .5f) * 5.dp.toPx()
+                val xc = size.width * (k - .5f) / trams
+                quadraticTo(xc, y + (r.nextFloat() - .5f) * 6.dp.toPx(), x, ym)
+            }
+        }
+        val mesura = PathMeasure().apply { setPath(cami, false) }
+        val tros = Path()
+        mesura.getSegment(0f, mesura.length * progres, tros, true)
+        // Una mica de tinta a sota perquè el groc es vegi sobre blanc.
+        drawPath(tros, vora, style = Stroke(5.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round))
+        drawPath(tros, color, style = Stroke(3.2.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round))
+    }
+}
+
+/** El segell del check-in: cau de dalt, gros i girat, i es queda una mica tort. */
+@Composable
+private fun Segell(progres: Float) {
+    val t = progres.coerceIn(0f, 1f)
+    Box(
+        Modifier
+            .graphicsLayer {
+                val escala = 1f + (1f - t) * 1.2f
+                scaleX = escala
+                scaleY = escala
+                rotationZ = -8f - (1f - t) * 16f
+                alpha = t
+            }
+            .border(2.5.dp, Colors.AmbreText)
+            .padding(horizontal = 8.dp, vertical = 3.dp),
+    ) {
+        Text(stringResource(R.string.segell_fet).uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText, letterSpacing = 1.sp))
     }
 }
 

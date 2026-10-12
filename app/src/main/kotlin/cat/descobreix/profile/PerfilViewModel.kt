@@ -8,6 +8,7 @@ import cat.descobreix.data.compte.ExcepcioCompte
 import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.exportacio.GestioDades
 import cat.descobreix.data.repositori.FotosRepositori
+import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.Joc
 import cat.descobreix.joc.progressio.Medalla
@@ -17,6 +18,7 @@ import cat.descobreix.joc.progressio.TipusMedalla
 import cat.descobreix.ui.components.Silueta
 import cat.descobreix.ui.components.siluetesComarques
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +27,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 data class GrupFotos(val nom: String, val fotos: List<Foto>)
 
@@ -52,6 +53,8 @@ data class PerfilEstat(
     val nomUsuari: String? = null,
     /** No s'han pogut esborrar les dades (per exemple, sense connexió). */
     val errorEsborrant: Boolean = false,
+    /** Si l'app fa sons i vibra. */
+    val soIVibracio: Boolean = true,
 )
 
 @HiltViewModel
@@ -60,11 +63,15 @@ class PerfilViewModel @Inject constructor(
     fotos: FotosRepositori,
     private val gestio: GestioDades,
     private val compte: ServeiCompte,
+    private val preferencies: PreferenciesRepositori,
 ) : ViewModel() {
     private val _estat = MutableStateFlow(PerfilEstat())
     val estat: StateFlow<PerfilEstat> = _estat.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            preferencies.soIVibracio.collect { so -> _estat.update { it.copy(soIVibracio = so) } }
+        }
         viewModelScope.launch {
             compte.estat.collect { e ->
                 _estat.update { it.copy(nomUsuari = (e as? EstatCompte.Llest)?.perfil?.nomUsuari) }
@@ -114,6 +121,10 @@ class PerfilViewModel @Inject constructor(
     fun tancaExportacio() = _estat.update { it.copy(exportat = null) }
 
     /** Esborra les dades del joc al servidor i al mòbil (cal connexió). */
+    fun canviaSoIVibracio(actiu: Boolean) {
+        viewModelScope.launch { preferencies.desaSoIVibracio(actiu) }
+    }
+
     fun esborraTot() {
         _estat.update { it.copy(treballant = true) }
         viewModelScope.launch {

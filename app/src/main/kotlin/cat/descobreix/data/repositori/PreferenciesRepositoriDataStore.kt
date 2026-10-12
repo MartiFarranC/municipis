@@ -3,6 +3,7 @@ package cat.descobreix.data.repositori
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
@@ -46,6 +47,12 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         dataStore.edit { if (animacio == null) it.remove(ANIMACIO) else it[ANIMACIO] = animacio }
     }
 
+    override val soIVibracio: Flow<Boolean> = dataStore.data.map { it[SO] ?: true }
+
+    override suspend fun desaSoIVibracio(actiu: Boolean) {
+        dataStore.edit { it[SO] = actiu }
+    }
+
     private companion object {
         val X = floatPreferencesKey("mapa_x")
         val Y = floatPreferencesKey("mapa_y")
@@ -53,5 +60,6 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         val TAPA = stringPreferencesKey("tapa_passaport")
         val COLOR = stringPreferencesKey("color_app")
         val ANIMACIO = stringPreferencesKey("animacio_carrega")
+        val SO = booleanPreferencesKey("so_i_vibracio")
     }
 }

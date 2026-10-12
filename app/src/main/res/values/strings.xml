@@ -194,6 +194,9 @@
         <item quantity="other">%1$d medalles noves!</item>
     </plurals>
     <string name="comarques">Comarques</string>
+    <string name="segell_fet">Fet</string>
+    <string name="so_i_vibracio">So i vibració</string>
+    <string name="so_i_vibracio_text">Sons i vibracions quan prems un botó, desbloqueges un poble o fas una missió.</string>
     <string name="les_teves_dades">Les teves dades</string>
     <string name="les_teves_dades_text">Pots exportar el teu progrés o esborrar totes les dades del joc, en aquest mòbil i al servidor.</string>
     <string name="exporta">Exporta el meu progrés</string>

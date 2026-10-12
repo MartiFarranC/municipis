@@ -21,8 +21,11 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -145,6 +148,27 @@ fun PerfilScreen(
                     Text("${c.descoberts}/${c.total}", style = MaterialTheme.typography.bodySmall)
                 }
                 BarraProgres(c.descoberts.toFloat() / c.total, alcada = 6, color = if (c.completa) Colors.Ambre else Colors.AmbreFosc)
+            }
+        }
+
+        item {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .toggleable(estat.soIVibracio, role = Role.Switch, onValueChange = viewModel::canviaSoIVibracio)
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.so_i_vibracio), style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.so_i_vibracio_text), style = MaterialTheme.typography.bodySmall)
+                }
+                Switch(
+                    checked = estat.soIVibracio,
+                    onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = Colors.Ambre, checkedThumbColor = Colors.TintaAmbre),
+                )
             }
         }
 
