@@ -135,6 +135,18 @@ jobs:
           path: captures/
           if-no-files-found: ignore
 
+      # També al registre, en base64, per poder-les llegir sense baixar l'artefacte.
+      - name: Captures en base64
+        if: always()
+        run: |
+          if [ -d captures ]; then
+            tar -czf captures.tgz -C captures .
+            echo "CAPTURES-INICI"
+            base64 -w 0 captures.tgz
+            echo
+            echo "CAPTURES-FI"
+          fi
+
       - name: Resum d'errors
         if: failure()
         run: |

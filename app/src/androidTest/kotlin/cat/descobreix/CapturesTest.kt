@@ -92,13 +92,17 @@ class CapturesTest {
     private fun recorregut(tema: String) {
         instrumentacio.targetContext.deleteDatabase(BaseDades.NOM)
         escenari = ActivityScenario.launch(MainActivity::class.java)
-        espera("D'on ets?")
-        captura("$tema-01-inici")
-        regla.onNode(hasSetTextAction()).performTextInput("Vic")
-        espera("Osona")
-        regla.onAllNodesWithText("Osona").onFirst().performClick()
-        captura("$tema-02-tria")
-        regla.onNodeWithText("Comença l'aventura").performClick()
+        // La primera vegada surt la tria del municipi; la segona, la partida ja hi és i l'app s'obre al mapa.
+        val existeix = { t: String -> regla.onAllNodes(hasText(t, substring = true)).fetchSemanticsNodes().isNotEmpty() }
+        regla.waitUntil(30_000) { existeix("D'on ets?") || existeix("de 947 municipis descoberts") }
+        if (existeix("D'on ets?")) {
+            captura("$tema-01-inici")
+            regla.onNode(hasSetTextAction()).performTextInput("Vic")
+            espera("Osona")
+            regla.onAllNodesWithText("Osona").onFirst().performClick()
+            captura("$tema-02-tria")
+            regla.onNodeWithText("Comença l'aventura").performClick()
+        }
         espera("de 947 municipis descoberts")
         Thread.sleep(1500)
         captura("$tema-03-mapa")
