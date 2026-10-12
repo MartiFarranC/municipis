@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -52,14 +50,18 @@ import cat.descobreix.R
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.municipality.Distintiu
+import cat.descobreix.ui.AvisDesbloqueig
 import cat.descobreix.ui.Celebracio
+import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BarraProgres
+import cat.descobreix.ui.components.BotoCompacte
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.IconaBarretina
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.components.ombraDura
 import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
@@ -118,7 +120,7 @@ fun MapaScreen(
                 }
             }
     }
-    val textAvis = estat.avis?.takeUnless { it.esCelebracio }?.let { textDe(it) }
+    val textAvis = estat.avis?.takeUnless { it.esCelebracio || it is Missatge.Desbloquejat }?.let { textDe(it) }
     LaunchedEffect(textAvis) {
         if (textAvis != null) {
             avisos.showSnackbar(textAvis)
@@ -223,6 +225,7 @@ fun MapaScreen(
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
     estat.avis?.takeIf { it.esCelebracio }?.let { Celebracio(it, viewModel::tancaAvis) }
+    (estat.avis as? Missatge.Desbloquejat)?.let { AvisDesbloqueig(it, viewModel::tancaAvis) }
 }
 
 @Composable
@@ -285,9 +288,9 @@ private fun TargetaSeleccio(
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RectangleShape)
-            .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RectangleShape)
+            .ombraDura()
+            .background(Colors.Fons)
+            .border(2.dp, Colors.Text)
             .semantics { liveRegion = LiveRegionMode.Polite }
             .padding(start = 16.dp, top = 8.dp, bottom = 8.dp, end = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -317,30 +320,19 @@ private fun TargetaSeleccio(
             if (collaborador) Distintiu(Modifier.padding(top = 4.dp))
         }
         when {
-            s.estat == EstatMunicipi.DISPONIBLE && s.potDesbloquejar -> Button(
-                onClick = onDesbloqueja,
-                enabled = !desbloquejant,
-                modifier = Modifier.heightIn(min = 48.dp),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = Colors.Ambre, contentColor = Colors.TintaAmbre),
-            ) {
+            s.estat == EstatMunicipi.DISPONIBLE && s.potDesbloquejar -> BotoCompacte(onDesbloqueja, enabled = !desbloquejant) {
                 val cost = plural(R.plurals.punts_curt, s.cost, s.cost)
                 Row(
                     Modifier.clearAndSetSemantics { contentDescription = cost },
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    Text("${s.cost}", fontFamily = Archivo, fontWeight = FontWeight.Bold)
+                    Text("${s.cost}", fontFamily = Archivo, color = Colors.TintaAmbre)
                     IconaBarretina(Modifier.size(18.dp), color = Colors.TintaAmbre)
                 }
             }
-            else -> Button(
-                onClick = onObre,
-                modifier = Modifier.heightIn(min = 48.dp),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = Colors.Superficie2, contentColor = Colors.Text),
-            ) {
-                Text(stringResource(R.string.obre_fitxa))
+            else -> BotoCompacte(onObre, principal = false) {
+                Text(stringResource(R.string.obre_fitxa), style = MaterialTheme.typography.labelLarge)
             }
         }
         BotoIcona(Icones.Tancar, stringResource(R.string.tanca), onTanca, modifier = Modifier.size(48.dp))
@@ -358,8 +350,8 @@ private fun Llegenda() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         ElementLlegenda(Colors.Ambre, stringResource(R.string.estat_descobert))
-        ElementLlegenda(Colors.Disponible2, stringResource(R.string.estat_disponible))
-        ElementLlegenda(Colors.Superficie2, stringResource(R.string.estat_boira))
+        ElementLlegenda(Colors.Fons, stringResource(R.string.estat_disponible))
+        ElementLlegenda(Colors.Boira, stringResource(R.string.estat_boira))
     }
 }
 
@@ -371,7 +363,7 @@ private fun ElementLlegenda(color: Color, text: String) {
                 .size(10.dp)
                 .clip(RectangleShape)
                 .background(color)
-                .border(1.dp, Colors.Linia, RectangleShape),
+                .border(1.dp, Colors.Text, RectangleShape),
         )
         Text(text, style = MaterialTheme.typography.bodySmall)
     }

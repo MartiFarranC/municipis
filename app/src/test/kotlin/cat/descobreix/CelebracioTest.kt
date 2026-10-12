@@ -8,10 +8,14 @@ import org.junit.Test
 
 class CelebracioTest {
     @Test
-    fun `es celebren els punts i els desbloquejos`() {
+    fun `es celebren els punts`() {
         assertTrue(Missatge.PuntsGuanyats(100, 0).esCelebracio)
         assertTrue(Missatge.FotoDesada(50, 0).esCelebracio)
-        assertTrue(Missatge.Desbloquejat("Gurb").esCelebracio)
+    }
+
+    @Test
+    fun `els desbloquejos no tapen el mapa, s'hi obren els núvols`() {
+        assertFalse(Missatge.Desbloquejat("Gurb").esCelebracio)
     }
 
     @Test

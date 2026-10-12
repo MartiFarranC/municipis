@@ -52,7 +52,6 @@ val Missatge.esCelebracio: Boolean
     get() = when (this) {
         is Missatge.PuntsGuanyats -> punts + bonus > 0
         is Missatge.FotoDesada -> punts + bonus > 0
-        is Missatge.Desbloquejat -> true
         else -> false
     }
 

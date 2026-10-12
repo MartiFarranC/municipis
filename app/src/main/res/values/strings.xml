@@ -238,6 +238,16 @@
         <item quantity="other">Foto desada. Missió completada! +%1$d barretines i +%2$d de bonus</item>
     </plurals>
     <string name="missatge_desbloquejat">Has desbloquejat %1$s!</string>
+    <!-- Frases fetes catalanes: en surt una a l'atzar, escrita a mà, quan es desbloqueja un municipi. -->
+    <string-array name="frases_fetes">
+        <item>De mica en mica s\'omple la pica.</item>
+        <item>Qui no s\'arrisca, no pisca.</item>
+        <item>Poc a poc i bona lletra.</item>
+        <item>Al pot petit hi ha la bona confitura.</item>
+        <item>Qui la segueix, la consegueix.</item>
+        <item>Val més tard que mai.</item>
+        <item>Cada terra fa sa guerra.</item>
+    </string-array>
     <string name="missatge_precisio">El GPS no és prou precís (%1$d m). Cal una precisió de %2$d m o millor. Prova-ho a l\'aire lliure.</string>
     <string name="missatge_massa_lluny">Ets a %1$d m del lloc. Has d\'estar a menys de %2$d m.</string>
     <string name="missatge_altre_municipi">Ara ets a %1$s. Aquesta prova s\'ha de fer dins del municipi de la missió.</string>

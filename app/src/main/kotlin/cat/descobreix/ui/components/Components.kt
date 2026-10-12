@@ -74,6 +74,7 @@ private fun BotoAmbOmbra(
     enabled: Boolean,
     ombra: Dp = 4.dp,
     alcadaMinima: Dp = 56.dp,
+    ample: Boolean = true,
     content: @Composable RowScope.() -> Unit,
 ) {
     val interaccio = remember { MutableInteractionSource() }
@@ -84,7 +85,7 @@ private fun BotoAmbOmbra(
     val vora = if (enabled) tinta else Colors.Linia
     Box(
         modifier
-            .fillMaxWidth()
+            .then(if (ample) Modifier.fillMaxWidth() else Modifier)
             .padding(end = ombra, bottom = ombra)
             .drawBehind {
                 // L'ombra dura: un rectangle de tinta desplaçat, que s'amaga a mesura que el botó s'enfonsa.
@@ -97,7 +98,7 @@ private fun BotoAmbOmbra(
         Row(
             Modifier
                 .offset(enfonsat, enfonsat)
-                .fillMaxWidth()
+                .then(if (ample) Modifier.fillMaxWidth() else Modifier)
                 .heightIn(min = alcadaMinima)
                 .background(if (enabled) fons else Colors.Superficie2)
                 .border(2.dp, vora)
@@ -161,6 +162,36 @@ fun BotoSecundari(
         TextQueContesta(text, MaterialTheme.typography.labelLarge)
     }
 }
+
+/** Un botó petit, de l'amplada del que porta a dins: amb el color fort (principal) o blanc. */
+@Composable
+fun BotoCompacte(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    principal: Boolean = true,
+    enabled: Boolean = true,
+    content: @Composable RowScope.() -> Unit,
+) {
+    BotoAmbOmbra(
+        onClick,
+        if (principal) Colors.Ambre else Colors.Fons,
+        if (principal) Colors.TintaAmbre else Colors.Text,
+        modifier,
+        enabled,
+        ombra = 3.dp,
+        alcadaMinima = 48.dp,
+        ample = false,
+        content = content,
+    )
+}
+
+/** L'ombra dura de les peces importants (docs/disseny.md): un rectangle de tinta desplaçat cap avall i a la dreta. */
+fun Modifier.ombraDura(ombra: Dp = 4.dp): Modifier = this
+    .padding(end = ombra, bottom = ombra)
+    .drawBehind {
+        val d = ombra.toPx()
+        drawRect(Colors.Text, topLeft = Offset(d, d), size = size)
+    }
 
 /** Botó d'icona quadrat (48 dp), amb vora de tinta. */
 @Composable

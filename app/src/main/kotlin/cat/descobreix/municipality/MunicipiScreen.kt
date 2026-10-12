@@ -67,7 +67,9 @@ import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.progressio.Medalles
 import cat.descobreix.joc.regles.DisponibilitatOficial
+import cat.descobreix.ui.AvisDesbloqueig
 import cat.descobreix.ui.Celebracio
+import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BarraProgres
@@ -111,7 +113,7 @@ fun MunicipiScreen(
         return
     }
     val avisos = remember { SnackbarHostState() }
-    val textAvis = estat.avis?.takeUnless { it.esCelebracio }?.let { textDe(it) }
+    val textAvis = estat.avis?.takeUnless { it.esCelebracio || it is Missatge.Desbloquejat }?.let { textDe(it) }
     LaunchedEffect(textAvis) {
         if (textAvis != null) {
             avisos.showSnackbar(textAvis)
@@ -166,6 +168,7 @@ fun MunicipiScreen(
     }
 
     estat.avis?.takeIf { it.esCelebracio }?.let { Celebracio(it, viewModel::tancaAvis) }
+    (estat.avis as? Missatge.Desbloquejat)?.let { AvisDesbloqueig(it, viewModel::tancaAvis) }
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
 }

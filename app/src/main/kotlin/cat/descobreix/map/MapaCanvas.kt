@@ -1,20 +1,43 @@
 package cat.descobreix.map
 
+import android.graphics.Bitmap
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.ImageShader
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.DrawTransform
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.semantics.contentDescription
@@ -32,6 +55,7 @@ import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
+import cat.descobreix.ui.theme.Tema
 import kotlinx.coroutines.launch
 
 /** A partir d'aquest zoom es dibuixa la geometria detallada. */
@@ -57,6 +81,25 @@ fun MapaCanvas(
     val ambit = rememberCoroutineScope()
     val mesurador = rememberTextMeasurer(cacheSize = 256)
     val estilEtiqueta = TextStyle(fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 0.04.em)
+    val textura = remember { texturaNuvols() }
+    val pinzellNuvols = remember(textura) { ShaderBrush(ImageShader(textura, TileMode.Repeated, TileMode.Repeated)) }
+    val colorNuvols = Colors.Superficie2.let { if (Tema.fosc) lerp(it, Color.White, .12f) else lerp(it, Color.Black, .1f) }
+    val obertures = remember { mutableStateMapOf<Int, Float>() }
+    // Quan un municipi passa a descobert, els núvols que el tapaven s'obren (1,3 s).
+    var descobertsAbans by remember { mutableStateOf<Set<Int>?>(null) }
+    LaunchedEffect(estats) {
+        val ara = estats.indices.filter { estats[it] == EstatMunicipi.DESCOBERT }.toSet()
+        val nous = descobertsAbans?.let { ara - it }.orEmpty()
+        descobertsAbans = ara
+        if (!animacions) return@LaunchedEffect
+        for (i in nous) {
+            launch {
+                val a = Animatable(0f)
+                a.animateTo(1f, tween(1300, easing = FastOutSlowInEasing)) { obertures[i] = value }
+                obertures.remove(i)
+            }
+        }
+    }
 
     Canvas(
         modifier
@@ -77,41 +120,69 @@ fun MapaCanvas(
         val visible = camera.visible()
         val camiActual = if (camera.zoom >= ZOOM_DETALL) camins.detall else camins.general
         val gruix = 1.dp.toPx() / escala
-        val periode = 8.dp.toPx() / escala
-        val ratllat = Brush.linearGradient(
-            0f to Colors.Disponible1, 0.5f to Colors.Disponible1, 0.5f to Colors.Disponible2, 1f to Colors.Disponible2,
-            start = Offset.Zero,
-            end = Offset(periode, periode),
-            tileMode = TileMode.Repeated,
-        )
         val visibles = geometria.municipis.indices.filter { i ->
             geometria.municipis[i].requadre.talla(visible.left.toDouble(), visible.top.toDouble(), visible.right.toDouble(), visible.bottom.toDouble())
         }
-
-        withTransform({
+        val estatDe = { i: Int -> estats.getOrNull(i) ?: EstatMunicipi.BOIRA }
+        val transformacio: DrawTransform.() -> Unit = {
             translate(camera.desplacament.x, camera.desplacament.y)
             scale(escala, escala, pivot = Offset.Zero)
-        }) {
+        }
+
+        // 1. Els municipis (docs/disseny.md, mapa «Núvols»): els teus, plens del color fort; la resta, en blanc.
+        withTransform(transformacio) {
             for (i in visibles) {
+                drawPath(camiActual[i], if (estatDe(i) == EstatMunicipi.DESCOBERT) Colors.Ambre else Colors.Fons)
+            }
+            for (i in visibles) {
+                val (color, g) = when (estatDe(i)) {
+                    EstatMunicipi.DESCOBERT -> Colors.Text to 1.3f
+                    EstatMunicipi.DISPONIBLE -> Colors.Text to .9f
+                    EstatMunicipi.BOIRA -> Colors.Linia to .8f
+                }
+                drawPath(camiActual[i], color, style = Stroke(width = g * gruix))
+            }
+        }
+
+        // 2. Els núvols: una capa que tapa el mapa, amb forats als teus municipis i mig forat als veïns.
+        //    Es fa en una capa a part perquè els forats (BlendMode.DstOut) només esborrin els núvols.
+        drawIntoCanvas { it.saveLayer(Rect(Offset.Zero, size), Paint()) }
+        drawRect(Colors.Boira.copy(alpha = .55f))
+        val mosaic = textura.width.toFloat()
+        // Els núvols es mouen una mica més a poc a poc que el mapa: sembla que siguin més a prop.
+        val dx = (camera.desplacament.x * .6f) % mosaic - mosaic
+        val dy = (camera.desplacament.y * .6f) % mosaic - mosaic
+        translate(dx, dy) {
+            drawRect(pinzellNuvols, size = Size(size.width + 2 * mosaic, size.height + 2 * mosaic), colorFilter = ColorFilter.tint(colorNuvols, BlendMode.SrcIn))
+        }
+        withTransform(transformacio) {
+            for (i in visibles) {
+                val estat = estatDe(i)
+                if (estat == EstatMunicipi.BOIRA) continue
+                val forca = if (estat == EstatMunicipi.DESCOBERT) 1f else .5f
+                val obrint = obertures[i]
                 val cami = camiActual[i]
-                when (estats.getOrNull(i) ?: EstatMunicipi.BOIRA) {
-                    EstatMunicipi.DESCOBERT -> drawPath(cami, if (i == inici) Colors.Ambre else Colors.AmbreFosc)
-                    EstatMunicipi.DISPONIBLE -> drawPath(cami, ratllat)
-                    EstatMunicipi.BOIRA -> drawPath(cami, Colors.Boira)
+                val dibuixaForat: DrawScope.() -> Unit = {
+                    // Vores difuminades: traços amples i transparents al voltant del forat.
+                    for ((amplada, alfa) in VORES_FORAT) drawPath(cami, Color.Black.copy(alpha = alfa * forca), style = Stroke(amplada * gruix), blendMode = BlendMode.DstOut)
+                    drawPath(cami, Color.Black.copy(alpha = forca), blendMode = BlendMode.DstOut)
+                }
+                if (obrint != null && obrint < 1f) {
+                    // Els núvols s'obren des del centre del municipi.
+                    val r = geometria.municipis[i].requadre
+                    val centre = Offset(((r.minX + r.maxX) / 2).toFloat(), ((r.minY + r.maxY) / 2).toFloat())
+                    scale(obrint, obrint, pivot = centre) { dibuixaForat() }
+                } else {
+                    dibuixaForat()
                 }
             }
-            val vora = Stroke(width = gruix)
-            for (i in visibles) {
-                val color = when (estats.getOrNull(i) ?: EstatMunicipi.BOIRA) {
-                    EstatMunicipi.DESCOBERT -> Colors.Fons.copy(alpha = 0.6f)
-                    EstatMunicipi.DISPONIBLE -> Colors.Disponible2
-                    EstatMunicipi.BOIRA -> Colors.VoraBoira
-                }
-                drawPath(camiActual[i], color, style = vora)
-            }
+        }
+        drawIntoCanvas { it.restore() }
+
+        // 3. La selecció, per sobre dels núvols.
+        withTransform(transformacio) {
             if (seleccionat != null && seleccionat in camiActual.indices) {
-                drawPath(camiActual[seleccionat], Colors.Blau.copy(alpha = 0.25f))
-                drawPath(camiActual[seleccionat], Colors.Blau, style = Stroke(width = 2.5f * gruix))
+                drawPath(camiActual[seleccionat], Colors.Text, style = Stroke(width = 3f * gruix))
             }
         }
 
@@ -214,4 +285,46 @@ fun Minimapa(
             )
         }
     }
+}
+
+/** Vores dels forats als núvols: (amplada en píxels del mapa, opacitat). */
+private val VORES_FORAT = listOf(14f to .12f, 9f to .2f, 5f to .3f)
+
+/**
+ * La textura dels núvols: soroll de valor suavitzat en quatre octaves, que es pot repetir sense que es noti la
+ * costura. Només és l'opacitat (blanc amb alfa); el color el posa el tema.
+ */
+private fun texturaNuvols(mida: Int = 256, llavor: Int = 9): ImageBitmap {
+    fun hash(x: Int, y: Int, o: Int): Float {
+        var h = x * 374761393 + y * 668265263 + o * 1442695041 + llavor * 982451653
+        h = (h xor (h ushr 13)) * 1274126177
+        return ((h xor (h ushr 16)) and 0xFFFF) / 65535f
+    }
+    fun suau(t: Float) = t * t * (3 - 2 * t)
+    fun soroll(x: Float, y: Float, cel: Int, o: Int): Float {
+        val gx = x * cel / mida
+        val gy = y * cel / mida
+        val x0 = gx.toInt()
+        val y0 = gy.toInt()
+        val fx = suau(gx - x0)
+        val fy = suau(gy - y0)
+        val v = { a: Int, b: Int -> hash(a.mod(cel), b.mod(cel), o) }
+        val dalt = v(x0, y0) + (v(x0 + 1, y0) - v(x0, y0)) * fx
+        val baix = v(x0, y0 + 1) + (v(x0 + 1, y0 + 1) - v(x0, y0 + 1)) * fx
+        return dalt + (baix - dalt) * fy
+    }
+    val pixels = IntArray(mida * mida)
+    for (y in 0 until mida) for (x in 0 until mida) {
+        var n = 0f
+        var amp = .5f
+        var cel = 4
+        for (o in 0 until 4) {
+            n += soroll(x.toFloat(), y.toFloat(), cel, o) * amp
+            amp /= 2
+            cel *= 2
+        }
+        val alfa = ((n - .35f) / .45f).coerceIn(0f, 1f)
+        pixels[y * mida + x] = ((alfa * 235).toInt() shl 24) or 0xFFFFFF
+    }
+    return Bitmap.createBitmap(pixels, mida, mida, Bitmap.Config.ARGB_8888).asImageBitmap()
 }
