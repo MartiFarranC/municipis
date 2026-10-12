@@ -21,7 +21,7 @@ Escollida el 12 d'octubre de 2026 a partir del qüestionari. Referència: `disse
 - **Canvi de pantalla:** zoom des del poble tocat; entre pestanyes, tall directe.
 - **So i vibració** a les accions, amb opció d'apagar-ho.
 
-Del sac, agrada la idea de la capsa de llauna (`disseny/sacs/sacs-estil.html`).
+- **El sac** (`disseny/sacs/sacs-estil2.html`, opcions «Sac de roba» i «Cromo»): un sac de roba amb trama de teixit, plecs al coll, vora una mica torta, corda groga i l'etiqueta «BOCINS de Catalunya» impresa. Abans d'obrir-se tremola una vegada si el que hi ha és comú, dues si és rar i tres si és llegendari (amb so i vibració a cada sacsejada). En obrir-se, la corda cau, el coll s'eixampla i el sac s'aixafa. El que en surt és un **cromo**: una carta amb ombra dura que puja i es gira, amb una banda groga amb la raresa i una, dues o tres estrelles; la llegendària té una lluentor que hi passa per sobre. A sota, un comentari escrit a mà per a cada raresa. Es continua dient «sac».
 
 El que s'ha après de les rondes: fons blanc net (mai blanc trencat), colors apagats o madurs (mai cridaners ni infantils), res que sembli vell, i res de botons de píndola ni paletes genèriques. La festa major (programa d'actes, lletra de tipus de fusta, dues tintes) és el concepte que més ha agradat.
 
