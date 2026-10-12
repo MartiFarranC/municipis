@@ -1,8 +1,27 @@
 # Disseny
 
-## Estètica nova: encara per decidir
+## Estètica nova: escollida (pendent d'aplicar)
 
-Els "rètols esmaltats" es van escollir i després es van descartar (octubre de 2026): la paleta agradava, però l'estètica sencera no. Ara es tria peça a peça al taller d'estil (`disseny/estil/taller.html`). Del sac, agrada la idea de la capsa de llauna (`disseny/sacs/sacs-estil.html`). Fins que es decideixi, mana l'estètica "nit i fanals" de sota.
+Escollida el 12 d'octubre de 2026 a partir del qüestionari. Referència: `disseny/estil/proposta1.html` (pantalles, botons i animacions) i `disseny/estil/proposta2.html`, estil «Núvols» (el mapa). Encara no s'ha aplicat a l'app: fins aleshores mana l'estètica "nit i fanals" de sota.
+
+| Element | Valor |
+|---|---|
+| Fons / tinta (clar) | `#FFFFFF` / `#111111` |
+| Fons / tinta (fosc) | `#0F0F0F` / `#F2F2F2` |
+| L'únic color fort | groc `#FFD000`, amb text `#111111` a sobre |
+| Secundari, filets, boira | `#6B6B6B`, `#E4E4E4`, `#ECECEC` (clar) · `#9A9A9A`, `#2A2A2A`, `#1E1E1E` (fosc) |
+| Títols i xifres | Archivo Black |
+| Text | Instrument Sans |
+| Frases fetes i pistes | Caveat (escrit a mà), només aquí |
+
+- **Clar i fosc**, segons el mòbil.
+- **Botons:** vora de 2 px i ombra dura de 4 px, de la tinta. En prémer, s'enfonsen fins a tocar l'ombra. Les accions grans contesten (el text canvia: «Fet!», «No t'arriba»). Res de píndoles ni degradats.
+- **Mapa «Núvols»:** els teus pobles en groc amb vora de tinta; els veïns en blanc, mig visibles a través de la boira; la resta, tapada per núvols. En desbloquejar, els núvols s'obren i surt escrita a mà una frase feta catalana a l'atzar.
+- **Missions:** fetes, es ratllen amb un gargot groc fet a mà; el check-in cau com un segell amb la data; els punts volen fins al comptador.
+- **Canvi de pantalla:** zoom des del poble tocat; entre pestanyes, tall directe.
+- **So i vibració** a les accions, amb opció d'apagar-ho.
+
+Del sac, agrada la idea de la capsa de llauna (`disseny/sacs/sacs-estil.html`).
 
 El que s'ha après de les rondes: fons blanc net (mai blanc trencat), colors apagats o madurs (mai cridaners ni infantils), res que sembli vell, i res de botons de píndola ni paletes genèriques. La festa major (programa d'actes, lletra de tipus de fusta, dues tintes) és el concepte que més ha agradat.
 
