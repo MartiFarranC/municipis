@@ -9,6 +9,7 @@ import cat.descobreix.BuildConfig
 import cat.descobreix.data.assets.DadesJoc
 import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.ServeiCompteLocal
 import cat.descobreix.data.compte.ServeiCompteSupabase
 import cat.descobreix.data.db.BaseDades
 import cat.descobreix.data.db.TriggersSincronitzacio
@@ -70,7 +71,11 @@ object ModulDades {
 
     @Provides
     @Singleton
-    fun supabase(): SupabaseClient = createSupabaseClient(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY) {
+    fun supabase(): SupabaseClient = createSupabaseClient(
+        // Sense servidor configurat, una adreça que no existeix: les crides fallen com si no hi hagués connexió.
+        if (BuildConfig.SENSE_SERVIDOR) "https://sense-servidor.invalid" else BuildConfig.SUPABASE_URL,
+        if (BuildConfig.SENSE_SERVIDOR) "sense-servidor" else BuildConfig.SUPABASE_ANON_KEY,
+    ) {
         install(Auth) {
             flowType = FlowType.PKCE
             scheme = ServeiCompteSupabase.ESQUEMA
@@ -136,8 +141,10 @@ abstract class ModulRepositoris {
 /** A part, perquè els tests de UI el puguin substituir per un compte fals. */
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ModulCompte {
-    @Binds
+object ModulCompte {
+    /** Sense servidor configurat, un compte local per poder jugar igualment (docs/android-studio.md). */
+    @Provides
     @Singleton
-    abstract fun compte(s: ServeiCompteSupabase): ServeiCompte
+    fun compte(supabase: dagger.Lazy<ServeiCompteSupabase>): ServeiCompte =
+        if (BuildConfig.SENSE_SERVIDOR) ServeiCompteLocal() else supabase.get()
 }

@@ -46,6 +46,7 @@ import cat.descobreix.data.compte.NomUsuari
 import cat.descobreix.data.compte.TipusPerfil
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
+import cat.descobreix.ui.components.Marca
 import cat.descobreix.ui.theme.Colors
 
 /** Inici de sessió i registre (secció 4, pantalla 6). */
@@ -293,7 +294,7 @@ private fun PantallaCompte(
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.AmbreText))
+        Marca()
         Text(titol, style = MaterialTheme.typography.displayLarge, modifier = Modifier.semantics { heading() })
         Text(text, style = MaterialTheme.typography.bodyLarge.copy(color = Colors.TextSecundari))
         if (error != null) {

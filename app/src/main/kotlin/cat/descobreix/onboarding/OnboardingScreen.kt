@@ -42,7 +42,7 @@ import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Icones
-import cat.descobreix.ui.components.Logo
+import cat.descobreix.ui.components.Marca
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.theme.Colors
 
@@ -83,10 +83,7 @@ fun OnboardingScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Logo(null, Modifier.size(52.dp), encen = true)
-                    Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.AmbreText))
-                }
+                Marca()
             }
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

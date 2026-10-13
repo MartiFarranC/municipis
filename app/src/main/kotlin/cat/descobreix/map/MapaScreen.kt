@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -42,8 +43,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
@@ -52,10 +53,9 @@ import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.municipality.Distintiu
 import cat.descobreix.ui.AvisDesbloqueig
 import cat.descobreix.ui.Celebracio
-import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
-import cat.descobreix.ui.components.BarraProgres
+import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.components.BotoCompacte
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.Carregant
@@ -231,47 +231,61 @@ fun MapaScreen(
 @Composable
 private fun Capcalera(estat: MapaEstat) {
     val nivell = estat.nivell
-    Row(
+    // Una sola fila que hi cap fins i tot als mòbils estrets: el nivell, els municipis i les barretines; a sota, una
+    // ratlla amb el progrés del nivell.
+    Column(
         Modifier
             .fillMaxWidth()
-            .clip(RectangleShape)
-            .background(Colors.Fons.copy(alpha = 0.88f))
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+            .ombraDura(3.dp)
+            .background(Colors.Fons)
+            .border(2.dp, Colors.Text),
     ) {
+        Row(
+            Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            if (nivell != null) {
+                Box(
+                    Modifier
+                        .size(40.dp)
+                        .background(Colors.Ambre)
+                        .border(2.dp, Colors.Text),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text("${nivell.numero}", fontFamily = Archivo, fontSize = 20.sp, color = Colors.TintaAmbre)
+                }
+            }
+            Row(
+                Modifier.weight(1f).semantics(mergeDescendants = true) {},
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text("${estat.descoberts}", fontFamily = Archivo, fontSize = 26.sp, color = Colors.Text)
+                Text(
+                    stringResource(R.string.comptador_llarg, estat.total),
+                    style = MaterialTheme.typography.bodySmall.copy(color = Colors.Text, lineHeight = 15.sp),
+                    maxLines = 2,
+                )
+            }
+            Row(
+                Modifier.semantics(mergeDescendants = true) {},
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                IconaBarretina(Modifier.size(18.dp), descripcio = stringResource(R.string.punts))
+                Text("${estat.saldo}", fontFamily = Archivo, fontSize = 18.sp)
+            }
+        }
         if (nivell != null) {
             Box(
                 Modifier
-                    .size(40.dp)
-                    .clip(RectangleShape)
-                    .background(Colors.Superficie2)
-                    .border(1.dp, Colors.Linia, RectangleShape),
-                contentAlignment = Alignment.Center,
+                    .fillMaxWidth()
+                    .height(4.dp)
+                    .background(Colors.Superficie2),
             ) {
-                Text("${nivell.numero}", fontFamily = Archivo, fontWeight = FontWeight.Bold, color = Colors.AmbreText)
+                Box(Modifier.fillMaxWidth(nivell.progres.coerceIn(0f, 1f)).height(4.dp).background(Colors.Ambre))
             }
-            Column(Modifier.width(96.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(stringResource(R.string.nivell, nivell.numero).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.TextSecundari))
-                BarraProgres(nivell.progres, alcada = 6)
-            }
-        }
-        Column(Modifier.weight(1f).semantics(mergeDescendants = true) {}) {
-            Text("${estat.descoberts}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))
-            Text(stringResource(R.string.comptador_llarg, estat.total), style = MaterialTheme.typography.bodySmall)
-        }
-        Row(
-            Modifier
-                .clip(RectangleShape)
-                .background(Colors.Superficie2)
-                .border(1.dp, Colors.Linia, RectangleShape)
-                .padding(horizontal = 12.dp, vertical = 8.dp)
-                .semantics(mergeDescendants = true) {},
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-        ) {
-            IconaBarretina(Modifier.size(18.dp), descripcio = stringResource(R.string.punts))
-            Text("${estat.saldo}", fontFamily = Archivo, fontWeight = FontWeight.Bold)
         }
     }
 }

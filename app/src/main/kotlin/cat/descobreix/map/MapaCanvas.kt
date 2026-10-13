@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -83,7 +82,7 @@ fun MapaCanvas(
     val estilEtiqueta = TextStyle(fontFamily = Archivo, fontWeight = FontWeight.Bold, fontSize = 11.sp, letterSpacing = 0.04.em)
     val textura = remember { texturaNuvols() }
     val pinzellNuvols = remember(textura) { ShaderBrush(ImageShader(textura, TileMode.Repeated, TileMode.Repeated)) }
-    val colorNuvols = Colors.Superficie2.let { if (Tema.fosc) lerp(it, Color.White, .12f) else lerp(it, Color.Black, .1f) }
+    val colorNuvols = Colors.Superficie2.let { if (Tema.fosc) lerp(it, Color.White, .12f) else lerp(it, Color.Black, .24f) }
     val obertures = remember { mutableStateMapOf<Int, Float>() }
     // Quan un municipi passa a descobert, els núvols que el tapaven s'obren (1,3 s).
     var descobertsAbans by remember { mutableStateOf<Set<Int>?>(null) }
@@ -147,7 +146,7 @@ fun MapaCanvas(
         // 2. Els núvols: una capa que tapa el mapa, amb forats als teus municipis i mig forat als veïns.
         //    Es fa en una capa a part perquè els forats (BlendMode.DstOut) només esborrin els núvols.
         drawIntoCanvas { it.saveLayer(Rect(Offset.Zero, size), Paint()) }
-        drawRect(Colors.Boira.copy(alpha = .55f))
+        drawRect(Colors.Boira.copy(alpha = if (Tema.fosc) .55f else .72f))
         val mosaic = textura.width.toFloat()
         // Els núvols es mouen una mica més a poc a poc que el mapa: sembla que siguin més a prop.
         val dx = (camera.desplacament.x * .6f) % mosaic - mosaic
@@ -203,7 +202,6 @@ private fun DrawScope.dibuixaEtiquetes(
 ) {
     val minim = 56.dp.toPx()
     val marge = 6.dp.toPx()
-    val radi = CornerRadius(6.dp.toPx())
     var dibuixades = 0
     // Primer el seleccionat i els descoberts, perquè tinguin prioritat.
     val ordre = visibles.sortedBy {
@@ -219,6 +217,8 @@ private fun DrawScope.dibuixaEtiquetes(
         val m = geometria.municipis[i]
         val amplada = (m.requadre.maxX - m.requadre.minX) * camera.escala
         val estat = estats.getOrNull(i) ?: EstatMunicipi.BOIRA
+        // Els noms dels pobles que són a la boira no es veuen: és el que s'ha de descobrir.
+        if (estat == EstatMunicipi.BOIRA && i != seleccionat) continue
         val llindar = if (estat == EstatMunicipi.BOIRA) minim * 2 else minim
         if (i != seleccionat && amplada < llindar) continue
         val nom = noms.getOrNull(i) ?: continue
@@ -232,8 +232,8 @@ private fun DrawScope.dibuixaEtiquetes(
         val p = camera.aPantalla(m.etiquetaX.toFloat(), m.etiquetaY.toFloat())
         val mida = Size(text.size.width + marge * 2, text.size.height + marge)
         val origen = Offset(p.x - mida.width / 2, p.y - mida.height / 2)
-        drawRoundRect(Colors.Fons.copy(alpha = 0.85f), origen, mida, radi)
-        drawRoundRect(color.copy(alpha = 0.7f), origen, mida, radi, style = Stroke(1.dp.toPx()))
+        drawRect(Colors.Fons, origen, mida)
+        drawRect(Colors.Text, origen, mida, style = Stroke(1.dp.toPx()))
         drawText(text, topLeft = Offset(origen.x + marge, origen.y + marge / 2))
         dibuixades++
     }

@@ -34,6 +34,8 @@ android {
         val anonKey = local.getProperty("supabase.anonKey") ?: System.getenv("SUPABASE_ANON_KEY") ?: ""
         buildConfigField("String", "SUPABASE_URL", "\"$url\"")
         buildConfigField("String", "SUPABASE_ANON_KEY", "\"$anonKey\"")
+        // Sense servidor, l'app funciona amb un compte local per provar-la (docs/android-studio.md).
+        buildConfigField("boolean", "SENSE_SERVIDOR", (url.isBlank() || anonKey.isBlank()).toString())
     }
 
     // La clau de signatura de les versions publicades (docs/obtainium.md). Mai al repositori: la CI la treu

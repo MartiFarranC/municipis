@@ -1,4 +1,4 @@
-# Descobreix Catalunya
+# Bocins de Catalunya
 
 App per visitar els 947 municipis de Catalunya com si fos un videojoc. Tot el mapa comença a la boira. El teu municipi és el primer que s'il·lumina, i a partir d'aquí vas desbloquejant els municipis veïns amb els punts que guanyes completant missions.
 
@@ -17,7 +17,9 @@ Les regles i l'abast de la versió 1 són a [`docs/requisits.md`](docs/requisits
 
 ## Compilar i provar
 
-Cal Android Studio (o l'SDK d'Android amb la plataforma 36) i JDK 17 o posterior.
+Per instal·lar l'app al mòbil des de l'Android Studio, pas a pas: [`docs/android-studio.md`](docs/android-studio.md). Sense Supabase configurat, l'app funciona en mode de prova, amb un compte local.
+
+Des de la línia d'ordres cal l'SDK d'Android amb la plataforma 36 i JDK 17 o posterior.
 
 ```bash
 ./gradlew :app:assembleDebug        # compila l'app

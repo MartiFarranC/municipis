@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- El nom definitiu de l'app és pendent (docs/requisits.md, secció 11). -->
-    <string name="app_name">Descobreix Catalunya</string>
+    <string name="app_name">Bocins de Catalunya</string>
+    <string name="marca_bocins">Bocins</string>
+    <string name="marca_de_catalunya">de Catalunya</string>
 
     <!-- Navegació -->
     <string name="pestanya_mapa">Mapa</string>
@@ -325,7 +327,7 @@
     <string name="perfil_surt_text">Les dades d\'aquest mòbil es mantenen. Si hi entra un altre compte, s\'esborraran.</string>
 
     <!-- Logo i animacions -->
-    <string name="logo_descripcio">Logo de Descobreix Catalunya: un fanal de paret fent llum sobre Catalunya</string>
+    <string name="logo_descripcio">Bocins de Catalunya</string>
     <string name="carregant">Carregant…</string>
     <string name="celebracio_missio">Missió completada!</string>
     <string name="celebracio_desbloquejat">Municipi desbloquejat!</string>

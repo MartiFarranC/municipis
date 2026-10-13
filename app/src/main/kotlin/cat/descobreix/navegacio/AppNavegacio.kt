@@ -16,6 +16,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,8 +52,8 @@ import cat.descobreix.onboarding.OnboardingScreen
 import cat.descobreix.passaport.PassaportScreen
 import cat.descobreix.passaport.SegellarScreen
 import cat.descobreix.photos.CameraScreen
-import cat.descobreix.photos.LectorQrScreen
 import cat.descobreix.photos.FotoScreen
+import cat.descobreix.photos.LectorQrScreen
 import cat.descobreix.profile.PerfilEspectadorScreen
 import cat.descobreix.profile.PerfilScreen
 import cat.descobreix.profile.SobreScreen
@@ -264,10 +268,20 @@ private fun irAlMapa(nav: NavHostController, codi: String) {
 
 @Composable
 private fun BarraInferior(nav: NavHostController, rutaActual: String?, pestanyes: List<Pestanya>) {
-    NavigationBar(containerColor = Colors.Fons, tonalElevation = 0.dp) {
+    // Sense la píndola de Material: una ratlla de tinta a dalt i, a la pestanya triada, una barra del color fort.
+    val tinta = Colors.Text
+    val fort = Colors.Ambre
+    NavigationBar(
+        containerColor = Colors.Fons,
+        tonalElevation = 0.dp,
+        modifier = Modifier.drawBehind { drawLine(tinta, Offset(0f, 0f), Offset(size.width, 0f), 2.dp.toPx()) },
+    ) {
         for (p in pestanyes) {
             val seleccionada = p.ruta == rutaActual
             NavigationBarItem(
+                modifier = Modifier.drawBehind {
+                    if (seleccionada) drawRect(fort, Offset(size.width * .22f, 0f), Size(size.width * .56f, 4.dp.toPx()))
+                },
                 selected = seleccionada,
                 onClick = {
                     if (!seleccionada) {
@@ -281,9 +295,9 @@ private fun BarraInferior(nav: NavHostController, rutaActual: String?, pestanyes
                 icon = { Box { Icon(p.icona, contentDescription = null, modifier = Modifier.size(24.dp)) } },
                 label = { Text(stringResource(p.etiqueta)) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Colors.AmbreText,
-                    selectedTextColor = Colors.AmbreText,
-                    indicatorColor = Colors.Superficie2,
+                    selectedIconColor = Colors.Text,
+                    selectedTextColor = Colors.Text,
+                    indicatorColor = Color.Transparent,
                     unselectedIconColor = Colors.TextSecundari,
                     unselectedTextColor = Colors.TextSecundari,
                 ),

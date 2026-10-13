@@ -22,8 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -36,6 +34,7 @@ import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.components.ombraDura
 import cat.descobreix.ui.theme.Colors
 
 @Composable
@@ -66,9 +65,9 @@ fun MissionsScreen(
                 Modifier
                     .fillMaxWidth()
                     .heightIn(min = 72.dp)
-                    .clip(RectangleShape)
-                    .background(if (m.complet) Colors.FonsCompletada else Colors.Superficie)
-                    .border(1.dp, if (m.complet) Colors.Disponible2 else Colors.Linia, RectangleShape)
+                    .ombraDura(3.dp)
+                    .background(if (m.complet) Colors.FonsCompletada else Colors.Fons)
+                    .border(2.dp, Colors.Text)
                     .clickable(role = Role.Button) { onObreMunicipi(m.codi) }
                     .padding(14.dp),
                 verticalAlignment = Alignment.CenterVertically,

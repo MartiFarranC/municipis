@@ -60,6 +60,7 @@ import cat.descobreix.sacs.ANIMACIONS_CARREGA
 import cat.descobreix.sacs.AnimacioCarrega
 import cat.descobreix.ui.Efectes
 import cat.descobreix.ui.LocalEfectes
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.LocalAnimacioCarrega
 import cat.descobreix.ui.theme.LocalReduirAnimacions
@@ -299,16 +300,44 @@ fun AnimacioDeCarrega(modifier: Modifier = Modifier) {
     if (triada != null && triada in ANIMACIONS_CARREGA) AnimacioCarrega(triada, modifier) else SardanaCarregant(modifier)
 }
 
-/** La pantalla d'obertura: el fanal s'encén i la rotllana balla mentre l'app es prepara. */
+/** La pantalla d'obertura: la marca i la rotllana que balla mentre l'app es prepara. */
 @Composable
 fun Obertura(modifier: Modifier = Modifier) {
     Column(
         modifier,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Logo(stringResource(R.string.logo_descripcio), Modifier.size(150.dp), encen = true)
-        Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge)
+        Marca(gran = true)
         AnimacioDeCarrega(Modifier.size(120.dp))
+    }
+}
+
+/**
+ * La marca de l'app (docs/disseny.md): una «B» en un quadrat del color fort, amb vora i ombra dura, i el nom al costat.
+ * Es llegeix com un sol text: «Bocins de Catalunya».
+ */
+@Composable
+fun Marca(modifier: Modifier = Modifier, gran: Boolean = false) {
+    val nom = stringResource(R.string.app_name)
+    Row(
+        modifier.semantics(mergeDescendants = true) { contentDescription = nom },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(if (gran) 14.dp else 10.dp),
+    ) {
+        Box(
+            Modifier
+                .ombraDura(if (gran) 4.dp else 3.dp)
+                .size(if (gran) 64.dp else 40.dp)
+                .background(Colors.Ambre)
+                .border(2.dp, Colors.Text),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text("B", fontFamily = Archivo, fontSize = if (gran) 38.sp else 24.sp, color = Colors.TintaAmbre)
+        }
+        Column {
+            Text(stringResource(R.string.marca_bocins), fontFamily = Archivo, fontSize = if (gran) 34.sp else 20.sp, lineHeight = if (gran) 34.sp else 20.sp, color = Colors.Text)
+            Text(stringResource(R.string.marca_de_catalunya), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari, fontSize = if (gran) 16.sp else 13.sp))
+        }
     }
 }
