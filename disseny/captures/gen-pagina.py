@@ -9,19 +9,17 @@ NOMS = {
     '08-perfil-opcions': 'Perfil: so i vibració', '09-sacs': 'Sacs i col·lecció',
 }
 VA_BE = [
+    "L'app ja es diu «Bocins de Catalunya», amb la marca nova (la «B» en un quadrat groc) a l'inici i a l'obertura.",
     'El tema clar i el fosc segueixen el mòbil, i els dos es llegeixen bé.',
     'Les lletres noves (Archivo Black als títols, Instrument Sans al text) es veuen a totes les pantalles.',
-    "Els botons tenen la vora de tinta i l'ombra dura, i les cantonades són rectes.",
-    'Els teus municipis surten en groc al mapa, i la resta, sota la boira.',
-    "L'opció «So i vibració» és al perfil.",
+    "Botons, targetes i capçalera del mapa amb vora de tinta i ombra dura, i cantonades rectes.",
+    "Mapa: el comptador en una sola fila, les etiquetes rectes, sense noms a la boira, i els núvols ja es veuen en clar.",
+    "Barra de baix sense píndola: una ratlla de tinta a dalt i una barra groga a la pestanya triada.",
 ]
 CAL_ARREGLAR = [
-    "Mapa: el comptador de dalt («1 de 947 municipis descoberts») surt partit en una columna estreta, paraula per paraula.",
-    "Mapa: les etiquetes dels noms encara són les d'abans (caixetes arrodonides), i surten noms de pobles que són a la boira.",
-    'Mapa: en clar, els núvols gairebé no es veuen; cal més contrast.',
-    'Barra de baix: la pestanya triada té una píndola arrodonida darrere la icona (és la de Material). Cal treure-la.',
-    "Inici: encara diu «Descobreix Catalunya» amb el logo antic. Falta decidir si l'app es diu «Bocins de Catalunya».",
-    "Missions: la targeta de cada poble és un requadre gris; li falta la vora de tinta com la resta.",
+    "La icona de l'app al mòbil encara és el fanal: cal fer-ne una de nova amb l'estètica nova.",
+    "El minimapa (a l'esquerra del mapa) encara té el fons semitransparent de l'estètica d'abans.",
+    "Les caixes de color dels sacs encara són rodones i grises: falta passar-les a l'estètica nova.",
 ]
 NO_ES_VEU = [
     "Les animacions (els núvols que s'obren, el gargot, el segell, el sac que tremola i el cromo que es gira): l'emulador del CI les té apagades i a les captures només surt el final.",
@@ -71,7 +69,7 @@ figcaption{{font-size:13px;color:var(--suau);margin-top:4px}}
 <div class="pagina">
 <small>Bocins de Catalunya · l'app de debò</small>
 <h1>Com ha quedat l'estètica nova</h1>
-<p>Aquestes captures són de l'app real, no d'un prototip: les fa un test automàtic que obre l'app en un emulador i hi passa dues vegades, una en clar i una en fosc. La segona vegada la partida ja hi és, per això en fosc no surten les pantalles d'inici.</p>
+<p><b>Actualitzat el 13 d'octubre</b>, amb el nom nou i els arreglos. Aquestes captures són de l'app real, no d'un prototip: les fa un test automàtic que obre l'app en un emulador i hi passa dues vegades, una en clar i una en fosc. La segona vegada la partida ja hi és, per això en fosc no surten les pantalles d'inici.</p>
 <div class="notes">
 <div><h3>Va bé</h3>{llista(VA_BE)}</div>
 <div class="mal"><h3>Cal arreglar</h3>{llista(CAL_ARREGLAR)}</div>
