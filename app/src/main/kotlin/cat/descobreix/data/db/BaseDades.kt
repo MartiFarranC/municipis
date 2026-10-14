@@ -124,14 +124,22 @@ abstract class BaseDades : RoomDatabase() {
 object TriggersSincronitzacio {
     val TAULES = listOf("municipis_descoberts", "missions_completades", "moviments_punts", "missions_propies", "fotos", "segells", "sacs")
 
+    /**
+     * Dins d'un trigger, SQLite aplica la política de conflicte de la sentència de fora (Room fa `UPDATE OR ABORT`)
+     * i no la de l'`INSERT OR IGNORE`. Per això es comprova a mà que la fila no sigui ja a la cua. Els triggers es
+     * tornen a crear sempre perquè els de les versions d'abans (amb `OR IGNORE`) quedin substituïts.
+     */
     fun crea(db: SupportSQLiteDatabase) {
         db.execSQL("INSERT OR IGNORE INTO control_sincronitzacio (id, aplicant) VALUES (0, 0)")
         for (t in TAULES) {
             for (quan in listOf("INSERT", "UPDATE")) {
+                val nom = "cua_${t}_${quan.lowercase()}"
+                db.execSQL("DROP TRIGGER IF EXISTS `$nom`")
                 db.execSQL(
-                    "CREATE TRIGGER IF NOT EXISTS `cua_${t}_${quan.lowercase()}` AFTER $quan ON `$t` " +
+                    "CREATE TRIGGER `$nom` AFTER $quan ON `$t` " +
                         "WHEN COALESCE((SELECT aplicant FROM control_sincronitzacio WHERE id = 0), 0) = 0 " +
-                        "BEGIN INSERT OR IGNORE INTO canvis_pendents (taula, id) VALUES ('$t', NEW.id); END",
+                        "BEGIN INSERT INTO canvis_pendents (taula, id) SELECT '$t', NEW.id " +
+                        "WHERE NOT EXISTS (SELECT 1 FROM canvis_pendents WHERE taula = '$t' AND id = NEW.id); END",
                 )
             }
         }
