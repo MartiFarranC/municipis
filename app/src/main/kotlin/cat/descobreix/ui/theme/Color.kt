@@ -1,66 +1,72 @@
 package cat.descobreix.ui.theme
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 
-/** Colors de docs/disseny.md: "nit i fanals". */
-object Colors {
-    val Fons = Color(0xFF0B0E13)
-    val Superficie = Color(0xFF151A22)
-    val Superficie2 = Color(0xFF1C2330)
-    val Linia = Color(0xFF273041)
-    val Text = Color(0xFFEEF1F5)
-    val TextSecundari = Color(0xFF9AA4B2)
+/**
+ * El color fort de l'app: el groc o un dels colors dels sacs. És l'únic color de l'app; la resta és blanc i negre.
+ * És un estat de Compose: en canviar-lo, es torna a pintar.
+ */
+object ColorSecundari {
+    val Groc = Color(0xFFFFD000)
 
-    /** Descobert: el teu municipi d'inici. */
-    val Ambre = Color(0xFFF2B544)
+    var actual by mutableStateOf(Groc)
 
-    /** Descobert: la resta. */
-    val AmbreFosc = Color(0xFFB8862F)
+    val esGroc: Boolean get() = actual == Groc
+}
 
-    /** Text sobre fons ambre. */
-    val TintaAmbre = Color(0xFF1A1305)
-
-    /** Disponible: ratllat ambre fosc. */
-    val Disponible1 = Color(0xFF2A2618)
-    val Disponible2 = Color(0xFF4A3E1E)
-
-    /** A la boira. */
-    val Boira = Color(0xFF161B23)
-    val VoraBoira = Color(0xFF222A36)
-
-    val Error = Color(0xFFF08A7A)
-
-    /** Fons de les missions completades. */
-    val FonsCompletada = Color(0xFF1F1C12)
+/** Si l'app es pinta en fosc. Segueix el mòbil; ho posa DescobreixTheme. */
+object Tema {
+    var fosc by mutableStateOf(false)
 }
 
 /**
- * Color de la selecció i de les accions secundàries, que l'usuari tria al perfil. Tots tenen un
- * contrast de 4,5:1 com a mínim sobre els fons de l'app i es distingeixen de l'ambre del territori
- * descobert i del color d'error (ho comproven els tests).
+ * Colors de docs/disseny.md: blanc i negre, i un sol color fort. Tots canvien amb el tema clar o fosc.
+ * Els noms «Ambre» són de l'estètica d'abans: avui volen dir «el color fort».
  */
-enum class ColorSecundari(val color: Color) {
-    BLAU(Color(0xFF5AB8E8)),
-    TURQUESA(Color(0xFF3ECFBF)),
-    VERD(Color(0xFF6CD68A)),
-    LILA(Color(0xFFA99BF5)),
-    ROSA(Color(0xFFF590C0)),
-    ;
+object Colors {
+    private fun c(clar: Long, fosc: Long) = Color(if (Tema.fosc) fosc else clar)
 
-    companion object {
-        val PER_DEFECTE = BLAU
+    val Fons: Color get() = c(0xFFFFFFFF, 0xFF0F0F0F)
+    val Superficie: Color get() = c(0xFFF5F5F5, 0xFF1A1A1A)
+    val Superficie2: Color get() = c(0xFFECECEC, 0xFF242424)
+    val Linia: Color get() = c(0xFFE4E4E4, 0xFF2A2A2A)
 
-        fun perNom(nom: String?): ColorSecundari = entries.firstOrNull { it.name == nom } ?: PER_DEFECTE
-    }
+    /** La tinta: textos, vores i ombres dures. */
+    val Text: Color get() = c(0xFF111111, 0xFFF2F2F2)
+    val TextSecundari: Color get() = c(0xFF6B6B6B, 0xFF9A9A9A)
+
+    /** El color fort, per omplir: botons principals, els teus municipis, barres. */
+    val Ambre: Color get() = ColorSecundari.actual
+
+    /**
+     * El color fort quan és text, icona o vora sobre el fons. En fosc es llegeix bé; en clar, el groc no es llegiria
+     * sobre blanc, i es fa servir la tinta.
+     */
+    val AmbreText: Color get() = if (Tema.fosc) Ambre else Text
+
+    /** El color fort, una mica més fosc (municipis descoberts que no són el d'inici). */
+    val AmbreFosc: Color get() = if (ColorSecundari.esGroc) Ambre else lerp(Ambre, Color.Black, .15f)
+
+    /** Text sobre el color fort. */
+    val TintaAmbre = Color(0xFF111111)
+
+    /** Disponible (veí): fons tènue del color fort. */
+    val Disponible1: Color get() = if (Tema.fosc) lerp(Fons, Ambre, .12f) else lerp(Fons, Ambre, .18f)
+    val Disponible2: Color get() = if (Tema.fosc) lerp(Fons, Ambre, .28f) else lerp(Fons, Ambre, .45f)
+
+    /** A la boira. */
+    val Boira: Color get() = c(0xFFECECEC, 0xFF1E1E1E)
+    val VoraBoira: Color get() = c(0xFFDADADA, 0xFF2A2A2A)
+
+    /** Selecció i accions secundàries: la tinta. */
+    val Blau: Color get() = Text
+
+    val Error: Color get() = c(0xFFC62D1F, 0xFFF08A7A)
+
+    /** Fons de les missions completades. */
+    val FonsCompletada: Color get() = if (Tema.fosc) lerp(Fons, Ambre, .08f) else lerp(Fons, Ambre, .12f)
 }
-
-val LocalColorSecundari = compositionLocalOf { ColorSecundari.PER_DEFECTE.color }
-
-/** Selecció i accions secundàries: el color que ha triat l'usuari. */
-val Colors.Secundari: Color
-    @Composable
-    @ReadOnlyComposable
-    get() = LocalColorSecundari.current

@@ -44,7 +44,6 @@ import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.theme.Colors
-import cat.descobreix.ui.theme.Secundari
 import java.text.DateFormat
 import java.util.Date
 
@@ -99,13 +98,13 @@ fun FotoScreen(onEnrere: () -> Unit, viewModel: FotoViewModel = hiltViewModel())
                     RadioButton(
                         selected = foto.visibilitat == v,
                         onClick = null,
-                        colors = RadioButtonDefaults.colors(selectedColor = Colors.Secundari),
+                        colors = RadioButtonDefaults.colors(selectedColor = Colors.Blau),
                     )
                     Text(
                         stringResource(
                             when (v) {
                                 Visibilitat.PRIVADA -> R.string.visibilitat_privada
-                                Visibilitat.AMICS -> R.string.visibilitat_amics
+                                Visibilitat.SEGUIDORS -> R.string.visibilitat_seguidors
                                 Visibilitat.PUBLICA -> R.string.visibilitat_publica
                             },
                         ),
@@ -119,7 +118,7 @@ fun FotoScreen(onEnrere: () -> Unit, viewModel: FotoViewModel = hiltViewModel())
         if (!foto.esPortada) {
             BotoSecundari(stringResource(R.string.fes_portada), viewModel::fesPortada, icona = Icones.Estrella)
         } else {
-            Text(stringResource(R.string.es_portada), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre))
+            Text(stringResource(R.string.es_portada), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText))
         }
         BotoSecundari(stringResource(R.string.esborra_foto), { confirmant = true }, icona = Icones.Esborrar)
     }

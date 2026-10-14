@@ -12,3 +12,6 @@ captures/
 .cxx/
 scripts/cache/
 .kotlin/
+scripts/sortida/
+web/config.js
+web/dades/

@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 data class RanquingEstat(
     val criteri: CriteriRanquing = CriteriRanquing.PUNTS,
-    val nomesAmics: Boolean = false,
+    val nomesSeguits: Boolean = false,
     val carregant: Boolean = true,
     val files: List<FilaRanquing> = emptyList(),
     /** No s'ha pogut carregar (normalment, sense connexió). */
@@ -27,8 +27,8 @@ data class RanquingEstat(
     /** La fila de l'usuari, que es mostra sempre a sota encara que no sigui entre les primeres. */
     val jo: FilaRanquing? get() = files.firstOrNull { it.socJo }
 
-    /** Si a la classificació d'amics només hi ha l'usuari. */
-    val senseAmics: Boolean get() = nomesAmics && !carregant && !error && files.all { it.socJo }
+    /** Si a la classificació de la gent que segueix només hi ha l'usuari. */
+    val senseSeguits: Boolean get() = nomesSeguits && !carregant && !error && files.all { it.socJo }
 }
 
 @HiltViewModel
@@ -47,9 +47,9 @@ class RanquingViewModel @Inject constructor(private val ranquing: ServeiRanquing
         actualitza()
     }
 
-    fun canviaAmbit(nomesAmics: Boolean) {
-        if (nomesAmics == _estat.value.nomesAmics) return
-        _estat.update { it.copy(nomesAmics = nomesAmics) }
+    fun canviaAmbit(nomesSeguits: Boolean) {
+        if (nomesSeguits == _estat.value.nomesSeguits) return
+        _estat.update { it.copy(nomesSeguits = nomesSeguits) }
         actualitza()
     }
 
@@ -67,7 +67,7 @@ class RanquingViewModel @Inject constructor(private val ranquing: ServeiRanquing
             }
             val e = _estat.value
             try {
-                val files = ranquing.classificacio(e.criteri, e.nomesAmics)
+                val files = ranquing.classificacio(e.criteri, e.nomesSeguits)
                 _estat.update { it.copy(carregant = false, files = files) }
             } catch (ex: CancellationException) {
                 throw ex

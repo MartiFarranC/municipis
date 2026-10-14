@@ -1,4 +1,4 @@
-# Descobreix Catalunya
+# Bocins de Catalunya
 
 App per visitar els 947 municipis de Catalunya com si fos un videojoc. Tot el mapa comença a la boira. El teu municipi és el primer que s'il·lumina, i a partir d'aquí vas desbloquejant els municipis veïns amb els punts que guanyes completant missions.
 
@@ -17,7 +17,9 @@ Les regles i l'abast de la versió 1 són a [`docs/requisits.md`](docs/requisits
 
 ## Compilar i provar
 
-Cal Android Studio (o l'SDK d'Android amb la plataforma 36) i JDK 17 o posterior.
+Per instal·lar l'app al mòbil des de l'Android Studio, pas a pas: [`docs/android-studio.md`](docs/android-studio.md). Sense Supabase configurat, l'app funciona en mode de prova, amb un compte local.
+
+Des de la línia d'ordres cal l'SDK d'Android amb la plataforma 36 i JDK 17 o posterior.
 
 ```bash
 ./gradlew :app:assembleDebug        # compila l'app
@@ -58,7 +60,7 @@ El workflow `Genera les missions` (`missions.yml`, s'executa a mà des de la pes
 - **Límits municipals.** Instituto Geográfico Nacional (IGN), versió de desembre de 2024 publicada a [ArnauInes/geometries_cat_bcn_2024](https://github.com/ArnauInes/geometries_cat_bcn_2024), amb llicència CC BY 4.0.
 - **Comarques.** Les 43 comarques actuals (el Lluçanès inclòs), de la capa de comarques de la mateixa font. Cada municipi s'assigna a la comarca que en conté el punt interior.
 - **Missions.** Wikidata (CC0) i OpenStreetMap (ODbL, © col·laboradors d'OpenStreetMap), més les missions genèriques de `dades/configuracio_joc.json`.
-- **Tipografies.** Chakra Petch i Atkinson Hyperlegible (SIL Open Font License 1.1). Les llicències són a `app/src/main/assets/llicencies/`.
+- **Tipografies.** Archivo Black, Instrument Sans i Caveat (SIL Open Font License 1.1). Les llicències són a `app/src/main/assets/llicencies/`.
 
 ## Pendent
 

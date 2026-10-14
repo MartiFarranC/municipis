@@ -45,7 +45,13 @@ class GestioDades @Inject constructor(
                 Exportacio.Propia(it.id, it.codiIne, it.titol, it.descripcio, it.completada, it.creatEl, it.modificatEl)
             },
             fotos = db.fotos().totesAra().map {
-                Exportacio.FotoExportada(it.id, it.codiIne, "fotos/${it.fitxer}", it.lat, it.lon, it.visibilitat, it.esPortada, it.missioId, it.creatEl, it.modificatEl)
+                Exportacio.FotoExportada(it.id, it.codiIne, "fotos/${it.fitxer}", it.lat, it.lon, it.visibilitat, it.esPortada, it.missioId, it.creatEl, it.modificatEl, it.esCromo)
+            },
+            segells = db.segells().totsAra().map {
+                Exportacio.SegellExportat(it.id, it.codiIne, it.comarca, it.pagina, it.x, it.y, it.gir, it.tinta, it.creatEl, it.modificatEl)
+            },
+            sacs = db.sacs().totsAra().map {
+                Exportacio.SacExportat(it.id, it.origen, it.objecteTipus, it.objecteId, it.punts, it.obertEl, it.creatEl, it.modificatEl)
             },
         )
         val sortida = context.contentResolver.openOutputStream(desti) ?: error("No es pot escriure al fitxer triat")
@@ -79,7 +85,37 @@ class GestioDades @Inject constructor(
         val movimentsPunts: List<Moviment>,
         val missionsPropies: List<Propia>,
         val fotos: List<FotoExportada>,
+        /** Els segells del passaport, amb el lloc de la pàgina on l'usuari els va posar. */
+        val segells: List<SegellExportat> = emptyList(),
+        /** Els sacs guanyats i el que n'ha sortit. */
+        val sacs: List<SacExportat> = emptyList(),
     ) {
+        @Serializable
+        data class SacExportat(
+            val id: String,
+            val origen: String,
+            val objecteTipus: String?,
+            val objecteId: String?,
+            val punts: Int?,
+            val obertEl: Long?,
+            val creatEl: Long,
+            val modificatEl: Long,
+        )
+
+        @Serializable
+        data class SegellExportat(
+            val id: String,
+            val codiIne: String,
+            val comarca: String,
+            val pagina: Int,
+            val x: Float,
+            val y: Float,
+            val gir: Float,
+            val tinta: Int,
+            val creatEl: Long,
+            val modificatEl: Long,
+        )
+
         @Serializable
         data class Descobert(val id: String, val codiIne: String, val esInici: Boolean, val cost: Int, val creatEl: Long, val modificatEl: Long)
 
@@ -132,6 +168,7 @@ class GestioDades @Inject constructor(
             val missioId: String?,
             val creatEl: Long,
             val modificatEl: Long,
+            val esCromo: Boolean = false,
         )
     }
 }

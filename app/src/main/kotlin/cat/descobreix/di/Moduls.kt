@@ -2,18 +2,19 @@ package cat.descobreix.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import cat.descobreix.BuildConfig
 import cat.descobreix.data.assets.DadesJoc
 import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.compte.ServeiCompte
+import cat.descobreix.data.compte.ServeiCompteLocal
 import cat.descobreix.data.compte.ServeiCompteSupabase
 import cat.descobreix.data.db.BaseDades
 import cat.descobreix.data.ranquing.ServeiRanquing
 import cat.descobreix.data.ranquing.ServeiRanquingSupabase
+import cat.descobreix.data.db.TriggersSincronitzacio
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.FotosRepositoriRoom
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
@@ -23,8 +24,20 @@ import cat.descobreix.data.repositori.PreferenciesRepositoriDataStore
 import cat.descobreix.data.repositori.ProgresRepositori
 import cat.descobreix.data.repositori.ProgresRepositoriRoom
 import cat.descobreix.data.repositori.Rellotge
+import cat.descobreix.data.repositori.SacsRepositori
+import cat.descobreix.data.repositori.SacsRepositoriRoom
+import cat.descobreix.data.repositori.AjuntamentsRepositori
+import cat.descobreix.data.repositori.AjuntamentsRepositoriRoom
+import cat.descobreix.data.repositori.SegellsRepositori
+import cat.descobreix.data.repositori.SegellsRepositoriRoom
+import cat.descobreix.data.sincronitzacio.ServidorSincronitzacio
+import cat.descobreix.data.sincronitzacio.ServidorSupabase
+import cat.descobreix.data.social.ServeiSocial
+import cat.descobreix.data.social.ServeiSocialSupabase
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.data.ubicacio.ServeiUbicacioFused
+import cat.descobreix.photos.LectorCartell
+import cat.descobreix.photos.LectorTesseract
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -39,25 +52,32 @@ import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.Storage
 import javax.inject.Singleton
 
+private val Context.preferenciesDataStore: DataStore<Preferences> by preferencesDataStore("preferencies")
+
 @Module
 @InstallIn(SingletonComponent::class)
 object ModulDades {
     @Provides
     @Singleton
     fun baseDades(@ApplicationContext context: Context): BaseDades =
-        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).build()
+        Room.databaseBuilder(context, BaseDades::class.java, BaseDades.NOM).addMigrations(BaseDades.MIGRACIO_1_2, BaseDades.MIGRACIO_2_3, BaseDades.MIGRACIO_3_4, BaseDades.MIGRACIO_4_5, BaseDades.MIGRACIO_5_6, BaseDades.MIGRACIO_6_7)
+            .addCallback(TriggersSincronitzacio.callback).build()
 
+    // Un sol DataStore per a tot el procés (els tests d'interfície creen un component de Hilt per test).
     @Provides
     @Singleton
-    fun preferencies(@ApplicationContext context: Context): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create { context.preferencesDataStoreFile("preferencies") }
+    fun preferencies(@ApplicationContext context: Context): DataStore<Preferences> = context.preferenciesDataStore
 
     @Provides
     fun rellotge(): Rellotge = Rellotge { System.currentTimeMillis() }
 
     @Provides
     @Singleton
-    fun supabase(): SupabaseClient = createSupabaseClient(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY) {
+    fun supabase(): SupabaseClient = createSupabaseClient(
+        // Sense servidor configurat, una adreça que no existeix: les crides fallen com si no hi hagués connexió.
+        if (BuildConfig.SENSE_SERVIDOR) "https://sense-servidor.invalid" else BuildConfig.SUPABASE_URL,
+        if (BuildConfig.SENSE_SERVIDOR) "sense-servidor" else BuildConfig.SUPABASE_ANON_KEY,
+    ) {
         install(Auth) {
             flowType = FlowType.PKCE
             scheme = ServeiCompteSupabase.ESQUEMA
@@ -89,7 +109,31 @@ abstract class ModulRepositoris {
     abstract fun preferencies(r: PreferenciesRepositoriDataStore): PreferenciesRepositori
 
     @Binds
+    @Singleton
+    abstract fun segells(r: SegellsRepositoriRoom): SegellsRepositori
+
+    @Binds
+    @Singleton
+    abstract fun ajuntaments(r: AjuntamentsRepositoriRoom): AjuntamentsRepositori
+
+    @Binds
+    @Singleton
+    abstract fun sacs(r: SacsRepositoriRoom): SacsRepositori
+
+    @Binds
     abstract fun dades(d: DadesJoc): FontDadesJoc
+
+    @Binds
+    @Singleton
+    abstract fun lectorCartell(l: LectorTesseract): LectorCartell
+
+    @Binds
+    @Singleton
+    abstract fun servidorSincronitzacio(s: ServidorSupabase): ServidorSincronitzacio
+
+    @Binds
+    @Singleton
+    abstract fun social(s: ServeiSocialSupabase): ServeiSocial
 
     @Binds
     @Singleton
@@ -99,12 +143,15 @@ abstract class ModulRepositoris {
 /** A part, perquè els tests de UI el puguin substituir per un compte fals. */
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class ModulCompte {
-    @Binds
+object ModulCompte {
+    /** Sense servidor configurat, un compte local per poder jugar igualment (docs/android-studio.md). */
+    @Provides
     @Singleton
-    abstract fun compte(s: ServeiCompteSupabase): ServeiCompte
+    fun compte(supabase: dagger.Lazy<ServeiCompteSupabase>): ServeiCompte =
+        if (BuildConfig.SENSE_SERVIDOR) ServeiCompteLocal() else supabase.get()
 
-    @Binds
+    /** Sense servidor, les crides fallen com si no hi hagués connexió i la pantalla ho explica. */
+    @Provides
     @Singleton
-    abstract fun ranquing(s: ServeiRanquingSupabase): ServeiRanquing
+    fun ranquing(s: ServeiRanquingSupabase): ServeiRanquing = s
 }

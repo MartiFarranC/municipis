@@ -32,6 +32,7 @@ object Icones {
     val Mapa = icona("mapa", "M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z", "M9 3v15M15 6v15")
     val Missions = icona("missions", "M9 6h11M9 12h11M9 18h11", "M3 6l1.5 1.5L7 5M3 12l1.5 1.5L7 11")
     val Perfil = icona("perfil", cercle(12f, 8f, 4f), "M4 21a8 8 0 0 1 16 0")
+    val Gent = icona("gent", cercle(9f, 8f, 3.5f), "M2 20a7 7 0 0 1 14 0", "M15.5 4.5a3.5 3.5 0 0 1 0 7", "M18 13.5a7 7 0 0 1 4 6.5")
     val Cadenat = icona("cadenat", "M7 11h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z", "M8 11V8a4 4 0 0 1 8 0v3")
     val Camera = icona("camera", "M4 8h3l2-3h6l2 3h3v11H4z", cercle(12f, 13f, 3.5f))
     val Centrar = icona("centrar", cercle(12f, 12f, 3f), "M12 2v4M12 18v4M2 12h4M18 12h4")
@@ -39,7 +40,7 @@ object Icones {
     val Cercar = icona("cercar", cercle(11f, 11f, 7f), "M20 20l-4-4")
     val Fet = icona("fet", "M5 12l5 5L20 7", gruix = 3f)
     val Mes = icona("mes", "M12 5v14M5 12h14")
-    val Punts = icona("punts", cercle(12f, 12f, 9f), "M12 7v10M9 9.5h4.5a1.75 1.75 0 0 1 0 3.5h-3a1.75 1.75 0 0 0 0 3.5H15")
+    val Sac = icona("sac", "M8 9h8c3 3 4 7 3 10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2c-1-3 0-7 3-10z", "M9 4l3 2 3-2-1 5h-4z")
     val Trofeu = icona("trofeu", "M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z", "M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3")
     val Llum = icona(
         "llum",
@@ -55,4 +56,5 @@ object Icones {
     val Imatge = icona("imatge", "M4 5h16v14H4z", cercle(9f, 10f, 1.5f), "M20 16l-5-5-8 8")
     val Gps = icona("gps", cercle(12f, 12f, 8f), cercle(12f, 12f, 2f), "M12 2v2M12 20v2M2 12h2M20 12h2")
     val Ratlla = icona("ratlla", "M5 12h14")
+    val Qr = icona("qr", "M4 4h6v6H4z", "M14 4h6v6h-6z", "M4 14h6v6H4z", "M14 14h2v2h-2z", "M18 18h2v2h-2z", "M18 14h2M14 18h2")
 }

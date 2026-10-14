@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="fons">#FF0B0E13</color>
-    <color name="ambre">#FFF2B544</color>
+    <!-- El fons de la finestra mentre s'obre l'app: blanc (vegeu values-night per al fosc). -->
+    <color name="fons">#FFFFFFFF</color>
+    <!-- El fons de la icona de l'app, que no canvia amb el tema. -->
+    <color name="fons_icona">#FF0B0E13</color>
 </resources>

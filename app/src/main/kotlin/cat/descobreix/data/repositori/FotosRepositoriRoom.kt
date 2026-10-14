@@ -37,7 +37,7 @@ class FotosRepositoriRoom @Inject constructor(
 
     override fun foto(id: String): Flow<Foto?> = dao.perId(id).map { it?.aFoto() }
 
-    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto {
+    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?, esCromo: Boolean): Foto {
         val config = dadesJoc.obte().config.fotos
         val id = uuid()
         val fitxer = "$id.jpg"
@@ -57,7 +57,7 @@ class FotosRepositoriRoom @Inject constructor(
             FotoEntity(
                 id = id, codiIne = codi, fitxer = fitxer, miniatura = fitxer,
                 lat = ubicacio?.lat, lon = ubicacio?.lon, visibilitat = Visibilitat.PRIVADA.name,
-                esPortada = esPrimera, missioId = missioId, creatEl = ara, modificatEl = ara,
+                esPortada = esPrimera, missioId = missioId, creatEl = ara, modificatEl = ara, esCromo = esCromo,
             ).also { dao.insereix(it) }
         }
         return entitat.aFoto()
@@ -74,7 +74,7 @@ class FotosRepositoriRoom @Inject constructor(
     override suspend fun esborra(id: String) {
         val f = dao.perIdAra(id) ?: return
         db.withTransaction {
-            dao.esborra(id)
+            dao.esborra(id, rellotge.ara())
             if (f.esPortada) {
                 dao.totesAra().firstOrNull { it.codiIne == f.codiIne }?.let { dao.fesPortada(f.codiIne, it.id, rellotge.ara()) }
             }
@@ -96,6 +96,7 @@ class FotosRepositoriRoom @Inject constructor(
         esPortada = esPortada,
         missioId = missioId,
         creatEl = creatEl,
+        esCromo = esCromo,
     )
 
     /** Descodifica reduint ja la mida, per no carregar en memòria fotos de molts megapíxels. */

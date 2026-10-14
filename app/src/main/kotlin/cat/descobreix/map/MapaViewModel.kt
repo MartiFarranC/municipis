@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.descobreix.data.assets.Dades
+import cat.descobreix.data.repositori.AjuntamentsRepositori
 import cat.descobreix.data.repositori.CameraMapa as CameraDesada
 import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.ubicacio.ServeiUbicacio
@@ -16,6 +17,7 @@ import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.progressio.Nivell
 import cat.descobreix.joc.regles.ResultatDesbloqueig
+import cat.descobreix.joc.regles.Ubicacio
 import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.missatgeBloquejat
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,9 +47,10 @@ data class Seleccio(
     val falten: Int,
     /** Un veí descobert, si el municipi és disponible. */
     val veiDe: String?,
-    /** A quants municipis és del territori descobert, si és a la boira. */
-    val distancia: Int?,
 )
+
+/** On és l'usuari, en coordenades del mapa: s'hi dibuixa la personeta. */
+data class PosicioUsuari(val x: Float, val y: Float)
 
 data class OpcioCerca(val index: Int, val nom: String, val comarca: String)
 
@@ -72,6 +75,12 @@ data class MapaEstat(
     val ordre: OrdreCamera? = null,
     val cameraInicial: CameraDesada? = null,
     val desbloquejant: Boolean = false,
+    /** Els municipis amb un ajuntament que col·labora (secció 9.6): la targeta en mostra el distintiu. */
+    val collaboradors: Set<CodiIne> = emptySet(),
+    /** Si l'app té permís d'ubicació. No es demana en obrir el mapa (docs/requisits.md, secció 8). */
+    val permisUbicacio: Boolean = false,
+    val posicio: PosicioUsuari? = null,
+    val minimapaVisible: Boolean = true,
 )
 
 @HiltViewModel
@@ -79,9 +88,10 @@ class MapaViewModel @Inject constructor(
     private val joc: Joc,
     private val preferencies: PreferenciesRepositori,
     private val ubicacio: ServeiUbicacio,
+    ajuntaments: AjuntamentsRepositori,
     estatDesat: SavedStateHandle,
 ) : ViewModel() {
-    private val _estat = MutableStateFlow(MapaEstat())
+    private val _estat = MutableStateFlow(MapaEstat(permisUbicacio = ubicacio.tePermis()))
     val estat: StateFlow<MapaEstat> = _estat.asStateFlow()
 
     private val centreInicial: String? = estatDesat["centre"]
@@ -90,6 +100,12 @@ class MapaViewModel @Inject constructor(
     private var comptadorOrdres = 0L
 
     init {
+        viewModelScope.launch {
+            preferencies.minimapaVisible.collect { v -> _estat.update { it.copy(minimapaVisible = v) } }
+        }
+        viewModelScope.launch {
+            ajuntaments.ajuntaments.collect { a -> _estat.update { it.copy(collaboradors = a.keys) } }
+        }
         viewModelScope.launch {
             val d = joc.dades()
             dades = d
@@ -157,11 +173,10 @@ class MapaViewModel @Inject constructor(
             } else {
                 null
             },
-            distancia = if (estat == EstatMunicipi.BOIRA) d.regles.graf.distancies(descoberts)[m.codi] else null,
         )
     }
 
-    /** Toc al mapa, en coordenades del mapa. */
+    /** Toc al mapa, en coordenades del mapa. Els municipis a la boira no es poden tocar: és com tocar a fora. */
     fun toca(x: Float, y: Float) {
         val g = _estat.value.geometria ?: return
         val index = g.municipis.indices.firstOrNull { i ->
@@ -169,8 +184,10 @@ class MapaViewModel @Inject constructor(
             m.requadre.conte(x.toDouble(), y.toDouble()) &&
                 m.detall.any { Geometria.dinsPoligon(x.toDouble(), y.toDouble(), it.anells) }
         }
-        _estat.update { it.copy(seleccio = index?.let(::seleccio)) }
+        _estat.update { it.copy(seleccio = index?.takeUnless(::esBoira)?.let(::seleccio)) }
     }
+
+    private fun esBoira(index: Int): Boolean = (_estat.value.estats.getOrNull(index) ?: EstatMunicipi.BOIRA) == EstatMunicipi.BOIRA
 
     fun treuSeleccio() = _estat.update { it.copy(seleccio = null) }
 
@@ -178,9 +195,12 @@ class MapaViewModel @Inject constructor(
 
     fun canviaCerca(text: String) {
         val d = dades ?: return
-        val resultats = d.cercador.cerca(text, LIMIT_CERCA).map {
-            OpcioCerca(d.geografia.index(it.codi), it.nom, d.geografia.comarca(it.comarca).nom)
-        }
+        // Els municipis a la boira no surten: encara s'han de descobrir.
+        val descoberts = progres.conjuntDescoberts
+        val resultats = d.cercador.cerca(text, d.geografia.total)
+            .filter { d.regles.estat(it.codi, descoberts) != EstatMunicipi.BOIRA }
+            .take(LIMIT_CERCA)
+            .map { OpcioCerca(d.geografia.index(it.codi), it.nom, d.geografia.comarca(it.comarca).nom) }
         _estat.update { it.copy(textCerca = text, resultatsCerca = resultats) }
     }
 
@@ -220,6 +240,8 @@ class MapaViewModel @Inject constructor(
         viewModelScope.launch {
             val u = ubicacio.ubicacioActual()
             val d = dades
+            _estat.update { it.copy(permisUbicacio = ubicacio.tePermis()) }
+            u?.let(::posa)
             if (u == null || d == null) {
                 _estat.update { it.copy(buscantUbicacio = false, missatge = Missatge.SenseUbicacio) }
                 return@launch
@@ -240,6 +262,16 @@ class MapaViewModel @Inject constructor(
         }
     }
 
+    /** Mou la personeta mentre es crida, només si ja hi ha permís. La pantalla la crida mentre és visible. */
+    suspend fun segueixUbicacio() {
+        ubicacio.seguiment().collect(::posa)
+    }
+
+    private fun posa(u: Ubicacio) {
+        val g = _estat.value.geometria ?: return
+        _estat.update { it.copy(posicio = PosicioUsuari(g.projeccio.x(u.lon).toFloat(), g.projeccio.y(u.lat).toFloat())) }
+    }
+
     fun triaCandidat(codi: CodiIne) {
         _estat.update { it.copy(candidats = null) }
         viewModelScope.launch { mostraUbicacio(codi) }
@@ -249,7 +281,9 @@ class MapaViewModel @Inject constructor(
 
     private suspend fun mostraUbicacio(codi: CodiIne) {
         val d = dades ?: return
-        _estat.update { it.copy(seleccio = seleccio(d.geografia.index(codi))) }
+        // Si és a la boira, no se selecciona: només s'explica què li falta.
+        val index = d.geografia.index(codi)
+        _estat.update { it.copy(seleccio = index.takeUnless(::esBoira)?.let(::seleccio)) }
         if (codi !in progres.conjuntDescoberts) {
             val m = joc.missatgeBloquejat(codi)
             _estat.update { it.copy(missatge = m) }
@@ -259,6 +293,12 @@ class MapaViewModel @Inject constructor(
     fun tancaMissatge() = _estat.update { it.copy(missatge = null) }
 
     fun tancaAvis() = _estat.update { it.copy(avis = null) }
+
+    fun canviaMinimapa() {
+        val visible = !_estat.value.minimapaVisible
+        _estat.update { it.copy(minimapaVisible = visible) }
+        viewModelScope.launch { preferencies.desaMinimapaVisible(visible) }
+    }
 
     fun desaCamera(x: Float, y: Float, escala: Float) {
         viewModelScope.launch { preferencies.desaCameraMapa(CameraDesada(x, y, escala)) }

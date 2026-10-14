@@ -8,6 +8,7 @@ import cat.descobreix.data.db.MunicipiDescobertEntity
 import cat.descobreix.domain.MissioCompletada
 import cat.descobreix.domain.Progres
 import cat.descobreix.joc.model.CodiIne
+import cat.descobreix.joc.progressio.MedallaGuanyada
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -62,6 +63,16 @@ class ProgresRepositoriRoom @Inject constructor(
                 dao.insereixMoviment(MovimentPuntsEntity(uuid(), MovimentPuntsEntity.GUANY, bonus, MovimentPuntsEntity.MOTIU_BONUS, codi, ara, ara))
             }
         }
+    }
+
+    override suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada> = db.withTransaction {
+        val jaSumades = dao.movimentsAra().filter { it.motiu == MovimentPuntsEntity.MOTIU_MEDALLA }.map { it.referencia }.toSet()
+        val noves = guanyades.filter { it.id !in jaSumades }
+        val ara = rellotge.ara()
+        for (m in noves) {
+            dao.insereixMoviment(MovimentPuntsEntity(uuid(), MovimentPuntsEntity.GUANY, m.punts, MovimentPuntsEntity.MOTIU_MEDALLA, m.id, ara, ara))
+        }
+        noves
     }
 
     private fun construeix(

@@ -24,6 +24,36 @@ class ConfiguracioJocTest {
     }
 
     @Test
+    fun `les medalles i el passaport tenen els valors decidits`() {
+        val m = config.medalles
+        assertEquals(listOf(10, 50, 100, 250, 500, 947), m.municipis)
+        assertEquals(listOf(1, 25, 100, 500, 947), m.cartells)
+        assertEquals(25, m.punts.comarcaBronze)
+        assertEquals(50, m.punts.comarcaPlata)
+        assertEquals(100, m.punts.comarcaOr)
+        assertEquals(20, m.punts.fitaMunicipis)
+        assertEquals(20, m.punts.fitaCartells)
+        assertEquals(100, m.punts.capitals)
+        assertEquals(20, config.passaport.segellsPerPagina)
+    }
+
+    @Test
+    fun `les fites de les medalles van de menys a més i no passen de 947`() {
+        for (fites in listOf(config.medalles.municipis, config.medalles.cartells)) {
+            assertEquals(fites.sorted().distinct(), fites)
+            assertTrue(fites.all { it in 1..947 })
+        }
+    }
+
+    @Test
+    fun `una medalla dona menys punts que el desbloqueig més barat`() {
+        // Les medalles han d'ajudar una mica sense regalar municipis: cap nivell no paga per si sol el desbloqueig més car.
+        val p = config.medalles.punts
+        val maxim = listOf(p.comarcaBronze, p.comarcaPlata, p.comarcaOr, p.fitaMunicipis, p.fitaCartells, p.capitals).max()
+        assertTrue(maxim < config.desbloqueig.costMaxim)
+    }
+
+    @Test
     fun `les missions genèriques garanteixen el mínim de punts`() {
         assertTrue(config.puntsGenericsPerMunicipi >= config.punts.minimGarantitPerMunicipi)
         assertTrue(config.puntsGenericsPerMunicipi <= config.punts.maximMissionsPerMunicipi)

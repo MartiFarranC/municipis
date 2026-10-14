@@ -1,0 +1,378 @@
+<meta charset="utf-8">
+<title>Cinc mapes</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--FONTS:Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@0;1&family=Archivo+Black&family=Instrument+Sans:wght@400;600;700&family=Caveat:wght@600-->
+<style>
+/*FONTS*/
+/* Proposta feta a partir del qüestionari d'estètica (disseny/estil/questionari-estil.html). Les fonts van a dins de la
+   pàgina perquè es vegin a qualsevol mòbil. Generat per gen-prototip.py amb dades reals (un tros d'Osona i les missions). */
+*{box-sizing:border-box}
+body{margin:0;background:#F1F1F1;color:#111;font:16px/1.5 "Instrument Sans",system-ui,sans-serif}
+.pagina{max-width:1100px;margin:0 auto;padding:28px 16px 80px}
+.cap small{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#666}
+.cap h1{font:800 34px/1.05 "Bricolage Grotesque",sans-serif;margin:6px 0 12px}
+.cap p{margin:0 0 10px;max-width:68ch}
+.disposicio{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;margin-top:20px}
+@media (max-width:860px){.disposicio{grid-template-columns:1fr}}
+.columna-tel{position:sticky;top:12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+@media (max-width:860px){.columna-tel{position:static}}
+.controls{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:380px}
+.controls .grup{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:center}
+.controls .grup>span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#666;margin-right:2px}
+.controls button{font:600 14px "Instrument Sans";border:1.5px solid #111;background:#fff;color:#111;padding:6px 10px;min-height:36px;cursor:pointer}
+.controls button[aria-pressed="true"]{background:#111;color:#fff}
+.controls .color{width:36px;padding:0}
+.controls .color[aria-pressed="true"]{box-shadow:inset 0 0 0 3px #fff}
+.entes{background:#fff;padding:16px 18px;border:1.5px solid #111}
+.entes h2,.valora h2{font:800 22px "Bricolage Grotesque",sans-serif;margin:0 0 8px}
+.entes ul{margin:0;padding-left:18px}.entes li{margin-bottom:6px}
+.entes b{font-weight:700}
+.valora{margin-top:18px;background:#fff;padding:16px 18px;border:1.5px solid #111}
+.valora .botons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.valora button{font:600 15px "Instrument Sans";border:1.5px solid #111;background:#fff;padding:8px 14px;min-height:42px;cursor:pointer}
+.valora button[aria-pressed="true"]{background:#111;color:#fff}
+.valora textarea{width:100%;min-height:90px;border:1.5px solid #111;padding:10px;font:inherit}
+.desat{font-size:13px;color:#666;margin-top:4px}
+button:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #1A5FD0;outline-offset:2px}
+
+/* ── El telèfon ─────────────────────────────────────────────────────────── */
+.marc{width:360px;height:740px;transform-origin:top center}
+.tel{--fons:#fff;--tinta:#111;--suau:#6B6B6B;--linia:#E4E4E4;--boira:#ECECEC;--vei:#fff;--acc:#FF3B1F;--onacc:#fff;--tit:"Bricolage Grotesque";--titw:800;--titst:normal;
+  width:360px;height:740px;border:8px solid #111;border-radius:40px;overflow:hidden;position:relative;background:var(--fons);color:var(--tinta);
+  font-family:"Instrument Sans",sans-serif;font-size:15px;line-height:1.35;user-select:none;-webkit-user-select:none}
+.tel[data-tema="fosc"]{--fons:#0F0F0F;--tinta:#F2F2F2;--suau:#9A9A9A;--linia:#2A2A2A;--boira:#1E1E1E;--vei:#0F0F0F;border-color:#333}
+.tel .t{font-family:var(--tit);font-weight:var(--titw);font-style:var(--titst);line-height:.95;letter-spacing:-.015em}
+.tel .ma{font-family:"Caveat",cursive;font-weight:600}
+.dalt{position:absolute;top:0;left:0;right:0;height:64px;padding:26px 16px 0;display:flex;justify-content:space-between;align-items:center;z-index:4;background:var(--fons)}
+.dalt .marca{font-size:20px}
+.saldo{display:flex;align-items:baseline;gap:5px;font-weight:700}
+.saldo .n{font-size:22px}
+.saldo small{font-size:12px;color:var(--suau);font-weight:600}
+.pantalla{position:absolute;top:64px;left:0;right:0;bottom:58px;background:var(--fons);overflow:hidden}
+.nav{position:absolute;left:0;right:0;bottom:0;height:58px;display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--tinta);background:var(--fons);z-index:4}
+.nav button{background:none;border:0;color:var(--suau);font:700 12px "Instrument Sans";text-transform:uppercase;letter-spacing:.08em;cursor:pointer;position:relative}
+.nav button[aria-current="page"]{color:var(--tinta)}
+.nav button[aria-current="page"]::before{content:"";position:absolute;left:28%;right:28%;top:-2px;height:4px;background:var(--acc)}
+
+/* Botons: ombra dura. En prémer, s'enfonsen fins a tocar l'ombra. */
+.bt{font:700 16px "Instrument Sans";display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;padding:13px 16px;cursor:pointer;
+  background:var(--acc);color:var(--onacc);border:2px solid var(--tinta);box-shadow:4px 4px 0 var(--tinta);transition:transform .07s,box-shadow .07s;position:relative;overflow:hidden}
+.bt.sec{background:var(--fons);color:var(--tinta)}
+.bt.premut{transform:translate(4px,4px);box-shadow:0 0 0 var(--tinta)}
+.bt .etq{display:inline-block}
+.bt .etq.surt{animation:surt .22s ease-in forwards}.bt .etq.entra{animation:entra .28s cubic-bezier(.3,1.5,.5,1)}
+@keyframes surt{to{transform:translateY(-140%);opacity:0}}@keyframes entra{from{transform:translateY(140%);opacity:0}}
+.bt.no{animation:nega .4s}
+@keyframes nega{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+/* Mapa */
+#mapa svg{width:100%;height:100%;display:block}
+#mapa path.m{cursor:pointer;transition:fill .3s}
+.full{position:absolute;left:12px;right:12px;bottom:12px;background:var(--fons);border:2px solid var(--tinta);padding:12px 14px 14px;box-shadow:4px 4px 0 var(--tinta)}
+.full .nom{font-size:30px;margin:2px 0 2px}
+.full .det{font-size:13px;color:var(--suau);margin-bottom:10px}
+.full .lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.boira-fx{animation:esvaeix 1.3s ease-out forwards;transform-box:fill-box;transform-origin:center}
+@keyframes esvaeix{to{opacity:0;transform:scale(1.35);filter:blur(6px)}}
+
+/* Fitxa d'un poble */
+#poble{overflow-y:auto}
+#poble .cos{padding:8px 16px 20px}
+.enrere{background:none;border:0;color:var(--tinta);font:700 13px "Instrument Sans";text-transform:uppercase;letter-spacing:.08em;padding:6px 0;cursor:pointer}
+#poble .nom{font-size:64px;margin-top:4px;position:relative;display:inline-block}
+#poble .subr{display:block;width:100%;height:12px;margin-top:2px}
+#poble .xifres{display:flex;gap:14px;font-weight:700;font-size:13px;margin:8px 0 2px}
+#poble .xifres span:last-child{color:var(--acc)}
+.pista{font-size:20px;color:var(--suau);margin:6px 0 4px;transform:rotate(-1.5deg)}
+.missio{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1.5px solid var(--linia);cursor:pointer;position:relative}
+.missio .tx{position:relative;font-weight:600;justify-self:start}
+.missio .pt{font-family:var(--tit);font-weight:var(--titw);font-size:20px}
+.missio.feta .tx,.missio.feta .pt{color:var(--suau)}
+.missio svg.ratlla{position:absolute;left:-4px;top:50%;width:calc(100% + 8px);height:14px;margin-top:-7px;overflow:visible;pointer-events:none}
+.missio svg.ratlla path{fill:none;stroke:var(--acc);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:0}
+.missio svg.ratlla.anima path{animation:gargot .45s ease-out both}
+@keyframes gargot{from{stroke-dashoffset:400}}
+.estampa{position:absolute;right:56px;top:50%;width:78px;height:42px;margin-top:-21px;border:2.5px solid var(--acc);color:var(--acc);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font:700 10px/1.1 "Instrument Sans";letter-spacing:.06em;text-transform:uppercase;transform:rotate(-8deg);pointer-events:none;opacity:.92}
+.estampa b{font-size:14px;letter-spacing:.02em}
+.estampa.anima{animation:segell .45s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes segell{from{transform:scale(2.2) rotate(-24deg);opacity:0}to{transform:rotate(-8deg);opacity:.92}}
+.punts-vola{position:absolute;z-index:6;font-family:var(--tit);font-weight:var(--titw);font-size:22px;color:var(--acc);pointer-events:none}
+
+/* Perfil */
+#perfil .cos{padding:14px 16px}
+#perfil .nom{font-size:58px}
+#perfil .graella{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--tinta);margin:16px 0}
+#perfil .graella div{padding:10px 0;border-bottom:1.5px solid var(--linia)}
+#perfil .graella div:nth-child(odd){border-right:1.5px solid var(--linia);padding-right:10px}
+#perfil .graella div:nth-child(even){padding-left:12px}
+#perfil .graella b{display:block;font-size:34px}
+#perfil .graella span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+
+/* Animacions de desbloqueig de cada mapa */
+#mapa svg *{transform-box:fill-box;transform-origin:center}
+.fx-puja{animation:fxpuja .6s cubic-bezier(.3,1.7,.5,1) both}
+@keyframes fxpuja{from{transform:translate(3px,3px)}}
+.fx-apareix{animation:fxapareix .5s .15s both}
+@keyframes fxapareix{from{opacity:0}}
+.fx-forat{animation:fxforat 1.3s cubic-bezier(.3,0,.2,1) both}
+@keyframes fxforat{from{transform:scale(0)}}
+.fx-pinta{animation:fxapareix .9s both}
+.fx-salta{animation:fxsalta .7s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes fxsalta{from{transform:scale(.4);opacity:0}}
+.estil{background:#fff;border:1.5px solid #111;padding:14px 16px;margin-bottom:12px}
+.estil.actiu{box-shadow:5px 5px 0 #111}
+.estil h2{font:400 22px "Archivo Black",sans-serif;margin:0 0 4px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.estil h2 button{font:600 13px "Instrument Sans";border:1.5px solid #111;background:#fff;padding:5px 10px;cursor:pointer}
+.estil p{margin:0 0 10px}
+.estil .botons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.estil .botons button{font:600 15px "Instrument Sans";border:1.5px solid #111;background:#fff;padding:8px 14px;min-height:42px;cursor:pointer}
+.estil .botons button[aria-pressed="true"]{background:#111;color:#fff}
+.estil textarea{width:100%;min-height:52px;border:1.5px solid #111;padding:8px;font:inherit}
+
+/* La frase feta, escrita a mà, que surt en desbloquejar */
+.nota{position:absolute;left:20px;right:20px;top:90px;z-index:7;font-size:30px;line-height:1.05;text-align:center;color:var(--tinta);pointer-events:none;opacity:0;transform:rotate(-3deg)}
+.nota.mostra{animation:nota 2.8s ease-out both}
+@keyframes nota{0%{opacity:0;transform:rotate(-3deg) translateY(10px) scale(.9)}12%,80%{opacity:1;transform:rotate(-3deg)}100%{opacity:0;transform:rotate(-3deg) translateY(-8px)}}
+.nota span{background:var(--fons);padding:2px 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media (prefers-reduced-motion:reduce){.tel *{animation-duration:.01s!important;transition:none!important}}
+</style>
+<div class="pagina">
+  <header class="cap">
+    <small>Bocins de Catalunya · el mapa</small>
+    <h1>Cinc maneres de fer el mapa</h1>
+    <p>Amb el que vas triar: <b>groc, Archivo i tema clar</b> (ho pots canviar a dalt del mòbil). Ara només canvia el mapa. Tria l'estil a sota de <b>Mapa</b> i <b>desbloqueja un poble</b> en cada estil: cada mapa té la seva animació. Pots tocar altres veïns per seleccionar-los, i <b>Torna a començar</b> torna a deixar-ho tot com al principi.</p>
+  </header>
+  <div class="disposicio">
+    <div class="columna-tel">
+      <div class="controls" aria-label="Opcions del prototip">
+        <div class="grup"><span>Tema</span><button type="button" data-tema="clar" aria-pressed="true">Clar</button><button type="button" data-tema="fosc" aria-pressed="false">Fosc</button></div>
+        <div class="grup"><span>Color</span><span id="colors" style="display:flex;gap:4px"></span></div>
+        <div class="grup"><span>Lletra</span><span id="lletres" style="display:flex;gap:4px;flex-wrap:wrap"></span></div>
+        <div class="grup"><span>Mapa</span><span id="estils" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"></span></div>
+        <div class="grup"><span>So</span><button type="button" id="so" aria-pressed="true">Activat</button><button type="button" id="reinicia">Torna a començar</button></div>
+      </div>
+      <div id="caixa"><div class="marc" id="marc">
+        <div class="tel" id="tel" data-tema="clar">
+          <div class="dalt"><span class="t marca">Bocins</span><span class="saldo"><span class="t n" id="saldo">0</span><small>barretines</small></span></div>
+          <div class="pantalla" id="mapa"></div>
+          <div class="pantalla" id="poble" hidden></div>
+          <div class="pantalla" id="perfil" hidden></div>
+          <nav class="nav"><button type="button" data-anar="mapa" aria-current="page">Mapa</button><button type="button" data-anar="poble">Missions</button><button type="button" data-anar="perfil">Perfil</button></nav>
+          <div class="nota ma" id="nota" aria-live="polite"></div>
+        </div>
+      </div></div>
+    </div>
+    <div>
+      <div id="valoracions"></div>
+    </div>
+  </div>
+</div>
+<script>
+const D=/*DADES*/{};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PER={};D.mapa.forEach(p=>PER[p.c]=p);
+const INICI=['08298','08100'];
+// Frases fetes catalanes, una a l'atzar cada vegada que es desbloqueja un poble.
+const FRASES=["De mica en mica s'omple la pica.","Qui no s'arrisca, no pisca.","Poc a poc i bona lletra.","Al pot petit hi ha la bona confitura.","Qui la segueix, la consegueix.","Val més tard que mai.","Cada terra fa sa guerra."];
+const COLORS=[['Vermell','#FF3B1F','#fff'],['Blau','#2F4BFF','#fff'],['Taronja','#FF6B00','#111'],['Verd','#00A66E','#fff'],['Groc','#FFD000','#111']];
+const LLETRES=[['Bricolage','"Bricolage Grotesque"',800,'normal'],['Instrument','"Instrument Serif"',400,'italic'],['Archivo','"Archivo Black"',400,'normal']];
+const DATA=new Date().toLocaleDateString('ca-ES',{day:'2-digit',month:'2-digit',year:'2-digit'});
+
+let S;
+function inicial(){const fetes={};fetes['08298']=new Set(D.missions['08298'].slice(0,3).map(m=>m.id));
+  const guanyat=D.missions['08298'].slice(0,3).reduce((a,m)=>a+m.p,0);
+  return {desc:new Set(INICI),fetes,saldo:guanyat-D.cfg.base,sel:'08037',poble:'08298',pant:'mapa'}}
+S=inicial();
+const tel=document.getElementById('tel');
+const estat=c=>S.desc.has(c)?'D':[...S.desc].some(d=>(PER[d].v||[]).includes(c))?'V':'B';
+const cost=()=>Math.min(D.cfg.base+D.cfg.inc*(S.desc.size-1),D.cfg.max);
+const totalPoble=c=>(D.missions[c]||[]).reduce((a,m)=>a+m.p,0)+D.cfg.bonus;
+
+// ── So i vibració ────────────────────────────────────────────────────────
+let so=true,ctx=null;
+function soroll(dur){const b=ctx.createBuffer(1,ctx.sampleRate*dur,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const s=ctx.createBufferSource();s.buffer=b;return s}
+function to(f,t0,dur,tipus='sine',vol=.25,f2){const o=ctx.createOscillator(),g=ctx.createGain();o.type=tipus;o.frequency.setValueAtTime(f,t0);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t0+dur);
+  g.gain.setValueAtTime(vol,t0);g.gain.exponentialRampToValueAtTime(.001,t0+dur);o.connect(g).connect(ctx.destination);o.start(t0);o.stop(t0+dur)}
+function sona(q){if(!so)return;try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();const t=ctx.currentTime;
+  if(q==='toc')to(240,t,.07,'sine',.3,110);
+  if(q==='xim'){to(660,t,.14,'triangle',.22);to(990,t+.11,.22,'triangle',.2);to(1320,t+.22,.3,'triangle',.12)}
+  if(q==='no'){to(200,t,.12,'square',.08,150);to(150,t+.13,.16,'square',.08,110)}
+  if(q==='gargot'){const s=soroll(.22),f=ctx.createBiquadFilter(),g=ctx.createGain();f.type='bandpass';f.frequency.value=2600;f.Q.value=1.5;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.25,t+.03);g.gain.linearRampToValueAtTime(.0001,t+.22);s.connect(f).connect(g).connect(ctx.destination);s.start(t)}
+  if(q==='segell'){to(95,t,.16,'sine',.5,55);const s=soroll(.05),g=ctx.createGain();g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);s.connect(g).connect(ctx.destination);s.start(t)}
+  if(q==='moneda'){to(1200,t,.06,'square',.05);to(1600,t+.06,.1,'square',.05)}
+}catch(e){}}
+const vibra=p=>{try{if(so&&navigator.vibrate)navigator.vibrate(p)}catch(e){}};
+
+// ── Comptador de barretines ─────────────────────────────────────────────
+let mostrat=null;
+function saldo(anim=true){const el=document.getElementById('saldo');const de=mostrat??S.saldo,a=S.saldo;mostrat=a;
+  if(!anim||de===a){el.textContent=a;return}const t0=performance.now();(function pas(t){const k=Math.min(1,(t-t0)/600);el.textContent=Math.round(de+(a-de)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(pas)})(t0);
+  el.animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:350,delay:450})}
+
+// ── Mapa ────────────────────────────────────────────────────────────────
+const ESTILS=[
+ {id:'actual',n:'El d\'abans',d:'El de la proposta anterior, per comparar: descoberts en negre, veïns amb ratlla discontínua, la resta gris. La boira s\'esvaeix.'},
+ {id:'noms',n:'Groc amb noms',d:'Els teus pobles, plens de groc i amb el nom escrit a sobre. Els veïns, en blanc amb el nom petit. La boira, gris i sense noms. En desbloquejar, el poble salta i hi apareix el nom.'},
+ {id:'retalls',n:'Retalls',d:'Els teus pobles són peces de paper retallat enganxades al mapa, amb la mateixa ombra dura que els botons. En desbloquejar, la peça s\'aixeca i hi surt l\'ombra.'},
+ {id:'ma',n:'Dibuixat a mà',d:'Contorns una mica torts, com fets amb retolador. Els teus pobles pintats amb ratlles grogues, i la boira feta de traços de llapis. En desbloquejar, els traços de llapis se\'n van.'},
+ {id:'nuvols',n:'Núvols',d:'Una boira de veritat, amb núvols, tapa el que no coneixes. Els veïns es veuen a través de la boira, i els teus pobles, nets. En desbloquejar, els núvols s\'obren.'},
+];
+const NS='http://www.w3.org/2000/svg';
+// Dibuixa el mapa amb l'estil triat. «nou» és el poble que s'acaba de desbloquejar, per animar-lo.
+function svgMapa(nou){const est=tria.estil,s=S.sel,fosc=tria.tema==='fosc';const ms=D.mapa;
+  const D_=ms.filter(m=>estat(m.c)==='D'),V_=ms.filter(m=>estat(m.c)==='V'),B_=ms.filter(m=>estat(m.c)==='B');
+  const P=(m,attr,cl='')=>`<path class="m ${cl}" data-c="${m.c}" d="${m.d}" ${attr}/>`;
+  let defs='',cos='',sobre='';
+  const selec=`<path d="${PER[s].d}" fill="none" stroke="${est==='actual'?'var(--acc)':'var(--tinta)'}" stroke-width="${est==='actual'?3:3.2}" stroke-linejoin="round" pointer-events="none" ${est==='ma'?'filter="url(#ma)"':''}/>`;
+  const etiqueta=(m,gran)=>m.x==null?'':`<text x="${m.x}" y="${m.y+3}" text-anchor="middle" font-family="Archivo Black" font-size="${gran?8.5:6}" fill="${gran?'var(--tinta)':'var(--suau)'}" stroke="${gran?'var(--acc)':'var(--fons)'}" stroke-width="${gran?2.4:2}" paint-order="stroke" pointer-events="none" ${m.c===nou?'class="fx-salta"':''}>${esc(m.n.length>14&&!gran?m.n.slice(0,13)+'…':m.n)}</text>`;
+  if(est==='actual'){
+    cos=B_.map(m=>P(m,'fill="var(--boira)" stroke="var(--fons)" stroke-width="1"')).join('')+V_.map(m=>P(m,'fill="var(--vei)" stroke="var(--tinta)" stroke-width="1" stroke-dasharray="3 2"')).join('')+D_.map(m=>P(m,'fill="var(--tinta)" stroke="var(--fons)" stroke-width="1.2"')).join('');
+    if(nou)sobre=`<path d="${PER[nou].d}" fill="var(--boira)" class="boira-fx" pointer-events="none"/>`;
+  }else if(est==='noms'){
+    cos=B_.map(m=>P(m,'fill="var(--boira)" stroke="var(--fons)" stroke-width="1"')).join('')+V_.map(m=>P(m,'fill="var(--vei)" stroke="var(--tinta)" stroke-width=".8"')).join('')+D_.map(m=>P(m,'fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.3"',m.c===nou?'fx-salta':'')).join('');
+    sobre=V_.map(m=>etiqueta(m,false)).join('')+D_.map(m=>etiqueta(m,true)).join('');
+  }else if(est==='retalls'){
+    cos=B_.map(m=>P(m,'fill="var(--boira)" stroke="var(--fons)" stroke-width="1"')).join('')+V_.map(m=>P(m,'fill="var(--vei)" stroke="var(--tinta)" stroke-width=".9"')).join('')
+      +`<g pointer-events="none">${D_.map(m=>`<path d="${m.d}" transform="translate(3 3)" fill="var(--tinta)" ${m.c===nou?'class="fx-apareix"':''}/>`).join('')}</g>`
+      +D_.map(m=>P(m,'fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.6" stroke-linejoin="round"',m.c===nou?'fx-puja':'')).join('');
+  }else if(est==='ma'){
+    defs=`<filter id="ma" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter>
+      <pattern id="ratlles" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="5" height="5" fill="var(--fons)"/><rect width="5" height="3.2" fill="var(--acc)"/></pattern>
+      <pattern id="llapis" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="4" height="4" fill="var(--fons)"/><rect width=".7" height="4" fill="var(--suau)" opacity=".45"/></pattern>`;
+    cos=`<g filter="url(#ma)">`+B_.map(m=>P(m,'fill="url(#llapis)" stroke="var(--suau)" stroke-opacity=".5" stroke-width=".6"')).join('')+V_.map(m=>P(m,'fill="var(--vei)" stroke="var(--tinta)" stroke-width="1.1"')).join('')
+      +D_.map(m=>P(m,'fill="url(#ratlles)" stroke="var(--tinta)" stroke-width="1.6"',m.c===nou?'fx-pinta':'')).join('')+`</g>`;
+    if(nou)sobre=`<path d="${PER[nou].d}" fill="url(#llapis)" class="boira-fx" filter="url(#ma)" pointer-events="none"/>`;
+  }else if(est==='nuvols'){
+    const m0=fosc?'0.12':'0.80';
+    defs=`<filter id="nuv" filterUnits="userSpaceOnUse" x="-120" y="-220" width="540" height="770"><feTurbulence type="fractalNoise" baseFrequency=".014" numOctaves="4" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 ${m0} 0 0 0 0 ${m0} 0 0 0 0 ${m0} 0 0 0 -2 1.7"/></filter>
+      <filter id="suau" filterUnits="userSpaceOnUse" x="-120" y="-220" width="540" height="770"><feGaussianBlur stdDeviation="3.5"/></filter>
+      <mask id="forat" maskUnits="userSpaceOnUse" x="-120" y="-220" width="540" height="770"><rect x="-120" y="-220" width="540" height="770" fill="#fff"/><g filter="url(#suau)">${V_.map(m=>`<path d="${m.d}" fill="#777"/>`).join('')}${D_.map(m=>`<path d="${m.d}" fill="#000" ${m.c===nou?'class="fx-forat"':''}/>`).join('')}</g></mask>`;
+    cos=B_.map(m=>P(m,'fill="var(--fons)" stroke="var(--linia)" stroke-width=".8"')).join('')+V_.map(m=>P(m,'fill="var(--vei)" stroke="var(--tinta)" stroke-width=".9"')).join('')+D_.map(m=>P(m,'fill="var(--acc)" stroke="var(--tinta)" stroke-width="1.3"')).join('');
+    sobre=`<g mask="url(#forat)" pointer-events="none"><rect x="-120" y="-220" width="540" height="770" fill="var(--boira)" opacity=".6"/><rect x="-120" y="-220" width="540" height="770" filter="url(#nuv)"/></g>`;
+  }
+  document.getElementById('mapa-svg').innerHTML=`<svg viewBox="0 0 300 330" aria-label="Mapa d'Osona"><defs>${defs}</defs>${cos}${sobre}${selec}</svg>`;
+}
+function pintaMapa(nou){const s=S.sel,p=PER[s],e=estat(s);
+  if(!document.getElementById('mapa-svg'))document.getElementById('mapa').innerHTML='<div id="mapa-svg" style="height:100%"></div><div id="mapa-full"></div>';
+  svgMapa(nou);if(nou)return;
+  let accio;
+  if(e==='D')accio=`<button type="button" class="bt sec" id="entra"><span class="etq">Entra a ${esc(p.n)}</span><span>→</span></button>`;
+  else if(e==='V')accio=`<button type="button" class="bt" id="desbloqueja"><span class="etq">Desbloqueja</span><span class="t" style="font-size:18px">${cost()}</span></button>`;
+  else accio=`<div class="det" style="margin:0">Encara és a la boira. Desbloqueja un poble del costat i s'hi podrà arribar.</div>`;
+  document.getElementById('mapa-full').innerHTML=`<div class="full"><div class="lbl">${e==='D'?'Descobert':e==='V'?'Al costat':'A la boira'} · ${esc(p.k)}</div><div class="t nom" style="font-size:${mida(p.n,30,290)}px">${esc(p.n)}</div>
+    <div class="det">${(D.missions[s]||[]).length} missions${e==='D'?` · ${S.fetes[s]?.size||0} fetes`:''}</div>${accio}</div>`;
+}
+function desbloqueja(bt){const c=S.sel;if(S.saldo<cost()){sona('no');vibra(80);bt.classList.remove('no');void bt.offsetWidth;bt.classList.add('no');canviaEtiqueta(bt,'No t\'arriba');setTimeout(()=>canviaEtiqueta(bt,'Desbloqueja'),1400);return}
+  S.saldo-=cost();S.desc.add(c);saldo();
+  canviaEtiqueta(bt,'Fet!');sona('xim');vibra([15,40,25]);
+  pintaMapa(c);
+  const n=document.getElementById('nota');n.innerHTML=`<span>${FRASES[Math.floor(Math.random()*FRASES.length)]}</span>`;n.classList.remove('mostra');void n.offsetWidth;n.classList.add('mostra');
+  setTimeout(()=>pintaMapa(),1600)}
+function canviaEtiqueta(bt,t){const e=bt.querySelector('.etq');e.classList.remove('entra');e.classList.add('surt');setTimeout(()=>{e.textContent=t;e.classList.remove('surt');void e.offsetWidth;e.classList.add('entra')},200)}
+
+// Mida del nom perquè hi càpiga sencer (els noms van de «Vic» a «Sant Martí de Centelles»).
+const mida=(n,max,ample)=>Math.max(22,Math.min(max,Math.floor(ample/(n.length*.56))));
+// ── Fitxa d'un poble ────────────────────────────────────────────────────
+const SUBR='<svg class="subr" viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M3 8 C40 3 80 10 120 6 S180 3 197 7" fill="none" stroke="var(--acc)" stroke-width="4" stroke-linecap="round"/></svg>';
+const RATLLA=()=>{const y=()=>(5+Math.random()*4).toFixed(1);return `<path d="M2 ${y()} C 30 ${y()}, 60 ${y()}, 100 ${y()} S 170 ${y()}, 198 ${y()}" vector-effect="non-scaling-stroke"/>`};
+function pintaPoble(){const c=S.poble,p=PER[c],ms=D.missions[c]||[],f=S.fetes[c]||(S.fetes[c]=new Set());
+  const guanyats=ms.filter(m=>f.has(m.id)).reduce((a,m)=>a+m.p,0);
+  document.getElementById('poble').innerHTML=`<div class="cos"><button type="button" class="enrere" id="enrere">← Mapa</button>
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)">${esc(p.k)}</div>
+    <div class="t nom" style="font-size:${mida(p.n,64,328)}px">${esc(p.n)}${SUBR}</div>
+    <div class="xifres"><span>${f.size}/${ms.length} missions</span><span>${guanyats}/${totalPoble(c)} barretines</span></div>
+    <div class="ma pista">toca una missió per fer veure que la fas</div>
+    ${ms.slice(0,12).map(m=>{const feta=f.has(m.id),chk=m.id.endsWith('-checkin');
+      return `<div class="missio ${feta?'feta':''}" data-m="${m.id}" role="button" tabindex="0"><span class="tx">${esc(m.t)}${feta&&!chk?`<svg class="ratlla" viewBox="0 0 200 14" preserveAspectRatio="none">${RATLLA()}</svg>`:''}</span><span class="t pt">${m.p}</span>${feta&&chk?`<span class="estampa">Fet<b>${DATA}</b></span>`:''}</div>`}).join('')}</div>`;
+}
+function fesMissio(row){const c=S.poble,m=(D.missions[c]||[]).find(x=>x.id===row.dataset.m),f=S.fetes[c];
+  if(!S.desc.has(c)){return}
+  if(f.has(m.id)){sona('no');return}
+  f.add(m.id);row.classList.add('feta');
+  if(m.id.endsWith('-checkin')){const e=document.createElement('span');e.className='estampa anima';e.innerHTML=`Fet<b>${DATA}</b>`;row.appendChild(e);setTimeout(()=>{sona('segell');vibra(35)},180)}
+  else{const tx=row.querySelector('.tx');tx.insertAdjacentHTML('beforeend',`<svg class="ratlla anima" viewBox="0 0 200 14" preserveAspectRatio="none">${RATLLA()}</svg>`);sona('gargot');vibra(12)}
+  // Els punts volen fins al comptador.
+  const r=row.querySelector('.pt').getBoundingClientRect(),rt=tel.getBoundingClientRect(),rs=document.getElementById('saldo').getBoundingClientRect(),k=rt.width/360;
+  const v=document.createElement('span');v.className='punts-vola';v.textContent='+'+m.p;tel.appendChild(v);
+  const x0=(r.left-rt.left)/k,y0=(r.top-rt.top)/k,x1=(rs.left-rt.left)/k,y1=(rs.top-rt.top)/k;
+  v.style.left=x0+'px';v.style.top=y0+'px';
+  v.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${(x1-x0)*.5}px,${(y1-y0)*.5-40}px) scale(1.2)`,opacity:1,offset:.5},{transform:`translate(${x1-x0}px,${y1-y0}px) scale(.6)`,opacity:.2}],{duration:750,easing:'cubic-bezier(.4,0,.3,1)',delay:250}).onfinish=()=>{v.remove();sona('moneda')};
+  S.saldo+=m.p;setTimeout(()=>{saldo();const ms=D.missions[c],g=ms.filter(x=>f.has(x.id)).reduce((a,x)=>a+x.p,0);document.querySelector('#poble .xifres').innerHTML=`<span>${f.size}/${ms.length} missions</span><span>${g}/${totalPoble(c)} barretines</span>`},700)}
+
+// ── Perfil ──────────────────────────────────────────────────────────────
+function pintaPerfil(){const missions=Object.values(S.fetes).reduce((a,f)=>a+f.size,0);
+  document.getElementById('perfil').innerHTML=`<div class="cos"><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)">Explorador · nivell 2</div>
+  <div class="t nom">marti</div><div class="ma" style="font-size:22px;color:var(--suau);transform:rotate(-1.5deg)">${S.desc.size} pobles, i els que vindran</div>
+  <div class="graella"><div><span>Pobles</span><b class="t">${S.desc.size}</b></div><div><span>Missions</span><b class="t">${missions}</b></div><div><span>Comarques</span><b class="t">0/${D.comarques}</b></div><div><span>Barretines</span><b class="t">${S.saldo}</b></div></div>
+  <button type="button" class="bt" id="passaport"><span class="etq">El passaport</span><span>→</span></button>
+  <div style="height:12px"></div><button type="button" class="bt sec"><span class="etq">Catàleg de cartells</span><span>→</span></button></div>`}
+
+// ── Navegació: zoom des del poble tocat; entre pestanyes, tall directe ─────
+function mostra(id,origen){const ant=['mapa','poble','perfil'].find(x=>!document.getElementById(x).hidden);
+  if(id==='poble')pintaPoble();if(id==='perfil')pintaPerfil();if(id==='mapa'){document.getElementById('mapa').innerHTML='';pintaMapa()}
+  const el=document.getElementById(id);el.hidden=false;
+  tel.querySelectorAll('.nav button').forEach(b=>{if(b.dataset.anar===id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  const tanca=()=>{if(ant&&ant!==id)document.getElementById(ant).hidden=true};
+  if(origen&&!matchMedia('(prefers-reduced-motion:reduce)').matches){el.style.zIndex=3;
+    const a=el.animate([{clipPath:`circle(0px at ${origen.x}px ${origen.y}px)`},{clipPath:`circle(160% at ${origen.x}px ${origen.y}px)`}],{duration:520,easing:'cubic-bezier(.5,0,.2,1)'});
+    a.onfinish=()=>{el.style.zIndex='';tanca()}}
+  else tanca();
+  S.pant=id}
+function puntDe(e){const rt=tel.getBoundingClientRect(),k=rt.width/360;return {x:(e.clientX-rt.left)/k,y:(e.clientY-rt.top)/k-64}}
+function centreDe(c){const p=PER[c];const svg=document.querySelector('#mapa svg');if(!svg||p.x==null)return {x:180,y:300};const r=svg.getBoundingClientRect(),rt=tel.getBoundingClientRect(),k=rt.width/360;
+  return {x:(r.left-rt.left)/k+p.x*(r.width/k)/300,y:(r.top-rt.top)/k-64+p.y*(r.height/k)/330}}
+
+// ── Esdeveniments ───────────────────────────────────────────────────────
+tel.addEventListener('pointerdown',e=>{const b=e.target.closest('.bt');if(b){b.classList.add('premut');sona('toc');vibra(8)}});
+['pointerup','pointerleave','pointercancel'].forEach(t=>tel.addEventListener(t,()=>tel.querySelectorAll('.bt.premut').forEach(b=>b.classList.remove('premut'))));
+tel.addEventListener('click',e=>{
+  const m=e.target.closest('path.m');if(m){S.sel=m.dataset.c;pintaMapa();return}
+  if(e.target.closest('#desbloqueja')){desbloqueja(e.target.closest('#desbloqueja'));return}
+  if(e.target.closest('#entra')){S.poble=S.sel;mostra('poble',centreDe(S.sel));return}
+  if(e.target.closest('#enrere')){mostra('mapa');return}
+  const r=e.target.closest('.missio');if(r){fesMissio(r);return}
+  const n=e.target.closest('.nav button');if(n){mostra(n.dataset.anar);return}
+});
+tel.addEventListener('keydown',e=>{const r=e.target.closest('.missio');if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();fesMissio(r)}});
+
+// ── Opcions del prototip ────────────────────────────────────────────────
+document.getElementById('colors').innerHTML=COLORS.map(([n,c],i)=>`<button type="button" class="color" data-col="${i}" aria-pressed="false" aria-label="${n}" title="${n}" style="background:${c}"></button>`).join('');
+document.getElementById('lletres').innerHTML=LLETRES.map(([n,f,w,st],i)=>`<button type="button" data-ll="${i}" aria-pressed="false" style="font-family:${f};font-weight:${w};font-style:${st};font-size:16px">${n}</button>`).join('');
+const tria={tema:'clar',col:4,ll:2,estil:'noms'};
+document.getElementById('estils').innerHTML=ESTILS.map(e=>`<button type="button" data-est="${e.id}">${e.n}</button>`).join('');
+function aplica(){const [,c,on]=COLORS[tria.col],[,f,w,st]=LLETRES[tria.ll];tel.dataset.tema=tria.tema;tel.style.setProperty('--acc',c);tel.style.setProperty('--onacc',on);
+  tel.style.setProperty('--tit',f);tel.style.setProperty('--titw',w);tel.style.setProperty('--titst',st);
+  document.querySelectorAll('[data-tema]').forEach(b=>b.tagName==='BUTTON'&&b.setAttribute('aria-pressed',b.dataset.tema===tria.tema));
+  document.querySelectorAll('[data-col]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.col===tria.col));
+  document.querySelectorAll('[data-ll]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ll===tria.ll));
+  document.querySelectorAll('[data-est]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.est===tria.estil));
+  document.querySelectorAll('.estil').forEach(x=>x.classList.toggle('actiu',x.dataset.e===tria.estil));
+  if(S.pant==='mapa')pintaMapa()}
+document.querySelector('.controls').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.tema)tria.tema=b.dataset.tema;else if(b.dataset.col)tria.col=+b.dataset.col;else if(b.dataset.ll)tria.ll=+b.dataset.ll;else if(b.dataset.est)tria.estil=b.dataset.est;
+  else if(b.id==='so'){so=!so;b.setAttribute('aria-pressed',so);b.textContent=so?'Activat':'Apagat';return}
+  else if(b.id==='reinicia'){S=inicial();mostrat=null;saldo(false);mostra('mapa');return}
+  aplica()});
+function escala(){const k=Math.min(1,(document.documentElement.clientWidth-24)/360);const m=document.getElementById('marc'),c=document.getElementById('caixa');m.style.transform=k<1?`scale(${k})`:'';c.style.width=360*k+'px';c.style.height=740*k+'px'}
+addEventListener('resize',escala);
+
+// ── Valoració de cada mapa ────────────────────────────────────────────
+let db=null,vals={},temps={};
+try{const m=JSON.parse(localStorage.getItem('mapes1')||'null');if(m)vals=m}catch(e){}
+function pintaVals(){document.getElementById('valoracions').innerHTML=ESTILS.map((e,i)=>{const v=vals[e.id]||{};return `<div class="estil ${e.id===tria.estil?'actiu':''}" data-e="${e.id}">
+  <h2><span>${i+1}. ${e.n}</span><button type="button" data-mira="${e.id}">Mira'l</button></h2><p>${e.d}</p>
+  <div class="botons" role="group" aria-label="Valoració de ${e.n}">${[['si','M\'agrada'],['millorar','Millorar'],['no','No']].map(([k,t])=>`<button type="button" data-v="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}</div>
+  <textarea aria-label="Nota sobre ${e.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div>`}).join('')}
+function desaVal(id){try{localStorage.setItem('mapes1',JSON.stringify(vals))}catch(e){}clearTimeout(temps[id]);temps[id]=setTimeout(async()=>{if(!db)return;const v=vals[id]||{};
+  try{await db.collection('mapes1').doc(id).set({id,nom:ESTILS.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',color:COLORS[tria.col][0],lletra:LLETRES[tria.ll][0],tema:tria.tema,ts:Date.now()})}catch(e){}},600)}
+const vEl=document.getElementById('valoracions');
+vEl.addEventListener('click',e=>{const m=e.target.closest('[data-mira]');if(m){tria.estil=m.dataset.mira;if(S.pant!=='mapa')mostra('mapa');aplica();document.getElementById('tel').scrollIntoView({behavior:'smooth',block:'center'});return}
+  const b=e.target.closest('[data-v]');if(!b)return;const id=b.closest('.estil').dataset.e,v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.v?null:b.dataset.v;
+  b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===v.valor));desaVal(id)});
+vEl.addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const id=e.target.closest('.estil').dataset.e,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';e.target.closest('.estil').querySelector('[data-v="millorar"]').setAttribute('aria-pressed','true')}desaVal(id)});
+pintaVals();
+saldo(false);pintaMapa();aplica();escala();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;
+  try{const q=await db.collection('mapes1').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pintaVals()}catch(e){}})();
+</script>

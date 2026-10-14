@@ -8,6 +8,7 @@ import cat.descobreix.data.compte.ServeiCompte
 import cat.descobreix.data.ranquing.CriteriRanquing
 import cat.descobreix.data.ranquing.FilaRanquing
 import cat.descobreix.data.ranquing.ServeiRanquing
+import cat.descobreix.data.compte.TipusPerfil
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /** Un compte sense servidor: entrar sempre funciona i el perfil es crea a l'instant. */
@@ -31,8 +32,12 @@ class CompteFals(inicial: EstatCompte = EstatCompte.Llest(PERFIL)) : ServeiCompt
         estat.value = EstatCompte.Llest(PERFIL)
     }
 
-    override suspend fun creaPerfil(nomUsuari: String) {
-        estat.value = EstatCompte.Llest(Perfil(PERFIL.usuariId, nomUsuari))
+    override suspend fun creaPerfil(nomUsuari: String, tipus: TipusPerfil, public: Boolean) {
+        estat.value = EstatCompte.Llest(Perfil(PERFIL.usuariId, nomUsuari, tipus, public))
+    }
+
+    override suspend fun triaVisibilitat(public: Boolean) {
+        estat.value = EstatCompte.Llest(PERFIL.copy(public = public))
     }
 
     override suspend fun canviaFoto(jpeg: ByteArray) = Unit
@@ -58,7 +63,7 @@ class CompteFals(inicial: EstatCompte = EstatCompte.Llest(PERFIL)) : ServeiCompt
 
 /** Un rànquing sense servidor, amb només l'usuari. */
 class RanquingFals : ServeiRanquing {
-    override suspend fun classificacio(criteri: CriteriRanquing, nomesAmics: Boolean) =
+    override suspend fun classificacio(criteri: CriteriRanquing, nomesSeguits: Boolean) =
         listOf(FilaRanquing(1, CompteFals.PERFIL.usuariId, CompteFals.PERFIL.nomUsuari, null, 0, 1, socJo = true))
 
     override suspend fun pujaProgres() = Unit

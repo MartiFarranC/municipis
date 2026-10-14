@@ -6,9 +6,15 @@ import kotlinx.coroutines.flow.StateFlow
 // Comptes d'usuari (docs/requisits.md, secció 9.1). El compte és obligatori: l'app només
 // deixa jugar quan l'estat és [EstatCompte.Llest].
 
+/** Explorador (juga) o Espectador (segueix altra gent). Es tria en crear el compte i és per sempre. */
+enum class TipusPerfil { EXPLORADOR, ESPECTADOR }
+
+/** @param public si el compte és públic (qualsevol el pot seguir directament) o privat (cal acceptar-ho). */
 data class Perfil(
     val usuariId: String,
     val nomUsuari: String,
+    val tipus: TipusPerfil = TipusPerfil.EXPLORADOR,
+    val public: Boolean = false,
     /** Ruta de la foto de perfil al bucket descobreix-avatars, o null si no en té. */
     val foto: String? = null,
 )
@@ -28,6 +34,9 @@ sealed interface EstatCompte {
 
     /** L'usuari ha obert l'enllaç per recuperar la contrasenya i n'ha de triar una de nova. */
     data object CalNovaContrasenya : EstatCompte
+
+    /** El perfil és d'abans dels comptes públics i privats: cal triar-ho (no hi ha cap opció per defecte). */
+    data class CalVisibilitat(val nomUsuari: String) : EstatCompte
 
     data class Llest(val perfil: Perfil) : EstatCompte
 }
@@ -72,7 +81,10 @@ interface ServeiCompte {
 
     suspend fun canviaContrasenya(nova: String)
 
-    suspend fun creaPerfil(nomUsuari: String)
+    suspend fun creaPerfil(nomUsuari: String, tipus: TipusPerfil, public: Boolean)
+
+    /** Canvia si el compte és públic o privat. */
+    suspend fun triaVisibilitat(public: Boolean)
 
     /** Puja la foto de perfil (un JPEG ja retallat i reduït) i substitueix l'anterior. Cal connexió. */
     suspend fun canviaFoto(jpeg: ByteArray)

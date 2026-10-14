@@ -3,10 +3,14 @@ package cat.descobreix.data.repositori
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
+import cat.descobreix.domain.Segell
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.domain.Sac
+import cat.descobreix.joc.progressio.ContingutSac
+import cat.descobreix.joc.progressio.MedallaGuanyada
+import cat.descobreix.joc.progressio.SegellPosat
 import cat.descobreix.joc.regles.Ubicacio
-import cat.descobreix.ui.theme.ColorSecundari
 import kotlinx.coroutines.flow.Flow
 
 // L'app accedeix a les dades només a través d'aquestes interfícies, perquè a la versió 2
@@ -31,6 +35,12 @@ interface ProgresRepositori {
      * @throws IllegalStateException si ja estava completada.
      */
     suspend fun completaMissio(missioId: String, codi: CodiIne, punts: Int, bonus: Int, ubicacio: Ubicacio?, fotoId: String?)
+
+    /**
+     * Suma els punts de les medalles guanyades que encara no s'havien sumat (cada una només una vegada).
+     * Retorna les que són noves.
+     */
+    suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada>
 }
 
 interface MissionsPropiesRepositori {
@@ -50,8 +60,11 @@ interface FotosRepositori {
 
     fun foto(id: String): Flow<Foto?>
 
-    /** Desa una foto feta amb la càmera (JPEG). La primera foto d'un municipi en serà la portada. */
-    suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto
+    /**
+     * Desa una foto feta amb la càmera (JPEG). La primera foto d'un municipi en serà la portada.
+     * @param esCromo si és la foto del cartell retallada amb el requadre (la que va al catàleg).
+     */
+    suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?, esCromo: Boolean = false): Foto
 
     suspend fun canviaVisibilitat(id: String, visibilitat: Visibilitat)
 
@@ -67,10 +80,67 @@ interface PreferenciesRepositori {
 
     suspend fun desaCameraMapa(camera: CameraMapa)
 
-    /** Color secundari que ha triat l'usuari al perfil. */
-    val colorSecundari: Flow<ColorSecundari>
+    /** La tapa del passaport que ha triat l'usuari: una de les tres de sempre o una portada dels sacs (pel seu id). */
+    val tapaPassaport: Flow<String>
 
-    suspend fun desaColorSecundari(color: ColorSecundari)
+    suspend fun desaTapaPassaport(tapa: String)
+
+    /** El color secundari de l'app (l'id d'un color dels sacs), o null per a l'ambre de sempre. */
+    val colorApp: Flow<String?>
+
+    suspend fun desaColorApp(color: String?)
+
+    /** L'animació de càrrega (l'id d'una dels sacs), o null per a la sardana de sempre. */
+    val animacioCarrega: Flow<String?>
+
+    suspend fun desaAnimacioCarrega(animacio: String?)
+
+    /** Si l'app fa sons i vibra quan passen coses (botons, desbloquejos, missions). Per defecte, sí. */
+    val soIVibracio: Flow<Boolean>
+
+    suspend fun desaSoIVibracio(actiu: Boolean)
+
+    /** Si el mapa mostra el minimapa. Per defecte, sí. */
+    val minimapaVisible: Flow<Boolean>
+
+    suspend fun desaMinimapaVisible(visible: Boolean)
+}
+
+/** Les tres tapes del passaport que hi ha sempre. */
+object TapesPassaport {
+    const val GRANAT = "granat"
+    const val BLAU = "blau"
+    const val APP = "app"
+    val classiques = listOf(GRANAT, BLAU, APP)
+}
+
+/** Els sacs guanyats i el que n'ha sortit. */
+interface SacsRepositori {
+    val sacs: Flow<List<Sac>>
+
+    suspend fun sacsAra(): List<Sac>
+
+    /** Desa els sacs guanyats que encara no hi eren. Retorna els orígens dels nous. */
+    suspend fun afegeix(origens: List<String>): List<String>
+
+    /**
+     * Desa el que ha sortit d'un sac; si són punts, els suma.
+     * @throws IllegalStateException si el sac no existeix o ja estava obert.
+     */
+    suspend fun obre(origen: String, contingut: ContingutSac)
+}
+
+/** Els segells del passaport, al mòbil. */
+interface SegellsRepositori {
+    val segells: Flow<List<Segell>>
+
+    suspend fun segellsAra(): List<Segell>
+
+    /**
+     * Desa un segell nou.
+     * @throws IllegalStateException si el municipi ja té segell.
+     */
+    suspend fun posa(segell: SegellPosat)
 }
 
 data class CameraMapa(val x: Float, val y: Float, val escala: Float)

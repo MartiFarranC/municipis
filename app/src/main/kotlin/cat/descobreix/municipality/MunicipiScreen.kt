@@ -1,5 +1,8 @@
 package cat.descobreix.municipality
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,7 +24,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -42,10 +44,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathMeasure
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -53,9 +64,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
+import cat.descobreix.data.repositori.Avantatge
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.joc.model.CodiIne
@@ -63,8 +76,16 @@ import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.model.Missio
 import cat.descobreix.joc.model.TipusMissio
 import cat.descobreix.joc.model.TipusProva
+import cat.descobreix.joc.progressio.Medalles
+import cat.descobreix.joc.regles.DisponibilitatOficial
+import cat.descobreix.passaport.PassaportViewModel
+import cat.descobreix.ui.AvisDesbloqueig
+import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
+import cat.descobreix.ui.Efectes
+import cat.descobreix.ui.LocalEfectes
+import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoIcona
 import cat.descobreix.ui.components.BotoPrincipal
@@ -72,12 +93,16 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.components.Icones
 import cat.descobreix.ui.components.ImatgeLocal
+import cat.descobreix.ui.esCelebracio
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.textDe
-import cat.descobreix.ui.theme.ChakraPetch
+import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
-import cat.descobreix.ui.theme.Secundari
+import cat.descobreix.ui.theme.LocalReduirAnimacions
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import kotlin.random.Random
 
 @Composable
 fun MunicipiScreen(
@@ -86,15 +111,25 @@ fun MunicipiScreen(
     onFesFoto: (CodiIne, String?) -> Unit,
     onObreFoto: (String) -> Unit,
     onVeureAlMapa: (CodiIne) -> Unit,
+    onSegella: (CodiIne) -> Unit,
+    onLlegeixQr: (CodiIne, String) -> Unit,
     viewModel: MunicipiViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
+    // Quan es tanca la celebració del check-in, s'obre el passaport per posar-hi el segell.
+    val segell = estat.segellPendent
+    LaunchedEffect(segell, estat.avis) {
+        if (segell != null && estat.avis == null) {
+            viewModel.segellObert()
+            onSegella(segell)
+        }
+    }
     if (estat.carregant) {
         Carregant(Modifier.fillMaxSize())
         return
     }
     val avisos = remember { SnackbarHostState() }
-    val textAvis = estat.avis?.let { textDe(it) }
+    val textAvis = estat.avis?.takeUnless { it.esCelebracio || it is Missatge.Desbloquejat }?.let { textDe(it) }
     LaunchedEffect(textAvis) {
         if (textAvis != null) {
             avisos.showSnackbar(textAvis)
@@ -119,6 +154,7 @@ fun MunicipiScreen(
                             demanaUbicacio()
                         }
                         TipusProva.FOTO -> onFesFoto(estat.codi, m.id)
+                        TipusProva.QR -> onLlegeixQr(estat.codi, m.id)
                     }
                 },
                 onFesFoto = { onFesFoto(estat.codi, null) },
@@ -147,12 +183,14 @@ fun MunicipiScreen(
         )
     }
 
+    estat.avis?.takeIf { it.esCelebracio }?.let { Celebracio(it, viewModel::tancaAvis) }
+    (estat.avis as? Missatge.Desbloquejat)?.let { AvisDesbloqueig(it, viewModel::tancaAvis) }
     estat.candidats?.let { DialegTriaMunicipi(it, viewModel::triaCandidat, viewModel::tancaCandidats) }
     estat.missatge?.let { DialegMissatge(it, viewModel::tancaMissatge) }
 }
 
-private val ratllat = Brush.linearGradient(
-    0f to Colors.Superficie, 0.5f to Colors.Superficie, 0.5f to Color(0xFF11151C), 1f to Color(0xFF11151C),
+private val ratllat: Brush get() = Brush.linearGradient(
+    0f to Colors.Superficie, 0.5f to Colors.Superficie, 0.5f to Colors.Superficie2, 1f to Colors.Superficie2,
     start = Offset.Zero,
     end = Offset(34f, 34f),
     tileMode = TileMode.Repeated,
@@ -233,8 +271,8 @@ private fun FitxaDescoberta(
                         Text(estat.nom, style = MaterialTheme.typography.displayMedium, modifier = Modifier.semantics { heading() })
                     }
                     Column(horizontalAlignment = Alignment.End, modifier = Modifier.semantics(mergeDescendants = true) {}) {
-                        Text("${estat.puntsGuanyats}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.Ambre))
-                        Text(stringResource(R.string.de_punts, estat.puntsPossibles), style = MaterialTheme.typography.bodySmall)
+                        Text("${estat.puntsGuanyats}", style = MaterialTheme.typography.headlineMedium.copy(color = Colors.AmbreText))
+                        Text(plural(R.plurals.de_punts, estat.puntsPossibles, estat.puntsPossibles), style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 BarraProgres(if (estat.puntsPossibles == 0) 0f else estat.puntsGuanyats.toFloat() / estat.puntsPossibles)
@@ -245,7 +283,41 @@ private fun FitxaDescoberta(
             }
         }
         items(estat.missions, key = { it.missio.id }) { f ->
-            FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) })
+            Column {
+                FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) }, potAnimar = estat.avis == null)
+                // La foto del cartell ja feta es pot repetir (sense punts) per canviar el cromo del catàleg.
+                if (f.completada && f.missio.clau == Medalles.CLAU_CARTELL) {
+                    val teCromo = estat.fotos.any { it.esCromo }
+                    BotoSecundari(
+                        stringResource(if (teCromo) R.string.torna_a_fer_foto_cartell else R.string.fes_foto_cartell_cataleg),
+                        { onProva(f.missio) },
+                        icona = Icones.Camera,
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp),
+                    )
+                }
+            }
+        }
+        if (estat.ajuntament != null || estat.oficials.isNotEmpty() || estat.avantatges.isNotEmpty()) {
+            item { CapAjuntament(estat) }
+            items(estat.oficials, key = { it.missio.id }) { o ->
+                val disponible = o.disponibilitat == DisponibilitatOficial.Disponible
+                FilaDeMissio(
+                    FilaMissio(o.missio, o.completada),
+                    provant = estat.provant == o.missio.id,
+                    onProva = { onProva(o.missio) },
+                    etiqueta = etiquetaOficial(o),
+                    activa = disponible,
+                    potAnimar = estat.avis == null,
+                )
+            }
+            if (estat.avantatges.isNotEmpty()) {
+                item {
+                    Seccio(stringResource(R.string.ajuntament_avantatges)) {
+                        Text(stringResource(R.string.ajuntament_avantatges_text), style = MaterialTheme.typography.bodySmall)
+                        for (a in estat.avantatges) TargetaAvantatge(a)
+                    }
+                }
+            }
         }
         item {
             Seccio(stringResource(R.string.les_teves_missions)) {
@@ -299,53 +371,127 @@ private fun Seccio(titol: String, contingut: @Composable () -> Unit) {
 }
 
 @Composable
-private fun FilaDeMissio(f: FilaMissio, provant: Boolean, onProva: () -> Unit) {
+private fun FilaDeMissio(
+    f: FilaMissio,
+    provant: Boolean,
+    onProva: () -> Unit,
+    etiqueta: String? = null,
+    activa: Boolean = true,
+    potAnimar: Boolean = true,
+) {
     val m = f.missio
     val titol = titolMissio(m)
-    val prova = stringResource(if (m.prova == TipusProva.GPS) R.string.prova_gps else R.string.prova_foto)
+    val prova = stringResource(
+        when (m.prova) {
+            TipusProva.GPS -> R.string.prova_gps
+            TipusProva.FOTO -> R.string.prova_foto
+            TipusProva.QR -> R.string.prova_qr
+        },
+    )
     val estatText = stringResource(if (f.completada) R.string.completada else R.string.pendent)
+    val esCheckin = m.tipus == TipusMissio.GENERICA && m.clau == PassaportViewModel.CLAU_CHECKIN
+    // Les missions que es fan ara (no les que ja venien fetes) es ratllen o es segellen amb animació, quan no hi ha
+    // cap celebració al damunt.
+    val eraFeta = remember(m.id) { f.completada }
+    val reduir = LocalReduirAnimacions.current
+    val traç = remember(m.id) { Animatable(if (f.completada) 1f else 0f) }
+    val efectes = LocalEfectes.current
+    LaunchedEffect(f.completada, potAnimar) {
+        if (f.completada && !eraFeta && potAnimar && traç.value < 1f) {
+            efectes?.fes(if (esCheckin) Efectes.So.SEGELL else Efectes.So.GARGOT)
+            traç.animateTo(1f, tween(if (reduir) 0 else if (esCheckin) 420 else 450))
+        }
+    }
+    val linia = Colors.Linia
     Row(
         Modifier
             .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .heightIn(min = 64.dp)
-            .clip(RoundedCornerShape(14.dp))
-            .background(if (f.completada) Colors.FonsCompletada else Colors.Superficie)
-            .border(1.dp, if (f.completada) Colors.Disponible2 else Colors.Linia, RoundedCornerShape(14.dp))
-            .clickable(enabled = !f.completada && !provant, role = Role.Button, onClick = onProva)
+            .drawBehind { drawLine(linia, Offset(0f, size.height), Offset(size.width, size.height), 1.5.dp.toPx()) }
+            .clickable(enabled = !f.completada && !provant && activa, role = Role.Button, onClick = onProva)
             .semantics(mergeDescendants = true) { stateDescription = estatText }
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Box(
-            Modifier
-                .size(26.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(if (f.completada) Colors.Ambre else Color.Transparent)
-                .border(2.dp, if (f.completada) Colors.Ambre else Color(0xFF4B5566), RoundedCornerShape(8.dp)),
-            contentAlignment = Alignment.Center,
-        ) {
-            if (f.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(16.dp))
-        }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = if (f.completada) Colors.TextSecundari else Colors.Text))
+            Box {
+                Text(titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold, color = if (f.completada) Colors.TextSecundari else Colors.Text))
+                if (f.completada && !esCheckin) Gargot(m.id, traç.value, Modifier.matchParentSize())
+            }
             Text(
                 if (f.completada) stringResource(R.string.prova_feta, prova) else stringResource(R.string.prova_toca, prova),
                 style = MaterialTheme.typography.bodySmall,
             )
+            if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
         }
+        if (f.completada && esCheckin) Segell(traç.value)
         if (provant) {
-            CircularProgressIndicator(Modifier.size(20.dp), color = Colors.Ambre, strokeWidth = 2.dp)
-        } else {
+            CircularProgressIndicator(Modifier.size(20.dp), color = Colors.AmbreText, strokeWidth = 2.dp)
+        } else if (!f.completada) {
             Icon(
-                if (m.prova == TipusProva.GPS) Icones.Gps else Icones.Camera,
+                when (m.prova) {
+                    TipusProva.GPS -> Icones.Gps
+                    TipusProva.FOTO -> Icones.Camera
+                    TipusProva.QR -> Icones.Qr
+                },
                 contentDescription = null,
                 tint = Colors.TextSecundari,
                 modifier = Modifier.size(18.dp),
             )
         }
-        Text("+${m.punts}", fontFamily = ChakraPetch, fontWeight = FontWeight.Bold, color = Colors.Ambre)
+        Text("${m.punts}", fontFamily = Archivo, fontSize = 20.sp, color = if (f.completada) Colors.TextSecundari else Colors.Text)
+    }
+}
+
+/**
+ * El gargot fet a mà que ratlla una missió feta, amb el color fort. Cada missió té el seu (surt de l'id), i es dibuixa
+ * d'esquerra a dreta segons «progres».
+ */
+@Composable
+private fun Gargot(llavor: String, progres: Float, modifier: Modifier = Modifier) {
+    val color = Colors.Ambre
+    val vora = Colors.Text
+    Canvas(modifier) {
+        val r = Random(llavor.hashCode())
+        val y = size.height / 2
+        val trams = 5
+        val cami = Path().apply {
+            moveTo(-4.dp.toPx(), y + (r.nextFloat() - .5f) * 4.dp.toPx())
+            for (k in 1..trams) {
+                val x = size.width * k / trams + if (k == trams) 4.dp.toPx() else 0f
+                val ym = y + (r.nextFloat() - .5f) * 5.dp.toPx()
+                val xc = size.width * (k - .5f) / trams
+                quadraticTo(xc, y + (r.nextFloat() - .5f) * 6.dp.toPx(), x, ym)
+            }
+        }
+        val mesura = PathMeasure().apply { setPath(cami, false) }
+        val tros = Path()
+        mesura.getSegment(0f, mesura.length * progres, tros, true)
+        // Una mica de tinta a sota perquè el groc es vegi sobre blanc.
+        drawPath(tros, vora, style = Stroke(5.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round))
+        drawPath(tros, color, style = Stroke(3.2.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round))
+    }
+}
+
+/** El segell del check-in: cau de dalt, gros i girat, i es queda una mica tort. */
+@Composable
+private fun Segell(progres: Float) {
+    val t = progres.coerceIn(0f, 1f)
+    Box(
+        Modifier
+            .graphicsLayer {
+                val escala = 1f + (1f - t) * 1.2f
+                scaleX = escala
+                scaleY = escala
+                rotationZ = -8f - (1f - t) * 16f
+                alpha = t
+            }
+            .border(2.5.dp, Colors.AmbreText)
+            .padding(horizontal = 8.dp, vertical = 3.dp),
+    ) {
+        Text(stringResource(R.string.segell_fet).uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText, letterSpacing = 1.sp))
     }
 }
 
@@ -368,7 +514,7 @@ private fun FilaPropia(p: MissioPropia, onCanvia: (String, Boolean) -> Unit, onE
         Modifier
             .fillMaxWidth()
             .heightIn(min = 56.dp)
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
             .padding(start = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -385,9 +531,9 @@ private fun FilaPropia(p: MissioPropia, onCanvia: (String, Boolean) -> Unit, onE
             Box(
                 Modifier
                     .size(22.dp)
-                    .clip(RoundedCornerShape(6.dp))
-                    .background(if (p.completada) Colors.Secundari else Color.Transparent)
-                    .border(2.dp, Colors.Secundari, RoundedCornerShape(6.dp)),
+                    .clip(RectangleShape)
+                    .background(if (p.completada) Colors.Blau else Color.Transparent)
+                    .border(2.dp, Colors.Blau, RectangleShape),
                 contentAlignment = Alignment.Center,
             ) {
                 if (p.completada) Icon(Icones.Fet, contentDescription = null, tint = Colors.Fons, modifier = Modifier.size(14.dp))
@@ -414,7 +560,7 @@ private fun Miniatura(f: Foto, nom: String, onClick: () -> Unit) {
         stringResource(R.string.foto_de, nom),
         Modifier
             .size(96.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RectangleShape)
             .clickable(role = Role.Image, onClick = onClick),
         midaMaxima = 320,
     )
@@ -437,10 +583,11 @@ private fun XipVei(v: FilaVei, onClick: () -> Unit) {
     Row(
         Modifier
             .heightIn(min = 48.dp)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RectangleShape)
             .background(fons)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(12.dp))
-            .clickable(role = Role.Button, onClick = onClick)
+            .border(1.dp, Colors.Linia, RectangleShape)
+            // Els veïns a la boira no es poden obrir.
+            .clickable(enabled = v.estat != EstatMunicipi.BOIRA, role = Role.Button, onClick = onClick)
             .semantics { stateDescription = estat }
             .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -502,25 +649,25 @@ private fun FitxaBloquejada(
                 Box(
                     Modifier
                         .size(200.dp, 150.dp)
-                        .clip(RoundedCornerShape(40.dp))
+                        .clip(RectangleShape)
                         .background(if (estat.estat == EstatMunicipi.DISPONIBLE) Colors.Disponible1 else Colors.Superficie),
                 )
                 Box(
                     Modifier
                         .size(64.dp)
-                        .clip(RoundedCornerShape(20.dp))
+                        .clip(RectangleShape)
                         .background(Colors.Fons)
-                        .border(2.dp, Colors.Ambre, RoundedCornerShape(20.dp)),
+                        .border(2.dp, Colors.AmbreText, RectangleShape),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(Icones.Cadenat, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(30.dp))
+                    Icon(Icones.Cadenat, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(30.dp))
                 }
             }
         }
         item {
             Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
                 val etiqueta = estat.veiDescobert?.let { stringResource(R.string.vei_de_comarca, it, estat.comarca) } ?: estat.comarca
-                Text(etiqueta.uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Secundari))
+                Text(etiqueta.uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.Blau))
                 Text(estat.nom, style = MaterialTheme.typography.headlineLarge, modifier = Modifier.semantics { heading() })
                 Text(
                     if (estat.estat == EstatMunicipi.DISPONIBLE) {
@@ -535,28 +682,28 @@ private fun FitxaBloquejada(
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Dada(stringResource(R.string.missions_ocultes_titol), "${estat.missions.size}", Modifier.weight(1f))
-                Dada(stringResource(R.string.punts_en_joc), stringResource(R.string.fins_a, estat.puntsPossibles), Modifier.weight(1f), Colors.Ambre)
+                Dada(stringResource(R.string.punts_en_joc), stringResource(R.string.fins_a, estat.puntsPossibles), Modifier.weight(1f), Colors.AmbreText)
             }
         }
         if (estat.estat == EstatMunicipi.DISPONIBLE) {
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text(stringResource(R.string.tens_punts, estat.saldo), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
+                        Text(plural(R.plurals.tens_punts, estat.saldo, estat.saldo), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
                         if (estat.potDesbloquejar) {
-                            Text(stringResource(R.string.despres_punts, estat.saldo - estat.cost), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
+                            Text(plural(R.plurals.despres_punts, estat.saldo - estat.cost, estat.saldo - estat.cost), style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari))
                         }
                     }
                     BotoPrincipal(
-                        stringResource(R.string.desbloqueja_cost, estat.cost),
+                        plural(R.plurals.desbloqueja_cost, estat.cost, estat.cost),
                         onDesbloqueja,
                         enabled = estat.potDesbloquejar,
                         carregant = estat.desbloquejant,
                     )
                     if (!estat.potDesbloquejar) {
                         Text(
-                            stringResource(R.string.et_falten, estat.cost - estat.saldo),
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre),
+                            plural(R.plurals.et_falten, estat.cost - estat.saldo, estat.cost - estat.saldo),
+                            style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText),
                         )
                     }
                 }
@@ -578,9 +725,9 @@ private fun FitxaBloquejada(
 private fun Dada(etiqueta: String, valor: String, modifier: Modifier = Modifier, color: Color = Colors.Text) {
     Column(
         modifier
-            .clip(RoundedCornerShape(14.dp))
+            .clip(RectangleShape)
             .background(Colors.Superficie)
-            .border(1.dp, Colors.Linia, RoundedCornerShape(14.dp))
+            .border(1.dp, Colors.Linia, RectangleShape)
             .padding(14.dp)
             .semantics(mergeDescendants = true) {},
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -590,3 +737,73 @@ private fun Dada(etiqueta: String, valor: String, modifier: Modifier = Modifier,
     }
 }
 
+
+// Ajuntaments (requisits.md, secció 9.6) ------------------------------------------------------------------
+
+private val formatDia = DateTimeFormatter.ofPattern("d MMMM", Locale.forLanguageTag("ca"))
+
+/** «De l'ajuntament», i si és una festa, quins dies es pot fer. */
+@Composable
+private fun etiquetaOficial(o: FilaOficial): String {
+    val de = stringResource(R.string.de_l_ajuntament)
+    return when (val d = o.disponibilitat) {
+        is DisponibilitatOficial.Abans -> stringResource(R.string.festa_dies, de, d.inici.format(formatDia), d.fi.format(formatDia))
+        is DisponibilitatOficial.Passada -> stringResource(R.string.festa_passada, de)
+        DisponibilitatOficial.Disponible -> {
+            val fi = o.origen.dataFi
+            if (o.origen.esFesta && fi != null) stringResource(R.string.festa_fins, de, fi.format(formatDia)) else de
+        }
+    }
+}
+
+/** El distintiu de col·laborador i el que l'ajuntament explica del municipi. */
+@Composable
+private fun CapAjuntament(estat: MunicipiEstat) {
+    val aj = estat.ajuntament
+    val obre = LocalUriHandler.current
+    Seccio(stringResource(R.string.de_l_ajuntament)) {
+        if (aj != null) Distintiu()
+        aj?.presentacio?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+        aj?.oficinaTurisme?.let {
+            Text(stringResource(R.string.ajuntament_oficina, it), style = MaterialTheme.typography.bodySmall)
+        }
+        aj?.web?.let { web ->
+            BotoSecundari(stringResource(R.string.ajuntament_web), { obre.openUri(web) }, icona = Icones.Exportar)
+        }
+    }
+}
+
+/** «Municipi col·laborador»: a la fitxa i a la targeta del mapa. */
+@Composable
+fun Distintiu(modifier: Modifier = Modifier) {
+    Row(
+        modifier
+            .clip(RectangleShape)
+            .border(1.dp, Colors.AmbreText, RectangleShape)
+            .padding(horizontal = 10.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Icon(Icones.Estrella, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(14.dp))
+        Text(stringResource(R.string.municipi_collaborador), style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
+    }
+}
+
+@Composable
+private fun TargetaAvantatge(a: Avantatge) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RectangleShape)
+            .background(Colors.Superficie)
+            .border(1.dp, Colors.Linia, RectangleShape)
+            .semantics(mergeDescendants = true) {}
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(a.titol, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold))
+        a.descripcio?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+        a.condicions?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+        a.validFins?.let { Text(stringResource(R.string.avantatge_fins, it.format(formatDia)), style = MaterialTheme.typography.bodySmall) }
+    }
+}

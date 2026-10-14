@@ -3,23 +3,40 @@ package cat.descobreix
 import cat.descobreix.data.assets.Dades
 import cat.descobreix.data.assets.FontDadesJoc
 import cat.descobreix.data.assets.construeixDades
+import cat.descobreix.data.repositori.Ajuntament
+import cat.descobreix.data.repositori.AjuntamentsRepositori
+import cat.descobreix.data.repositori.Avantatge
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
+import cat.descobreix.data.repositori.CameraMapa
+import cat.descobreix.data.repositori.PreferenciesRepositori
 import cat.descobreix.data.repositori.ProgresRepositori
+import cat.descobreix.data.repositori.SegellsRepositori
+import cat.descobreix.data.repositori.SacsRepositori
+import cat.descobreix.data.repositori.TapesPassaport
 import cat.descobreix.data.ubicacio.ServeiUbicacio
+import cat.descobreix.domain.ClauObjecte
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.MissioCompletada
 import cat.descobreix.domain.MissioPropia
 import cat.descobreix.domain.Progres
+import cat.descobreix.domain.Sac
+import cat.descobreix.domain.Segell
 import cat.descobreix.joc.dades.FormatLimits
 import cat.descobreix.joc.dades.FormatMapa
 import cat.descobreix.joc.dades.GeometriaMapa
 import cat.descobreix.joc.geo.Localitzador
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.Visibilitat
+import cat.descobreix.joc.progressio.ContingutSac
+import cat.descobreix.joc.progressio.MedallaGuanyada
+import cat.descobreix.joc.progressio.SegellPosat
+import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import java.io.File
 import java.io.RandomAccessFile
@@ -87,6 +104,18 @@ class ProgresEnMemoria : ProgresRepositori {
             puntsGuanyats = p.puntsGuanyats + punts + bonus,
         )
     }
+
+    private val medalles = mutableSetOf<String>()
+
+    fun sumaPunts(punts: Int) {
+        estat.value = estat.value.copy(puntsGuanyats = estat.value.puntsGuanyats + punts)
+    }
+
+    override suspend fun atorgaMedalles(guanyades: List<MedallaGuanyada>): List<MedallaGuanyada> {
+        val noves = guanyades.filter { medalles.add(it.id) }
+        estat.value = estat.value.copy(puntsGuanyats = estat.value.puntsGuanyats + noves.sumOf { it.punts })
+        return noves
+    }
 }
 
 class MissionsPropiesEnMemoria : MissionsPropiesRepositori {
@@ -115,8 +144,8 @@ class FotosEnMemoria : FotosRepositori {
 
     override fun foto(id: String): Flow<Foto?> = llista.map { l -> l.firstOrNull { it.id == id } }
 
-    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?): Foto {
-        val f = Foto("f${llista.value.size}", codi, "", "", ubicacio?.lat, ubicacio?.lon, Visibilitat.PRIVADA, llista.value.none { it.codiIne == codi }, missioId, 0)
+    override suspend fun desa(codi: CodiIne, jpeg: ByteArray, rotacioGraus: Int, ubicacio: Ubicacio?, missioId: String?, esCromo: Boolean): Foto {
+        val f = Foto("f${llista.value.size}", codi, "", "", ubicacio?.lat, ubicacio?.lon, Visibilitat.PRIVADA, llista.value.none { it.codiIne == codi }, missioId, 0, esCromo)
         llista.value = llista.value + f
         return f
     }
@@ -139,4 +168,90 @@ class UbicacioFixa(var ubicacio: Ubicacio?) : ServeiUbicacio {
     override fun tePermis(): Boolean = true
 
     override suspend fun ubicacioActual(): Ubicacio? = ubicacio
+
+    override fun seguiment(): Flow<Ubicacio> = listOfNotNull(ubicacio).asFlow()
+}
+
+class SegellsEnMemoria : SegellsRepositori {
+    private val llista = MutableStateFlow<List<Segell>>(emptyList())
+    override val segells: Flow<List<Segell>> = llista
+
+    override suspend fun segellsAra(): List<Segell> = llista.value
+
+    override suspend fun posa(segell: SegellPosat) {
+        check(llista.value.none { it.posat.codi == segell.codi })
+        llista.value = llista.value + Segell(segell, 0)
+    }
+}
+
+class PreferenciesEnMemoria : PreferenciesRepositori {
+    private val camera = MutableStateFlow<CameraMapa?>(null)
+    private val tapa = MutableStateFlow(TapesPassaport.GRANAT)
+    private val color = MutableStateFlow<String?>(null)
+    private val animacio = MutableStateFlow<String?>(null)
+    override val cameraMapa: Flow<CameraMapa?> = camera
+    override suspend fun desaCameraMapa(camera: CameraMapa) {
+        this.camera.value = camera
+    }
+
+    override val tapaPassaport: Flow<String> = tapa
+    override suspend fun desaTapaPassaport(tapa: String) {
+        this.tapa.value = tapa
+    }
+
+    override val colorApp: Flow<String?> = color
+    override suspend fun desaColorApp(color: String?) {
+        this.color.value = color
+    }
+
+    override val animacioCarrega: Flow<String?> = animacio
+    override suspend fun desaAnimacioCarrega(animacio: String?) {
+        this.animacio.value = animacio
+    }
+
+    private val so = MutableStateFlow(true)
+    override val soIVibracio: Flow<Boolean> = so
+    override suspend fun desaSoIVibracio(actiu: Boolean) {
+        so.value = actiu
+    }
+
+    private val minimapa = MutableStateFlow(true)
+    override val minimapaVisible: Flow<Boolean> = minimapa
+    override suspend fun desaMinimapaVisible(visible: Boolean) {
+        minimapa.value = visible
+    }
+}
+
+class SacsEnMemoria(private val progres: ProgresEnMemoria) : SacsRepositori {
+    private val llista = MutableStateFlow<List<Sac>>(emptyList())
+    override val sacs: Flow<List<Sac>> = llista
+
+    override suspend fun sacsAra(): List<Sac> = llista.value
+
+    override suspend fun afegeix(origens: List<String>): List<String> {
+        val nous = origens.distinct().filter { o -> llista.value.none { it.origen == o } }
+        llista.value = llista.value + nous.map { Sac(it, 0, false, null, null) }
+        return nous
+    }
+
+    override suspend fun obre(origen: String, contingut: ContingutSac) {
+        val sac = checkNotNull(llista.value.firstOrNull { it.origen == origen })
+        check(!sac.obert)
+        val obert = when (contingut) {
+            is ContingutSac.Nou -> sac.copy(obert = true, objecte = ClauObjecte(contingut.objecte.tipus, contingut.objecte.id))
+            is ContingutSac.Punts -> sac.copy(obert = true, punts = contingut.punts).also { progres.sumaPunts(contingut.punts) }
+        }
+        llista.value = llista.value.map { if (it.origen == origen) obert else it }
+    }
+}
+
+
+class AjuntamentsEnMemoria(var llista: List<MissioAjuntament> = emptyList()) : AjuntamentsRepositori {
+    override val ajuntaments: Flow<Map<CodiIne, Ajuntament>> = flowOf(emptyMap())
+    override val missions: Flow<List<MissioAjuntament>> get() = flowOf(llista)
+    override val avantatges: Flow<List<Avantatge>> = flowOf(emptyList())
+
+    override suspend fun missionsAra(): List<MissioAjuntament> = llista
+
+    override fun segell(codi: CodiIne): File? = null
 }

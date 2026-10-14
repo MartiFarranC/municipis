@@ -48,6 +48,8 @@ La relació de veïnatge surt de `dades/municipis_veins.json`, i s'ha de regener
 
 ### 3.3 Economia de punts
 
+**La moneda es diu «barretines».** A l'app, els punts es mostren com a barretines, amb la icona de la barretina dels emojis (`IconaBarretina`). Als textos sempre amb plural correcte: «1 barretina», «2 barretines». Al codi, a la configuració i al servidor es continuen dient «punts»; en aquest document també.
+
 **Regla obligatòria: el joc no pot quedar mai encallat.** Ha de ser impossible arribar a un estat en què l'usuari no pugui guanyar prou punts per desbloquejar cap altre municipi. Això ha de quedar cobert per tests.
 
 **Valors inicials.** Han de viure en un sol lloc de configuració, perquè s'hauran d'ajustar:
@@ -95,7 +97,9 @@ Totes dues proves només funcionen si el municipi ja està **desbloquejat**.
 ### 3.7 Progressió
 
 - Hi ha nivells calculats a partir dels punts totals guanyats. Els punts gastats en desbloquejar també compten.
-- **Assoliments.** Exemples: primer municipi, primera comarca completa, 10 / 50 / 100 municipis, totes les capitals de comarca.
+- **Medalles.** Substitueixen els assoliments. Una per comarca amb tres nivells (bronze: tots els municipis descoberts; plata: a més, totes les missions automàtiques; or: a més, la foto del cartell de cada municipi), fites de 10 / 50 / 100 / 250 / 500 / 947 municipis, totes les capitals de comarca i fites de 1 / 25 / 100 / 500 / 947 cartells. Cada medalla (i cada nivell de comarca) dona uns quants punts una sola vegada. Els valors són a `configuracio_joc.json`. Detall a `docs/decisions-pendents.md`.
+- **Catàleg de cartells.** Al perfil, un àlbum amb els 947 municipis (per comarques, amb el recompte de cada una, o per ordre alfabètic). Cada casella té la foto del cartell d'entrada quan es fa; els municipis descoberts sense foto surten amb el nom i el marc buit, i els altres, tapats. La foto del cartell es fa amb un requadre que l'usuari ajusta sobre la càmera; només se'n desa el retall, es comprova el GPS i que s'hi llegeixi el nom del municipi (Tesseract, al mòbil i sense connexió). Es pot repetir sense punts. Les fotos del cartell anteriors, sense requadre, no valen per al catàleg.
+- **Sacs.** Es guanyen la primera vegada que es desbloqueja un municipi (a més del d'inici), que es fa una missió i que es fa una foto, i un per cada nivell de medalla de comarca (129). En obrir-los surt a l'atzar una cosa que encara no es té: un emoji, una tapa del passaport, una animació de càrrega o un color secundari de l'app. Rareses comuna, rara i llegendària (70 / 25 / 5 %). Mai no surten repetides; quan ja es té tot, el sac dona punts. El contingut i les probabilitats són a `configuracio_joc.json` (bloc `sacs`, generat per `disseny/sacs/gen-objectes.py`). Els dibuixos dels emojis i de les tapes surten de `disseny/sacs/gen-recursos.py` i `captura-recursos.mjs`.
 - **Comarques.** Les dades de comarques s'han de treure de l'Idescat, amb les 43 comarques actuals (el Lluçanès inclòs). No s'ha de fer servir el camp de comarca de la font de l'IGN, perquè no està al dia.
 
 ## 4. Pantalles
@@ -113,10 +117,11 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - la llista de missions amb el seu tipus de prova;
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
-4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
-5. **Perfil i àlbum.** Té dues pestanyes: **Perfil** i **Rànquing** (pantalla 7). La de perfil té la foto de perfil, les estadístiques, les fotos per municipi, els assoliments, el progrés per comarques i el color secundari de l'app. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
+4. **Fitxa d'un municipi disponible.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar.
+   - Amb els municipis **a la boira** no s'hi pot interactuar: no es poden tocar al mapa, no surten al cercador del mapa i no s'obren des de la llista de veïns. Si l'usuari hi és físicament, «On sóc?» només li explica què li falta.
+5. **Perfil i àlbum.** Té dues pestanyes: **Perfil** i **Rànquing** (pantalla 7). La de perfil té la foto de perfil, les estadístiques, les fotos per municipi, la vitrina de medalles i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
 6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
-7. **Rànquing.** Pestanya del perfil. Classificació per punts o per municipis descoberts, general o entre amics, amb la posició de l'usuari sempre visible.
+7. **Rànquing.** Pestanya del perfil. Classificació per punts o per municipis descoberts, general o entre la gent que segueixes, amb la posició de l'usuari sempre visible.
 8. **Amics.** Buscar per nom d'usuari, enviar, acceptar i rebutjar sol·licituds, eliminar amics, i veure el mapa i les fotos visibles d'un amic.
 
 ## 5. Estètica
@@ -124,7 +129,6 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
 Es segueix el que diu `docs/disseny.md`:
 - **Tema:** fosc, "nit i fanals".
 - **Colors:** ambre `#F2B544` per al que està descobert i blau `#5AB8E8` per a la selecció.
-- **Color secundari:** l'usuari el pot canviar al perfil (el de la selecció i de les accions secundàries). Es tria d'una paleta tancada (`ColorSecundari`) en què tots els colors tenen un contrast de 4,5:1 sobre els fons i es distingeixen de l'ambre i del color d'error. L'ambre no es pot canviar, perquè marca el territori descobert.
 - **Tipografia:** Chakra Petch per als títols i Atkinson Hyperlegible per al text.
 
 Requisits d'accessibilitat:
@@ -147,6 +151,7 @@ Requisits d'accessibilitat:
 | Mòduls | Al principi un sol mòdul `:app`, organitzat per paquets de funcionalitat (`map`, `municipality`, `missions`, `photos`, `profile`, `onboarding`) i una capa `data` / `domain` |
 | SDK | `minSdk 26`; `targetSdk` i `compileSdk` a l'última versió estable |
 | Tests | Unitaris per a les regles del joc (secció 3), la geometria (punt dins de polígon, distància a frontera) i els ViewModels. Tests de UI de Compose per als fluxos principals. |
+| Distribució | Obtainium, des de les releases de GitHub. La CI publica una release amb l'APK signat cada vegada que tot passa a `main` (vegeu [`obtainium.md`](obtainium.md)) |
 
 ### 6.1 Mapa
 
@@ -216,8 +221,8 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 - El compte és **obligatori**. El primer cop cal connexió per iniciar la sessió. Després la sessió es guarda i l'app funciona sense connexió.
 - Mètodes: Google, correu i contrasenya (amb verificació del correu i recuperació de contrasenya), i enllaç màgic per correu (obre l'app amb un deep link).
 - **De moment l'app no envia cap correu.** Per crear el compte n'hi ha prou amb el correu i la contrasenya, que s'escriu dues vegades. No hi ha verificació del correu (*Confirm email* desactivat al projecte), ni enllaç màgic, ni recuperació de contrasenya. Es tornaran a activar quan el projecte tingui un SMTP propi i `cat.descobreix://login/**` sigui a les URL de redirecció.
-- Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i als amics), data d'alta i, si vol, una **foto de perfil**. No es mostra mai el correu a altres usuaris.
-- **Foto de perfil:** es tria de la galeria o es fa amb la càmera. Es retalla quadrada i es redueix a la mida de les miniatures. Es puja al bucket `descobreix-avatars` i la veu qualsevol usuari amb sessió (al rànquing i als amics).
+- Cada usuari té un **perfil**: nom d'usuari únic (el que es mostra al rànquing i a la gent que el segueix), data d'alta i, si vol, una **foto de perfil**. No es mostra mai el correu a altres usuaris.
+- **Foto de perfil:** es tria de la galeria o es fa amb la càmera. Es retalla quadrada i es redueix a la mida de les miniatures. Es puja al bucket `descobreix-avatars` i la veu qualsevol usuari amb sessió (al rànquing i a la pestanya Gent).
 - **Dades d'abans dels comptes:** si en iniciar sessió hi ha progrés local sense compte, s'assigna a aquest compte.
 
 ### 9.2 Sincronització
@@ -228,26 +233,67 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
   - **Municipis descoberts, missions completades i moviments de punts** només s'afegeixen, mai es modifiquen: es fusionen per UUID. Si dos dispositius completen la mateixa missió, val la primera (`missioId` és únic per usuari).
   - **Missions pròpies i fotos:** guanya la modificació més recent (`modificatEl`).
   - Els esborrats són **lògics** (`esborratEl`) perquè es puguin sincronitzar.
-- Les regles del joc s'han de continuar complint després de fusionar (per exemple, el saldo no pot ser negatiu). Si una fusió dona un estat invàlid, cal un test que ho cobreixi i una regla clara per resoldre-ho.
+- Les regles del joc s'han de continuar complint després de fusionar. Si una fusió dona un estat invàlid, cal un test que ho cobreixi i una regla clara per resoldre-ho.
+- **Com està fet** (`app/.../data/sincronitzacio/`):
+  - Uns triggers de SQLite apunten a la cua (`canvis_pendents`) cada fila que canvia; el `Sincronitzador` primer baixa el que ha canviat al servidor (per `sincronitzat_el`, des de l'últim cursor) i ho ajunta (`Fusio`, amb tests), i després puja la cua. Les fotos es pugen a Storage (`<usuari>/<fitxer>` i `<usuari>/miniatures/<fitxer>`).
+  - Si dos mòbils han fet el mateix sense connexió (el mateix municipi, la mateixa missió, el mateix segell o el mateix sac), val la fila del servidor. D'un sac, es manté el que n'hagi sortit si només s'havia obert en un mòbil.
+  - Limitació coneguda: en aquest cas, els moviments de punts dels dos mòbils es mantenen (es poden comptar dues vegades). Si el saldo queda negatiu, no es desfà res: cal guanyar punts abans de tornar a desbloquejar (test a `ReglesJocTest`).
+  - WorkManager sincronitza cada 6 hores i, amb connexió, uns segons després de cada canvi.
 
 ### 9.3 Rànquing
 
 - Es calcula **al servidor** a partir de les missions completades i dels punts que val cada missió segons la taula oficial de missions del servidor. **No es fia mai dels punts que envia el client.**
 - La taula oficial de missions es carrega al servidor amb un script a partir del mateix JSON que va dins de l'app.
 - Les missions pròpies no compten mai.
-- Dues classificacions: per **punts** i per **municipis descoberts**. Cadascuna, general o entre amics.
+- Dues classificacions: per **punts** i per **municipis descoberts**. Cadascuna, general o només amb la gent que l'usuari segueix (seguiments acceptats). Els comptes d'espectador no hi surten, perquè no juguen.
 - Els municipis només compten si són dels 947 de l'app. Limitació coneguda: el servidor no comprova l'economia de punts del desbloqueig.
-- Mentre no hi hagi la sincronització completa (pas 11), l'app ja puja els municipis descoberts i les missions completades quan hi ha connexió (cada vegada que canvien i en obrir el rànquing), perquè el rànquing estigui al dia.
+- El progrés hi arriba amb la sincronització (secció 9.2). En obrir el rànquing, l'app sincronitza abans de carregar-lo, perquè l'usuari s'hi vegi al dia.
 - Limitació coneguda: el GPS es pot falsejar. Es valida com a mínim que la missió existeix, que el municipi està desbloquejat i que la ubicació enviada compleix el radi (secció 3.4).
 
-### 9.4 Amics i fotos
+### 9.4 Seguir i fotos
 
-- Sol·licitud d'amistat per nom d'usuari: enviar, acceptar, rebutjar i eliminar.
+- Ja no hi ha amics: **es segueix** (docs/decisions-pendents.md). Cada perfil és d'**Explorador** (juga) o d'**Espectador** (només segueix), es tria en crear el compte i no es pot canviar.
+- Cada compte és **públic** (qualsevol el segueix directament) o **privat** (el seguit accepta o rebutja la sol·licitud). Fins que no s'accepta, no es veu res del compte. Els perfils d'abans ho trien en entrar.
 - Visibilitat de les fotos, aplicada amb **RLS** a Postgres i a Storage:
   - `PRIVADA`: només el propietari;
-  - `AMICS`: el propietari i els seus amics;
-  - `PUBLICA`: qualsevol usuari amb sessió iniciada.
-- Un amic pot veure el mapa (municipis descoberts) i els punts de l'altre.
+  - `SEGUIDORS`: el propietari i qui el segueix (acceptat);
+  - `PUBLICA`: qualsevol usuari amb sessió, si el compte és públic; si és privat, només els seguidors.
+- Un seguidor veu el mapa (municipis descoberts) de l'altre.
+- **Pestanya «Gent»** (l'Espectador hi entra directament): el mur amb el que fa la gent que segueixes (municipis desbloquejats i fotos), buscar gent pel nom d'usuari i les sol·licituds per seguir-te. El perfil d'una persona mostra a quanta gent segueix i quants la segueixen, el botó de seguir i, si et deixa, el mapa, les fotos i a qui segueix.
+- Al perfil: el compte públic o privat i la gent que segueixes.
+- **Animar:** al mur, cada municipi desbloquejat i cada foto té el botó «Anima»: un emoji dels que tens (els 6 de tothom i els dels sacs), que s'envia amb la seva frase, o un missatge de 80 caràcters com a molt. Només es pot animar algú que segueixes. Les reaccions només les veuen qui les envia i qui les rep; a la pestanya «Gent» hi ha les que t'han enviat.
+  - Que l'emoji sigui teu només ho comprova l'app (el servidor no sap quins emojis tens).
+- **Bloquejar i denunciar:** des d'una reacció rebuda o des del perfil d'algú. Bloquejar fa que deixeu de seguir-vos i que no et pugui tornar a seguir ni escriure; el bloquejat no ho sap. Les denúncies es guarden a `descobreix.denuncies` (amb el text denunciat) i les revisa el Martí des del servidor.
+
+### 9.6 Col·laboracions amb els ajuntaments
+
+Decidit amb la pàgina `disseny/ajuntaments/tria-ajuntaments.html`. Es prepara ara, encara que no hi hagi cap ajuntament.
+
+**Què hi posa un ajuntament** (tot és opcional i surt marcat «De l'ajuntament»):
+
+- **Missions oficials.** Es fan com les altres: amb GPS (un punt i el radi de la configuració), amb una foto (dins del municipi) o llegint un **codi QR** (vegeu més avall).
+  - Donen les barretines que diu la configuració (`ajuntaments.puntsMissio`), no les que posa l'ajuntament.
+  - Com a molt `ajuntaments.maximMissionsPerMunicipi` missions per municipi: si n'hi ha més, l'app només fa servir les primeres (per `ordre`).
+  - Van a part de les missions automàtiques: no compten per al bonus de completar-les totes, ni per a «municipi complet», ni per als punts màxims del municipi.
+  - Si una missió es retira, qui ja l'havia feta no perd les barretines.
+- **Festes i fires.** Una missió oficial pot tenir unes dates (de la festa major, d'una fira…). Només es pot fer aquells dies (hora de Catalunya, dates incloses) i dona un bonus (`ajuntaments.bonusFesta`). Abans, es veu amb les dates; quan han passat, només es veu si s'havia fet.
+- **Punt de segellat (QR).** Un codi QR penjat a l'ajuntament o a l'oficina de turisme. La missió es fa llegint-lo amb la càmera de l'app des de dins del municipi.
+  - El servidor només en guarda el resum (SHA-256), no el codi. L'app el comprova sense connexió.
+  - El QR és un enllaç a la pàgina de l'app: qui no la té, hi va a parar.
+- **Presentació del municipi:** un text curt (500 caràcters com a molt), el web i l'oficina de turisme, a la fitxa del municipi.
+- **Segell propi al passaport:** un dibuix d'un sol color (PNG amb transparència, 512 × 512) a Storage (`descobreix-ajuntaments/<codi>/segell.png`). L'app el pinta amb la tinta del segell i el posa en lloc de la silueta del municipi (la vora, el nom i la data es mantenen), també als segells que ja hi eren.
+- **Avantatges fora de l'app** (entrada reduïda, regal…): l'app només els mostra a la fitxa, amb les condicions i fins quan valen. Els gestiona l'ajuntament.
+
+**Què rep l'ajuntament:**
+
+- **Xifres anònimes:** quanta gent ha desbloquejat el municipi i quantes missions s'hi han fet cada mes. Només totals, i cap xifra per sota de 10 persones. Les treu el Martí des del servidor (funció `descobreix.xifres_ajuntament`, només amb el rol de servei). No hi ha cap SDK d'analítica.
+- **Distintiu «Municipi col·laborador»** a la fitxa i a la targeta del mapa.
+- **Cartell per promocionar l'app**, amb un QR per instal·lar-la (`scripts/cartell-ajuntament.js`).
+
+**Com es fa:**
+
+- L'ajuntament escriu al Martí, que entra el contingut al servidor. No hi ha cap pas de revisió a part: el que s'entra **surt directament**. La guia és a [`ajuntaments.md`](ajuntaments.md).
+- El contingut va a Supabase (taules `ajuntaments`, `missions_ajuntament` i `avantatges`) i l'app el baixa en sincronitzar. Qualsevol usuari amb sessió el pot llegir, i només el rol de servei el pot escriure. L'app el desa a Room per fer-lo servir sense connexió.
 
 ### 9.5 Seguretat
 
@@ -263,21 +309,21 @@ El projecte de Supabase (`https://mjdbqbcyensvyvhzegrc.supabase.co`, regió `eu-
 4. **Onboarding i regles de joc.** Desbloqueig, economia de punts, i tests que demostrin que el joc no es pot quedar encallat.
 5. **Fitxa i missions.** Proves amb GPS i amb foto, i missions pròpies.
 6. **Fotos i àlbum.** Amb la visibilitat de cada foto.
-7. **Perfil.** Nivells, assoliments i comarques.
+7. **Perfil.** Nivells, medalles i comarques.
 8. **Poliment.** Accessibilitat, rendiment, exportar i esborrar dades, atribucions.
 9. **Servidor.** Projecte Supabase, esquema, RLS i migracions amb tests.
 10. **Comptes.** Pantalla d'inici de sessió amb els tres mètodes, perfil, tancar sessió i esborrar les dades del joc.
 11. **Sincronització.** Esborrats lògics, cua de pendents, pujada i baixada amb WorkManager i fusió amb tests.
 12. **Fotos al núvol.** Pujar-les a Storage amb la visibilitat aplicada.
 13. **Rànquing.** Taula oficial de missions al servidor, càlcul al servidor i pantalla.
-14. **Amics.** Sol·licituds, llista d'amics i veure el mapa i les fotos d'un amic.
+14. **Seguir.** Explorador o Espectador, comptes públics i privats, la pestanya «Gent», el mur i el perfil dels altres.
 
 ## 11. Decisions pendents
 
 - Baixar la base municipal de l'ICGC i decidir-ne el format d'entrada per a l'script.
 - Ajustar els valors de l'economia (secció 3.3) després de provar-la.
 - Quines categories de Wikidata i d'OSM es converteixen en missions, i quants punts val cada categoria.
-- Nom definitiu de l'app i icona.
+- Nom i icona. L'app es diu **«Bocins de Catalunya»** (octubre de 2026). Dins de l'app, la marca és una «B» en un quadrat groc amb el nom al costat. Pendent: una icona nova amb l'estètica nova (ara encara és el fanal 06) i comprovar que no faci servir el nom ningú més. L'identificador del paquet (`cat.descobreix`) no canvia.
 - Normes del nom d'usuari (llargada, caràcters permesos, paraules prohibides).
 - URL de la política de privacitat i de la pàgina per esborrar les dades.
 - Si esborrar només les dades de l'app (i no el compte compartit) compleix la política d'esborrat de comptes de Google Play. Si no, caldrà un projecte de Supabase dedicat.

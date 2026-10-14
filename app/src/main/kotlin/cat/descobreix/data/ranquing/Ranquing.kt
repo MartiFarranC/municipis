@@ -24,9 +24,9 @@ data class FilaRanquing(
 interface ServeiRanquing {
     /**
      * Les primeres posicions de la classificació i, si no hi és, també la de l'usuari.
-     * Amb [nomesAmics], només l'usuari i els seus amics.
+     * Amb [nomesSeguits], només l'usuari i la gent que segueix.
      */
-    suspend fun classificacio(criteri: CriteriRanquing, nomesAmics: Boolean): List<FilaRanquing>
+    suspend fun classificacio(criteri: CriteriRanquing, nomesSeguits: Boolean): List<FilaRanquing>
 
     /** Puja el progrés que encara no és al servidor, perquè el rànquing el tingui en compte. */
     suspend fun pujaProgres()

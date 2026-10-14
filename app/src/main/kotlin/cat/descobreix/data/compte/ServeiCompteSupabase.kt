@@ -91,11 +91,21 @@ class ServeiCompteSupabase @Inject constructor(
         reintenta()
     }
 
-    override suspend fun creaPerfil(nomUsuari: String) {
+    override suspend fun creaPerfil(nomUsuari: String, tipus: TipusPerfil, public: Boolean) {
         val nom = NomUsuari.normalitza(nomUsuari)
         if (!NomUsuari.esValid(nom)) throw ExcepcioCompte(ErrorCompte.NOM_USUARI_INVALID)
         val id = supabase.auth.currentUserOrNull()?.id ?: throw ExcepcioCompte(ErrorCompte.DESCONEGUT)
-        ambErrors { supabase.postgrest.from(PERFILS).insert(PerfilRemot(id, nom)) }
+        ambErrors { supabase.postgrest.from(PERFILS).insert(PerfilRemot(id, nom, tipus.name, public)) }
+        reintenta()
+    }
+
+    override suspend fun triaVisibilitat(public: Boolean) {
+        val id = supabase.auth.currentUserOrNull()?.id ?: throw ExcepcioCompte(ErrorCompte.DESCONEGUT)
+        ambErrors {
+            supabase.postgrest.from(PERFILS).update({ set("public", public) }) { filter { eq("id", id) } }
+        }
+        // El perfil desat es torna a llegir del servidor.
+        dataStore.edit { it.remove(CLAU_USUARI) }
         reintenta()
     }
 
@@ -139,6 +149,8 @@ class ServeiCompteSupabase @Inject constructor(
         dataStore.edit {
             it[CLAU_USUARI] = perfil.usuariId
             it[CLAU_NOM] = perfil.nomUsuari
+            it[CLAU_TIPUS] = perfil.tipus.name
+            it[CLAU_PUBLIC] = perfil.public.toString()
             if (perfil.foto != null) it[CLAU_FOTO] = perfil.foto else it.remove(CLAU_FOTO)
         }
         if (_estat.value is EstatCompte.Llest) _estat.value = EstatCompte.Llest(perfil)
@@ -209,10 +221,14 @@ class ServeiCompteSupabase @Inject constructor(
         }
         adoptaDades(id)
         if (remot == null) return EstatCompte.CalPerfil
-        val perfil = Perfil(id, remot.nomUsuari, remot.foto)
+        val public = remot.public ?: return EstatCompte.CalVisibilitat(remot.nomUsuari)
+        val tipus = TipusPerfil.entries.firstOrNull { it.name == remot.tipus } ?: TipusPerfil.EXPLORADOR
+        val perfil = Perfil(id, remot.nomUsuari, tipus, public, remot.foto)
         dataStore.edit {
             it[CLAU_USUARI] = perfil.usuariId
             it[CLAU_NOM] = perfil.nomUsuari
+            it[CLAU_TIPUS] = perfil.tipus.name
+            it[CLAU_PUBLIC] = perfil.public.toString()
             if (perfil.foto != null) it[CLAU_FOTO] = perfil.foto else it.remove(CLAU_FOTO)
         }
         return EstatCompte.Llest(perfil)
@@ -232,7 +248,10 @@ class ServeiCompteSupabase @Inject constructor(
         val p = dataStore.data.first()
         val id = p[CLAU_USUARI] ?: return null
         val nom = p[CLAU_NOM] ?: return null
-        return Perfil(id, nom, p[CLAU_FOTO])
+        // Desat abans que hi hagués tipus i visibilitat: es torna a llegir del servidor.
+        val tipus = TipusPerfil.entries.firstOrNull { it.name == p[CLAU_TIPUS] } ?: return null
+        val public = p[CLAU_PUBLIC]?.toBooleanStrictOrNull() ?: return null
+        return Perfil(id, nom, tipus, public, p[CLAU_FOTO])
     }
 
     private inline fun <T> ambErrors(bloc: () -> T): T = try {
@@ -247,6 +266,8 @@ class ServeiCompteSupabase @Inject constructor(
     private data class PerfilRemot(
         val id: String,
         @SerialName("nom_usuari") val nomUsuari: String,
+        val tipus: String = TipusPerfil.EXPLORADOR.name,
+        val public: Boolean? = null,
         val foto: String? = null,
     )
 
@@ -266,6 +287,8 @@ class ServeiCompteSupabase @Inject constructor(
 
         private val CLAU_USUARI = stringPreferencesKey("compte_usuari_id")
         private val CLAU_NOM = stringPreferencesKey("compte_nom_usuari")
+        private val CLAU_TIPUS = stringPreferencesKey("compte_tipus")
+        private val CLAU_PUBLIC = stringPreferencesKey("compte_public")
         private val CLAU_FOTO = stringPreferencesKey("compte_foto")
         private val CLAU_PROPIETARI = stringPreferencesKey("dades_propietari")
 

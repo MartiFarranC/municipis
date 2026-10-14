@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo, capa 2: el fanal de ferro (sense el vidre). Generat a partir del logo triat (fanal de paret sobre Catalunya). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <group android:scaleX="0.85" android:scaleY="0.85" android:translateX="14.55" android:translateY="19.50">
+        <path
+            android:pathData="M95.5,10.0h2.0a1.5,1.5 0 0 1 1.5,1.5v31.0a1.5,1.5 0 0 1 -1.5,1.5h-2.0a1.5,1.5 0 0 1 -1.5,-1.5v-31.0a1.5,1.5 0 0 1 1.5,-1.5Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M95,18H60"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="2.6"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M56.4,15.5a2.1,2.1 0 1,0 4.2,0a2.1,2.1 0 1,0 -4.2,0Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M58.5,17.5V19"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="2.08"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M95,38L64,19.5"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="2.21"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M88,33.5c-4,-1 -5,-6 -1.5,-8c3,-1.5 5,1.5 3,3.5c-1.5,1.5 -3,0 -2,-1.2"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="1.4300000000000002"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M80,28.5c-3.5,-1 -4.5,-5.5 -1.2,-7c2.6,-1.2 4.4,1.2 2.6,3c-1.2,1.2 -2.6,0 -1.7,-1"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="1.4300000000000002"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M72,23.5c-2.6,-.6 -3.4,-3.6 -1,-4.6"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="1.4300000000000002"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M90,19c0,3 -2,6 -6,6.5M82,19c0,2.6 -1.8,4.6 -4.6,5"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="1.3"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M58.0,22.5a2.0,2.0 0 1,0 4.0,0a2.0,2.0 0 1,0 -4.0,0Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M56.5,28.5c0,-3.5 1.5,-5 3.5,-5s3.5,1.5 3.5,5Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M44,37L56,28.5h8L76,37Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M42.5,36.5h35.0a1.0,1.0 0 0 1 1.0,1.0v0.3999999999999999a1.0,1.0 0 0 1 -1.0,1.0h-35.0a1.0,1.0 0 0 1 -1.0,-1.0v-0.3999999999999999a1.0,1.0 0 0 1 1.0,-1.0Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M47,39h26l-5,18h-16Z"
+            android:strokeColor="#FF55655F"
+            android:strokeWidth="2.4000000000000004"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+        <path
+            android:pathData="M51,57h18l-2.4,3h-13.2Z"
+            android:fillColor="#FF55655F" />
+        <path
+            android:pathData="M58.7,61.6a1.3,1.3 0 1,0 2.6,0a1.3,1.3 0 1,0 -2.6,0Z"
+            android:fillColor="#FF55655F" />
+    </group>
+</vector>

@@ -3,8 +3,12 @@ package cat.descobreix.municipality
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cat.descobreix.data.repositori.AjuntamentsRepositori
+import cat.descobreix.data.repositori.Ajuntament
+import cat.descobreix.data.repositori.Avantatge
 import cat.descobreix.data.repositori.FotosRepositori
 import cat.descobreix.data.repositori.MissionsPropiesRepositori
+import cat.descobreix.data.repositori.SegellsRepositori
 import cat.descobreix.data.ubicacio.ServeiUbicacio
 import cat.descobreix.domain.Foto
 import cat.descobreix.domain.Joc
@@ -14,9 +18,12 @@ import cat.descobreix.joc.geo.Localitzacio
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
 import cat.descobreix.joc.model.Missio
+import cat.descobreix.joc.regles.DisponibilitatOficial
+import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.ResultatDesbloqueig
 import cat.descobreix.joc.regles.ResultatProva
 import cat.descobreix.joc.regles.Ubicacio
+import cat.descobreix.passaport.PassaportViewModel
 import cat.descobreix.ui.Missatge
 import cat.descobreix.ui.missatgeBloquejat
 import cat.descobreix.ui.missatgeDe
@@ -32,6 +39,14 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class FilaMissio(val missio: Missio, val completada: Boolean)
+
+/** Una missió oficial d'un ajuntament: la [missio] per fer-la i si es pot fer avui. */
+data class FilaOficial(
+    val missio: Missio,
+    val origen: MissioAjuntament,
+    val completada: Boolean,
+    val disponibilitat: DisponibilitatOficial,
+)
 
 data class FilaVei(val codi: CodiIne, val nom: String, val estat: EstatMunicipi)
 
@@ -58,6 +73,12 @@ data class MunicipiEstat(
     val missatge: Missatge? = null,
     val avis: Missatge? = null,
     val desbloquejant: Boolean = false,
+    /** Si l'ajuntament col·labora, el que hi ha posat (secció 9.6). */
+    val ajuntament: Ajuntament? = null,
+    val oficials: List<FilaOficial> = emptyList(),
+    val avantatges: List<Avantatge> = emptyList(),
+    /** S'acaba de fer el check-in amb el GPS i el municipi encara no té segell: toca posar-lo al passaport. */
+    val segellPendent: CodiIne? = null,
 ) {
     val missionsFetes: Int get() = missions.count { it.completada }
     val portada: Foto? get() = fotos.firstOrNull { it.esPortada } ?: fotos.firstOrNull()
@@ -70,6 +91,8 @@ class MunicipiViewModel @Inject constructor(
     private val propies: MissionsPropiesRepositori,
     fotos: FotosRepositori,
     private val ubicacio: ServeiUbicacio,
+    private val segells: SegellsRepositori,
+    private val ajuntaments: AjuntamentsRepositori,
     estatDesat: SavedStateHandle,
 ) : ViewModel() {
     val codi: CodiIne = checkNotNull(estatDesat["codi"])
@@ -114,6 +137,19 @@ class MunicipiViewModel @Inject constructor(
                         )
                     }
                 }
+        }
+        viewModelScope.launch {
+            val d = joc.dades()
+            combine(joc.progres, ajuntaments.ajuntaments, ajuntaments.missions, ajuntaments.avantatges) { p, aj, ms, av ->
+                val avui = Joc.avui()
+                val completades = p.completades.keys
+                val oficials = d.ajuntaments.missionsDe(codi, ms, avui, completades).map { m ->
+                    FilaOficial(d.ajuntaments.comMissio(m), m, m.idMissio in completades, d.ajuntaments.disponibilitat(m, avui))
+                }
+                Triple(aj[codi], oficials, av.filter { it.codi == codi && (it.validFins == null || it.validFins >= avui) })
+            }.collect { (aj, oficials, av) ->
+                _estat.update { it.copy(ajuntament = aj, oficials = oficials, avantatges = av) }
+            }
         }
     }
 
@@ -168,7 +204,10 @@ class MunicipiViewModel @Inject constructor(
         when (r) {
             ResultatProva.Valida -> {
                 val punts = joc.completaMissio(missio, u, null)
-                _estat.update { it.copy(provant = null, avis = Missatge.PuntsGuanyats(punts.missio, punts.bonus)) }
+                val segell = missio.clau == PassaportViewModel.CLAU_CHECKIN && segells.segellsAra().none { it.posat.codi == missio.municipi }
+                _estat.update {
+                    it.copy(provant = null, avis = Missatge.PuntsGuanyats(punts.missio, punts.bonus), segellPendent = if (segell) missio.municipi else it.segellPendent)
+                }
             }
             is ResultatProva.CalTriarMunicipi -> {
                 pendent = Triple(missio, u, loc)
@@ -197,4 +236,6 @@ class MunicipiViewModel @Inject constructor(
     fun tancaMissatge() = _estat.update { it.copy(missatge = null) }
 
     fun tancaAvis() = _estat.update { it.copy(avis = null) }
+
+    fun segellObert() = _estat.update { it.copy(segellPendent = null) }
 }

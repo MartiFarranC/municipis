@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -23,10 +23,12 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -40,8 +42,12 @@ import cat.descobreix.ui.DialegTriaMunicipi
 import cat.descobreix.ui.components.BotoPrincipal
 import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Icones
+import cat.descobreix.ui.components.Marca
 import cat.descobreix.ui.rememberPermisUbicacio
 import cat.descobreix.ui.theme.Colors
+
+/** Posició del camp de cerca a la llista: després del logo i del títol. */
+private const val CAMP_DE_CERCA = 2
 
 @Composable
 fun OnboardingScreen(
@@ -64,14 +70,20 @@ fun OnboardingScreen(
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+        // Amb el teclat obert en una pantalla petita, els resultats queden a sota: s'hi baixa perquè es vegin.
+        val llista = rememberLazyListState()
+        LaunchedEffect(estat.resultats) {
+            if (estat.resultats.isNotEmpty()) llista.animateScrollToItem(CAMP_DE_CERCA)
+        }
         LazyColumn(
             Modifier
                 .weight(1f)
                 .fillMaxWidth(),
+            state = llista,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                Text(stringResource(R.string.app_name).uppercase(), style = MaterialTheme.typography.labelSmall.copy(color = Colors.Ambre))
+                Marca()
             }
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -88,14 +100,14 @@ fun OnboardingScreen(
                     leadingIcon = { Icon(Icones.Cercar, contentDescription = null) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                    shape = RoundedCornerShape(14.dp),
+                    shape = RectangleShape,
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Colors.Ambre,
+                        focusedBorderColor = Colors.AmbreText,
                         unfocusedBorderColor = Colors.Linia,
                         focusedContainerColor = Colors.Superficie,
                         unfocusedContainerColor = Colors.Superficie,
-                        focusedLabelColor = Colors.Ambre,
-                        cursorColor = Colors.Ambre,
+                        focusedLabelColor = Colors.AmbreText,
+                        cursorColor = Colors.AmbreText,
                     ),
                 )
             }
@@ -104,9 +116,9 @@ fun OnboardingScreen(
                     Column(
                         Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(16.dp))
+                            .clip(RectangleShape)
                             .background(Colors.Superficie)
-                            .border(1.dp, Colors.Linia, RoundedCornerShape(16.dp)),
+                            .border(1.dp, Colors.Linia, RectangleShape),
                     ) {
                         estat.resultats.forEachIndexed { i, opcio ->
                             if (i > 0) HorizontalDivider(color = Colors.Linia)
@@ -127,7 +139,7 @@ fun OnboardingScreen(
         estat.seleccionat?.let {
             Text(
                 stringResource(R.string.onboarding_triat, it.nom),
-                style = MaterialTheme.typography.bodyMedium.copy(color = Colors.Ambre),
+                style = MaterialTheme.typography.bodyMedium.copy(color = Colors.AmbreText),
             )
         }
         BotoPrincipal(
@@ -163,6 +175,6 @@ private fun FilaOpcio(opcio: OpcioMunicipi, triat: Boolean, onClick: () -> Unit)
             Text(opcio.nom, style = MaterialTheme.typography.bodyLarge)
             Text(opcio.comarca, style = MaterialTheme.typography.bodySmall)
         }
-        if (triat) Icon(Icones.Fet, contentDescription = null, tint = Colors.Ambre, modifier = Modifier.size(20.dp))
+        if (triat) Icon(Icones.Fet, contentDescription = null, tint = Colors.AmbreText, modifier = Modifier.size(20.dp))
     }
 }

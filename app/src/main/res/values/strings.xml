@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- El nom definitiu de l'app és pendent (docs/requisits.md, secció 11). -->
-    <string name="app_name">Descobreix Catalunya</string>
+    <string name="app_name">Bocins de Catalunya</string>
+    <string name="marca_bocins">Bocins</string>
+    <string name="marca_de_catalunya">de Catalunya</string>
 
     <!-- Navegació -->
     <string name="pestanya_mapa">Mapa</string>
@@ -29,10 +31,15 @@
     <string name="mapa_descripcio">Mapa de Catalunya. Has descobert %1$d de %2$d municipis. Toca un municipi per seleccionar-lo, o fes servir el cercador.</string>
     <string name="minimapa_descripcio">Minimapa de Catalunya amb la zona visible marcada. Toca\'l per moure-t\'hi.</string>
     <string name="comptador_curt">%1$d / %2$d</string>
+    <string name="amaga_minimapa">Amaga el minimapa</string>
+    <string name="mostra_minimapa">Mostra el minimapa</string>
     <string name="comptador_llarg">de %1$d municipis descoberts</string>
     <string name="nivell">Nivell %1$d</string>
-    <string name="punts">Punts</string>
-    <string name="punts_curt">%1$d pts</string>
+    <string name="punts">Barretines</string>
+    <plurals name="punts_curt">
+        <item quantity="one">%1$d barretina</item>
+        <item quantity="other">%1$d barretines</item>
+    </plurals>
     <string name="cerca_municipi">Cerca un municipi</string>
     <string name="centra_territori">Centra el mapa al teu municipi</string>
     <string name="on_soc">On sóc?</string>
@@ -49,17 +56,17 @@
         <item quantity="one">%1$d missió oculta</item>
         <item quantity="other">%1$d missions ocultes</item>
     </plurals>
-    <plurals name="distancia_territori">
-        <item quantity="one">a %1$d municipi del teu territori</item>
-        <item quantity="other">a %1$d municipis del teu territori</item>
-    </plurals>
 
     <!-- Fitxa del municipi -->
     <string name="comarca_inici">%1$s · El teu municipi d\'inici</string>
-    <string name="de_punts">de %1$d pts</string>
+    <plurals name="de_punts">
+        <item quantity="one">d\'%1$d barretina</item>
+        <item quantity="other">de %1$d barretines</item>
+    </plurals>
     <string name="progres_missions">%1$d de %2$d missions · Completa-les totes i guanya +%3$d de bonus</string>
     <string name="prova_gps">GPS</string>
     <string name="prova_foto">Foto</string>
+    <string name="prova_qr">Codi QR</string>
     <string name="prova_toca">Prova: %1$s · Toca per fer-la</string>
     <string name="prova_feta">Prova: %1$s · Feta</string>
     <string name="completada">Completada</string>
@@ -69,7 +76,7 @@
     <string name="missio_cartell">Fes una foto del cartell d\'entrada</string>
     <string name="missio_ajuntament">Fes una foto de l\'ajuntament</string>
     <string name="les_teves_missions">Les teves missions</string>
-    <string name="les_teves_missions_text">Les missions que proposes només les veus tu i no donen punts.</string>
+    <string name="les_teves_missions_text">Les missions que proposes només les veus tu i no donen barretines.</string>
     <string name="afegeix_missio">Proposa una missió</string>
     <string name="nova_missio">Nova missió</string>
     <string name="nova_missio_text">Què vols fer en aquest municipi? Només la veuràs tu.</string>
@@ -84,18 +91,30 @@
     <string name="veins">Municipis veïns</string>
 
     <!-- Fitxa d'un municipi bloquejat -->
-    <string name="bloquejat_text">Encara és a la boira. Desbloqueja\'l amb punts per veure\'n les missions.</string>
+    <string name="bloquejat_text">Encara és a la boira. Desbloqueja\'l amb barretines per veure\'n les missions.</string>
     <plurals name="boira_text">
         <item quantity="one">És a %1$d municipi del teu territori. Primer has de desbloquejar un veí.</item>
         <item quantity="other">És a %1$d municipis del teu territori. Primer has de desbloquejar els que hi ha entremig.</item>
     </plurals>
     <string name="missions_ocultes_titol">Missions ocultes</string>
-    <string name="punts_en_joc">Punts en joc</string>
+    <string name="punts_en_joc">Barretines en joc</string>
     <string name="fins_a">fins a %1$d</string>
-    <string name="tens_punts">Tens %1$d pts</string>
-    <string name="despres_punts">Després: %1$d pts</string>
-    <string name="desbloqueja_cost">Desbloqueja · %1$d pts</string>
-    <string name="et_falten">Et falten %1$d punts. Fes missions als municipis que ja tens per guanyar-ne.</string>
+    <plurals name="tens_punts">
+        <item quantity="one">Tens %1$d barretina</item>
+        <item quantity="other">Tens %1$d barretines</item>
+    </plurals>
+    <plurals name="despres_punts">
+        <item quantity="one">Després: %1$d barretina</item>
+        <item quantity="other">Després: %1$d barretines</item>
+    </plurals>
+    <plurals name="desbloqueja_cost">
+        <item quantity="one">Desbloqueja · %1$d barretina</item>
+        <item quantity="other">Desbloqueja · %1$d barretines</item>
+    </plurals>
+    <plurals name="et_falten">
+        <item quantity="one">Et falta %1$d barretina. Fes missions als municipis que ja tens per guanyar-la.</item>
+        <item quantity="other">Et falten %1$d barretines. Fes missions als municipis que ja tens per guanyar-ne.</item>
+    </plurals>
 
     <!-- Càmera -->
     <string name="camera_text">Fes una foto. Ha de ser feta dins del municipi.</string>
@@ -106,43 +125,81 @@
     <string name="visibilitat">Qui la pot veure</string>
     <string name="visibilitat_text">Ara mateix totes les fotos es queden al teu mòbil. Quan l\'app permeti compartir-les, es respectarà el que triïs aquí.</string>
     <string name="visibilitat_privada">Només jo</string>
-    <string name="visibilitat_amics">Els meus amics</string>
+    <string name="visibilitat_seguidors">Qui em segueix</string>
     <string name="visibilitat_publica">Tothom</string>
     <string name="fes_portada">Fes-la la portada del municipi</string>
     <string name="es_portada">És la portada del municipi.</string>
     <string name="esborra_foto">Esborra la foto</string>
-    <string name="esborra_foto_text">La foto s\'esborrarà del mòbil. Els punts que hagis guanyat amb ella no es perden.</string>
+    <string name="esborra_foto_text">La foto s\'esborrarà del mòbil. Les barretines que hagis guanyat amb ella no es perden.</string>
 
     <!-- Missions -->
-    <string name="missions_resum">%1$d missions completades · %2$d punts per gastar</string>
-    <string name="missions_municipi">%1$s · %2$d de %3$d missions · %4$d de %5$d pts</string>
+    <string name="missions_resum">%1$d missions completades · Barretines per gastar: %2$d</string>
+    <string name="missions_municipi">%1$s · %2$d de %3$d missions · %4$d de %5$d barretines</string>
 
     <!-- Perfil -->
-    <string name="punts_per_al_nivell">%1$d pts per al nivell %2$d</string>
+    <plurals name="punts_per_al_nivell">
+        <item quantity="one">%1$d barretina per al nivell %2$d</item>
+        <item quantity="other">%1$d barretines per al nivell %2$d</item>
+    </plurals>
     <string name="stat_municipis">municipis</string>
     <string name="stat_missions">missions</string>
     <string name="stat_fotos">fotos</string>
     <string name="stat_comarques">comarques</string>
-    <string name="punts_resum">Tens %1$d punts per gastar. N\'has guanyat %2$d en total.</string>
+    <plurals name="punts_resum">
+        <item quantity="one">Tens %1$d barretina per gastar. N\'has guanyat %2$d en total.</item>
+        <item quantity="other">Tens %1$d barretines per gastar. N\'has guanyat %2$d en total.</item>
+    </plurals>
     <string name="album">El meu àlbum</string>
     <string name="album_buit">Encara no has fet cap foto. Les pots fer des de la fitxa de cada municipi.</string>
-    <string name="assoliments">Assoliments</string>
+    <string name="passaport">El meu passaport</string>
+    <string name="passaport_segellats">%1$d de %2$d municipis segellats</string>
+    <string name="passaport_tapa_titol">PASSAPORT</string>
+    <string name="passaport_tapa_subtitol">DESCOBREIX CATALUNYA</string>
+    <string name="passaport_color_tapa">Color de la tapa</string>
+    <string name="tapa_granat">Granat</string>
+    <string name="tapa_blau">Blau fosc</string>
+    <string name="tapa_app">Colors de l\'app</string>
+    <string name="passaport_pagina">PÀGINA %1$d</string>
+    <string name="passaport_buit">Encara no tens cap segell. Fes el check-in amb el GPS en un municipi i podràs posar-ne el segell al passaport.</string>
+    <string name="passaport_pendents">Per segellar</string>
+    <string name="passaport_segella">Segella</string>
+    <string name="segellar_obrint">S\'obre el passaport…</string>
+    <string name="segellar_toca">Toca on vols posar el segell de %1$s</string>
+    <string name="segellar_decideix">T\'agrada on ha quedat?</string>
+    <string name="segellar_repeteix">Repeteix</string>
+    <string name="segellar_accepta">Queda bé</string>
+    <string name="segellar_ja_te">%1$s ja té el seu segell al passaport.</string>
+    <string name="medalles">Medalles</string>
     <string name="aconseguit">Aconseguit</string>
     <string name="progres_de">%1$d de %2$d</string>
-    <string name="assoliment_primer_municipi">Primera llum</string>
-    <string name="assoliment_primera_missio">Primera missió</string>
-    <string name="assoliment_municipi_complet">Municipi complet</string>
-    <string name="assoliment_comarca_completa">Tota una comarca</string>
-    <string name="assoliment_capitals">Totes les capitals de comarca</string>
-    <plurals name="assoliment_municipis">
+    <string name="medalla_bronze">Bronze</string>
+    <string name="medalla_plata">Plata</string>
+    <string name="medalla_or">Or</string>
+    <string name="medalla_capitals">Totes les capitals</string>
+    <string name="medalla_capitals_etiqueta">CAPITALS</string>
+    <plurals name="medalla_municipis">
         <item quantity="one">%1$d municipi</item>
         <item quantity="other">%1$d municipis</item>
     </plurals>
-    <plurals name="assoliment_fotos">
-        <item quantity="one">Primera foto</item>
-        <item quantity="other">%1$d fotos</item>
+    <plurals name="medalla_cartells">
+        <item quantity="one">%1$d cartell</item>
+        <item quantity="other">%1$d cartells</item>
+    </plurals>
+    <string name="medalla_cap_a_bronze">%1$d de %2$d municipis</string>
+    <string name="medalla_cap_a_plata">Plata: %1$d de %2$d complets</string>
+    <string name="medalla_cap_a_or">Or: %1$d de %2$d cartells</string>
+    <string name="medalla_nivell_de">%1$s · %2$s</string>
+    <plurals name="celebracio_medalles">
+        <item quantity="one">Nova medalla!</item>
+        <item quantity="other">%1$d medalles noves!</item>
     </plurals>
     <string name="comarques">Comarques</string>
+    <string name="segell_fet">Fet</string>
+    <string name="sacs_comenta_comuna">Per algun lloc s\'ha de començar.</string>
+    <string name="sacs_comenta_rara">Ui, aquest no el té tothom.</string>
+    <string name="sacs_comenta_llegendaria">Llegendari! Guarda\'l bé.</string>
+    <string name="so_i_vibracio">So i vibració</string>
+    <string name="so_i_vibracio_text">Sons i vibracions quan prems un botó, desbloqueges un poble o fas una missió.</string>
     <string name="les_teves_dades">Les teves dades</string>
     <string name="les_teves_dades_text">Pots exportar el teu progrés o esborrar totes les dades del joc, en aquest mòbil i al servidor.</string>
     <string name="exporta">Exporta el meu progrés</string>
@@ -150,7 +207,7 @@
     <string name="exportacio_feta">S\'ha exportat el teu progrés, amb les fotos.</string>
     <string name="exportacio_error">No s\'ha pogut exportar el progrés.</string>
     <string name="esborra_tot">Esborra tot el progrés</string>
-    <string name="esborra_tot_text">S\'esborraran els municipis descoberts, els punts, les missions, les fotos, les preferències i el teu nom d\'usuari, en aquest mòbil i al servidor. El compte es manté. No es pot desfer.</string>
+    <string name="esborra_tot_text">S\'esborraran els municipis descoberts, les barretines, les missions, les fotos, les preferències i el teu nom d\'usuari, en aquest mòbil i al servidor. El compte es manté. No es pot desfer.</string>
 
     <!-- Sobre l'app -->
     <string name="sobre_app">Sobre l\'app</string>
@@ -162,24 +219,49 @@
     <string name="atribucio_osm_titol">OpenStreetMap</string>
     <string name="atribucio_osm">Dades de llocs d\'interès © col·laboradors d\'OpenStreetMap, amb llicència ODbL.</string>
     <string name="atribucio_fonts_titol">Tipografies</string>
-    <string name="atribucio_fonts">Chakra Petch (© The Chakra Petch Project Authors) i Atkinson Hyperlegible (© Braille Institute of America), amb llicència SIL Open Font License 1.1.</string>
+    <string name="atribucio_fonts">Archivo Black (© The Archivo Black Project Authors), Instrument Sans (© The Instrument Sans Project Authors) i Caveat (© The Caveat Project Authors), amb llicència SIL Open Font License 1.1.</string>
     <string name="privacitat_titol">Privacitat</string>
     <string name="privacitat">La ubicació només es fa servir mentre utilitzes l\'app, quan fas una prova. Les fotos i el progrés es guarden només al mòbil.</string>
 
     <!-- Missatges -->
     <string name="titol_no_ha_funcionat">No ha funcionat</string>
     <string name="titol_municipi_bloquejat">Municipi bloquejat</string>
-    <string name="missatge_punts">Missió completada! +%1$d punts</string>
-    <string name="missatge_punts_amb_bonus">Missió completada! +%1$d punts i +%2$d de bonus per completar-les totes</string>
+    <plurals name="missatge_punts">
+        <item quantity="one">Missió completada! +%1$d barretina</item>
+        <item quantity="other">Missió completada! +%1$d barretines</item>
+    </plurals>
+    <plurals name="missatge_punts_amb_bonus">
+        <item quantity="one">Missió completada! +%1$d barretina i +%2$d de bonus per completar-les totes</item>
+        <item quantity="other">Missió completada! +%1$d barretines i +%2$d de bonus per completar-les totes</item>
+    </plurals>
     <string name="missatge_foto_desada">Foto desada</string>
-    <string name="missatge_foto_punts">Foto desada. Missió completada! +%1$d punts</string>
-    <string name="missatge_foto_punts_amb_bonus">Foto desada. Missió completada! +%1$d punts i +%2$d de bonus</string>
+    <plurals name="missatge_foto_punts">
+        <item quantity="one">Foto desada. Missió completada! +%1$d barretina</item>
+        <item quantity="other">Foto desada. Missió completada! +%1$d barretines</item>
+    </plurals>
+    <plurals name="missatge_foto_punts_amb_bonus">
+        <item quantity="one">Foto desada. Missió completada! +%1$d barretina i +%2$d de bonus</item>
+        <item quantity="other">Foto desada. Missió completada! +%1$d barretines i +%2$d de bonus</item>
+    </plurals>
     <string name="missatge_desbloquejat">Has desbloquejat %1$s!</string>
+    <!-- Frases fetes catalanes: en surt una a l'atzar, escrita a mà, quan es desbloqueja un municipi. -->
+    <string-array name="frases_fetes">
+        <item>De mica en mica s\'omple la pica.</item>
+        <item>Qui no s\'arrisca, no pisca.</item>
+        <item>Poc a poc i bona lletra.</item>
+        <item>Al pot petit hi ha la bona confitura.</item>
+        <item>Qui la segueix, la consegueix.</item>
+        <item>Val més tard que mai.</item>
+        <item>Cada terra fa sa guerra.</item>
+    </string-array>
     <string name="missatge_precisio">El GPS no és prou precís (%1$d m). Cal una precisió de %2$d m o millor. Prova-ho a l\'aire lliure.</string>
     <string name="missatge_massa_lluny">Ets a %1$d m del lloc. Has d\'estar a menys de %2$d m.</string>
     <string name="missatge_altre_municipi">Ara ets a %1$s. Aquesta prova s\'ha de fer dins del municipi de la missió.</string>
-    <string name="missatge_bloquejat_falten">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falten %2$d punts per desbloquejar-lo.</string>
-    <string name="missatge_bloquejat_pots">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Ja tens prou punts: desbloqueja\'l des del mapa.</string>
+    <plurals name="missatge_bloquejat_falten">
+        <item quantity="one">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falta %2$d barretina per desbloquejar-lo.</item>
+        <item quantity="other">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Et falten %2$d barretines per desbloquejar-lo.</item>
+    </plurals>
+    <string name="missatge_bloquejat_pots">Ets a %1$s, però encara no l\'has desbloquejat, i no hi pots fer res. Ja tens prou barretines: desbloqueja\'l des del mapa.</string>
     <plurals name="missatge_bloquejat_boira">
         <item quantity="one">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipi del teu territori.</item>
         <item quantity="other">Ets a %1$s, però encara és a la boira i no hi pots fer res. És a %2$d municipis del teu territori.</item>
@@ -205,24 +287,15 @@
     <string name="ranquing_punts">Punts</string>
     <string name="ranquing_municipis">Municipis</string>
     <string name="ranquing_general">General</string>
-    <string name="ranquing_amics">Amics</string>
+    <string name="ranquing_seguits">Qui segueixo</string>
     <string name="ranquing_tu">%1$s (tu)</string>
     <plurals name="ranquing_n_municipis">
         <item quantity="one">%1$d municipi</item>
         <item quantity="other">%1$d municipis</item>
     </plurals>
     <string name="ranquing_error">No s\'ha pogut carregar el rànquing. Cal connexió a internet.</string>
-    <string name="ranquing_sense_amics">Encara no tens amics. Quan en tinguis, aquí veuràs com aneu.</string>
+    <string name="ranquing_sense_seguits">Encara no segueixes ningú. Quan segueixis algú, aquí veuràs com aneu.</string>
     <string name="ranquing_nota">Els punts els calcula el servidor i només compten les missions oficials. El teu progrés es puja quan tens connexió.</string>
-
-    <!-- Color secundari de l'app -->
-    <string name="color_app">Color de l\'app</string>
-    <string name="color_app_text">El color de la selecció al mapa, dels botons secundaris i dels enllaços.</string>
-    <string name="color_blau">Blau</string>
-    <string name="color_turquesa">Turquesa</string>
-    <string name="color_verd">Verd</string>
-    <string name="color_lila">Lila</string>
-    <string name="color_rosa">Rosa</string>
 
     <!-- Compte (docs/requisits.md, secció 9.1) -->
     <string name="compte_titol_entra">Entra</string>
@@ -252,7 +325,7 @@
     <string name="compte_avis_enllac">T\'hem enviat un enllaç a %1$s. Obre\'l en aquest mòbil per entrar.</string>
     <string name="compte_avis_recupera">Si hi ha un compte amb el correu %1$s, hi rebràs un enllaç per triar una contrasenya nova.</string>
     <string name="compte_titol_nom">Tria el teu nom</string>
-    <string name="compte_text_nom">És el nom que veuran els altres al rànquing i als amics. El teu correu no el veurà ningú.</string>
+    <string name="compte_text_nom">És el nom que veuran els altres al rànquing i la gent que et segueix. El teu correu no el veurà ningú.</string>
     <string name="compte_nom_usuari">Nom d\'usuari</string>
     <string name="compte_nom_ajuda">De %1$d a %2$d caràcters: lletres minúscules sense accents, números i _.</string>
     <string name="compte_desa_nom">Continua</string>
@@ -276,4 +349,163 @@
     <string name="compte_error_desconegut">No ha funcionat. Torna-ho a provar d\'aquí a una estona.</string>
     <string name="perfil_sessio">Has entrat com a %1$s</string>
     <string name="perfil_surt_text">Les dades d\'aquest mòbil es mantenen. Si hi entra un altre compte, s\'esborraran.</string>
+
+    <!-- Logo i animacions -->
+    <string name="logo_descripcio">Bocins de Catalunya</string>
+    <string name="carregant">Carregant…</string>
+    <string name="celebracio_missio">Missió completada!</string>
+    <string name="celebracio_desbloquejat">Municipi desbloquejat!</string>
+    <string name="celebracio_punts">+%1$d</string>
+    <string name="continua">Continua</string>
+    <!-- Sacs i col·lecció -->
+    <string name="sacs_titol">Sacs i col·lecció</string>
+    <string name="sacs_col_leccio">Tens %1$d de les %2$d coses que surten dels sacs.</string>
+    <string name="sacs_cap">No tens cap sac per obrir</string>
+    <string name="sacs_com_es_guanyen">Es guanyen la primera vegada que desbloqueges un municipi, fas una missió i fas una foto, i amb cada nivell de les medalles de comarca.</string>
+    <plurals name="sacs_per_obrir">
+        <item quantity="one">Tens un sac per obrir</item>
+        <item quantity="other">Tens %1$d sacs per obrir</item>
+    </plurals>
+    <string name="sacs_obre">Obre\'l</string>
+    <string name="sacs_nou">Un sac nou!</string>
+    <string name="sacs_toca">Toca el sac per obrir-lo</string>
+    <string name="sacs_fes_servir">Fes-lo servir</string>
+    <plurals name="sacs_obre_un_altre">
+        <item quantity="one">Obre l\'altre sac</item>
+        <item quantity="other">Obre\'n un altre (en queden %1$d)</item>
+    </plurals>
+    <plurals name="sacs_ja_ho_tens_tot">
+        <item quantity="one">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d barretina.</item>
+        <item quantity="other">Ja ho tens tot! En comptes d\'una cosa nova, el sac et dona %1$d barretines.</item>
+    </plurals>
+    <string name="sacs_sortit_emoji">Un emoji nou per reaccionar.</string>
+    <string name="sacs_sortit_portada">Una tapa nova per al passaport.</string>
+    <string name="sacs_sortit_animacio">Una animació nova per quan l\'app carrega.</string>
+    <string name="sacs_sortit_color">Un color nou per a l\'app.</string>
+    <string name="sacs_amagada">Encara no la tens (%1$s)</string>
+    <string name="sacs_ajuda_colors">El color dels botons, dels municipis descoberts i de les xifres.</string>
+    <string name="sacs_ajuda_animacions">El que es mou mentre l\'app carrega.</string>
+    <string name="sacs_ajuda_portades">La tapa del teu passaport.</string>
+    <string name="sacs_ajuda_emojis">Per reaccionar a les fotos dels altres (aviat).</string>
+    <string name="sacs_avis_titol">Has guanyat un sac!</string>
+    <plurals name="sacs_avis">
+        <item quantity="one">Tens un sac nou per obrir.</item>
+        <item quantity="other">Tens %1$d sacs nous per obrir.</item>
+    </plurals>
+    <string name="sacs_despres">Després</string>
+    <string name="color_groc">Groc</string>
+    <string name="animacio_sardana">Sardana</string>
+    <string name="raresa_inicial">De sempre</string>
+    <string name="raresa_comuna">Comuna</string>
+    <string name="raresa_rara">Rara</string>
+    <string name="raresa_llegendaria">Llegendària</string>
+    <string name="tipus_emojis">Emojis</string>
+    <string name="tipus_portades">Tapes del passaport</string>
+    <string name="tipus_animacions">Animacions de càrrega</string>
+    <string name="tipus_colors">Colors</string>
+    <!-- Foto del cartell i catàleg -->
+    <string name="camera_cartell">Ajusta el requadre al cartell d\'entrada: arrossega\'l pel mig o per les cantonades. Només es desa el que hi ha dins.</string>
+    <string name="camera_requadre">Requadre del cartell</string>
+    <string name="missatge_cartell_no_llegit">No s\'hi llegeix «%1$s». Ajusta el requadre només al cartell, que es vegi net i dret, i torna-ho a provar.</string>
+    <string name="missatge_cromo_nou">Foto del cartell canviada al catàleg.</string>
+    <string name="missatge_qr_no_valid">Aquest codi QR no és el d\'aquesta missió. Busca el del punt de segellat de l\'ajuntament.</string>
+
+    <!-- Ajuntaments que col·laboren (requisits.md, secció 9.6) -->
+    <string name="de_l_ajuntament">De l\'ajuntament</string>
+    <string name="municipi_collaborador">Municipi col·laborador</string>
+    <string name="festa_dies">%1$s · Només del %2$s al %3$s</string>
+    <string name="festa_fins">%1$s · Festa: fins al %2$s</string>
+    <string name="festa_passada">%1$s · La festa ja ha passat</string>
+    <string name="ajuntament_oficina">Oficina de turisme: %1$s</string>
+    <string name="ajuntament_web">Web de l\'ajuntament</string>
+    <string name="ajuntament_avantatges">Avantatges</string>
+    <string name="ajuntament_avantatges_text">Els ofereix l\'ajuntament, fora de l\'app. Pregunta-hi les condicions.</string>
+    <string name="avantatge_fins">Fins al %1$s</string>
+    <string name="qr_text">Missió: %1$s. Enfoca el codi QR del punt de segellat.</string>
+    <string name="torna_a_fer_foto_cartell">Torna a fer la foto del cartell</string>
+    <string name="fes_foto_cartell_cataleg">Fes la foto del cartell per al catàleg</string>
+    <string name="cataleg">Catàleg de cartells</string>
+    <string name="cataleg_recompte">Tens %1$d dels %2$d cartells.</string>
+    <string name="cataleg_per_comarques">Per comarques</string>
+    <string name="cataleg_alfabetic">Per ordre alfabètic</string>
+    <string name="cataleg_cartell_de">Cartell d\'entrada de %1$s</string>
+    <string name="cataleg_sense_foto">%1$s: encara no tens la foto del cartell</string>
+    <string name="cataleg_tapat">Municipi per descobrir</string>
+    <string name="cataleg_ves_al_municipi">Vés al municipi</string>
+    <!-- Perfils i comptes públics o privats -->
+    <string name="compte_com_jugaras">Com hi jugaràs?</string>
+    <string name="perfil_explorador">Explorador</string>
+    <string name="perfil_explorador_text">Recorres els municipis i jugues: el mapa, les missions i els premis.</string>
+    <string name="perfil_espectador">Espectador</string>
+    <string name="perfil_espectador_text">No jugues: segueixes altra gent per veure com van i animar-los.</string>
+    <string name="compte_per_sempre">No es podrà canviar: per fer-ho caldria un compte nou.</string>
+    <string name="compte_qui_et_pot_seguir">Qui et pot seguir?</string>
+    <string name="compte_public">Compte públic</string>
+    <string name="compte_public_text">Qualsevol et pot seguir directament.</string>
+    <string name="compte_privat">Compte privat</string>
+    <string name="compte_privat_text">Tu acceptes o rebutges qui et vol seguir. Fins llavors, no es veu res del teu compte.</string>
+    <string name="compte_titol_visibilitat">Hola, %1$s</string>
+    <string name="compte_text_visibilitat">Ara pots seguir altra gent i ells et poden seguir a tu. Tria si el teu compte és públic o privat. Ho podràs canviar al perfil.</string>
+    <!-- Gent -->
+    <string name="gent">Gent</string>
+    <string name="gent_cerca">Busca gent pel nom d\'usuari</string>
+    <string name="gent_cap_resultat">No hi ha ningú amb aquest nom.</string>
+    <string name="gent_sense_connexio">Sense connexió no es pot veure la gent. Torna-ho a provar quan en tinguis.</string>
+    <string name="gent_sollicituds">Et volen seguir</string>
+    <string name="gent_accepta">Accepta</string>
+    <string name="gent_rebutja">Rebutja</string>
+    <string name="gent_mur">El que fa la gent que segueixes</string>
+    <string name="gent_mur_buit">Encara no hi ha res. Busca gent i segueix-la per veure com va.</string>
+    <string name="gent_mes">Més</string>
+    <string name="mur_municipi">%1$s ha desbloquejat %2$s</string>
+    <string name="mur_foto">%1$s ha fet una foto a %2$s</string>
+    <string name="mur_foto_de">Foto de %1$s</string>
+    <plurals name="gent_seguidors">
+        <item quantity="one">%1$d seguidor</item>
+        <item quantity="other">%1$d seguidors</item>
+    </plurals>
+    <plurals name="gent_segueix">
+        <item quantity="one">segueix %1$d persona</item>
+        <item quantity="other">segueix %1$d persones</item>
+    </plurals>
+    <string name="gent_et_segueix">et segueix</string>
+    <string name="gent_segueix">Segueix</string>
+    <string name="gent_sollicitud_enviada">Sol·licitud enviada: falta que t\'accepti.</string>
+    <string name="gent_retira_sollicitud">Retira la sol·licitud</string>
+    <string name="gent_deixa_de_seguir">Deixa de seguir</string>
+    <string name="gent_compte_privat">És un compte privat. Quan t\'accepti, veuràs el seu mapa i les seves fotos.</string>
+    <string name="gent_mapa">Mapa · %1$d de %2$d municipis</string>
+    <string name="gent_mapa_descripcio">Mapa de Catalunya amb %1$d municipis descoberts</string>
+    <string name="gent_a_qui_segueix">A qui segueix</string>
+    <string name="gent_que_segueixo">Gent que segueixo</string>
+    <string name="gent_no_segueixes_ningu">Encara no segueixes ningú.</string>
+    <string name="perfil_compte">El teu compte</string>
+    <string name="pestanya_gent">Gent</string>
+    <plurals name="gent_segueixes">
+        <item quantity="one">Segueixes %1$d persona</item>
+        <item quantity="other">Segueixes %1$d persones</item>
+    </plurals>
+    <!-- Animar, bloquejar i denunciar -->
+    <string name="anima">Anima</string>
+    <string name="anima_a">Anima %1$s</string>
+    <string name="anima_missatge">Escriu un missatge curt</string>
+    <string name="anima_envia">Envia el missatge</string>
+    <string name="anima_o_emoji">O envia un emoji</string>
+    <string name="anima_mes_emojis">N\'aconseguiràs més obrint sacs.</string>
+    <string name="anima_enviat">Enviat!</string>
+    <string name="gent_t_han_animat">T\'han animat</string>
+    <string name="reaccio_de_per_municipi">%1$s, per %2$s</string>
+    <string name="reaccio_de_per_foto">%1$s, per una foto</string>
+    <string name="reaccio_treu">Treu</string>
+    <string name="gent_bloqueja">Bloqueja</string>
+    <string name="gent_desbloqueja">Desbloqueja</string>
+    <string name="gent_l_has_bloquejat">L\'has bloquejat: no et pot seguir ni escriure.</string>
+    <string name="gent_bloquejat">Bloquejat.</string>
+    <string name="bloqueja_titol">Vols bloquejar %1$s?</string>
+    <string name="bloqueja_text">Deixareu de seguir-vos i no et podrà tornar a seguir ni escriure. No li direm res.</string>
+    <string name="gent_denuncia">Denuncia</string>
+    <string name="gent_denunciat">Denúncia enviada. La revisarem.</string>
+    <string name="denuncia_titol">Denunciar %1$s</string>
+    <string name="denuncia_text">Si et molesta o escriu coses que no toquen, digues-nos què passa i ho revisarem.</string>
+    <string name="denuncia_motiu">Què ha passat? (opcional)</string>
 </resources>

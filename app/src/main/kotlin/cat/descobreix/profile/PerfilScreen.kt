@@ -25,16 +25,15 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -48,21 +47,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cat.descobreix.R
-import cat.descobreix.joc.progressio.Assoliment
-import cat.descobreix.joc.progressio.TipusAssoliment
+import cat.descobreix.gent.CompteSocial
+import cat.descobreix.ui.TargetaMedalla
 import cat.descobreix.ui.components.Avatar
 import cat.descobreix.ui.components.BarraProgres
 import cat.descobreix.ui.components.BotoSecundari
@@ -72,15 +69,19 @@ import cat.descobreix.ui.components.ImatgeLocal
 import cat.descobreix.ui.components.Xifra
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.rememberPermisCamera
-import cat.descobreix.ui.theme.ColorSecundari
 import cat.descobreix.ui.theme.Colors
 import java.io.File
 
+/** El perfil té dues pestanyes: el perfil i el rànquing (docs/requisits.md, secció 4). */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PerfilScreen(
     onObreFoto: (String) -> Unit,
     onObreSobre: () -> Unit,
+    onObrePassaport: () -> Unit,
+    onObreSacs: () -> Unit,
+    onObreCataleg: () -> Unit,
+    onObreSeguits: () -> Unit,
 ) {
     var pestanya by rememberSaveable { mutableIntStateOf(0) }
     Column(
@@ -94,13 +95,13 @@ fun PerfilScreen(
                     selected = pestanya == i,
                     onClick = { pestanya = i },
                     text = { Text(stringResource(text), style = MaterialTheme.typography.titleSmall) },
-                    selectedContentColor = Colors.Ambre,
+                    selectedContentColor = Colors.Text,
                     unselectedContentColor = Colors.TextSecundari,
                 )
             }
         }
         when (pestanya) {
-            0 -> PestanyaPerfil(onObreFoto, onObreSobre)
+            0 -> PestanyaPerfil(onObreFoto, onObreSobre, onObrePassaport, onObreSacs, onObreCataleg, onObreSeguits)
             else -> RanquingPestanya()
         }
     }
@@ -111,6 +112,10 @@ fun PerfilScreen(
 private fun PestanyaPerfil(
     onObreFoto: (String) -> Unit,
     onObreSobre: () -> Unit,
+    onObrePassaport: () -> Unit,
+    onObreSacs: () -> Unit,
+    onObreCataleg: () -> Unit,
+    onObreSeguits: () -> Unit,
     viewModel: PerfilViewModel = hiltViewModel(),
 ) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -144,7 +149,7 @@ private fun PestanyaPerfil(
         item { Capcalera(estat, onFoto = { triantFoto = true }) }
         item {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Xifra("${estat.descoberts}", stringResource(R.string.stat_municipis), Modifier.weight(1f), Colors.Ambre)
+                Xifra("${estat.descoberts}", stringResource(R.string.stat_municipis), Modifier.weight(1f), Colors.AmbreText)
                 Xifra("${estat.missionsFetes}", stringResource(R.string.stat_missions), Modifier.weight(1f))
                 Xifra("${estat.fotos}", stringResource(R.string.stat_fotos), Modifier.weight(1f))
                 Xifra("${estat.comarquesCompletes}/${estat.comarques.size}", stringResource(R.string.stat_comarques), Modifier.weight(1f))
@@ -152,7 +157,7 @@ private fun PestanyaPerfil(
         }
         item {
             Text(
-                stringResource(R.string.punts_resum, estat.saldo, estat.puntsGuanyats),
+                plural(R.plurals.punts_resum, estat.saldo, estat.saldo, estat.puntsGuanyats),
                 style = MaterialTheme.typography.bodyMedium.copy(color = Colors.TextSecundari),
             )
         }
@@ -172,7 +177,7 @@ private fun PestanyaPerfil(
                             Modifier
                                 .width(104.dp)
                                 .aspectRatio(1f)
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(RectangleShape)
                                 .clickable(role = Role.Image) { onObreFoto(f.id) },
                             midaMaxima = 320,
                         )
@@ -181,10 +186,17 @@ private fun PestanyaPerfil(
             }
         }
 
-        item { Titol(stringResource(R.string.assoliments)) }
+        item { BotoSecundari(stringResource(R.string.passaport), onObrePassaport, icona = Icones.Mapa) }
+        item { BotoSecundari(stringResource(R.string.cataleg), onObreCataleg, icona = Icones.Camera) }
+        item { BotoSecundari(stringResource(R.string.sacs_titol), onObreSacs, icona = Icones.Sac) }
+        item { CompteSocial(onObreSeguits) }
+
+        item { Titol(stringResource(R.string.medalles)) }
         item {
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                for (a in estat.assoliments) TargetaAssoliment(a)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+                for (m in estat.medalles) {
+                    TargetaMedalla(m, m.comarca?.let { estat.nomsComarques[it] }, m.comarca?.let { estat.siluetes[it] })
+                }
             }
         }
 
@@ -199,8 +211,26 @@ private fun PestanyaPerfil(
             }
         }
 
-        item { Titol(stringResource(R.string.color_app)) }
-        item { SelectorColor(estat.colorSecundari, viewModel::canviaColor) }
+        item {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .toggleable(estat.soIVibracio, role = Role.Switch, onValueChange = viewModel::canviaSoIVibracio)
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.so_i_vibracio), style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.so_i_vibracio_text), style = MaterialTheme.typography.bodySmall)
+                }
+                Switch(
+                    checked = estat.soIVibracio,
+                    onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = Colors.Ambre, checkedThumbColor = Colors.TintaAmbre),
+                )
+            }
+        }
 
         item { Titol(stringResource(R.string.les_teves_dades)) }
         item {
@@ -312,53 +342,12 @@ private fun PestanyaPerfil(
     }
 }
 
-/** Cercles de la paleta de [ColorSecundari]. El triat porta una vora i una marca. */
-@Composable
-private fun SelectorColor(triat: ColorSecundari, onTria: (ColorSecundari) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(stringResource(R.string.color_app_text), style = MaterialTheme.typography.bodySmall)
-        Row(Modifier.selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            for (c in ColorSecundari.entries) {
-                val seleccionat = c == triat
-                val nom = stringResource(
-                    when (c) {
-                        ColorSecundari.BLAU -> R.string.color_blau
-                        ColorSecundari.TURQUESA -> R.string.color_turquesa
-                        ColorSecundari.VERD -> R.string.color_verd
-                        ColorSecundari.LILA -> R.string.color_lila
-                        ColorSecundari.ROSA -> R.string.color_rosa
-                    },
-                )
-                Box(
-                    Modifier
-                        .size(48.dp)
-                        .clip(CircleShape)
-                        .selectable(selected = seleccionat, role = Role.RadioButton) { onTria(c) }
-                        .semantics { contentDescription = nom },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Box(
-                        Modifier
-                            .size(36.dp)
-                            .border(if (seleccionat) 3.dp else 0.dp, Colors.Text, CircleShape)
-                            .padding(if (seleccionat) 5.dp else 0.dp)
-                            .clip(CircleShape)
-                            .background(c.color),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        if (seleccionat) Icon(Icones.Fet, contentDescription = null, tint = Colors.Fons, modifier = Modifier.size(16.dp))
-                    }
-                }
-            }
-        }
-    }
-}
-
 @Composable
 private fun Titol(text: String) {
     Text(text, style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { heading() })
 }
 
+/** La foto de perfil (tocar-la la canvia), el nom i el nivell. */
 @Composable
 private fun Capcalera(estat: PerfilEstat, onFoto: () -> Unit) {
     val nivell = estat.nivell ?: return
@@ -367,20 +356,19 @@ private fun Capcalera(estat: PerfilEstat, onFoto: () -> Unit) {
         Box(
             Modifier
                 .size(72.dp)
-                .clip(CircleShape)
                 .clickable(enabled = !estat.canviantFoto, onClickLabel = stringResource(R.string.foto_perfil_canvia), role = Role.Button, onClick = onFoto),
             contentAlignment = Alignment.Center,
         ) {
             Avatar(estat.foto, nom, 72.dp, vora = true)
             if (estat.canviantFoto) {
-                CircularProgressIndicator(Modifier.size(32.dp), color = Colors.Ambre)
+                CircularProgressIndicator(Modifier.size(32.dp), color = Colors.AmbreText)
             } else {
                 Box(
                     Modifier
                         .align(Alignment.BottomEnd)
                         .size(24.dp)
-                        .clip(CircleShape)
-                        .background(Colors.Ambre),
+                        .background(Colors.Ambre)
+                        .border(2.dp, Colors.Text, RectangleShape),
                     contentAlignment = Alignment.Center,
                 ) {
                     Icon(Icones.Camera, contentDescription = null, tint = Colors.TintaAmbre, modifier = Modifier.size(14.dp))
@@ -391,8 +379,8 @@ private fun Capcalera(estat: PerfilEstat, onFoto: () -> Unit) {
             if (nom.isNotEmpty()) {
                 Text(nom, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
             }
-            Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.titleMedium.copy(color = Colors.Ambre))
-            Text(stringResource(R.string.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
+            Text(stringResource(R.string.nivell, nivell.numero), style = MaterialTheme.typography.titleMedium.copy(color = Colors.AmbreText))
+            Text(plural(R.plurals.punts_per_al_nivell, nivell.faltenPerAlSeguent, nivell.faltenPerAlSeguent, nivell.numero + 1), style = MaterialTheme.typography.bodySmall)
             BarraProgres(nivell.progres, alcada = 6)
         }
     }
@@ -409,33 +397,4 @@ private fun OpcioFoto(text: String, onClick: () -> Unit) {
 private fun fitxerFotoCamera(context: Context): Uri {
     val fitxer = File(File(context.cacheDir, "foto_perfil").apply { mkdirs() }, "camera.jpg")
     return FileProvider.getUriForFile(context, "${context.packageName}.fitxers", fitxer)
-}
-
-@Composable
-private fun TargetaAssoliment(a: Assoliment) {
-    val (titol, icona) = when (a.tipus) {
-        TipusAssoliment.PRIMER_MUNICIPI -> stringResource(R.string.assoliment_primer_municipi) to Icones.Llum
-        TipusAssoliment.PRIMERA_MISSIO -> stringResource(R.string.assoliment_primera_missio) to Icones.Fet
-        TipusAssoliment.MUNICIPI_COMPLET -> stringResource(R.string.assoliment_municipi_complet) to Icones.Estrella
-        TipusAssoliment.COMARCA_COMPLETA -> stringResource(R.string.assoliment_comarca_completa) to Icones.Mapa
-        TipusAssoliment.MUNICIPIS -> plural(R.plurals.assoliment_municipis, a.objectiu, a.objectiu) to Icones.Trofeu
-        TipusAssoliment.CAPITALS -> stringResource(R.string.assoliment_capitals) to Icones.Casa
-        TipusAssoliment.FOTOS -> plural(R.plurals.assoliment_fotos, a.objectiu, a.objectiu) to Icones.Camera
-    }
-    val estatText = if (a.aconseguit) stringResource(R.string.aconseguit) else stringResource(R.string.progres_de, a.actual, a.objectiu)
-    Column(
-        Modifier
-            .width(104.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(if (a.aconseguit) Colors.Disponible1 else Colors.Superficie)
-            .border(1.dp, if (a.aconseguit) Colors.Disponible2 else Colors.Linia, RoundedCornerShape(12.dp))
-            .semantics(mergeDescendants = true) { stateDescription = estatText }
-            .padding(horizontal = 8.dp, vertical = 12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
-    ) {
-        Icon(icona, contentDescription = null, tint = if (a.aconseguit) Colors.Ambre else Colors.TextSecundari, modifier = Modifier.size(26.dp))
-        Text(titol, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
-        Text(estatText, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
-    }
 }

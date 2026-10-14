@@ -1,12 +1,12 @@
--- Tests de l'esquema descobreix: RLS, amistats, visibilitat de les fotos i esborrat de dades.
+-- Tests de l'esquema descobreix: RLS, seguiments, visibilitat de les fotos, el mur i esborrat de dades.
 -- S'executen amb `npx supabase test db`.
 
 begin;
 create extension if not exists pgtap with schema extensions;
 
-select plan(39);
+select plan(47);
 
--- Tres usuaris: l'Anna i en Biel seran amics; la Clara no és amiga de ningú.
+-- Tres usuaris: en Biel seguirà l'Anna (compte privat); la Clara té el compte públic.
 insert into auth.users (id, email) values
     ('00000000-0000-0000-0000-00000000000a', 'anna@example.com'),
     ('00000000-0000-0000-0000-00000000000b', 'biel@example.com'),
@@ -137,7 +137,7 @@ select ok(
 insert into descobreix.fotos (id, codi_ine, ruta, ruta_miniatura, visibilitat, es_portada, creat_el, modificat_el, esborrat_el)
 values
     ('50000000-0000-0000-0000-000000000001', '08298', '00000000-0000-0000-0000-00000000000a/1.jpg', '00000000-0000-0000-0000-00000000000a/1_min.jpg', 'PRIVADA', true, 1, 1, null),
-    ('50000000-0000-0000-0000-000000000002', '08298', '00000000-0000-0000-0000-00000000000a/2.jpg', '00000000-0000-0000-0000-00000000000a/2_min.jpg', 'AMICS', false, 1, 1, null),
+    ('50000000-0000-0000-0000-000000000002', '08298', '00000000-0000-0000-0000-00000000000a/2.jpg', '00000000-0000-0000-0000-00000000000a/2_min.jpg', 'SEGUIDORS', false, 1, 1, null),
     ('50000000-0000-0000-0000-000000000003', '08298', '00000000-0000-0000-0000-00000000000a/3.jpg', '00000000-0000-0000-0000-00000000000a/3_min.jpg', 'PUBLICA', false, 1, 1, null),
     ('50000000-0000-0000-0000-000000000004', '08298', '00000000-0000-0000-0000-00000000000a/4.jpg', '00000000-0000-0000-0000-00000000000a/4_min.jpg', 'PUBLICA', false, 1, 1, 2);
 
@@ -162,75 +162,100 @@ select throws_ok(
     'Un usuari no pot pujar fitxers a la carpeta d''un altre'
 );
 
--- Abans de ser amics ----------------------------------------------------------------------------
+-- Comptes ------------------------------------------------------------------------------------------
+
+select lives_ok(
+    $$ update descobreix.perfils set public = false where id = '00000000-0000-0000-0000-00000000000a' $$,
+    'Un usuari tria si el seu compte és públic o privat'
+);
+select throws_ok(
+    $$ update descobreix.perfils set tipus = 'ESPECTADOR' where id = '00000000-0000-0000-0000-00000000000a' $$,
+    'P0001', null,
+    'Explorador o Espectador no es pot canviar'
+);
+
+-- Abans de seguir ---------------------------------------------------------------------------------
 
 select pg_temp.com_a('00000000-0000-0000-0000-00000000000b');
 
-select is((select count(*) from descobreix.municipis_descoberts), 0::bigint, 'Sense ser amics, no es veu el mapa de l''altre');
+select is((select count(*) from descobreix.municipis_descoberts), 0::bigint, 'Sense seguir-lo, no es veu el mapa de l''altre');
 select is((select count(*) from descobreix.missions_completades), 0::bigint, 'No es veuen les missions completades d''un altre');
 select is((select count(*) from descobreix.moviments_punts), 0::bigint, 'No es veuen els moviments de punts d''un altre');
 select is((select count(*) from descobreix.missions_propies), 0::bigint, 'No es veuen les missions pròpies d''un altre');
-select results_eq(
-    $$ select id from descobreix.fotos order by id $$,
-    $$ values ('50000000-0000-0000-0000-000000000003'::uuid) $$,
-    'Sense ser amics, només es veuen les fotos públiques no esborrades'
-);
+select is((select count(*) from descobreix.fotos), 0::bigint, 'D''un compte privat que no segueixes no es veu cap foto, ni les públiques');
 
--- Amistat ---------------------------------------------------------------------------------------
+-- Seguir un compte privat -------------------------------------------------------------------------
+
+select lives_ok(
+    $$ insert into descobreix.seguiments (seguit_id, estat) values ('00000000-0000-0000-0000-00000000000a', 'ACCEPTAT') $$,
+    'Es pot demanar de seguir algú'
+);
+select is((select estat from descobreix.seguiments), 'PENDENT', 'Seguir un compte privat queda pendent, digui el que digui qui ho demana');
+update descobreix.seguiments set estat = 'ACCEPTAT';
+select is((select estat from descobreix.seguiments), 'PENDENT', 'Qui demana de seguir no ho pot acceptar');
+select throws_ok(
+    $$ insert into descobreix.seguiments (seguit_id) values ('00000000-0000-0000-0000-00000000000a') $$,
+    '23505', null,
+    'No es pot demanar dues vegades'
+);
+select is((select count(*) from descobreix.municipis_descoberts), 0::bigint, 'Mentre és pendent, no es veu res');
 
 select pg_temp.com_a('00000000-0000-0000-0000-00000000000a');
+select lives_ok($$ update descobreix.seguiments set estat = 'ACCEPTAT' $$, 'Qui rep la sol·licitud l''accepta');
 select throws_ok(
-    $$ insert into descobreix.amistats (sollicitant_id, destinatari_id, estat)
-       values ('00000000-0000-0000-0000-00000000000a', '00000000-0000-0000-0000-00000000000b', 'ACCEPTADA') $$,
-    '42501', null,
-    'Una sol·licitud d''amistat no es pot crear ja acceptada'
-);
-insert into descobreix.amistats (sollicitant_id, destinatari_id)
-values ('00000000-0000-0000-0000-00000000000a', '00000000-0000-0000-0000-00000000000b');
-
-update descobreix.amistats set estat = 'ACCEPTADA';
-select is(
-    (select estat from descobreix.amistats),
-    'PENDENT',
-    'Qui envia la sol·licitud no la pot acceptar'
+    $$ update descobreix.seguiments set estat = 'PENDENT' $$,
+    'P0001', null,
+    'Un seguiment acceptat no pot tornar a pendent'
 );
 
 select pg_temp.com_a('00000000-0000-0000-0000-00000000000b');
-select throws_ok(
-    $$ insert into descobreix.amistats (sollicitant_id, destinatari_id)
-       values ('00000000-0000-0000-0000-00000000000b', '00000000-0000-0000-0000-00000000000a') $$,
-    '23505', null,
-    'Només hi pot haver una relació per parella d''usuaris'
-);
-select lives_ok(
-    $$ update descobreix.amistats set estat = 'ACCEPTADA' $$,
-    'Qui rep la sol·licitud la pot acceptar'
-);
-select throws_ok(
-    $$ update descobreix.amistats set estat = 'PENDENT' $$,
-    'P0001', null,
-    'Una amistat acceptada no pot tornar a pendent'
-);
-
-select is((select count(*) from descobreix.municipis_descoberts), 1::bigint, 'Un amic veu el mapa de l''altre');
-select is((select count(*) from descobreix.missions_propies), 0::bigint, 'Un amic no veu les missions pròpies de l''altre');
+select is((select count(*) from descobreix.municipis_descoberts), 1::bigint, 'Un seguidor veu el mapa de l''altre');
+select is((select count(*) from descobreix.missions_propies), 0::bigint, 'Un seguidor no veu les missions pròpies de l''altre');
 select results_eq(
     $$ select id from descobreix.fotos order by id $$,
     $$ values ('50000000-0000-0000-0000-000000000002'::uuid), ('50000000-0000-0000-0000-000000000003'::uuid) $$,
-    'Un amic veu les fotos per a amics i les públiques, però no les privades'
+    'Un seguidor veu les fotos per a seguidors i les públiques, però no les privades'
 );
 select results_eq(
     $$ select name from storage.objects where bucket_id = 'descobreix-fotos' order by name $$,
     $$ values ('00000000-0000-0000-0000-00000000000a/2.jpg'), ('00000000-0000-0000-0000-00000000000a/3.jpg') $$,
-    'A Storage, un amic només pot llegir els fitxers de les fotos que pot veure'
+    'A Storage, un seguidor només pot llegir els fitxers de les fotos que pot veure'
+);
+select is(
+    (select count(*) from descobreix.mur() where tipus = 'FOTO'),
+    2::bigint,
+    'Al mur hi ha les fotos que pot veure de la gent que segueix'
+);
+select is(
+    (select count(*) from descobreix.mur() where tipus = 'MUNICIPI'),
+    0::bigint,
+    'El municipi d''inici no surt al mur'
+);
+
+-- Seguir un compte públic -------------------------------------------------------------------------
+
+select pg_temp.com_a('00000000-0000-0000-0000-00000000000c');
+update descobreix.perfils set public = true where id = '00000000-0000-0000-0000-00000000000c';
+
+select pg_temp.com_a('00000000-0000-0000-0000-00000000000b');
+insert into descobreix.seguiments (seguit_id) values ('00000000-0000-0000-0000-00000000000c');
+select is(
+    (select estat from descobreix.seguiments where seguit_id = '00000000-0000-0000-0000-00000000000c'),
+    'ACCEPTAT',
+    'Un compte públic es pot seguir directament'
 );
 
 select pg_temp.com_a('00000000-0000-0000-0000-00000000000c');
-select is((select count(*) from descobreix.amistats), 0::bigint, 'Les amistats només les veuen els dos usuaris');
-select results_eq(
-    $$ select id from descobreix.fotos order by id $$,
-    $$ values ('50000000-0000-0000-0000-000000000003'::uuid) $$,
-    'Qui no és amic només veu les fotos públiques'
+select is(
+    (select count(*) from descobreix.seguiments where seguidor_id = '00000000-0000-0000-0000-00000000000b'),
+    1::bigint,
+    'D''un compte privat, a qui segueix només ho veuen els seus seguidors i la persona seguida'
+);
+select is((select count(*) from descobreix.fotos), 0::bigint, 'Qui no segueix un compte privat no en veu les fotos');
+select is(
+    (select seguidors from descobreix.perfil_de('00000000-0000-0000-0000-00000000000a')),
+    1::bigint,
+    'Del perfil de qualsevol es veu quanta gent el segueix'
 );
 
 -- Esborrar les dades ----------------------------------------------------------------------------
@@ -242,9 +267,9 @@ reset role;
 select is(
     (select count(*) from descobreix.municipis_descoberts where usuari_id = '00000000-0000-0000-0000-00000000000a')
   + (select count(*) from descobreix.fotos where usuari_id = '00000000-0000-0000-0000-00000000000a')
-  + (select count(*) from descobreix.amistats),
+  + (select count(*) from descobreix.seguiments where '00000000-0000-0000-0000-00000000000a' in (seguidor_id, seguit_id)),
     0::bigint,
-    'Esborrar les dades esborra el progrés, les fotos i les amistats de l''usuari'
+    'Esborrar les dades esborra el progrés, les fotos i els seguiments de l''usuari'
 );
 select is(
     (select count(*) from auth.users where id = '00000000-0000-0000-0000-00000000000a'),

@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -24,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -40,9 +40,8 @@ import cat.descobreix.ui.components.BotoSecundari
 import cat.descobreix.ui.components.Carregant
 import cat.descobreix.ui.plural
 import cat.descobreix.ui.theme.Colors
-import cat.descobreix.ui.theme.Secundari
 
-/** Pestanya del rànquing al perfil (secció 4, pantalla 7): per punts o per municipis, general o entre amics. */
+/** Pestanya del rànquing al perfil (secció 4, pantalla 7): per punts o per municipis, general o entre la gent que segueixes. */
 @Composable
 fun RanquingPestanya(viewModel: RanquingViewModel = hiltViewModel()) {
     val estat by viewModel.estat.collectAsStateWithLifecycle()
@@ -54,8 +53,8 @@ fun RanquingPestanya(viewModel: RanquingViewModel = hiltViewModel()) {
                 onTria = viewModel::canviaCriteri,
             )
             Selector(
-                opcions = listOf(false to R.string.ranquing_general, true to R.string.ranquing_amics),
-                triat = estat.nomesAmics,
+                opcions = listOf(false to R.string.ranquing_general, true to R.string.ranquing_seguits),
+                triat = estat.nomesSeguits,
                 onTria = viewModel::canviaAmbit,
             )
         }
@@ -77,8 +76,8 @@ fun RanquingPestanya(viewModel: RanquingViewModel = hiltViewModel()) {
                     }
                     FilaClassificacio(f, estat.criteri)
                 }
-                if (estat.senseAmics) {
-                    item { Missatge(stringResource(R.string.ranquing_sense_amics)) {} }
+                if (estat.senseSeguits) {
+                    item { Missatge(stringResource(R.string.ranquing_sense_seguits)) {} }
                 }
                 item {
                     Text(
@@ -95,19 +94,19 @@ fun RanquingPestanya(viewModel: RanquingViewModel = hiltViewModel()) {
 @Composable
 private fun <T> Selector(opcions: List<Pair<T, Int>>, triat: T, onTria: (T) -> Unit) {
     val colors = SegmentedButtonDefaults.colors(
-        activeContainerColor = Colors.Secundari.copy(alpha = 0.18f),
-        activeContentColor = Colors.Secundari,
-        activeBorderColor = Colors.Secundari,
-        inactiveContainerColor = Colors.Superficie,
-        inactiveContentColor = Colors.TextSecundari,
-        inactiveBorderColor = Colors.Linia,
+        activeContainerColor = Colors.Ambre,
+        activeContentColor = Colors.TintaAmbre,
+        activeBorderColor = Colors.Text,
+        inactiveContainerColor = Colors.Fons,
+        inactiveContentColor = Colors.Text,
+        inactiveBorderColor = Colors.Text,
     )
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
         opcions.forEachIndexed { i, (valor, text) ->
             SegmentedButton(
                 selected = valor == triat,
                 onClick = { onTria(valor) },
-                shape = SegmentedButtonDefaults.itemShape(i, opcions.size),
+                shape = RectangleShape,
                 colors = colors,
                 modifier = Modifier.heightIn(min = 48.dp),
             ) { Text(stringResource(text)) }
@@ -118,16 +117,16 @@ private fun <T> Selector(opcions: List<Pair<T, Int>>, triat: T, onTria: (T) -> U
 @Composable
 private fun FilaClassificacio(f: FilaRanquing, criteri: CriteriRanquing) {
     val valor = when (criteri) {
-        CriteriRanquing.PUNTS -> stringResource(R.string.punts_curt, f.punts)
+        CriteriRanquing.PUNTS -> plural(R.plurals.punts_curt, f.punts.toInt(), f.punts)
         CriteriRanquing.MUNICIPIS -> plural(R.plurals.ranquing_n_municipis, f.municipis.toInt(), f.municipis)
     }
     val nom = if (f.socJo) stringResource(R.string.ranquing_tu, f.nomUsuari) else f.nomUsuari
     Row(
         Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RectangleShape)
             .background(if (f.socJo) Colors.Disponible1 else Colors.Superficie)
-            .then(if (f.socJo) Modifier.border(1.dp, Colors.Ambre, RoundedCornerShape(12.dp)) else Modifier)
+            .then(if (f.socJo) Modifier.border(2.dp, Colors.Text, RectangleShape) else Modifier)
             .semantics(mergeDescendants = true) {}
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -136,12 +135,12 @@ private fun FilaClassificacio(f: FilaRanquing, criteri: CriteriRanquing) {
         Text(
             "${f.posicio}",
             Modifier.width(32.dp),
-            style = MaterialTheme.typography.titleMedium.copy(color = if (f.posicio <= 3) Colors.Ambre else Colors.TextSecundari),
+            style = MaterialTheme.typography.titleMedium.copy(color = if (f.posicio <= 3) Colors.AmbreText else Colors.TextSecundari),
             textAlign = TextAlign.End,
         )
         Avatar(f.foto, f.nomUsuari, 40.dp)
         Text(nom, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        Text(valor, style = MaterialTheme.typography.titleMedium.copy(color = if (f.socJo) Colors.Ambre else Colors.Text))
+        Text(valor, style = MaterialTheme.typography.titleMedium.copy(color = if (f.socJo) Colors.AmbreText else Colors.Text))
     }
 }
 

@@ -6,7 +6,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +14,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Dp
@@ -35,7 +35,7 @@ interface FotosPerfilEntryPoint {
 }
 
 /**
- * Foto de perfil rodona. Si l'usuari no en té (o encara no s'ha baixat), mostra la inicial del nom.
+ * Foto de perfil quadrada, com la resta de l'app (docs/disseny.md). Si l'usuari no en té (o encara no s'ha baixat), mostra la inicial del nom.
  * És decorativa: el nom sempre es mostra al costat.
  */
 @Composable
@@ -48,9 +48,9 @@ fun Avatar(ruta: String?, nom: String, mida: Dp, modifier: Modifier = Modifier, 
     Box(
         modifier
             .size(mida)
-            .clip(CircleShape)
+            .clip(RectangleShape)
             .background(Colors.Superficie2)
-            .then(if (vora) Modifier.border(2.dp, Colors.Ambre, CircleShape) else Modifier),
+            .then(if (vora) Modifier.border(2.dp, Colors.Text, RectangleShape) else Modifier),
         contentAlignment = Alignment.Center,
     ) {
         val f = fitxer

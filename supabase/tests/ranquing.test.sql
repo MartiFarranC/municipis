@@ -4,7 +4,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 
-select plan(23);
+select plan(24);
 
 -- Missions i configuració de prova, en lloc de les reals.
 delete from descobreix.missions_oficials;
@@ -18,19 +18,22 @@ insert into descobreix.missions_oficials (id, codi_ine, prova, lat, lon, punts) 
     ('gen-08002-checkin', '08002', 'GPS', null, null, 100),
     ('gen-08003-checkin', '08003', 'GPS', null, null, 100);
 
--- L'Anna i en Biel són amics; la Clara i en Dani no són amics de ningú.
+-- L'Anna segueix en Biel (que és públic: el seguiment s'accepta sol); la Clara i en Dani no segueixen ningú.
+-- L'Eva és espectadora: no juga i no surt al rànquing.
 insert into auth.users (id, email) values
     ('00000000-0000-0000-0000-00000000000a', 'anna@example.com'),
     ('00000000-0000-0000-0000-00000000000b', 'biel@example.com'),
     ('00000000-0000-0000-0000-00000000000c', 'clara@example.com'),
-    ('00000000-0000-0000-0000-00000000000d', 'dani@example.com');
-insert into descobreix.perfils (id, nom_usuari, creat_el) values
-    ('00000000-0000-0000-0000-00000000000a', 'anna', '2026-01-01'),
-    ('00000000-0000-0000-0000-00000000000b', 'biel', '2026-01-02'),
-    ('00000000-0000-0000-0000-00000000000c', 'clara', '2026-01-03'),
-    ('00000000-0000-0000-0000-00000000000d', 'dani', '2026-01-04');
-insert into descobreix.amistats (sollicitant_id, destinatari_id, estat) values
-    ('00000000-0000-0000-0000-00000000000a', '00000000-0000-0000-0000-00000000000b', 'ACCEPTADA');
+    ('00000000-0000-0000-0000-00000000000d', 'dani@example.com'),
+    ('00000000-0000-0000-0000-00000000000e', 'eva@example.com');
+insert into descobreix.perfils (id, nom_usuari, creat_el, tipus, public) values
+    ('00000000-0000-0000-0000-00000000000a', 'anna', '2026-01-01', 'EXPLORADOR', false),
+    ('00000000-0000-0000-0000-00000000000b', 'biel', '2026-01-02', 'EXPLORADOR', true),
+    ('00000000-0000-0000-0000-00000000000c', 'clara', '2026-01-03', 'EXPLORADOR', false),
+    ('00000000-0000-0000-0000-00000000000d', 'dani', '2026-01-04', 'EXPLORADOR', false),
+    ('00000000-0000-0000-0000-00000000000e', 'eva', '2026-01-05', 'ESPECTADOR', false);
+insert into descobreix.seguiments (seguidor_id, seguit_id) values
+    ('00000000-0000-0000-0000-00000000000a', '00000000-0000-0000-0000-00000000000b');
 
 create function pg_temp.com_a(usuari uuid) returns void language sql as $$
     select set_config('request.jwt.claims', json_build_object('sub', usuari, 'role', 'authenticated')::text, true);
@@ -99,7 +102,7 @@ select pg_temp.com_a('00000000-0000-0000-0000-00000000000d');
 select results_eq(
     $$ select posicio, nom_usuari, punts, soc_jo from descobreix.ranquing('PUNTS', false) $$,
     $$ values (1::bigint, 'anna', 220::bigint, false), (2, 'biel', 150, false), (3, 'clara', 100, false), (4, 'dani', 0, true) $$,
-    'Classificació general per punts; els usuaris sense progrés hi surten amb 0'
+    'Classificació general per punts; els usuaris sense progrés hi surten amb 0, i els espectadors no hi surten'
 );
 select results_eq(
     $$ select posicio, nom_usuari, municipis from descobreix.ranquing('MUNICIPIS', false) $$,
@@ -114,14 +117,20 @@ select results_eq(
 select results_eq(
     $$ select nom_usuari from descobreix.ranquing('PUNTS', true) $$,
     $$ values ('dani') $$,
-    'Sense amics, la classificació d''amics només té l''usuari'
+    'Si no segueix ningú, la classificació de seguits només té l''usuari'
 );
 
 select pg_temp.com_a('00000000-0000-0000-0000-00000000000a');
 select results_eq(
     $$ select posicio, nom_usuari, soc_jo from descobreix.ranquing('PUNTS', true) $$,
     $$ values (1::bigint, 'anna', true), (2, 'biel', false) $$,
-    'La classificació d''amics només té l''usuari i els seus amics'
+    'La classificació de seguits només té l''usuari i la gent que segueix'
+);
+select pg_temp.com_a('00000000-0000-0000-0000-00000000000b');
+select results_eq(
+    $$ select nom_usuari from descobreix.ranquing('PUNTS', true) $$,
+    $$ values ('biel') $$,
+    'Seguir algú no fa que ell et vegi a la seva classificació de seguits'
 );
 select throws_ok($$ select * from descobreix.ranquing('RES', false) $$, '22023', null, 'Un criteri desconegut és un error');
 select is(

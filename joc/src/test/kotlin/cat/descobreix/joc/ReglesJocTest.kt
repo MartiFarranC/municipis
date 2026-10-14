@@ -34,6 +34,13 @@ class ReglesJocTest {
     }
 
     @Test
+    fun `si en ajuntar dos mòbils el saldo queda negatiu, cal guanyar punts abans de desbloquejar`() {
+        // Regla de la sincronització (requisits.md, 9.2): no es desfà res; el saldo negatiu només impedeix gastar.
+        val estat = EstatJoc(setOf(vic), puntsGuanyats = 100, puntsGastats = 160, missionsCompletades = emptySet())
+        assertEquals(ResultatDesbloqueig.PuntsInsuficients(60, 120), regles.avaluaDesbloqueig(gurb, estat))
+    }
+
+    @Test
     fun `un municipi a la boira no es pot desbloquejar i se'n sap la distància`() {
         val estat = EstatJoc(setOf(vic), puntsGuanyats = 10_000, puntsGastats = 0, missionsCompletades = emptySet())
         val r = regles.avaluaDesbloqueig(barcelona, estat)

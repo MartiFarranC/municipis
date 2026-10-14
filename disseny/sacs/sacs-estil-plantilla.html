@@ -1,0 +1,189 @@
+<title>Com s'obre un sac</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Alegreya+Sans+SC:wght@500;700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+/* Quatre maneres de dibuixar i obrir el sac, amb l'estètica triada: rètols esmaltats en blau nit i terracota, sobre blanc net.
+   Generat per gen-sacs-estil.py, que hi posa els emojis de debò de recursos.json. */
+:root{--f:#28364F;--a:#A9503F;--ocre:#B07D33;--pissarra:#6E7787;--linia:#E2E5EA;--suau:#9097A3}
+body{margin:0;background:#E9E6DF;color:#1B1A17;font:15px/1.5 "Newsreader",Georgia,serif}
+.pagina{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.cap{max-width:70ch;margin-bottom:28px}
+.cap small{font:700 12px "Alegreya Sans SC",sans-serif;letter-spacing:.12em;color:#8A3A22}
+.cap h1{font:600 36px/1.1 "Newsreader",serif;margin:6px 0 10px}
+.cap p{margin:0 0 8px}
+.concepte{border-top:2px solid #1B1A17;padding:22px 0 30px;display:grid;grid-template-columns:330px 1fr;gap:16px 32px;align-items:start}
+@media (max-width:760px){.concepte{grid-template-columns:1fr}}
+.concepte header .n{font:600 44px/1 "Newsreader",serif}
+.concepte header h2{font:600 24px "Newsreader",serif;margin:4px 0 6px}
+.concepte header p{margin:0 0 10px;max-width:60ch}
+.raresa{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.raresa button,.valora button{font:500 14px "Alegreya Sans SC",sans-serif;letter-spacing:.06em;padding:8px 14px;border:1.5px solid #1B1A17;background:none;cursor:pointer;min-height:40px}
+.raresa button[aria-pressed="true"],.valora button[aria-pressed="true"]{background:#1B1A17;color:#F4EFE3}
+.valora{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.valora textarea{flex:1 1 260px;min-height:40px;border:1.5px solid #1B1A17;background:#F7F4EC;padding:8px;font:inherit}
+button:focus-visible,textarea:focus-visible,.escena:focus-visible{outline:3px solid #8A3A22;outline-offset:2px}
+
+/* ── El telèfon, amb l'estètica de l'app ────────────────────────────────────────────── */
+.tel{width:330px;max-width:100%;height:680px;border:7px solid #1B1A17;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;background:#fff;color:var(--f);font-family:"Oswald",sans-serif;box-sizing:border-box}
+.placa{background:var(--f);color:#fff;border-radius:10px;box-shadow:inset 0 0 0 3px var(--f),inset 0 0 0 5px #fff;position:relative;padding:10px 26px;text-align:center}
+.placa::before,.placa::after{content:"";position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.placa::before{left:9px}.placa::after{right:9px}
+.placa.acc{background:var(--a);box-shadow:inset 0 0 0 3px var(--a),inset 0 0 0 5px #fff}
+.placa.blanca{background:#fff;color:var(--f);box-shadow:inset 0 0 0 2px var(--f),inset 0 0 0 4px #fff,inset 0 0 0 5px var(--f)}
+.tel .titol{margin:34px 16px 0;align-self:stretch;font:600 20px "Oswald";text-transform:uppercase;letter-spacing:.08em}
+.escena{position:relative;width:300px;height:300px;margin-top:18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.escena svg.cont{position:absolute;inset:40px;width:220px;height:220px;overflow:visible}
+.escena svg.cont *{transform-box:fill-box}
+.ajuda{font:400 14px "Oswald";text-transform:uppercase;letter-spacing:.1em;color:var(--suau);margin-top:6px}
+.resultat{display:none;flex-direction:column;align-items:center;gap:8px;padding:0 16px;align-self:stretch;text-align:center}
+.tel[data-fase="obert"] .resultat{display:flex;animation:puja .5s .25s both}
+.tel[data-fase="obert"] .ajuda{display:none}
+.resultat .nom{font:600 26px/1.1 "Oswald";text-transform:uppercase}
+.resultat .que{font:400 14px "Oswald";color:var(--suau);letter-spacing:.03em}
+.resultat .botons{display:flex;flex-direction:column;gap:6px;align-self:stretch;margin-top:6px}
+.resultat .botons .placa{font:600 15px "Oswald";text-transform:uppercase;letter-spacing:.04em;display:flex;justify-content:space-between}
+.etiqueta{font:500 12px "Oswald";text-transform:uppercase;letter-spacing:.16em;padding:4px 22px;border-radius:6px;color:#fff}
+.etiqueta::before,.etiqueta::after{width:5px;height:5px;margin-top:-2.5px}.etiqueta::before{left:7px}.etiqueta::after{right:7px}
+@keyframes puja{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ── El que surt: una placa rodona esmaltada que gira, com un rètol de doble cara, amb l'emoji ── */
+.revela{position:absolute;left:50%;top:50%;width:170px;height:170px;margin:-85px 0 0 -85px;perspective:600px;pointer-events:none;opacity:0}
+.revela .disc{width:100%;height:100%;border-radius:50%;background:var(--r);box-shadow:inset 0 0 0 5px var(--r),inset 0 0 0 8px #fff,0 10px 24px rgba(40,54,79,.25);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.revela .disc .em{width:122px;height:122px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.revela .disc .em svg{width:112px;height:112px}
+.revela .cargol{position:absolute;width:8px;height:8px;border-radius:50%;background:#D5D7DA;box-shadow:inset 0 0 0 1px #8D9096}
+.tel[data-r="comuna"]{--r:var(--pissarra)}.tel[data-r="rara"]{--r:var(--a)}.tel[data-r="llegendaria"]{--r:var(--ocre)}
+.tel[data-fase="obert"] .revela{opacity:1;animation:gira .9s cubic-bezier(.2,.9,.25,1.15) both}
+@keyframes gira{0%{opacity:0;transform:translateY(60px) scale(.35) rotateY(90deg)}45%{opacity:1}100%{opacity:1;transform:none}}
+/* La llegendària, a més, té una lluentor que passa per sobre de l'esmalt, com quan hi toca el sol. */
+.tel[data-r="llegendaria"][data-fase="obert"] .disc::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%);animation:lluu 2.6s 1s ease-in-out infinite}
+@keyframes lluu{from{transform:translateX(-80%)}60%,to{transform:translateX(80%)}}
+.tel[data-fase="obert"] svg.cont{animation:fora .5s ease-in both}
+@keyframes fora{to{opacity:0;transform:translateY(30px) scale(.9)}}
+
+/* L'espera abans d'obrir: tremola; com més rar, més vegades (1, 2 o 3 sacsejades). */
+.tel[data-fase="tancat"] svg.cont{animation:respira 2.4s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes respira{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.tel[data-fase="obrint"] svg.cont{transform-origin:50% 90%;animation:sacseja .36s ease-in-out var(--cops)}
+.tel[data-r="comuna"]{--cops:1}.tel[data-r="rara"]{--cops:2}.tel[data-r="llegendaria"]{--cops:3}
+@keyframes sacseja{0%,100%{transform:none}20%{transform:rotate(-9deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(4deg)}}
+
+/* ── 1 · Sac de roba: la corda es deslliga i la boca s'obre ── */
+.sac .corda{transition:transform .45s ease-in,opacity .45s}
+.tel[data-fase="obert"] .sac .corda.e{transform:translate(-40px,30px) rotate(-60deg);opacity:0}
+.tel[data-fase="obert"] .sac .corda.d{transform:translate(40px,34px) rotate(70deg);opacity:0}
+.sac .boca{transform-origin:50% 100%;transition:transform .4s}
+.tel[data-fase="obert"] .sac .boca{transform:scaleX(1.45) scaleY(.5)}
+
+/* ── 2 · Farcell: el nus es desfà, les puntes cauen i el mocador queda estès ── */
+.farcell .punta{transition:transform .5s cubic-bezier(.5,0,.6,1),opacity .5s}
+.farcell .punta.o{transform-origin:100% 100%}.farcell .punta.e{transform-origin:0 100%}
+.tel[data-fase="obert"] .farcell .punta.o{transform:rotate(-115deg);opacity:0}
+.tel[data-fase="obert"] .farcell .punta.e{transform:rotate(115deg);opacity:0}
+.farcell .nus{transform-origin:center;transition:transform .3s,opacity .3s}
+.tel[data-fase="obert"] .farcell .nus{transform:scale(0);opacity:0}
+.farcell .cos{transform-origin:50% 100%;transition:transform .5s .15s}
+.tel[data-fase="obert"] .farcell .cos{transform:scale(1.25,.3)}
+
+/* ── 3 · Capsa de llauna: la tapa salta ── */
+.llauna .tapa{transform-origin:0 100%;transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .6s .2s}
+.tel[data-fase="obert"] .llauna .tapa{transform:translate(20px,-60px) rotate(-38deg);opacity:0}
+
+/* ── 4 · Paquet de pastisseria: el cordill es trenca i el paper es desplega ── */
+.paquet .cordill{transition:transform .4s ease-in,opacity .4s}
+.tel[data-fase="obert"] .paquet .cordill.e{transform:translate(-30px,40px) rotate(-30deg);opacity:0}
+.tel[data-fase="obert"] .paquet .cordill.d{transform:translate(30px,40px) rotate(30deg);opacity:0}
+.paquet .ala{transition:transform .5s .15s cubic-bezier(.5,0,.6,1.2)}
+.paquet .ala.e{transform-origin:100% 50%}.paquet .ala.d{transform-origin:0 50%}
+.tel[data-fase="obert"] .paquet .ala.e{transform:scaleX(-1)}
+.tel[data-fase="obert"] .paquet .ala.d{transform:scaleX(-1)}
+
+@media (prefers-reduced-motion:reduce){.tel *,.tel{animation:none!important;transition:none!important}.tel[data-fase="obert"] .revela{opacity:1}.tel[data-fase="obert"] svg.cont{opacity:0}}
+/*CSS-EMOJIS*/
+</style>
+<div class="pagina">
+  <div class="cap">
+    <small>Bocins de Catalunya · el sac</small>
+    <h1>Com és el sac i com s'obre</h1>
+    <p>Amb l'estètica que has triat (rètols esmaltats, blau nit i terracota), quatre maneres de dibuixar el sac i d'obrir-lo. <b>Toca el sac de cada mòbil per obrir-lo</b>, i torna'l a tocar per tancar-lo. Pots canviar la raresa per veure com canvia.</p>
+    <p>Tots quatre comparteixen dues idees. La primera: abans d'obrir-se, el sac <b>tremola una vegada si és comú, dues si és rar i tres si és llegendari</b>, i així ja t'ho fa esperar. La segona: el que surt és <b>una placa rodona esmaltada que gira com un rètol de doble cara</b>, del color de la raresa (pissarra, terracota o ocre). Substitueix els raigs que giren d'ara. Els emojis són els de l'app.</p>
+  </div>
+  <div id="conceptes"></div>
+</div>
+<script>
+const EM=/*EMOJIS*/;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RAR={comuna:{n:'Comuna',em:'cares--festa'},rara:{n:'Rara',em:'anims--castell'},llegendaria:{n:'Llegendària',em:'celebrar--sardana'}};
+const F='#28364F',A='#A9503F';
+
+const SVG={
+ sac:`<svg class="cont sac" viewBox="0 0 100 100" aria-hidden="true">
+   <path d="M30 42C16 56 14 80 24 90Q50 98 76 90C86 80 84 56 70 42Z" fill="${F}"/>
+   <path d="M29 47C19 59 18 79 26 87Q50 94 74 87C82 79 81 59 71 47" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="2.5 2"/>
+   <path class="boca" d="M36 20Q44 26 42 36L58 36Q56 26 64 20Q56 24 50 18Q44 24 36 20Z" fill="${F}" stroke="#fff" stroke-width="1"/>
+   <rect x="36" y="35" width="28" height="6" rx="3" fill="${A}"/>
+   <g class="corda e"><path d="M50 38C42 30 36 33 40 38S48 41 50 38" fill="none" stroke="${A}" stroke-width="2.4"/><path d="M50 39L45 52" stroke="${A}" stroke-width="2.4" stroke-linecap="round"/></g>
+   <g class="corda d"><path d="M50 38C58 30 64 33 60 38S52 41 50 38" fill="none" stroke="${A}" stroke-width="2.4"/><path d="M50 39L56 51" stroke="${A}" stroke-width="2.4" stroke-linecap="round"/></g>
+   <circle cx="50" cy="69" r="10" fill="#fff"/><text x="50" y="73.5" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="12" fill="${F}">B</text>
+ </svg>`,
+ farcell:`<svg class="cont farcell" viewBox="0 0 100 100" aria-hidden="true">
+   <defs><pattern id="quadres" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${F}"/><path d="M0 4H8M4 0V8" stroke="#fff" stroke-width=".6" opacity=".55"/><rect x="3" y="3" width="2" height="2" fill="${A}"/></pattern></defs>
+   <path class="cos" d="M18 64Q16 42 50 42Q84 42 82 64Q84 92 50 92Q16 92 18 64Z" fill="url(#quadres)"/>
+   <path d="M24 52Q50 46 76 52" fill="none" stroke="#fff" stroke-width=".8" opacity=".6"/>
+   <path class="punta o" d="M47 41Q36 34 26 20Q38 24 49 36Z" fill="url(#quadres)" stroke="#fff" stroke-width="1"/>
+   <path class="punta e" d="M53 41Q64 34 74 20Q62 24 51 36Z" fill="url(#quadres)" stroke="#fff" stroke-width="1"/>
+   <g class="nus"><ellipse cx="50" cy="40" rx="8" ry="5.5" fill="${A}"/><path d="M44 40Q50 44 56 40" fill="none" stroke="#fff" stroke-width=".8"/></g>
+ </svg>`,
+ llauna:`<svg class="cont llauna" viewBox="0 0 100 100" aria-hidden="true">
+   <rect x="16" y="44" width="68" height="46" rx="5" fill="${F}"/>
+   <rect x="19" y="47" width="62" height="40" rx="3" fill="none" stroke="#fff" stroke-width="1"/>
+   <text x="50" y="72" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="11" letter-spacing="1.2" fill="#fff">BOCINS</text>
+   <rect x="34" y="76" width="32" height="1" fill="${A}"/>
+   <g class="tapa"><rect x="12" y="32" width="76" height="14" rx="4" fill="${A}"/><rect x="15" y="35" width="70" height="8" rx="2" fill="none" stroke="#fff" stroke-width="1"/>
+     <circle cx="20" cy="39" r="1.8" fill="#D5D7DA" stroke="#8D9096" stroke-width=".4"/><circle cx="80" cy="39" r="1.8" fill="#D5D7DA" stroke="#8D9096" stroke-width=".4"/></g>
+ </svg>`,
+ paquet:`<svg class="cont paquet" viewBox="0 0 100 100" aria-hidden="true">
+   <rect x="20" y="38" width="60" height="50" fill="#fff" stroke="${F}" stroke-width="1.6"/>
+   <g class="ala e"><path d="M20 38H50V88H20Z" fill="#fff" stroke="${F}" stroke-width="1.6"/><path d="M24 44H46M24 50H46M24 76H46M24 82H46" stroke="${F}" stroke-width=".6" opacity=".5"/></g>
+   <g class="ala d"><path d="M50 38H80V88H50Z" fill="#fff" stroke="${F}" stroke-width="1.6"/><path d="M54 44H76M54 50H76M54 76H76M54 82H76" stroke="${F}" stroke-width=".6" opacity=".5"/></g>
+   <rect x="34" y="57" width="32" height="12" rx="2" fill="${F}"/><text x="50" y="66" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="7" letter-spacing=".8" fill="#fff">BOCINS</text>
+   <g class="cordill e"><path d="M20 63H34M50 38V57M50 69V88" stroke="${A}" stroke-width="1.6"/><path d="M50 36C42 26 36 30 41 35S48 38 50 36" fill="none" stroke="${A}" stroke-width="1.6"/></g>
+   <g class="cordill d"><path d="M66 63H80" stroke="${A}" stroke-width="1.6"/><path d="M50 36C58 26 64 30 59 35S52 38 50 36M50 37L56 46" fill="none" stroke="${A}" stroke-width="1.6"/></g>
+ </svg>`,
+};
+const C=[
+ {id:'sac',n:'Sac de roba',d:'El sac d\'ara, redibuixat amb els esmalts: roba blau nit amb un pespunt blanc, la corda terracota i la B de Bocins en una xapa. En obrir-se, la corda es deslliga i la boca s\'eixampla.'},
+ {id:'farcell',n:'Farcell',d:'El mocador de quadres lligat amb un nus, com el farcell que es duia per anar a treballar al camp o de viatge. En obrir-se, el nus es desfà, les puntes cauen i el mocador queda estès a terra.'},
+ {id:'llauna',n:'Capsa de llauna',d:'Una capsa de llauna esmaltada, com les de galetes o de neules que es guarden a l\'armari, amb la tapa terracota i cargolada. En obrir-se, la tapa salta i surt volant.'},
+ {id:'paquet',n:'Paquet de pastisseria',d:'El paquet del diumenge: paper blanc amb ratlles, l\'etiqueta de la botiga i el cordill amb el llaç. En obrir-se, el cordill es trenca i el paper es desplega a banda i banda.'},
+];
+const pantalla=(c,r)=>`<div class="tel" data-fase="tancat" data-r="${r}">
+  <div class="placa titol">Un sac nou!</div>
+  <div class="escena" role="button" tabindex="0" aria-label="Obre el sac">${SVG[c.id]}
+    <div class="revela"><div class="disc"><span class="cargol" style="top:12px;left:50%;margin-left:-4px"></span><span class="cargol" style="bottom:12px;left:50%;margin-left:-4px"></span><div class="em anim">${EM[RAR[r].em].svg}</div></div></div></div>
+  <div class="ajuda">Toca el sac per obrir-lo</div>
+  <div class="resultat"><span class="placa etiqueta" style="background:var(--r);box-shadow:inset 0 0 0 2px var(--r),inset 0 0 0 3px #fff">${RAR[r].n}</span>
+    <div class="nom">${esc(EM[RAR[r].em].frase)}</div><div class="que">Un emoji nou per reaccionar.</div>
+    <div class="botons"><div class="placa acc"><span>Obre'n un altre (2)</span><span>→</span></div><div class="placa blanca"><span>Continua</span><span>→</span></div></div></div>
+</div>`;
+let vals={},db=null;const rar={};
+try{const m=JSON.parse(localStorage.getItem('sac1')||'{}');if(m&&typeof m==='object')vals=m}catch(e){}
+function pinta(){document.getElementById('conceptes').innerHTML=C.map((c,i)=>{const v=vals[c.id]||{},r=rar[c.id]||'comuna';return `<section class="concepte" data-c="${c.id}">
+  <div class="mobil">${pantalla(c,r)}</div>
+  <div><header><span class="n">${i+1}</span><h2>${c.n}</h2><p>${c.d}</p></header>
+  <div class="raresa" role="group" aria-label="Raresa">${Object.entries(RAR).map(([k,x])=>`<button type="button" data-r="${k}" aria-pressed="${k===r}">${x.n}</button>`).join('')}</div>
+  <div class="valora" role="group" aria-label="Valoració de ${c.n}">${[['si','M\'agrada'],['no','No'],['millorar','Millorar']].map(([k,t])=>`<button type="button" data-k="${k}" aria-pressed="${v.valor===k}">${t}</button>`).join('')}
+  <textarea aria-label="Nota sobre ${c.n}" placeholder="Nota (opcional)">${esc(v.nota||'')}</textarea></div></div></section>`}).join('')}
+function obre(t){if(t.dataset.fase==='tancat'){t.dataset.fase='obrint';const cops=({comuna:1,rara:2,llegendaria:3})[t.dataset.r];const reduir=matchMedia('(prefers-reduced-motion:reduce)').matches;setTimeout(()=>{if(t.dataset.fase==='obrint')t.dataset.fase='obert'},reduir?0:cops*360+80)}else if(t.dataset.fase==='obert')t.dataset.fase='tancat'}
+async function desa(id){try{localStorage.setItem('sac1',JSON.stringify(vals))}catch(e){}if(!db)return;const v=vals[id]||{};
+  try{if(!v.valor&&!v.nota)await db.collection('sac1').doc(id).delete();else await db.collection('sac1').doc(id).set({id,nom:C.find(x=>x.id===id).n,valor:v.valor||null,nota:v.nota||'',ts:Date.now()})}catch(e){}}
+const arrel=document.getElementById('conceptes');
+arrel.addEventListener('click',e=>{const s=e.target.closest('.concepte');if(!s)return;const id=s.dataset.c;
+  const esc_=e.target.closest('.escena');if(esc_){obre(esc_.closest('.tel'));return}
+  const r=e.target.closest('[data-r]');if(r&&r.tagName==='BUTTON'){rar[id]=r.dataset.r;const m=s.querySelector('.mobil');m.innerHTML=pantalla(C.find(x=>x.id===id),r.dataset.r);s.querySelectorAll('.raresa button').forEach(x=>x.setAttribute('aria-pressed',x===r));return}
+  const b=e.target.closest('[data-k]');if(!b)return;const v=vals[id]||(vals[id]={});v.valor=v.valor===b.dataset.k?null:b.dataset.k;s.querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===v.valor));desa(id)});
+arrel.addEventListener('keydown',e=>{const esc_=e.target.closest('.escena');if(esc_&&(e.key==='Enter'||e.key===' ')){e.preventDefault();obre(esc_.closest('.tel'))}});
+const temps={};
+arrel.addEventListener('input',e=>{if(e.target.tagName!=='TEXTAREA')return;const s=e.target.closest('.concepte'),id=s.dataset.c,v=vals[id]||(vals[id]={});v.nota=e.target.value;if(v.nota.trim()&&!v.valor){v.valor='millorar';s.querySelector('[data-k="millorar"]').setAttribute('aria-pressed','true')}clearTimeout(temps[id]);temps[id]=setTimeout(()=>desa(id),600)});
+pinta();
+(async()=>{try{db=window.claude?.use?await window.claude.use('db'):null}catch(e){db=null}if(!db)return;try{const q=await db.collection('sac1').get();for(const d of q.docs){const x=d.data();if(x)vals[x.id||d.id]={valor:x.valor||null,nota:x.nota||''}}pinta()}catch(e){}})();
+</script>
