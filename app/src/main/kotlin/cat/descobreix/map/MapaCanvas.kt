@@ -3,6 +3,11 @@ package cat.descobreix.map
 import android.graphics.Bitmap
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -26,7 +31,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -56,6 +63,8 @@ import cat.descobreix.ui.theme.Archivo
 import cat.descobreix.ui.theme.Colors
 import cat.descobreix.ui.theme.Tema
 import kotlinx.coroutines.launch
+import kotlin.math.PI
+import kotlin.math.sin
 
 /** A partir d'aquest zoom es dibuixa la geometria detallada. */
 private const val ZOOM_DETALL = 3f
@@ -71,6 +80,7 @@ fun MapaCanvas(
     noms: List<String>,
     inici: Int?,
     seleccionat: Int?,
+    posicio: PosicioUsuari?,
     camera: CameraMapa,
     animacions: Boolean,
     descripcio: String,
@@ -100,92 +110,141 @@ fun MapaCanvas(
         }
     }
 
-    Canvas(
-        modifier
-            .onSizeChanged { camera.canviaMida(it.toSize()) }
-            .semantics { contentDescription = descripcio }
-            .pointerInput(camera) {
-                detectTransformGestures { centroide, despl, zoom, _ -> camera.transforma(centroide, despl, zoom) }
+    Box(modifier) {
+        Canvas(
+            Modifier
+                .matchParentSize()
+                .onSizeChanged { camera.canviaMida(it.toSize()) }
+                .semantics { contentDescription = descripcio }
+                .pointerInput(camera) {
+                    detectTransformGestures { centroide, despl, zoom, _ -> camera.transforma(centroide, despl, zoom) }
+                }
+                .pointerInput(camera) {
+                    detectTapGestures(
+                        onTap = { onToc(camera.aMapa(it)) },
+                        onDoubleTap = { p -> ambit.launch { camera.amplia(p, 2f, animacions) } },
+                    )
+                },
+        ) {
+            if (!camera.inicialitzada) return@Canvas
+            val escala = camera.escala
+            val visible = camera.visible()
+            val camiActual = if (camera.zoom >= ZOOM_DETALL) camins.detall else camins.general
+            val gruix = 1.dp.toPx() / escala
+            val visibles = geometria.municipis.indices.filter { i ->
+                geometria.municipis[i].requadre.talla(visible.left.toDouble(), visible.top.toDouble(), visible.right.toDouble(), visible.bottom.toDouble())
             }
-            .pointerInput(camera) {
-                detectTapGestures(
-                    onTap = { onToc(camera.aMapa(it)) },
-                    onDoubleTap = { p -> ambit.launch { camera.amplia(p, 2f, animacions) } },
-                )
-            },
-    ) {
+            val estatDe = { i: Int -> estats.getOrNull(i) ?: EstatMunicipi.BOIRA }
+            val transformacio: DrawTransform.() -> Unit = {
+                translate(camera.desplacament.x, camera.desplacament.y)
+                scale(escala, escala, pivot = Offset.Zero)
+            }
+
+            // 1. Els municipis (docs/disseny.md, mapa «Núvols»): els teus, plens del color fort; la resta, en blanc.
+            withTransform(transformacio) {
+                for (i in visibles) {
+                    drawPath(camiActual[i], if (estatDe(i) == EstatMunicipi.DESCOBERT) Colors.Ambre else Colors.Fons)
+                }
+                for (i in visibles) {
+                    val (color, g) = when (estatDe(i)) {
+                        EstatMunicipi.DESCOBERT -> Colors.Text to 1.3f
+                        EstatMunicipi.DISPONIBLE -> Colors.Text to .9f
+                        EstatMunicipi.BOIRA -> Colors.Linia to .8f
+                    }
+                    drawPath(camiActual[i], color, style = Stroke(width = g * gruix))
+                }
+            }
+
+            // 2. Els núvols: una capa que tapa el mapa, amb forats als teus municipis i mig forat als veïns.
+            //    Es fa en una capa a part perquè els forats (BlendMode.DstOut) només esborrin els núvols.
+            drawIntoCanvas { it.saveLayer(Rect(Offset.Zero, size), Paint()) }
+            drawRect(Colors.Boira.copy(alpha = if (Tema.fosc) .55f else .72f))
+            val mosaic = textura.width.toFloat()
+            // Els núvols es mouen una mica més a poc a poc que el mapa: sembla que siguin més a prop.
+            val dx = (camera.desplacament.x * .6f) % mosaic - mosaic
+            val dy = (camera.desplacament.y * .6f) % mosaic - mosaic
+            translate(dx, dy) {
+                drawRect(pinzellNuvols, size = Size(size.width + 2 * mosaic, size.height + 2 * mosaic), colorFilter = ColorFilter.tint(colorNuvols, BlendMode.SrcIn))
+            }
+            withTransform(transformacio) {
+                for (i in visibles) {
+                    val estat = estatDe(i)
+                    if (estat == EstatMunicipi.BOIRA) continue
+                    val forca = if (estat == EstatMunicipi.DESCOBERT) 1f else .5f
+                    val obrint = obertures[i]
+                    val cami = camiActual[i]
+                    val dibuixaForat: DrawScope.() -> Unit = {
+                        // Vores difuminades: traços amples i transparents al voltant del forat.
+                        for ((amplada, alfa) in VORES_FORAT) drawPath(cami, Color.Black.copy(alpha = alfa * forca), style = Stroke(amplada * gruix), blendMode = BlendMode.DstOut)
+                        drawPath(cami, Color.Black.copy(alpha = forca), blendMode = BlendMode.DstOut)
+                    }
+                    if (obrint != null && obrint < 1f) {
+                        // Els núvols s'obren des del centre del municipi.
+                        val r = geometria.municipis[i].requadre
+                        val centre = Offset(((r.minX + r.maxX) / 2).toFloat(), ((r.minY + r.maxY) / 2).toFloat())
+                        scale(obrint, obrint, pivot = centre) { dibuixaForat() }
+                    } else {
+                        dibuixaForat()
+                    }
+                }
+            }
+            drawIntoCanvas { it.restore() }
+
+            // 3. La selecció, per sobre dels núvols.
+            withTransform(transformacio) {
+                if (seleccionat != null && seleccionat in camiActual.indices) {
+                    drawPath(camiActual[seleccionat], Colors.Text, style = Stroke(width = 3f * gruix))
+                }
+            }
+
+            dibuixaEtiquetes(geometria, estats, noms, seleccionat, visibles, camera, mesurador, estilEtiqueta)
+        }
+        // La personeta va en una capa a part: la seva animació no fa tornar a dibuixar el mapa.
+        if (posicio != null) Personeta(posicio, camera, animacions, Modifier.matchParentSize())
+    }
+}
+
+/**
+ * On és l'usuari: un sardanista com els de l'animació de càrrega (ui/components/Sardana.kt), que punteja al seu
+ * lloc. És de tinta, perquè es vegi també a sobre dels teus municipis, que són del color fort.
+ */
+@Composable
+private fun Personeta(posicio: PosicioUsuari, camera: CameraMapa, animacions: Boolean, modifier: Modifier) {
+    val transicio = rememberInfiniteTransition(label = "personeta")
+    val bot by transicio.animateFloat(0f, 1f, infiniteRepeatable(tween(600), RepeatMode.Reverse), label = "bot")
+    val pas by transicio.animateFloat(0f, 1f, infiniteRepeatable(tween(2400, easing = LinearEasing)), label = "pas")
+    Canvas(modifier) {
         if (!camera.inicialitzada) return@Canvas
-        val escala = camera.escala
-        val visible = camera.visible()
-        val camiActual = if (camera.zoom >= ZOOM_DETALL) camins.detall else camins.general
-        val gruix = 1.dp.toPx() / escala
-        val visibles = geometria.municipis.indices.filter { i ->
-            geometria.municipis[i].requadre.talla(visible.left.toDouble(), visible.top.toDouble(), visible.right.toDouble(), visible.bottom.toDouble())
-        }
-        val estatDe = { i: Int -> estats.getOrNull(i) ?: EstatMunicipi.BOIRA }
-        val transformacio: DrawTransform.() -> Unit = {
-            translate(camera.desplacament.x, camera.desplacament.y)
-            scale(escala, escala, pivot = Offset.Zero)
-        }
-
-        // 1. Els municipis (docs/disseny.md, mapa «Núvols»): els teus, plens del color fort; la resta, en blanc.
-        withTransform(transformacio) {
-            for (i in visibles) {
-                drawPath(camiActual[i], if (estatDe(i) == EstatMunicipi.DESCOBERT) Colors.Ambre else Colors.Fons)
-            }
-            for (i in visibles) {
-                val (color, g) = when (estatDe(i)) {
-                    EstatMunicipi.DESCOBERT -> Colors.Text to 1.3f
-                    EstatMunicipi.DISPONIBLE -> Colors.Text to .9f
-                    EstatMunicipi.BOIRA -> Colors.Linia to .8f
+        val peus = camera.aPantalla(posicio.x, posicio.y)
+        // Només es llegeix l'animació si n'hi ha: si no, la capa no es redibuixa a cada fotograma.
+        val t = if (animacions) pas else 0f
+        val b = if (animacions) bot else 0f
+        val tinta = Colors.Text
+        // Unitats del dibuix de la sardana; la figura fa unes 15 unitats d'alt.
+        translate(peus.x, peus.y) {
+            scale(1.9.dp.toPx(), pivot = Offset.Zero) {
+                // Una onada que surt dels peus, cada cop que fa el pas.
+                if (animacions) {
+                    val r = 3f + 9f * t
+                    drawOval(tinta.copy(alpha = .45f * (1f - t)), Offset(-r, -r * .35f), Size(2 * r, r * .7f), style = Stroke(.7f))
                 }
-                drawPath(camiActual[i], color, style = Stroke(width = g * gruix))
-            }
-        }
-
-        // 2. Els núvols: una capa que tapa el mapa, amb forats als teus municipis i mig forat als veïns.
-        //    Es fa en una capa a part perquè els forats (BlendMode.DstOut) només esborrin els núvols.
-        drawIntoCanvas { it.saveLayer(Rect(Offset.Zero, size), Paint()) }
-        drawRect(Colors.Boira.copy(alpha = if (Tema.fosc) .55f else .72f))
-        val mosaic = textura.width.toFloat()
-        // Els núvols es mouen una mica més a poc a poc que el mapa: sembla que siguin més a prop.
-        val dx = (camera.desplacament.x * .6f) % mosaic - mosaic
-        val dy = (camera.desplacament.y * .6f) % mosaic - mosaic
-        translate(dx, dy) {
-            drawRect(pinzellNuvols, size = Size(size.width + 2 * mosaic, size.height + 2 * mosaic), colorFilter = ColorFilter.tint(colorNuvols, BlendMode.SrcIn))
-        }
-        withTransform(transformacio) {
-            for (i in visibles) {
-                val estat = estatDe(i)
-                if (estat == EstatMunicipi.BOIRA) continue
-                val forca = if (estat == EstatMunicipi.DESCOBERT) 1f else .5f
-                val obrint = obertures[i]
-                val cami = camiActual[i]
-                val dibuixaForat: DrawScope.() -> Unit = {
-                    // Vores difuminades: traços amples i transparents al voltant del forat.
-                    for ((amplada, alfa) in VORES_FORAT) drawPath(cami, Color.Black.copy(alpha = alfa * forca), style = Stroke(amplada * gruix), blendMode = BlendMode.DstOut)
-                    drawPath(cami, Color.Black.copy(alpha = forca), blendMode = BlendMode.DstOut)
-                }
-                if (obrint != null && obrint < 1f) {
-                    // Els núvols s'obren des del centre del municipi.
-                    val r = geometria.municipis[i].requadre
-                    val centre = Offset(((r.minX + r.maxX) / 2).toFloat(), ((r.minY + r.maxY) / 2).toFloat())
-                    scale(obrint, obrint, pivot = centre) { dibuixaForat() }
-                } else {
-                    dibuixaForat()
+                drawOval(tinta.copy(alpha = .25f), Offset(-5f, -1.2f), Size(10f, 2.4f))
+                // Punteja: un bot petit i un pas a banda i banda.
+                translate(left = sin(2 * PI.toFloat() * t) * 1.2f, top = -5f - 1.6f * b) {
+                    drawCircle(tinta, 2.4f, Offset(0f, -8f))
+                    val cos = Path().apply {
+                        moveTo(-3f, -4f)
+                        relativeLineTo(6f, 0f)
+                        relativeLineTo(1f, 9f)
+                        relativeLineTo(-8f, 0f)
+                        close()
+                    }
+                    drawPath(cos, tinta)
+                    drawLine(tinta, Offset(-3f, -3f), Offset(-6f, 3f), 1.6f, StrokeCap.Round)
+                    drawLine(tinta, Offset(3f, -3f), Offset(6f, 3f), 1.6f, StrokeCap.Round)
                 }
             }
         }
-        drawIntoCanvas { it.restore() }
-
-        // 3. La selecció, per sobre dels núvols.
-        withTransform(transformacio) {
-            if (seleccionat != null && seleccionat in camiActual.indices) {
-                drawPath(camiActual[seleccionat], Colors.Text, style = Stroke(width = 3f * gruix))
-            }
-        }
-
-        dibuixaEtiquetes(geometria, estats, noms, seleccionat, visibles, camera, mesurador, estilEtiqueta)
     }
 }
 

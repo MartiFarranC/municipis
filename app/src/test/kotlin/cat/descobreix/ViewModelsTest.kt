@@ -5,6 +5,7 @@ import cat.descobreix.data.repositori.AjuntamentsRepositori
 import cat.descobreix.domain.Joc
 import cat.descobreix.joc.model.TipusProva
 import cat.descobreix.joc.regles.Ubicacio
+import cat.descobreix.map.MapaViewModel
 import cat.descobreix.municipality.MunicipiViewModel
 import cat.descobreix.onboarding.OnboardingViewModel
 import cat.descobreix.passaport.FaseSegellar
@@ -160,5 +161,40 @@ class ViewModelsTest {
         assertEquals(0, desat.pagina)
         assertEquals(.5f, desat.x)
     }
-}
 
+    @Test
+    fun `al mapa la personeta és on és l'usuari`() = runTest {
+        joc.iniciaPartida(vic)
+        val vm = MapaViewModel(joc, PreferenciesEnMemoria(), UbicacioFixa(ubicacioA("Vic")), AjuntamentsRepositori.Buit, SavedStateHandle())
+        val estat = vm.estat.first { it.geometria != null }
+        assertTrue(estat.permisUbicacio)
+        assertNull(estat.posicio)
+
+        vm.segueixUbicacio()
+        val posicio = assertNotNull(vm.estat.value.posicio)
+        val m = estat.geometria!!.municipis[DadesDeProva.obte().geografia.index(vic)]
+        assertEquals(m.etiquetaX.toFloat(), posicio.x, .01f)
+        assertEquals(m.etiquetaY.toFloat(), posicio.y, .01f)
+    }
+
+    @Test
+    fun `al mapa els municipis a la boira no es poden tocar ni cercar`() = runTest {
+        joc.iniciaPartida(vic)
+        val vm = MapaViewModel(joc, PreferenciesEnMemoria(), UbicacioFixa(null), AjuntamentsRepositori.Buit, SavedStateHandle())
+        val estat = vm.estat.first { it.geometria != null && it.estats.isNotEmpty() }
+        fun toca(nom: String) {
+            val m = estat.geometria!!.municipis[estat.noms.indexOf(nom)]
+            vm.toca(m.etiquetaX.toFloat(), m.etiquetaY.toFloat())
+        }
+
+        toca("Gurb")
+        assertEquals("Gurb", vm.estat.value.seleccio?.nom)
+        toca("Figueres")
+        assertNull(vm.estat.value.seleccio)
+
+        vm.canviaCerca("figueres")
+        assertTrue(vm.estat.value.resultatsCerca.none { it.nom == "Figueres" })
+        vm.canviaCerca("gurb")
+        assertEquals("Gurb", vm.estat.value.resultatsCerca.firstOrNull()?.nom)
+    }
+}

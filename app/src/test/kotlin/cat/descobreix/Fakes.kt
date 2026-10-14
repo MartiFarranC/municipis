@@ -35,6 +35,7 @@ import cat.descobreix.joc.regles.MissioAjuntament
 import cat.descobreix.joc.regles.Ubicacio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import java.io.File
@@ -167,6 +168,8 @@ class UbicacioFixa(var ubicacio: Ubicacio?) : ServeiUbicacio {
     override fun tePermis(): Boolean = true
 
     override suspend fun ubicacioActual(): Ubicacio? = ubicacio
+
+    override fun seguiment(): Flow<Ubicacio> = listOfNotNull(ubicacio).asFlow()
 }
 
 class SegellsEnMemoria : SegellsRepositori {
@@ -210,6 +213,12 @@ class PreferenciesEnMemoria : PreferenciesRepositori {
     override val soIVibracio: Flow<Boolean> = so
     override suspend fun desaSoIVibracio(actiu: Boolean) {
         so.value = actiu
+    }
+
+    private val minimapa = MutableStateFlow(true)
+    override val minimapaVisible: Flow<Boolean> = minimapa
+    override suspend fun desaMinimapaVisible(visible: Boolean) {
+        minimapa.value = visible
     }
 }
 

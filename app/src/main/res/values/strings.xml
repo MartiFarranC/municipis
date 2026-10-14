@@ -31,6 +31,8 @@
     <string name="mapa_descripcio">Mapa de Catalunya. Has descobert %1$d de %2$d municipis. Toca un municipi per seleccionar-lo, o fes servir el cercador.</string>
     <string name="minimapa_descripcio">Minimapa de Catalunya amb la zona visible marcada. Toca\'l per moure-t\'hi.</string>
     <string name="comptador_curt">%1$d / %2$d</string>
+    <string name="amaga_minimapa">Amaga el minimapa</string>
+    <string name="mostra_minimapa">Mostra el minimapa</string>
     <string name="comptador_llarg">de %1$d municipis descoberts</string>
     <string name="nivell">Nivell %1$d</string>
     <string name="punts">Barretines</string>
@@ -53,10 +55,6 @@
     <plurals name="missions_ocultes">
         <item quantity="one">%1$d missió oculta</item>
         <item quantity="other">%1$d missions ocultes</item>
-    </plurals>
-    <plurals name="distancia_territori">
-        <item quantity="one">a %1$d municipi del teu territori</item>
-        <item quantity="other">a %1$d municipis del teu territori</item>
     </plurals>
 
     <!-- Fitxa del municipi -->

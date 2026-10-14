@@ -53,6 +53,12 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         dataStore.edit { it[SO] = actiu }
     }
 
+    override val minimapaVisible: Flow<Boolean> = dataStore.data.map { it[MINIMAPA] ?: true }
+
+    override suspend fun desaMinimapaVisible(visible: Boolean) {
+        dataStore.edit { it[MINIMAPA] = visible }
+    }
+
     private companion object {
         val X = floatPreferencesKey("mapa_x")
         val Y = floatPreferencesKey("mapa_y")
@@ -61,5 +67,6 @@ class PreferenciesRepositoriDataStore @Inject constructor(
         val COLOR = stringPreferencesKey("color_app")
         val ANIMACIO = stringPreferencesKey("animacio_carrega")
         val SO = booleanPreferencesKey("so_i_vibracio")
+        val MINIMAPA = booleanPreferencesKey("minimapa_visible")
     }
 }

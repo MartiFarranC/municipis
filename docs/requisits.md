@@ -117,7 +117,8 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - la llista de missions amb el seu tipus de prova;
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
-4. **Fitxa d'un municipi disponible o a la boira.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar. Si és a la boira, diu a quants municipis de distància és del territori de l'usuari.
+4. **Fitxa d'un municipi disponible.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar.
+   - Amb els municipis **a la boira** no s'hi pot interactuar: no es poden tocar al mapa, no surten al cercador del mapa i no s'obren des de la llista de veïns. Si l'usuari hi és físicament, «On sóc?» només li explica què li falta.
 5. **Perfil i àlbum.** Té les estadístiques, les fotos per municipi, la vitrina de medalles i el progrés per comarques. També el nom d'usuari, tancar la sessió i esborrar les dades del joc.
 6. **Inici de sessió.** Abans de "Tria el teu municipi". Google, correu i contrasenya (amb recuperació de contrasenya) i enllaç màgic. Si no hi ha connexió, ho explica.
 7. **Rànquing.** Classificació general i classificació entre amics.

@@ -99,6 +99,11 @@ interface PreferenciesRepositori {
     val soIVibracio: Flow<Boolean>
 
     suspend fun desaSoIVibracio(actiu: Boolean)
+
+    /** Si el mapa mostra el minimapa. Per defecte, sí. */
+    val minimapaVisible: Flow<Boolean>
+
+    suspend fun desaMinimapaVisible(visible: Boolean)
 }
 
 /** Les tres tapes del passaport que hi ha sempre. */

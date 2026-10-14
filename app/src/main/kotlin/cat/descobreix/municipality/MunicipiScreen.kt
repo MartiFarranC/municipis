@@ -586,7 +586,8 @@ private fun XipVei(v: FilaVei, onClick: () -> Unit) {
             .clip(RectangleShape)
             .background(fons)
             .border(1.dp, Colors.Linia, RectangleShape)
-            .clickable(role = Role.Button, onClick = onClick)
+            // Els veïns a la boira no es poden obrir.
+            .clickable(enabled = v.estat != EstatMunicipi.BOIRA, role = Role.Button, onClick = onClick)
             .semantics { stateDescription = estat }
             .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,

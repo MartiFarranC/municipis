@@ -1,5 +1,12 @@
 package cat.descobreix.map
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -46,7 +53,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import cat.descobreix.R
 import cat.descobreix.joc.model.CodiIne
 import cat.descobreix.joc.model.EstatMunicipi
@@ -90,6 +100,12 @@ fun MapaScreen(
     val reduir = LocalReduirAnimacions.current
     val avisos = remember { SnackbarHostState() }
     val demanaUbicacio = rememberPermisUbicacio(onConcedit = viewModel::onSoc, onDenegat = viewModel::sensePermis)
+
+    // La personeta segueix l'usuari mentre el mapa és visible, si ja hi ha permís d'ubicació.
+    val cicle = LocalLifecycleOwner.current.lifecycle
+    LaunchedEffect(cicle, estat.permisUbicacio) {
+        if (estat.permisUbicacio) cicle.repeatOnLifecycle(Lifecycle.State.STARTED) { viewModel.segueixUbicacio() }
+    }
 
     // Posició inicial: la que es va desar, o tota Catalunya fins que el ViewModel la mogui.
     LaunchedEffect(camera, camera.mida) {
@@ -136,6 +152,7 @@ fun MapaScreen(
             noms = estat.noms,
             inici = estat.inici,
             seleccionat = estat.seleccio?.index,
+            posicio = estat.posicio,
             camera = camera,
             animacions = !reduir,
             descripcio = stringResource(R.string.mapa_descripcio, estat.descoberts, estat.total),
@@ -160,20 +177,41 @@ fun MapaScreen(
                         .padding(6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Minimapa(
-                        camins = camins,
-                        geometria = geometria,
-                        estats = estat.estats,
-                        camera = camera,
-                        descripcio = stringResource(R.string.minimapa_descripcio),
-                        modifier = Modifier
-                            .width(96.dp)
-                            .aspectRatio(geometria.amplada.toFloat() / geometria.alcada),
-                    )
-                    Text(
-                        stringResource(R.string.comptador_curt, estat.descoberts, estat.total),
-                        style = MaterialTheme.typography.bodySmall.copy(fontSize = MaterialTheme.typography.labelMedium.fontSize),
-                    )
+                    AnimatedVisibility(
+                        estat.minimapaVisible,
+                        enter = if (reduir) EnterTransition.None else expandVertically() + fadeIn(),
+                        exit = if (reduir) ExitTransition.None else shrinkVertically() + fadeOut(),
+                    ) {
+                        Minimapa(
+                            camins = camins,
+                            geometria = geometria,
+                            estats = estat.estats,
+                            camera = camera,
+                            descripcio = stringResource(R.string.minimapa_descripcio),
+                            modifier = Modifier
+                                .width(96.dp)
+                                .aspectRatio(geometria.amplada.toFloat() / geometria.alcada),
+                        )
+                    }
+                    // El comptador fa de botó per amagar i tornar a mostrar el minimapa.
+                    val accio = stringResource(if (estat.minimapaVisible) R.string.amaga_minimapa else R.string.mostra_minimapa)
+                    Row(
+                        Modifier
+                            .heightIn(min = 32.dp)
+                            .clickable(onClickLabel = accio, role = Role.Button, onClick = viewModel::canviaMinimapa),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Text(
+                            stringResource(R.string.comptador_curt, estat.descoberts, estat.total),
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = MaterialTheme.typography.labelMedium.fontSize),
+                        )
+                        Icon(
+                            if (estat.minimapaVisible) Icones.Ratlla else Icones.Mapa,
+                            contentDescription = accio,
+                            modifier = Modifier.size(16.dp),
+                        )
+                    }
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     BotoIcona(Icones.Cercar, stringResource(R.string.cerca_municipi), { viewModel.obreCerca(true) })
@@ -328,7 +366,8 @@ private fun TargetaSeleccio(
             val detall = when (s.estat) {
                 EstatMunicipi.DESCOBERT -> stringResource(R.string.missions_fetes, s.missionsFetes, s.missions)
                 EstatMunicipi.DISPONIBLE -> plural(R.plurals.missions_ocultes, s.missions, s.missions)
-                EstatMunicipi.BOIRA -> s.distancia?.let { plural(R.plurals.distancia_territori, it, it) } ?: s.comarca
+                // No passa: els municipis a la boira no es poden seleccionar.
+                EstatMunicipi.BOIRA -> s.comarca
             }
             Text("${s.comarca} · $detall", style = MaterialTheme.typography.bodySmall)
             if (collaborador) Distintiu(Modifier.padding(top = 4.dp))
