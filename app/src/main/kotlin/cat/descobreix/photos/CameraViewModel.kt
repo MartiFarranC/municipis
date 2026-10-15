@@ -148,7 +148,7 @@ class CameraViewModel @Inject constructor(
             retallaCartell(p.jpeg, p.rotacio, requadre.requadre, requadre.amplada, requadre.alcada, config.costatLlargMaxim)
         }
         try {
-            if (!Cartell.diuElNom(lector.llegeix(retall), nom)) {
+            if (!lector.troba(retall) { Cartell.diuElNom(it, nom, config.lletresPerErrorCartell) }) {
                 _estat.update { it.copy(processant = false, missatge = Missatge.CartellNoLlegit(nom)) }
                 return
             }

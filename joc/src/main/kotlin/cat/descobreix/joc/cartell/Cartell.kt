@@ -35,15 +35,19 @@ object Cartell {
         Normalizer.normalize(text.uppercase(), Normalizer.Form.NFD).filter { it in 'A'..'Z' || it in '0'..'9' }
 
     /**
-     * Si el [text] llegit al cartell diu el [nom] del municipi. La lectura no és perfecta (cartells bruts, lletres
-     * que es confonen), així que s'accepta que hi hagi el nom amb alguns errors: un per cada cinc lletres, com a mínim un.
+     * Si el [text] llegit al cartell diu el [nom] del municipi. El nom pot anar envoltat d'altres coses (pintades,
+     * adhesius, la comarca) i la lectura no és perfecta (cartells bruts, lletres tapades o que es confonen), així que
+     * s'accepta el nom amb alguns errors: un per cada [lletresPerError] lletres, com a mínim un. Els noms no tenen
+     * xifres, així que les que surten es llegeixen com la lletra que s'hi assembla.
      */
-    fun diuElNom(text: String, nom: String): Boolean {
-        val llegit = normalitza(text)
+    fun diuElNom(text: String, nom: String, lletresPerError: Int): Boolean {
+        val llegit = normalitza(text).map { XIFRES_COM_LLETRES[it] ?: it }.joinToString("")
         val esperat = normalitza(nom)
         if (llegit.isEmpty() || esperat.isEmpty()) return false
-        return distanciaDinsDe(esperat, llegit) <= max(1, esperat.length / 5)
+        return distanciaDinsDe(esperat, llegit) <= max(1, esperat.length / lletresPerError)
     }
+
+    private val XIFRES_COM_LLETRES = mapOf('0' to 'O', '1' to 'I', '5' to 'S', '8' to 'B')
 
     /** La mínima distància d'edició entre [patro] i qualsevol tros de [text] (Levenshtein per a subcadenes). */
     internal fun distanciaDinsDe(patro: String, text: String): Int {

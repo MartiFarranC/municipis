@@ -21,6 +21,7 @@ class ConfiguracioJocTest {
         assertEquals(50.0, config.gps.precisioMaximaMetres)
         assertEquals(50.0, config.gps.margeFronteraMetres)
         assertEquals(2048, config.fotos.costatLlargMaxim)
+        assertEquals(4, config.fotos.lletresPerErrorCartell)
     }
 
     @Test

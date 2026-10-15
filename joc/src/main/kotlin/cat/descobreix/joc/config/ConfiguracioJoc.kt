@@ -67,6 +67,8 @@ data class ConfiguracioJoc(
         val costatLlargMaxim: Int,
         val costatMiniatura: Int,
         val qualitatJpeg: Int,
+        /** A la foto del cartell s'accepta el nom amb un error de lectura per cada tantes lletres (com a mínim un). */
+        val lletresPerErrorCartell: Int,
     )
 
     @Serializable

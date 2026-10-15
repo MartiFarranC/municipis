@@ -9,6 +9,8 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class CartellTest {
+    private val LLETRES = Repositori.config.fotos.lletresPerErrorCartell
+
     @Test
     fun `el requadre de tota la vista quan la foto té la seva proporció`() {
         assertEquals(Rectangle(0, 0, 3000, 4000), Cartell.retall(Requadre(0f, 0f, 1f, 1f), 300, 400, 3000, 4000))
@@ -39,18 +41,31 @@ class CartellTest {
 
     @Test
     fun `el nom es troba dins del text del cartell, amb errors de lectura`() {
-        assertTrue(Cartell.diuElNom("VIC\nOsona", "Vic"))
-        assertTrue(Cartell.diuElNom("Benvinguts a\nSANT JOAN DE LES ABADESSES", "Sant Joan de les Abadesses"))
-        assertTrue(Cartell.diuElNom("SANT JOAN DE LES ABADESSE5", "Sant Joan de les Abadesses"))
-        assertTrue(Cartell.diuElNom("L AMETLLA DE MAR", "L'Ametlla de Mar"))
-        assertTrue(Cartell.diuElNom("castellolí", "Castellolí"))
+        assertTrue(Cartell.diuElNom("VIC\nOsona", "Vic", LLETRES))
+        assertTrue(Cartell.diuElNom("Benvinguts a\nSANT JOAN DE LES ABADESSES", "Sant Joan de les Abadesses", LLETRES))
+        assertTrue(Cartell.diuElNom("SANT JOAN DE LES ABADESSE5", "Sant Joan de les Abadesses", LLETRES))
+        assertTrue(Cartell.diuElNom("L AMETLLA DE MAR", "L'Ametlla de Mar", LLETRES))
+        assertTrue(Cartell.diuElNom("castellolí", "Castellolí", LLETRES))
+    }
+
+    @Test
+    fun `el nom passa encara que hi hagi més text o lletres que no es veuen`() {
+        assertTrue(Cartell.diuElNom("SOM REPÚBLICA\nSANT FRUITÓS\nDE BAGES", "Sant Fruitós de Bages", LLETRES))
+        assertTrue(Cartell.diuElNom("SOM\nREPUBLICA TORELLO", "Torelló", LLETRES))
+        // Lletres tapades o confoses amb altres.
+        assertTrue(Cartell.diuElNom("SANT FR TOS DE BAG S", "Sant Fruitós de Bages", LLETRES))
+        assertTrue(Cartell.diuElNom("T0RELL0", "Torelló", LLETRES))
+        assertTrue(Cartell.diuElNom("C4STELLOLI", "Castellolí", LLETRES))
+        assertTrue(Cartell.diuElNom("8ANYOLES", "Banyoles", LLETRES))
     }
 
     @Test
     fun `un altre nom no passa`() {
-        assertFalse(Cartell.diuElNom("GURB", "Vic"))
-        assertFalse(Cartell.diuElNom("", "Vic"))
-        assertFalse(Cartell.diuElNom("SANT JOAN DESPI", "Sant Joan de les Abadesses"))
-        assertFalse(Cartell.diuElNom("TONA", "Moià"))
+        assertFalse(Cartell.diuElNom("GURB", "Vic", LLETRES))
+        assertFalse(Cartell.diuElNom("", "Vic", LLETRES))
+        assertFalse(Cartell.diuElNom("SANT JOAN DESPI", "Sant Joan de les Abadesses", LLETRES))
+        assertFalse(Cartell.diuElNom("TONA", "Moià", LLETRES))
+        assertFalse(Cartell.diuElNom("SANT FELIU DE GUÍXOLS", "Sant Feliu de Llobregat", LLETRES))
+        assertFalse(Cartell.diuElNom("SANT CUGAT DEL VALLÈS", "Sant Quirze del Vallès", LLETRES))
     }
 }

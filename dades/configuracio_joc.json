@@ -35,7 +35,8 @@
   "fotos": {
     "costatLlargMaxim": 2048,
     "costatMiniatura": 320,
-    "qualitatJpeg": 85
+    "qualitatJpeg": 85,
+    "lletresPerErrorCartell": 4
   },
   "nivells": {
     "puntsPrimerNivell": 150,
