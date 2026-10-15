@@ -114,7 +114,7 @@ Disseny de referència: `docs/disseny.md` i el llenç https://claude.ai/artifact
    - els noms dels municipis segons el zoom.
 3. **Fitxa d'un municipi descobert.** Té:
    - la foto de portada i el progrés de missions i punts;
-   - la llista de missions amb el seu tipus de prova;
+   - la llista de missions amb el seu tipus de prova. Cada missió pendent té un botó «Com hi vaig» que obre la ruta a Google Maps (a l'app si hi és, si no al navegador): fins a les coordenades del lloc o, si no en té, fins a l'ajuntament o el municipi. En general, sempre que l'app digui d'anar a un lloc concret, hi ha d'haver aquest enllaç;
    - el botó per afegir una missió pròpia;
    - la llista de municipis veïns, que es pot tocar.
 4. **Fitxa d'un municipi disponible.** Mostra el cost, quantes missions té (sense dir quines són) i el botó de desbloquejar.

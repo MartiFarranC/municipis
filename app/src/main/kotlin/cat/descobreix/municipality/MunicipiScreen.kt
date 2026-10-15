@@ -83,6 +83,7 @@ import cat.descobreix.ui.AvisDesbloqueig
 import cat.descobreix.ui.Celebracio
 import cat.descobreix.ui.DialegMissatge
 import cat.descobreix.ui.DialegTriaMunicipi
+import cat.descobreix.ui.Direccions
 import cat.descobreix.ui.Efectes
 import cat.descobreix.ui.LocalEfectes
 import cat.descobreix.ui.Missatge
@@ -284,7 +285,7 @@ private fun FitxaDescoberta(
         }
         items(estat.missions, key = { it.missio.id }) { f ->
             Column {
-                FilaDeMissio(f, provant = estat.provant == f.missio.id, onProva = { onProva(f.missio) }, potAnimar = estat.avis == null)
+                FilaDeMissio(f, estat.nom, provant =estat.provant == f.missio.id, onProva = { onProva(f.missio) }, potAnimar = estat.avis == null)
                 // La foto del cartell ja feta es pot repetir (sense punts) per canviar el cromo del catàleg.
                 if (f.completada && f.missio.clau == Medalles.CLAU_CARTELL) {
                     val teCromo = estat.fotos.any { it.esCromo }
@@ -303,6 +304,7 @@ private fun FitxaDescoberta(
                 val disponible = o.disponibilitat == DisponibilitatOficial.Disponible
                 FilaDeMissio(
                     FilaMissio(o.missio, o.completada),
+                    estat.nom,
                     provant = estat.provant == o.missio.id,
                     onProva = { onProva(o.missio) },
                     etiqueta = etiquetaOficial(o),
@@ -373,6 +375,7 @@ private fun Seccio(titol: String, contingut: @Composable () -> Unit) {
 @Composable
 private fun FilaDeMissio(
     f: FilaMissio,
+    municipi: String,
     provant: Boolean,
     onProva: () -> Unit,
     etiqueta: String? = null,
@@ -427,6 +430,11 @@ private fun FilaDeMissio(
             if (etiqueta != null) Text(etiqueta, style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText))
         }
         if (f.completada && esCheckin) Segell(traç.value)
+        if (!f.completada && activa && !provant) {
+            val obre = LocalUriHandler.current
+            val enllac = enllacRuta(m, municipi)
+            BotoIcona(Icones.Ruta, stringResource(R.string.com_hi_vaig, titol), { obre.openUri(enllac) })
+        }
         if (provant) {
             CircularProgressIndicator(Modifier.size(20.dp), color = Colors.AmbreText, strokeWidth = 2.dp)
         } else if (!f.completada) {
@@ -492,6 +500,21 @@ private fun Segell(progres: Float) {
             .padding(horizontal = 8.dp, vertical = 3.dp),
     ) {
         Text(stringResource(R.string.segell_fet).uppercase(), style = MaterialTheme.typography.labelMedium.copy(color = Colors.AmbreText, letterSpacing = 1.sp))
+    }
+}
+
+/**
+ * La ruta fins al lloc de la missió: les que tenen coordenades hi van directament; les genèriques, a l'ajuntament o al
+ * municipi.
+ */
+@Composable
+private fun enllacRuta(m: Missio, municipi: String): String {
+    val lat = m.lat
+    val lon = m.lon
+    return when {
+        lat != null && lon != null -> Direccions.fins(lat, lon)
+        m.clau == "ajuntament" -> Direccions.fins(stringResource(R.string.desti_ajuntament, municipi))
+        else -> Direccions.fins(stringResource(R.string.desti_municipi, municipi))
     }
 }
 

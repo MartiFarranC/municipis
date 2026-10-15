@@ -51,6 +51,10 @@
     <string name="missions_fetes">%1$d de %2$d missions fetes</string>
     <string name="obre_fitxa">Obre la fitxa</string>
     <string name="veure_al_mapa">Mostra\'l al mapa</string>
+    <string name="com_hi_vaig">Com hi vaig: %1$s</string>
+    <!-- Destinacions de la ruta per a les missions que no tenen coordenades. -->
+    <string name="desti_municipi" translatable="false">%1$s, Catalunya</string>
+    <string name="desti_ajuntament" translatable="false">Ajuntament, %1$s, Catalunya</string>
 
     <plurals name="missions_ocultes">
         <item quantity="one">%1$d missió oculta</item>
